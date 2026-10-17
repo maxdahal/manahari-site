@@ -1,0 +1,255 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Manahari — Portfolio</title>
+  <meta name="description" content="Manahari Dahal, a UX engineer in the US. I design products and build them in code. Case studies: Luna Surgical Console, KU Brand and Asian&#x27;s.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&amp;family=Antonio:wght@400;500;600;700&amp;display=swap">
+  <link rel="stylesheet" href="css/site.css">
+  <link rel="stylesheet" href="css/home.css">
+  <script src="js/site.js"></script>
+  <script src="js/home.js" defer></script>
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+  <header class="site-header">
+    <div class="site-header__bar">
+      <a class="brand" href="#top" aria-label="mdahal, home">mdahal<i>.</i></a>
+      <nav class="site-nav" aria-label="Main">
+        <a href="#top" data-section="top">Home</a>
+        <a href="#about-me" data-section="about-me">About</a>
+        <a href="#work" data-section="work">Projects</a>
+        <a href="#artwork" data-section="artwork">Artwork</a>
+        <a href="#contact" data-section="contact">Contact</a>
+      </nav>
+      <div class="header-actions">
+        <button class="menu-button" type="button" aria-expanded="false" aria-controls="menu">Menu</button>
+        <button class="icon-button theme-toggle" type="button" aria-label="Switch theme"><svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20.985 12.486a9 9 0 1 1-9.473-9.472c.405-.022.617.46.402.803a6 6 0 0 0 8.268 8.268c.344-.215.825-.004.803.401"/></svg><svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2m-7.07-17.07 1.41 1.41m11.32 11.32 1.41 1.41M2 12h2m16 0h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"/></svg></button>
+      </div>
+    </div>
+  </header>
+
+  <div class="menu" id="menu">
+    <nav class="menu__links" aria-label="Menu">
+      <a href="#top">Home<small>01</small></a>
+      <a href="#about-me">About<small>02</small></a>
+      <a href="#work">Projects<small>03</small></a>
+      <a href="#artwork">Artwork<small>04</small></a>
+      <a href="#contact">Contact<small>05</small></a>
+    </nav>
+    <div class="menu__foot">
+      <span>manahari.dahal1@gmail.com</span>
+      <span><a href="https://www.linkedin.com/in/manaharidahal/" target="_blank" rel="noopener">LinkedIn</a><a href="https://dribbble.com/manaharidahal" target="_blank" rel="noopener">Dribbble</a></span>
+    </div>
+  </div>
+
+  <main class="page" id="main">
+    <div class="sections">
+
+      <!-- Hero: the name rolls up and "UX Engineer." rises in as you scroll -->
+      <section class="hero" id="top" aria-label="Introduction">
+        <div class="hero__sticky">
+          <div class="hero__words">
+            <h1 class="hero__name"><span class="hero__line"><span>Manahari</span></span><span class="hero__line"><span>Dahal</span></span></h1>
+            <p class="hero__role" aria-hidden="true"><span class="hero__line"><span>UX</span></span><span class="hero__line"><span>Engineer<i>.</i></span></span></p>
+          </div>
+          <div class="hero__bar container">
+            <p><i class="dot" aria-hidden="true"></i>Design and code, with a specialty in healthcare.</p>
+            <p class="hero__links"><a href="https://www.linkedin.com/in/manaharidahal/" target="_blank" rel="noopener">LinkedIn</a><a href="https://dribbble.com/manaharidahal" target="_blank" rel="noopener">Dribbble</a></p>
+          </div>
+        </div>
+      </section>
+
+      <!-- About me: a statement that fills in, and a card that slides out -->
+      <section class="intro" id="about-me" aria-labelledby="intro-h">
+        <div class="container intro__inner">
+          <div class="intro__top">
+            <p class="label"><i class="dot" aria-hidden="true"></i>About me</p>
+            <h2 class="statement" id="intro-h" data-fill>I design products and build them in code. Most recently, I designed three projects for a surgical console at Karl Storz.</h2>
+          </div>
+          <div class="peek">
+            <p class="peek__ghost" aria-hidden="true"></p>
+            <p class="peek__hint" aria-hidden="true"><i class="dot"></i>Hover or tap to reveal<svg viewBox="0 0 64 40" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 30C14 4 44 2 59 24"/><path d="M50 22l9 3 2-9"/></svg></p>
+            <div class="peek__card" id="peek-card">
+              <img class="peek__photo" src="assets/images/index-01-5d96ff329c.webp" alt="Portrait of Manahari Dahal" width="900" height="900" loading="lazy">
+              <div class="peek__text">
+                <h3>Manahari Dahal</h3>
+                <p class="peek__role">UX Engineer</p>
+                <p>I work in both UX design and frontend, so I can design an idea and build it myself.</p>
+                <dl class="peek__facts">
+                  <div><dt>Based in</dt><dd>the US</dd></div>
+                  <div><dt>Available for</dt><dd>UX design and UX engineering roles</dd></div>
+                </dl>
+                <p class="peek__links">
+                  <a class="peek__icon" href="https://www.linkedin.com/in/manaharidahal/" target="_blank" rel="noopener" aria-label="LinkedIn"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-4 0v7h-4v-7a6 6 0 0 1 6-6z"/><rect width="4" height="12" x="2" y="9"/><circle cx="4" cy="4" r="2"/></svg></a>
+                  <a class="peek__icon" href="https://dribbble.com/manaharidahal" target="_blank" rel="noopener" aria-label="Dribbble"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M19.13 5.09C15.22 9.14 10 10.44 2.25 10.94"/><path d="M21.75 12.84c-6.62-1.41-12.14 1-16.38 6.32"/><path d="M8.56 2.75c4.37 6 6 9.42 8 17.72"/></svg></a>
+                  <a class="peek__more" href="about.html">More about me <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></a>
+                </p>
+              </div>
+            </div>
+            <button class="peek__tab" type="button" aria-expanded="false" aria-controls="peek-card"><i class="dot" aria-hidden="true"></i>Available for new roles</button>
+          </div>
+        </div>
+      </section>
+
+      <!-- Numbers and background -->
+      <section class="facts" aria-label="Stats and background">
+        <div class="container facts__inner">
+          <div class="tiles">
+            <div><span>Years in UX and frontend</span><b><span data-count="6">6</span><small>+</small></b></div>
+            <div><span>UX case studies</span><b><span data-count="3">3</span></b></div>
+            <div><span>Traffic growth across ku.edu</span><b><span data-count="30">30</span><small>%</small></b></div>
+          </div>
+          <div class="facts__list">
+            <details open>
+              <summary><h3>Education</h3></summary>
+              <ul>
+                <li><b>UNC Chapel Hill</b><span>M.S. Information Science, Human-Computer Interaction</span><span>Expected 2027</span></li>
+                <li><b>Brigham Young University–Idaho</b><span>B.S. Computer Science</span><span>2022</span></li>
+              </ul>
+            </details>
+            <details>
+              <summary><h3>Skills</h3></summary>
+              <ul>
+                <li><b>Product Design</b><span>Wireframing, prototyping, UI design, usability testing, interaction design</span><span></span></li>
+                <li><b>Web Development</b><span>HTML, CSS, JavaScript, TypeScript, React, Next.js, Webflow, landing pages</span><span></span></li>
+                <li><b>Branding</b><span>Brand strategy, style guides, typography, color, storytelling</span><span></span></li>
+                <li><b>Tools</b><span>Figma, Adobe XD, Illustrator, Photoshop, Framer, Git</span><span></span></li>
+              </ul>
+            </details>
+            <details>
+              <summary><h3>Experience</h3></summary>
+              <ul>
+                <li><b>UX Design Intern</b><span>Karl Storz · Morrisville, NC</span><span>May to Aug 2026</span></li>
+                <li><b>UX Designer</b><span>App Team Carolina · Chapel Hill, NC</span><span>Sep 2025 to May 2026</span></li>
+                <li><b>Frontend Developer</b><span>University of Kansas · Lawrence, KS</span><span>Jun 2022 to Apr 2025</span></li>
+              </ul>
+            </details>
+          </div>
+        </div>
+      </section>
+
+      <!-- Case studies -->
+      <section class="work" id="work" aria-labelledby="work-h">
+        <div class="container">
+          <div class="block block--wide">
+            <h2 class="block__title" id="work-h">UX <span class="muted">Case Studies</span> <small class="work__count">03</small></h2>
+            <div class="block__body">
+              <ol class="work__list">
+                <li class="work__item work__item--1">
+                  <a href="luna.html">
+                    <span class="work__num" aria-hidden="true">01</span>
+                    <span class="work__image"><img src="assets/images/card-luna.webp" alt="" loading="lazy" width="1100" height="619"></span>
+                    <span class="work__caption"><b>Luna</b><span>Healthcare, Medical device</span></span>
+                  </a>
+                </li>
+                <li class="work__item work__item--2">
+                  <a href="ku-brand.html">
+                    <span class="work__num" aria-hidden="true">02</span>
+                    <span class="work__image"><img src="assets/images/card-ku-brand.webp" alt="" loading="lazy" width="2000" height="856"></span>
+                    <span class="work__caption"><b>KU Brand</b><span>Higher education, Brand system</span></span>
+                  </a>
+                </li>
+                <li class="work__item work__item--3">
+                  <a href="asians.html">
+                    <span class="work__num" aria-hidden="true">03</span>
+                    <span class="work__image"><img src="assets/images/card-asians.webp" alt="" loading="lazy" width="1100" height="666"></span>
+                    <span class="work__caption"><b>Asian's</b><span>Mobile app, Food and dining</span></span>
+                  </a>
+                </li>
+              </ol>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Skills marquee -->
+      <section class="marquee" aria-label="Skills">
+        <div class="marquee__stage">
+          <p class="marquee__row" data-direction="1">
+            <span>Product Design</span><span>Web Development</span><span>Branding</span><span>UX Research</span><span>Frontend</span><span>Prototyping</span>
+            <span aria-hidden="true">Product Design</span><span aria-hidden="true">Web Development</span><span aria-hidden="true">Branding</span><span aria-hidden="true">UX Research</span><span aria-hidden="true">Frontend</span><span aria-hidden="true">Prototyping</span>
+          </p>
+          <p class="marquee__row marquee__row--outline" data-direction="-1" aria-hidden="true">
+            <span>Prototyping</span><span>Frontend</span><span>UX Research</span><span>Branding</span><span>Web Development</span><span>Product Design</span>
+            <span>Prototyping</span><span>Frontend</span><span>UX Research</span><span>Branding</span><span>Web Development</span><span>Product Design</span>
+          </p>
+        </div>
+      </section>
+
+      <!-- Artwork: scrolling down moves the row of artwork sideways -->
+      <section class="artwork" id="artwork" aria-labelledby="art-h">
+        <div class="container">
+          <div class="block block--wide">
+            <div class="artwork__head">
+              <h2 class="block__title" id="art-h">Artwork</h2>
+              <p>Art I make for fun</p>
+            </div>
+            <div class="block__body artwork__body">
+              <div class="artwork__scroller">
+                <div class="artwork__sticky">
+                  <ul class="artwork__track" aria-label="Artwork. Select one to view it larger.">
+                    <li><button type="button" class="artwork__item"><img src="assets/images/index-02-bf139d0c00.webp" alt="Animated pixel-art elk under a moon" loading="lazy" width="400" height="400"></button></li>
+                    <li><button type="button" class="artwork__item"><img src="assets/images/index-03-f2827196b8.webp" alt="Silhouettes against a glowing orange sunset" loading="lazy" width="770" height="656"></button></li>
+                    <li><button type="button" class="artwork__item"><img src="assets/images/index-04-e40c5c0484.webp" alt="Autumn forest path in mist" loading="lazy" width="1100" height="778"></button></li>
+                    <li><button type="button" class="artwork__item"><img src="assets/images/index-05-7eab617767.webp" alt="Digital painting of glossy red lips" loading="lazy" width="880" height="1100"></button></li>
+                    <li><button type="button" class="artwork__item"><img src="assets/images/index-06-bdfabfe408.webp" alt="Illustrated desk with laptop, plants and string lights" loading="lazy" width="843" height="1100"></button></li>
+                    <li><button type="button" class="artwork__item"><img src="assets/images/index-07-8517c6c4d5.webp" alt="Elk head silhouette filled with a night mountain landscape" loading="lazy" width="843" height="1100"></button></li>
+                    <li><button type="button" class="artwork__item"><img src="assets/images/index-08-ca15fe9d96.webp" alt="Figure with a broom on rocks before a lighthouse" loading="lazy" width="880" height="1100"></button></li>
+                    <li><button type="button" class="artwork__item"><img src="assets/images/index-09-17d8af1698.webp" alt="Hiker waving at snowy blue mountains" loading="lazy" width="1100" height="825"></button></li>
+                    <li><button type="button" class="artwork__item"><img src="assets/images/index-10-d2339b5db6.svg" alt="Volcano illustration" loading="lazy" width="513" height="513"></button></li>
+                    <li><button type="button" class="artwork__item"><img src="assets/images/index-11-424bf2862f.webp" alt="Flame illustration" loading="lazy" width="680" height="740"></button></li>
+                  </ul>
+                  <div class="artwork__progress" aria-hidden="true"><i></i></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
+
+    <dialog class="lightbox" aria-label="Artwork viewer">
+      <img alt="">
+      <div class="lightbox__bar">
+        <button class="icon-button" type="button" data-step="-1" aria-label="Previous artwork"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m15 18-6-6 6-6"/></svg></button>
+        <span class="lightbox__count" aria-live="polite"></span>
+        <button class="icon-button" type="button" data-step="1" aria-label="Next artwork"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m9 18 6-6-6-6"/></svg></button>
+        <button class="icon-button" type="button" data-close aria-label="Close"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg></button>
+      </div>
+    </dialog>
+  </main>
+  <footer class="site-footer" id="contact">
+    <div class="container">
+      <div class="site-footer__grid">
+        <div>
+          <h2>Let’s connect.</h2>
+          <a class="site-footer__cta" href="mailto:manahari.dahal1@gmail.com">Email me</a>
+        </div>
+        <div class="site-footer__col">
+          <span>Navigation</span>
+          <a href="#top">Home</a>
+          <a href="#about-me">About</a>
+          <a href="#work">Projects</a>
+          <a href="#artwork">Artwork</a>
+        </div>
+        <div class="site-footer__col">
+          <span>Follow me</span>
+          <a href="https://www.linkedin.com/in/manaharidahal/" target="_blank" rel="noopener">LinkedIn</a>
+          <a href="https://dribbble.com/manaharidahal" target="_blank" rel="noopener">Dribbble</a>
+        </div>
+        <div class="site-footer__col">
+          <span>Contact</span>
+          <span>manahari.dahal1@gmail.com</span>
+        </div>
+      </div>
+      <p class="wordmark" aria-hidden="true">manahari<i>.</i></p>
+      <p class="site-footer__legal">© 2026 Manahari</p>
+    </div>
+  </footer>
+
+</body>
+</html>

@@ -1,0 +1,344 @@
+/* ==========================================================================
+   About page
+     1. Intro
+     2. Timelines (education, experience, research, awards)
+     3. Skills
+   ========================================================================== */
+
+.label {
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--text);
+}
+.muted {
+  color: var(--text);
+}
+.page-end {
+  height: clamp(64px, 10vh, 120px);
+}
+
+/* 1. Intro ----------------------------------------------------------------- */
+.about-intro {
+  display: grid;
+  grid-template-columns: minmax(0, 0.67fr) minmax(0, 1fr);
+  gap: clamp(40px, 8vw, 115px);
+  align-items: start;
+  padding-top: calc(var(--header-h) + var(--header-top) + 120px);
+  padding-bottom: 86px;
+}
+.about-intro__photo {
+  overflow: hidden;
+  border-radius: var(--r-lg);
+  background: #fbfcfe;
+}
+.about-intro__photo img {
+  width: 100%;
+  aspect-ratio: 4 / 5;
+  object-fit: cover;
+}
+.about-intro__text {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+.statement {
+  max-width: 474px;
+  font-size: var(--fs-h2);
+  line-height: 1.15;
+  letter-spacing: -0.02em;
+}
+.fill-word {
+  background: linear-gradient(90deg, var(--ink) var(--f, 0%), color-mix(in srgb, var(--ink) 55%, transparent) var(--f, 0%));
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+.about-intro__facts {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px 40px;
+}
+.about-intro__stats {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 24px 57px;
+  margin-top: 24px;
+}
+.about-intro__stats b {
+  display: block;
+  font-family: var(--heading-font);
+  font-size: 3rem;
+  font-weight: 600;
+  line-height: 1;
+  letter-spacing: -0.01em;
+}
+.about-intro__stats span {
+  display: block;
+  margin-top: 8px;
+  color: var(--text);
+}
+@media (max-width: 860px) {
+  .about-intro {
+    grid-template-columns: minmax(0, 1fr);
+  }
+  .about-intro__photo {
+    max-width: 420px;
+  }
+}
+@media (max-width: 640px) {
+  .about-intro__stats {
+    gap: 16px;
+  }
+  .about-intro__stats b {
+    font-size: 2.5rem;
+  }
+}
+
+/* 2. Timelines ------------------------------------------------------------- */
+.timeline-section {
+  padding-block: 40px 0;
+}
+.block--center {
+  --title-lh: calc(36px * 1.12);
+  align-items: center;
+  text-align: center;
+}
+.block--center .block__title {
+  font-size: 2.25rem;
+  line-height: 1.12;
+  letter-spacing: -0.03em;
+}
+.block--center .block__body {
+  --indent: 0px;
+  align-self: stretch;
+  text-align: left;
+}
+
+.timeline-wrap {
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+  width: 100%;
+  max-width: 1080px;
+  margin-inline: auto;
+}
+.timeline-tabs {
+  justify-content: center;
+  gap: 12px 16px;
+}
+.timeline-tabs [role="tab"] {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  min-height: 48px;
+  padding: 0 24px;
+  background: transparent;
+  box-shadow: none;
+}
+.timeline-tabs [role="tab"][aria-selected="true"] {
+  border-color: var(--accent);
+  background: var(--accent);
+  color: var(--on-accent);
+}
+.timeline-tabs svg {
+  width: 20px;
+  height: 20px;
+}
+.timeline-summary {
+  margin-inline: auto;
+  text-align: center;
+}
+
+/* Each entry is a row: year, a rail column with the dot and the line, the body */
+.timeline {
+  display: flex;
+  flex-direction: column;
+}
+.timeline > li {
+  display: grid;
+  grid-template-columns: minmax(0, 0.64fr) 28px minmax(0, 1fr);
+}
+.timeline__year {
+  grid-column: 1;
+  font-family: var(--heading-font);
+  font-size: 2.25rem;
+  font-weight: 600;
+  line-height: 1;
+  letter-spacing: -0.03em;
+  color: var(--text);
+}
+.timeline__year.is-repeat {
+  visibility: hidden;
+}
+/* the rail: a 1px line down the middle, and the dot drawn on top of it */
+.timeline__dot {
+  grid-column: 2;
+  display: flex;
+  justify-content: center;
+  align-self: stretch;
+  padding-top: 7px;
+  background: linear-gradient(var(--line), var(--line)) center 19px / 1px 100% no-repeat;
+}
+.timeline > li:last-child .timeline__dot {
+  background: none;
+}
+.timeline__dot::before {
+  content: "";
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: var(--text);
+}
+.timeline > li.is-now .timeline__dot::before {
+  background: var(--accent);
+}
+.timeline__body {
+  grid-column: 3;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 10px;
+  padding: 0 0 36px 20px;
+}
+.timeline__top {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 8px 20px;
+  width: 100%;
+}
+.timeline__top b {
+  font-family: var(--heading-font);
+  font-size: 1.25rem;
+  font-weight: 600;
+  line-height: 1.3;
+}
+.pill {
+  display: inline-flex;
+  align-items: center;
+  min-height: 24px;
+  padding: 0 8px;
+  border-radius: 6px;
+  background: var(--surface);
+  font-family: var(--heading-font);
+  font-size: 0.75rem;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--text);
+}
+.timeline__org {
+  line-height: 1.5;
+}
+.timeline__desc {
+  max-width: 38em;
+  color: var(--text);
+}
+.timeline__body .dot-list li {
+  font-size: 1rem;
+}
+
+/* Research and awards: a heading on the left, a list without years */
+.timeline-group {
+  display: grid;
+  grid-template-columns: minmax(0, 0.64fr) 28px minmax(0, 1fr);
+  align-items: start;
+}
+.timeline-group__title {
+  font-size: 1.5rem;
+  line-height: 1.2;
+}
+.timeline-group .timeline {
+  grid-column: 2 / 4;
+}
+.timeline-group .timeline > li {
+  grid-template-columns: 28px minmax(0, 1fr);
+}
+.timeline-group .timeline__dot {
+  grid-column: 1;
+}
+.timeline-group .timeline__body {
+  grid-column: 2;
+}
+
+@media (max-width: 860px) {
+  .timeline > li {
+    grid-template-columns: 28px minmax(0, 1fr);
+  }
+  .timeline__year {
+    grid-column: 2;
+    grid-row: 1;
+    margin: 0 0 10px 20px;
+    font-size: 1.75rem;
+  }
+  .timeline__year.is-repeat {
+    display: none;
+  }
+  .timeline__dot {
+    grid-column: 1;
+    grid-row: 1 / 3;
+  }
+  .timeline__body {
+    grid-column: 2;
+    grid-row: 2;
+  }
+  .timeline-group {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 16px;
+  }
+  .timeline-group .timeline {
+    grid-column: 1;
+  }
+  .timeline-group .timeline__body {
+    grid-row: auto;
+  }
+  .timeline-group .timeline__dot {
+    grid-row: auto;
+  }
+}
+
+/* 3. Skills ---------------------------------------------------------------- */
+.skills details {
+  border-top: 1px solid var(--line);
+}
+.skills details:last-child {
+  border-bottom: 1px solid var(--line);
+}
+.skills summary {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 23px 0;
+  cursor: pointer;
+  list-style: none;
+}
+.skills summary::-webkit-details-marker {
+  display: none;
+}
+.skills summary::after {
+  content: "+";
+  font-size: 1.375rem;
+  color: var(--accent-text);
+}
+.skills details[open] summary::after {
+  content: "×";
+}
+.skills h3 {
+  font-size: 1.5rem;
+}
+.skills ul {
+  padding-bottom: 16px;
+}
+.skills li {
+  padding: 9px 0;
+  font-size: var(--fs-body);
+  line-height: var(--lh-body);
+  color: var(--text);
+}
+.skills {
+  gap: 0;
+  max-width: 860px;
+}

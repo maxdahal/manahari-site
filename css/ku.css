@@ -1,0 +1,209 @@
+/* ==========================================================================
+   KU Brand page
+     1. Brand colors (content: these are KU's colors, shown as they are)
+     2. Identity graphic
+     3. Design system tabs: swatches, contrast, code
+   ========================================================================== */
+
+/* 1. Brand colors ---------------------------------------------------------- */
+:root {
+  --ku-blue: #0051ba;
+  --ku-crimson: #e8000d;
+  --ku-night: #003459;
+  --ku-lake: #2767ff;
+  --ku-sky: #73cbf2;
+  --ku-fog: #8e9fbc;
+  --ku-steam: #dde5ed;
+  --ku-fire: #ff3042;
+  --ku-brick: #971b2f;
+  --ku-wheat: #f2a900;
+  --ku-terra: #c66e4e;
+  --ku-tallgrass: #be9a79;
+  --ku-limestone: #d7d2cb;
+  --ku-yellow: #ffc82d;
+  --ku-gray: #85898a;
+  --ku-text: #333333;
+}
+
+/* 2. Identity graphic: shapes drift a little on hover ---------------------- */
+.brand-art .figure__media {
+  background: var(--ku-blue);
+}
+.brand-art svg {
+  display: block;
+  width: 100%;
+  height: clamp(200px, 24vw, 340px);
+}
+.brand-art g {
+  transition: transform 0.5s cubic-bezier(0.2, 0.7, 0.2, 1);
+}
+.brand-art:hover .kua-m {
+  transform: translateX(14px);
+}
+.brand-art:hover .kua-s {
+  transform: translateX(-18px);
+}
+.brand-art:hover .kua-l {
+  transform: translateX(10px);
+}
+
+/* the two extra wireframes */
+.wireframes {
+  --grid-gap: 32px;
+}
+
+/* 3. Design system tabs ---------------------------------------------------- */
+.system {
+  display: flex;
+  flex-direction: column;
+  gap: 28px;
+  margin-top: 20px;
+}
+.system__panel {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+.swatch-group {
+  margin-top: 8px;
+  font-size: var(--fs-small);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--text);
+}
+.swatches {
+  display: grid;
+  grid-template-columns: repeat(6, minmax(0, 1fr));
+  gap: 10px;
+}
+/* each swatch: the color as a chip, then its name and hex in page colors */
+.sw {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  line-height: 1.35;
+}
+.sw::before {
+  content: "";
+  height: 64px;
+  margin-bottom: 10px;
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  background: var(--sw);
+}
+.sw b {
+  font-weight: 600;
+}
+.sw span {
+  font-size: var(--fs-small);
+  font-variant-numeric: tabular-nums;
+  color: var(--text);
+}
+.sw--blue { --sw: var(--ku-blue); }
+.sw--crimson { --sw: var(--ku-crimson); }
+.sw--night { --sw: var(--ku-night); }
+.sw--lake { --sw: var(--ku-lake); }
+.sw--brick { --sw: var(--ku-brick); }
+.sw--sky { --sw: var(--ku-sky); }
+.sw--fog { --sw: var(--ku-fog); }
+.sw--steam { --sw: var(--ku-steam); }
+.sw--fire { --sw: var(--ku-fire); }
+.sw--wheat { --sw: var(--ku-wheat); }
+.sw--terra { --sw: var(--ku-terra); }
+.sw--tallgrass { --sw: var(--ku-tallgrass); }
+.sw--limestone { --sw: var(--ku-limestone); }
+.sw--yellow { --sw: var(--ku-yellow); }
+.sw--gray { --sw: var(--ku-gray); }
+
+/* contrast: each tile shows the pair as a sample, then names it in page colors */
+.contrast {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 10px;
+}
+.contrast > li {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  padding: 0 0 14px;
+  overflow: hidden;
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  background: var(--bg);
+  font-weight: 500;
+}
+.contrast > li > span:not(.contrast__sample),
+.contrast small {
+  padding-inline: 16px;
+}
+.contrast small {
+  font-size: var(--fs-small);
+  font-weight: 600;
+  color: var(--ok-text);
+}
+.contrast .fail small {
+  color: var(--bad-text);
+}
+.contrast__sample {
+  display: flex;
+  align-items: center;
+  height: 64px;
+  margin-bottom: 8px;
+  padding-inline: 16px;
+  font-family: var(--heading-font);
+  font-size: 1.75rem;
+  font-weight: 600;
+}
+/* the sample letters are decoration; the label below carries the meaning */
+.contrast__sample::before {
+  content: "Aa";
+}
+.cs--white-blue { background: var(--ku-blue); color: #ffffff; }
+.cs--night-sky { background: var(--ku-sky); color: var(--ku-night); }
+.cs--gray-steam { background: var(--ku-steam); color: var(--ku-text); }
+.cs--white-brick { background: var(--ku-brick); color: #ffffff; }
+.cs--white-sky { background: var(--ku-sky); color: #ffffff; }
+.cs--night-lake { background: var(--ku-lake); color: var(--ku-night); }
+.cs--white-gray { background: var(--ku-gray); color: #ffffff; }
+.cs--gray-crimson { background: var(--ku-crimson); color: var(--ku-text); }
+
+:root {
+  --ok-text: #0d5228;
+  --bad-text: #a1121c;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --ok-text: #5dd68a;
+    --bad-text: #ff8a8a;
+  }
+}
+:root[data-theme="dark"] {
+  --ok-text: #5dd68a;
+  --bad-text: #ff8a8a;
+}
+
+.code {
+  overflow-x: auto;
+  padding: 18px 20px;
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  background: var(--surface);
+  font-family: ui-monospace, "SFMono-Regular", Menlo, Consolas, monospace;
+  font-size: var(--fs-small);
+  line-height: 1.65;
+  color: var(--ink);
+}
+
+@media (max-width: 860px) {
+  .swatches {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+  .contrast {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+@media (max-width: 640px) {
+  .swatches {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}

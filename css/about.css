@@ -27,7 +27,7 @@
   grid-template-columns: minmax(0, 0.67fr) minmax(0, 1fr);
   gap: clamp(40px, 8vw, 115px);
   align-items: start;
-  padding-top: calc(var(--header-h) + var(--header-top) + 120px);
+  padding-top: clamp(56px, 10vh, 112px);
   padding-bottom: 86px;
 }
 /* the ID badge (styles in site.css) hangs in the left column */
@@ -229,7 +229,7 @@
   border-radius: 6px;
   background: var(--surface);
   font-family: var(--heading-font);
-  font-size: 0.75rem;
+  font-size: 0.8125rem;
   font-weight: 500;
   letter-spacing: 0.08em;
   text-transform: uppercase;
@@ -376,7 +376,7 @@
   color: var(--text);
 }
 .chapter {
-  --pin: calc(var(--header-h) + var(--header-top) + 32px);
+  --pin: calc(var(--bar-h) + 32px);
   display: grid;
   grid-template-columns: minmax(0, 5fr) minmax(0, 7fr);
   gap: clamp(32px, 5vw, 80px);
@@ -562,5 +562,270 @@
   }
   .chapter__media {
     position: static;
+  }
+}
+
+/* Chapters as slides (about.js adds .chapters--slides) -----------------------
+   The four chapters share one stage and show one at a time; the chosen one
+   fades in and the others are hidden. Each slide is two columns: on the left a panel in
+   the chapter's own soft colour with the big chapter number and count at
+   the top, the story at the bottom and the place as a huge outlined ghost
+   word along the bottom edge; on the right the chapter's photos (or its
+   chapter card until photos are added). Above the stage: the places to
+   jump to any chapter, and previous / next. Nothing moves on its own. Grid only. */
+.chapters--slides .slides {
+  display: grid;
+}
+.chapters--slides .slides:focus {
+  outline: none;
+}
+.chapters--slides .chapter,
+.chapters--slides .chapter:nth-of-type(even),
+.chapters--slides .chapter--stack {
+  grid-area: 1 / 1;
+  grid-template-columns: minmax(0, 7fr) minmax(0, 5fr);
+  align-items: stretch;
+  gap: 0;
+  height: auto;
+  min-height: clamp(460px, 64vh, 600px);
+  overflow: hidden;
+  border-radius: var(--r-xl);
+  view-timeline-name: none;
+}
+/* only the chosen chapter takes up space; it fades in when shown */
+.chapters--slides .chapter:not(.is-active) {
+  display: none;
+}
+.chapters--slides .chapter.is-active {
+  animation: slide-in 0.45s ease;
+}
+@keyframes slide-in {
+  from {
+    opacity: 0;
+  }
+}
+/* each chapter's colour */
+.chapters--slides .chapter:nth-of-type(1) { --tint: color-mix(in oklch, #f2a07b 32%, var(--bg)); }
+.chapters--slides .chapter:nth-of-type(2) { --tint: color-mix(in oklch, #7fb2e5 32%, var(--bg)); }
+.chapters--slides .chapter:nth-of-type(3) { --tint: color-mix(in oklch, #9ccb8f 32%, var(--bg)); }
+.chapters--slides .chapter:nth-of-type(4) { --tint: color-mix(in oklch, #c0a6e0 32%, var(--bg)); }
+
+/* the panel */
+.chapters--slides .chapter__text {
+  order: 1;
+  display: grid;
+  grid-template-rows: auto 1fr auto auto;
+  min-width: 0;
+  padding: clamp(24px, 3vw, 40px) clamp(24px, 3vw, 40px) 0;
+  overflow: hidden;
+  background: var(--tint);
+}
+.chapters--slides .chapter__count {
+  grid-row: 1;
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 12px;
+  margin: 0;
+}
+.chapters--slides .chapter__count b {
+  font-family: var(--heading-font);
+  font-size: clamp(3.25rem, 2.2rem + 3vw, 5.5rem);
+  font-weight: 700;
+  line-height: 0.85;
+  color: var(--ink);
+}
+.chapters--slides .chapter__count span {
+  padding-top: 6px;
+  font-size: var(--fs-small);
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  color: var(--text);
+}
+.chapters--slides .chapter__body {
+  grid-row: 3;
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding-bottom: 8px;
+}
+/* chapters with three or more entries list them two to a row on wide
+   screens, so every slide stays a sensible height */
+@media (min-width: 1001px) {
+  .chapters--slides .chapter__entries:has(> li:nth-child(3)) {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 18px 28px;
+    align-items: start;
+  }
+  .chapters--slides .chapter__entries:has(> li:nth-child(3)) > li {
+    margin: 0;
+  }
+  /* an entry with a description takes the full width */
+  .chapters--slides .chapter__entries:has(> li:nth-child(3)) > li:has(.chapter__desc) {
+    grid-column: 1 / -1;
+  }
+}
+/* the place as a ghost word, cut off by the bottom edge */
+.chapters--slides .chapter__text::after {
+  content: attr(data-ghost) / "";
+  grid-row: 4;
+  display: block;
+  margin: -0.15em 0 -0.22em;
+  overflow: hidden;
+  font-family: var(--heading-font);
+  font-size: clamp(4rem, 2.6rem + 4.5vw, 7.5rem);
+  font-weight: 700;
+  line-height: 1;
+  white-space: nowrap;
+  color: transparent;
+  -webkit-text-stroke: 1px var(--ink);
+  opacity: 0.22;
+  pointer-events: none;
+  user-select: none;
+}
+@supports not (-webkit-text-stroke: 1px black) {
+  .chapters--slides .chapter__text::after {
+    color: var(--ink);
+    opacity: 0.08;
+  }
+}
+
+/* the photos: one fills the side; with more, the first is large and the
+   rest share a column beside it. The flip-away stack is not used here. */
+.chapters--slides .chapter__media,
+.chapters--slides .chapter:nth-of-type(even) .chapter__media {
+  order: 2;
+  position: static;
+  display: grid;
+  min-width: 0;
+  /* the photos never set the slide's height: the side simply fills the
+     height the panel gives it */
+  contain: size;
+}
+.chapters--slides .chapter .chapter__stack {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  grid-auto-rows: minmax(0, 1fr);
+  gap: 6px;
+  height: 100%;
+  padding: 0;
+}
+.chapters--slides .chapter .chapter__stack:has(.chapter__photo ~ .chapter__photo) {
+  grid-template-columns: minmax(0, 2fr) minmax(0, 1fr);
+}
+.chapters--slides .chapter .chapter__stack:has(.chapter__photo ~ .chapter__photo) .chapter__photo:first-of-type {
+  grid-row: span 3;
+}
+.chapters--slides .chapter .chapter__card {
+  grid-area: auto;
+  width: 100%;
+  height: 100%;
+  max-height: none;
+  aspect-ratio: auto;
+  border-radius: 0;
+  box-shadow: none;
+  rotate: none;
+  translate: none;
+  transform: none;
+  opacity: 1;
+  animation: none;
+}
+.chapters--slides .chapter .chapter__stack:has(.chapter__photo) .chapter__panel {
+  display: none;
+}
+
+/* the places and previous / next under the stage */
+.slides__nav {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px 24px;
+  margin-bottom: 16px;
+}
+.slides__places {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+.slides__place {
+  display: inline-flex;
+  align-items: center; /* baseline would pin the text to the top of the pill */
+  gap: 8px;
+  min-height: 40px;
+  padding: 0 14px;
+  border: 1px solid var(--line);
+  border-radius: 99px;
+  background: none;
+  font: inherit;
+  font-size: var(--fs-small);
+  font-weight: 500;
+  color: var(--text);
+  cursor: pointer;
+  transition: background-color 0.2s ease, color 0.2s ease, border-color 0.2s ease;
+}
+.slides__place-num {
+  font-variant-numeric: tabular-nums;
+  color: var(--accent-text);
+}
+.slides__place:hover {
+  border-color: var(--ink);
+  color: var(--ink);
+}
+.slides__place[aria-current="true"] {
+  border-color: var(--ink);
+  background: var(--ink);
+  color: var(--bg);
+}
+.slides__place[aria-current="true"] .slides__place-num {
+  color: inherit;
+}
+.slides__steps {
+  display: flex;
+  gap: 8px;
+}
+.slides__step {
+  display: grid;
+  place-items: center;
+  width: 44px;
+  height: 44px;
+  border: 1px solid var(--line);
+  border-radius: 50%;
+  background: none;
+  color: var(--ink);
+  cursor: pointer;
+  transition: background-color 0.2s ease, color 0.2s ease;
+}
+.slides__step svg {
+  width: 20px;
+  height: 20px;
+}
+.slides__step:hover {
+  background: var(--ink);
+  color: var(--bg);
+}
+:is(.slides__place, .slides__step):focus-visible {
+  outline: 3px solid var(--ink);
+  outline-offset: 2px;
+}
+
+@media (max-width: 860px) {
+  .chapters--slides .chapter,
+  .chapters--slides .chapter:nth-of-type(even),
+  .chapters--slides .chapter--stack {
+    grid-template-columns: minmax(0, 1fr);
+    min-height: 0;
+  }
+  .chapters--slides .chapter__media,
+  .chapters--slides .chapter:nth-of-type(even) .chapter__media {
+    min-height: 260px;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .chapters--slides .chapter.is-active {
+    animation: none;
   }
 }

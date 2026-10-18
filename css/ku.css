@@ -236,7 +236,7 @@
   transition: background-color 0.25s ease, color 0.25s ease;
 }
 .sandbox .play__preview .play__eyebrow {
-  font-size: 0.6875rem;
+  font-size: 0.8125rem;
   font-weight: 700;
   letter-spacing: 0.14em;
   text-transform: uppercase;
@@ -330,7 +330,7 @@
   box-shadow: inset 0 0 0 1px rgb(0 0 0 / 0.18), 0 0 0 2px var(--bg), 0 0 0 4px var(--ink);
 }
 .play__sw input:focus-visible + span {
-  outline: 3px solid var(--accent);
+  outline: 3px solid var(--ink);
   outline-offset: 4px;
 }
 
@@ -364,7 +364,7 @@
   font-weight: 500;
 }
 .play__checks small {
-  font-size: 0.75rem;
+  font-size: 0.8125rem;
   color: var(--text);
 }
 .play__checks small::before {
@@ -374,7 +374,7 @@
   min-width: 40px;
   padding: 1px 7px;
   border-radius: 999px;
-  font-size: 0.6875rem;
+  font-size: 0.8125rem;
   font-weight: 700;
   text-align: center;
 }

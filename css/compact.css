@@ -1,9 +1,8 @@
 /* ==========================================================================
    Compact case study (prototype), laid out like a quiet document. The page
    is as wide as the homepage (the same side margins and maximum width), and
-   the story runs in a narrower centred column (--cp-max) beside the outline. No
-   top bar: the breadcrumb sits at the top left and the theme switch at the
-   top right. A plain outline of the stages and their sections runs down the
+   the story runs in a narrower centred column (--cp-max) beside the outline.
+   The top bar is the site's own (site.css). A plain outline of the stages and their sections runs down the
    left with a dot on the one you are reading. The story fills the rest:
    text keeps a comfortable reading width, while pictures, rows of details
    and panels use the full width, and handwritten notes sit in the margin
@@ -14,7 +13,7 @@
 
 :root {
   --opener-h: 0px;
-  --bar-h: 60px; /* the top bar with the breadcrumb and theme switch */
+  --bar-h: 60px; /* the top bar */
   /* inactive links: a little greyer than body text, still easy to read */
   --muted: color-mix(in srgb, var(--text) 80%, var(--bg));
 }
@@ -26,35 +25,21 @@ html {
 /* Paper: the grain is baked into the body background (--paper in
    site.css), the same as the home and About pages. */
 
-/* The top bar: the breadcrumb on the left and the theme switch on the
-   right, as wide as the page. It stays at the top and the story scrolls
-   underneath it. */
-.cp-bar {
-  position: sticky;
-  top: 0;
-  z-index: 40;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 16px;
-  min-height: var(--bar-h);
-  padding-inline: max(var(--gx), calc((100% - var(--max)) / 2 + var(--gx)));
-  background: var(--paper) 0 0 / 240px auto, var(--bg);
-}
+/* The top bar is shared with the other pages (site.css). */
 
 .cp {
   --measure: 680px; /* reading width for text */
   --cp-max: 880px; /* the story column: narrower than the page, so pictures
                       and rows of details stay compact on wide screens */
   display: grid;
-  grid-template-columns: minmax(150px, 190px) minmax(0, 1fr);
+  grid-template-columns: minmax(180px, 220px) minmax(0, 1fr);
   column-gap: clamp(32px, 4vw, 64px);
   max-width: var(--max);
   margin-inline: auto;
   padding-inline: var(--gx);
 }
 
-/* left: breadcrumb at the top, outline below it; both stay in view */
+/* left: the outline, which stays in view */
 .cp-side {
   grid-column: 1;
   grid-row: 1;
@@ -67,40 +52,8 @@ html {
   overflow-y: auto;
   scrollbar-width: none;
 }
-.cp-crumbs {
-  display: flex;
-  align-items: center;
-  flex-wrap: wrap;
-  gap: 4px 8px;
-  font-size: 0.875rem;
-  color: var(--muted);
-}
-.cp-crumbs a {
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
-  min-height: 32px;
-  color: var(--muted);
-  text-decoration: none;
-  transition: color 0.2s ease;
-}
-.cp-crumbs a svg {
-  width: 15px;
-  height: 15px;
-  transition: translate 0.2s ease;
-}
-.cp-crumbs a:hover {
-  color: var(--ink);
-}
-.cp-crumbs a:hover svg {
-  translate: -3px 0;
-}
-.cp-crumbs [aria-current] {
-  color: var(--ink);
-}
-.cp-crumbs a:focus-visible,
 .cp-outline a:focus-visible {
-  outline: 3px solid var(--accent);
+  outline: 3px solid var(--ink);
   outline-offset: 2px;
   border-radius: 4px;
 }
@@ -292,7 +245,7 @@ html {
   border: 0;
   border-radius: 99px;
   background: color-mix(in srgb, var(--accent) 14%, transparent);
-  font-size: 0.75rem;
+  font-size: 0.8125rem;
   font-weight: 600;
   color: var(--accent-text);
 }
@@ -360,7 +313,7 @@ html {
   font-size: clamp(2.25rem, 1.9rem + 1.2vw, 2.75rem);
 }
 .cp-outcome .meta__cap {
-  font-size: 0.75rem;
+  font-size: 0.8125rem;
 }
 .cp-outcome__text {
   font-size: 0.9375rem;
@@ -580,10 +533,10 @@ html {
   --t-card: 1.0625rem;    /* titles inside cards and lists */
   --t-lead: 1.25rem;      /* opening paragraphs */
   --t-body: 1.0625rem;    /* reading text */
-  --t-small: 0.9375rem;   /* captions, meta values */
+  --t-small: 1rem;        /* captions, meta values: still reading text, so 16px */
   --t-meta: 0.875rem;     /* plain labels, buttons */
   --t-label: 0.8125rem;   /* small capital labels */
-  --t-tiny: 0.75rem;      /* tags */
+  --t-tiny: 0.8125rem;      /* tags */
 }
 
 /* display sizes */
@@ -762,7 +715,7 @@ html {
   border-radius: 999px;
   background: color-mix(in srgb, var(--accent) 16%, transparent);
   color: var(--accent-text);
-  font-size: 0.6875rem;
+  font-size: 0.8125rem;
   font-weight: 700;
 }
 /* An outline entry for something to try (the KU color sandbox). Until the
@@ -800,4 +753,124 @@ html {
   .cp-outline__play[data-attn] .cp-outline__tag::after {
     animation: none;
   }
+}
+
+/* Stage headers: a thin rule carrying the stage number, then a large,
+   faint, outlined, all-caps ghost of the stage name, with the stage name
+   itself overlapping its lower part. The number and the ghost come from the
+   stage's data-num and data-ghost attributes, drawn as generated content
+   that screen readers skip ("/ ''"); the number badge inside the heading
+   is no longer shown. */
+.cp-sec[data-ghost]::before {
+  content: attr(data-num) / "";
+  order: -2;
+  display: block;
+  min-height: 1em;
+  margin-bottom: 16px;
+  background: linear-gradient(var(--line), var(--line)) no-repeat right center / calc(100% - 2.8em) 1px;
+  font-family: var(--body-font);
+  font-size: var(--t-label);
+  font-weight: 600;
+  line-height: 1;
+  letter-spacing: 0.12em;
+  font-variant-numeric: tabular-nums;
+  color: var(--accent-text);
+}
+/* the overview has no number: its rule runs the full width */
+.cp-sec[data-ghost]:not([data-num])::before {
+  background-size: 100% 1px;
+}
+.cp-sec[data-ghost]::after {
+  content: attr(data-ghost) / "";
+  order: -1;
+  display: block;
+  max-width: 100%;
+  overflow: hidden;
+  margin-bottom: -0.5em;
+  font-family: var(--heading-font);
+  font-size: clamp(3.5rem, 2rem + 5vw, 6.5rem);
+  font-weight: 700;
+  line-height: 0.9;
+  letter-spacing: 0.01em;
+  text-transform: uppercase;
+  white-space: nowrap;
+  color: transparent;
+  -webkit-text-stroke: 1px var(--ink);
+  opacity: 0.14;
+  pointer-events: none;
+  user-select: none;
+}
+@supports not (-webkit-text-stroke: 1px black) {
+  .cp-sec[data-ghost]::after {
+    color: var(--ink);
+    opacity: 0.06;
+  }
+}
+.cp-sec[data-ghost] > .cp-sec__label {
+  position: relative;
+  z-index: 1;
+  padding: 0 0 6px;
+  border-bottom: 0;
+  background: none;
+}
+.cp-sec[data-ghost] > .cp-sec__label span {
+  display: none;
+}
+
+/* Outline numbers, as on the homepage: each stage carries the same small
+   number as its stage header ("1." for 01 Empathize). The overview and the
+   things to try have no stage number; they keep an empty slot so every name
+   lines up. The number is the link's ::after, moved in front of the name
+   (::before is the accent bar); screen readers skip it. The outline text is
+   a step smaller, also as on the homepage. */
+.cp-outline > ol {
+  counter-reset: stage;
+}
+.cp-outline > ol > li:not(:first-child):has(> .cp-outline__stage:not(.cp-outline__play)) {
+  counter-increment: stage;
+}
+.cp-outline > ol > li > a::after {
+  content: "";
+  order: -1;
+  flex: none;
+  min-width: 1.4em;
+  margin-right: -2px;
+  font-size: 0.8125rem;
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+  opacity: 0.7;
+}
+.cp-outline > ol > li:not(:first-child) > .cp-outline__stage:not(.cp-outline__play)::after {
+  content: counter(stage) "." / "";
+}
+.cp-outline a {
+  font-size: 0.875rem;
+}
+.cp-outline ol ol a {
+  font-size: 0.8125rem;
+}
+.cp-outline ol ol {
+  margin-left: calc(12px + 1.4em);
+}
+/* the slot takes a little room: keep "Color sandbox  Try it" on one line */
+.cp-outline > ol > li > a {
+  gap: 6px;
+}
+.cp-outline__play {
+  white-space: nowrap;
+}
+
+/* Inactive outline links fade back, just above the 4.5:1 contrast text
+   needs (--outline-dim, set per theme in site.css); the section you are
+   reading is bold as well as orange, so it stands out by weight too. */
+.cp-outline a {
+  color: var(--outline-dim);
+}
+.cp-outline a:hover,
+.cp-outline a.is-in {
+  color: var(--ink);
+}
+.cp-outline a[aria-current] {
+  color: var(--accent-text);
+  font-weight: 600;
 }

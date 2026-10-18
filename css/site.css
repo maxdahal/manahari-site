@@ -24,6 +24,7 @@
   --surface-2: #e9e9e4;
   --ink: #1a1a1e;
   --text: #4a4a4a;
+  --outline-dim: #717170; /* inactive outline links: 4.6:1 on the page */
   --line: rgba(26, 26, 30, 0.14);
   /* orange: #e65f2e for fills and marks; text in the accent uses a darker
      shade (#b0441c, 5.4:1 on the page) and filled buttons use dark text
@@ -88,13 +89,14 @@
     --surface-2: #212125;
     --ink: #e6e6e1;
     --text: #b5b5b5;
+    --outline-dim: #7d7d7e;
     --line: rgba(230, 230, 225, 0.14);
-    --accent: #1db954;
-    --accent-text: #5dd68a;
+    --accent: #ff7a45;
+    --accent-text: #ff9d73;
     --on-accent: #0b0b0c;
     --stage: color-mix(in srgb, var(--accent) 15%, var(--bg));
-    --marker: linear-gradient(100deg, rgb(29 185 84 / 0.4), rgb(29 185 84 / 0.24));
-    --header-bg: linear-gradient(90deg, #18181b 0%, #1c2420 100%);
+    --marker: linear-gradient(100deg, rgb(255 122 69 / 0.4), rgb(255 122 69 / 0.24));
+    --header-bg: linear-gradient(90deg, #18181b 0%, #221d1a 100%);
     --header-line: #2a2a2e;
     --shadow: 0 10px 30px rgba(0, 0, 0, 0.55);
     --ok: #5dd68a;
@@ -108,13 +110,14 @@
   --surface-2: #212125;
   --ink: #e6e6e1;
   --text: #b5b5b5;
+  --outline-dim: #7d7d7e;
   --line: rgba(230, 230, 225, 0.14);
-  --accent: #1db954;
-  --accent-text: #5dd68a;
+  --accent: #ff7a45;
+  --accent-text: #ff9d73;
   --on-accent: #0b0b0c;
   --stage: color-mix(in srgb, var(--accent) 15%, var(--bg));
-  --marker: linear-gradient(100deg, rgb(29 185 84 / 0.4), rgb(29 185 84 / 0.24));
-  --header-bg: linear-gradient(90deg, #18181b 0%, #1c2420 100%);
+  --marker: linear-gradient(100deg, rgb(255 122 69 / 0.4), rgb(255 122 69 / 0.24));
+  --header-bg: linear-gradient(90deg, #18181b 0%, #221d1a 100%);
   --header-line: #2a2a2e;
   --shadow: 0 10px 30px rgba(0, 0, 0, 0.55);
   --ok: #5dd68a;
@@ -200,8 +203,10 @@ button {
   color: inherit;
 }
 
+/* Keyboard focus: a neutral ink ring everywhere, so the accent stays for
+   the few marks that need it; ink keeps full contrast on the paper */
 :focus-visible {
-  outline: 2px solid var(--accent);
+  outline: 2px solid var(--ink);
   outline-offset: 3px;
 }
 
@@ -408,6 +413,21 @@ strong {
   width: 18px;
   height: 18px;
 }
+.icon-button {
+  color: var(--ink);
+  transition: background-color 0.2s ease, border-color 0.2s ease;
+}
+.icon-button:hover {
+  border-color: var(--ink);
+  background: color-mix(in srgb, var(--ink) 8%, var(--bg));
+}
+.icon-button:active {
+  translate: 0 1px;
+}
+.icon-button:focus-visible {
+  outline: 3px solid var(--ink);
+  outline-offset: 2px;
+}
 
 /* theme icon: show the moon in light mode and the sun in dark mode */
 .theme-toggle .icon-sun {
@@ -504,6 +524,13 @@ strong {
     display: block;
   }
 }
+.menu-button {
+  border-radius: 999px;
+  transition: background-color 0.2s ease;
+}
+.menu-button:hover {
+  background: color-mix(in srgb, var(--ink) 8%, transparent);
+}
 
 /* 5. Buttons, chips and tabs ----------------------------------------------- */
 .button {
@@ -523,8 +550,14 @@ strong {
   cursor: pointer;
   transition: background-color 0.2s, border-color 0.2s, transform 0.2s;
 }
+/* Hover states: every button answers the pointer clearly, by more than a
+   hairline; pressing nudges it down a touch. */
 .button:hover {
   border-color: var(--ink);
+  background: color-mix(in srgb, var(--ink) 6%, transparent);
+}
+.button:active {
+  translate: 0 1px;
 }
 .button--primary {
   border-color: var(--accent);
@@ -533,7 +566,8 @@ strong {
 }
 .button--primary:hover {
   border-color: var(--accent);
-  filter: brightness(1.08);
+  /* lighter, so the dark label gains contrast (6.2:1 light, 9:1 dark) */
+  background: color-mix(in srgb, var(--accent) 82%, #fff);
 }
 .button svg {
   width: 18px;
@@ -887,81 +921,72 @@ body,
   z-index: 1;
 }
 
-/* Footer: the same paper, one step darker (the surface colour), with the
-   case study voice: orange small caps labels, Antonio titles, an orange
-   button. */
+/* Footer, in the document's voice: compact, on the same paper one step
+   darker (the surface colour). The contact line is set like a stage title,
+   the labels are the small grey capitals used across the site, and the one
+   orange thing is the Email me button. It waits under the page and is
+   revealed at the bottom. */
 .site-footer {
   position: sticky;
   bottom: 0;
   z-index: 0;
-  padding-top: clamp(64px, 8vw, 104px);
+  padding-top: clamp(40px, 5vw, 64px);
   border-top: 1px solid var(--line);
   background: var(--paper) 0 0 / 240px auto, var(--surface);
   color: var(--text);
 }
 .site-footer__grid {
   display: grid;
-  grid-template-columns: 1.6fr repeat(3, 1fr);
-  gap: 40px 24px;
+  grid-template-columns: minmax(0, 1.6fr) repeat(3, minmax(0, 1fr));
+  align-items: start;
+  gap: 32px 24px;
 }
 .site-footer__label {
-  margin: 0 0 4px;
+  margin: 0 0 6px;
   font-size: 0.8125rem;
   font-weight: 600;
   letter-spacing: 0.12em;
   text-transform: uppercase;
-  color: var(--accent-text);
+  color: var(--muted, var(--text));
 }
 .site-footer h2 {
-  font-size: var(--fs-stage);
+  font-size: clamp(1.75rem, 1.4rem + 1.1vw, 2.375rem);
   line-height: 1.05;
   color: var(--ink);
 }
 .site-footer__note {
-  margin-top: 10px;
+  margin-top: 8px;
   color: var(--text);
 }
 .site-footer__cta {
-  margin-top: 20px;
+  min-height: 44px;
+  margin-top: 16px;
 }
 .site-footer__col {
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  gap: 10px;
+  gap: 8px;
 }
 .site-footer__col a {
   color: var(--ink);
   text-decoration: none;
-  background: linear-gradient(var(--accent), var(--accent)) 0 100% / 0 2px no-repeat;
+  background: linear-gradient(currentColor, currentColor) 0 100% / 0 1px no-repeat;
   transition: background-size 0.25s ease;
 }
 .site-footer__col a:hover,
 .site-footer__col a:focus-visible {
-  background-size: 100% 2px;
-}
-.wordmark {
-  margin-top: clamp(48px, 6vw, 80px);
-  font-family: var(--heading-font);
-  font-size: clamp(4rem, 9vw, 8rem);
-  font-weight: 600;
-  line-height: 0.8;
-  letter-spacing: -0.02em;
-  color: var(--ink);
-}
-.wordmark i {
-  font-style: normal;
-  color: var(--accent);
+  background-size: 100% 1px;
 }
 .site-footer__legal {
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
   gap: 12px;
-  margin-top: 24px;
-  padding: 20px 0 28px;
+  margin-top: clamp(32px, 4vw, 48px);
+  padding: 16px 0 20px;
   border-top: 1px solid var(--line);
-  font-size: var(--fs-small);
+  font-size: 0.875rem;
 }
 .site-footer__legal a {
   display: inline-flex;
@@ -1230,6 +1255,7 @@ body,
 }
 .badge__flip:hover {
   border-color: var(--accent);
+  background: color-mix(in srgb, var(--accent) 12%, transparent);
 }
 /* straighten and turn over: on hover/button (.is-open) or when a link on the
    back has keyboard focus */
@@ -1258,5 +1284,91 @@ body,
 @media (max-width: 860px) {
   .badge__card {
     width: min(300px, 80vw);
+  }
+}
+
+/* Top bar, shared by Home and About (the case study pages have their own
+   copy in compact.css): the breadcrumb on the left; a few links and the
+   switches on the right. It sticks to the top and the page scrolls under
+   it, on the same paper. */
+:root {
+  --bar-h: 60px;
+  --muted: color-mix(in srgb, var(--text) 80%, var(--bg));
+}
+html {
+  scroll-padding-top: calc(var(--bar-h) + 24px);
+}
+.cp-bar {
+  position: sticky;
+  top: 0;
+  z-index: 40;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  min-height: var(--bar-h);
+  padding-inline: max(var(--gx), calc((100% - var(--max)) / 2 + var(--gx)));
+  border-bottom: 1px solid var(--line);
+  background: var(--paper) 0 0 / 240px auto, var(--bg);
+}
+/* left: the "md." mark (home) and the three page links; right: the icon
+   buttons. The page you are on is marked in the accent. */
+.cp-bar__start {
+  display: flex;
+  align-items: center;
+  gap: clamp(16px, 3vw, 36px);
+  min-width: 0;
+}
+.bar-mark {
+  font-family: var(--heading-font);
+  font-size: 1.5rem;
+  font-weight: 600;
+  line-height: 1;
+  letter-spacing: -0.02em;
+  color: var(--ink);
+  text-decoration: none;
+}
+.bar-mark i {
+  font-style: normal;
+  color: var(--accent);
+}
+.cp-bar__end {
+  display: flex;
+  align-items: center;
+  gap: clamp(8px, 2vw, 20px);
+}
+.cp-bar__links {
+  display: flex;
+  gap: clamp(14px, 2.4vw, 28px);
+}
+.cp-bar__links a {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+  font-size: 0.875rem;
+  color: var(--muted);
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+.cp-bar__links a:hover {
+  color: var(--ink);
+}
+.cp-bar__links a[aria-current] {
+  color: var(--accent-text);
+}
+.cp-bar a:focus-visible {
+  outline: 3px solid var(--ink);
+  outline-offset: 2px;
+  border-radius: 4px;
+}
+/* phones: smaller round buttons, so the mark, the three links and the
+   buttons share one row */
+@media (max-width: 520px) {
+  .cp-bar .icon-button {
+    width: 40px;
+    height: 40px;
+  }
+  .cp-bar__end {
+    gap: 6px;
   }
 }

@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
+  <!-- "md." drawn as shapes (a favicon cannot load the site's fonts): a
+       condensed m and d like Antonio, and the orange dot. Ink tile on light
+       browser chrome, paper tile on dark. -->
+  <style>
+    .tile { fill: #1a1a1e; }
+    .ink { stroke: #f9f9f6; }
+    .dot { fill: #e65f2e; }
+    @media (prefers-color-scheme: dark) {
+      .tile { fill: #f9f9f6; }
+      .ink { stroke: #1a1a1e; }
+    }
+  </style>
+  <rect class="tile" width="64" height="64" rx="14"/>
+  <g class="ink" fill="none" stroke-width="5.2" stroke-linejoin="round">
+    <path d="M10.5 47V21.5 M10.5 29c0-4.6 2.2-7 5.2-7s5 2.4 5 7v18 M20.7 29c0-4.6 2.2-7 5.2-7s5 2.4 5 7v18"/>
+    <path d="M47.5 12v35 M47.5 29.5c0-5-2.4-7.5-5.6-7.5s-5.6 2.5-5.6 7.5v10c0 5 2.4 7.5 5.6 7.5s5.6-2.5 5.6-7.5"/>
+  </g>
+  <circle class="dot" cx="55.6" cy="44" r="3.6"/>
+</svg>

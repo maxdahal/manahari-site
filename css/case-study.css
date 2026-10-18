@@ -109,7 +109,7 @@ html {
   translate: -3px 0;
 }
 .cs-top__back:focus-visible {
-  outline: 3px solid var(--accent);
+  outline: 3px solid var(--ink);
   outline-offset: 2px;
 }
 .cs-top__name {
@@ -237,7 +237,7 @@ html {
   color: var(--ink);
 }
 :is(.rail, .stage-sheet) a:focus-visible {
-  outline: 3px solid var(--accent);
+  outline: 3px solid var(--ink);
   outline-offset: 2px;
 }
 .rail__label {
@@ -249,7 +249,7 @@ html {
 .rail__num {
   flex: none;
   font-family: var(--body-font);
-  font-size: 0.75rem;
+  font-size: 0.8125rem;
   font-weight: 400;
   font-variant-numeric: tabular-nums;
   letter-spacing: 0.04em;
@@ -368,7 +368,7 @@ li:has(> a[aria-current="true"]) > .rail__sub {
   cursor: pointer;
 }
 .stage-chip:focus-visible {
-  outline: 3px solid var(--accent);
+  outline: 3px solid var(--ink);
   outline-offset: 3px;
 }
 .stage-chip__ring {
@@ -498,7 +498,7 @@ li:has(> a[aria-current="true"]) > .rail__sub {
   height: 18px;
 }
 .stage-sheet__close:focus-visible {
-  outline: 3px solid var(--accent);
+  outline: 3px solid var(--ink);
   outline-offset: 2px;
 }
 @media (prefers-reduced-motion: reduce) {
@@ -883,8 +883,8 @@ li:has(> a[aria-current="true"]) > .rail__sub {
     --bg: #1d1e23;
     --surface: #25262c;
     --surface-2: #2d2e34;
-    --accent: #1db954;
-    --accent-text: #5dd68a;
+    --accent: #ff7a45;
+    --accent-text: #ff9d73;
     border-color: rgba(236, 236, 231, 0.18);
   }
 }
@@ -892,8 +892,8 @@ li:has(> a[aria-current="true"]) > .rail__sub {
   --bg: #1d1e23;
   --surface: #25262c;
   --surface-2: #2d2e34;
-  --accent: #1db954;
-  --accent-text: #5dd68a;
+  --accent: #ff7a45;
+  --accent-text: #ff9d73;
   border-color: rgba(236, 236, 231, 0.18);
 }
 .reel__head {
@@ -936,7 +936,7 @@ li:has(> a[aria-current="true"]) > .rail__sub {
   min-width: 0;
 }
 .reel__track:focus-visible {
-  outline: 3px solid var(--accent);
+  outline: 3px solid var(--ink);
   outline-offset: 4px;
 }
 .reel__track .step__figure svg {
@@ -968,7 +968,7 @@ li:has(> a[aria-current="true"]) > .rail__sub {
   background: var(--surface-2);
 }
 .reel__step:focus-visible {
-  outline: 3px solid var(--accent);
+  outline: 3px solid var(--ink);
   outline-offset: 2px;
 }
 .reel__step:disabled {
@@ -1479,7 +1479,7 @@ a.card:hover {
   pointer-events: none;
 }
 .tooltip b {
-  color: #5dd68a;
+  color: #ff9d73;
 }
 .tooltip p {
   line-height: 1.5;

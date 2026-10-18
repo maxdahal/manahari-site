@@ -1,5 +1,5 @@
 /* Home page behaviour: stacked sections, hero swap, statement fill, the ID
-   badge, the case-study seasons, marquee and the artwork lightbox. */
+   badge, the case-study seasons and the artwork lightbox. */
 (function () {
   "use strict";
 
@@ -15,38 +15,147 @@
     return clamp((vh * startLine - r.top) / (vh * startLine - vh * endLine));
   }
 
+  /* Hero name: one span per letter, numbered for the CSS stagger. The h1
+     keeps its words as its accessible name so it is not read letter by letter. */
+  function splitHeroName() {
+    var name = document.querySelector(".hero__name");
+    if (!name) return;
+    name.setAttribute(
+      "aria-label",
+      [].map.call(name.querySelectorAll(".hero__word:not(.hero__word--role)"), function (w) {
+        return w.textContent.trim();
+      }).join(" ")
+    );
+    [].forEach.call(name.querySelectorAll(".hero__word"), function (word) {
+      var i = 0;
+      [].slice.call(word.childNodes).forEach(function (node) {
+        if (node.nodeType === 3) {
+          Array.from(node.textContent).forEach(function (c) {
+            var ch = document.createElement("span");
+            ch.className = "hero__ch";
+            ch.setAttribute("aria-hidden", "true");
+            ch.textContent = c;
+            ch.style.setProperty("--i", i++);
+            word.insertBefore(ch, node);
+          });
+          word.removeChild(node);
+        } else {
+          node.classList.add("hero__ch");
+          node.style.setProperty("--i", i++);
+        }
+      });
+    });
+  }
+
+  /* Skill rings round the hero name: the ring's text is repeated until it
+     fills the ring at about one letter per em, then each letter is numbered
+     for its place on the ring. The CSS does the rest. */
+  function buildSkillRings() {
+    [].forEach.call(document.querySelectorAll(".skills3d__spin[data-text]"), function (spin) {
+      var style = getComputedStyle(spin);
+      var r = parseFloat(style.getPropertyValue("--r-px")) || spin.closest(".skills3d").offsetWidth / 2;
+      var room = Math.floor((2 * Math.PI * r) / (parseFloat(style.fontSize) * 1.05));
+      var text = spin.dataset.text.toUpperCase();
+      var chars = Array.from(text);
+      while (chars.length + text.length <= room) chars = chars.concat(Array.from(text));
+      spin.style.setProperty("--n", chars.length);
+      chars.forEach(function (c, i) {
+        var ch = document.createElement("span");
+        ch.className = "skills3d__ch";
+        ch.dataset.c = c === " " ? "\u00a0" : c;
+        ch.style.setProperty("--i", i);
+        spin.appendChild(ch);
+      });
+    });
+  }
+
+  /* Pause motion: the button in the top bar toggles .motion-paused on the
+     page (the CSS pauses what it animates), tells the falling leaves, and
+     remembers the choice for next time. */
+  function motionToggle() {
+    var root = document.documentElement;
+    var button = document.querySelector(".motion-toggle");
+    if (!button) return;
+    function apply(paused) {
+      root.classList.toggle("motion-paused", paused);
+      button.setAttribute("aria-pressed", String(paused));
+      document.dispatchEvent(new CustomEvent("motionchange", { detail: { paused: paused } }));
+    }
+    apply(root.classList.contains("motion-paused"));
+    button.addEventListener("click", function () {
+      var paused = !root.classList.contains("motion-paused");
+      try {
+        sessionStorage.setItem("motion", paused ? "paused" : "playing");
+      } catch (e) {}
+      apply(paused);
+      hideTip();
+    });
+
+    /* The tip: a small note under the button, pointing up at it, shown
+       once per visit (the browser tab's session), when the intro has
+       finished. A thin bar along its bottom counts down 8s and the tip goes
+       when it runs out (the CSS pauses the bar while you hover or focus the
+       tip); "Got it", the button itself or Escape close it sooner. */
+    var tip = document.getElementById("motion-tip");
+    function placeTip() {
+      var r = button.getBoundingClientRect();
+      var width = tip.offsetWidth;
+      var edge = document.documentElement.clientWidth - 16;
+      /* the note's right edge just past the button's, kept on screen */
+      var left = Math.max(16, Math.min(r.right + 8, edge) - width);
+      tip.style.setProperty("--tip-left", Math.round(left) + "px");
+      tip.style.setProperty("--arrow-x", Math.round(r.left + r.width / 2 - left) + "px");
+    }
+    function hideTip() {
+      if (!tip || tip.hidden) return;
+      tip.classList.add("is-leaving");
+      setTimeout(function () {
+        tip.hidden = true;
+      }, 250);
+      window.removeEventListener("resize", placeTip);
+    }
+    try {
+      localStorage.removeItem("motion-tip");
+    } catch (e) {}
+    var shown = false;
+    try {
+      shown = sessionStorage.getItem("motion-tip") === "shown";
+    } catch (e) {}
+    if (!tip || shown || reduceMotion || getComputedStyle(button).display === "none") return;
+    var introLeft = root.classList.contains("hello-lock") ? 3600 : 1200;
+    setTimeout(function () {
+      if (root.classList.contains("motion-paused")) return;
+      tip.hidden = false;
+      placeTip();
+      window.addEventListener("resize", placeTip);
+      try {
+        sessionStorage.setItem("motion-tip", "shown");
+      } catch (e) {}
+    }, introLeft);
+    tip.querySelector(".motion-tip__timer").addEventListener("animationend", hideTip);
+    tip.querySelector(".motion-tip__ok").addEventListener("click", hideTip);
+    document.addEventListener("keydown", function (event) {
+      if (event.key === "Escape") hideTip();
+    });
+  }
+
   function start() {
+    splitHeroName();
+    motionToggle();
+    buildSkillRings();
     var sections = [].slice.call(document.querySelectorAll(".sections > section"));
 
-    /* Each section sticks once its bottom reaches the bottom of the screen */
-    function setStickyOffsets() {
-      sections.forEach(function (section) {
-        section.style.setProperty("--stick", Math.min(0, window.innerHeight - section.offsetHeight) + "px");
-      });
-    }
-    setStickyOffsets();
-    window.addEventListener("resize", setStickyOffsets);
-    if (window.ResizeObserver) {
-      var ro = new ResizeObserver(setStickyOffsets);
-      sections.forEach(function (s) {
-        ro.observe(s);
-      });
-    }
-
-    /* In-page links. A stuck section already counts as "in view", so the
-       browser would not move; scroll to where the section starts instead. */
-    var holder = document.querySelector(".sections");
-    function sectionTop(section) {
-      var top = holder.getBoundingClientRect().top + window.scrollY;
-      for (var s = section.previousElementSibling; s; s = s.previousElementSibling) top += s.offsetHeight;
-      return top;
-    }
+    /* In-page links land with the section's top just under the top bar.
+       The footer sits under the page and is revealed at the very bottom. */
+    var bar = document.querySelector(".cp-bar");
     function goTo(id, smooth) {
       var target = document.getElementById(id);
       if (!target) return false;
       var section = target.closest(".sections > section");
-      var top = section ? sectionTop(section) : document.documentElement.scrollHeight;
-      window.scrollTo({ top: top, behavior: smooth && !reduceMotion ? "smooth" : "auto" });
+      var top = section
+        ? section.getBoundingClientRect().top + window.scrollY - (bar ? bar.offsetHeight : 0)
+        : document.documentElement.scrollHeight;
+      window.scrollTo({ top: Math.max(0, top), behavior: smooth && !reduceMotion ? "smooth" : "auto" });
       return true;
     }
     document.addEventListener("click", function (event) {
@@ -66,6 +175,49 @@
     }
     /* other scripts (and the board links) use the same jump */
     if (window.Site) window.Site.goTo = goTo;
+
+    /* Outline: marks the section you are reading, the last one whose top
+       has passed the upper third of the screen; at the very bottom, Contact */
+    var outlineLinks = [].slice.call(document.querySelectorAll('.cp-outline a[href^="#"]'));
+    var outlineTargets = outlineLinks.map(function (link) {
+      return document.getElementById(link.getAttribute("href").slice(1));
+    });
+    var outlineTick = false;
+    function markOutline() {
+      outlineTick = false;
+      var line = window.innerHeight / 3;
+      var current = 0;
+      outlineTargets.forEach(function (target, i) {
+        if (!target) return;
+        /* the footer waits under the page, so it is "reached" only where
+           the page above it ends */
+        var top = target.matches(".site-footer")
+          ? document.querySelector(".doc").getBoundingClientRect().bottom
+          : target.getBoundingClientRect().top;
+        if (top <= line) current = i;
+      });
+      if (window.innerHeight + window.scrollY >= document.documentElement.scrollHeight - 2) {
+        current = outlineLinks.length - 1;
+      }
+      outlineLinks.forEach(function (link, i) {
+        if (i === current) link.setAttribute("aria-current", "location");
+        else link.removeAttribute("aria-current");
+      });
+    }
+    if (outlineLinks.length) {
+      window.addEventListener(
+        "scroll",
+        function () {
+          if (!outlineTick) {
+            outlineTick = true;
+            requestAnimationFrame(markOutline);
+          }
+        },
+        { passive: true }
+      );
+      window.addEventListener("resize", markOutline);
+      markOutline();
+    }
 
     /* Statement: split into words that fill with color as you scroll */
     var statement = document.querySelector("[data-fill]");
@@ -109,8 +261,6 @@
 
     /* Everything that follows the scroll position */
     var hero = document.querySelector(".hero");
-    var rows = document.querySelectorAll(".marquee__row");
-    var marquee = document.querySelector(".marquee");
     var ticking = false;
 
     function onScroll() {
@@ -138,23 +288,7 @@
         });
       }
 
-      if (marquee) {
-        var section = marquee.getBoundingClientRect();
-        var mp = clamp((vh - section.top) / (vh * 3));
-        rows.forEach(function (row) {
-          var width = (row.scrollWidth / 2) * 0.45;
-          var dir = Number(row.dataset.direction) || 1;
-          var x = dir > 0 ? -mp * width : -(1 - mp) * width;
-          row.style.setProperty("--x", x.toFixed(1) + "px");
-        });
-      }
 
-      sections.forEach(function (section, i) {
-        var next = sections[i + 1];
-        if (!next) return;
-        var nr = next.getBoundingClientRect();
-        section.style.setProperty("--cover", clamp(1 - nr.top / vh).toFixed(3));
-      });
     }
     window.addEventListener(
       "scroll",
@@ -372,7 +506,19 @@
           );
         }
       }
+      if (document.documentElement.classList.contains("motion-paused")) pauseLeaves(true);
     }
+
+    /* the pause-motion button holds the pieces where they are */
+    function pauseLeaves(paused) {
+      layer.getAnimations({ subtree: true }).forEach(function (a) {
+        if (paused) a.pause();
+        else a.play();
+      });
+    }
+    document.addEventListener("motionchange", function (event) {
+      pauseLeaves(event.detail.paused);
+    });
 
     function set(next, replay) {
       season = next;

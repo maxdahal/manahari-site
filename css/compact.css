@@ -764,3 +764,15 @@ body::after {
 .cp-main :not(h1, h2, h1 *, h2 *, code, pre, pre *, .callout:not(.callout--statement), .callout:not(.callout--statement) *) {
   font-family: var(--body-font);
 }
+
+/* a small tag beside an outline link to something interactive */
+.cp-outline__tag {
+  flex: none;
+  margin-left: 2px;
+  padding: 1px 7px;
+  border-radius: 999px;
+  background: color-mix(in srgb, var(--accent) 16%, transparent);
+  color: var(--accent-text);
+  font-size: 0.6875rem;
+  font-weight: 700;
+}

@@ -1944,3 +1944,22 @@ a.card:hover {
     transition: none;
   }
 }
+
+/* A button that takes you to something to try on the page (the KU color
+   sandbox): tinted in the accent with a play mark, so it reads as an
+   invitation rather than a second main action */
+.button--play {
+  gap: 8px;
+  border: 2px solid var(--accent);
+  background: color-mix(in srgb, var(--accent) 12%, var(--bg));
+  color: var(--accent-text);
+}
+.button--play:hover {
+  background: color-mix(in srgb, var(--accent) 22%, var(--bg));
+}
+.button--play svg,
+.cp-card__links .button--play svg {
+  width: 14px;
+  height: 14px;
+  fill: currentColor;
+}

@@ -27,7 +27,7 @@
   <div class="cp">
     <div class="cp-side">
       <nav class="cp-outline" aria-label="On this page">
-        <ol><li><a href="#overview" class="cp-outline__stage">Overview</a></li><li><a href="#empathize" class="cp-outline__stage">Empathize</a></li><li><a href="#define" class="cp-outline__stage">Define</a></li><li><a href="#ideate" class="cp-outline__stage">Ideate</a></li><li><a href="#design" class="cp-outline__stage">Design</a><ol><li><a href="#identity">New identity</a></li><li><a href="#platform">The new platform</a></li><li><a href="#wireframes">Low-fi to high-fi</a></li><li><a href="#decisions">Design system decisions</a></li></ol></li><li><a href="#prototype" class="cp-outline__stage">Prototype</a></li><li><a href="#test" class="cp-outline__stage">Test</a></li><li><a href="#result" class="cp-outline__stage">Outcome</a></li><li><a href="#learn" class="cp-outline__stage">Learn</a><ol><li><a href="#didnt">What didn’t work</a></li><li><a href="#takeaways">Takeaways</a></li></ol></li></ol>
+        <ol><li><a href="#overview" class="cp-outline__stage">Overview</a></li><li><a href="#empathize" class="cp-outline__stage">Empathize</a></li><li><a href="#define" class="cp-outline__stage">Define</a></li><li><a href="#ideate" class="cp-outline__stage">Ideate</a></li><li><a href="#design" class="cp-outline__stage">Design</a><ol><li><a href="#identity">New identity</a></li><li><a href="#platform">The new platform</a></li><li><a href="#wireframes">Low-fi to high-fi</a></li><li><a href="#decisions">Design system decisions</a></li><li><a href="#sandbox">Color sandbox <span class="cp-outline__tag">Try it</span></a></li></ol></li><li><a href="#prototype" class="cp-outline__stage">Prototype</a></li><li><a href="#test" class="cp-outline__stage">Test</a></li><li><a href="#result" class="cp-outline__stage">Outcome</a></li><li><a href="#learn" class="cp-outline__stage">Learn</a><ol><li><a href="#didnt">What didn’t work</a></li><li><a href="#takeaways">Takeaways</a></li></ol></li></ol>
       </nav>
     </div>
 
@@ -42,7 +42,7 @@
           <div class="cp-card">
             <p class="cp-card__title">Project access</p>
             <div class="cp-card__links"><a class="button button--primary" href="https://brand.ku.edu" target="_blank" rel="noopener">Live Demo <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 3h6v6"/><path d="M10 14 21 3"/><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/></svg></a>
-              <a class="button" href="index.html#work">All projects</a></div>
+              <a class="button button--play" href="#sandbox"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5.5v13l11-6.5z"/></svg>Play with KU colors</a></div>
             <div class="cp-card__part"><p class="cp-card__title">Focus</p><div class="cp-topics"><span class="chip">Research</span><span class="chip">Brand system</span><span class="chip">Frontend</span></div></div>
           </div>
         </aside>
@@ -845,6 +845,12 @@
                    the system down the left, the live canvas, and a panel with
                    tabs for the controls, the accessibility check and the code
                    (js/ku.js) -->
+              <div class="sandbox-wrap" id="sandbox">
+                <div class="sandbox-wrap__head">
+                  <p class="sandbox-wrap__tag"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5.5v13l11-6.5z"/></svg>Interactive</p>
+                  <h4 class="sandbox-wrap__title">Try the KU color system yourself</h4>
+                  <p class="sandbox-wrap__text">Pick any two of the 17 brand colors, or one of the 8 pairs from the system, and see whether it passes the same contrast check we used.</p>
+                </div>
               <section class="sandbox" aria-labelledby="sandbox-h" data-play>
                 <div class="sandbox__bar">
                   <p class="sandbox__crumb">KU Brand <span aria-hidden="true">/</span> <b id="sandbox-h">Color sandbox</b></p>
@@ -904,6 +910,7 @@
                   </div>
                 </div>
               </section>
+              </div>
 
               <section class="reel" aria-labelledby="reel-sys-title">
                 <div class="reel__head">

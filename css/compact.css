@@ -1,0 +1,760 @@
+/* ==========================================================================
+   Compact case study (prototype), laid out like a quiet document. The page
+   is as wide as the homepage (the same side margins and maximum width). No
+   top bar: the breadcrumb sits at the top left and the theme switch at the
+   top right. A plain outline of the stages and their sections runs down the
+   left with a dot on the one you are reading. The story fills the rest:
+   text keeps a comfortable reading width, while pictures, rows of details
+   and panels use the full width, and handwritten notes sit in the margin
+   beside the text. Details are shown side by side or as steps, never
+   hidden behind clicks. The stages and their sections are the case study's
+   own markup, so the shared components keep working.
+   ========================================================================== */
+
+:root {
+  --opener-h: 0px;
+  --bar-h: 60px; /* the top bar with the breadcrumb and theme switch */
+  /* inactive links: a little greyer than body text, still easy to read */
+  --muted: color-mix(in srgb, var(--text) 80%, var(--bg));
+}
+html {
+  /* links land below the top bar and the stage header pinned under it */
+  scroll-padding-top: calc(var(--bar-h) + 84px);
+}
+
+/* Paper: a fine grain over the whole page, like paper. A fixed layer of
+   SVG noise sits above everything (it ignores the pointer), blended into
+   the colours beneath, so the grain runs unbroken under the pinned bar and
+   headers too. */
+body::after {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  background: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E") 0 0 / 240px auto;
+  opacity: 0.3;
+  mix-blend-mode: multiply;
+  pointer-events: none;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) body::after {
+    opacity: 0.12;
+    mix-blend-mode: screen;
+  }
+}
+:root[data-theme="dark"] body::after {
+  opacity: 0.12;
+  mix-blend-mode: screen;
+}
+
+/* The top bar: the breadcrumb on the left and the theme switch on the
+   right, as wide as the page. It stays at the top and the story scrolls
+   underneath it. */
+.cp-bar {
+  position: sticky;
+  top: 0;
+  z-index: 40;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  min-height: var(--bar-h);
+  padding-inline: max(var(--gx), calc((100% - var(--max)) / 2 + var(--gx)));
+  background: var(--bg);
+}
+
+.cp {
+  --measure: 680px; /* reading width for text */
+  display: grid;
+  grid-template-columns: minmax(150px, 190px) minmax(0, 1fr);
+  column-gap: clamp(32px, 4vw, 64px);
+  max-width: var(--max);
+  margin-inline: auto;
+  padding-inline: var(--gx);
+}
+
+/* left: breadcrumb at the top, outline below it; both stay in view */
+.cp-side {
+  grid-column: 1;
+  grid-row: 1;
+  position: sticky;
+  top: var(--bar-h);
+  display: flex;
+  flex-direction: column;
+  height: calc(100vh - var(--bar-h));
+  padding-block: 20px;
+  overflow-y: auto;
+  scrollbar-width: none;
+}
+.cp-crumbs {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 4px 8px;
+  font-size: 0.875rem;
+  color: var(--muted);
+}
+.cp-crumbs a {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  min-height: 32px;
+  color: var(--muted);
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+.cp-crumbs a svg {
+  width: 15px;
+  height: 15px;
+  transition: translate 0.2s ease;
+}
+.cp-crumbs a:hover {
+  color: var(--ink);
+}
+.cp-crumbs a:hover svg {
+  translate: -3px 0;
+}
+.cp-crumbs [aria-current] {
+  color: var(--ink);
+}
+.cp-crumbs a:focus-visible,
+.cp-outline a:focus-visible {
+  outline: 3px solid var(--accent);
+  outline-offset: 2px;
+  border-radius: 4px;
+}
+
+.cp-outline {
+  margin-top: clamp(40px, 10vh, 120px);
+}
+.cp-outline > ol {
+  padding-left: 14px;
+}
+.cp-outline ol {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+.cp-outline ol ol {
+  margin: 2px 0 6px 12px;
+}
+.cp-outline a {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 3px 8px;
+  border-radius: 6px 0 0 6px;
+  /* a soft wash of the accent behind the link you are reading: strongest at
+     the left, fading out to the right; it sweeps in when you arrive */
+  background: linear-gradient(90deg in oklch,
+      color-mix(in oklch, var(--wash-color) 20%, transparent),
+      color-mix(in oklch, var(--wash-color) 8%, transparent) 55%,
+      transparent)
+    no-repeat 0 0 / 0% 100%;
+  font-size: 0.875rem;
+  line-height: 1.35;
+  color: var(--muted);
+  text-decoration: none;
+  transition: color 0.2s ease, background-size 0.4s ease;
+}
+.cp-outline ol ol a {
+  font-size: 0.8125rem;
+}
+/* a small dot marks the section you are reading; its stage turns dark */
+.cp-outline a::before {
+  content: "";
+  flex: none;
+  width: 6px;
+  height: 6px;
+  margin-left: -22px; /* the dot sits outside the wash */
+  border-radius: 50%;
+  background: transparent;
+  transition: background-color 0.2s ease;
+}
+.cp-outline a:hover,
+.cp-outline a.is-in {
+  color: var(--ink);
+}
+.cp-outline a[aria-current] {
+  background-size: 100% 100%;
+  color: var(--accent-text);
+}
+.cp-outline a[aria-current]::before {
+  background: var(--accent);
+}
+
+/* the story */
+.cp-main {
+  grid-column: 2;
+  grid-row: 1;
+  display: flex;
+  flex-direction: column;
+  gap: var(--gap-section);
+  min-width: 0;
+  padding-block: clamp(28px, 6vh, 56px) clamp(72px, 12vh, 140px);
+}
+/* wide content (tables, code, rows of cards) scrolls inside its own box
+   instead of stretching the column */
+.cp-main > *,
+.cp-sec > * {
+  min-width: 0;
+}
+/* text keeps the reading width; everything else uses the full width */
+.cp-story,
+.cp-sec .block__title,
+.cp-sec .block__body > :is(p, h4, a, .pair, .goal, .card, .notice, .lead, .note-line, .callout--statement) {
+  max-width: var(--measure);
+}
+
+/* the hero: two columns, like a repository page. The title runs across
+   the top; under it the picture, with a card beside it holding the project
+   links and its focus (like the "About" box beside a GitHub repo), its
+   bottom edge level with the bottom of the picture; then the outcome and
+   the facts under the picture. */
+.cp-hero {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(240px, 300px);
+  grid-template-areas:
+    "intro intro"
+    "image aside"
+    "meta  .";
+  gap: 20px clamp(28px, 3.5vw, 48px);
+  padding-bottom: clamp(32px, 5vh, 48px);
+  border-bottom: 1px solid var(--line);
+}
+.cp-hero__intro {
+  grid-area: intro;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+/* the picture fills its row: when the card beside it is taller, the
+   picture grows to match (cropping a little at the sides), so their tops
+   and bottoms line up */
+.cp-hero__image {
+  grid-area: image;
+  align-self: stretch;
+  min-width: 0;
+}
+.cp-hero__meta {
+  grid-area: meta;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  min-width: 0;
+}
+.cp-hero__image img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 12px;
+}
+.cp-hero__aside {
+  grid-area: aside;
+  align-self: end;
+}
+.cp-card {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding: 18px;
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  background: var(--surface);
+}
+.cp-card__title {
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: var(--ink);
+}
+.cp-card__links {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.cp-card__links .button {
+  justify-content: center;
+  min-height: 40px;
+  padding: 8px 16px;
+  font-size: var(--fs-small);
+}
+.cp-card__part {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding-top: 14px;
+  border-top: 1px solid var(--line);
+}
+/* focus areas as topic tags */
+.cp-topics {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+.cp-topics .chip {
+  padding: 3px 10px;
+  border: 0;
+  border-radius: 99px;
+  background: color-mix(in srgb, var(--accent) 14%, transparent);
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: var(--accent-text);
+}
+.cp-title {
+  font-size: clamp(2.25rem, 1.8rem + 1.6vw, 3rem);
+  line-height: 1.05;
+  color: var(--ink);
+}
+.cp-sub {
+  font-size: 0.9375rem;
+  color: var(--text);
+}
+/* facts in a row, label above value */
+.cp-facts {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(170px, 1fr));
+  gap: 16px 24px;
+  margin-top: 14px;
+  padding-top: 18px;
+  border-top: 1px solid var(--line);
+}
+.cp-facts div {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+.cp-facts dt,
+.cp-outcome__label {
+  font-family: var(--body-font);
+  font-size: 0.875rem;
+  font-weight: 400;
+  letter-spacing: 0;
+  color: var(--text);
+}
+.cp-facts dd {
+  font-size: 0.9375rem;
+  line-height: 1.45;
+  color: var(--ink);
+}
+/* tools read as a plain list here, not as chips */
+.cp-facts .chips {
+  display: block;
+}
+.cp-facts .chip {
+  display: inline;
+  padding: 0;
+  border: 0;
+  background: none;
+  font: inherit;
+  color: inherit;
+}
+.cp-facts .chip + .chip::before {
+  content: ", ";
+}
+.cp-outcome {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-top: 10px;
+}
+.cp-outcome .meta__stats {
+  gap: 12px 40px;
+}
+.cp-outcome .meta__num {
+  font-size: clamp(2.25rem, 1.9rem + 1.2vw, 2.75rem);
+}
+.cp-outcome .meta__cap {
+  font-size: 0.75rem;
+}
+.cp-outcome__text {
+  font-size: 0.9375rem;
+  line-height: 1.55;
+  color: var(--text);
+}
+
+.cp-story {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.cp-label {
+  font-size: 0.875rem;
+  color: var(--text);
+}
+.cp-story .story__text {
+  font-family: var(--body-font);
+  font-size: clamp(1.125rem, 1rem + 0.4vw, 1.3125rem);
+  font-weight: 400;
+  line-height: 1.55;
+  letter-spacing: 0;
+  text-align: left;
+  color: var(--ink);
+}
+
+/* Spacing, one rhythm for the whole story:
+   - between stages: the most room (--gap-stage)
+   - before each section title inside a stage: clear room (--gap-section)
+   - inside a section: tight and even (--gap-inside), just enough to read */
+.cp {
+  --gap-stage: clamp(72px, 11vh, 120px);
+  --gap-section: clamp(44px, 6.5vh, 64px);
+  --gap-inside: 16px;
+}
+
+/* a stage: its header sticks just under the top bar while you read the
+   stage (the next stage's header pushes it away). The header: the stage number in an accent badge and the stage
+   name in the display face, on a hairline. */
+.cp-sec {
+  display: flex;
+  flex-direction: column;
+  padding-top: var(--gap-stage);
+}
+.cp-sec:first-of-type {
+  padding-top: calc(var(--gap-stage) / 2);
+}
+.cp-sec__label {
+  position: sticky;
+  top: var(--bar-h);
+  z-index: 15;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  width: 100%;
+  padding: 16px 0 14px;
+  border-bottom: 1px solid var(--line);
+  background: var(--bg);
+  font-size: clamp(1.75rem, 1.4rem + 1.1vw, 2.375rem);
+  line-height: 1.05;
+  letter-spacing: -0.005em;
+  color: var(--ink);
+}
+.cp-sec__label span {
+  display: inline-grid;
+  place-items: center;
+  flex: none;
+  min-width: 44px;
+  height: 30px;
+  padding: 0 8px;
+  border-radius: 8px;
+  background: color-mix(in srgb, var(--accent) 16%, transparent);
+  font-family: var(--body-font);
+  font-size: 0.875rem;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  font-variant-numeric: tabular-nums;
+  color: var(--accent-text);
+}
+/* each section: clear room above its title, then tight, even content */
+.cp-sec .block {
+  gap: 0;
+  padding-top: var(--gap-section);
+}
+.cp-sec .block__title {
+  font-size: clamp(1.5rem, 1.3rem + 0.6vw, 1.75rem);
+  line-height: 1.2;
+}
+/* the section title sits on the top edge of a short tinted band, which
+   runs from just left of the text out to the right edge of the screen (not
+   behind the outline on the left). The band covers the opening text of the
+   section (site.js measures it as --band-h), then the content carries on
+   below it. */
+.cp-sec .block {
+  --title-lh: calc(clamp(1.3125rem, 1.15rem + 0.5vw, 1.5rem) * 1.25);
+}
+.cp-sec .block__title {
+  position: relative;
+  z-index: 1;
+}
+.cp-sec .block__body {
+  gap: var(--gap-inside);
+  margin-top: calc(var(--title-lh) * -0.55);
+  padding: calc(var(--title-lh) * 0.55 + 20px) 0 8px;
+  border-image: linear-gradient(var(--band) var(--band-h, calc(var(--title-lh) * 0.45 + 120px)), transparent 0)
+    fill 0 / 0 / 0 100vmax 0 20px;
+}
+/* only a section's opening gets the band: a section that continues the
+   one before it, or a body nested inside another, has none */
+.cp-sec .block--continued > .block__body,
+.cp-sec .block__body .block__body {
+  margin-top: 0;
+  padding-top: 0;
+  border-image: none;
+}
+/* the first section right under a stage header needs less room */
+.cp-sec__label + .block {
+  padding-top: calc(var(--gap-section) * 0.6);
+}
+
+/* Details side by side: rows of cards share the full width in equal
+   columns; the six design decisions sit in two rows of three. The numbered
+   steps keep their connected-steps design. */
+.cp-sec .block__body > :is(.grid-2, .grid-3:not(.path)) {
+  display: grid;
+  gap: var(--gap-inside) clamp(24px, 3vw, 40px);
+}
+.cp-sec .block__body > .grid-2 {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+.cp-sec .block__body > .grid-3:not(.path) {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+.cp-sec .block__body > .rules-list {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+/* margin notes: in sections that have them, the handwritten notes sit in
+   the space beside the text, level with the paragraph they follow; wide
+   pieces still span the whole width */
+@media (min-width: 1101px) {
+  .cp-sec .block__body:has(> .callout:not(.callout--statement)) {
+    display: grid;
+    /* the notes always get at least 200px; the text gives way a little on
+       narrower screens */
+    grid-template-columns: minmax(0, var(--measure)) minmax(200px, 1fr);
+    column-gap: clamp(24px, 4vw, 64px);
+    row-gap: var(--gap-inside);
+    align-items: start;
+  }
+  .cp-sec .block__body:has(> .callout:not(.callout--statement)) > * {
+    grid-column: 1 / -1;
+  }
+  .cp-sec .block__body:has(> .callout:not(.callout--statement)) > :is(p, h4, a, .pair, .goal, .card, .notice, .lead, .note-line, .callout--statement, .intro-split) {
+    grid-column: 1;
+  }
+  .cp-sec .block__body > .callout:not(.callout--statement) {
+    grid-column: 2;
+    max-width: 300px;
+  }
+}
+
+/* Smaller screens: no outline; the breadcrumb and the theme switch share a
+   row at the top */
+@media (max-width: 1100px) {
+  .cp {
+    grid-template-columns: minmax(0, 1fr);
+  }
+  .cp-side {
+    display: none;
+  }
+  .cp-main {
+    grid-column: 1 / -1;
+    grid-row: 1;
+    padding-top: clamp(16px, 4vh, 40px);
+  }
+  .cp-sec__label {
+    width: 100%;
+  }
+  .cp-hero {
+    grid-template-columns: minmax(0, 1fr);
+    grid-template-areas: "intro" "image" "aside" "meta";
+  }
+  .cp-card__links {
+    flex-direction: row;
+    flex-wrap: wrap;
+  }
+  .cp-sec .block__body > .rules-list {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+@media (max-width: 640px) {
+  .cp-sec .block__body > :is(.grid-2, .grid-3:not(.path), .rules-list) {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .cp-outline a {
+    transition: none;
+  }
+}
+
+/* ==========================================================================
+   Type scale for the case study. One size per role, so the same kind of
+   text always looks the same, whichever component it sits in. The display
+   face (Antonio) is for titles and numbers, the body face (Inter) for
+   reading and labels. Handwritten margin notes (Kalam) keep their own look.
+   ========================================================================== */
+.cp {
+  --t-title: 3rem;        /* page title */
+  --t-stat: 2.5rem;       /* big numbers */
+  --t-stage: 2.25rem;     /* stage header */
+  --t-section: 1.5rem;    /* section title */
+  --t-quote: 1.25rem;     /* statements */
+  --t-sub: 1.1875rem;     /* subheads */
+  --t-card: 1.0625rem;    /* titles inside cards and lists */
+  --t-lead: 1.25rem;      /* opening paragraphs */
+  --t-body: 1.0625rem;    /* reading text */
+  --t-small: 0.9375rem;   /* captions, meta values */
+  --t-meta: 0.875rem;     /* plain labels, buttons */
+  --t-label: 0.8125rem;   /* small capital labels */
+  --t-tiny: 0.75rem;      /* tags */
+}
+
+/* display sizes */
+.cp-title {
+  font-size: clamp(2.25rem, 1.8rem + 1.6vw, var(--t-title));
+}
+.cp-sec__label {
+  font-size: clamp(1.75rem, 1.4rem + 1vw, var(--t-stage));
+}
+.cp-main .block__title {
+  font-family: var(--body-font);
+  font-size: clamp(1.3125rem, 1.15rem + 0.5vw, var(--t-section));
+  font-weight: 600;
+  line-height: 1.25;
+  letter-spacing: -0.015em;
+}
+.cp-main :is(h4, .subhead),
+.cp-main .steps--story .step__text h4 {
+  font-family: var(--body-font);
+  font-size: var(--t-sub);
+  font-weight: 600;
+  line-height: 1.2;
+  letter-spacing: 0;
+}
+.cp-main :is(.card, .grid-2, .grid-3, .rules-list, .numbered, .path) h3,
+.cp-main .more__meta b {
+  font-family: var(--body-font);
+  font-size: var(--t-card);
+  font-weight: 600;
+  line-height: 1.25;
+  letter-spacing: 0;
+}
+.cp-main :is(.goal__statement, .callout--statement p:not(.eyebrow)) {
+  font-family: var(--body-font);
+  font-size: var(--t-quote);
+  font-weight: 500;
+  line-height: 1.3;
+}
+.cp-main :is(.meta__num, .stats b) {
+  font-family: var(--body-font);
+  font-size: var(--t-stat);
+  line-height: 1;
+  letter-spacing: -0.03em;
+}
+/* the caption under a big number */
+.cp-main .stats > div > span {
+  font-size: var(--t-small);
+  line-height: 1.45;
+}
+
+/* reading sizes */
+.cp-main :is(p, li),
+.cp-main .steps--story .step__text p {
+  font-size: var(--t-body);
+  line-height: 1.6;
+}
+.cp-main :is(.story__text, .intro-split__text) {
+  font-size: var(--t-lead);
+  line-height: 1.5;
+}
+.cp-main :is(figcaption, .cp-sub, .cp-outcome__text, .cp-facts dd, .more__meta span) {
+  font-size: var(--t-small);
+  letter-spacing: 0;
+}
+.cp-main :is(.cp-facts dt, .cp-outcome__label, .cp-card__title, .cp-label, .button, [role="tab"]) {
+  font-size: var(--t-meta);
+}
+
+/* small capital labels: one size, weight and spacing everywhere */
+.cp-main :is(.eyebrow, .swatch-group, .meta__cap, .reel__kicker, .numbered--label b),
+.cp-main .steps--story .step__text b,
+.cp-main .stats .eyebrow {
+  font-family: var(--body-font);
+  font-size: var(--t-label);
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+.cp-main .cp-topics .chip {
+  font-size: var(--t-tiny);
+}
+/* small values: colour codes, contrast results */
+.cp-main :is(.swatches span, .contrast small) {
+  font-size: var(--t-meta);
+}
+.cp-main .text-link {
+  font-size: var(--t-body);
+}
+.cp-main code,
+.cp-main pre {
+  font-size: var(--t-meta);
+}
+/* handwritten notes keep their hand, in one size each */
+.cp-main .stage .callout:not(.callout--statement) .eyebrow {
+  font-family: "Kalam", var(--body-font);
+  font-size: var(--t-small);
+  font-weight: 400;
+  letter-spacing: 0.02em;
+  text-transform: none;
+}
+.cp-main .stage .callout:not(.callout--statement) p:not(.eyebrow) {
+  font-family: "Kalam", var(--body-font);
+  font-size: 1.125rem;
+  line-height: 1.4;
+}
+
+/* Behind the scenes, everything at once: the wireframes side by side, and
+   the brand system's parts one after another, each named in a small label
+   and divided by a hairline */
+.cp-main .reel__grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 20px;
+}
+.cp-main .reel__grid .step__figure {
+  gap: 10px;
+}
+.cp-main .reel .system {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+.cp-main .reel .system__panel {
+  display: flex;
+  flex-direction: column;
+  gap: var(--gap-inside);
+  padding-block: 24px;
+  border-top: 1px solid var(--line);
+}
+.cp-main .reel .system__panel:first-of-type {
+  padding-top: 8px;
+  border-top: 0;
+}
+.cp-main .system__part {
+  font-family: var(--body-font);
+  font-size: var(--t-label);
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--accent-text);
+}
+@media (max-width: 640px) {
+  .cp-main .reel__grid {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+/* tables read at caption size, with small capital headers */
+.cp-main :is(td, th) {
+  font-size: var(--t-small);
+}
+.cp-main th {
+  font-family: var(--body-font);
+  font-size: var(--t-label);
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+/* big numbers share one weight */
+.cp-main :is(.meta__num, .stats b) {
+  font-weight: 700;
+}
+
+/* Antonio is for the page title (h1) and the stage headers (h2) only;
+   everything else in the story reads in Inter. This catches any component
+   that sets the display face itself (numbers, card titles, labels). Code
+   and the handwritten notes keep their own faces. */
+.cp-main :not(h1, h2, h1 *, h2 *, code, pre, pre *, .callout:not(.callout--statement), .callout:not(.callout--statement) *) {
+  font-family: var(--body-font);
+}

@@ -8,108 +8,71 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&amp;family=Antonio:wght@400;500;600;700&amp;display=swap">
-  <!-- Kalam: the handwriting for the margin notes -->
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Kalam:wght@400&amp;display=swap">
   <link rel="stylesheet" href="css/site.css">
   <link rel="stylesheet" href="css/case-study.css">
   <link rel="stylesheet" href="css/luna.css">
+  <link rel="stylesheet" href="css/compact.css">
   <script src="js/site.js"></script>
   <script src="js/case-study.js" defer></script>
   <script src="js/luna.js" defer></script>
 </head>
-<body>
+<body class="cp-page">
   <a class="skip-link" href="#main">Skip to content</a>
-  <!-- Case studies swap the site navigation for a slim bar: back to the
-       projects, the case study's name and the theme switch -->
-  <header class="cs-top">
-    <div class="cs-top__bar">
-      <a class="cs-top__back" href="index.html#work"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m12 19-7-7 7-7M19 12H5"/></svg>Back to projects</a>
-      <p class="cs-top__name" aria-hidden="true">Luna Surgical Console</p>
-      <button class="icon-button theme-toggle" type="button" aria-label="Switch theme"><svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20.985 12.486a9 9 0 1 1-9.473-9.472c.405-.022.617.46.402.803a6 6 0 0 0 8.268 8.268c.344-.215.825-.004.803.401"/></svg><svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2m-7.07-17.07 1.41 1.41m11.32 11.32 1.41 1.41M2 12h2m16 0h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"/></svg></button>
-    </div>
+  <header class="cp-bar">
+    <nav class="cp-crumbs" aria-label="Breadcrumbs"><a href="index.html#work"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m12 19-7-7 7-7M19 12H5"/></svg>Projects</a><span class="cp-crumbs__sep" aria-hidden="true">/</span><span aria-current="page">Luna</span></nav>
+    <button class="icon-button theme-toggle" type="button" aria-label="Switch theme"><svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20.985 12.486a9 9 0 1 1-9.473-9.472c.405-.022.617.46.402.803a6 6 0 0 0 8.268 8.268c.344-.215.825-.004.803.401"/></svg><svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2m-7.07-17.07 1.41 1.41m11.32 11.32 1.41 1.41M2 12h2m16 0h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"/></svg></button>
   </header>
+  <div class="cp">
+    <div class="cp-side">
+      <nav class="cp-outline" aria-label="On this page">
+        <ol><li><a href="#overview" class="cp-outline__stage">Overview</a><ol><li><a href="#product-sec">The product</a></li><li><a href="#path-sec">How the story runs</a></li><li><a href="#principles">Vision &amp; principles</a></li></ol></li><li><a href="#empathize" class="cp-outline__stage">Empathize</a></li><li><a href="#define" class="cp-outline__stage">Problem</a><ol><li><a href="#problem-sec">The problems</a></li><li><a href="#today-sec">Where project 1 started</a></li><li><a href="#old-sec">Where project 2 started</a></li><li><a href="#new-sec">Where project 3 started</a></li><li><a href="#strategy-sec">Strategy</a></li></ol></li><li><a href="#ideate" class="cp-outline__stage">Ideate</a></li><li><a href="#design" class="cp-outline__stage">Design</a><ol><li><a href="#design-work-sec">Component system</a></li><li><a href="#ed-sec">Project 2 · Inside the video editor</a></li></ol></li><li><a href="#prototype" class="cp-outline__stage">Prototype</a></li><li><a href="#test" class="cp-outline__stage">Test</a><ol><li><a href="#hev-sec">Heuristic evaluation</a></li><li><a href="#six-sec">Feedback</a></li></ol></li><li><a href="#result" class="cp-outline__stage">Outcome</a><ol><li><a href="#together-sec">All three together</a></li><li><a href="#outcome-sec">Outcome</a></li></ol></li><li><a href="#learn" class="cp-outline__stage">Learn</a></li></ol>
+      </nav>
+    </div>
 
-  <main class="page" id="main">
-    <header class="cs-hero">
-      <div class="container cs-hero__inner">
-        <div class="cs-hero__main">
-          <nav class="breadcrumbs" aria-label="Breadcrumbs">
-            <a href="index.html#work">Projects</a><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m9 18 6-6-6-6"/></svg><span>Karl Storz</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m9 18 6-6-6-6"/></svg><span aria-current="page">Luna</span>
-          </nav>
-          <p class="eyebrow">UX Design Internship · Karl Storz · 2026</p>
-          <h1 class="cs-title">Luna Surgical Console</h1>
-          <div class="cs-hero__image">
-            <img src="assets/images/luna-01-7142ae9c81.webp" alt="The live video editor in annotation mode, with numbered pins and a measurement on the feed" width="1280" height="720">
+    <main class="cp-main" id="main">
+      <header class="cp-hero">
+        <div class="cp-hero__intro">
+          <p class="cp-sub">UX Design Internship · Karl Storz · 2026</p>
+          <h1 class="cp-title">Luna Surgical Console</h1>
+        </div>
+        <figure class="cp-hero__image"><img src="assets/images/luna-01-7142ae9c81.webp" alt="The live video editor in annotation mode, with numbered pins and a measurement on the feed" width="1280" height="720"></figure>
+        <aside class="cp-hero__aside" aria-label="Project quick links">
+          <div class="cp-card">
+            <p class="cp-card__title">Project access</p>
+            <div class="cp-card__links"><a class="button button--primary" href="#ideate">View wireframes <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect width="7" height="7" x="3" y="3" rx="1"/><rect width="7" height="7" x="14" y="3" rx="1"/><rect width="7" height="7" x="14" y="14" rx="1"/><rect width="7" height="7" x="3" y="14" rx="1"/></svg></a>
+              <a class="button" href="index.html#work">All projects</a></div>
+            <div class="cp-card__part"><p class="cp-card__title">Focus</p><div class="cp-topics"><span class="chip">Arm identity</span><span class="chip">Gallery</span><span class="chip">Video editor</span><span class="chip">Live annotation</span></div></div>
           </div>
-          <div class="meta">
-            <section class="meta__outcome" aria-labelledby="outcome-title">
-              <h2 class="meta__label" id="outcome-title">Outcome</h2>
-              <ul class="meta__stats">
+        </aside>
+        <div class="cp-hero__meta">
+          <section class="cp-outcome" aria-labelledby="cp-outcome-h">
+            <h2 class="cp-outcome__label" id="cp-outcome-h">Outcome</h2>
+            <ul class="meta__stats">
                 <li><span class="meta__num">3</span><span class="meta__cap">Projects built into one working prototype</span></li>
                 <li><span class="meta__num">6 of 10</span><span class="meta__cap">Usability rules fixed in my own review</span></li>
               </ul>
-              <p class="meta__summary">A working Figma prototype of all three projects. To follow NDA rules, I redrew the screens and hid clinical data.</p>
-            </section>
-            <dl class="meta__facts">
+            <p class="cp-outcome__text">A working Figma prototype of all three projects. To follow NDA rules, I redrew the screens and hid clinical data.</p>
+          </section>
+          <dl class="cp-facts">
               <div><dt>Role</dt><dd>UX Design Intern</dd></div>
               <div><dt>Timeline</dt><dd>Summer 2026 (3 months)</dd></div>
               <div><dt>Mentorship</dt><dd>Design Mentor &amp; Clinical Supervisor (names masked)</dd></div>
-              <div class="wide"><dt>Tools</dt><dd class="chips"><span class="chip chip--pill">Figma</span><span class="chip chip--pill">Interactive Prototype</span></dd></div>
+              <div><dt>Tools</dt><dd class="chips"><span class="chip chip--pill">Figma</span><span class="chip chip--pill">Interactive Prototype</span></dd></div>
             </dl>
-          </div>
         </div>
-        <aside class="cs-hero__aside" aria-label="Project quick links">
-          <div class="access">
-            <div class="access__card">
-              <p class="access__title">Project access</p>
-              <a class="button button--primary" href="#ideate">View wireframes <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect width="7" height="7" x="3" y="3" rx="1"/><rect width="7" height="7" x="14" y="3" rx="1"/><rect width="7" height="7" x="14" y="14" rx="1"/><rect width="7" height="7" x="3" y="14" rx="1"/></svg></a>
-              <a class="button" href="index.html#work">All projects</a>
-            </div>
-            <div class="stack">
-              <p class="access__title">Focus</p>
-              <div class="chips">
-                <span class="chip">Arm identity</span><span class="chip">Gallery</span><span class="chip">Video editor</span><span class="chip">Live annotation</span>
-              </div>
-            </div>
-          </div>
-        </aside>
-      </div>
-    </header>
-
-    <section class="story container" aria-label="The story in short">
-      <p class="eyebrow">The story in short</p>
+      </header>
+      <section class="cp-story" aria-label="The story in short"><p class="cp-label">The story in short</p>
       <p class="story__text">A surgery team had one second to understand a screen. Nurses could not tell which robotic arm needed help. Residents could not review video. Scrub nurses could not see what the surgeon pointed at. I designed three fixes for a surgical console: arm identity, a gallery with a video editor, and live annotation.</p>
       <div class="notice" role="note">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3"/><path d="M12 9v4"/><path d="M12 17h.01"/></svg><span class="notice__label">Note</span>
         <p>Much of this work is confidential, so I can share only a few screens and no prototype. Here I focus on the problems, my process and my decisions.</p>
-      </div>
-    </section>
+      </div></section>
 
-    <div class="cs">
-      <nav class="rail" aria-label="Stages">
-        <p class="rail__title">Stages</p>
-        <ol>
-          <li><a href="#overview"><span class="rail__label">Overview</span></a></li>
-          <li><a href="#empathize"><span class="rail__label"><span class="rail__num">1.</span>Empathize</span></a></li>
-          <li><a href="#define"><span class="rail__label"><span class="rail__num">2.</span>Problem</span></a></li>
-          <li><a href="#ideate"><span class="rail__label"><span class="rail__num">3.</span>Ideate</span></a></li>
-          <li><a href="#design"><span class="rail__label"><span class="rail__num">4.</span>Design</span></a></li>
-          <li><a href="#prototype"><span class="rail__label"><span class="rail__num">5.</span>Prototype</span></a></li>
-          <li><a href="#test"><span class="rail__label"><span class="rail__num">6.</span>Test</span></a></li>
-          <li><a href="#result"><span class="rail__label"><span class="rail__num">7.</span>Outcome</span></a></li>
-          <li><a href="#learn"><span class="rail__label"><span class="rail__num">8.</span>Learn</span></a></li>
-        </ol>
-        <button class="rail__toggle" type="button" aria-expanded="false"><span class="rail__current">Overview</span><span class="rail__count">1/9</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m18 15-6-6-6 6"/></svg></button>
-      </nav>
+      <section class="cp-sec stage" id="overview" aria-labelledby="overview-cp-h">
+        <h2 class="cp-sec__label" id="overview-cp-h">Overview</h2>
 
-      <div class="cs__content">
-
-        <!-- Overview ======================================================= -->
-        <section class="stage stage--intro" id="overview" aria-labelledby="overview-title">
-          <h2 class="sr-only" id="overview-title">Overview</h2>
-
-          <section class="block" aria-labelledby="ov-h">
-            <h3 class="block__title" id="ov-h" data-split>Overview</h3>
+          <section class="block" aria-labelledby="overview-cp-h" id="ov-sec">
             <div class="block__body">
               <div class="grid-3 pieces reveal">
                 <a class="card" href="#p-arm"><span class="card__num">01</span><h3>Arm identity</h3><p>A color bar on each arm panel shows a nurse which arm has an error or warning.</p></a>
@@ -123,7 +86,7 @@
             </div>
           </section>
 
-          <section class="block" aria-labelledby="product-h">
+          <section class="block" aria-labelledby="product-h" id="product-sec">
             <h3 class="block__title" id="product-h" data-split>The product</h3>
             <div class="block__body">
               <figure class="drawing reveal">
@@ -277,7 +240,7 @@
             </div>
           </section>
 
-          <section class="block" aria-labelledby="path-h">
+          <section class="block" aria-labelledby="path-h" id="path-sec">
             <h3 class="block__title" id="path-h" data-split>How the story runs</h3>
             <div class="block__body">
               <div class="table-wrap reveal" role="region" aria-label="Table: one design process, three projects" tabindex="0">
@@ -309,18 +272,13 @@
               <p class="note-line">The team’s main goal was “designing for confidence.” Six principles came from that goal, and each project below points to the ones it follows.</p>
             </div>
           </section>
-        </section>
+      </section>
 
-        <!-- 1 Empathize ===================================================== -->
-        <section class="stage" id="empathize" aria-labelledby="empathize-title">
-          <div class="stage__card">
-            <div class="stage__label">
-              <h2 class="stage__title" id="empathize-title">Empathize</h2>
-            </div>
-            <span class="stage__big" aria-hidden="true">01</span>
-          </div>
+      <section class="cp-sec stage" id="empathize" aria-labelledby="empathize-cp-h">
+        <h2 class="cp-sec__label" id="empathize-cp-h"><span>01</span>Empathize</h2>
+          
 
-          <section class="block" aria-labelledby="users-h">
+          <section class="block" aria-labelledby="users-h" id="users-sec">
             <h3 class="block__title" id="users-h" data-split>Users and environment</h3>
             <div class="block__body">
               <div class="roles reveal">
@@ -381,18 +339,13 @@
               </div>
             </div>
           </section>
-        </section>
+      </section>
 
-        <!-- 2 Problem ======================================================= -->
-        <section class="stage" id="define" aria-labelledby="define-title">
-          <div class="stage__card">
-            <div class="stage__label">
-              <h2 class="stage__title" id="define-title">Problem</h2>
-            </div>
-            <span class="stage__big" aria-hidden="true">02</span>
-          </div>
+      <section class="cp-sec stage" id="define" aria-labelledby="define-cp-h">
+        <h2 class="cp-sec__label" id="define-cp-h"><span>02</span>Problem</h2>
+          
 
-          <section class="block" aria-labelledby="problem-h">
+          <section class="block" aria-labelledby="problem-h" id="problem-sec">
             <h3 class="block__title" id="problem-h" data-split>The problems</h3>
             <div class="block__body">
               <div class="stack reveal">
@@ -425,7 +378,7 @@
             </div>
           </section>
 
-          <section class="block" aria-labelledby="today-h">
+          <section class="block" aria-labelledby="today-h" id="today-sec">
             <h3 class="block__title" id="today-h" data-split>Where project 1 started</h3>
             <div class="block__body">
               <figure class="drawing reveal">
@@ -480,7 +433,7 @@
             </div>
           </section>
 
-          <section class="block" aria-labelledby="old-h">
+          <section class="block" aria-labelledby="old-h" id="old-sec">
             <h3 class="block__title" id="old-h" data-split>Where project 2 started</h3>
             <div class="block__body">
               <div class="notice" role="note"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4"/><path d="M12 8h.01"/></svg><p>The old screens showed real patient video, so I do not show them. I redrew them as wireframes.</p></div>
@@ -707,7 +660,7 @@
             </div>
           </section>
 
-          <section class="block" aria-labelledby="new-h">
+          <section class="block" aria-labelledby="new-h" id="new-sec">
             <h3 class="block__title" id="new-h" data-split>Where project 3 started</h3>
             <div class="block__body">
               <div class="notice" role="note"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4"/><path d="M12 8h.01"/></svg><p>The old design had no way to mark the live video, so there is no old screen to show.</p></div>
@@ -715,7 +668,7 @@
             </div>
           </section>
 
-          <section class="block" aria-labelledby="strategy-h">
+          <section class="block" aria-labelledby="strategy-h" id="strategy-sec">
             <h3 class="block__title" id="strategy-h" data-split>Strategy</h3>
             <div class="block__body">
               <p class="body-text">Engineering had limited time, so I did not plan one huge redesign. I chose three steps:</p>
@@ -731,18 +684,13 @@
               </div>
             </div>
           </section>
-        </section>
+      </section>
 
-        <!-- 3 Ideate ======================================================== -->
-        <section class="stage" id="ideate" aria-labelledby="ideate-title">
-          <div class="stage__card">
-            <div class="stage__label">
-              <h2 class="stage__title" id="ideate-title">Ideate</h2>
-            </div>
-            <span class="stage__big" aria-hidden="true">03</span>
-          </div>
+      <section class="cp-sec stage" id="ideate" aria-labelledby="ideate-cp-h">
+        <h2 class="cp-sec__label" id="ideate-cp-h"><span>03</span>Ideate</h2>
+          
 
-          <section class="block" aria-labelledby="sketches-h">
+          <section class="block" aria-labelledby="sketches-h" id="sketches-sec">
             <h3 class="block__title" id="sketches-h" data-split>Lo-fi sketches</h3>
             <div class="block__body">
               <div class="switcher reveal">
@@ -1028,20 +976,14 @@
               </div>
             </div>
           </section>
-        </section>
+      </section>
 
-        <!-- 4 Design ======================================================== -->
-        <section class="stage" id="design" aria-labelledby="design-title">
-          <div class="stage__card">
-            <div class="stage__label">
-              <h2 class="stage__title" id="design-title">Design</h2>
-            </div>
-            <span class="stage__big" aria-hidden="true">04</span>
-            <img class="stage__visual" src="assets/images/luna-02-6d4cfe0c27.svg" alt="" aria-hidden="true" loading="lazy">
-          </div>
+      <section class="cp-sec stage" id="design" aria-labelledby="design-cp-h">
+        <h2 class="cp-sec__label" id="design-cp-h"><span>04</span>Design</h2>
+          
 
           <!-- One section holds the project switcher; its heading follows the selected project -->
-          <section class="block project-switch" aria-labelledby="design-work-h">
+          <section class="block project-switch" aria-labelledby="design-work-h" id="design-work-sec">
             <h3 class="block__title" id="design-work-h">Component system</h3>
             <div class="block__body">
               <div class="project-switch__choose" data-band-cover>
@@ -1230,7 +1172,7 @@
               </div>
             </section>
 
-            <section class="block" aria-labelledby="ed-h">
+            <section class="block" aria-labelledby="ed-h" id="ed-sec">
               <h3 class="block__title" id="ed-h">Project 2 · Inside the video editor</h3>
               <div class="block__body">
                 <p class="principles">Principles used <a href="#pr-awareness" data-principle>Situational awareness</a> <a href="#pr-clarity" data-principle>Clarity</a></p>
@@ -1426,19 +1368,13 @@
               </div>
             </section>
           </div>
-        </section>
+      </section>
 
-        <!-- 5 Prototype ===================================================== -->
-        <section class="stage" id="prototype" aria-labelledby="prototype-title">
-          <div class="stage__card">
-            <div class="stage__label">
-              <h2 class="stage__title" id="prototype-title">Prototype</h2>
-            </div>
-            <span class="stage__big" aria-hidden="true">05</span>
-            <img class="stage__visual" src="assets/images/luna-30-127e4df147.svg" alt="" aria-hidden="true" loading="lazy">
-          </div>
+      <section class="cp-sec stage" id="prototype" aria-labelledby="prototype-cp-h">
+        <h2 class="cp-sec__label" id="prototype-cp-h"><span>05</span>Prototype</h2>
+          
 
-          <section class="block" aria-labelledby="wire-h">
+          <section class="block" aria-labelledby="wire-h" id="wire-sec">
             <h3 class="block__title" id="wire-h" data-split>From wireframe to prototype</h3>
             <div class="block__body">
               <div class="fidelity reveal" data-fidelity>
@@ -1457,18 +1393,13 @@
               <p class="body-text">I can’t show the prototype here because of privacy rules. It uses real clinical workflows from the project. I am happy to walk through it with you in a call.</p>
             </div>
           </section>
-        </section>
+      </section>
 
-        <!-- 6 Test ========================================================== -->
-        <section class="stage" id="test" aria-labelledby="test-title">
-          <div class="stage__card">
-            <div class="stage__label">
-              <h2 class="stage__title" id="test-title">Test</h2>
-            </div>
-            <span class="stage__big" aria-hidden="true">06</span>
-          </div>
+      <section class="cp-sec stage" id="test" aria-labelledby="test-cp-h">
+        <h2 class="cp-sec__label" id="test-cp-h"><span>06</span>Test</h2>
+          
 
-          <section class="block" aria-labelledby="hev-h">
+          <section class="block" aria-labelledby="hev-h" id="hev-sec">
             <h3 class="block__title" id="hev-h" data-split>Heuristic evaluation</h3>
             <div class="block__body">
               <div class="heuristics reveal" data-filter="all">
@@ -1501,7 +1432,7 @@
             </div>
           </section>
 
-          <section class="block" aria-labelledby="six-h">
+          <section class="block" aria-labelledby="six-h" id="six-sec">
             <h3 class="block__title" id="six-h" data-split>Feedback</h3>
             <div class="block__body">
               <div class="table-wrap reveal" role="region" aria-label="Table: one control, six versions" tabindex="0">
@@ -1520,18 +1451,13 @@
               <p class="note-line">I treated it as a styling problem, but it was a state problem: how does a person know which mode the screen is in, and how do they get out? Once I designed the mode, the button design became straightforward.</p>
             </div>
           </section>
-        </section>
+      </section>
 
-        <!-- 7 Outcome ======================================================= -->
-        <section class="stage" id="result" aria-labelledby="result-title">
-          <div class="stage__card">
-            <div class="stage__label">
-              <h2 class="stage__title" id="result-title">Outcome</h2>
-            </div>
-            <span class="stage__big" aria-hidden="true">07</span>
-          </div>
+      <section class="cp-sec stage" id="result" aria-labelledby="result-cp-h">
+        <h2 class="cp-sec__label" id="result-cp-h"><span>07</span>Outcome</h2>
+          
 
-          <section class="block" aria-labelledby="together-h">
+          <section class="block" aria-labelledby="together-h" id="together-sec">
             <h3 class="block__title" id="together-h" data-split>All three together</h3>
             <div class="block__body">
               <ol class="timeline-4 reveal">
@@ -1544,7 +1470,7 @@
             </div>
           </section>
 
-          <section class="block" aria-labelledby="outcome-h">
+          <section class="block" aria-labelledby="outcome-h" id="outcome-sec">
             <h3 class="block__title" id="outcome-h" data-split>Outcome</h3>
             <div class="block__body">
               <div class="stats reveal">
@@ -1566,17 +1492,11 @@
               </div>
             </div>
           </section>
-        </section>
+      </section>
 
-        <!-- 8 Learn ========================================================= -->
-        <section class="stage" id="learn" aria-labelledby="learn-title">
-          <div class="stage__card">
-            <div class="stage__label">
-              <h2 class="stage__title" id="learn-title">Learn</h2>
-            </div>
-            <span class="stage__big" aria-hidden="true">08</span>
-            <img class="stage__visual" src="assets/images/luna-01-7142ae9c81.webp" alt="" aria-hidden="true" loading="lazy">
-          </div>
+      <section class="cp-sec stage" id="learn" aria-labelledby="learn-cp-h">
+        <h2 class="cp-sec__label" id="learn-cp-h"><span>08</span>Learn</h2>
+          
 
           <section class="block block--plain" aria-label="Still unfinished">
             <div class="callout">
@@ -1590,7 +1510,7 @@
             </div>
           </section>
 
-          <section class="block" aria-labelledby="take-h">
+          <section class="block" aria-labelledby="take-h" id="take-sec">
             <h3 class="block__title" id="take-h" data-split>Takeaways</h3>
             <div class="block__body">
               <div class="takeaways">
@@ -1618,39 +1538,35 @@
               </nav>
             </div>
           </section>
-        </section>
-        <div class="page-end"></div>
-      </div>
-    </div>
-  </main>
-  <footer class="site-footer" id="contact">
-    <div class="container">
-      <div class="site-footer__grid">
-        <div>
-          <h2>Let’s connect.</h2>
-          <a class="site-footer__cta" href="mailto:manahari.dahal1@gmail.com">Email me</a>
-        </div>
-        <div class="site-footer__col">
-          <span>Navigation</span>
-          <a href="index.html">Home</a>
-          <a href="about.html">About</a>
-          <a href="index.html#work">Projects</a>
-          <a href="index.html#artwork">Artwork</a>
-        </div>
-        <div class="site-footer__col">
-          <span>Follow me</span>
-          <a href="https://www.linkedin.com/in/manaharidahal/" target="_blank" rel="noopener">LinkedIn</a>
-          <a href="https://dribbble.com/manaharidahal" target="_blank" rel="noopener">Dribbble</a>
-        </div>
-        <div class="site-footer__col">
-          <span>Contact</span>
-          <span>manahari.dahal1@gmail.com</span>
-        </div>
-      </div>
-      <p class="wordmark" aria-hidden="true">manahari<i>.</i></p>
-      <p class="site-footer__legal">© 2026 Manahari</p>
-    </div>
-  </footer>
+      </section>
 
+    </main>
+
+  </div>
+  <script>
+    /* Outline: mark the section you are reading (and its stage) */
+    (function () {
+      var links = [].slice.call(document.querySelectorAll(".cp-outline a"));
+      var targets = links.map(function (a) { return document.querySelector(a.getAttribute("href")); });
+      var current = null;
+      function mark() {
+        var line = window.innerHeight / 3, here = null;
+        /* sections inside a closed tab take no space; skip them */
+        targets.forEach(function (t, i) { if (t && t.getClientRects().length && t.getBoundingClientRect().top <= line) here = i; });
+        if (here === current) return;
+        current = here;
+        links.forEach(function (a) { a.removeAttribute("aria-current"); a.classList.remove("is-in"); });
+        if (here === null) return;
+        var a = links[here];
+        a.setAttribute("aria-current", "location");
+        var stage = a.closest("ol").closest("li");
+        if (stage) stage.querySelector(".cp-outline__stage").classList.add("is-in");
+        else a.classList.add("is-in");
+      }
+      window.addEventListener("scroll", mark, { passive: true });
+      window.addEventListener("resize", mark);
+      mark();
+    })();
+  </script>
 </body>
 </html>

@@ -1,0 +1,360 @@
+/* ==========================================================================
+   Two reading lengths (prototype): a switch at the top picks a quick look
+   (a bento map of the whole project) or the full story (each problem with
+   what I did about it, then the results). The switch is two radio buttons;
+   CSS shows the matching view with :has(), so it works without a script.
+   ========================================================================== */
+
+.len-page {
+  max-width: 1120px;
+  margin-inline: auto;
+  padding: clamp(32px, 6vh, 64px) var(--gx) clamp(64px, 10vh, 120px);
+}
+
+.len-intro {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 14px;
+  margin-bottom: clamp(28px, 5vh, 48px);
+}
+.len-intro__lede {
+  max-width: 36em;
+  font-size: clamp(1.0625rem, 1rem + 0.3vw, 1.25rem);
+  line-height: 1.55;
+  color: var(--text);
+}
+
+/* the switch: two labels in a pill; the radios themselves take no space */
+.len-switch {
+  scroll-margin-top: calc(var(--top-h) + 24px);
+  display: inline-flex;
+  gap: 4px;
+  margin: 8px 0 0;
+  padding: 4px;
+  border: 1px solid var(--line);
+  border-radius: 18px;
+  background: var(--surface);
+}
+.len-switch input {
+  appearance: none;
+  width: 0;
+  height: 0;
+  margin: 0;
+  border: 0;
+}
+.len-switch label {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  padding: 10px 20px;
+  border-radius: 14px;
+  font-size: var(--fs-small);
+  color: var(--text);
+  cursor: pointer;
+  transition: background-color 0.2s ease, color 0.2s ease;
+}
+.len-switch label b {
+  font-size: var(--fs-body);
+  font-weight: 600;
+  color: var(--ink);
+}
+.len-switch input:checked + label {
+  background: var(--ink);
+  color: color-mix(in srgb, var(--bg) 75%, transparent);
+}
+.len-switch input:checked + label b {
+  color: var(--bg);
+}
+.len-switch input:focus-visible + label {
+  outline: 3px solid var(--accent);
+  outline-offset: 2px;
+}
+
+/* only the chosen view shows */
+.len-page:has(#len-short:checked) .len-view--full,
+.len-page:has(#len-full:checked) .len-view--short {
+  display: none;
+}
+
+/* Quick look: the bento map */
+.bento {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  grid-template-areas:
+    "hero hero s1   s2"
+    "hero hero role role"
+    "proc proc art  art"
+    "less cta  art  art";
+  gap: 12px;
+}
+.tile {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  min-width: 0;
+  padding: 22px;
+  overflow: hidden;
+  border: 1px solid var(--line);
+  border-radius: 20px;
+  background: var(--surface);
+  line-height: 1.5;
+  color: var(--text);
+}
+.tile--hero {
+  grid-area: hero;
+  padding: 0;
+}
+.tile--hero img {
+  width: 100%;
+  height: auto;
+  aspect-ratio: 16 / 7;
+  object-fit: cover;
+}
+.tile--hero .tile__body {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: 22px;
+}
+.tile--stat:nth-of-type(2) {
+  grid-area: s1;
+}
+.tile--stat:nth-of-type(3) {
+  grid-area: s2;
+}
+.tile--stat {
+  justify-content: flex-end;
+}
+.tile--role {
+  grid-area: role;
+}
+.tile--process {
+  grid-area: proc;
+}
+.tile--art {
+  grid-area: art;
+  justify-content: center;
+  padding: 14px;
+  background: var(--surface-2);
+}
+.tile--art .art {
+  width: 100%;
+  height: auto;
+  border-radius: 12px;
+}
+.tile--lesson {
+  grid-area: less;
+}
+.tile--cta {
+  grid-area: cta;
+  justify-content: space-between;
+  border-color: transparent;
+  background: var(--accent);
+  color: var(--on-accent);
+}
+.tile--cta .text-link {
+  color: var(--on-accent);
+}
+.tile__label,
+.pair-row__label {
+  font-size: var(--fs-small);
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--accent-text);
+}
+.tile__big {
+  font-size: clamp(1.0625rem, 1rem + 0.35vw, 1.3125rem);
+  font-weight: 500;
+  line-height: 1.4;
+  color: var(--ink);
+}
+.tile__cta {
+  font-family: var(--heading-font);
+  font-size: clamp(1.5rem, 1.2rem + 1vw, 2rem);
+  font-weight: 600;
+  line-height: 1.1;
+  cursor: pointer;
+}
+
+/* the process as a row of steps joined by arrows */
+.flow {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px;
+}
+.flow li {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: var(--fs-small);
+  font-weight: 500;
+  color: var(--ink);
+}
+.flow li + li::before {
+  content: "→";
+  color: var(--accent-text);
+}
+
+/* Full story: each problem beside what I did and its picture; the sides
+   swap on every other row */
+.pairs {
+  display: flex;
+  flex-direction: column;
+}
+.pair-row {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1.1fr);
+  align-items: center;
+  gap: clamp(28px, 5vw, 64px);
+  padding-block: clamp(36px, 6vh, 64px);
+  border-top: 1px solid var(--line);
+}
+.pair-row:nth-child(even) .pair-row__text {
+  order: 2;
+}
+.pair-row__text {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  line-height: var(--lh-body);
+  color: var(--text);
+}
+.pair-row__text b {
+  font-weight: 600;
+  color: var(--ink);
+}
+.pair-row__num {
+  font-family: var(--heading-font);
+  font-size: 3rem;
+  font-weight: 600;
+  line-height: 1;
+  color: transparent;
+  -webkit-text-stroke: 1.5px var(--accent-text);
+}
+.pair-row__problem {
+  margin-bottom: 10px;
+  font-size: clamp(1.375rem, 1.1rem + 1vw, 1.875rem);
+  line-height: 1.2;
+  color: var(--ink);
+}
+.pair-row__visual {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.pair-row__visual img,
+.pair-row__visual .art {
+  width: 100%;
+  height: auto;
+  border-radius: 18px;
+}
+.pair-row__visual figcaption {
+  font-size: var(--fs-small);
+  color: var(--text);
+}
+.steps-mini {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  counter-reset: mini;
+}
+.steps-mini li {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr);
+  gap: 10px;
+  align-items: baseline;
+}
+.steps-mini li::before {
+  content: counter(mini);
+  counter-increment: mini;
+  display: grid;
+  place-items: center;
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  background: color-mix(in srgb, var(--accent) 18%, transparent);
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: var(--accent-text);
+}
+.rules-mini {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.swatch {
+  display: inline-block;
+  width: 0.9em;
+  height: 0.9em;
+  margin-right: 4px;
+  border-radius: 3px;
+  background: var(--c);
+  vertical-align: -0.1em;
+}
+
+/* results */
+.len-results {
+  display: flex;
+  flex-direction: column;
+  gap: 28px;
+  padding-top: clamp(40px, 6vh, 64px);
+  border-top: 1px solid var(--line);
+}
+.len-results__title {
+  font-size: var(--fs-h2);
+}
+.len-learn {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 24px 48px;
+  line-height: var(--lh-body);
+  color: var(--text);
+}
+.len-learn > div {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.len-learn b {
+  font-weight: 600;
+  color: var(--ink);
+}
+.len-back {
+  align-self: flex-start;
+  font-size: 1.25rem;
+  color: var(--accent-text);
+}
+
+@media (max-width: 900px) {
+  .bento {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    grid-template-areas:
+      "hero hero"
+      "s1   s2"
+      "role role"
+      "proc proc"
+      "art  art"
+      "less cta";
+  }
+  .pair-row {
+    grid-template-columns: minmax(0, 1fr);
+  }
+  .pair-row:nth-child(even) .pair-row__text {
+    order: 0;
+  }
+}
+@media (max-width: 560px) {
+  .bento {
+    grid-template-columns: minmax(0, 1fr);
+    grid-template-areas: "hero" "s1" "s2" "role" "proc" "art" "less" "cta";
+  }
+  .len-switch label {
+    padding: 10px 14px;
+  }
+  .len-learn {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}

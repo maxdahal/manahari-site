@@ -151,6 +151,19 @@ html {
 .cs__content {
   min-width: 0;
 }
+/* On wide screens the story is one centred column in the space beside the
+   stages list, so the space on both sides of it is even; paragraphs run
+   about 75 characters a line, which fills it without getting hard to read. */
+@media (min-width: 1101px) {
+  .cs__content {
+    width: 100%;
+    max-width: 900px;
+    margin-inline: auto;
+  }
+  .cs .body-text {
+    max-width: 40em;
+  }
+}
 
 /* Stages list. On wide screens it is a column on the left that stays in
    view; on smaller screens it lives in a sheet opened from the floating
@@ -313,12 +326,25 @@ li:has(> a[aria-current="true"]) > .rail__sub {
     column-gap: clamp(32px, 4vw, 64px);
     align-items: start;
   }
+  /* The list is a frosted column the full height of the screen under the
+     top bar, reaching out to the left edge of the screen (--bleed: the page
+     margin plus the gutter). Anything that scrolls behind it, like the
+     tinted bands behind section titles, blurs as it passes under. */
   .rail {
+    --bleed: calc(max(0px, (100vw - var(--max)) / 2) + var(--gx));
     position: sticky;
-    top: calc(var(--top-h) + 24px);
+    top: var(--top-h);
+    z-index: 20;
     display: block;
-    /* the bottom margin keeps the list clear of the footer at the end */
-    margin-block: clamp(40px, 6vh, 72px) clamp(56px, 10vh, 120px);
+    height: calc(100vh - var(--top-h));
+    overflow-y: auto;
+    scrollbar-width: none;
+    margin-left: calc(var(--bleed) * -1);
+    padding: clamp(28px, 5vh, 60px) 16px 24px var(--bleed);
+    border-right: 1px solid var(--line);
+    background: color-mix(in srgb, var(--bg) 72%, transparent);
+    -webkit-backdrop-filter: blur(18px);
+    backdrop-filter: blur(18px);
   }
 }
 
@@ -339,12 +365,12 @@ li:has(> a[aria-current="true"]) > .rail__sub {
   min-height: 48px;
   margin: clamp(40px, 6vh, 72px) auto 0;
   padding: 0 16px 0 10px;
-  border: 1px solid var(--line);
+  border: 1px solid color-mix(in srgb, var(--ink) 18%, transparent);
   border-radius: 99px;
-  background: color-mix(in srgb, var(--bg) 84%, transparent);
-  -webkit-backdrop-filter: blur(14px);
-  backdrop-filter: blur(14px);
-  box-shadow: 0 12px 28px -14px rgb(0 0 0 / 0.5);
+  /* solid, a step lighter than the page, so bands and text behind it never
+     show through or blend with it */
+  background: var(--surface);
+  box-shadow: 0 0 0 4px var(--bg), 0 14px 30px -12px rgb(0 0 0 / 0.55);
   font: inherit;
   font-size: var(--fs-small);
   font-weight: 600;
@@ -824,8 +850,10 @@ li:has(> a[aria-current="true"]) > .rail__sub {
 }
 
 /* Marked-up document: each stage's story reads like a clean document with
-   handwritten notes in the margin. The sections are separated by thin rules;
-   on wide screens each section's body gets a margin column, and its callouts
+   handwritten notes in the margin. Each section title sits on the top edge
+   of a short tinted band, as in the overview (see .block__body in
+   site.css); on wide screens each section's body gets a margin column, and
+   its callouts
    (the core constraint, hypotheses, quotes, "instead of" notes) move into it
    as handwritten notes in the Kalam hand, each with a small arrow pointing
    back at the text beside it. The big Outcome statements stay in the text.
@@ -834,16 +862,143 @@ li:has(> a[aria-current="true"]) > .rail__sub {
 .stage:has(> .stage__card) {
   padding-bottom: clamp(32px, 5vh, 64px);
 }
-.stage:has(> .stage__card) .block + .block {
-  margin-top: 24px;
-  border-top: 1px solid var(--line);
+/* Behind the scenes: extra detail (more wireframes, the full brand system)
+   sits in a framed panel with its own darker palette, so it reads as
+   separate from the story in both themes. A reel shows one picture at a
+   time: it scrolls sideways and snaps, with previous and next buttons and a
+   count (case-study.js). The panel redefines the colour tokens, so
+   everything inside follows its palette. */
+.reel {
+  --bg: #16171b;
+  --surface: #1e1f24;
+  --surface-2: #26272d;
+  --ink: #ecece7;
+  --text: #b9b9b4;
+  --line: rgba(236, 236, 231, 0.14);
+  --accent: #4d8dff;
+  --accent-text: #8db4ff;
+  --on-accent: #0b0b0c;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  padding: clamp(20px, 3vw, 36px);
+  border: 1px solid var(--line);
+  border-radius: var(--r-xl);
+  background: var(--bg);
+  box-shadow: 0 24px 48px -28px rgb(0 0 0 / 0.55);
+  color: var(--ink);
 }
-/* inside the document there is no wide band behind section titles */
-.stage:has(> .stage__card) .block__body {
-  margin-top: 0;
-  padding: 20px 0 32px;
-  border-image: none;
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) .reel {
+    --bg: #1d1e23;
+    --surface: #25262c;
+    --surface-2: #2d2e34;
+    --accent: #1db954;
+    --accent-text: #5dd68a;
+    border-color: rgba(236, 236, 231, 0.18);
+  }
 }
+:root[data-theme="dark"] .reel {
+  --bg: #1d1e23;
+  --surface: #25262c;
+  --surface-2: #2d2e34;
+  --accent: #1db954;
+  --accent-text: #5dd68a;
+  border-color: rgba(236, 236, 231, 0.18);
+}
+.reel__head {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+.reel__kicker {
+  font-size: var(--fs-small);
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--accent-text);
+}
+.reel__title {
+  font-size: var(--fs-h3);
+  line-height: 1.25;
+  color: var(--ink);
+}
+.reel__intro {
+  max-width: 40em;
+  line-height: var(--lh-body);
+  color: var(--text);
+}
+.reel__track {
+  display: grid;
+  grid-auto-flow: column;
+  grid-auto-columns: 100%;
+  gap: 24px;
+  overflow-x: auto;
+  overscroll-behavior-x: contain;
+  scroll-snap-type: x mandatory;
+  scrollbar-width: none;
+}
+.reel__track::-webkit-scrollbar {
+  display: none;
+}
+.reel__track > * {
+  scroll-snap-align: start;
+  min-width: 0;
+}
+.reel__track:focus-visible {
+  outline: 3px solid var(--accent);
+  outline-offset: 4px;
+}
+.reel__track .step__figure svg {
+  max-height: min(70vh, 640px);
+}
+.reel__nav {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+}
+.reel__step {
+  display: grid;
+  place-items: center;
+  width: 44px;
+  height: 44px;
+  border: 1px solid var(--line);
+  border-radius: 50%;
+  background: var(--surface);
+  color: var(--ink);
+  cursor: pointer;
+  transition: background-color 0.2s ease, opacity 0.2s ease;
+}
+.reel__step svg {
+  width: 20px;
+  height: 20px;
+}
+.reel__step:hover:not(:disabled) {
+  background: var(--surface-2);
+}
+.reel__step:focus-visible {
+  outline: 3px solid var(--accent);
+  outline-offset: 2px;
+}
+.reel__step:disabled {
+  opacity: 0.35;
+  cursor: default;
+}
+.reel__count {
+  min-width: 4em;
+  margin: 0;
+  font-size: var(--fs-small);
+  font-variant-numeric: tabular-nums;
+  text-align: center;
+  color: var(--text);
+}
+@media (prefers-reduced-motion: no-preference) {
+  .reel__track {
+    scroll-behavior: smooth;
+  }
+}
+
 /* the margin note */
 .stage .callout:not(.callout--statement) {
   gap: 2px;
@@ -875,10 +1030,14 @@ li:has(> a[aria-current="true"]) > .rail__sub {
   font-size: 1.15rem;
   line-height: 1.4;
 }
+/* section text lines up with its title (no indent) */
+.cs .block__body {
+  padding-left: 0;
+}
 @media (min-width: 1200px) {
-  /* a margin column beside each section's text; callouts sit in it, level
-     with the paragraph they follow */
-  .stage:has(> .stage__card) .block__body {
+  /* a margin column beside the text of sections that have notes; the notes
+     sit in it, level with the paragraph they follow */
+  .stage:has(> .stage__card) .block__body:has(> .callout:not(.callout--statement)) {
     display: grid;
     grid-template-columns: minmax(0, 1fr) minmax(200px, 260px);
     column-gap: 36px;
@@ -892,8 +1051,9 @@ li:has(> a[aria-current="true"]) > .rail__sub {
     grid-column: 2;
     padding-left: 40px;
   }
-  /* the step-by-step story uses both columns */
-  .stage:has(> .stage__card) .block__body > .steps--story {
+  /* the step-by-step story, decision cards and behind-the-scenes panels
+     use both columns */
+  .stage:has(> .stage__card) .block__body > :is(.steps--story, .reel, .rules-list) {
     grid-column: 1 / -1;
   }
 }
@@ -1595,34 +1755,33 @@ a.card:hover {
   }
 }
 
-/* rules written as rows: label, title, description */
+/* Decision log: each decision is a card with its number, the decision and
+   how it was applied, in a grid; the number sits on an accent rule. */
 .rules-list {
-  display: flex;
-  flex-direction: column;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(min(100%, 240px), 1fr));
+  gap: 16px;
 }
 .rules-list > li {
-  display: grid;
-  grid-template-columns: 140px minmax(0, 1fr) minmax(0, 1.4fr);
-  gap: 8px 24px;
-  align-items: baseline;
-  padding-block: 18px;
-  border-top: 1px solid var(--line);
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: 20px;
+  border: 1px solid var(--line);
+  border-top: 3px solid var(--accent);
+  border-radius: 0 0 var(--r-lg) var(--r-lg);
+  background: var(--surface);
 }
-.rules-list > li:last-child {
-  border-bottom: 1px solid var(--line);
+.rules-list .eyebrow {
+  color: var(--accent-text);
 }
 .rules-list h3 {
   font-size: var(--fs-h3);
-  line-height: 1.3;
+  line-height: 1.25;
 }
 .rules-list p {
   line-height: 1.5;
   color: var(--text);
-}
-@media (max-width: 860px) {
-  .rules-list > li {
-    grid-template-columns: minmax(0, 1fr);
-  }
 }
 
 /* a callout whose lines read as statements */

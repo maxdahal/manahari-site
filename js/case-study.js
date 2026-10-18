@@ -176,6 +176,38 @@
     });
   }
 
+  /* Behind-the-scenes reels: previous and next move one picture at a time;
+     the count and the buttons follow the track as it is scrolled or swiped */
+  function initReels() {
+    document.querySelectorAll(".reel").forEach(function (reel) {
+      var track = reel.querySelector(".reel__track");
+      if (!track) return;
+      var count = reel.querySelector(".reel__count");
+      var steps = [].slice.call(reel.querySelectorAll(".reel__step"));
+      var total = track.children.length;
+      /* one picture is the track's width plus the gap between pictures */
+      var stepWidth = function () {
+        return track.clientWidth + (parseFloat(getComputedStyle(track).columnGap) || 0);
+      };
+      function update() {
+        var i = Math.round(track.scrollLeft / Math.max(1, stepWidth()));
+        if (count) count.textContent = i + 1 + " / " + total;
+        steps.forEach(function (b) {
+          var dir = Number(b.dataset.step);
+          b.disabled = dir < 0 ? i <= 0 : i >= total - 1;
+        });
+      }
+      steps.forEach(function (b) {
+        b.addEventListener("click", function () {
+          track.scrollBy({ left: Number(b.dataset.step) * stepWidth() });
+        });
+      });
+      track.addEventListener("scroll", update, { passive: true });
+      window.addEventListener("resize", update);
+      update();
+    });
+  }
+
   /* Principle chips: show the principle's definition in a small tooltip */
   function initPrinciples() {
     var chips = document.querySelectorAll("[data-principle]");
@@ -289,6 +321,7 @@
     initStageMeta();
     initRail();
     initSteps();
+    initReels();
     initPrinciples();
     initFlips();
     initHashLinks();

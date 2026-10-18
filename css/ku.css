@@ -846,3 +846,62 @@
     animation: none;
   }
 }
+
+/* The sandbox speaks in a technical, terminal-like face (JetBrains Mono),
+   so it feels like a tool rather than part of the story. The preview card
+   keeps a plain sans: it stands in for the real Brand Center page. The
+   heading gets a prompt and a blinking cursor (still for reduced motion). */
+.sandbox-wrap {
+  --mono: "JetBrains Mono", ui-monospace, "SFMono-Regular", Menlo, Consolas, monospace;
+}
+.cp-main .sandbox-wrap,
+.cp-main .sandbox-wrap :is(p, h4, button, span, b, small, li, label, code, pre) {
+  font-family: var(--mono);
+  letter-spacing: -0.01em;
+}
+.cp-main .sandbox-wrap .play__preview,
+.cp-main .sandbox-wrap .play__preview * {
+  font-family: var(--body-font);
+  letter-spacing: normal;
+}
+.cp-main .sandbox-wrap .sandbox-wrap__title {
+  font-family: var(--mono);
+  font-size: clamp(1.4rem, 1.05rem + 1.1vw, 1.95rem);
+  font-weight: 700;
+  letter-spacing: -0.03em;
+}
+.sandbox-wrap__title::before {
+  content: "> ";
+  color: var(--accent-text);
+}
+.sandbox-wrap__title::after {
+  content: "";
+  display: inline-block;
+  width: 0.55em;
+  height: 1em;
+  margin-left: 0.15em;
+  vertical-align: -0.12em;
+  background: var(--accent);
+  animation: sb-caret 1.1s steps(1) infinite;
+}
+@keyframes sb-caret {
+  50% { opacity: 0; }
+}
+.cp-main .sandbox-wrap .sandbox-wrap__text {
+  font-size: 0.9375rem;
+  line-height: 1.6;
+}
+.cp-main .sandbox-wrap .sandbox-wrap__tag {
+  letter-spacing: 0.08em;
+}
+.cp-main .sandbox-wrap .sandbox__crumb {
+  font-size: 0.8125rem;
+}
+.cp-main .sandbox-wrap .play__ratio b {
+  letter-spacing: -0.04em;
+}
+@media (prefers-reduced-motion: reduce) {
+  .sandbox-wrap__title::after {
+    animation: none;
+  }
+}

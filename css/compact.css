@@ -757,9 +757,9 @@ body::after {
 
 /* Antonio is for the page title (h1) and the stage headers (h2) only;
    everything else in the story reads in Inter. This catches any component
-   that sets the display face itself (numbers, card titles, labels). Code
-   and the handwritten notes keep their own faces. */
-.cp-main :not(h1, h2, h1 *, h2 *, code, pre, pre *, .callout:not(.callout--statement), .callout:not(.callout--statement) *) {
+   that sets the display face itself (numbers, card titles, labels). Code,
+   the handwritten notes and the KU color sandbox keep their own faces. */
+.cp-main :not(h1, h2, h1 *, h2 *, code, pre, pre *, .callout:not(.callout--statement), .callout:not(.callout--statement) *, .sandbox-wrap, .sandbox-wrap *) {
   font-family: var(--body-font);
 }
 

@@ -19,8 +19,8 @@
   --muted: color-mix(in srgb, var(--text) 80%, var(--bg));
 }
 html {
-  /* links land below the top bar and the stage header pinned under it */
-  scroll-padding-top: calc(var(--bar-h) + 84px);
+  /* links land a little below the top bar */
+  scroll-padding-top: calc(var(--bar-h) + 24px);
 }
 
 /* Paper: a fine grain over the whole page, like paper. A fixed layer of
@@ -408,9 +408,10 @@ body::after {
   --gap-inside: 16px;
 }
 
-/* a stage: its header sticks just under the top bar while you read the
-   stage (the next stage's header pushes it away). The header: the stage number in an accent badge and the stage
-   name in the display face, on a hairline. */
+/* a stage: its header opens the stage and scrolls away with it (the
+   outline on the left shows where you are). The header: the stage number
+   in an accent badge and the stage name in the display face, on a
+   hairline. */
 .cp-sec {
   display: flex;
   flex-direction: column;
@@ -420,9 +421,6 @@ body::after {
   padding-top: calc(var(--gap-stage) / 2);
 }
 .cp-sec__label {
-  position: sticky;
-  top: var(--bar-h);
-  z-index: 15;
   display: flex;
   align-items: center;
   gap: 14px;

@@ -540,7 +540,7 @@
 }
 .sandbox__row {
   display: grid;
-  grid-template-columns: 118px minmax(0, 1fr);
+  grid-template-columns: 108px minmax(0, 1fr);
   align-items: center;
   gap: 12px;
   padding: 6px 0;
@@ -578,8 +578,8 @@
 }
 .play__sw span {
   display: block;
-  width: 24px;
-  height: 24px;
+  width: 22px;
+  height: 22px;
   border-radius: 50%;
   background: var(--c);
   box-shadow: inset 0 0 0 1px rgb(0 0 0 / 0.18);
@@ -723,20 +723,37 @@
   }
 }
 
-/* The sandbox stands out from the story around it: framed in the accent on
-   a light accent tint, with an "Interactive" tag and its own heading. The
-   hero's "Play with KU colors" button and the outline link land here. */
+/* The sandbox stands out from the story around it. It has its own KU look,
+   not the page's: a border in the KU palette, a soft wash of Sky, Wheat and
+   Crimson, an "Interactive" tag, its own heading and a strip of all 17
+   brand colors. When it scrolls into view (ku.js adds .is-in) it rises into
+   place, the border's colors turn once and the strip fills in, then the
+   canvas flips through a few pairs until the visitor touches it. Without
+   JS, or with reduced motion, it simply sits there. The hero's "Play with
+   KU colors" button and the outline link land here. */
+@property --sb-turn {
+  syntax: "<angle>";
+  inherits: false;
+  initial-value: 0deg;
+}
 .sandbox-wrap {
+  --sb-wash:
+    radial-gradient(circle at 0% 0%, rgb(115 203 242 / 0.3), transparent 42%),
+    radial-gradient(circle at 100% 0%, rgb(242 169 0 / 0.22), transparent 38%),
+    radial-gradient(circle at 100% 100%, rgb(232 0 13 / 0.12), transparent 40%);
   display: flex;
   flex-direction: column;
   gap: 18px;
-  margin-top: 28px;
-  padding: clamp(16px, 2.4vw, 28px);
-  border: 2px solid var(--accent);
-  border-radius: 22px;
-  background: color-mix(in srgb, var(--accent) 7%, var(--bg));
-  box-shadow: 0 28px 56px -34px color-mix(in srgb, var(--accent) 70%, transparent);
-  scroll-margin-top: calc(var(--bar-h, 60px) + 72px);
+  margin-top: 36px;
+  padding: clamp(18px, 2.6vw, 30px);
+  border: 3px solid transparent;
+  border-radius: 24px;
+  background:
+    var(--sb-wash) padding-box,
+    linear-gradient(var(--bg), var(--bg)) padding-box,
+    conic-gradient(from var(--sb-turn), #0051ba, #73cbf2, #f2a900, #e8000d, #971b2f, #2767ff, #0051ba) border-box;
+  box-shadow: 0 30px 60px -32px rgb(0 81 186 / 0.45);
+  scroll-margin-top: calc(var(--bar-h, 60px) + 24px);
 }
 .sandbox-wrap .sandbox {
   margin-top: 0;
@@ -775,4 +792,57 @@
 .cp-main .sandbox-wrap .sandbox-wrap__text {
   max-width: 40em;
   color: var(--text);
+}
+/* all 17 brand colors in one strip */
+.sandbox-wrap__strip {
+  display: flex;
+  height: 10px;
+  overflow: hidden;
+  border-radius: 999px;
+  box-shadow: inset 0 0 0 1px rgb(0 0 0 / 0.08);
+}
+.sandbox-wrap__strip i {
+  flex: 1;
+  background: var(--c);
+}
+
+/* the entrance, only when ku.js has set it up (.js-reveal) */
+.sandbox-wrap.js-reveal {
+  opacity: 0;
+  translate: 0 56px;
+  scale: 0.96;
+  transition: opacity 0.6s ease, translate 0.9s cubic-bezier(0.2, 0.7, 0.2, 1), scale 0.9s cubic-bezier(0.2, 0.7, 0.2, 1);
+}
+.sandbox-wrap.js-reveal .sandbox-wrap__strip i {
+  scale: 1 0;
+  transition: scale 0.35s cubic-bezier(0.2, 0.7, 0.2, 1);
+  transition-delay: calc(0.45s + var(--i) * 0.04s);
+}
+.sandbox-wrap.js-reveal.is-in {
+  opacity: 1;
+  translate: 0 0;
+  scale: 1;
+  animation: sb-turn 1.8s 0.3s cubic-bezier(0.4, 0, 0.2, 1) both, sb-glow 2.2s 0.6s ease-out both;
+}
+.sandbox-wrap.js-reveal.is-in .sandbox-wrap__strip i {
+  scale: 1 1;
+}
+@keyframes sb-turn {
+  from { --sb-turn: 0deg; }
+  to { --sb-turn: 360deg; }
+}
+@keyframes sb-glow {
+  0% { box-shadow: 0 30px 60px -32px rgb(0 81 186 / 0.45), 0 0 0 0 rgb(115 203 242 / 0.55); }
+  60% { box-shadow: 0 30px 60px -32px rgb(0 81 186 / 0.45), 0 0 0 18px rgb(115 203 242 / 0); }
+  100% { box-shadow: 0 30px 60px -32px rgb(0 81 186 / 0.45), 0 0 0 0 rgb(115 203 242 / 0); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .sandbox-wrap.js-reveal,
+  .sandbox-wrap.js-reveal .sandbox-wrap__strip i {
+    opacity: 1;
+    translate: none;
+    scale: none;
+    transition: none;
+    animation: none;
+  }
 }

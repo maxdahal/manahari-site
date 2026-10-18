@@ -178,6 +178,46 @@
       });
     });
     update();
+    reveal(play, pick, update);
+  }
+
+  /* The sandbox's entrance: once it is a third in view it rises in (CSS),
+     then the canvas flips through a few pairs from the system to show it
+     reacts, ending back on Night on Sky. The first touch, click or key
+     inside it stops the demo. Nothing moves for reduced motion. */
+  function reveal(play, pick, update) {
+    var wrap = play.closest(".sandbox-wrap");
+    if (!wrap || !("IntersectionObserver" in window)) return;
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+    var touched = false;
+    ["pointerdown", "keydown", "focusin"].forEach(function (type) {
+      play.addEventListener(type, function () {
+        touched = true;
+      });
+    });
+    var demo = [["white", "blue"], ["night", "wheat"], ["white", "brick"], ["text", "steam"], ["night", "sky"]];
+    function run(i) {
+      if (touched || i >= demo.length) return;
+      pick("fg", demo[i][0]);
+      pick("bg", demo[i][1]);
+      update();
+      setTimeout(function () {
+        run(i + 1);
+      }, 850);
+    }
+    wrap.classList.add("js-reveal");
+    var io = new IntersectionObserver(
+      function (entries) {
+        if (!entries[0].isIntersecting) return;
+        io.disconnect();
+        wrap.classList.add("is-in");
+        setTimeout(function () {
+          run(0);
+        }, 1300);
+      },
+      { threshold: 0.3 }
+    );
+    io.observe(wrap);
   }
 
   if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", start);

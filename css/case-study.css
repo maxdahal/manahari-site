@@ -1868,9 +1868,10 @@ a.card:hover {
   max-width: 760px;
 }
 
-/* Motion: a short muted loop of wireframes or a prototype (see the KU Brand
-   wireframes). It plays only while on screen, never for reduced motion, and
-   always has a pause button (WCAG 2.2.2), bottom right over the video. */
+/* Motion: a short video of wireframes or a prototype (see the KU Brand
+   wireframes). It waits on its poster under a big play button; once it
+   plays, the video's own controls take over, and when it ends the button
+   comes back to replay it. */
 .motion__frame {
   position: relative;
 }
@@ -1881,67 +1882,65 @@ a.card:hover {
   aspect-ratio: 16 / 9;
   background: #0b0f14;
 }
-.motion__toggle {
+.motion__start {
   position: absolute;
-  right: 14px;
-  bottom: 14px;
-  display: inline-flex;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
   align-items: center;
-  gap: 8px;
-  min-height: 40px;
-  padding: 0 14px;
-  border: 1px solid rgb(255 255 255 / 0.25);
-  border-radius: 999px;
-  background: rgb(11 15 20 / 0.72);
-  -webkit-backdrop-filter: blur(8px);
-  backdrop-filter: blur(8px);
+  justify-content: center;
+  gap: 14px;
+  width: 100%;
+  border: 0;
+  background: rgb(11 15 20 / 0.45);
   color: #fff;
   font: inherit;
-  font-size: 0.875rem;
-  font-weight: 600;
   cursor: pointer;
+  transition: background 0.2s ease;
 }
-.motion__toggle:hover {
-  background: rgb(11 15 20 / 0.9);
+.motion__start:hover {
+  background: rgb(11 15 20 / 0.3);
 }
-.motion__toggle:focus-visible {
-  outline: 3px solid var(--accent);
-  outline-offset: 2px;
-}
-.motion__toggle svg {
-  width: 16px;
-  height: 16px;
-  fill: none;
-  stroke: currentColor;
-  stroke-width: 2.5;
-  stroke-linecap: round;
-  stroke-linejoin: round;
-}
-.motion__play {
-  fill: currentColor;
-}
-.motion__toggle .motion__play,
-.motion__toggle[aria-pressed="true"] .motion__pause {
+.motion__start[hidden] {
   display: none;
 }
-.motion__toggle[aria-pressed="true"] .motion__play {
-  display: block;
+.motion__disc {
+  display: grid;
+  place-items: center;
+  width: clamp(64px, 9vw, 92px);
+  aspect-ratio: 1;
+  border-radius: 50%;
+  background: var(--accent);
+  color: var(--on-accent);
+  box-shadow: 0 10px 30px rgb(0 0 0 / 0.45);
+  transition: scale 0.2s ease;
 }
-/* on phones the button is just the icon (its name stays for screen readers) */
-@media (max-width: 640px) {
-  .motion__toggle {
-    right: 8px;
-    bottom: 8px;
-    justify-content: center;
-    min-width: 40px;
-    padding: 0;
-  }
-  .motion__label {
-    position: absolute;
-    width: 1px;
-    height: 1px;
-    overflow: hidden;
-    clip-path: inset(50%);
-    white-space: nowrap;
+.motion__start:hover .motion__disc {
+  scale: 1.06;
+}
+.motion__disc svg {
+  width: 42%;
+  height: 42%;
+  margin-left: 6%; /* the triangle looks centred when nudged right */
+  fill: currentColor;
+}
+.motion__cue {
+  padding: 6px 14px;
+  border-radius: 999px;
+  background: rgb(11 15 20 / 0.72);
+  font-size: 0.9375rem;
+  font-weight: 600;
+}
+.motion__start:focus-visible {
+  outline: none;
+}
+.motion__start:focus-visible .motion__disc {
+  outline: 3px solid #fff;
+  outline-offset: 4px;
+}
+@media (prefers-reduced-motion: reduce) {
+  .motion__start,
+  .motion__disc {
+    transition: none;
   }
 }

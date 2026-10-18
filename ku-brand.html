@@ -225,15 +225,16 @@
             <h3 class="block__title" id="wireframes-h" data-split>Low-fi to high-fi</h3>
             <div class="block__body">
               <p class="body-text">I started with boxes and added detail one layer at a time. Each step answered one question before the next began. I kept the early steps grey on purpose, so we discussed structure before color.</p>
-              <!-- The four steps below, played as one short loop (case-study.js
-                   pauses it off screen and for reduced motion) -->
+              <!-- The four steps below, played as one short video. It waits on
+                   its poster with a big play button; playing it brings up the
+                   video controls (case-study.js). -->
               <figure class="figure motion">
                 <div class="figure__media motion__frame">
-                  <video class="motion__video" muted loop playsinline preload="metadata" width="1280" height="720" poster="assets/images/ku-brand-wireframes-poster.webp" aria-label="The Brand Center home page built up in four steps: boxes only, a grey wireframe, the brand frame, then photos and color.">
+                  <video class="motion__video" muted playsinline preload="metadata" width="1280" height="720" poster="assets/images/ku-brand-wireframes-poster.webp" aria-label="The Brand Center home page built up in four steps: boxes only, a grey wireframe, the brand frame, then photos and color.">
                     <source src="assets/video/ku-brand-wireframes.webm" type="video/webm">
                     <source src="assets/video/ku-brand-wireframes.mp4" type="video/mp4">
                   </video>
-                  <button class="motion__toggle" type="button" aria-pressed="false"><svg class="motion__pause" viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5v14M16 5v14"/></svg><svg class="motion__play" viewBox="0 0 24 24" aria-hidden="true"><path d="M7 4l13 8-13 8z"/></svg><span class="motion__label">Pause</span></button>
+                  <button class="motion__start" type="button"><span class="motion__disc" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M8 5.5v13l11-6.5z"/></svg></span><span class="motion__cue"><span class="motion__verb">Play</span> the build · 9s</span></button>
                 </div>
                 <figcaption>The home page coming together, from boxes to the final design. Each step is shown on its own below.</figcaption>
               </figure>

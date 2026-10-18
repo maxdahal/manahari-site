@@ -317,40 +317,29 @@
     if (location.hash.length > 1) go(location.hash);
   }
 
-  /* Motion: short muted loops. Each plays while it is on screen and the
-     visitor has not paused it; reduced motion starts paused (the poster
-     shows the finished design). The button pauses and plays. */
+  /* Motion: short videos. Each waits under a big play button; pressing it
+     plays the video with its controls showing, and when it ends the button
+     comes back as "Replay". */
   function initMotion() {
     [].forEach.call(document.querySelectorAll(".motion"), function (fig) {
       var video = fig.querySelector("video");
-      var button = fig.querySelector(".motion__toggle");
-      var label = fig.querySelector(".motion__label");
+      var button = fig.querySelector(".motion__start");
+      var verb = fig.querySelector(".motion__verb");
       if (!video || !button) return;
-      var paused = reduceMotion;
-      var onScreen = false;
-      function update() {
-        button.setAttribute("aria-pressed", String(paused));
-        label.textContent = paused ? "Play" : "Pause";
-        if (!paused && onScreen) {
-          var p = video.play();
-          if (p && p.catch) p.catch(function () {});
-        } else {
-          video.pause();
-        }
-      }
       button.addEventListener("click", function () {
-        paused = !paused;
-        update();
+        button.hidden = true;
+        video.controls = true;
+        if (video.ended) video.currentTime = 0;
+        var p = video.play();
+        if (p && p.catch) p.catch(function () {});
+        video.focus();
       });
-      if ("IntersectionObserver" in window) {
-        new IntersectionObserver(function (entries) {
-          onScreen = entries[0].isIntersecting;
-          update();
-        }, { threshold: 0.25 }).observe(video);
-      } else {
-        onScreen = true;
-      }
-      update();
+      video.addEventListener("ended", function () {
+        video.controls = false;
+        if (verb) verb.textContent = "Replay";
+        button.hidden = false;
+        button.focus();
+      });
     });
   }
 

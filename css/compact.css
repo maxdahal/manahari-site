@@ -142,11 +142,12 @@ body::after {
   margin: 2px 0 6px 12px;
 }
 .cp-outline a {
+  position: relative;
   display: flex;
   align-items: center;
   gap: 8px;
-  padding: 3px 8px;
-  border-radius: 6px 0 0 6px;
+  padding: 3px 8px 3px 11px;
+  border-radius: 0 6px 6px 0;
   /* a soft wash of the accent behind the link you are reading: strongest at
      the left, fading out to the right; it sweeps in when you arrive */
   background: linear-gradient(90deg in oklch,
@@ -163,16 +164,20 @@ body::after {
 .cp-outline ol ol a {
   font-size: 0.8125rem;
 }
-/* a small dot marks the section you are reading; its stage turns dark */
+/* a bar in the accent along the left edge marks the section you are
+   reading, with the wash fading out to the right of it; its stage turns
+   dark. The bar grows from its middle when you arrive. */
 .cp-outline a::before {
   content: "";
-  flex: none;
-  width: 6px;
-  height: 6px;
-  margin-left: -22px; /* the dot sits outside the wash */
-  border-radius: 50%;
-  background: transparent;
-  transition: background-color 0.2s ease;
+  position: absolute;
+  top: 2px;
+  bottom: 2px;
+  left: 0;
+  width: 3px;
+  border-radius: 2px;
+  background: var(--accent);
+  scale: 1 0;
+  transition: scale 0.3s cubic-bezier(0.2, 0.7, 0.2, 1);
 }
 .cp-outline a:hover,
 .cp-outline a.is-in {
@@ -183,7 +188,13 @@ body::after {
   color: var(--accent-text);
 }
 .cp-outline a[aria-current]::before {
-  background: var(--accent);
+  scale: 1 1;
+}
+@media (prefers-reduced-motion: reduce) {
+  .cp-outline a,
+  .cp-outline a::before {
+    transition: none;
+  }
 }
 
 /* the story */

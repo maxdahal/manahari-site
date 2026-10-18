@@ -9,12 +9,16 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&amp;family=Antonio:wght@400;500;600;700&amp;display=swap">
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Kalam:wght@400&amp;display=swap">
+  <!-- JetBrains Mono: the technical face inside the arm panel sandbox -->
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&amp;display=swap">
   <link rel="stylesheet" href="css/site.css">
   <link rel="stylesheet" href="css/case-study.css">
+  <link rel="stylesheet" href="css/sandbox.css">
   <link rel="stylesheet" href="css/luna.css">
   <link rel="stylesheet" href="css/compact.css">
   <script src="js/site.js"></script>
   <script src="js/case-study.js" defer></script>
+  <script src="js/sandbox.js" defer></script>
   <script src="js/luna.js" defer></script>
 </head>
 <body class="cp-page">
@@ -26,7 +30,7 @@
   <div class="cp">
     <div class="cp-side">
       <nav class="cp-outline" aria-label="On this page">
-        <ol><li><a href="#overview" class="cp-outline__stage">Overview</a><ol><li><a href="#product-sec">The product</a></li><li><a href="#path-sec">How the story runs</a></li><li><a href="#principles">Vision &amp; principles</a></li></ol></li><li><a href="#empathize" class="cp-outline__stage">Empathize</a></li><li><a href="#define" class="cp-outline__stage">Problem</a><ol><li><a href="#problem-sec">The problems</a></li><li><a href="#today-sec">Where project 1 started</a></li><li><a href="#old-sec">Where project 2 started</a></li><li><a href="#new-sec">Where project 3 started</a></li><li><a href="#strategy-sec">Strategy</a></li></ol></li><li><a href="#ideate" class="cp-outline__stage">Ideate</a></li><li><a href="#design" class="cp-outline__stage">Design</a><ol><li><a href="#design-work-sec">Component system</a></li><li><a href="#ed-sec">Project 2 · Inside the video editor</a></li></ol></li><li><a href="#prototype" class="cp-outline__stage">Prototype</a></li><li><a href="#test" class="cp-outline__stage">Test</a><ol><li><a href="#hev-sec">Heuristic evaluation</a></li><li><a href="#six-sec">Feedback</a></li></ol></li><li><a href="#result" class="cp-outline__stage">Outcome</a><ol><li><a href="#together-sec">All three together</a></li><li><a href="#outcome-sec">Outcome</a></li></ol></li><li><a href="#learn" class="cp-outline__stage">Learn</a></li></ol>
+        <ol><li><a href="#overview" class="cp-outline__stage">Overview</a><ol><li><a href="#product-sec">The product</a></li><li><a href="#path-sec">How the story runs</a></li><li><a href="#principles">Vision &amp; principles</a></li></ol></li><li><a href="#empathize" class="cp-outline__stage">Empathize</a></li><li><a href="#define" class="cp-outline__stage">Problem</a><ol><li><a href="#problem-sec">The problems</a></li><li><a href="#today-sec">Where project 1 started</a></li><li><a href="#old-sec">Where project 2 started</a></li><li><a href="#new-sec">Where project 3 started</a></li><li><a href="#strategy-sec">Strategy</a></li></ol></li><li><a href="#ideate" class="cp-outline__stage">Ideate</a></li><li><a href="#design" class="cp-outline__stage">Design</a><ol><li><a href="#design-work-sec">Component system</a></li><li><a href="#ed-sec">Project 2 · Inside the video editor</a></li></ol></li><li><a href="#sandbox" class="cp-outline__stage cp-outline__play" data-attn>Arm sandbox <span class="cp-outline__tag">Try it</span></a></li><li><a href="#prototype" class="cp-outline__stage">Prototype</a></li><li><a href="#test" class="cp-outline__stage">Test</a><ol><li><a href="#hev-sec">Heuristic evaluation</a></li><li><a href="#six-sec">Feedback</a></li></ol></li><li><a href="#result" class="cp-outline__stage">Outcome</a><ol><li><a href="#together-sec">All three together</a></li><li><a href="#outcome-sec">Outcome</a></li></ol></li><li><a href="#learn" class="cp-outline__stage">Learn</a></li></ol>
       </nav>
     </div>
 
@@ -41,7 +45,7 @@
           <div class="cp-card">
             <p class="cp-card__title">Project access</p>
             <div class="cp-card__links"><a class="button button--primary" href="#ideate">View wireframes <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect width="7" height="7" x="3" y="3" rx="1"/><rect width="7" height="7" x="14" y="3" rx="1"/><rect width="7" height="7" x="14" y="14" rx="1"/><rect width="7" height="7" x="3" y="14" rx="1"/></svg></a>
-              <a class="button" href="index.html#work">All projects</a></div>
+              <a class="button button--play" href="#sandbox"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5.5v13l11-6.5z"/></svg>Play with the arm panels</a></div>
             <div class="cp-card__part"><p class="cp-card__title">Focus</p><div class="cp-topics"><span class="chip">Arm identity</span><span class="chip">Gallery</span><span class="chip">Video editor</span><span class="chip">Live annotation</span></div></div>
           </div>
         </aside>
@@ -1365,6 +1369,89 @@
                   </div>
                 </div>
                 <div class="notice" role="note"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4"/><path d="M12 8h.01"/></svg><p>Still to do: an Edit button. I ran out of time, so a dashed placeholder marks where it goes.</p></div>
+              </div>
+            </section>
+          </div>
+
+          <!-- Arm panel sandbox, laid out like the KU color sandbox (sandbox.css,
+               sandbox.js; Luna's own parts in luna.css and luna.js): the designs
+               I tested down the left, the console in the middle, and tabs for
+               each arm's state, the one-second glance test and my notes. -->
+          <div class="sandbox-wrap sandbox-wrap--luna" id="sandbox">
+            <div class="sandbox-wrap__head">
+              <p class="sandbox-wrap__tag"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5.5v13l11-6.5z"/></svg>Interactive</p>
+              <h4 class="sandbox-wrap__title">Find the arm that needs help</h4>
+              <p class="sandbox-wrap__text">Four arms, four colors, one second. Switch between the designs I tested, from the old number-only panels to the final design, and set each arm’s state. Then take the glance test: the screen shows for one second, and you pick the arm that needs help.</p>
+            </div>
+            <div class="sandbox-wrap__strip" aria-hidden="true"><i style="--c:#ff6b1a;--i:0"></i><i style="--c:#7cc4f2;--i:1"></i><i style="--c:#2b4c9b;--i:2"></i><i style="--c:#d6329e;--i:3"></i><i style="--c:#2e9e5b;--i:4"></i><i style="--c:#e0a93b;--i:5"></i><i style="--c:#d93a2b;--i:6"></i><i style="--c:#8a8a86;--i:7"></i></div>
+            <section class="sandbox" aria-labelledby="sandbox-h" data-arms>
+              <div class="sandbox__bar">
+                <p class="sandbox__crumb">Luna <span aria-hidden="true">/</span> <b id="sandbox-h">Arm panel sandbox</b></p>
+                <div class="sandbox__tools">
+                  <button type="button" class="sandbox__btn" data-fault><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M16 3h5v5M4 20 21 3M21 16v5h-5M15 15l6 6M4 4l5 5"/></svg>Random fault</button>
+                  <button type="button" class="sandbox__btn sandbox__btn--go" data-glance><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7S2 12 2 12z"/><circle cx="12" cy="12" r="3"/></svg>Glance test · 1s</button>
+                  <label class="sandbox__switch"><input type="checkbox" data-far><span aria-hidden="true"></span>Across the room</label>
+                </div>
+              </div>
+              <div class="sandbox__body">
+                <nav class="sandbox__side" aria-label="Designs I tested">
+                  <p class="sandbox__group">Before</p><ul><li><button type="button" class="play__preset" data-design="before"><span class="play__aa arm-chip arm-chip--num" aria-hidden="true">#</span><span>Number only</span></button></li></ul>
+                  <p class="sandbox__group">Options I tested</p><ul><li><button type="button" class="play__preset" data-design="a"><span class="play__aa arm-chip arm-chip--pic" aria-hidden="true">L</span><span>A · Warning on the picture <small class="arm-tag arm-tag--kept">Kept</small></span></button></li><li><button type="button" class="play__preset" data-design="b"><span class="play__aa arm-chip arm-chip--fill" aria-hidden="true"></span><span>B · Arm color as a fill <small class="arm-tag arm-tag--dropped">Dropped</small></span></button></li><li><button type="button" class="play__preset" data-design="c"><span class="play__aa arm-chip arm-chip--bar" aria-hidden="true"><i></i></span><span>C · Bar, dot and word <small class="arm-tag arm-tag--kept">Kept</small></span></button></li></ul>
+                  <p class="sandbox__group">Shipped</p><ul><li><button type="button" class="play__preset" data-design="final"><span class="play__aa arm-chip arm-chip--bar arm-chip--final" aria-hidden="true"><i></i>L</span><span>A + C · Final design <small class="arm-tag arm-tag--shipped">Shipped</small></span></button></li></ul>
+                </nav>
+                <div class="sandbox__main">
+                  <div class="sandbox__canvas" data-canvas>
+                    <div class="console" data-real data-console data-design="final">
+                      <div class="console__video" aria-hidden="true">
+                        <span class="console__tool console__tool--l"></span>
+                        <span class="console__tool console__tool--r"></span>
+                        <span class="console__flag console__flag--l" data-flag="l"></span>
+                        <span class="console__flag console__flag--r" data-flag="r"></span>
+                      </div>
+                      <ul class="console__arms"><li class="carm" data-arm="1" style="--arm:#ff6b1a"><b class="carm__name">Arm 1</b><span class="carm__color">Orange</span><span class="carm__state"><i class="carm__dot"></i><em class="carm__word">Running</em></span><i class="carm__lines" aria-hidden="true"></i></li><li class="carm" data-arm="2" style="--arm:#7cc4f2"><b class="carm__name">Arm 2</b><span class="carm__color">Light blue</span><span class="carm__state"><i class="carm__dot"></i><em class="carm__word">Warning</em></span><i class="carm__lines" aria-hidden="true"></i></li><li class="carm" data-arm="3" style="--arm:#2b4c9b"><b class="carm__name">Arm 3</b><span class="carm__color">Dark blue</span><span class="carm__state"><i class="carm__dot"></i><em class="carm__word">Error</em></span><i class="carm__lines" aria-hidden="true"></i></li><li class="carm" data-arm="4" style="--arm:#d6329e"><b class="carm__name">Arm 4</b><span class="carm__color">Magenta</span><span class="carm__state"><i class="carm__dot"></i><em class="carm__word">Inactive</em></span><i class="carm__lines" aria-hidden="true"></i></li></ul>
+                      <p class="console__list" data-list></p>
+                      <div class="console__quiz" data-quiz hidden>
+                        <p class="console__ask">Which arm needs help?</p>
+                        <div class="console__picks"><button type="button" class="console__pick" data-pick="1">Arm 1</button><button type="button" class="console__pick" data-pick="2">Arm 2</button><button type="button" class="console__pick" data-pick="3">Arm 3</button><button type="button" class="console__pick" data-pick="4">Arm 4</button></div>
+                        <p class="console__result" data-result aria-live="polite"></p>
+                        <div class="console__after" hidden data-after><button type="button" class="console__again" data-again>Try again</button><button type="button" class="console__again console__again--ghost" data-show>Show the screen</button></div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="sandbox__panel">
+                    <div class="sandbox__tabs" role="tablist" aria-label="Sandbox panels">
+                      <button type="button" role="tab" id="lb-tab-0" aria-controls="lb-pan-0" aria-selected="true">Controls</button>
+                      <button type="button" role="tab" id="lb-tab-1" aria-controls="lb-pan-1" aria-selected="false" tabindex="-1">Glance test <span class="sandbox__badge" data-badge>0 / 0</span></button>
+                      <button type="button" role="tab" id="lb-tab-2" aria-controls="lb-pan-2" aria-selected="false" tabindex="-1">Notes</button>
+                    </div>
+                    <div class="sandbox__pane" role="tabpanel" id="lb-pan-0" aria-labelledby="lb-tab-0">
+                        <div class="sandbox__row">
+                          <p class="sandbox__label" id="arm-1-l"><span class="arm-swatch" style="--arm:#ff6b1a" aria-hidden="true"></span>Arm 1<span class="play__picked">Orange</span></p>
+                          <div class="arm-states" role="radiogroup" aria-labelledby="arm-1-l"><label class="arm-state"><input type="radio" name="arm-1" value="Running" checked><span>Running</span></label><label class="arm-state"><input type="radio" name="arm-1" value="Warning"><span>Warning</span></label><label class="arm-state"><input type="radio" name="arm-1" value="Error"><span>Error</span></label><label class="arm-state"><input type="radio" name="arm-1" value="Inactive"><span>Inactive</span></label></div>
+                        </div>
+                        <div class="sandbox__row">
+                          <p class="sandbox__label" id="arm-2-l"><span class="arm-swatch" style="--arm:#7cc4f2" aria-hidden="true"></span>Arm 2<span class="play__picked">Light blue</span></p>
+                          <div class="arm-states" role="radiogroup" aria-labelledby="arm-2-l"><label class="arm-state"><input type="radio" name="arm-2" value="Running"><span>Running</span></label><label class="arm-state"><input type="radio" name="arm-2" value="Warning" checked><span>Warning</span></label><label class="arm-state"><input type="radio" name="arm-2" value="Error"><span>Error</span></label><label class="arm-state"><input type="radio" name="arm-2" value="Inactive"><span>Inactive</span></label></div>
+                        </div>
+                        <div class="sandbox__row">
+                          <p class="sandbox__label" id="arm-3-l"><span class="arm-swatch" style="--arm:#2b4c9b" aria-hidden="true"></span>Arm 3<span class="play__picked">Dark blue</span></p>
+                          <div class="arm-states" role="radiogroup" aria-labelledby="arm-3-l"><label class="arm-state"><input type="radio" name="arm-3" value="Running"><span>Running</span></label><label class="arm-state"><input type="radio" name="arm-3" value="Warning"><span>Warning</span></label><label class="arm-state"><input type="radio" name="arm-3" value="Error" checked><span>Error</span></label><label class="arm-state"><input type="radio" name="arm-3" value="Inactive"><span>Inactive</span></label></div>
+                        </div>
+                        <div class="sandbox__row">
+                          <p class="sandbox__label" id="arm-4-l"><span class="arm-swatch" style="--arm:#d6329e" aria-hidden="true"></span>Arm 4<span class="play__picked">Magenta</span></p>
+                          <div class="arm-states" role="radiogroup" aria-labelledby="arm-4-l"><label class="arm-state"><input type="radio" name="arm-4" value="Running"><span>Running</span></label><label class="arm-state"><input type="radio" name="arm-4" value="Warning"><span>Warning</span></label><label class="arm-state"><input type="radio" name="arm-4" value="Error"><span>Error</span></label><label class="arm-state"><input type="radio" name="arm-4" value="Inactive" checked><span>Inactive</span></label></div>
+                        </div>
+                    </div>
+                    <div class="sandbox__pane" role="tabpanel" id="lb-pan-1" aria-labelledby="lb-tab-1" hidden>
+                      <p class="glance__intro">Press <b>Glance test · 1s</b> above. The console shows for one second, then you pick the arm that needs help. Try it with each design.</p>
+                      <ul class="glance__scores" data-scores></ul>
+                    </div>
+                    <div class="sandbox__pane arm-notes" role="tabpanel" id="lb-pan-2" aria-labelledby="lb-tab-2" hidden>
+                      <p class="arm-notes__title" data-notes-title></p>
+                      <p class="arm-notes__text" data-notes></p>
+                    </div>
+                  </div>
+                </div>
               </div>
             </section>
           </div>

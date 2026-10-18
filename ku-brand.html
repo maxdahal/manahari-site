@@ -13,10 +13,12 @@
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&amp;display=swap">
   <link rel="stylesheet" href="css/site.css">
   <link rel="stylesheet" href="css/case-study.css">
+  <link rel="stylesheet" href="css/sandbox.css">
   <link rel="stylesheet" href="css/ku.css">
   <link rel="stylesheet" href="css/compact.css">
   <script src="js/site.js"></script>
   <script src="js/case-study.js" defer></script>
+  <script src="js/sandbox.js" defer></script>
   <script src="js/ku.js" defer></script>
 
 </head>
@@ -847,7 +849,7 @@
                    the system down the left, the live canvas, and a panel with
                    tabs for the controls, the accessibility check and the code
                    (js/ku.js) -->
-              <div class="sandbox-wrap" id="sandbox">
+              <div class="sandbox-wrap sandbox-wrap--ku" id="sandbox">
                 <div class="sandbox-wrap__head">
                   <p class="sandbox-wrap__tag"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5.5v13l11-6.5z"/></svg>Interactive</p>
                   <h4 class="sandbox-wrap__title">Try the KU color system yourself</h4>
@@ -872,7 +874,7 @@
                   </nav>
                   <div class="sandbox__main">
                     <div class="sandbox__canvas">
-                      <div class="play__preview" data-preview>
+                      <div class="play__preview" data-preview data-real>
                         <p class="play__eyebrow">Brand Center</p>
                         <p class="play__headline">Towering Toward the Blue</p>
                         <p class="play__body">Logos, colors, type and graphics for everyone who tells KU’s story.</p>

@@ -795,3 +795,411 @@
   --ok-text: #5dd68a;
   --warn-text: #e0a93b;
 }
+
+/* Arm panel sandbox: Luna's own pieces ---------------------------------------
+   The frame, panel and tabs are in sandbox.css. Here: the arm colors for the
+   frame, the console with its four arm panels drawn five ways (data-design:
+   before = numbers only, a = warning on the picture, b = arm color as a
+   fill, c = bar, dot and word, final = a and c together, as shipped), the
+   state controls, the one-second glance
+   test and the "across the room" view. The console is always dark, like the
+   real one. */
+.sandbox-wrap--luna {
+  --sb-ring: #ff6b1a, #7cc4f2, #2b4c9b, #d6329e, #ff6b1a;
+  --sb-wash:
+    radial-gradient(circle at 0% 0%, rgb(255 107 26 / 0.18), transparent 40%),
+    radial-gradient(circle at 100% 0%, rgb(124 196 242 / 0.24), transparent 40%),
+    radial-gradient(circle at 100% 100%, rgb(214 50 158 / 0.14), transparent 42%);
+  --sb-shadow: rgb(43 76 155 / 0.4);
+  --sb-glow: #7cc4f2;
+}
+.sandbox__btn--go {
+  border-color: var(--accent);
+  background: color-mix(in srgb, var(--accent) 12%, var(--bg));
+  color: var(--accent-text);
+}
+.arm-chip {
+  background: #3a3a3a;
+  color: #fff;
+}
+.arm-chip--pic {
+  background: #20262a;
+  color: var(--sev-error);
+}
+.arm-chip--fill {
+  background: var(--arm-4);
+}
+.arm-chip--bar {
+  position: relative;
+  background: #3a3a3a;
+}
+.arm-chip--bar i {
+  position: absolute;
+  top: 0;
+  right: 0;
+  left: 0;
+  height: 6px;
+  border-radius: 5px 5px 0 0;
+  background: var(--arm-4);
+}
+.arm-chip--final {
+  display: grid;
+  place-items: center;
+  padding-top: 4px;
+  color: var(--sev-error);
+}
+/* the verdict beside each design: kept, dropped, shipped */
+.arm-tag {
+  margin-left: 4px;
+  padding: 1px 6px;
+  border-radius: 999px;
+  font-size: 0.6875rem;
+  font-weight: 700;
+  white-space: nowrap;
+}
+.arm-tag--kept {
+  background: color-mix(in srgb, var(--ink) 8%, transparent);
+  color: var(--text);
+}
+.arm-tag--dropped {
+  background: color-mix(in srgb, var(--bad-text, #a1121c) 12%, transparent);
+  color: var(--bad-text, #a1121c);
+}
+.arm-tag--shipped {
+  background: color-mix(in srgb, var(--ok-text, #0d5228) 14%, transparent);
+  color: var(--ok-text, #0d5228);
+}
+
+/* the console */
+.console {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  width: 100%;
+  max-width: 560px;
+  padding: 12px;
+  border-radius: 12px;
+  background: #1a1d1f;
+  color: var(--console-ink);
+  box-shadow: 0 14px 34px -16px rgb(0 0 0 / 0.5);
+  transition: scale 0.35s ease, filter 0.35s ease;
+}
+.sandbox__canvas.is-far .console {
+  scale: 0.55;
+  filter: blur(1.1px);
+}
+.console__video {
+  position: relative;
+  height: 96px;
+  overflow: hidden;
+  border-radius: 8px;
+  background: radial-gradient(ellipse at 50% 120%, #4a2a2a, #121516 70%);
+}
+.console__tool {
+  position: absolute;
+  bottom: -10px;
+  width: 10px;
+  height: 80px;
+  border-radius: 5px;
+  background: linear-gradient(#9aa3a8, #5b656a);
+}
+.console__tool--l {
+  left: 34%;
+  rotate: 28deg;
+}
+.console__tool--r {
+  right: 34%;
+  rotate: -28deg;
+}
+/* design A: a label with L or R next to the instrument, on the picture */
+.console__flag {
+  position: absolute;
+  top: 16px;
+  display: none;
+  padding: 3px 8px;
+  border-radius: 4px;
+  background: var(--sev-error);
+  color: #fff;
+  font-size: 0.75rem;
+  font-weight: 700;
+}
+.console__flag.is-warning {
+  background: var(--sev-warning);
+  color: #1a1a1a;
+}
+.console__flag--l {
+  left: 18%;
+}
+.console__flag--r {
+  right: 18%;
+}
+.console:is([data-design="a"], [data-design="final"]) .console__flag.is-on {
+  display: block;
+}
+.console__arms {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 8px;
+}
+.carm {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  min-width: 0;
+  padding: 12px 10px 10px;
+  border-top: 6px solid transparent;
+  border-radius: 6px;
+  background: var(--console);
+  font-size: 0.8125rem;
+}
+.carm__name {
+  font-size: 0.875rem;
+}
+.carm__color {
+  color: var(--console-text);
+}
+.carm__state {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin-top: 4px;
+}
+.carm__dot {
+  flex: none;
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+  background: var(--sev, var(--sev-running));
+}
+.carm__word {
+  font-style: normal;
+}
+.carm__lines {
+  display: block;
+  height: 5px;
+  margin-top: 6px;
+  border-radius: 3px;
+  background: rgb(255 255 255 / 0.14);
+}
+.carm[data-state="Running"] { --sev: var(--sev-running); }
+.carm[data-state="Warning"] { --sev: var(--sev-warning); }
+.carm[data-state="Error"] { --sev: var(--sev-error); }
+.carm[data-state="Inactive"] { --sev: var(--sev-inactive); }
+/* C and the final design: the arm color as a bar on top, the state as a
+   dot and a word */
+.console:is([data-design="c"], [data-design="final"]) .carm {
+  border-top-color: var(--arm);
+}
+/* B: the whole panel takes the arm color; the state is only a word */
+.console[data-design="b"] .carm {
+  border-top-color: var(--arm);
+  background: var(--arm);
+  color: #111;
+}
+.console[data-design="b"] .carm[data-arm="3"] {
+  color: #fff;
+}
+.console[data-design="b"] .carm__color {
+  color: inherit;
+  opacity: 0.8;
+}
+.console[data-design="b"] .carm__dot,
+.console[data-design="b"] .carm__lines {
+  display: none;
+}
+/* before and A: no arm colors, the arm is only a number */
+.console:is([data-design="before"], [data-design="a"]) .carm__color {
+  visibility: hidden;
+}
+.console[data-design="before"] .carm__state,
+.console[data-design="a"] .carm__state {
+  display: none;
+}
+.console__list {
+  display: none;
+  padding: 8px 10px;
+  border-radius: 6px;
+  background: #24282b;
+  color: var(--console-text);
+  font-size: 0.8125rem;
+}
+.console[data-design="before"] .console__list {
+  display: block;
+}
+.console__list b {
+  color: var(--console-ink);
+}
+
+/* the glance test: after one second the console is covered by the question */
+.console__quiz {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  padding: 16px;
+  border-radius: 12px;
+  background: rgb(18 21 22 / 0.97);
+  text-align: center;
+}
+.console__quiz[hidden] {
+  display: none;
+}
+.console__ask {
+  font-size: 1.0625rem;
+  font-weight: 600;
+}
+.console__picks {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 8px;
+}
+.console__pick,
+.console__again {
+  min-height: 44px;
+  padding: 0 18px;
+  border: 1px solid rgb(255 255 255 / 0.3);
+  border-radius: 8px;
+  background: #2a2f32;
+  color: #fff;
+  font: inherit;
+  font-weight: 600;
+  cursor: pointer;
+}
+.console__pick:hover,
+.console__again:hover {
+  border-color: #fff;
+}
+.console__pick:focus-visible,
+.console__again:focus-visible {
+  outline: 3px solid var(--accent);
+  outline-offset: 2px;
+}
+.console__pick.is-right {
+  border-color: var(--sev-running);
+  background: color-mix(in srgb, var(--sev-running) 35%, #2a2f32);
+}
+.console__pick.is-wrong {
+  border-color: var(--sev-error);
+  background: color-mix(in srgb, var(--sev-error) 35%, #2a2f32);
+}
+.console__result {
+  min-height: 1.4em;
+  font-size: 0.9375rem;
+}
+.console__after {
+  display: flex;
+  gap: 8px;
+}
+.console__after[hidden] {
+  display: none;
+}
+.console__again--ghost {
+  background: transparent;
+}
+
+/* controls: one row per arm, its four states as a segmented control */
+[data-arms] .sandbox__label {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  column-gap: 6px;
+  align-items: center;
+}
+[data-arms] .sandbox__label .play__picked {
+  grid-column: 1 / -1;
+}
+.arm-swatch {
+  display: inline-block;
+  width: 12px;
+  height: 12px;
+  border-radius: 3px;
+  background: var(--arm);
+  vertical-align: -1px;
+}
+.arm-states {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
+}
+.arm-state {
+  position: relative;
+  cursor: pointer;
+}
+.arm-state input {
+  position: absolute;
+  inset: 0;
+  margin: 0;
+  opacity: 0;
+  cursor: pointer;
+}
+.arm-state span {
+  display: inline-flex;
+  align-items: center;
+  min-height: 28px;
+  padding: 0 10px;
+  border: 1px solid var(--line);
+  border-radius: 6px;
+  font-size: 0.75rem;
+  font-weight: 600;
+}
+.arm-state input:checked + span {
+  border-color: var(--ink);
+  background: var(--ink);
+  color: var(--bg);
+}
+.arm-state input:focus-visible + span {
+  outline: 3px solid var(--accent);
+  outline-offset: 2px;
+}
+.glance__intro,
+.arm-notes__text {
+  font-size: 0.875rem;
+  line-height: 1.55;
+  color: var(--text);
+}
+.arm-notes__title {
+  margin-bottom: 6px;
+  font-size: 0.875rem;
+  font-weight: 700;
+}
+.glance__scores {
+  display: grid;
+  gap: 4px;
+  margin-top: 10px;
+}
+.glance__scores li {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 8px;
+  padding: 6px 10px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  font-size: 0.75rem;
+  color: var(--text);
+}
+.glance__scores b {
+  color: var(--ink);
+}
+.glance__name {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.glance__num {
+  flex: none;
+}
+@media (max-width: 860px) {
+  .console__arms {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .console {
+    transition: none;
+  }
+}

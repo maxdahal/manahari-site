@@ -317,6 +317,43 @@
     if (location.hash.length > 1) go(location.hash);
   }
 
+  /* Motion: short muted loops. Each plays while it is on screen and the
+     visitor has not paused it; reduced motion starts paused (the poster
+     shows the finished design). The button pauses and plays. */
+  function initMotion() {
+    [].forEach.call(document.querySelectorAll(".motion"), function (fig) {
+      var video = fig.querySelector("video");
+      var button = fig.querySelector(".motion__toggle");
+      var label = fig.querySelector(".motion__label");
+      if (!video || !button) return;
+      var paused = reduceMotion;
+      var onScreen = false;
+      function update() {
+        button.setAttribute("aria-pressed", String(paused));
+        label.textContent = paused ? "Play" : "Pause";
+        if (!paused && onScreen) {
+          var p = video.play();
+          if (p && p.catch) p.catch(function () {});
+        } else {
+          video.pause();
+        }
+      }
+      button.addEventListener("click", function () {
+        paused = !paused;
+        update();
+      });
+      if ("IntersectionObserver" in window) {
+        new IntersectionObserver(function (entries) {
+          onScreen = entries[0].isIntersecting;
+          update();
+        }, { threshold: 0.25 }).observe(video);
+      } else {
+        onScreen = true;
+      }
+      update();
+    });
+  }
+
   function start() {
     initStageMeta();
     initRail();
@@ -324,6 +361,7 @@
     initReels();
     initPrinciples();
     initFlips();
+    initMotion();
     initHashLinks();
     /* one way to jump to any part of the page, even inside a closed tab */
     if (window.Site) {

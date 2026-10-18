@@ -1013,6 +1013,111 @@ body,
 }
 
 /* 10. Motion --------------------------------------------------------------- */
+/* Scroll text: text eases in as it scrolls into view, pure CSS (each
+   element's own view timeline), with a different entrance per kind of text
+   so it does not feel repeated:
+     section titles    rise out of a mask
+     eyebrows, labels  wipe in from the left
+     subheads          slide in from the left
+     paragraphs        drift up out of a soft blur
+     quotes, statements  grow in from a little smaller
+     list items        come up with a slight tilt, alternating sides
+   Each finishes within the first ~220px of scrolling, so nothing is half
+   faded while you read it. Text already on screen at load shows as is.
+   Pinned (sticky) text, like the About chapters, is left out: its view
+   timeline stops while it is pinned. Skipped for reduced motion, while motion is paused (.motion-paused), and
+   in browsers without scroll-driven animations (text just shows). Decorative
+   or interactive areas with their own motion are left alone. */
+@supports (animation-timeline: view()) {
+  @media (prefers-reduced-motion: no-preference) {
+    /* text sliding in from the side must not widen the page */
+    main {
+      overflow-x: clip;
+    }
+    :root:not(.motion-paused) main :is(h2, h3, h4, p, li, blockquote, dt, dd):not(:is(.hero, .sandbox-wrap, .badge, .shelves, .spot, .console, .cp-outline, nav, figure, table, .tabs, [role="tablist"], .seasons, .motion, .lightbox, .skills3d, li, .chapter) *):not(.hero *),
+    :root:not(.motion-paused) main :is(.shelf__name, .shelf__tags) {
+      animation: st-up linear both;
+      animation-timeline: view();
+      animation-range: entry 0px entry 220px;
+    }
+    :root:not(.motion-paused) main :is(h2, .doc-head__title, .block__title, .cp-sec__label):not(:is(.sandbox-wrap, .badge, .shelves) *) {
+      animation-name: st-rise;
+    }
+    :root:not(.motion-paused) main :is(.eyebrow, .label, .cp-label, .card__label, .timeline-group__title):not(:is(.sandbox-wrap, .badge, .seasons) *) {
+      animation: st-wipe linear both;
+      animation-timeline: view();
+      animation-range: entry 0px entry 200px;
+    }
+    :root:not(.motion-paused) main :is(h3, h4):not(:is(.sandbox-wrap, .badge, .shelves, .spot, .console, figure, table, nav, li, .chapter) *) {
+      animation-name: st-slide;
+    }
+    :root:not(.motion-paused) main .shelf__tags {
+      animation-name: st-wipe;
+    }
+    :root:not(.motion-paused) main :is(blockquote, .statement, .cp-quote, [class*="quote"]):not(:is(.sandbox-wrap, .badge) *) {
+      animation-name: st-zoom;
+    }
+    :root:not(.motion-paused) main li:not(:is(.sandbox-wrap, .badge, .shelves, .spot, .console, .cp-outline, nav, figure, table, .seasons, .chapter) *):nth-child(odd) {
+      animation-name: st-tilt-l;
+    }
+    :root:not(.motion-paused) main li:not(:is(.sandbox-wrap, .badge, .shelves, .spot, .console, .cp-outline, nav, figure, table, .seasons, .chapter) *):nth-child(even) {
+      animation-name: st-tilt-r;
+    }
+  }
+}
+@keyframes st-up {
+  from {
+    opacity: 0;
+    transform: translateY(26px);
+    filter: blur(5px);
+  }
+}
+@keyframes st-rise {
+  from {
+    opacity: 0;
+    transform: translateY(0.45em);
+    clip-path: inset(0 0 100% 0);
+  }
+  to {
+    clip-path: inset(-1em -100vw -0.5em -100vw);
+  }
+}
+@keyframes st-wipe {
+  from {
+    opacity: 0;
+    transform: translateX(-8px);
+    clip-path: inset(0 100% 0 0);
+  }
+  to {
+    clip-path: inset(-1em -100vw -1em -1em);
+  }
+}
+@keyframes st-slide {
+  from {
+    opacity: 0;
+    transform: translateX(-32px);
+  }
+}
+@keyframes st-zoom {
+  from {
+    opacity: 0;
+    transform: scale(0.94);
+    filter: blur(3px);
+  }
+}
+@keyframes st-tilt-l {
+  from {
+    opacity: 0;
+    transform: translate(-14px, 18px) rotate(-1.5deg);
+  }
+}
+@keyframes st-tilt-r {
+  from {
+    opacity: 0;
+    transform: translate(14px, 18px) rotate(1.5deg);
+  }
+}
+
 .reveal {
   opacity: 0;
   translate: 0 24px;

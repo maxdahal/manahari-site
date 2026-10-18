@@ -123,18 +123,20 @@
     function setOpen(open) {
       menu.classList.toggle("is-open", open);
       button.setAttribute("aria-expanded", String(open));
-      button.textContent = open ? "Close" : "Menu";
+      if (button.classList.contains("icon-button")) button.setAttribute("aria-label", open ? "Close menu" : "Open menu");
+      else button.textContent = open ? "Close" : "Menu";
       root.style.overflow = open ? "hidden" : "";
-      if (open) {
-        var first = menu.querySelector("a");
-        if (first) first.focus();
-      }
+      /* focus stays on the toggle (now "Close menu"); the menu follows the
+         top bar in the page, so Tab goes straight into its links */
     }
     button.addEventListener("click", function () {
       setOpen(!menu.classList.contains("is-open"));
     });
     menu.addEventListener("click", function (event) {
       if (event.target.closest("a")) setOpen(false);
+    });
+    window.matchMedia("(min-width: 1101px)").addEventListener("change", function (event) {
+      if (event.matches) setOpen(false);
     });
     document.addEventListener("keydown", function (event) {
       if (event.key === "Escape" && menu.classList.contains("is-open")) {

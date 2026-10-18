@@ -33,8 +33,23 @@
     </div>
     <div class="cp-bar__end">
       <button class="icon-button theme-toggle" type="button" aria-label="Switch theme"><svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20.985 12.486a9 9 0 1 1-9.473-9.472c.405-.022.617.46.402.803a6 6 0 0 0 8.268 8.268c.344-.215.825-.004.803.401"/></svg><svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2m-7.07-17.07 1.41 1.41m11.32 11.32 1.41 1.41M2 12h2m16 0h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"/></svg></button>
+      <button class="icon-button menu-button" type="button" aria-expanded="false" aria-controls="menu" aria-label="Open menu"><span class="menu-button__lines" aria-hidden="true"><i></i><i></i><i></i></span></button>
     </div>
   </header>
+  <!-- Menu for smaller screens: covers the whole screen under the top bar
+       (site.js opens and closes it with the button in the bar) -->
+  <div class="menu" id="menu">
+    <nav class="menu__links" aria-label="Menu">
+      <a href="index.html">Home<small>01</small></a>
+      <a href="index.html#about-me">About<small>02</small></a>
+      <a href="index.html#work" aria-current="true">Work<small>03</small></a>
+      <a href="index.html#contact">Contact<small>04</small></a>
+    </nav>
+    <div class="menu__foot">
+      <a href="mailto:manahari.dahal1@gmail.com">manahari.dahal1@gmail.com</a>
+      <span><a href="https://www.linkedin.com/in/manaharidahal/" target="_blank" rel="noopener">LinkedIn</a><a href="https://dribbble.com/manaharidahal" target="_blank" rel="noopener">Dribbble</a></span>
+    </div>
+  </div>
   <div class="cp">
     <div class="cp-side">
       <nav class="cp-outline" aria-label="On this page">

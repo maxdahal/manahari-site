@@ -1499,23 +1499,85 @@ html {
     gap: 6px;
   }
 }
-@media (max-width: 400px) {
-  .cp-bar {
-    padding-inline: 12px;
-  }
-  .cp-bar__start,
+/* Hamburger: below laptop width the links move into a menu that covers the
+   whole screen under the top bar. The three lines turn into an X. */
+.cp-bar .menu-button {
+  display: none;
+  place-items: center;
+  padding: 0;
+}
+.menu-button__lines {
+  display: grid;
+  gap: 4px;
+  width: 18px;
+}
+.menu-button__lines i {
+  display: block;
+  height: 2px;
+  border-radius: 2px;
+  background: currentColor;
+  transition: transform 0.3s ease, opacity 0.2s ease;
+}
+.menu-button[aria-expanded="true"] .menu-button__lines i:nth-child(1) {
+  transform: translateY(6px) rotate(45deg);
+}
+.menu-button[aria-expanded="true"] .menu-button__lines i:nth-child(2) {
+  opacity: 0;
+}
+.menu-button[aria-expanded="true"] .menu-button__lines i:nth-child(3) {
+  transform: translateY(-6px) rotate(-45deg);
+}
+@media (max-width: 1100px) {
   .cp-bar__links {
-    gap: 12px;
-  }
-  .cp-bar__links a {
-    font-size: 0.8125rem;
-  }
-  /* the Home link already goes where the mark goes */
-  .bar-mark {
     display: none;
   }
-  .cp-bar .icon-button {
-    width: 36px;
-    height: 36px;
+  .cp-bar .menu-button {
+    display: inline-grid;
+  }
+}
+/* the full-screen menu sits under the top bar, so the X stays in reach */
+.menu {
+  z-index: 35;
+  height: 100vh;
+  height: 100dvh;
+  padding: calc(var(--bar-h) + 32px) var(--gx) max(32px, env(safe-area-inset-bottom));
+  background: var(--paper) 0 0 / 240px auto, var(--bg);
+  overflow-y: auto;
+}
+.menu__links a {
+  color: var(--ink);
+  transform: translateY(16px);
+  opacity: 0;
+  transition: transform 0.45s cubic-bezier(0.2, 0.8, 0.2, 1), opacity 0.45s ease, color 0.2s ease;
+}
+.menu.is-open .menu__links a {
+  transform: none;
+  opacity: 1;
+}
+.menu.is-open .menu__links a:nth-child(2) { transition-delay: 0.05s; }
+.menu.is-open .menu__links a:nth-child(3) { transition-delay: 0.1s; }
+.menu.is-open .menu__links a:nth-child(4) { transition-delay: 0.15s; }
+.menu__links a:hover,
+.menu__links a[aria-current] {
+  color: var(--accent-text);
+}
+.menu__links small {
+  color: var(--accent-text);
+}
+.menu__foot,
+.menu__foot span {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px 24px;
+}
+.menu__foot a {
+  margin-left: 0;
+  color: var(--ink);
+  text-decoration-color: var(--accent);
+  text-underline-offset: 4px;
+}
+@media (min-width: 1101px) {
+  .menu {
+    display: none;
   }
 }

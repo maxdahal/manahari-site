@@ -874,3 +874,118 @@ html {
   color: var(--accent-text);
   font-weight: 600;
 }
+
+/* Outline on smaller screens: a floating button at the bottom middle names
+   the stage you are reading and opens the outline in a bottom sheet
+   (case-study.js moves the outline there). Hidden on wide screens, where the
+   outline sits in the left column. */
+.outline-chip {
+  position: fixed;
+  left: 50%;
+  bottom: max(16px, env(safe-area-inset-bottom));
+  z-index: 30;
+  display: none;
+  align-items: center;
+  gap: 10px;
+  max-width: calc(100% - 32px);
+  min-height: 48px;
+  padding: 0 16px 0 18px;
+  border: 0;
+  border-radius: 999px;
+  background: var(--ink);
+  box-shadow: 0 10px 30px -8px rgb(0 0 0 / 0.45);
+  color: var(--bg);
+  font: inherit;
+  font-size: 0.9375rem;
+  font-weight: 600;
+  cursor: pointer;
+  opacity: 0;
+  pointer-events: none;
+  transform: translate(-50%, 16px);
+  transition: opacity 0.3s ease, transform 0.3s ease;
+}
+.outline-chip.is-shown {
+  opacity: 1;
+  pointer-events: auto;
+  transform: translate(-50%, 0);
+}
+.outline-chip:focus-visible {
+  outline: 3px solid var(--accent);
+  outline-offset: 3px;
+}
+.outline-chip__label {
+  font-size: 0.6875rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--accent);
+}
+.outline-chip__name {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.outline-chip svg {
+  flex: none;
+  width: 18px;
+  height: 18px;
+}
+@media (max-width: 1100px) {
+  .outline-chip {
+    display: inline-flex;
+  }
+}
+
+.outline-sheet {
+  width: min(560px, 100%);
+  max-width: 100%;
+  max-height: min(80vh, 640px);
+  max-height: min(80dvh, 640px);
+  margin: auto auto 0;
+  padding: 0 20px max(24px, env(safe-area-inset-bottom));
+  border: 1px solid var(--line);
+  border-bottom: 0;
+  border-radius: 20px 20px 0 0;
+  background: var(--paper) 0 0 / 240px auto, var(--bg);
+  color: var(--ink);
+  overflow-y: auto;
+  overscroll-behavior: contain;
+}
+.outline-sheet::backdrop {
+  background: rgb(0 0 0 / 0.45);
+}
+.outline-sheet[open] {
+  animation: sheet-up 0.3s cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+@keyframes sheet-up {
+  from {
+    transform: translateY(40px);
+    opacity: 0;
+  }
+}
+.outline-sheet__head {
+  position: sticky;
+  top: 0;
+  z-index: 1;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 14px 0 10px;
+  background: var(--paper) 0 0 / 240px auto, var(--bg);
+}
+.outline-sheet__title {
+  font-size: 0.8125rem;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--accent-text);
+}
+.outline-sheet .cp-outline {
+  margin-top: 0;
+}
+@media (prefers-reduced-motion: reduce) {
+  .outline-chip,
+  .outline-sheet[open] {
+    transition: none;
+    animation: none;
+  }
+}

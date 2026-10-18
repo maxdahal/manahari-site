@@ -343,9 +343,85 @@
     });
   }
 
+  /* Outline on smaller screens: the page outline (left column on wide
+     screens) moves into a bottom sheet, opened from a floating button at the
+     bottom middle that names the stage you are reading. The same <nav> is
+     moved, not copied, so the outline script keeps marking it. */
+  function initOutlineSheet() {
+    var nav = document.querySelector(".cp-side .cp-outline");
+    if (!nav) return;
+    var side = nav.parentNode;
+    var spot = nav.nextSibling;
+    var stages = [].slice.call(nav.querySelectorAll(".cp-outline__stage"));
+
+    var sheet = document.createElement("dialog");
+    sheet.className = "outline-sheet";
+    sheet.setAttribute("aria-labelledby", "outline-sheet-title");
+    sheet.innerHTML =
+      '<div class="outline-sheet__head"><p class="outline-sheet__title" id="outline-sheet-title">On this page</p>' +
+      '<button class="icon-button outline-sheet__close" type="button" aria-label="Close">' + icon("M18 6 6 18M6 6l12 12") + "</button></div>";
+    document.body.appendChild(sheet);
+
+    var chip = document.createElement("button");
+    chip.className = "outline-chip";
+    chip.type = "button";
+    chip.setAttribute("aria-haspopup", "dialog");
+    chip.innerHTML =
+      '<span class="outline-chip__label">Stage</span>' +
+      '<span class="outline-chip__name">' + (stages[0] ? stages[0].firstChild.textContent.trim() : "") + "</span>" +
+      icon("m18 15-6-6-6 6");
+    document.body.appendChild(chip);
+    var name = chip.querySelector(".outline-chip__name");
+
+    var small = window.matchMedia("(max-width: 1100px)");
+    function place() {
+      if (small.matches) sheet.appendChild(nav);
+      else {
+        if (sheet.open) sheet.close();
+        side.insertBefore(nav, spot);
+      }
+    }
+    small.addEventListener("change", place);
+    place();
+
+    chip.addEventListener("click", function () {
+      sheet.showModal();
+      var here = nav.querySelector('[aria-current]');
+      if (here) here.scrollIntoView({ block: "center" });
+    });
+    sheet.querySelector(".outline-sheet__close").addEventListener("click", function () {
+      sheet.close();
+    });
+    sheet.addEventListener("click", function (event) {
+      /* a tap on the dimmed page outside the sheet lands on the dialog itself */
+      if (event.target === sheet) sheet.close();
+      /* choosing a part closes the sheet; the link then scrolls there */
+      if (event.target.closest("a")) sheet.close();
+    });
+
+    /* the button names the stage you are in, and waits until you are past
+       the opening of the page */
+    var tick = false;
+    function update() {
+      tick = false;
+      var stage = nav.querySelector(".cp-outline__stage.is-in");
+      var text = stage ? stage.firstChild.textContent.trim() : name.textContent;
+      if (name.textContent !== text) name.textContent = text;
+      chip.classList.toggle("is-shown", window.scrollY > window.innerHeight * 0.6);
+    }
+    window.addEventListener("scroll", function () {
+      if (!tick) {
+        tick = true;
+        requestAnimationFrame(update);
+      }
+    }, { passive: true });
+    update();
+  }
+
   function start() {
     initStageMeta();
     initRail();
+    initOutlineSheet();
     initSteps();
     initReels();
     initPrinciples();

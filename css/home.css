@@ -1179,7 +1179,7 @@ html.hello-lock {
   background: rgb(20 20 24 / 0.75);
   -webkit-backdrop-filter: blur(6px);
   backdrop-filter: blur(6px);
-  box-shadow: 0 0 40px 6px color-mix(in srgb, var(--footer-accent) 35%, transparent);
+  box-shadow: 0 0 40px 6px color-mix(in srgb, var(--accent) 35%, transparent);
   color: #f4f4f0;
   font-size: var(--fs-body);
   font-weight: 600;
@@ -1190,7 +1190,7 @@ html.hello-lock {
 .spot__hint svg {
   width: 22px;
   height: 22px;
-  color: var(--footer-accent);
+  color: var(--accent);
 }
 .spot.is-lit .spot__hint {
   opacity: 0;
@@ -1198,7 +1198,7 @@ html.hello-lock {
 }
 @keyframes hint-glow {
   50% {
-    box-shadow: 0 0 60px 14px color-mix(in srgb, var(--footer-accent) 50%, transparent);
+    box-shadow: 0 0 60px 14px color-mix(in srgb, var(--accent) 50%, transparent);
   }
 }
 @media (hover: hover) and (prefers-reduced-motion: no-preference) {
@@ -1334,23 +1334,8 @@ html.hello-lock {
   }
 }
 
-/* Paper: every section's own background carries a fine grain, so each
-   one reads as paper, in both themes, in every browser (no blend modes or
-   overlays). Light mode has dark specks, dark mode faint light ones. The
-   grain is baked into the SVG's alpha, so it simply sits over --bg. */
-:root {
-  --paper: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n' color-interpolation-filters='sRGB'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 -0.09 0 0 0 0.09'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
-}
-@media (prefers-color-scheme: dark) {
-  :root:not([data-theme="light"]) {
-    --paper: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n' color-interpolation-filters='sRGB'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 1 0 0 0 0 1 0 0 0 0 1 0.13 0 0 0 -0.035'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
-  }
-}
-:root[data-theme="dark"] {
-  --paper: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n' color-interpolation-filters='sRGB'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 1 0 0 0 0 1 0 0 0 0 1 0.13 0 0 0 -0.035'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
-}
-body,
-.page,
+/* Paper: every section's own background carries the grain (the --paper
+   token in site.css), so each one reads as paper, in both themes. */
 .hello,
 .sections > section {
   background: var(--paper) 0 0 / 240px auto, var(--bg);

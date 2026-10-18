@@ -5,11 +5,14 @@
      3. Skills
    ========================================================================== */
 
-.label {
+/* small caps labels in the case study voice: orange, tracked out */
+.label,
+.eyebrow {
+  font-size: 0.8125rem;
   font-weight: 600;
   letter-spacing: 0.12em;
   text-transform: uppercase;
-  color: var(--text);
+  color: var(--accent-text);
 }
 .muted {
   color: var(--text);
@@ -63,7 +66,8 @@
 .about-intro__stats b {
   display: block;
   font-family: var(--heading-font);
-  font-size: 3rem;
+  font-size: 2.5rem;
+  color: var(--accent-text);
   font-weight: 600;
   line-height: 1;
   letter-spacing: -0.01em;
@@ -91,23 +95,30 @@
 }
 
 /* 2. Timelines ------------------------------------------------------------- */
-.timeline-section {
-  padding-block: 40px 0;
+/* Section headers as on the case studies: an orange eyebrow over an
+   Antonio title, left-aligned on the same 1080px column as the content,
+   with no tinted band. */
+.timeline-section,
+.chapters {
+  padding-block: clamp(56px, 9vh, 104px) 0;
 }
 .block--center {
-  --title-lh: calc(36px * 1.12);
-  align-items: center;
-  text-align: center;
+  gap: 8px;
+  width: 100%;
+  max-width: 1080px;
+  margin-inline: auto;
+  padding-top: 0;
 }
 .block--center .block__title {
-  font-size: 2.25rem;
-  line-height: 1.12;
-  letter-spacing: -0.03em;
+  font-size: var(--fs-stage);
+  line-height: 1.05;
+  letter-spacing: -0.01em;
 }
 .block--center .block__body {
   --indent: 0px;
-  align-self: stretch;
-  text-align: left;
+  margin-top: 0;
+  padding: 24px 0 0;
+  border-image: none;
 }
 
 .timeline-wrap {
@@ -295,6 +306,9 @@
 }
 
 /* 3. Skills ---------------------------------------------------------------- */
+.timeline-wrap.skills {
+  max-width: none;
+}
 .skills details {
   border-top: 1px solid var(--line);
 }
@@ -358,7 +372,7 @@
   gap: clamp(64px, 9vw, 120px);
 }
 .chapters__lead {
-  text-align: center;
+  margin-bottom: calc(clamp(64px, 9vw, 120px) * -0.5);
   color: var(--text);
 }
 .chapter {

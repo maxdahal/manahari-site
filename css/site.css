@@ -25,16 +25,19 @@
   --ink: #1a1a1e;
   --text: #4a4a4a;
   --line: rgba(26, 26, 30, 0.14);
-  --accent: #0051ba;
-  --accent-text: #0046a0;
-  --on-accent: #ffffff;
+  /* orange: #e65f2e for fills and marks; text in the accent uses a darker
+     shade (#b0441c, 5.4:1 on the page) and filled buttons use dark text
+     (#1a1a1e, 4.9:1), since the bright orange is too light for small text */
+  --accent: #e65f2e;
+  --accent-text: #b0441c;
+  --on-accent: #1a1a1e;
   --band: color-mix(in srgb, var(--accent) 8%, var(--bg));
   --stage: color-mix(in srgb, var(--accent) 15%, #ffffff);
-  --marker: linear-gradient(100deg, rgb(0 81 186 / 0.38), rgb(0 81 186 / 0.22));
+  --marker: linear-gradient(100deg, rgb(230 95 46 / 0.38), rgb(230 95 46 / 0.22));
   --frame: #0f0f11;
   --frame-2: #17171a;
   --frame-line: rgba(255, 255, 255, 0.1);
-  --header-bg: linear-gradient(90deg, #eeeee9 0%, #d9e0e5 100%);
+  --header-bg: linear-gradient(90deg, #eeeee9 0%, #ebe1d8 100%);
   --header-line: #d9d9d2;
   --shadow: 0 10px 30px rgba(0, 0, 0, 0.22);
   --ok: #1a8a42;

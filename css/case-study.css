@@ -24,18 +24,8 @@
   --stage-ink: var(--ink);
 }
 
-/* the active stage's background in the stages list: a brighter blue than
-   the accent in the light theme (the deep KU blue looks grey when faded),
-   the accent itself in the dark theme */
+/* the active stage's background in the stages list: the accent */
 :root {
-  --wash-color: #2767ff;
-}
-@media (prefers-color-scheme: dark) {
-  :root:not([data-theme="light"]) {
-    --wash-color: var(--accent);
-  }
-}
-:root[data-theme="dark"] {
   --wash-color: var(--accent);
 }
 
@@ -875,8 +865,8 @@ li:has(> a[aria-current="true"]) > .rail__sub {
   --ink: #ecece7;
   --text: #b9b9b4;
   --line: rgba(236, 236, 231, 0.14);
-  --accent: #4d8dff;
-  --accent-text: #8db4ff;
+  --accent: #ff8a5c;
+  --accent-text: #ffab85;
   --on-accent: #0b0b0c;
   display: flex;
   flex-direction: column;

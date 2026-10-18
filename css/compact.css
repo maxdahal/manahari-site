@@ -1,6 +1,7 @@
 /* ==========================================================================
    Compact case study (prototype), laid out like a quiet document. The page
-   is as wide as the homepage (the same side margins and maximum width). No
+   is as wide as the homepage (the same side margins and maximum width), and
+   the story runs in a narrower centred column (--cp-max) beside the outline. No
    top bar: the breadcrumb sits at the top left and the theme switch at the
    top right. A plain outline of the stages and their sections runs down the
    left with a dot on the one you are reading. The story fills the rest:
@@ -65,6 +66,8 @@ body::after {
 
 .cp {
   --measure: 680px; /* reading width for text */
+  --cp-max: 880px; /* the story column: narrower than the page, so pictures
+                      and rows of details stay compact on wide screens */
   display: grid;
   grid-template-columns: minmax(150px, 190px) minmax(0, 1fr);
   column-gap: clamp(32px, 4vw, 64px);
@@ -187,6 +190,9 @@ body::after {
 .cp-main {
   grid-column: 2;
   grid-row: 1;
+  justify-self: center;
+  width: 100%;
+  max-width: var(--cp-max);
   display: flex;
   flex-direction: column;
   gap: var(--gap-section);

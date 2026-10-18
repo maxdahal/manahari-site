@@ -1,6 +1,6 @@
-/* Shared behaviour for every page: theme, header, menu, tabs, reveals, counters
-   and the cursor ring. Each feature looks for its own markup and does nothing
-   when that markup is not on the page. */
+/* Shared behaviour for every page: theme, menu, tabs, section bands, the ID
+   badge, reveals, counters and the cursor ring. Each feature looks for its own
+   markup and does nothing when that markup is not on the page. */
 (function () {
   "use strict";
 
@@ -44,75 +44,6 @@
         labelThemeButtons();
       });
     });
-  }
-
-  /* Header: hide on scroll down, show on scroll up, mark the active section - */
-  function initHeader() {
-    var header = document.querySelector(".site-header");
-    if (!header) return;
-    var lastY = window.scrollY;
-    window.addEventListener(
-      "scroll",
-      function () {
-        var y = window.scrollY;
-        var menuOpen = document.querySelector(".menu.is-open");
-        header.classList.toggle("is-hidden", !menuOpen && y > lastY && y > 200);
-        lastY = y;
-      },
-      { passive: true }
-    );
-
-    /* The active link is the last section (in page order) that has reached
-       the middle of the screen. Home's sections stack and stay stuck, so an
-       earlier section can still overlap the middle; the later one is on top. */
-    var links = [].slice.call(document.querySelectorAll(".site-nav a[data-section]"));
-    var targets = links.map(function (link) {
-      return document.getElementById(link.dataset.section);
-    });
-    if (!links.length) return;
-    /* The footer sticks to the bottom of the screen underneath the page, so it
-       always looks "in view"; it really starts where the content above it ends. */
-    function topOf(target) {
-      var style = getComputedStyle(target);
-      var stuckToBottom = style.position === "sticky" && style.bottom !== "auto" && target.previousElementSibling;
-      return stuckToBottom
-        ? target.previousElementSibling.getBoundingClientRect().bottom
-        : target.getBoundingClientRect().top;
-    }
-    var ticking = false;
-    function markActive() {
-      ticking = false;
-      var middle = window.innerHeight / 2;
-      var active = -1;
-      targets.forEach(function (target, i) {
-        if (target && topOf(target) <= middle) active = i;
-      });
-      /* at the very bottom the last section counts even if short */
-      if (window.innerHeight + window.scrollY >= document.documentElement.scrollHeight - 2) {
-        for (var i = targets.length - 1; i >= 0; i--) {
-          if (targets[i] && topOf(targets[i]) < window.innerHeight) {
-            active = i;
-            break;
-          }
-        }
-      }
-      links.forEach(function (link, i) {
-        link.classList.toggle("is-active", i === active);
-      });
-    }
-    window.addEventListener(
-      "scroll",
-      function () {
-        if (!ticking) {
-          ticking = true;
-          requestAnimationFrame(markActive);
-        }
-      },
-      { passive: true }
-    );
-    window.addEventListener("resize", markActive);
-    window.addEventListener("load", markActive);
-    markActive();
   }
 
   /* Phone menu -------------------------------------------------------------- */
@@ -390,7 +321,6 @@
 
   function start() {
     initTheme();
-    initHeader();
     initMenu();
     initTabs();
     initBands();

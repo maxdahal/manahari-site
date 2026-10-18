@@ -48,11 +48,6 @@
   transform: translateX(10px);
 }
 
-/* the two extra wireframes */
-.wireframes {
-  --grid-gap: 32px;
-}
-
 /* 3. Design system tabs ---------------------------------------------------- */
 .system {
   display: flex;
@@ -65,56 +60,12 @@
   flex-direction: column;
   gap: 14px;
 }
-.swatch-group {
-  margin-top: 8px;
-  font-size: var(--fs-small);
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-  color: var(--text);
-}
+
 .swatches {
   display: grid;
   grid-template-columns: repeat(6, minmax(0, 1fr));
   gap: 10px;
 }
-/* each swatch: the color as a chip, then its name and hex in page colors */
-.sw {
-  display: flex;
-  flex-direction: column;
-  gap: 2px;
-  line-height: 1.35;
-}
-.sw::before {
-  content: "";
-  height: 64px;
-  margin-bottom: 10px;
-  border: 1px solid var(--line);
-  border-radius: 12px;
-  background: var(--sw);
-}
-.sw b {
-  font-weight: 600;
-}
-.sw span {
-  font-size: var(--fs-small);
-  font-variant-numeric: tabular-nums;
-  color: var(--text);
-}
-.sw--blue { --sw: var(--ku-blue); }
-.sw--crimson { --sw: var(--ku-crimson); }
-.sw--night { --sw: var(--ku-night); }
-.sw--lake { --sw: var(--ku-lake); }
-.sw--brick { --sw: var(--ku-brick); }
-.sw--sky { --sw: var(--ku-sky); }
-.sw--fog { --sw: var(--ku-fog); }
-.sw--steam { --sw: var(--ku-steam); }
-.sw--fire { --sw: var(--ku-fire); }
-.sw--wheat { --sw: var(--ku-wheat); }
-.sw--terra { --sw: var(--ku-terra); }
-.sw--tallgrass { --sw: var(--ku-tallgrass); }
-.sw--limestone { --sw: var(--ku-limestone); }
-.sw--yellow { --sw: var(--ku-yellow); }
-.sw--gray { --sw: var(--ku-gray); }
 
 /* contrast: each tile shows the pair as a sample, then names it in page colors */
 .contrast {
@@ -142,31 +93,8 @@
   font-weight: 600;
   color: var(--ok-text);
 }
-.contrast .fail small {
-  color: var(--bad-text);
-}
-.contrast__sample {
-  display: flex;
-  align-items: center;
-  height: 64px;
-  margin-bottom: 8px;
-  padding-inline: 16px;
-  font-family: var(--heading-font);
-  font-size: 1.75rem;
-  font-weight: 600;
-}
+
 /* the sample letters are decoration; the label below carries the meaning */
-.contrast__sample::before {
-  content: "Aa";
-}
-.cs--white-blue { background: var(--ku-blue); color: #ffffff; }
-.cs--night-sky { background: var(--ku-sky); color: var(--ku-night); }
-.cs--gray-steam { background: var(--ku-steam); color: var(--ku-text); }
-.cs--white-brick { background: var(--ku-brick); color: #ffffff; }
-.cs--white-sky { background: var(--ku-sky); color: #ffffff; }
-.cs--night-lake { background: var(--ku-lake); color: var(--ku-night); }
-.cs--white-gray { background: var(--ku-gray); color: #ffffff; }
-.cs--gray-crimson { background: var(--ku-crimson); color: var(--ku-text); }
 
 :root {
   --ok-text: #0d5228;

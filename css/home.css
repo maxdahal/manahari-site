@@ -233,8 +233,6 @@ html.hello-lock {
   }
 }
 
-/* the document covers the footer, which waits underneath and is revealed
-   at the bottom, so it carries the paper across the whole width */
 /* Pause motion: the button in the top bar stops everything that moves by
    itself (WCAG 2.2.2): the skill rings, the letter wave, the falling leaves
    (home.js pauses those), the plants, the badge's sway and the blinking

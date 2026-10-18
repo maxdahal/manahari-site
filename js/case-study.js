@@ -1,151 +1,16 @@
-/* Case-study behaviour shared by Luna, KU Brand and Asian's: the stages list
-   that follows your reading, the step-by-step drawings (scrollytelling),
-   principle tooltips, flip cards and opening a tab from a link. */
+/* Case-study behaviour shared by Luna, KU Brand and Asian's: the outline
+   button and sheet on smaller screens, the step-by-step drawings
+   (scrollytelling), principle tooltips, flip cards, the wireframe
+   video and opening a tab from a link. */
 (function () {
   "use strict";
 
   var reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
-  /* Under each stage's title: how many sections it has and how long it
-     takes to read (about 200 words a minute). */
-  function initStageMeta() {
-    document.querySelectorAll(".stage__label").forEach(function (label) {
-      var stage = label.closest(".stage");
-      var sections = stage.querySelectorAll(":scope > .block").length;
-      var words = stage.textContent.trim().split(/\s+/).length;
-      var minutes = Math.max(1, Math.round(words / 200));
-      var meta = document.createElement("p");
-      meta.className = "stage__meta";
-      meta.textContent = (sections > 1 ? sections + " sections · " : "") + minutes + " min read";
-      label.appendChild(meta);
-    });
-  }
-
-  /* Stages list: all stages are on the page; the list marks the one you are
-     reading (the last stage whose top has passed a line a third of the way
-     down the screen) and sizes the others by how far away they are. The
-     stage you are reading opens to list its sections, marking the one you
-     are in. On smaller screens the list moves into a sheet opened from a
-     floating chip that names the stage you are in. */
+  /* a small line icon (Lucide style) from one path */
   var icon = function (d) {
     return '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="' + d + '"/></svg>';
   };
-  function initRail() {
-    var rail = document.querySelector(".rail");
-    if (!rail) return;
-    var list = rail.querySelector("ol");
-    var links = [].slice.call(list.querySelectorAll(":scope > li > a"));
-    var stages = links.map(function (link) {
-      return document.getElementById(link.getAttribute("href").slice(1));
-    });
-    if (stages.some(function (s) { return !s; })) return;
-    var names = links.map(function (link) {
-      return link.textContent.replace(/^\s*\d+\.\s*/, "").trim();
-    });
-    var nums = links.map(function (link) {
-      var num = link.querySelector(".rail__num");
-      return num ? num.textContent.trim() : "";
-    });
-
-    /* each stage with more than one section gets a list of its sections */
-    var sections = stages.map(function (stage, i) {
-      var blocks = [].slice.call(stage.querySelectorAll(":scope > .block")).filter(function (block) {
-        return block.querySelector(".block__title");
-      });
-      if (blocks.length < 2) return [];
-      var sub = document.createElement("ol");
-      sub.className = "rail__sub";
-      blocks.forEach(function (block, j) {
-        var title = block.querySelector(".block__title");
-        if (!block.id) block.id = title.id ? title.id.replace(/-h$/, "") + "-section" : stage.id + "-" + (j + 1);
-        var li = document.createElement("li");
-        var a = document.createElement("a");
-        a.href = "#" + block.id;
-        a.textContent = title.textContent.trim();
-        li.appendChild(a);
-        sub.appendChild(li);
-      });
-      links[i].parentNode.appendChild(sub);
-      return blocks;
-    });
-
-    /* the sheet: a dialog with a copy of the list */
-    var sheet = document.createElement("dialog");
-    sheet.className = "stage-sheet";
-    sheet.setAttribute("aria-labelledby", "stage-sheet-title");
-    sheet.innerHTML =
-      '<div class="stage-sheet__head"><p class="rail__title" id="stage-sheet-title">Stages</p>' +
-      '<button class="stage-sheet__close" type="button" aria-label="Close stages">' + icon("M18 6 6 18M6 6l12 12") + "</button></div>";
-    var sheetList = list.cloneNode(true);
-    sheet.appendChild(sheetList);
-    document.body.appendChild(sheet);
-    var sheetLinks = [].slice.call(sheetList.querySelectorAll(":scope > li > a"));
-
-    /* the chip: last in the stages column, so it sticks to the bottom of the
-       screen only while you are reading the stages */
-    var chip = document.createElement("button");
-    chip.className = "stage-chip";
-    chip.type = "button";
-    chip.setAttribute("aria-haspopup", "dialog");
-    chip.innerHTML =
-      '<span class="stage-chip__ring" aria-hidden="true"></span>' +
-      '<span class="sr-only">Stages, now reading: </span>' +
-      '<span class="stage-chip__num"></span><span class="stage-chip__name"></span>' +
-      icon("m18 15-6-6-6 6");
-    var content = stages[0].parentNode;
-    content.insertBefore(chip, content.querySelector(".page-end"));
-
-    chip.addEventListener("click", function () {
-      sheet.showModal();
-      var here = sheetList.querySelector('[aria-current="true"]');
-      if (here) here.focus();
-    });
-    sheet.querySelector(".stage-sheet__close").addEventListener("click", function () {
-      sheet.close();
-    });
-    sheet.addEventListener("click", function (event) {
-      /* a tap on the dimmed page outside the sheet lands on the dialog itself */
-      if (event.target === sheet) sheet.close();
-      /* choosing a stage closes the sheet; the link then scrolls there */
-      if (event.target.closest("a")) sheet.close();
-    });
-
-    var current = -1;
-    var currentBlock = null;
-    function mark() {
-      var line = window.innerHeight / 3;
-      var index = 0;
-      stages.forEach(function (stage, i) {
-        if (stage.getBoundingClientRect().top <= line) index = i;
-      });
-      var block = null;
-      sections[index].forEach(function (b) {
-        if (b.getBoundingClientRect().top <= line) block = b;
-      });
-      if (!block && sections[index].length) block = sections[index][0];
-      if (index === current && block === currentBlock) return;
-      currentBlock = block;
-      [list, sheetList].forEach(function (ol) {
-        [].slice.call(ol.querySelectorAll(":scope > li > a")).forEach(function (link, i) {
-          if (i === index) link.setAttribute("aria-current", "true");
-          else link.removeAttribute("aria-current");
-          /* how far each stage is from the one you are reading (sets its size) */
-          link.dataset.d = String(Math.min(3, Math.abs(i - index)));
-        });
-        [].slice.call(ol.querySelectorAll(".rail__sub a")).forEach(function (link) {
-          if (block && link.getAttribute("href") === "#" + block.id) link.setAttribute("aria-current", "location");
-          else link.removeAttribute("aria-current");
-        });
-      });
-      if (index === current) return;
-      current = index;
-      chip.querySelector(".stage-chip__num").textContent = nums[index];
-      chip.querySelector(".stage-chip__name").textContent = names[index];
-    }
-    window.addEventListener("scroll", mark, { passive: true });
-    window.addEventListener("resize", mark);
-    mark();
-  }
 
   /* Scrollytelling: in a list of steps, the drawings share one pinned spot
      beside the text (see .steps in case-study.css). The step whose text is
@@ -176,37 +41,7 @@
     });
   }
 
-  /* Behind-the-scenes reels: previous and next move one picture at a time;
-     the count and the buttons follow the track as it is scrolled or swiped */
-  function initReels() {
-    document.querySelectorAll(".reel").forEach(function (reel) {
-      var track = reel.querySelector(".reel__track");
-      if (!track) return;
-      var count = reel.querySelector(".reel__count");
-      var steps = [].slice.call(reel.querySelectorAll(".reel__step"));
-      var total = track.children.length;
-      /* one picture is the track's width plus the gap between pictures */
-      var stepWidth = function () {
-        return track.clientWidth + (parseFloat(getComputedStyle(track).columnGap) || 0);
-      };
-      function update() {
-        var i = Math.round(track.scrollLeft / Math.max(1, stepWidth()));
-        if (count) count.textContent = i + 1 + " / " + total;
-        steps.forEach(function (b) {
-          var dir = Number(b.dataset.step);
-          b.disabled = dir < 0 ? i <= 0 : i >= total - 1;
-        });
-      }
-      steps.forEach(function (b) {
-        b.addEventListener("click", function () {
-          track.scrollBy({ left: Number(b.dataset.step) * stepWidth() });
-        });
-      });
-      track.addEventListener("scroll", update, { passive: true });
-      window.addEventListener("resize", update);
-      update();
-    });
-  }
+
 
   /* Principle chips: show the principle's definition in a small tooltip */
   function initPrinciples() {
@@ -439,11 +274,8 @@
   }
 
   function start() {
-    initStageMeta();
-    initRail();
     initOutlineSheet();
     initSteps();
-    initReels();
     initPrinciples();
     initFlips();
     initMotion();

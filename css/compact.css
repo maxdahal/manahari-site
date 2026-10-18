@@ -12,7 +12,6 @@
    ========================================================================== */
 
 :root {
-  --opener-h: 0px;
   --bar-h: 60px; /* the top bar */
   /* inactive links: a little greyer than body text, still easy to read */
   --muted: color-mix(in srgb, var(--text) 80%, var(--bg));
@@ -21,9 +20,6 @@ html {
   /* links land a little below the top bar */
   scroll-padding-top: calc(var(--bar-h) + 24px);
 }
-
-/* Paper: the grain is baked into the body background (--paper in
-   site.css), the same as the home and About pages. */
 
 /* The top bar is shared with the other pages (site.css). */
 
@@ -606,7 +602,7 @@ html {
 }
 
 /* small capital labels: one size, weight and spacing everywhere */
-.cp-main :is(.eyebrow, .swatch-group, .meta__cap, .reel__kicker, .numbered--label b),
+.cp-main :is(.eyebrow, .meta__cap, .reel__kicker, .numbered--label b),
 .cp-main .steps--story .step__text b,
 .cp-main .stats .eyebrow {
   font-family: var(--body-font);

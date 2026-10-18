@@ -129,32 +129,6 @@
   max-width: 1080px;
   margin-inline: auto;
 }
-.timeline-tabs {
-  justify-content: center;
-  gap: 12px 16px;
-}
-.timeline-tabs [role="tab"] {
-  display: inline-flex;
-  align-items: center;
-  gap: 10px;
-  min-height: 48px;
-  padding: 0 24px;
-  background: transparent;
-  box-shadow: none;
-}
-.timeline-tabs [role="tab"][aria-selected="true"] {
-  border-color: var(--accent);
-  background: var(--accent);
-  color: var(--on-accent);
-}
-.timeline-tabs svg {
-  width: 20px;
-  height: 20px;
-}
-.timeline-summary {
-  margin-inline: auto;
-  text-align: center;
-}
 
 /* Each entry is a row: year, a rail column with the dot and the line, the body */
 .timeline {
@@ -165,18 +139,7 @@
   display: grid;
   grid-template-columns: minmax(0, 0.64fr) 28px minmax(0, 1fr);
 }
-.timeline__year {
-  grid-column: 1;
-  font-family: var(--heading-font);
-  font-size: 2.25rem;
-  font-weight: 600;
-  line-height: 1;
-  letter-spacing: -0.03em;
-  color: var(--text);
-}
-.timeline__year.is-repeat {
-  visibility: hidden;
-}
+
 /* the rail: a 1px line down the middle, and the dot drawn on top of it */
 .timeline__dot {
   grid-column: 2;
@@ -196,9 +159,7 @@
   border-radius: 50%;
   background: var(--text);
 }
-.timeline > li.is-now .timeline__dot::before {
-  background: var(--accent);
-}
+
 .timeline__body {
   grid-column: 3;
   display: flex;
@@ -238,10 +199,7 @@
 .timeline__org {
   line-height: 1.5;
 }
-.timeline__desc {
-  max-width: 38em;
-  color: var(--text);
-}
+
 .timeline__body .dot-list li {
   font-size: 1rem;
 }
@@ -273,15 +231,7 @@
   .timeline > li {
     grid-template-columns: 28px minmax(0, 1fr);
   }
-  .timeline__year {
-    grid-column: 2;
-    grid-row: 1;
-    margin: 0 0 10px 20px;
-    font-size: 1.75rem;
-  }
-  .timeline__year.is-repeat {
-    display: none;
-  }
+
   .timeline__dot {
     grid-column: 1;
     grid-row: 1 / 3;

@@ -15,6 +15,7 @@
   <link rel="stylesheet" href="css/compact.css">
   <script src="js/site.js"></script>
   <script src="js/case-study.js" defer></script>
+  <script src="js/ku.js" defer></script>
 
 </head>
 <body class="cp-page">
@@ -843,55 +844,55 @@
               <section class="reel" aria-labelledby="reel-sys-title">
                 <div class="reel__head">
                   <p class="reel__kicker">Behind the scenes</p>
-                  <h4 class="reel__title" id="reel-sys-title">Colors, contrast, code, type and graphics</h4>
+                  <h4 class="reel__title" id="reel-sys-title">A color playground, then code, type and graphics</h4>
                 </div>
                 <div class="system">
-                  <div class="system__panel" role="group" aria-labelledby="sys-p0-h"><h5 class="system__part" id="sys-p0-h">Colors</h5>
+                  <div class="system__panel" role="group" aria-labelledby="sys-p0-h"><h5 class="system__part" id="sys-p0-h">Color playground</h5>
                     <div class="pair">
-                      <h4>Color tokens</h4>
-                      <p>These are the colors from the Brand Center, named once and used everywhere.</p>
+                      <h4>Try the brand colors</h4>
+                      <p>Pick a text color and a background from the Brand Center palette. The contrast is checked as you go, the same check every pairing passed before it entered the system.</p>
                     </div>
-                    <p class="swatch-group">Primary</p>
-                    <ul class="swatches">
-                      <li class="sw sw--blue"><b>Kansas Blue</b><span>#0051ba</span></li>
-                      <li class="sw sw--crimson"><b>Crimson</b><span>#e8000d</span></li>
-                    </ul>
-                    <p class="swatch-group">Secondary</p>
-                    <ul class="swatches">
-                      <li class="sw sw--night"><b>Night</b><span>#003459</span></li>
-                      <li class="sw sw--lake"><b>Lake</b><span>#2767ff</span></li>
-                      <li class="sw sw--sky"><b>Sky</b><span>#73cbf2</span></li>
-                      <li class="sw sw--fog"><b>Fog</b><span>#8e9fbc</span></li>
-                      <li class="sw sw--steam"><b>Steam</b><span>#dde5ed</span></li>
-                      <li class="sw sw--fire"><b>Fire</b><span>#ff3042</span></li>
-                      <li class="sw sw--brick"><b>Brick</b><span>#971b2f</span></li>
-                      <li class="sw sw--wheat"><b>Wheat</b><span>#f2a900</span></li>
-                      <li class="sw sw--terra"><b>Terra Cotta</b><span>#c66e4e</span></li>
-                      <li class="sw sw--tallgrass"><b>Tallgrass</b><span>#be9a79</span></li>
-                      <li class="sw sw--limestone"><b>Limestone</b><span>#d7d2cb</span></li>
-                    </ul>
-                    <p class="swatch-group">Supporting</p>
-                    <ul class="swatches">
-                      <li class="sw sw--yellow"><b>Jayhawk Yellow</b><span>#ffc82d</span></li>
-                      <li class="sw sw--gray"><b>Signature Gray</b><span>#85898a</span></li>
-                    </ul>
-                  </div>
-
-                  <div class="system__panel" role="group" aria-labelledby="sys-p1-h"><h5 class="system__part" id="sys-p1-h">Contrast</h5>
-                    <div class="pair">
-                      <h4>Contrast checks</h4>
-                      <p>I checked each pair before it entered the system. The top four passed. The bottom four failed, so we listed them as pairs to avoid.</p>
+                    <div class="play" data-play>
+                      <div class="play__pickers">
+                      <fieldset class="play__set">
+                        <legend>Text <span class="play__picked" data-picked="fg"></span></legend>
+                        <div class="play__swatches"><label class="play__sw" title="White #ffffff"><input type="radio" name="play-fg" value="white" data-hex="#ffffff" data-name="White" data-token=""><span style="--c:#ffffff"></span><b>White</b></label><label class="play__sw" title="Text gray #333333"><input type="radio" name="play-fg" value="text" data-hex="#333333" data-name="Text gray" data-token="--ku-text"><span style="--c:#333333"></span><b>Text gray</b></label><label class="play__sw" title="Kansas Blue #0051ba"><input type="radio" name="play-fg" value="blue" data-hex="#0051ba" data-name="Kansas Blue" data-token="--ku-blue"><span style="--c:#0051ba"></span><b>Kansas Blue</b></label><label class="play__sw" title="Crimson #e8000d"><input type="radio" name="play-fg" value="crimson" data-hex="#e8000d" data-name="Crimson" data-token="--ku-crimson"><span style="--c:#e8000d"></span><b>Crimson</b></label><label class="play__sw" title="Night #003459"><input type="radio" name="play-fg" value="night" data-hex="#003459" data-name="Night" data-token="--ku-night" checked><span style="--c:#003459"></span><b>Night</b></label><label class="play__sw" title="Lake #2767ff"><input type="radio" name="play-fg" value="lake" data-hex="#2767ff" data-name="Lake" data-token="--ku-lake"><span style="--c:#2767ff"></span><b>Lake</b></label><label class="play__sw" title="Sky #73cbf2"><input type="radio" name="play-fg" value="sky" data-hex="#73cbf2" data-name="Sky" data-token="--ku-sky"><span style="--c:#73cbf2"></span><b>Sky</b></label><label class="play__sw" title="Fog #8e9fbc"><input type="radio" name="play-fg" value="fog" data-hex="#8e9fbc" data-name="Fog" data-token="--ku-fog"><span style="--c:#8e9fbc"></span><b>Fog</b></label><label class="play__sw" title="Steam #dde5ed"><input type="radio" name="play-fg" value="steam" data-hex="#dde5ed" data-name="Steam" data-token="--ku-steam"><span style="--c:#dde5ed"></span><b>Steam</b></label><label class="play__sw" title="Fire #ff3042"><input type="radio" name="play-fg" value="fire" data-hex="#ff3042" data-name="Fire" data-token="--ku-fire"><span style="--c:#ff3042"></span><b>Fire</b></label><label class="play__sw" title="Brick #971b2f"><input type="radio" name="play-fg" value="brick" data-hex="#971b2f" data-name="Brick" data-token="--ku-brick"><span style="--c:#971b2f"></span><b>Brick</b></label><label class="play__sw" title="Wheat #f2a900"><input type="radio" name="play-fg" value="wheat" data-hex="#f2a900" data-name="Wheat" data-token="--ku-wheat"><span style="--c:#f2a900"></span><b>Wheat</b></label><label class="play__sw" title="Terra Cotta #c66e4e"><input type="radio" name="play-fg" value="terra" data-hex="#c66e4e" data-name="Terra Cotta" data-token="--ku-terra"><span style="--c:#c66e4e"></span><b>Terra Cotta</b></label><label class="play__sw" title="Tallgrass #be9a79"><input type="radio" name="play-fg" value="tallgrass" data-hex="#be9a79" data-name="Tallgrass" data-token="--ku-tallgrass"><span style="--c:#be9a79"></span><b>Tallgrass</b></label><label class="play__sw" title="Limestone #d7d2cb"><input type="radio" name="play-fg" value="limestone" data-hex="#d7d2cb" data-name="Limestone" data-token="--ku-limestone"><span style="--c:#d7d2cb"></span><b>Limestone</b></label><label class="play__sw" title="Jayhawk Yellow #ffc82d"><input type="radio" name="play-fg" value="yellow" data-hex="#ffc82d" data-name="Jayhawk Yellow" data-token="--ku-yellow"><span style="--c:#ffc82d"></span><b>Jayhawk Yellow</b></label><label class="play__sw" title="Signature Gray #85898a"><input type="radio" name="play-fg" value="gray" data-hex="#85898a" data-name="Signature Gray" data-token="--ku-gray"><span style="--c:#85898a"></span><b>Signature Gray</b></label></div>
+                      </fieldset>
+                      <fieldset class="play__set">
+                        <legend>Background <span class="play__picked" data-picked="bg"></span></legend>
+                        <div class="play__swatches"><label class="play__sw" title="White #ffffff"><input type="radio" name="play-bg" value="white" data-hex="#ffffff" data-name="White" data-token=""><span style="--c:#ffffff"></span><b>White</b></label><label class="play__sw" title="Text gray #333333"><input type="radio" name="play-bg" value="text" data-hex="#333333" data-name="Text gray" data-token="--ku-text"><span style="--c:#333333"></span><b>Text gray</b></label><label class="play__sw" title="Kansas Blue #0051ba"><input type="radio" name="play-bg" value="blue" data-hex="#0051ba" data-name="Kansas Blue" data-token="--ku-blue"><span style="--c:#0051ba"></span><b>Kansas Blue</b></label><label class="play__sw" title="Crimson #e8000d"><input type="radio" name="play-bg" value="crimson" data-hex="#e8000d" data-name="Crimson" data-token="--ku-crimson"><span style="--c:#e8000d"></span><b>Crimson</b></label><label class="play__sw" title="Night #003459"><input type="radio" name="play-bg" value="night" data-hex="#003459" data-name="Night" data-token="--ku-night"><span style="--c:#003459"></span><b>Night</b></label><label class="play__sw" title="Lake #2767ff"><input type="radio" name="play-bg" value="lake" data-hex="#2767ff" data-name="Lake" data-token="--ku-lake"><span style="--c:#2767ff"></span><b>Lake</b></label><label class="play__sw" title="Sky #73cbf2"><input type="radio" name="play-bg" value="sky" data-hex="#73cbf2" data-name="Sky" data-token="--ku-sky" checked><span style="--c:#73cbf2"></span><b>Sky</b></label><label class="play__sw" title="Fog #8e9fbc"><input type="radio" name="play-bg" value="fog" data-hex="#8e9fbc" data-name="Fog" data-token="--ku-fog"><span style="--c:#8e9fbc"></span><b>Fog</b></label><label class="play__sw" title="Steam #dde5ed"><input type="radio" name="play-bg" value="steam" data-hex="#dde5ed" data-name="Steam" data-token="--ku-steam"><span style="--c:#dde5ed"></span><b>Steam</b></label><label class="play__sw" title="Fire #ff3042"><input type="radio" name="play-bg" value="fire" data-hex="#ff3042" data-name="Fire" data-token="--ku-fire"><span style="--c:#ff3042"></span><b>Fire</b></label><label class="play__sw" title="Brick #971b2f"><input type="radio" name="play-bg" value="brick" data-hex="#971b2f" data-name="Brick" data-token="--ku-brick"><span style="--c:#971b2f"></span><b>Brick</b></label><label class="play__sw" title="Wheat #f2a900"><input type="radio" name="play-bg" value="wheat" data-hex="#f2a900" data-name="Wheat" data-token="--ku-wheat"><span style="--c:#f2a900"></span><b>Wheat</b></label><label class="play__sw" title="Terra Cotta #c66e4e"><input type="radio" name="play-bg" value="terra" data-hex="#c66e4e" data-name="Terra Cotta" data-token="--ku-terra"><span style="--c:#c66e4e"></span><b>Terra Cotta</b></label><label class="play__sw" title="Tallgrass #be9a79"><input type="radio" name="play-bg" value="tallgrass" data-hex="#be9a79" data-name="Tallgrass" data-token="--ku-tallgrass"><span style="--c:#be9a79"></span><b>Tallgrass</b></label><label class="play__sw" title="Limestone #d7d2cb"><input type="radio" name="play-bg" value="limestone" data-hex="#d7d2cb" data-name="Limestone" data-token="--ku-limestone"><span style="--c:#d7d2cb"></span><b>Limestone</b></label><label class="play__sw" title="Jayhawk Yellow #ffc82d"><input type="radio" name="play-bg" value="yellow" data-hex="#ffc82d" data-name="Jayhawk Yellow" data-token="--ku-yellow"><span style="--c:#ffc82d"></span><b>Jayhawk Yellow</b></label><label class="play__sw" title="Signature Gray #85898a"><input type="radio" name="play-bg" value="gray" data-hex="#85898a" data-name="Signature Gray" data-token="--ku-gray"><span style="--c:#85898a"></span><b>Signature Gray</b></label></div>
+                      </fieldset>
+                      </div>
+                      <div class="play__stage">
+                        <div class="play__preview" data-preview>
+                          <p class="play__eyebrow">Brand Center</p>
+                          <p class="play__headline">Towering Toward the Blue</p>
+                          <p class="play__body">Logos, colors, type and graphics for everyone who tells KU’s story.</p>
+                          <p class="play__links"><span class="play__button">Explore the brand</span><span class="play__link">Download logos</span></p>
+                          <span class="play__frame" aria-hidden="true"><i></i><i></i></span>
+                        </div>
+                        <div class="play__result" aria-live="polite">
+                          <p class="play__ratio"><b data-ratio>7.06</b> : 1</p>
+                          <ul class="play__checks">
+                            <li data-check="4.5"><span class="play__mark" aria-hidden="true"></span>Body text <small>needs 4.5</small></li>
+                            <li data-check="3"><span class="play__mark" aria-hidden="true"></span>Large text and icons <small>needs 3</small></li>
+                            <li data-check="7"><span class="play__mark" aria-hidden="true"></span>Enhanced (AAA) <small>needs 7</small></li>
+                          </ul>
+                          <p class="play__verdict" data-verdict></p>
+                        </div>
+                      </div>
+                      <div class="play__tools">
+                        <button type="button" class="button play__swap" data-swap>Swap colors</button>
+                        <button type="button" class="button play__shuffle" data-shuffle>Try a passing pair</button>
+                        <label class="play__toggle"><input type="checkbox" data-frame checked> Show the holding box</label>
+                      </div>
+                      <div class="play__code">
+                        <pre class="code" tabindex="0"><code data-code></code></pre>
+                        <button type="button" class="button play__copy" data-copy>Copy</button>
+                      </div>
+                      <p class="swatch-group">Pairs from the system</p>
+                      <ul class="play__presets"><li><button type="button" class="play__preset is-pass" data-fg="white" data-bg="blue"><span class="play__aa" style="color:#ffffff;background:#0051ba" aria-hidden="true">Aa</span><span>White on Kansas Blue</span><small>Use</small></button></li><li><button type="button" class="play__preset is-pass" data-fg="night" data-bg="sky"><span class="play__aa" style="color:#003459;background:#73cbf2" aria-hidden="true">Aa</span><span>Night on Sky</span><small>Use</small></button></li><li><button type="button" class="play__preset is-pass" data-fg="text" data-bg="steam"><span class="play__aa" style="color:#333333;background:#dde5ed" aria-hidden="true">Aa</span><span>Gray text on Steam</span><small>Use</small></button></li><li><button type="button" class="play__preset is-pass" data-fg="white" data-bg="brick"><span class="play__aa" style="color:#ffffff;background:#971b2f" aria-hidden="true">Aa</span><span>White on Brick</span><small>Use</small></button></li><li><button type="button" class="play__preset is-fail" data-fg="white" data-bg="sky"><span class="play__aa" style="color:#ffffff;background:#73cbf2" aria-hidden="true">Aa</span><span>White on Sky</span><small>Avoid</small></button></li><li><button type="button" class="play__preset is-fail" data-fg="night" data-bg="lake"><span class="play__aa" style="color:#003459;background:#2767ff" aria-hidden="true">Aa</span><span>Night on Lake</span><small>Avoid</small></button></li><li><button type="button" class="play__preset is-fail" data-fg="white" data-bg="gray"><span class="play__aa" style="color:#ffffff;background:#85898a" aria-hidden="true">Aa</span><span>White on Signature Gray</span><small>Avoid</small></button></li><li><button type="button" class="play__preset is-fail" data-fg="text" data-bg="crimson"><span class="play__aa" style="color:#333333;background:#e8000d" aria-hidden="true">Aa</span><span>Gray text on Crimson</span><small>Avoid</small></button></li></ul>
                     </div>
-                    <ul class="contrast">
-                      <li class="pass"><span class="contrast__sample cs--white-blue" aria-hidden="true"></span><span>White on Kansas Blue</span><small>7.3 : 1 pass</small></li>
-                      <li class="pass"><span class="contrast__sample cs--night-sky" aria-hidden="true"></span><span>Night on Sky</span><small>7.1 : 1 pass</small></li>
-                      <li class="pass"><span class="contrast__sample cs--gray-steam" aria-hidden="true"></span><span>Gray text on Steam</span><small>9.9 : 1 pass</small></li>
-                      <li class="pass"><span class="contrast__sample cs--white-brick" aria-hidden="true"></span><span>White on Brick</span><small>8.4 : 1 pass</small></li>
-                      <li class="fail"><span class="contrast__sample cs--white-sky" aria-hidden="true"></span><span>White on Sky</span><small>1.8 : 1 fail</small></li>
-                      <li class="fail"><span class="contrast__sample cs--night-lake" aria-hidden="true"></span><span>Night on Lake</span><small>2.7 : 1 fail</small></li>
-                      <li class="fail"><span class="contrast__sample cs--white-gray" aria-hidden="true"></span><span>White on Signature Gray</span><small>3.5 : 1 fail</small></li>
-                      <li class="fail"><span class="contrast__sample cs--gray-crimson" aria-hidden="true"></span><span>Gray text on Crimson</span><small>2.7 : 1 fail</small></li>
-                    </ul>
                   </div>
 
                   <div class="system__panel" role="group" aria-labelledby="sys-p2-h"><h5 class="system__part" id="sys-p2-h">Code</h5>

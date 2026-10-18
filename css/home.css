@@ -452,213 +452,538 @@ html.hello-lock {
 }
 
 /* 5. Case studies ------------------------------------------------------------
-   A huge title at the top right, then the projects as prints on a
-   clothesline (below). Grid and flex only. */
+   Each project sits on its own floating wall shelf, on the screen it was
+   made for: Luna on a monitor, KU on a laptop, Asian's on a phone. The
+   shelves step down from left to right. Everything is sized in container
+   units (cqw) of .shelves, so the whole wall scales with the page and the
+   steps stay in proportion. Below 860px the shelves stack.
+   Falling leaves, petals, fireflies or snow (home.js) play in .falling over
+   the whole section; the season switch sets data-season on .work, which the
+   plants read here (spring flowers, winter snow). */
 .work {
-  padding-block: 126px 144px;
+  --wood: #c9a77c;
+  --wood-top: #dcc19b;
+  --wood-edge: #b18f64;
+  --board-shadow: 0 14px 22px rgb(60 40 10 / 0.18);
+  --laptop: #e4e4de;
+  --laptop-edge: #d0d0c9;
+  --laptop-dot: #c9c9c2;
+  --laptop-base: linear-gradient(#d4d4cd, #b9b9b2);
+  --stand: #c3c3bc;
+  --cord: #a8a8a0;
+  --device-shadow: 0 24px 40px rgb(0 0 0 / 0.22);
+  --bezel-edge: transparent;
+  position: relative;
+  padding-block: 120px 120px;
 }
-.work__grid {
-  display: grid;
-  grid-template-columns: repeat(12, minmax(0, 1fr));
-  column-gap: 24px;
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) .work {
+    --wood: #6b4f36;
+    --wood-top: #8a6a4b;
+    --wood-edge: #4e3826;
+    --board-shadow: 0 14px 22px rgb(0 0 0 / 0.55);
+    --laptop: #26262b;
+    --laptop-edge: #34343a;
+    --laptop-dot: #3e3e45;
+    --laptop-base: linear-gradient(#3a3a40, #2a2a2f);
+    --stand: #3a3a40;
+    --cord: #5a5a62;
+    --device-shadow: 0 24px 40px rgb(0 0 0 / 0.6);
+    --bezel-edge: rgb(255 255 255 / 0.14);
+  }
 }
-.work__title {
-  grid-column: 7 / -1;
-  grid-row: 1;
+:root[data-theme="dark"] .work {
+  --wood: #6b4f36;
+  --wood-top: #8a6a4b;
+  --wood-edge: #4e3826;
+  --board-shadow: 0 14px 22px rgb(0 0 0 / 0.55);
+  --laptop: #26262b;
+  --laptop-edge: #34343a;
+  --laptop-dot: #3e3e45;
+  --laptop-base: linear-gradient(#3a3a40, #2a2a2f);
+  --stand: #3a3a40;
+  --cord: #5a5a62;
+  --device-shadow: 0 24px 40px rgb(0 0 0 / 0.6);
+  --bezel-edge: rgb(255 255 255 / 0.14);
+}
+.work__head {
+  position: relative;
+  z-index: 2;
   display: flex;
   flex-direction: column;
-  align-items: flex-end;
-  text-align: right;
+  align-items: flex-start;
+  gap: 16px;
 }
 .work__count {
-  margin-top: 16px;
   font-family: var(--body-font);
   font-size: var(--fs-small);
   font-weight: 600;
   letter-spacing: 0.12em;
+  vertical-align: top;
+  color: var(--text);
 }
-/* Prints on a clothesline: a string sags across the section (an SVG curve
-   stretched over the list's top) and each project is a photo print hanging
-   from it on a wooden peg, swaying gently. Hovering (or tabbing to) a print
-   steadies it and lifts it. The peg is an in-flow pseudo-element of each
-   item's flex column; nothing is positioned. */
-.work__list {
-  grid-column: 1 / -1;
-  grid-row: 2;
-  display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  align-items: start;
-  gap: clamp(28px, 4vw, 72px);
-  margin-top: clamp(48px, 6vw, 96px);
-  padding: 4px clamp(8px, 2vw, 32px) 24px;
-  background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1000 60' preserveAspectRatio='none'%3E%3Cpath d='M0 4 Q 250 46 500 30 T 1000 4' fill='none' stroke='%23888' stroke-width='2.5' vector-effect='non-scaling-stroke'/%3E%3C/svg%3E") 0 0 / 100% 60px no-repeat;
+.work__lede {
+  color: var(--text);
 }
-.work__item {
-  --tilt: -2.5deg;
-  --drop: 18px;
+
+/* Season switch: big targets, an outline on every button, and the chosen
+   one filled with the accent and ticked, so it never relies on color alone */
+.seasons {
   display: flex;
-  flex-direction: column;
+  flex-wrap: wrap;
   align-items: center;
-  margin-top: var(--drop);
+  gap: 10px 14px;
+  margin-top: 4px;
 }
-.work__item--2 {
-  --tilt: 2deg;
-  --drop: 34px;
+.seasons__label {
+  font-weight: 600;
 }
-.work__item--3 {
-  --tilt: -1.5deg;
-  --drop: 10px;
+.seasons__group {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
 }
-/* the wooden peg */
-.work__item::before {
-  content: "";
-  z-index: 1;
-  width: 14px;
-  height: 34px;
-  margin-bottom: -16px;
-  border-radius: 3px;
-  background: linear-gradient(90deg, #b88a5a, #d9b383 45%, #a87a4c);
-  box-shadow: 0 2px 3px rgb(0 0 0 / 0.3);
+.seasons__btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  min-height: 48px;
+  padding: 0 18px;
+  border: 2px solid color-mix(in srgb, var(--ink) 55%, var(--bg));
+  border-radius: 999px;
+  background: var(--bg);
+  color: var(--ink);
+  font: inherit;
+  font-size: 0.9375rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.15s ease, border-color 0.15s ease, color 0.15s ease;
 }
-.work__card {
+.seasons__btn:hover {
+  border-color: var(--ink);
+}
+.seasons__btn:focus-visible {
+  outline: 3px solid var(--accent);
+  outline-offset: 3px;
+}
+.seasons__btn[aria-pressed="true"] {
+  border-color: var(--accent);
+  background: var(--accent);
+  color: var(--on-accent);
+}
+.seasons__btn svg {
+  width: 18px;
+  height: 18px;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+.seasons__check {
+  display: none;
+}
+.seasons__btn[aria-pressed="true"] .seasons__check {
+  display: block;
+  width: 16px;
+  height: 16px;
+  stroke-width: 3;
+}
+
+/* The wall. Column widths and step heights come from the design
+   (640 / 400 / 230 px on a 1270 px wall). */
+.shelves {
+  container-type: inline-size;
+  position: relative;
+  margin-top: clamp(40px, 5vw, 72px);
+}
+.shelves__list {
+  display: grid;
+  grid-template-columns: 640fr 400fr minmax(200px, 230fr);
+  gap: 3.15cqw;
+  align-items: start;
+  padding: 0;
+  margin: 0;
+  list-style: none;
+}
+.shelf--ku {
+  margin-top: 22cqw;
+}
+.shelf--asians {
+  margin-top: 29.3cqw;
+}
+.shelf__card {
   display: flex;
   flex-direction: column;
-  gap: 18px;
-  width: 100%;
   color: var(--ink);
   text-decoration: none;
 }
-.work__card:focus-visible {
-  outline: none;
+.shelf__card:focus-visible {
+  outline: 3px solid var(--accent);
+  outline-offset: 8px;
+  border-radius: 6px;
 }
-.work__card:focus-visible .work__name {
-  text-decoration: underline;
-  text-decoration-color: var(--accent);
-  text-decoration-thickness: 3px;
-  text-underline-offset: 6px;
+.shelf__stage {
+  display: flex;
+  align-items: flex-end;
+  gap: 0.4cqw;
+  padding-inline: 0.8cqw;
 }
-.work__print {
-  display: block;
-  padding: 12px 12px 36px;
-  border-radius: 3px;
-  background: #fbfaf6;
-  box-shadow: 0 16px 30px -14px rgb(0 0 0 / 0.5), 0 0 0 1px rgb(0 0 0 / 0.06);
-  rotate: var(--tilt);
-  transform-origin: 50% 0;
-  animation: print-sway 4.5s ease-in-out infinite alternate;
-  transition: rotate 0.5s ease, translate 0.4s ease;
+.shelf--asians .shelf__stage {
+  justify-content: center;
 }
-.work__item--2 .work__print {
-  animation-delay: -1.5s;
+.device {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  transition: translate 0.3s ease;
 }
-.work__item--3 .work__print {
-  animation-delay: -3s;
+.shelf__card:hover .device,
+.shelf__card:focus-visible .device {
+  translate: 0 -6px;
 }
-.work__card:hover .work__print,
-.work__card:focus-visible .work__print {
-  animation: none;
-  rotate: 0deg;
-  translate: 0 -8px;
-}
-@keyframes print-sway {
-  from {
-    rotate: calc(var(--tilt) - 1.2deg);
-  }
-  to {
-    rotate: calc(var(--tilt) + 1.2deg);
-  }
-}
-.work__image {
-  display: block;
-  aspect-ratio: 4 / 3;
-  overflow: hidden;
-  background: #e9e7e1;
-  clip-path: inset(100% 0 0 0);
-  transition: clip-path 1.2s cubic-bezier(0.76, 0, 0.24, 1);
-}
-.work__item.is-in .work__image {
-  clip-path: inset(0 0 0 0);
-}
-.work__image img {
+.device img {
   width: 100%;
   height: 100%;
   object-fit: cover;
+  display: block;
 }
-.work__info {
+.device--monitor {
+  width: 84.4%;
+}
+.device__screen {
+  display: block;
+  width: 100%;
+  padding: 0.95cqw;
+  border-radius: 1.1cqw;
+  background: #16161a;
+  box-shadow: 0 0 0 1px var(--bezel-edge), var(--device-shadow);
+}
+.device__screen img {
+  aspect-ratio: 16 / 9;
+  border-radius: 3px;
+  background: #000;
+}
+.device__neck {
+  width: 10%;
+  height: 3.5cqw;
+  background: var(--stand);
+}
+.device__foot {
+  width: 34%;
+  height: 0.8cqw;
+  border-radius: 6px 6px 0 0;
+  background: var(--stand);
+}
+.device--laptop {
+  width: 82.5%;
+}
+.device__lid {
+  display: block;
+  width: 91%;
+  padding: 0.8cqw 0.8cqw 0.95cqw;
+  border: 1px solid var(--laptop-edge);
+  border-bottom: 0;
+  border-radius: 0.8cqw 0.8cqw 0 0;
+  background: var(--laptop);
+}
+.device__lid img {
+  aspect-ratio: 16 / 10;
+  border-radius: 3px;
+}
+.device__dots {
+  display: flex;
+  gap: 0.4cqw;
+  padding: 0 0.3cqw 0.6cqw;
+}
+.device__dots i {
+  width: 0.63cqw;
+  height: 0.63cqw;
+  border-radius: 50%;
+  background: var(--laptop-dot);
+}
+.device__base {
+  width: 100%;
+  height: 1.1cqw;
+  border-radius: 0 0 0.8cqw 0.8cqw;
+  background: var(--laptop-base);
+}
+.device--phone {
+  width: 60%;
+  padding: 0.63cqw;
+  border-radius: 1.75cqw;
+  background: #16161a;
+  box-shadow: 0 0 0 1px var(--bezel-edge), var(--device-shadow);
+}
+.device--phone img {
+  aspect-ratio: 9 / 19;
+  border-radius: 1.25cqw;
+}
+.shelf__board {
+  display: block;
+  height: max(14px, 1.75cqw);
+  border-radius: 3px;
+  background: linear-gradient(var(--wood-top) 0 5px, var(--wood) 5px);
+  border-bottom: 2px solid var(--wood-edge);
+  box-shadow: var(--board-shadow);
+}
+.shelf__info {
   display: flex;
   flex-direction: column;
-  gap: 8px;
-  padding-inline: 4px;
+  gap: 6px;
+  padding: 22px 0.8cqw 0;
 }
-.work__num {
-  font-family: var(--heading-font);
-  font-size: 1.25rem;
-  color: transparent;
-  -webkit-text-stroke: 1px var(--text);
+.shelf__meta {
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--accent-text);
 }
-.work__name {
+.shelf__name {
   font-family: var(--heading-font);
-  font-size: clamp(1.5rem, 1.1rem + 1.2vw, 2.4rem);
+  font-size: clamp(1.6rem, 1.1rem + 1.4vw, 2.5rem);
   font-weight: 600;
   line-height: 1.05;
 }
-.work__meta {
-  font-size: var(--fs-small);
-  font-weight: 600;
-  color: var(--accent-text);
+.shelf--ku .shelf__name {
+  font-size: clamp(1.5rem, 1.1rem + 1vw, 2.1rem);
 }
-.work__summary {
+.shelf--asians .shelf__name {
+  font-size: clamp(1.4rem, 1.1rem + 0.8vw, 1.9rem);
+}
+.shelf__summary {
   color: var(--text);
 }
-.work__tags {
-  font-size: var(--fs-small);
-  font-weight: 600;
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
-  color: var(--text);
-}
-.work__cta {
+.shelf__cta {
   display: inline-flex;
   align-items: center;
   gap: 8px;
   align-self: flex-start;
+  margin-top: 4px;
   font-weight: 600;
   border-bottom: 2px solid var(--accent);
   transition: gap 0.2s ease;
 }
-.work__card:hover .work__cta {
+.shelf__card:hover .shelf__cta {
   gap: 14px;
 }
+
+/* Plants. They move a little: the snake plant's leaves sway from their
+   base, the succulent breathes, the hanging pothos swings on its cord. */
+.plant {
+  flex: none;
+  overflow: visible;
+}
+.plant--snake {
+  width: 14%;
+  margin-left: auto;
+}
+.plant--succulent {
+  width: 13%;
+  margin-left: auto;
+  transform-origin: 50% 100%;
+  animation: plant-breathe 3.6s ease-in-out infinite alternate;
+}
+.plant--pothos {
+  position: absolute;
+  top: -2cqw;
+  right: 0;
+  width: 14cqw;
+  transform-origin: 50% 0;
+  animation: plant-swing 5s ease-in-out infinite alternate;
+}
+.plant__cord {
+  fill: none;
+  stroke: var(--cord);
+  stroke-width: 1.5;
+}
+.plant__vine {
+  fill: none;
+  stroke: #3f7d4e;
+  stroke-width: 2.5;
+}
+.plant__sway {
+  stroke: #b9cf72;
+  stroke-width: 1.5;
+  transform-box: fill-box;
+  transform-origin: 50% 100%;
+  animation: plant-sway 4s ease-in-out infinite alternate;
+}
+.plant__sway--2 {
+  animation-duration: 4.8s;
+  animation-delay: -1s;
+}
+.plant__sway--3 {
+  animation-duration: 5.4s;
+  animation-delay: -2s;
+}
+.plant__sway--4 {
+  animation-duration: 4.4s;
+  animation-delay: -0.5s;
+}
+@keyframes plant-sway {
+  from { transform: rotate(-2.5deg); }
+  to { transform: rotate(2.5deg); }
+}
+@keyframes plant-breathe {
+  from { transform: scale(1); }
+  to { transform: scale(1.06, 1.04); }
+}
+@keyframes plant-swing {
+  from { transform: rotate(-2deg); }
+  to { transform: rotate(2deg); }
+}
+/* season touches: flowers in spring, snow on the pots and shelves in winter */
+.plant__spring,
+.plant__winter {
+  opacity: 0;
+  transition: opacity 0.4s ease;
+}
+.plant__winter {
+  fill: #fff;
+  stroke: #d7e1ec;
+}
+.work[data-season="spring"] .plant__spring,
+.work[data-season="winter"] .plant__winter {
+  opacity: 1;
+}
+.work[data-season="winter"] .shelf__board {
+  background: linear-gradient(#fff 0 5px, var(--wood-top) 5px 8px, var(--wood) 8px);
+}
+
+/* What falls. home.js fills this layer and animates each piece with the
+   Web Animations API; the side-to-side flutter is CSS. */
+.falling {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  overflow: hidden;
+  pointer-events: none;
+}
+.falling__piece {
+  position: absolute;
+  top: 0;
+  left: 0;
+  will-change: transform, opacity;
+}
+.falling__piece > span {
+  display: block;
+}
+.falling__piece svg {
+  display: block;
+  width: 100%;
+  height: 100%;
+  overflow: visible;
+}
+.flutter {
+  animation: flutter 1.6s ease-in-out infinite alternate;
+}
+.flutter--r {
+  animation-name: flutter-r;
+}
+.drift {
+  animation: drift 2.4s ease-in-out infinite alternate;
+}
+.hover {
+  animation: hover 3s ease-in-out infinite alternate;
+}
+@keyframes flutter {
+  from { transform: translateX(-26px) rotate(-35deg); }
+  to { transform: translateX(26px) rotate(40deg); }
+}
+@keyframes flutter-r {
+  from { transform: translateX(24px) rotate(30deg); }
+  to { transform: translateX(-24px) rotate(-45deg); }
+}
+@keyframes drift {
+  from { transform: translateX(-10px); }
+  to { transform: translateX(10px); }
+}
+@keyframes hover {
+  from { transform: translate(-18px, 6px); }
+  to { transform: translate(18px, -6px); }
+}
+
+/* Phones and narrow windows: the shelves stack, each one centered */
 @media (max-width: 860px) {
-  .work__grid {
+  .shelves__list {
     grid-template-columns: minmax(0, 1fr);
+    gap: 56px;
   }
-  .work__title {
-    grid-column: 1;
-    align-items: flex-start;
-    text-align: left;
-  }
-  .work__list {
-    grid-template-columns: minmax(0, 1fr);
-    gap: 48px;
-    margin-top: 40px;
-    padding-top: 0;
-    background: none;
-  }
-  .work__item {
+  .shelf--ku,
+  .shelf--asians {
     margin-top: 0;
   }
-  .work__print {
-    max-width: 440px;
-    align-self: center;
+  .shelf__stage {
+    padding-inline: 12px;
+  }
+  .device--monitor {
+    width: 84%;
+  }
+  .device__screen {
+    padding: 8px;
+    border-radius: 12px;
+  }
+  .device__neck {
+    height: 28px;
+  }
+  .device__foot {
+    height: 7px;
+  }
+  .shelf--ku .shelf__stage {
+    max-width: 480px;
+  }
+  .device__lid {
+    padding: 8px 8px 10px;
+    border-radius: 10px 10px 0 0;
+  }
+  .device__dots {
+    gap: 5px;
+    padding: 0 4px 7px;
+  }
+  .device__dots i {
+    width: 7px;
+    height: 7px;
+  }
+  .device__base {
+    height: 12px;
+    border-radius: 0 0 10px 10px;
+  }
+  .shelf--asians .shelf__stage {
+    max-width: 260px;
+    justify-content: flex-start;
+  }
+  .device--phone {
+    width: 120px;
+    padding: 7px;
+    border-radius: 24px;
+  }
+  .device--phone img {
+    border-radius: 18px;
+  }
+  .shelf--ku .shelf__board,
+  .shelf--asians .shelf__board {
+    max-width: 480px;
+  }
+  .shelf--asians .shelf__board {
+    max-width: 260px;
+  }
+  .plant--pothos {
+    display: none;
   }
 }
 @media (prefers-reduced-motion: reduce) {
-  .work__print {
+  .plant--succulent,
+  .plant--pothos,
+  .plant__sway {
     animation: none;
   }
-  .work__image {
-    clip-path: none;
+  .falling {
+    display: none;
+  }
+  .device {
+    transition: none;
   }
 }
 

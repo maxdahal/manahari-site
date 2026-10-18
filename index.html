@@ -162,51 +162,117 @@
 
       <!-- Case studies -->
       <section class="work" id="work" aria-labelledby="work-h">
-        <div class="container work__grid">
-          <h2 class="work__title" id="work-h">Case studies <small class="work__count">(03)</small></h2>
-          <!-- Each project is a photo print pegged to a sagging clothesline -->
-          <ol class="work__list">
-            <li class="work__item work__item--1">
-              <a class="work__card" href="luna.html">
-                <span class="work__print"><span class="work__image"><img src="assets/images/card-luna.webp" alt="" loading="lazy" width="1100" height="619"></span></span>
-                <span class="work__info">
-                  <span class="work__num" aria-hidden="true">01</span>
-                  <b class="work__name">Luna Surgical Console</b>
-                  <span class="work__meta">UX Design Internship · Karl Storz · 2026</span>
-                  <span class="work__summary">Three fixes for a surgical console where the team has one second to read the screen: arm identity, a gallery with a video editor, and live annotation.</span>
-                  <span class="work__tags">Healthcare · Medical device</span>
-                  <span class="work__cta">View case study <span aria-hidden="true">→</span></span>
-                </span>
-              </a>
-            </li>
-            <li class="work__item work__item--2">
-              <a class="work__card" href="ku-brand.html">
-                <span class="work__print"><span class="work__image"><img src="assets/images/card-ku-brand.webp" alt="" loading="lazy" width="2000" height="856"></span></span>
-                <span class="work__info">
-                  <span class="work__num" aria-hidden="true">02</span>
-                  <b class="work__name">KU Brand</b>
-                  <span class="work__meta">Branding · University of Kansas · 2023 to 2024</span>
-                  <span class="work__summary">Turned KU’s new identity into a design system and a brand site for campus partners. Traffic across ku.edu grew 30% after launch, to about 100k visitors a month.</span>
-                  <span class="work__tags">Higher education · Brand system</span>
-                  <span class="work__cta">View case study <span aria-hidden="true">→</span></span>
-                </span>
-              </a>
-            </li>
-            <li class="work__item work__item--3">
-              <a class="work__card" href="asians.html">
-                <span class="work__print"><span class="work__image"><img src="assets/images/card-asians.webp" alt="" loading="lazy" width="1100" height="666"></span></span>
-                <span class="work__info">
-                  <span class="work__num" aria-hidden="true">03</span>
-                  <b class="work__name">Asian’s</b>
-                  <span class="work__meta">Volunteer UX Research and Design · Berkeley, CA · 2021 to 2022</span>
-                  <span class="work__summary">Online ordering for a small family restaurant where language barriers led to wrong orders. Researched with guests and staff, sketched and tested a prototype.</span>
-                  <span class="work__tags">Mobile app · Food and dining</span>
-                  <span class="work__cta">View case study <span aria-hidden="true">→</span></span>
-                </span>
-              </a>
-            </li>
-          </ol>
+        <div class="container">
+          <div class="work__head">
+            <h2 class="work__title" id="work-h">Case studies <small class="work__count">(03)</small></h2>
+            <p class="work__lede">A surgical console, a website and a phone app.</p>
+            <!-- Season switch: picks what falls on the shelves (home.js) -->
+            <div class="seasons">
+              <span class="seasons__label" id="season-label">Season</span>
+              <div class="seasons__group" role="group" aria-labelledby="season-label">
+                <button class="seasons__btn" type="button" data-season="spring" aria-pressed="false"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 9a3 3 0 1 1 0-6 3 3 0 1 1 0 6zM12 21a3 3 0 1 1 0-6 3 3 0 1 1 0 6zM9 12a3 3 0 1 1-6 0 3 3 0 1 1 6 0zM21 12a3 3 0 1 1-6 0 3 3 0 1 1 6 0z"/></svg>Spring<svg class="seasons__check" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12l5 5L20 7"/></svg></button>
+                <button class="seasons__btn" type="button" data-season="summer" aria-pressed="false"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 8a4 4 0 1 0 0 8 4 4 0 1 0 0-8zM12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg>Summer<svg class="seasons__check" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12l5 5L20 7"/></svg></button>
+                <button class="seasons__btn" type="button" data-season="autumn" aria-pressed="true"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M11 20A7 7 0 0 1 9.8 6.1C15.5 5 17 4.5 19 2c1 2 2 4.2 2 8 0 5.5-4.8 10-10 10ZM2 21c0-3 1.9-5.4 5.2-6"/></svg>Autumn<svg class="seasons__check" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12l5 5L20 7"/></svg></button>
+                <button class="seasons__btn" type="button" data-season="winter" aria-pressed="false"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2v20M4.9 7l14.2 10M4.9 17L19.1 7M9 4l3 2 3-2M9 20l3-2 3 2"/></svg>Winter<svg class="seasons__check" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12l5 5L20 7"/></svg></button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Each project sits on its own wall shelf, on the screen it was made
+               for. The shelves step down from left to right. Leaves (or petals,
+               fireflies, snow) fall over them; some land on the [data-land]
+               surfaces. -->
+          <div class="shelves">
+            <svg class="plant plant--pothos" viewBox="0 0 180 300" aria-hidden="true">
+              <path class="plant__cord" d="M90 0 L62 168 M90 0 L118 168"/>
+              <path class="plant__vine" d="M70 184 C56 214 40 244 34 290 M84 186 C86 224 80 254 84 278 M106 184 C124 214 142 240 150 286"/>
+              <path fill="#6aa86f" d="M0 0 C-12 6 -12 20 0 26 C12 20 12 6 0 0 Z" transform="translate(52 214) rotate(30)"/>
+              <path fill="#5a9a63" d="M0 0 C-12 6 -12 20 0 26 C12 20 12 6 0 0 Z" transform="translate(36 260) rotate(15)"/>
+              <path fill="#7fb08a" d="M0 0 C-12 6 -12 20 0 26 C12 20 12 6 0 0 Z" transform="translate(84 232) rotate(-5)"/>
+              <path fill="#5a9a63" d="M0 0 C-12 6 -12 20 0 26 C12 20 12 6 0 0 Z" transform="translate(84 266) rotate(10)"/>
+              <path fill="#6aa86f" d="M0 0 C-12 6 -12 20 0 26 C12 20 12 6 0 0 Z" transform="translate(128 216) rotate(-30)"/>
+              <path fill="#7fb08a" d="M0 0 C-12 6 -12 20 0 26 C12 20 12 6 0 0 Z" transform="translate(146 262) rotate(-15)"/>
+              <path fill="#5a9a63" d="M60 144 C60 162 74 168 90 168 C106 168 120 162 120 144 C108 152 100 148 90 156 C80 148 72 152 60 144 Z"/>
+              <path fill="#e7e2d6" stroke="#cfc8b8" d="M58 168 L122 168 L114 192 L66 192 Z"/>
+              <circle class="plant__spring" cx="58" cy="226" r="5" fill="#f28db0"/>
+              <circle class="plant__spring" cx="128" cy="246" r="5" fill="#f7b3c8"/>
+              <circle class="plant__spring" cx="88" cy="292" r="4.5" fill="#f28db0"/>
+            </svg>
+
+            <ol class="shelves__list">
+              <li class="shelf shelf--luna">
+                <a class="shelf__card" href="luna.html">
+                  <span class="shelf__stage">
+                    <span class="device device--monitor">
+                      <span class="device__screen" data-land><img src="assets/images/card-luna.webp" alt="" loading="lazy" width="1100" height="619"></span>
+                      <span class="device__neck"></span>
+                      <span class="device__foot"></span>
+                    </span>
+                    <svg class="plant plant--snake" viewBox="0 0 120 250" aria-hidden="true">
+                      <path class="plant__sway" fill="#3f7d4e" d="M58 190 C52 130 46 70 54 8 C64 70 66 130 64 190 Z"/>
+                      <path class="plant__sway plant__sway--2" fill="#5a9a63" d="M50 192 C34 145 26 100 30 52 C44 98 52 140 58 192 Z"/>
+                      <path class="plant__sway plant__sway--3" fill="#4c8a58" d="M66 192 C78 148 90 110 92 66 C82 112 74 148 70 192 Z"/>
+                      <path class="plant__sway plant__sway--4" fill="#6aa86f" d="M44 194 C28 165 16 140 12 108 C28 138 40 160 52 194 Z"/>
+                      <rect x="28" y="184" width="64" height="14" rx="3" fill="#b3653f"/>
+                      <path fill="#c8754f" d="M32 198 L88 198 L81 248 L39 248 Z"/>
+                      <path class="plant__winter" d="M26 186 C30 176 44 179 52 181 C62 176 80 175 94 186 Z"/>
+                    </svg>
+                  </span>
+                  <span class="shelf__board" data-land></span>
+                  <span class="shelf__info">
+                    <span class="shelf__meta">01 · Karl Storz · 2026</span>
+                    <b class="shelf__name">Luna Surgical Console</b>
+                    <span class="shelf__summary">Three fixes for a surgical console the team has one second to read. 6 of 10 usability rules fixed.</span>
+                    <span class="shelf__cta">View case study <span aria-hidden="true">→</span></span>
+                  </span>
+                </a>
+              </li>
+              <li class="shelf shelf--ku">
+                <a class="shelf__card" href="ku-brand.html">
+                  <span class="shelf__stage">
+                    <span class="device device--laptop">
+                      <span class="device__lid" data-land><span class="device__dots"><i></i><i></i><i></i></span><img src="assets/images/card-ku-brand.webp" alt="" loading="lazy" width="2000" height="856"></span>
+                      <span class="device__base"></span>
+                    </span>
+                    <svg class="plant plant--succulent" viewBox="0 0 90 72" aria-hidden="true">
+                      <ellipse cx="45" cy="30" rx="12" ry="20" fill="#7fb08a"/>
+                      <ellipse cx="28" cy="34" rx="10" ry="17" fill="#8fc09a" transform="rotate(-35 28 34)"/>
+                      <ellipse cx="62" cy="34" rx="10" ry="17" fill="#8fc09a" transform="rotate(35 62 34)"/>
+                      <ellipse cx="20" cy="42" rx="8" ry="13" fill="#9fcaa8" transform="rotate(-65 20 42)"/>
+                      <ellipse cx="70" cy="42" rx="8" ry="13" fill="#9fcaa8" transform="rotate(65 70 42)"/>
+                      <path fill="#e7e2d6" stroke="#cfc8b8" d="M22 46 L68 46 L63 72 L27 72 Z"/>
+                      <circle class="plant__spring" cx="45" cy="11" r="8" fill="#f28db0"/>
+                      <circle class="plant__spring" cx="45" cy="11" r="3.5" fill="#ffd36b"/>
+                      <path class="plant__winter" d="M20 47 C26 40 36 42 45 43 C54 41 64 40 70 47 Z"/>
+                    </svg>
+                  </span>
+                  <span class="shelf__board" data-land></span>
+                  <span class="shelf__info">
+                    <span class="shelf__meta">02 · University of Kansas · 2023 to 2024</span>
+                    <b class="shelf__name">KU Brand</b>
+                    <span class="shelf__summary">A design system and brand site for campus partners. +30% traffic across ku.edu.</span>
+                    <span class="shelf__cta">View case study <span aria-hidden="true">→</span></span>
+                  </span>
+                </a>
+              </li>
+              <li class="shelf shelf--asians">
+                <a class="shelf__card" href="asians.html">
+                  <span class="shelf__stage">
+                    <span class="device device--phone" data-land><img src="assets/images/card-asians.webp" alt="" loading="lazy" width="1100" height="666"></span>
+                  </span>
+                  <span class="shelf__board" data-land></span>
+                  <span class="shelf__info">
+                    <span class="shelf__meta">03 · Berkeley · 2021 to 2022</span>
+                    <b class="shelf__name">Asian’s</b>
+                    <span class="shelf__summary">Ordering for a family restaurant. 10+ guests tested it.</span>
+                    <span class="shelf__cta">View case study <span aria-hidden="true">→</span></span>
+                  </span>
+                </a>
+              </li>
+            </ol>
+          </div>
         </div>
+        <div class="falling" aria-hidden="true"></div>
       </section>
 
       <!-- Skills marquee -->

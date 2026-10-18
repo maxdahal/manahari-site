@@ -1,8 +1,10 @@
-/* KU Brand page: the color playground. Pick a text color and a background
-   from the Brand Center palette; the preview repaints, the contrast ratio
-   is worked out (WCAG 2 formula) and checked against body text (4.5), large
-   text and icons (3) and enhanced (7), and the matching CSS is shown to copy.
-   The pairs from the system load with one click. */
+/* KU Brand page: the color sandbox, laid out like Storybook. Pick a text
+   color and a background from the Brand Center palette (Controls tab); the
+   canvas repaints, the contrast ratio is worked out (WCAG 2 formula) and
+   checked against body text (4.5), large text and icons (3) and enhanced (7)
+   (Accessibility tab, its result also on the tab itself), and the matching
+   CSS is shown to copy (Code tab). The pairs from the system, down the left,
+   load with one click. */
 (function () {
   "use strict";
 
@@ -29,6 +31,7 @@
     var copy = play.querySelector("[data-copy]");
     var checks = [].slice.call(play.querySelectorAll("[data-check]"));
     var presets = [].slice.call(play.querySelectorAll(".play__preset"));
+    var badge = play.querySelector("[data-badge]");
     var radios = {
       fg: [].slice.call(play.querySelectorAll('input[name="play-fg"]')),
       bg: [].slice.call(play.querySelectorAll('input[name="play-bg"]'))
@@ -64,6 +67,8 @@
         li.classList.toggle("is-fail", !pass);
         li.querySelector(".play__mark").textContent = pass ? "Pass" : "Fail";
       });
+      badge.textContent = r.toFixed(1) + " " + (r >= 4.5 ? "Pass" : "Fail");
+      badge.className = "sandbox__badge " + (r >= 4.5 ? "is-pass" : "is-fail");
       var same = fg.value === bg.value;
       verdict.textContent = same
         ? "Same color twice: there is nothing to read."
@@ -122,6 +127,28 @@
       if (navigator.clipboard && navigator.clipboard.writeText) {
         navigator.clipboard.writeText(code.textContent).then(done, function () {});
       }
+    });
+    /* tabs: click, or arrow keys, Home and End when a tab has focus */
+    var tabs = [].slice.call(play.querySelectorAll('[role="tab"]'));
+    function select(tab, focus) {
+      tabs.forEach(function (t) {
+        var on = t === tab;
+        t.setAttribute("aria-selected", String(on));
+        t.tabIndex = on ? 0 : -1;
+        document.getElementById(t.getAttribute("aria-controls")).hidden = !on;
+      });
+      if (focus) tab.focus();
+    }
+    tabs.forEach(function (tab, i) {
+      tab.addEventListener("click", function () {
+        select(tab, false);
+      });
+      tab.addEventListener("keydown", function (event) {
+        var next = { ArrowRight: i + 1, ArrowLeft: i - 1, Home: 0, End: tabs.length - 1 }[event.key];
+        if (next === undefined) return;
+        event.preventDefault();
+        select(tabs[(next + tabs.length) % tabs.length], true);
+      });
     });
     update();
   }

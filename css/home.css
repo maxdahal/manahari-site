@@ -1670,6 +1670,86 @@ html.hello-lock {
   }
 }
 
+/* Touch screens: no cursor, so scrolling is the flashlight. As the wall
+   passes through the screen the light sweeps down it in a slow zigzag,
+   staying near the middle of the screen, so each piece lights up as you
+   reach it (pure CSS, the wall's own view timeline). The hint says "Scroll"
+   and fades once you are on your way. Tapping a piece still opens it. Without
+   scroll-driven animations, or with reduced motion, the lights stay on. */
+@property --mx {
+  syntax: "<length-percentage>";
+  inherits: true;
+  initial-value: 50%;
+}
+@property --my {
+  syntax: "<length-percentage>";
+  inherits: true;
+  initial-value: 40%;
+}
+.spot__say-touch {
+  display: none;
+}
+@media (hover: none) and (prefers-reduced-motion: no-preference) {
+  @supports (animation-timeline: view()) {
+    /* the wall clips its corners (overflow: hidden), which makes it a
+       scroll box of its own, so the light inside follows the wall's
+       timeline in the page instead of its own */
+    .spot {
+      view-timeline: --wall block;
+    }
+    .spot__dark {
+      display: block;
+      --r: clamp(150px, 44vw, 260px);
+      animation: spot-sweep linear both;
+      animation-timeline: --wall;
+    }
+    .spot__hint {
+      display: inline-flex;
+      place-self: start center;
+      margin-top: clamp(40px, 12vh, 120px);
+      animation: spot-hint-out linear both;
+      animation-timeline: --wall;
+      animation-range: entry 60% cover 40%;
+    }
+    .spot__say-mouse {
+      display: none;
+    }
+    .spot__say-touch {
+      display: inline;
+    }
+  }
+}
+/* the middle of the screen runs from above the wall to below it over the
+   wall's cover range; the light follows it, swinging side to side */
+@keyframes spot-sweep {
+  0% {
+    --mx: 50%;
+    --my: -15%;
+  }
+  25% {
+    --mx: 25%;
+    --my: 22%;
+  }
+  50% {
+    --mx: 72%;
+    --my: 50%;
+  }
+  75% {
+    --mx: 28%;
+    --my: 78%;
+  }
+  100% {
+    --mx: 50%;
+    --my: 115%;
+  }
+}
+@keyframes spot-hint-out {
+  to {
+    opacity: 0;
+    scale: 0.9;
+  }
+}
+
 .lightbox {
   position: fixed;
   width: 100vw;

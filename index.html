@@ -16,16 +16,17 @@
   <link rel="stylesheet" href="css/site.css">
   <link rel="stylesheet" href="css/home.css">
   <script>
-    /* The "hello" intro plays on a fresh visit and on a refresh, but not when
-       you come back to Home from another page of this site (a link or Back).
-       Runs before the page paints, so the intro never flashes. */
+    /* The "hello" intro plays once per visit (browser tab session): not
+       again on a refresh, a link back to Home or Back. Runs before the page
+       paints, so the intro never flashes. */
     (function () {
       try {
-        var nav = performance.getEntriesByType("navigation")[0];
-        var reload = nav && nav.type === "reload";
-        var fromSite = document.referrer && new URL(document.referrer).origin === location.origin;
-        if (fromSite && !reload) document.documentElement.classList.add("no-hello");
-      } catch (e) {}
+        if (sessionStorage.getItem("hello") === "seen") document.documentElement.classList.add("no-hello");
+        else sessionStorage.setItem("hello", "seen");
+      } catch (e) {
+        /* no storage (private mode): fall back to skipping it inside the site */
+        if (document.referrer && new URL(document.referrer).origin === location.origin) document.documentElement.classList.add("no-hello");
+      }
       /* Motion plays on every new visit; pausing it with the button in the
          top bar (home.js) holds for the rest of the visit only */
       try {
@@ -71,7 +72,7 @@
   <header class="cp-bar">
     <div class="cp-bar__start">
       <a class="bar-mark" href="#top" aria-label="Manahari Dahal, home">md<i>.</i></a>
-      <nav class="cp-bar__links" aria-label="Main"><a href="#work" aria-current="true">Work</a><a href="about.html">About</a><a href="#contact">Contact</a></nav>
+      <nav class="cp-bar__links" aria-label="Main"><a href="#top" aria-current="page">Home</a><a href="#about-me">About</a><a href="#work">Work</a><a href="#contact">Contact</a></nav>
     </div>
     <div class="cp-bar__end">
       <button class="icon-button motion-toggle" type="button" aria-pressed="false" aria-label="Pause motion" title="Pause motion"><svg class="icon-pause" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M9 5v14M15 5v14"/></svg><svg class="icon-play" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M8 5.5v13l11-6.5z"/></svg></button>
@@ -347,7 +348,7 @@
         <nav class="site-footer__col" aria-label="Footer">
           <p class="site-footer__label">Navigation</p>
             <a href="#top">Home</a>
-            <a href="about.html">About</a>
+            <a href="#about-me">About</a>
             <a href="#work">Projects</a>
             <a href="#artwork">Artwork</a>
         </nav>

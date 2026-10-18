@@ -1013,6 +1013,21 @@ body,
 }
 
 /* 10. Motion --------------------------------------------------------------- */
+/* Moving between pages of the site cross-fades in place (cross-document view
+   transitions) instead of blanking and repainting like a fresh load; the top
+   bar stays put. Browsers without it navigate as before. */
+@view-transition {
+  navigation: auto;
+}
+.cp-bar {
+  view-transition-name: top-bar;
+}
+@media (prefers-reduced-motion: reduce) {
+  @view-transition {
+    navigation: none;
+  }
+}
+
 /* Scroll text: text eases in as it scrolls into view, pure CSS (each
    element's own view timeline), with a different entrance per kind of text
    so it does not feel repeated:
@@ -1466,7 +1481,14 @@ html {
   outline-offset: 2px;
   border-radius: 4px;
 }
-/* phones: smaller round buttons, so the mark, the three links and the
+/* from laptop width the page outline on the left does the navigating
+   (home and case studies), so the top bar keeps only the mark and buttons */
+@media (min-width: 1101px) {
+  body:has(.cp-outline) .cp-bar__links {
+    display: none;
+  }
+}
+/* phones: smaller round buttons, so the mark, the four links and the
    buttons share one row */
 @media (max-width: 520px) {
   .cp-bar .icon-button {
@@ -1475,5 +1497,25 @@ html {
   }
   .cp-bar__end {
     gap: 6px;
+  }
+}
+@media (max-width: 400px) {
+  .cp-bar {
+    padding-inline: 12px;
+  }
+  .cp-bar__start,
+  .cp-bar__links {
+    gap: 12px;
+  }
+  .cp-bar__links a {
+    font-size: 0.8125rem;
+  }
+  /* the Home link already goes where the mark goes */
+  .bar-mark {
+    display: none;
+  }
+  .cp-bar .icon-button {
+    width: 36px;
+    height: 36px;
   }
 }

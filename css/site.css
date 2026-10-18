@@ -1557,6 +1557,7 @@ html {
 .menu.is-open .menu__links a:nth-child(2) { transition-delay: 0.05s; }
 .menu.is-open .menu__links a:nth-child(3) { transition-delay: 0.1s; }
 .menu.is-open .menu__links a:nth-child(4) { transition-delay: 0.15s; }
+.menu.is-open .menu__links a:nth-child(5) { transition-delay: 0.2s; }
 .menu__links a:hover,
 .menu__links a[aria-current] {
   color: var(--accent-text);

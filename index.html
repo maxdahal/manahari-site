@@ -8,8 +8,8 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&amp;family=Antonio:wght@400;500;600;700&amp;display=swap">
-  <!-- Kalam (handwriting, Devanagari) for the intro's "namaste" and the hero's "design", only those letters -->
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Kalam:wght@400&amp;text=%E0%A4%A8%E0%A4%AE%E0%A4%B8%E0%A5%8D%E0%A4%A4%E0%A5%87design&amp;display=block">
+  <!-- Kalam (handwriting) for the hero's "design", only those letters -->
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Kalam:wght@400&amp;text=design&amp;display=block">
   <link rel="stylesheet" href="css/site.css">
   <link rel="stylesheet" href="css/home.css">
   <script>
@@ -25,7 +25,7 @@
       } catch (e) {}
       /* While the intro plays, the page is locked at the top: no scrolling,
          and a refresh starts from the top instead of where you were. The
-         lock lifts when the intro has faded (5.6s + 0.6s, as in home.css). */
+         lock lifts when the intro has faded (2.8s + 0.6s, as in home.css). */
       var root = document.documentElement;
       var plays = !root.classList.contains("no-hello") &&
         !window.matchMedia("(prefers-reduced-motion: reduce)").matches;
@@ -42,7 +42,7 @@
         window.addEventListener("load", toTop);
         setTimeout(function () {
           root.classList.remove("hello-lock");
-        }, 6200);
+        }, 3400);
       }
     })();
   </script>
@@ -50,13 +50,11 @@
   <script src="js/home.js" defer></script>
 </head>
 <body>
-  <!-- Intro: "hello" writes itself, then "namaste" in Nepali, then the screen fades away (pure CSS) -->
+  <!-- Intro: "hello" writes itself, then the screen fades away (pure CSS) -->
   <div class="hello" aria-hidden="true">
     <svg class="hello__word" viewBox="0 0 460 190" focusable="false">
       <path pathLength="1" d="M30 150 C60 140 100 90 110 50 C118 20 95 10 85 40 C75 70 70 120 68 150 C75 120 95 95 115 100 C135 105 128 140 135 150 C145 160 165 140 175 125 C200 120 215 100 200 92 C185 85 165 110 175 135 C185 155 215 155 235 135 C255 110 275 60 272 35 C270 15 250 20 252 50 C254 90 250 130 260 148 C268 158 285 150 295 130 C310 105 330 60 327 35 C325 15 305 20 307 50 C309 90 305 130 315 148 C323 158 340 150 352 128 C360 105 390 95 400 110 C412 130 395 158 375 152 C355 145 358 110 385 105 C400 102 415 108 430 100"/>
-    </svg>
-    <p class="hello__namaste" lang="ne">नमस्ते</p>
-  </div>
+    </svg>  </div>
   <a class="skip-link" href="#main">Skip to content</a>
   <header class="site-header">
     <div class="site-header__bar">

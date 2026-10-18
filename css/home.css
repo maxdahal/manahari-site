@@ -39,13 +39,9 @@
      0.2s - 2.2s  "hello" writes itself as one continuous line (its stroke is
                   revealed with stroke-dashoffset; pathLength="1" makes the
                   line one unit long), at an even, unhurried pace
-     2.6s - 3.0s  "hello" fades out
-     3.0s - 5.0s  "नमस्ते" (namaste, Nepali) writes itself left to right
-                  along its headline, in the Kalam handwriting font
-     5.6s - 6.2s  the screen fades away, then the name's block wipe starts
-                  (--intro on .hero delays it)
-   Both words share the overlay's single grid cell, so nothing is positioned
-   inside it. The overlay is fixed on top of everything and never takes
+     2.8s - 3.4s  the screen fades away with "hello" on it, then the name's
+                  block wipe starts (--intro on .hero delays it)
+   The overlay is fixed on top of everything and never takes
    clicks once it has faded. It plays on a fresh visit or a refresh only, not
    when you return to Home from another page of the site, and is skipped
    entirely for reduced motion. */
@@ -57,16 +53,11 @@
   display: grid;
   place-items: center;
   background: var(--bg);
-  animation: hello-out 0.6s ease 5.6s forwards;
-}
-.hello__word,
-.hello__namaste {
-  grid-area: 1 / 1;
+  animation: hello-out 0.6s ease 2.8s forwards;
 }
 .hello__word {
   width: var(--hello-w);
   overflow: visible;
-  animation: hello-fade 0.4s ease 2.6s forwards;
 }
 .hello__word path {
   fill: none;
@@ -78,32 +69,9 @@
   stroke-dashoffset: 1;
   animation: hello-write 2s cubic-bezier(0.45, 0.05, 0.55, 0.95) 0.2s forwards;
 }
-.hello__namaste {
-  margin: 0;
-  padding-inline: 0.1em;
-  font-family: "Kalam", var(--body-font);
-  /* नमस्ते is about 2.35em wide, so this makes it as wide as the drawn
-     "hello" (which fills about 85% of its box) */
-  font-size: calc(var(--hello-w) * 0.36);
-  font-weight: 400;
-  line-height: 1.3;
-  color: var(--ink);
-  clip-path: inset(0 100% 0 0);
-  animation: namaste-write 2s cubic-bezier(0.45, 0.05, 0.55, 0.95) 3s forwards;
-}
 @keyframes hello-write {
   to {
     stroke-dashoffset: 0;
-  }
-}
-@keyframes hello-fade {
-  to {
-    opacity: 0;
-  }
-}
-@keyframes namaste-write {
-  to {
-    clip-path: inset(0 0 0 0);
   }
 }
 @keyframes hello-out {
@@ -114,7 +82,7 @@
 }
 /* the name's intro wipe waits for the greeting to finish */
 .hero {
-  --intro: 6.3s;
+  --intro: 3.5s;
 }
 /* while the intro plays (see the script in index.html) the page cannot
    scroll; the scrollbar's space is kept so nothing shifts when it unlocks */
@@ -316,7 +284,7 @@ html.hello-lock {
   color: var(--ink);
 }
 /* Tagline: "I design and code." with a little personality. "design" is
-   handwritten (Kalam, the hand from the intro), tilted, in the accent colour;
+   handwritten (Kalam), tilted, in the accent colour;
    "code" is monospaced with a blinking text cursor after it. */
 .tagline__hand {
   display: inline-block;

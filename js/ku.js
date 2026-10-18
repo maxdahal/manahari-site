@@ -21,7 +21,34 @@
     return (Math.max(la, lb) + 0.05) / (Math.min(la, lb) + 0.05);
   }
 
+  /* The outline's "Color sandbox" entry pulses until the visitor goes to
+     the sandbox once (that link or the hero's play button); then it stops
+     for good on this browser. */
+  function attention() {
+    var calls = [].slice.call(document.querySelectorAll("[data-attn]"));
+    if (!calls.length) return;
+    var seen = false;
+    try {
+      seen = localStorage.getItem("ku-sandbox-seen") === "1";
+    } catch (e) {}
+    function quiet() {
+      calls.forEach(function (el) {
+        el.removeAttribute("data-attn");
+      });
+    }
+    if (seen) return quiet();
+    [].forEach.call(document.querySelectorAll('[data-attn], a[href="#sandbox"]'), function (link) {
+      link.addEventListener("click", function () {
+        quiet();
+        try {
+          localStorage.setItem("ku-sandbox-seen", "1");
+        } catch (e) {}
+      });
+    });
+  }
+
   function start() {
+    attention();
     var play = document.querySelector("[data-play]");
     if (!play) return;
     var preview = play.querySelector("[data-preview]");

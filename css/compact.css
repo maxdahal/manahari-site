@@ -776,3 +776,39 @@ body::after {
   font-size: 0.6875rem;
   font-weight: 700;
 }
+/* An outline entry for something to try (the KU color sandbox). Until the
+   visitor has clicked it, its tag pulses softly to draw the eye; ku.js
+   removes data-attn on the first click and remembers it. No pulse for
+   reduced motion. */
+.cp-outline__play .cp-outline__tag {
+  position: relative;
+}
+.cp-outline__play[data-attn] .cp-outline__tag {
+  background: var(--accent);
+  color: var(--on-accent);
+  animation: attn-pop 2.4s ease-in-out infinite;
+}
+.cp-outline__play[data-attn] .cp-outline__tag::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  box-shadow: 0 0 0 0 color-mix(in srgb, var(--accent) 55%, transparent);
+  animation: attn-ring 2.4s ease-out infinite;
+}
+@keyframes attn-ring {
+  0% { box-shadow: 0 0 0 0 color-mix(in srgb, var(--accent) 55%, transparent); }
+  70%, 100% { box-shadow: 0 0 0 8px transparent; }
+}
+@keyframes attn-pop {
+  0%, 60%, 100% { scale: 1; }
+  70% { scale: 1.12; }
+  80% { scale: 0.96; }
+  90% { scale: 1.04; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .cp-outline__play[data-attn] .cp-outline__tag,
+  .cp-outline__play[data-attn] .cp-outline__tag::after {
+    animation: none;
+  }
+}

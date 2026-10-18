@@ -31,7 +31,8 @@
   --accent: #e65f2e;
   --accent-text: #b0441c;
   --on-accent: #1a1a1e;
-  --band: color-mix(in srgb, var(--accent) 8%, var(--bg));
+  /* see-through, so the paper grain shows through the tinted band */
+  --band: color-mix(in srgb, var(--accent) 9%, transparent);
   --stage: color-mix(in srgb, var(--accent) 15%, #ffffff);
   --marker: linear-gradient(100deg, rgb(230 95 46 / 0.38), rgb(230 95 46 / 0.22));
   --frame: #0f0f11;
@@ -649,7 +650,7 @@ strong {
   margin-top: calc(var(--title-lh) * -0.45 - 12px);
   padding: calc(var(--title-lh) * 0.45 + 39px) 0 clamp(40px, 6vh, 64px) var(--indent);
   /* the outset stretches the band to the screen edges without adding width */
-  border-image: linear-gradient(var(--band) var(--band-h, calc(var(--title-lh) * 0.45 + 200px)), transparent 0)
+  border-image: linear-gradient(var(--band) 20px, transparent var(--band-h, calc(var(--title-lh) * 0.45 + 200px)))
     fill 0 / 0 / 0 100vmax;
 }
 

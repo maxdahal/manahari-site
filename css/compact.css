@@ -39,7 +39,7 @@ html {
   gap: 16px;
   min-height: var(--bar-h);
   padding-inline: max(var(--gx), calc((100% - var(--max)) / 2 + var(--gx)));
-  background: var(--bg);
+  background: var(--paper) 0 0 / 240px auto, var(--bg);
 }
 
 .cp {
@@ -416,7 +416,7 @@ html {
   width: 100%;
   padding: 16px 0 14px;
   border-bottom: 1px solid var(--line);
-  background: var(--bg);
+  background: var(--paper) 0 0 / 240px auto, var(--bg);
   font-size: clamp(1.75rem, 1.4rem + 1.1vw, 2.375rem);
   line-height: 1.05;
   letter-spacing: -0.005em;
@@ -463,8 +463,10 @@ html {
   gap: var(--gap-inside);
   margin-top: calc(var(--title-lh) * -0.55);
   padding: calc(var(--title-lh) * 0.55 + 20px) 0 8px;
-  border-image: linear-gradient(var(--band) var(--band-h, calc(var(--title-lh) * 0.45 + 120px)), transparent 0)
-    fill 0 / 0 / 0 100vmax 0 20px;
+  /* a soft wash: 20px past the column on both sides, fading out at the
+     bottom instead of cutting across a picture */
+  border-image: linear-gradient(var(--band) 20px, transparent var(--band-h, calc(var(--title-lh) * 0.45 + 120px)))
+    fill 0 / 0 / 0 20px;
 }
 /* only a section's opening gets the band: a section that continues the
    one before it, or a body nested inside another, has none */

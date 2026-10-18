@@ -1,56 +1,179 @@
-/* Case-study behaviour shared by Luna, KU Brand and Asian's:
-   the stages rail, principle tooltips, flip cards and opening a tab from a link. */
+/* Case-study behaviour shared by Luna, KU Brand and Asian's: the stages list
+   that follows your reading, the step-by-step drawings (scrollytelling),
+   principle tooltips, flip cards and opening a tab from a link. */
 (function () {
   "use strict";
 
-  /* Stages rail: highlight the stage on screen; on phones it opens as a list */
+  var reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+  /* Under each stage's title: how many sections it has and how long it
+     takes to read (about 200 words a minute). */
+  function initStageMeta() {
+    document.querySelectorAll(".stage__label").forEach(function (label) {
+      var stage = label.closest(".stage");
+      var sections = stage.querySelectorAll(":scope > .block").length;
+      var words = stage.textContent.trim().split(/\s+/).length;
+      var minutes = Math.max(1, Math.round(words / 200));
+      var meta = document.createElement("p");
+      meta.className = "stage__meta";
+      meta.textContent = (sections > 1 ? sections + " sections · " : "") + minutes + " min read";
+      label.appendChild(meta);
+    });
+  }
+
+  /* Stages list: all stages are on the page; the list marks the one you are
+     reading (the last stage whose top has passed a line a third of the way
+     down the screen) and sizes the others by how far away they are. The
+     stage you are reading opens to list its sections, marking the one you
+     are in. On smaller screens the list moves into a sheet opened from a
+     floating chip that names the stage you are in. */
+  var icon = function (d) {
+    return '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="' + d + '"/></svg>';
+  };
   function initRail() {
     var rail = document.querySelector(".rail");
     if (!rail) return;
-    var links = [].slice.call(rail.querySelectorAll("ol a"));
-    var stages = links
-      .map(function (link) {
-        return document.getElementById(link.getAttribute("href").slice(1));
-      })
-      .filter(Boolean);
-    var toggle = rail.querySelector(".rail__toggle");
-    var current = rail.querySelector(".rail__current");
-    var count = rail.querySelector(".rail__count");
+    var list = rail.querySelector("ol");
+    var links = [].slice.call(list.querySelectorAll(":scope > li > a"));
+    var stages = links.map(function (link) {
+      return document.getElementById(link.getAttribute("href").slice(1));
+    });
+    if (stages.some(function (s) { return !s; })) return;
+    var names = links.map(function (link) {
+      return link.textContent.replace(/^\s*\d+\.\s*/, "").trim();
+    });
+    var nums = links.map(function (link) {
+      var num = link.querySelector(".rail__num");
+      return num ? num.textContent.trim() : "";
+    });
 
-    function setActive(index) {
-      links.forEach(function (link, i) {
-        if (i === index) link.setAttribute("aria-current", "true");
-        else link.removeAttribute("aria-current");
+    /* each stage with more than one section gets a list of its sections */
+    var sections = stages.map(function (stage, i) {
+      var blocks = [].slice.call(stage.querySelectorAll(":scope > .block")).filter(function (block) {
+        return block.querySelector(".block__title");
       });
-      if (current) current.textContent = links[index].textContent.replace(/^\d+\.\s*/, "");
-      if (count) count.textContent = index + 1 + "/" + links.length;
-    }
+      if (blocks.length < 2) return [];
+      var sub = document.createElement("ol");
+      sub.className = "rail__sub";
+      blocks.forEach(function (block, j) {
+        var title = block.querySelector(".block__title");
+        if (!block.id) block.id = title.id ? title.id.replace(/-h$/, "") + "-section" : stage.id + "-" + (j + 1);
+        var li = document.createElement("li");
+        var a = document.createElement("a");
+        a.href = "#" + block.id;
+        a.textContent = title.textContent.trim();
+        li.appendChild(a);
+        sub.appendChild(li);
+      });
+      links[i].parentNode.appendChild(sub);
+      return blocks;
+    });
 
-    function update() {
-      var line = window.innerHeight * 0.35;
+    /* the sheet: a dialog with a copy of the list */
+    var sheet = document.createElement("dialog");
+    sheet.className = "stage-sheet";
+    sheet.setAttribute("aria-labelledby", "stage-sheet-title");
+    sheet.innerHTML =
+      '<div class="stage-sheet__head"><p class="rail__title" id="stage-sheet-title">Stages</p>' +
+      '<button class="stage-sheet__close" type="button" aria-label="Close stages">' + icon("M18 6 6 18M6 6l12 12") + "</button></div>";
+    var sheetList = list.cloneNode(true);
+    sheet.appendChild(sheetList);
+    document.body.appendChild(sheet);
+    var sheetLinks = [].slice.call(sheetList.querySelectorAll(":scope > li > a"));
+
+    /* the chip: last in the stages column, so it sticks to the bottom of the
+       screen only while you are reading the stages */
+    var chip = document.createElement("button");
+    chip.className = "stage-chip";
+    chip.type = "button";
+    chip.setAttribute("aria-haspopup", "dialog");
+    chip.innerHTML =
+      '<span class="stage-chip__ring" aria-hidden="true"></span>' +
+      '<span class="sr-only">Stages, now reading: </span>' +
+      '<span class="stage-chip__num"></span><span class="stage-chip__name"></span>' +
+      icon("m18 15-6-6-6 6");
+    var content = stages[0].parentNode;
+    content.insertBefore(chip, content.querySelector(".page-end"));
+
+    chip.addEventListener("click", function () {
+      sheet.showModal();
+      var here = sheetList.querySelector('[aria-current="true"]');
+      if (here) here.focus();
+    });
+    sheet.querySelector(".stage-sheet__close").addEventListener("click", function () {
+      sheet.close();
+    });
+    sheet.addEventListener("click", function (event) {
+      /* a tap on the dimmed page outside the sheet lands on the dialog itself */
+      if (event.target === sheet) sheet.close();
+      /* choosing a stage closes the sheet; the link then scrolls there */
+      if (event.target.closest("a")) sheet.close();
+    });
+
+    var current = -1;
+    var currentBlock = null;
+    function mark() {
+      var line = window.innerHeight / 3;
       var index = 0;
       stages.forEach(function (stage, i) {
         if (stage.getBoundingClientRect().top <= line) index = i;
       });
-      setActive(index);
-    }
-    window.addEventListener("scroll", update, { passive: true });
-    window.addEventListener("resize", update);
-    update();
-
-    if (toggle) {
-      toggle.addEventListener("click", function () {
-        var open = !rail.classList.contains("is-open");
-        rail.classList.toggle("is-open", open);
-        toggle.setAttribute("aria-expanded", String(open));
+      var block = null;
+      sections[index].forEach(function (b) {
+        if (b.getBoundingClientRect().top <= line) block = b;
       });
-      links.forEach(function (link) {
-        link.addEventListener("click", function () {
-          rail.classList.remove("is-open");
-          toggle.setAttribute("aria-expanded", "false");
+      if (!block && sections[index].length) block = sections[index][0];
+      if (index === current && block === currentBlock) return;
+      currentBlock = block;
+      [list, sheetList].forEach(function (ol) {
+        [].slice.call(ol.querySelectorAll(":scope > li > a")).forEach(function (link, i) {
+          if (i === index) link.setAttribute("aria-current", "true");
+          else link.removeAttribute("aria-current");
+          /* how far each stage is from the one you are reading (sets its size) */
+          link.dataset.d = String(Math.min(3, Math.abs(i - index)));
+        });
+        [].slice.call(ol.querySelectorAll(".rail__sub a")).forEach(function (link) {
+          if (block && link.getAttribute("href") === "#" + block.id) link.setAttribute("aria-current", "location");
+          else link.removeAttribute("aria-current");
         });
       });
+      if (index === current) return;
+      current = index;
+      chip.querySelector(".stage-chip__num").textContent = nums[index];
+      chip.querySelector(".stage-chip__name").textContent = names[index];
     }
+    window.addEventListener("scroll", mark, { passive: true });
+    window.addEventListener("resize", mark);
+    mark();
+  }
+
+  /* Scrollytelling: in a list of steps, the drawings share one pinned spot
+     beside the text (see .steps in case-study.css). The step whose text is
+     in the middle of the screen shows its drawing. */
+  function initSteps() {
+    document.querySelectorAll(".steps").forEach(function (list) {
+      var steps = [].slice.call(list.querySelectorAll(":scope > .step"));
+      if (steps.length < 2) return;
+      list.classList.add("steps--story");
+      var show = function (step) {
+        steps.forEach(function (s) {
+          s.classList.toggle("is-active", s === step);
+        });
+      };
+      show(steps[0]);
+      if (!("IntersectionObserver" in window)) return;
+      var io = new IntersectionObserver(function (entries) {
+        entries.forEach(function (entry) {
+          if (entry.isIntersecting) show(entry.target.closest(".step"));
+        });
+      }, { rootMargin: "-45% 0px -45% 0px" });
+      steps.forEach(function (step) {
+        io.observe(step.querySelector(".step__text"));
+        step.querySelector(".step__text").addEventListener("focusin", function () {
+          show(step);
+        });
+      });
+    });
   }
 
   /* Principle chips: show the principle's definition in a small tooltip */
@@ -138,25 +261,34 @@
       target.scrollIntoView({ block: "start" });
     });
   }
+  /* Links into a closed tab open it; everything else is an ordinary link
+     (the page scrolls smoothly in CSS, under the bar at the top). */
   function initHashLinks() {
+    function go(hash) {
+      var target = hash.length > 1 && document.getElementById(hash.slice(1));
+      if (!target || !target.closest('[role="tabpanel"][hidden]')) return false;
+      openFromHash(hash);
+      return true;
+    }
     document.addEventListener("click", function (event) {
       var link = event.target.closest('a[href^="#"]');
-      if (!link) return;
-      var target = document.getElementById(link.getAttribute("href").slice(1));
-      if (target && target.closest('[role="tabpanel"][hidden]')) {
+      if (!link || link.getAttribute("href").length < 2) return;
+      var hash = link.getAttribute("href");
+      if (go(hash)) {
         event.preventDefault();
-        history.pushState(null, "", link.getAttribute("href"));
-        openFromHash(link.getAttribute("href"));
+        history.pushState(null, "", hash);
       }
     });
     window.addEventListener("hashchange", function () {
-      openFromHash(location.hash);
+      go(location.hash);
     });
-    openFromHash(location.hash);
+    if (location.hash.length > 1) go(location.hash);
   }
 
   function start() {
+    initStageMeta();
     initRail();
+    initSteps();
     initPrinciples();
     initFlips();
     initHashLinks();
@@ -166,7 +298,7 @@
         var target = document.getElementById(id);
         if (!target) return false;
         if (target.closest('[role="tabpanel"]')) openFromHash("#" + id);
-        else target.scrollIntoView({ block: "start" });
+        else target.scrollIntoView({ block: "start", behavior: reduceMotion ? "auto" : "smooth" });
         return true;
       };
     }

@@ -120,65 +120,178 @@
   }
 }
 
-/* Design stage: project tabs sit in the page and scroll away with it. When
-   you switch projects, luna.js scrolls the bar back into view, clear of the
-   site header. ---------------------------------------------------------- */
-.project-tabs {
-  margin-top: 24px;
-  padding: 12px 0;
-  border-bottom: 1px solid var(--line);
+/* Design stage: project switcher -------------------------------------------
+   Big, plain cards in a grid (no sideways scrolling), one per project. The
+   selected card is filled with the accent colour AND shows a check mark, so
+   the choice does not depend on colour alone. The section heading above
+   follows the selected card (luna.js). */
+.project-switch {
   scroll-margin-top: calc(var(--header-h) + var(--header-top) + 16px);
 }
-.project-tabs .tabs {
-  flex-wrap: nowrap;
-  overflow-x: auto;
-  scrollbar-width: thin;
+.project-switch__choose {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+.project-switch__hint {
+  font-size: var(--fs-small);
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--text);
+}
+.project-tabs {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 12px;
 }
 .project-tabs [role="tab"] {
-  flex: none;
-  min-height: 48px;
-  white-space: nowrap;
-}
-
-/* Component rules: a vertical list of tabs with previous and next --------- */
-.rules {
   display: grid;
-  grid-template-columns: 300px minmax(0, 1fr);
-  gap: 24px 48px;
-  align-items: start;
-}
-.rules__nav {
-  grid-row: 1 / span 5;
-  display: flex;
-  flex-direction: column;
-  gap: 24px;
-}
-.rules__list {
-  flex-direction: column;
-  flex-wrap: nowrap;
-  gap: 8px;
-}
-.rules__list [role="tab"] {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 12px;
-  min-height: 57px;
-  padding: 14px 18px;
+  grid-template-columns: minmax(0, 1fr) auto;
+  align-content: start;
+  gap: 4px 12px;
+  min-height: 96px;
+  padding: 16px 16px 18px;
+  border: 2px solid var(--line);
+  border-radius: var(--r-md);
+  background: var(--bg);
+  box-shadow: none;
+  color: var(--ink);
   text-align: left;
 }
-.rules__list [role="tab"] svg {
-  width: 16px;
-  height: 16px;
-  color: var(--accent-text);
+.project-tabs [role="tab"]:hover {
+  border-color: var(--accent);
+  translate: 0 -2px;
 }
-.rules__list [role="tab"][aria-selected="true"] svg {
+.project-tabs [role="tab"]:focus-visible {
+  outline: 3px solid var(--accent);
+  outline-offset: 3px;
+}
+.project-tabs [role="tab"][aria-selected="true"] {
+  border-color: var(--accent);
+  background: var(--accent);
+  color: var(--on-accent);
+}
+.ptab__kicker {
+  grid-column: 1;
+  font-size: var(--fs-small);
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--text);
+}
+.ptab__name {
+  grid-column: 1;
+  font-size: var(--fs-body);
+  font-weight: 600;
+  line-height: 1.3;
+}
+[aria-selected="true"] > .ptab__kicker {
   color: inherit;
 }
+/* the round marker: an empty ring, or a filled ring with a check mark */
+.project-tabs [role="tab"]::after {
+  content: "";
+  grid-column: 2;
+  grid-row: 1 / span 2;
+  width: 22px;
+  height: 22px;
+  border: 2px solid var(--line);
+  border-radius: 50%;
+}
+.project-tabs [role="tab"][aria-selected="true"]::after {
+  border-color: currentColor;
+  background: currentColor;
+  -webkit-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Ccircle cx='12' cy='12' r='12' fill='white'/%3E%3Cpath d='m7 12.5 3.2 3.2L17 9' fill='none' stroke='black' stroke-width='2.6' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E") center / contain no-repeat;
+  mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Ccircle cx='12' cy='12' r='12' fill='white'/%3E%3Cpath d='m7 12.5 3.2 3.2L17 9' fill='none' stroke='black' stroke-width='2.6' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E") center / contain no-repeat;
+  mask-mode: luminance;
+}
+@media (max-width: 1100px) {
+  .project-tabs {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+@media (max-width: 640px) {
+  .project-tabs {
+    grid-template-columns: minmax(0, 1fr);
+  }
+  .project-tabs [role="tab"] {
+    min-height: 0;
+  }
+}
+
+/* A panel's first block continues the switcher section: no heading of its
+   own and no second band */
+.block--continued {
+  padding-top: 0;
+}
+.block--continued > .block__body {
+  margin-top: 0;
+  padding-top: 24px;
+  border-image: none;
+}
+
+/* Component rules: a row of text tabs with an underline under the selected
+   one (unlike the project cards above), previous and next beside the intro
+   line, and the selected rule below. Grid and flex only. */
+.rules {
+  display: flex;
+  flex-direction: column;
+  gap: 28px;
+}
+.rules__nav {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  align-items: end;
+  gap: 20px 24px;
+  border-bottom: 1px solid var(--line);
+}
+.rules__nav .lead {
+  grid-column: 1;
+  grid-row: 1;
+}
+.rules__list {
+  grid-column: 1 / -1;
+  grid-row: 2;
+}
+.rules__list {
+  flex-wrap: wrap;
+  gap: 4px 28px;
+}
+.rules__list [role="tab"] {
+  min-height: 48px;
+  margin-bottom: -1px;
+  padding: 0 0 4px;
+  border: 0;
+  border-bottom: 3px solid transparent;
+  border-radius: 0;
+  background: none;
+  box-shadow: none;
+  color: var(--text);
+  /* same weight selected or not, so the row never shifts when you switch */
+  font-weight: 600;
+}
+.rules__list [role="tab"]:hover {
+  border-bottom-color: var(--line);
+  color: var(--ink);
+  translate: none;
+}
+.rules__list [role="tab"]:focus-visible {
+  outline: 3px solid var(--accent);
+  outline-offset: 2px;
+}
+.rules__list [role="tab"][aria-selected="true"] {
+  border-bottom-color: var(--accent);
+  background: none;
+  color: var(--ink);
+}
 .rules__controls {
+  grid-column: 2;
+  grid-row: 1;
+  align-self: center;
   display: flex;
   align-items: center;
-  gap: 16px;
+  gap: 12px;
 }
 .rules__count {
   min-width: 3em;
@@ -203,6 +316,11 @@
 .rule {
   gap: 14px;
 }
+/* the tab row's line already separates the rule from the tabs */
+.rules .rule.card {
+  padding-top: 0;
+  border-top: 0;
+}
 .rule:not(.card) {
   display: flex;
   flex-direction: column;
@@ -210,9 +328,14 @@
 .rule .subhead {
   margin-top: 0;
 }
-@media (max-width: 860px) {
-  .rules {
+@media (max-width: 640px) {
+  .rules__nav {
     grid-template-columns: minmax(0, 1fr);
+  }
+  .rules__controls {
+    grid-column: 1;
+    grid-row: 3;
+    padding-bottom: 12px;
   }
 }
 

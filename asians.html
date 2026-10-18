@@ -8,6 +8,8 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&amp;family=Antonio:wght@400;500;600;700&amp;display=swap">
+  <!-- Kalam: the handwriting for the margin notes -->
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Kalam:wght@400&amp;display=swap">
   <link rel="stylesheet" href="css/site.css">
   <link rel="stylesheet" href="css/case-study.css">
   <link rel="stylesheet" href="css/asians.css">
@@ -17,36 +19,15 @@
 </head>
 <body>
   <a class="skip-link" href="#main">Skip to content</a>
-  <header class="site-header">
-    <div class="site-header__bar">
-      <a class="brand" href="index.html" aria-label="mdahal, home">mdahal<i>.</i></a>
-      <nav class="site-nav" aria-label="Main">
-        <a href="index.html">Home</a>
-        <a href="about.html">About</a>
-        <a href="index.html#work" aria-current="page">Projects</a>
-        <a href="index.html#artwork">Artwork</a>
-        <a href="#contact">Contact</a>
-      </nav>
-      <div class="header-actions">
-        <button class="menu-button" type="button" aria-expanded="false" aria-controls="menu">Menu</button>
-        <button class="icon-button theme-toggle" type="button" aria-label="Switch theme"><svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20.985 12.486a9 9 0 1 1-9.473-9.472c.405-.022.617.46.402.803a6 6 0 0 0 8.268 8.268c.344-.215.825-.004.803.401"/></svg><svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2m-7.07-17.07 1.41 1.41m11.32 11.32 1.41 1.41M2 12h2m16 0h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"/></svg></button>
-      </div>
+  <!-- Case studies swap the site navigation for a slim bar: back to the
+       projects, the case study's name and the theme switch -->
+  <header class="cs-top">
+    <div class="cs-top__bar">
+      <a class="cs-top__back" href="index.html#work"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m12 19-7-7 7-7M19 12H5"/></svg>Back to projects</a>
+      <p class="cs-top__name" aria-hidden="true">Asian’s</p>
+      <button class="icon-button theme-toggle" type="button" aria-label="Switch theme"><svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20.985 12.486a9 9 0 1 1-9.473-9.472c.405-.022.617.46.402.803a6 6 0 0 0 8.268 8.268c.344-.215.825-.004.803.401"/></svg><svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2m-7.07-17.07 1.41 1.41m11.32 11.32 1.41 1.41M2 12h2m16 0h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"/></svg></button>
     </div>
   </header>
-
-  <div class="menu" id="menu">
-    <nav class="menu__links" aria-label="Menu">
-      <a href="index.html">Home<small>01</small></a>
-      <a href="about.html">About<small>02</small></a>
-      <a href="index.html#work">Projects<small>03</small></a>
-      <a href="index.html#artwork">Artwork<small>04</small></a>
-      <a href="#contact">Contact<small>05</small></a>
-    </nav>
-    <div class="menu__foot">
-      <span>manahari.dahal1@gmail.com</span>
-      <span><a href="https://www.linkedin.com/in/manaharidahal/" target="_blank" rel="noopener">LinkedIn</a><a href="https://dribbble.com/manaharidahal" target="_blank" rel="noopener">Dribbble</a></span>
-    </div>
-  </div>
 
   <main class="page" id="main">
     <header class="cs-hero">
@@ -60,13 +41,22 @@
           <div class="cs-hero__image cs-hero__image--light">
             <img src="assets/images/asians-01-6c004b698b.jpg" alt="Two phones showing the Asian's app splash and onboarding screens" width="1800" height="1090">
           </div>
-          <dl class="meta">
-            <div><dt>Role</dt><dd>UX Researcher &amp; Designer, project lead</dd></div>
-            <div><dt>Timeline</dt><dd>Fall 2021 to Spring 2022</dd></div>
-            <div class="wide"><dt>Outcome</dt><dd>I built an interactive prototype in Adobe XD. The restaurant closed in the pandemic before the app was built.</dd></div>
-            <div><dt>Team</dt><dd>Me, a UX researcher, and a visual designer</dd></div>
-            <div><dt>Tools</dt><dd class="chips"><span class="chip chip--pill">Adobe XD</span><span class="chip chip--pill">InVision</span><span class="chip chip--pill">Google Forms</span><span class="chip chip--pill">Adobe Illustrator</span></dd></div>
-          </dl>
+          <div class="meta">
+            <section class="meta__outcome" aria-labelledby="outcome-title">
+              <h2 class="meta__label" id="outcome-title">Outcome</h2>
+              <ul class="meta__stats">
+                <li><span class="meta__num">~50</span><span class="meta__cap">People surveyed</span></li>
+                <li><span class="meta__num">10+</span><span class="meta__cap">Guests tested the prototype</span></li>
+              </ul>
+              <p class="meta__summary">I built an interactive prototype in Adobe XD. The restaurant closed in the pandemic before the app was built.</p>
+            </section>
+            <dl class="meta__facts">
+              <div><dt>Role</dt><dd>UX Researcher &amp; Designer, project lead</dd></div>
+              <div><dt>Timeline</dt><dd>Fall 2021 to Spring 2022</dd></div>
+              <div><dt>Team</dt><dd>Me, a UX researcher, and a visual designer</dd></div>
+              <div class="wide"><dt>Tools</dt><dd class="chips"><span class="chip chip--pill">Adobe XD</span><span class="chip chip--pill">InVision</span><span class="chip chip--pill">Google Forms</span><span class="chip chip--pill">Adobe Illustrator</span></dd></div>
+            </dl>
+          </div>
         </div>
         <aside class="cs-hero__aside" aria-label="Project quick links">
           <div class="access">
@@ -95,15 +85,15 @@
       <nav class="rail" aria-label="Stages">
         <p class="rail__title">Stages</p>
         <ol>
-          <li><a href="#overview">Overview</a></li>
-          <li><a href="#empathize"><span class="rail__num">1.</span>Empathize</a></li>
-          <li><a href="#define"><span class="rail__num">2.</span>Define</a></li>
-          <li><a href="#ideate"><span class="rail__num">3.</span>Ideate</a></li>
-          <li><a href="#design"><span class="rail__num">4.</span>Design</a></li>
-          <li><a href="#prototype"><span class="rail__num">5.</span>Prototype</a></li>
-          <li><a href="#test"><span class="rail__num">6.</span>Test</a></li>
-          <li><a href="#result"><span class="rail__num">7.</span>Outcome</a></li>
-          <li><a href="#learn"><span class="rail__num">8.</span>Learn</a></li>
+          <li><a href="#overview"><span class="rail__label">Overview</span></a></li>
+          <li><a href="#empathize"><span class="rail__label"><span class="rail__num">1.</span>Empathize</span></a></li>
+          <li><a href="#define"><span class="rail__label"><span class="rail__num">2.</span>Define</span></a></li>
+          <li><a href="#ideate"><span class="rail__label"><span class="rail__num">3.</span>Ideate</span></a></li>
+          <li><a href="#design"><span class="rail__label"><span class="rail__num">4.</span>Design</span></a></li>
+          <li><a href="#prototype"><span class="rail__label"><span class="rail__num">5.</span>Prototype</span></a></li>
+          <li><a href="#test"><span class="rail__label"><span class="rail__num">6.</span>Test</span></a></li>
+          <li><a href="#result"><span class="rail__label"><span class="rail__num">7.</span>Outcome</span></a></li>
+          <li><a href="#learn"><span class="rail__label"><span class="rail__num">8.</span>Learn</span></a></li>
         </ol>
         <button class="rail__toggle" type="button" aria-expanded="false"><span class="rail__current">Overview</span><span class="rail__count">1/9</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m18 15-6-6-6 6"/></svg></button>
       </nav>
@@ -133,11 +123,12 @@
 
         <!-- 1 Empathize ===================================================== -->
         <section class="stage" id="empathize" aria-labelledby="empathize-title">
-          <div class="stage__card" data-ghost="Empathize">
+          <div class="stage__card">
             <div class="stage__label">
               <h2 class="stage__title" id="empathize-title">Empathize</h2>
             </div>
             <span class="stage__big" aria-hidden="true">01</span>
+            <img class="stage__visual" src="assets/images/asians-02-225171566d.webp" alt="" aria-hidden="true" loading="lazy">
           </div>
 
           <section class="block" id="survey" aria-labelledby="survey-h">
@@ -286,7 +277,7 @@
 
         <!-- 2 Define ======================================================== -->
         <section class="stage" id="define" aria-labelledby="define-title">
-          <div class="stage__card" data-ghost="Define">
+          <div class="stage__card">
             <div class="stage__label">
               <h2 class="stage__title" id="define-title">Define</h2>
             </div>
@@ -318,11 +309,12 @@
 
         <!-- 3 Ideate ======================================================== -->
         <section class="stage" id="ideate" aria-labelledby="ideate-title">
-          <div class="stage__card" data-ghost="Ideate">
+          <div class="stage__card">
             <div class="stage__label">
               <h2 class="stage__title" id="ideate-title">Ideate</h2>
             </div>
             <span class="stage__big" aria-hidden="true">03</span>
+            <img class="stage__visual" src="assets/images/asians-03-75cd6c1585.webp" alt="" aria-hidden="true" loading="lazy">
           </div>
 
           <section class="block" id="wires" aria-labelledby="wires-h">
@@ -825,11 +817,12 @@
 
         <!-- 4 Design ======================================================== -->
         <section class="stage" id="design" aria-labelledby="design-title">
-          <div class="stage__card" data-ghost="Design">
+          <div class="stage__card">
             <div class="stage__label">
               <h2 class="stage__title" id="design-title">Design</h2>
             </div>
             <span class="stage__big" aria-hidden="true">04</span>
+            <img class="stage__visual" src="assets/images/asians-06-f207029491.webp" alt="" aria-hidden="true" loading="lazy">
           </div>
 
           <section class="block" id="system" aria-labelledby="system-h">
@@ -963,11 +956,12 @@
 
         <!-- 5 Prototype ===================================================== -->
         <section class="stage" id="prototype" aria-labelledby="prototype-title">
-          <div class="stage__card" data-ghost="Prototype">
+          <div class="stage__card">
             <div class="stage__label">
               <h2 class="stage__title" id="prototype-title">Prototype</h2>
             </div>
             <span class="stage__big" aria-hidden="true">05</span>
+            <img class="stage__visual" src="assets/images/asians-08-1be2b366c1.webp" alt="" aria-hidden="true" loading="lazy">
           </div>
 
           <section class="block" id="compare" aria-labelledby="compare-h">
@@ -1048,7 +1042,7 @@
 
         <!-- 6 Test ========================================================== -->
         <section class="stage" id="test" aria-labelledby="test-title">
-          <div class="stage__card" data-ghost="Test">
+          <div class="stage__card">
             <div class="stage__label">
               <h2 class="stage__title" id="test-title">Test</h2>
             </div>
@@ -1712,7 +1706,7 @@
 
         <!-- 7 Outcome ======================================================= -->
         <section class="stage" id="result" aria-labelledby="result-title">
-          <div class="stage__card" data-ghost="Outcome">
+          <div class="stage__card">
             <div class="stage__label">
               <h2 class="stage__title" id="result-title">Outcome</h2>
             </div>
@@ -1739,11 +1733,12 @@
 
         <!-- 8 Learn ========================================================= -->
         <section class="stage" id="learn" aria-labelledby="learn-title">
-          <div class="stage__card" data-ghost="Learn">
+          <div class="stage__card">
             <div class="stage__label">
               <h2 class="stage__title" id="learn-title">Learn</h2>
             </div>
             <span class="stage__big" aria-hidden="true">08</span>
+            <img class="stage__visual" src="assets/images/ku-brand-09-c78000167a.webp" alt="" aria-hidden="true" loading="lazy">
           </div>
 
           <section class="block" id="unfinished" aria-labelledby="unfinished-h">

@@ -8,6 +8,8 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&amp;family=Antonio:wght@400;500;600;700&amp;display=swap">
+  <!-- Kalam: the handwriting for the margin notes -->
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Kalam:wght@400&amp;display=swap">
   <link rel="stylesheet" href="css/site.css">
   <link rel="stylesheet" href="css/case-study.css">
   <link rel="stylesheet" href="css/luna.css">
@@ -17,36 +19,15 @@
 </head>
 <body>
   <a class="skip-link" href="#main">Skip to content</a>
-  <header class="site-header">
-    <div class="site-header__bar">
-      <a class="brand" href="index.html" aria-label="mdahal, home">mdahal<i>.</i></a>
-      <nav class="site-nav" aria-label="Main">
-        <a href="index.html">Home</a>
-        <a href="about.html">About</a>
-        <a href="index.html#work" aria-current="page">Projects</a>
-        <a href="index.html#artwork">Artwork</a>
-        <a href="#contact">Contact</a>
-      </nav>
-      <div class="header-actions">
-        <button class="menu-button" type="button" aria-expanded="false" aria-controls="menu">Menu</button>
-        <button class="icon-button theme-toggle" type="button" aria-label="Switch theme"><svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20.985 12.486a9 9 0 1 1-9.473-9.472c.405-.022.617.46.402.803a6 6 0 0 0 8.268 8.268c.344-.215.825-.004.803.401"/></svg><svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2m-7.07-17.07 1.41 1.41m11.32 11.32 1.41 1.41M2 12h2m16 0h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"/></svg></button>
-      </div>
+  <!-- Case studies swap the site navigation for a slim bar: back to the
+       projects, the case study's name and the theme switch -->
+  <header class="cs-top">
+    <div class="cs-top__bar">
+      <a class="cs-top__back" href="index.html#work"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m12 19-7-7 7-7M19 12H5"/></svg>Back to projects</a>
+      <p class="cs-top__name" aria-hidden="true">Luna Surgical Console</p>
+      <button class="icon-button theme-toggle" type="button" aria-label="Switch theme"><svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20.985 12.486a9 9 0 1 1-9.473-9.472c.405-.022.617.46.402.803a6 6 0 0 0 8.268 8.268c.344-.215.825-.004.803.401"/></svg><svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2m-7.07-17.07 1.41 1.41m11.32 11.32 1.41 1.41M2 12h2m16 0h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"/></svg></button>
     </div>
   </header>
-
-  <div class="menu" id="menu">
-    <nav class="menu__links" aria-label="Menu">
-      <a href="index.html">Home<small>01</small></a>
-      <a href="about.html">About<small>02</small></a>
-      <a href="index.html#work">Projects<small>03</small></a>
-      <a href="index.html#artwork">Artwork<small>04</small></a>
-      <a href="#contact">Contact<small>05</small></a>
-    </nav>
-    <div class="menu__foot">
-      <span>manahari.dahal1@gmail.com</span>
-      <span><a href="https://www.linkedin.com/in/manaharidahal/" target="_blank" rel="noopener">LinkedIn</a><a href="https://dribbble.com/manaharidahal" target="_blank" rel="noopener">Dribbble</a></span>
-    </div>
-  </div>
 
   <main class="page" id="main">
     <header class="cs-hero">
@@ -60,13 +41,22 @@
           <div class="cs-hero__image">
             <img src="assets/images/luna-01-7142ae9c81.webp" alt="The live video editor in annotation mode, with numbered pins and a measurement on the feed" width="1280" height="720">
           </div>
-          <dl class="meta">
-            <div><dt>Role</dt><dd>UX Design Intern</dd></div>
-            <div><dt>Timeline</dt><dd>Summer 2026 (3 months)</dd></div>
-            <div class="wide"><dt>Outcome</dt><dd>A working Figma prototype of all three projects. To follow NDA rules, I redrew the screens and hid clinical data.</dd></div>
-            <div><dt>Mentorship</dt><dd>Design Mentor &amp; Clinical Supervisor (names masked)</dd></div>
-            <div><dt>Tools</dt><dd class="chips"><span class="chip chip--pill">Figma</span><span class="chip chip--pill">Interactive Prototype</span></dd></div>
-          </dl>
+          <div class="meta">
+            <section class="meta__outcome" aria-labelledby="outcome-title">
+              <h2 class="meta__label" id="outcome-title">Outcome</h2>
+              <ul class="meta__stats">
+                <li><span class="meta__num">3</span><span class="meta__cap">Projects built into one working prototype</span></li>
+                <li><span class="meta__num">6 of 10</span><span class="meta__cap">Usability rules fixed in my own review</span></li>
+              </ul>
+              <p class="meta__summary">A working Figma prototype of all three projects. To follow NDA rules, I redrew the screens and hid clinical data.</p>
+            </section>
+            <dl class="meta__facts">
+              <div><dt>Role</dt><dd>UX Design Intern</dd></div>
+              <div><dt>Timeline</dt><dd>Summer 2026 (3 months)</dd></div>
+              <div><dt>Mentorship</dt><dd>Design Mentor &amp; Clinical Supervisor (names masked)</dd></div>
+              <div class="wide"><dt>Tools</dt><dd class="chips"><span class="chip chip--pill">Figma</span><span class="chip chip--pill">Interactive Prototype</span></dd></div>
+            </dl>
+          </div>
         </div>
         <aside class="cs-hero__aside" aria-label="Project quick links">
           <div class="access">
@@ -99,15 +89,15 @@
       <nav class="rail" aria-label="Stages">
         <p class="rail__title">Stages</p>
         <ol>
-          <li><a href="#overview">Overview</a></li>
-          <li><a href="#empathize"><span class="rail__num">1.</span>Empathize</a></li>
-          <li><a href="#define"><span class="rail__num">2.</span>Problem</a></li>
-          <li><a href="#ideate"><span class="rail__num">3.</span>Ideate</a></li>
-          <li><a href="#design"><span class="rail__num">4.</span>Design</a></li>
-          <li><a href="#prototype"><span class="rail__num">5.</span>Prototype</a></li>
-          <li><a href="#test"><span class="rail__num">6.</span>Test</a></li>
-          <li><a href="#result"><span class="rail__num">7.</span>Outcome</a></li>
-          <li><a href="#learn"><span class="rail__num">8.</span>Learn</a></li>
+          <li><a href="#overview"><span class="rail__label">Overview</span></a></li>
+          <li><a href="#empathize"><span class="rail__label"><span class="rail__num">1.</span>Empathize</span></a></li>
+          <li><a href="#define"><span class="rail__label"><span class="rail__num">2.</span>Problem</span></a></li>
+          <li><a href="#ideate"><span class="rail__label"><span class="rail__num">3.</span>Ideate</span></a></li>
+          <li><a href="#design"><span class="rail__label"><span class="rail__num">4.</span>Design</span></a></li>
+          <li><a href="#prototype"><span class="rail__label"><span class="rail__num">5.</span>Prototype</span></a></li>
+          <li><a href="#test"><span class="rail__label"><span class="rail__num">6.</span>Test</span></a></li>
+          <li><a href="#result"><span class="rail__label"><span class="rail__num">7.</span>Outcome</span></a></li>
+          <li><a href="#learn"><span class="rail__label"><span class="rail__num">8.</span>Learn</span></a></li>
         </ol>
         <button class="rail__toggle" type="button" aria-expanded="false"><span class="rail__current">Overview</span><span class="rail__count">1/9</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m18 15-6-6-6 6"/></svg></button>
       </nav>
@@ -323,7 +313,7 @@
 
         <!-- 1 Empathize ===================================================== -->
         <section class="stage" id="empathize" aria-labelledby="empathize-title">
-          <div class="stage__card" data-ghost="Empathize">
+          <div class="stage__card">
             <div class="stage__label">
               <h2 class="stage__title" id="empathize-title">Empathize</h2>
             </div>
@@ -395,7 +385,7 @@
 
         <!-- 2 Problem ======================================================= -->
         <section class="stage" id="define" aria-labelledby="define-title">
-          <div class="stage__card" data-ghost="Problem">
+          <div class="stage__card">
             <div class="stage__label">
               <h2 class="stage__title" id="define-title">Problem</h2>
             </div>
@@ -745,7 +735,7 @@
 
         <!-- 3 Ideate ======================================================== -->
         <section class="stage" id="ideate" aria-labelledby="ideate-title">
-          <div class="stage__card" data-ghost="Ideate">
+          <div class="stage__card">
             <div class="stage__label">
               <h2 class="stage__title" id="ideate-title">Ideate</h2>
             </div>
@@ -1042,37 +1032,44 @@
 
         <!-- 4 Design ======================================================== -->
         <section class="stage" id="design" aria-labelledby="design-title">
-          <div class="stage__card" data-ghost="Design">
+          <div class="stage__card">
             <div class="stage__label">
               <h2 class="stage__title" id="design-title">Design</h2>
             </div>
             <span class="stage__big" aria-hidden="true">04</span>
+            <img class="stage__visual" src="assets/images/luna-02-6d4cfe0c27.svg" alt="" aria-hidden="true" loading="lazy">
           </div>
 
-          <div class="project-tabs">
-            <div class="tabs" role="tablist" aria-label="Design work, by project" id="project-tabs">
-              <button type="button" role="tab" id="pt-0" aria-controls="components" aria-selected="true">Components</button>
-              <button type="button" role="tab" id="pt-1" aria-controls="p-arm" aria-selected="false">Project 1 · Arm identity</button>
-              <button type="button" role="tab" id="pt-2" aria-controls="p-gal" aria-selected="false">Project 2 · Gallery and video editor</button>
-              <button type="button" role="tab" id="pt-3" aria-controls="p-live" aria-selected="false">Project 3 · Live annotation</button>
+          <!-- One section holds the project switcher; its heading follows the selected project -->
+          <section class="block project-switch" aria-labelledby="design-work-h">
+            <h3 class="block__title" id="design-work-h">Component system</h3>
+            <div class="block__body">
+              <div class="project-switch__choose" data-band-cover>
+                <p class="project-switch__hint">Choose what to see</p>
+                <div class="tabs project-tabs" role="tablist" aria-label="Design work, by project" id="project-tabs">
+                  <button type="button" role="tab" id="pt-0" aria-controls="components" aria-selected="true" data-title="Component system"><span class="ptab__kicker">Shared</span><span class="ptab__name">Component system</span></button>
+                  <button type="button" role="tab" id="pt-1" aria-controls="p-arm" aria-selected="false" data-title="Project 1 · Arm identity"><span class="ptab__kicker">Project 1</span><span class="ptab__name">Arm identity</span></button>
+                  <button type="button" role="tab" id="pt-2" aria-controls="p-gal" aria-selected="false" data-title="Project 2 · Gallery and video editor"><span class="ptab__kicker">Project 2</span><span class="ptab__name">Gallery and video editor</span></button>
+                  <button type="button" role="tab" id="pt-3" aria-controls="p-live" aria-selected="false" data-title="Project 3 · Live annotation"><span class="ptab__kicker">Project 3</span><span class="ptab__name">Live annotation</span></button>
+                </div>
+              </div>
             </div>
-          </div>
+          </section>
 
           <!-- Components -->
           <div role="tabpanel" id="components" aria-labelledby="pt-0">
-            <section class="block" aria-labelledby="comp-h">
-              <h3 class="block__title" id="comp-h" data-split>Component system</h3>
+            <section class="block block--continued">
               <div class="block__body">
                 <p class="principles">Principles used <a href="#pr-extensibility" data-principle>Extensibility</a></p>
                 <div class="rules">
                   <div class="rules__nav">
                     <p class="lead">I wrote the component rules first, so every screen looks and acts the same.</p>
-                    <div class="tabs rules__list" role="tablist" aria-label="Component rules" aria-orientation="vertical" id="rules">
-                      <button type="button" role="tab" id="rule-t0" aria-controls="rule-p0" aria-selected="true">Severity scale <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></button>
-                      <button type="button" role="tab" id="rule-t1" aria-controls="rule-p1" aria-selected="false">Arm identity <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></button>
-                      <button type="button" role="tab" id="rule-t2" aria-controls="rule-p2" aria-selected="false">Tools and actions <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></button>
-                      <button type="button" role="tab" id="rule-t3" aria-controls="rule-p3" aria-selected="false">Three ways to show a state <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></button>
-                      <button type="button" role="tab" id="rule-t4" aria-controls="rule-p4" aria-selected="false">Captures <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></button>
+                    <div class="tabs rules__list" role="tablist" aria-label="Component rules" id="rules">
+                      <button type="button" role="tab" id="rule-t0" aria-controls="rule-p0" aria-selected="true">Severity scale</button>
+                      <button type="button" role="tab" id="rule-t1" aria-controls="rule-p1" aria-selected="false">Arm identity</button>
+                      <button type="button" role="tab" id="rule-t2" aria-controls="rule-p2" aria-selected="false">Tools and actions</button>
+                      <button type="button" role="tab" id="rule-t3" aria-controls="rule-p3" aria-selected="false">Three ways to show a state</button>
+                      <button type="button" role="tab" id="rule-t4" aria-controls="rule-p4" aria-selected="false">Captures</button>
                     </div>
                     <div class="rules__controls">
                       <button class="round-button" type="button" data-step="-1" aria-label="Previous rule"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m15 18-6-6 6-6"/></svg></button>
@@ -1155,8 +1152,7 @@
 
           <!-- Project 1 -->
           <div role="tabpanel" id="p-arm" aria-labelledby="pt-1" hidden>
-            <section class="block" aria-labelledby="arm-h">
-              <h3 class="block__title" id="arm-h">Project 1 · Arm identity</h3>
+            <section class="block block--continued">
               <div class="block__body">
                 <p class="principles">Principles used <a href="#pr-awareness" data-principle>Situational awareness</a> <a href="#pr-clarity" data-principle>Clarity</a></p>
                 <ul class="arms">
@@ -1183,8 +1179,7 @@
 
           <!-- Project 2 -->
           <div role="tabpanel" id="p-gal" aria-labelledby="pt-2" hidden>
-            <section class="block" aria-labelledby="gal-h">
-              <h3 class="block__title" id="gal-h">Project 2 · Gallery and video editor</h3>
+            <section class="block block--continued">
               <div class="block__body">
                 <p class="principles">Principles used <a href="#pr-familiarity" data-principle>Familiarity</a> <a href="#pr-trust" data-principle>Trust &amp; reliability</a></p>
                 <div class="gallery-split">
@@ -1307,8 +1302,7 @@
 
           <!-- Project 3 -->
           <div role="tabpanel" id="p-live" aria-labelledby="pt-3" hidden>
-            <section class="block" aria-labelledby="live-h">
-              <h3 class="block__title" id="live-h">Project 3 · Live annotation</h3>
+            <section class="block block--continued">
               <div class="block__body">
                 <p class="principles">Principles used <a href="#pr-informed-control" data-principle>Informed control</a> <a href="#pr-trust" data-principle>Trust &amp; reliability</a></p>
                 <div class="switcher">
@@ -1436,11 +1430,12 @@
 
         <!-- 5 Prototype ===================================================== -->
         <section class="stage" id="prototype" aria-labelledby="prototype-title">
-          <div class="stage__card" data-ghost="Prototype">
+          <div class="stage__card">
             <div class="stage__label">
               <h2 class="stage__title" id="prototype-title">Prototype</h2>
             </div>
             <span class="stage__big" aria-hidden="true">05</span>
+            <img class="stage__visual" src="assets/images/luna-30-127e4df147.svg" alt="" aria-hidden="true" loading="lazy">
           </div>
 
           <section class="block" aria-labelledby="wire-h">
@@ -1466,7 +1461,7 @@
 
         <!-- 6 Test ========================================================== -->
         <section class="stage" id="test" aria-labelledby="test-title">
-          <div class="stage__card" data-ghost="Test">
+          <div class="stage__card">
             <div class="stage__label">
               <h2 class="stage__title" id="test-title">Test</h2>
             </div>
@@ -1529,7 +1524,7 @@
 
         <!-- 7 Outcome ======================================================= -->
         <section class="stage" id="result" aria-labelledby="result-title">
-          <div class="stage__card" data-ghost="Outcome">
+          <div class="stage__card">
             <div class="stage__label">
               <h2 class="stage__title" id="result-title">Outcome</h2>
             </div>
@@ -1575,11 +1570,12 @@
 
         <!-- 8 Learn ========================================================= -->
         <section class="stage" id="learn" aria-labelledby="learn-title">
-          <div class="stage__card" data-ghost="Learn">
+          <div class="stage__card">
             <div class="stage__label">
               <h2 class="stage__title" id="learn-title">Learn</h2>
             </div>
             <span class="stage__big" aria-hidden="true">08</span>
+            <img class="stage__visual" src="assets/images/luna-01-7142ae9c81.webp" alt="" aria-hidden="true" loading="lazy">
           </div>
 
           <section class="block block--plain" aria-label="Still unfinished">

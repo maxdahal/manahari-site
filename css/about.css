@@ -27,15 +27,10 @@
   padding-top: calc(var(--header-h) + var(--header-top) + 120px);
   padding-bottom: 86px;
 }
-.about-intro__photo {
-  overflow: hidden;
-  border-radius: var(--r-lg);
-  background: #fbfcfe;
-}
-.about-intro__photo img {
-  width: 100%;
-  aspect-ratio: 4 / 5;
-  object-fit: cover;
+/* the ID badge (styles in site.css) hangs in the left column */
+.about-intro .badge {
+  justify-self: center;
+  margin-top: -48px;
 }
 .about-intro__text {
   display: flex;
@@ -82,8 +77,8 @@
   .about-intro {
     grid-template-columns: minmax(0, 1fr);
   }
-  .about-intro__photo {
-    max-width: 420px;
+  .about-intro .badge {
+    margin-top: 0;
   }
 }
 @media (max-width: 640px) {
@@ -341,4 +336,217 @@
 .skills {
   gap: 0;
   max-width: 860px;
+}
+
+/* Education and experience as story chapters ----------------------------------
+   One chapter per place, oldest first. Each is two columns: a stack of
+   pictures on one side and the story on the other; the sides alternate. The
+   top of every stack is the chapter card (number and place on the grid-line
+   band used for the case-study stage breaks), then the chapter's photos.
+
+   A chapter with photos pins in place while you scroll through it (both
+   columns are sticky and the chapter is made taller, 45vh per photo), and the
+   cards flip away one by one to reveal the next. That is pure CSS: each
+   chapter is a view timeline, and each card's "fly away" animation runs over
+   its own slice of the chapter's progress (card --i of --flips). The last
+   photo stays. On phones, for reduced motion, or in browsers without
+   scroll-driven animations, the stack is a swipeable row instead. Grid and
+   flex only. */
+.chapters .block__body {
+  display: flex;
+  flex-direction: column;
+  gap: clamp(64px, 9vw, 120px);
+}
+.chapters__lead {
+  text-align: center;
+  color: var(--text);
+}
+.chapter {
+  --pin: calc(var(--header-h) + var(--header-top) + 32px);
+  display: grid;
+  grid-template-columns: minmax(0, 5fr) minmax(0, 7fr);
+  gap: clamp(32px, 5vw, 80px);
+  align-items: start;
+  view-timeline-name: --chapter;
+}
+/* every other chapter swaps sides; the columns swap too, so the picture is
+   always the narrower (5fr) column and every chapter's picture is the same size */
+.chapter:nth-of-type(even) {
+  grid-template-columns: minmax(0, 7fr) minmax(0, 5fr);
+}
+.chapter:nth-of-type(even) .chapter__media {
+  order: 2;
+}
+.chapter__media {
+  position: sticky;
+  top: var(--pin);
+}
+.chapter__stack {
+  display: grid;
+  padding: 12px;
+}
+.chapter__card {
+  grid-area: 1 / 1;
+  width: 100%;
+  aspect-ratio: 4 / 5;
+  max-height: calc(100vh - var(--pin) - 56px);
+  border-radius: var(--r-xl);
+  box-shadow: 0 18px 36px -14px rgb(0 0 0 / 0.5);
+  z-index: calc(20 - var(--i, 0));
+}
+/* the cards underneath peek out, each turned a little */
+.chapter__card:nth-child(2) { rotate: 3deg; }
+.chapter__card:nth-child(3) { rotate: -2.5deg; }
+.chapter__card:nth-child(4) { rotate: 4deg; }
+.chapter__card:nth-child(5) { rotate: -3.5deg; }
+.chapter__photo {
+  object-fit: cover;
+  background: var(--surface-2);
+}
+.chapter__panel {
+  --grid-line: color-mix(in srgb, var(--accent) 22%, transparent);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: clamp(20px, 2.5vw, 32px);
+  background:
+    linear-gradient(90deg, var(--grid-line) 1px, transparent 1px) 0 0 / 44px 44px,
+    linear-gradient(var(--grid-line) 1px, transparent 1px) 0 0 / 44px 44px,
+    var(--stage);
+}
+.chapter__num {
+  font-family: var(--heading-font);
+  font-size: clamp(4rem, 2rem + 6vw, 8rem);
+  font-weight: 600;
+  line-height: 0.8;
+  color: transparent;
+  -webkit-text-stroke: 1.5px var(--accent-text);
+}
+.chapter__panel-place {
+  font-family: var(--heading-font);
+  font-size: clamp(2rem, 1.2rem + 2.5vw, 3.5rem);
+  font-weight: 600;
+  line-height: 1;
+  color: var(--ink);
+}
+
+/* pinned chapters that flip through their photos */
+@media (min-width: 861px) and (prefers-reduced-motion: no-preference) {
+  @supports (animation-timeline: view()) {
+    .chapter--stack {
+      min-height: calc(100vh + var(--flips) * 45vh);
+    }
+    .chapter--stack .chapter__text {
+      position: sticky;
+      top: var(--pin);
+    }
+    .chapter--stack .chapter__card:not(:last-child) {
+      animation: card-away 1ms ease-in both;
+      animation-timeline: --chapter;
+      animation-range:
+        contain calc(var(--i) / var(--flips) * 90%)
+        contain calc((var(--i) + 0.85) / var(--flips) * 90%);
+    }
+  }
+}
+@keyframes card-away {
+  to {
+    translate: 10% -120%;
+    rotate: -14deg;
+    opacity: 0;
+  }
+}
+
+/* phones, reduced motion, older browsers: a swipeable row of cards */
+@media (max-width: 860px), (prefers-reduced-motion: reduce) {
+  .chapter__stack {
+    display: flex;
+    gap: 12px;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    padding: 4px 0 12px;
+  }
+  .chapter__card {
+    flex: 0 0 82%;
+    rotate: none !important;
+    aspect-ratio: 4 / 3.4;
+    scroll-snap-align: start;
+  }
+  .chapter__stack:has(> :only-child) .chapter__card {
+    flex-basis: 100%;
+  }
+}
+@supports not (animation-timeline: view()) {
+  .chapter__stack {
+    display: flex;
+    gap: 12px;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+  }
+  .chapter__card {
+    flex: 0 0 82%;
+    rotate: none !important;
+    scroll-snap-align: start;
+  }
+}
+
+.chapter__text {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+.chapter__kicker {
+  font-size: var(--fs-small);
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--accent-text);
+}
+.chapter__place {
+  font-size: var(--fs-h2);
+  line-height: 1.05;
+}
+.chapter__intro {
+  font-size: var(--fs-lead);
+  line-height: 1.45;
+  color: var(--ink);
+}
+.chapter__entries {
+  display: flex;
+  flex-direction: column;
+  margin-top: 8px;
+}
+.chapter__entry {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  padding: 20px 0;
+  border-top: 1px solid var(--line);
+}
+.chapter__role {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px 16px;
+}
+.chapter__role b {
+  font-weight: 600;
+  color: var(--ink);
+}
+.chapter__org,
+.chapter__desc {
+  color: var(--text);
+}
+@media (max-width: 860px) {
+  .chapter,
+  .chapter:nth-of-type(even) {
+    grid-template-columns: minmax(0, 1fr);
+  }
+  .chapter:nth-of-type(even) .chapter__media {
+    order: 0;
+  }
+  .chapter__media {
+    position: static;
+  }
 }

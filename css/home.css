@@ -2,10 +2,11 @@
    Home page
    Sections stack: each one sticks when you reach its end, and the next one
    slides up over it (home.js sets each section's sticky offset).
+     0. Hello intro
      1. Stacked sections
      2. Hero
      3. About me
-     4. Numbers and background
+     4. Numbers
      5. Case studies
      6. Skills marquee
      7. Artwork and lightbox
@@ -33,15 +34,127 @@
   color: var(--text);
 }
 
+/* 0. Hello intro ------------------------------------------------------------
+   Pure CSS, after Apple's "hello". Timeline:
+     0.2s - 2.2s  "hello" writes itself as one continuous line (its stroke is
+                  revealed with stroke-dashoffset; pathLength="1" makes the
+                  line one unit long), at an even, unhurried pace
+     2.6s - 3.0s  "hello" fades out
+     3.0s - 5.0s  "नमस्ते" (namaste, Nepali) writes itself left to right
+                  along its headline, in the Kalam handwriting font
+     5.6s - 6.2s  the screen fades away, then the name's block wipe starts
+                  (--intro on .hero delays it)
+   Both words share the overlay's single grid cell, so nothing is positioned
+   inside it. The overlay is fixed on top of everything and never takes
+   clicks once it has faded. It plays on a fresh visit or a refresh only, not
+   when you return to Home from another page of the site, and is skipped
+   entirely for reduced motion. */
+.hello {
+  --hello-w: min(560px, 72vw); /* width of the "hello" drawing */
+  position: fixed;
+  inset: 0;
+  z-index: 100;
+  display: grid;
+  place-items: center;
+  background: var(--bg);
+  animation: hello-out 0.6s ease 5.6s forwards;
+}
+.hello__word,
+.hello__namaste {
+  grid-area: 1 / 1;
+}
+.hello__word {
+  width: var(--hello-w);
+  overflow: visible;
+  animation: hello-fade 0.4s ease 2.6s forwards;
+}
+.hello__word path {
+  fill: none;
+  stroke: var(--ink);
+  stroke-width: 11;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  stroke-dasharray: 1;
+  stroke-dashoffset: 1;
+  animation: hello-write 2s cubic-bezier(0.45, 0.05, 0.55, 0.95) 0.2s forwards;
+}
+.hello__namaste {
+  margin: 0;
+  padding-inline: 0.1em;
+  font-family: "Kalam", var(--body-font);
+  /* नमस्ते is about 2.35em wide, so this makes it as wide as the drawn
+     "hello" (which fills about 85% of its box) */
+  font-size: calc(var(--hello-w) * 0.36);
+  font-weight: 400;
+  line-height: 1.3;
+  color: var(--ink);
+  clip-path: inset(0 100% 0 0);
+  animation: namaste-write 2s cubic-bezier(0.45, 0.05, 0.55, 0.95) 3s forwards;
+}
+@keyframes hello-write {
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+@keyframes hello-fade {
+  to {
+    opacity: 0;
+  }
+}
+@keyframes namaste-write {
+  to {
+    clip-path: inset(0 0 0 0);
+  }
+}
+@keyframes hello-out {
+  to {
+    opacity: 0;
+    visibility: hidden;
+  }
+}
+/* the name's intro wipe waits for the greeting to finish */
+.hero {
+  --intro: 6.3s;
+}
+/* while the intro plays (see the script in index.html) the page cannot
+   scroll; the scrollbar's space is kept so nothing shifts when it unlocks */
+html.hello-lock,
+html.hello-lock body {
+  overflow: hidden;
+}
+html.hello-lock {
+  scrollbar-gutter: stable;
+}
+/* coming back from another page of the site (see the script in index.html),
+   or reduced motion: no intro, the name appears straight away */
+.no-hello .hello {
+  display: none;
+}
+.no-hello .hero {
+  --intro: 0s;
+}
+@media (prefers-reduced-motion: reduce) {
+  .hello {
+    display: none;
+  }
+  .hero {
+    --intro: 0s;
+  }
+}
+
 /* 1. Stacked sections ------------------------------------------------------ */
 .sections {
   overflow-x: clip;
 }
+/* While the next section slides up over a stuck one, the stuck one drifts
+   upward too, but slower (parallax), and dims a little, so the hand-off keeps
+   moving instead of freezing. --cover (0 to 1) comes from home.js. */
 .sections > section {
   position: sticky;
   top: var(--stick, 0px);
   background: var(--bg);
-  box-shadow: inset 0 0 0 100vmax rgb(0 0 0 / calc(var(--cover, 0) * 0.2));
+  box-shadow: inset 0 0 0 100vmax rgb(0 0 0 / calc(var(--cover, 0) * 0.25));
+  translate: 0 calc(var(--cover, 0) * -22vh);
 }
 .sections > section:last-child {
   position: relative;
@@ -52,12 +165,24 @@
     position: relative;
     top: auto;
     box-shadow: none;
+    translate: none;
   }
 }
 
 /* 2. Hero -------------------------------------------------------------------- */
+/* The hero holds for 30vh of scrolling (130vh tall, its content sticky):
+   the name swaps between 5vh and 20vh, rests a moment as "UX Developer.",
+   and only then does About me start to slide up over it. */
 .hero {
-  height: 150vh;
+  height: 130vh;
+}
+/* Left out of the hand-off drift: the hero (the name never moves) and the
+   short stats section. A section shorter than the screen would drift up and
+   open a gap under itself, showing the section pinned behind it. */
+.sections > .hero,
+.sections > .facts {
+  translate: none;
+  box-shadow: none;
 }
 .hero__sticky {
   position: sticky;
@@ -71,47 +196,106 @@
   place-items: center;
   text-align: center;
 }
-.hero__name,
-.hero__role {
-  grid-area: 1 / 1;
+/* Hero name, built like the Loire hero. Set in Inter, every word the same
+   weight. Each line is a strict window (overflow hidden) holding two words
+   stacked with no gap: the name word, and the role word right under it. On
+   scroll both words move up exactly one word height together, so the role
+   word replaces the name word inside the same window and is never seen
+   outside it. The words are stacked tight (Loire's 0.85 line), so the role
+   word sits directly behind the name and the move reads as one push. The
+   window stops just above the waiting word's tallest letters. The move follows the scroll position on an
+   ease-out curve (see "Scroll-driven motion" below); browsers without
+   scroll-driven animations get the same move as a transition when home.js
+   adds .is-swapped. */
+.hero__name {
+  --word: 0.85em; /* one word's line box, as tight as Loire's */
+  --slot: 0.87em; /* the window: stops just above the waiting word */
   display: flex;
   flex-direction: column;
+  align-items: center;
   margin: 0;
-  font-family: var(--heading-font);
-  font-size: clamp(5.5rem, 15.5vw, 13.9375rem);
+  font-family: var(--body-font);
+  font-size: clamp(3.5rem, 15.5vw, 13.9375rem);
   font-weight: 600;
-  line-height: 0.88;
+  line-height: 0.85;
   letter-spacing: -0.035em;
 }
-.hero__role {
-  font-weight: 500;
-  color: #6f6f6f;
+.hero__line {
+  display: grid;
+  grid-template-rows: var(--slot);
+  overflow: hidden;
+  margin-bottom: -0.03em;
 }
-.hero__role i {
+.hero__reel,
+.hero__line::after {
+  grid-area: 1 / 1;
+}
+.hero__reel {
+  align-self: start;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  translate: 0 0;
+  transition: translate 0.7s cubic-bezier(0.33, 1, 0.68, 1);
+}
+.hero.is-swapped .hero__reel {
+  translate: 0 calc(-1 * var(--word));
+}
+.hero__word {
+  display: block;
+  height: var(--word);
+  animation: wipe-text 1.2s calc(var(--intro, 0s) + var(--wipe-delay, 0.2s)) both;
+}
+.hero__word--role i {
   font-style: normal;
   color: var(--accent);
 }
-.hero__line {
-  display: block;
-  overflow: hidden;
-  padding-bottom: 0.06em;
+
+/* Intro reveal, pure CSS: on load a solid block sweeps across each line of the
+   name, then pulls away to the right and leaves the name behind it. The block
+   is the line's ::after and shares the line's single grid cell with the reel,
+   so nothing is positioned. The second line follows a moment later. */
+.hero__line::after {
+  content: "";
+  background: var(--ink);
+  transform: scaleX(0);
+  animation: wipe-block 1.2s calc(var(--intro, 0s) + var(--wipe-delay, 0.2s)) cubic-bezier(0.77, 0, 0.18, 1) both;
 }
-.hero__line > span {
-  display: inline-block;
+.hero__line:nth-child(2) {
+  --wipe-delay: 0.42s;
 }
-.hero__name .hero__line > span {
-  translate: 0 calc(var(--hero, 0) * -112%);
-  animation: rise-in 0.9s cubic-bezier(0.22, 1, 0.36, 1) both;
+@keyframes wipe-block {
+  0% {
+    transform: scaleX(0);
+    transform-origin: left;
+  }
+  50% {
+    transform: scaleX(1);
+    transform-origin: left;
+  }
+  50.01% {
+    transform: scaleX(1);
+    transform-origin: right;
+  }
+  100% {
+    transform: scaleX(0);
+    transform-origin: right;
+  }
 }
-.hero__name .hero__line:nth-child(2) > span {
-  animation-delay: 0.12s;
+@keyframes wipe-text {
+  0%,
+  49.99% {
+    opacity: 0;
+  }
+  50%,
+  100% {
+    opacity: 1;
+  }
 }
-.hero__role .hero__line > span {
-  translate: 0 calc((1 - var(--hero, 0)) * 112%);
-}
-@keyframes rise-in {
-  from {
-    transform: translateY(100%);
+@media (prefers-reduced-motion: reduce) {
+  .hero__word,
+  .hero__line::after {
+    animation: none;
   }
 }
 
@@ -130,6 +314,45 @@
   align-items: center;
   gap: 12px;
   color: var(--ink);
+}
+/* Tagline: "I design and code." with a little personality. "design" is
+   handwritten (Kalam, the hand from the intro), tilted, in the accent colour;
+   "code" is monospaced with a blinking text cursor after it. */
+.tagline__hand {
+  display: inline-block;
+  margin-inline: 0.1em;
+  font-family: "Kalam", var(--body-font);
+  font-size: 1.4em;
+  line-height: 1;
+  color: var(--accent-text);
+  rotate: -4deg;
+}
+.tagline__code {
+  margin-inline: 0.15em 0;
+  padding: 0.05em 0.35em;
+  border-radius: 6px;
+  background: color-mix(in srgb, var(--accent) 14%, transparent);
+  font-family: ui-monospace, "SFMono-Regular", Menlo, Consolas, monospace;
+  font-size: 0.95em;
+}
+.tagline__caret {
+  display: inline-block;
+  width: 0.55em;
+  height: 1.05em;
+  margin-left: 0.15em;
+  vertical-align: -0.15em;
+  background: var(--accent);
+  animation: caret-blink 1.1s steps(1) infinite;
+}
+@keyframes caret-blink {
+  50% {
+    opacity: 0;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .tagline__caret {
+    animation: none;
+  }
 }
 .hero__links {
   display: flex;
@@ -155,18 +378,36 @@
   flex-direction: column;
   gap: 64px;
 }
+/* Same language as Case studies: a huge title (here on the left, mirroring
+   Case studies on the right) on the same 12-column grid, with the statement
+   set large beside it. */
 .intro__top {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 24px;
-  text-align: center;
+  display: grid;
+  grid-template-columns: repeat(12, minmax(0, 1fr));
+  column-gap: 24px;
+  row-gap: 32px;
+  align-items: end;
+}
+.intro__title {
+  grid-column: 1 / span 6;
 }
 .statement {
-  max-width: 434px;
-  font-size: var(--fs-h2);
-  line-height: 1.15;
+  grid-column: 6 / -1;
+  grid-row: 2;
+  align-self: start;
+  max-width: 22ch;
+  font-family: var(--heading-font);
+  font-size: clamp(2rem, 1.3rem + 2.2vw, 3.5rem);
+  font-weight: 600;
+  line-height: 1.08;
   letter-spacing: -0.02em;
+  color: var(--ink);
+}
+@media (max-width: 860px) {
+  .intro__title,
+  .statement {
+    grid-column: 1 / -1;
+  }
 }
 .fill-word {
   background: linear-gradient(90deg, var(--ink) var(--f, 0%), color-mix(in srgb, var(--ink) 26%, transparent) var(--f, 0%));
@@ -175,202 +416,25 @@
   color: transparent;
 }
 
-/* the card that slides out from the "Available for new roles" tab */
-.peek {
-  display: grid;
-  grid-template-columns: minmax(0, 1fr) 60px;
-  align-items: center;
-  min-height: 520px;
-}
-.peek__ghost,
-.peek__hint,
-.peek__card {
-  grid-area: 1 / 1;
-}
-.peek__ghost {
-  align-self: end;
-  font-family: var(--heading-font);
-  font-size: 8rem;
-  font-weight: 600;
-  line-height: 1;
-  letter-spacing: -0.035em;
-  opacity: 0.05;
-}
-.peek__ghost::before {
-  content: "About";
-}
-.peek__hint {
-  justify-self: end;
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  margin-right: 24px;
-  font-weight: 600;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
-  color: var(--text);
-}
-.peek__hint svg {
-  width: 40px;
-  height: 25px;
-  color: var(--accent-text);
-}
-.peek__card {
-  justify-self: end;
-  display: grid;
-  grid-template-columns: minmax(0, 0.82fr) minmax(0, 1fr);
-  gap: 40px;
-  align-items: center;
-  width: min(900px, 100%);
-  padding: 36px;
-  border-radius: 28px;
-  background: #1a1a1e;
-  color: #f9f9f6;
-  opacity: 0;
-  visibility: hidden;
-  translate: 24px 0;
-  transition: opacity 0.4s ease, translate 0.4s ease, visibility 0.4s;
-}
-.peek.is-open .peek__card {
-  opacity: 1;
-  visibility: visible;
-  translate: 0 0;
-}
-.peek.is-open .peek__hint {
-  opacity: 0;
-}
-.peek__photo {
-  width: 100%;
-  aspect-ratio: 4 / 5;
-  object-fit: cover;
-  border-radius: var(--r-lg);
-  background: #fbfcfe;
-}
-.peek__text {
-  display: flex;
-  flex-direction: column;
-  gap: 16px;
-}
-.peek__text h3 {
-  font-size: 2.25rem;
-  line-height: 1.1;
-  color: #f9f9f6;
-}
-.peek__role {
-  margin-top: -12px;
-  color: #c9c9c4;
-}
-.peek__facts {
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
-  padding-top: 20px;
-  border-top: 1px dashed rgb(249 249 246 / 0.3);
-  font-weight: 500;
-}
-.peek__facts div {
-  display: flex;
-  gap: 6px;
-}
-.peek__facts dt {
-  color: #c9c9c4;
-  font-weight: 400;
-}
-.peek__links {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: flex-end;
-  gap: 10px;
-}
-.peek__icon {
-  display: grid;
-  place-items: center;
-  width: 44px;
-  height: 44px;
-  border-radius: 50%;
-  background: #f9f9f6;
-  color: #1a1a1e;
-}
-.peek__icon svg {
-  width: 20px;
-  height: 20px;
-}
-.peek__more {
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  min-height: 44px;
-  padding: 0 14px;
-  border-radius: var(--r);
-  background: #f9f9f6;
-  color: #1a1a1e;
-  font-weight: 500;
-  text-decoration: none;
-}
-.peek__more svg {
-  width: 16px;
-  height: 16px;
-}
-.peek__tab {
-  grid-column: 2;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 14px;
-  height: 440px;
-  padding: 12px 0;
-  border: 0;
-  border-radius: 18px 0 0 18px;
-  background: var(--accent);
-  color: var(--on-accent);
-  font-weight: 500;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
-  writing-mode: vertical-rl;
-  cursor: pointer;
-}
-.peek__tab .dot {
-  background: currentColor;
+/* the ID badge (styles in site.css) hangs under the About me title */
+.intro .badge {
+  grid-column: 1 / span 4;
+  grid-row: 2;
+  justify-self: center;
+  align-self: start;
+  margin-top: -16px;
 }
 @media (max-width: 860px) {
-  .peek {
-    grid-template-columns: minmax(0, 1fr);
-    gap: 16px;
-    min-height: 0;
-  }
-  .peek__ghost,
-  .peek__hint {
-    display: none;
-  }
-  .peek__tab {
-    grid-column: 1;
-    grid-row: 1;
-    height: auto;
-    min-height: 52px;
-    border-radius: var(--r);
-    writing-mode: horizontal-tb;
-  }
-  .peek__card {
-    grid-row: 2;
-    grid-template-columns: minmax(0, 1fr);
-    display: none;
-  }
-  .peek.is-open .peek__card {
-    display: grid;
+  .intro .badge {
+    grid-column: 1 / -1;
+    grid-row: auto;
+    margin-top: 16px;
   }
 }
 
-/* 4. Numbers and background ------------------------------------------------- */
+/* 4. Numbers ---------------------------------------------------------------- */
 .facts {
-  display: grid;
-  align-items: center;
-  min-height: 100vh;
   padding-block: 90px;
-}
-.facts__inner {
-  display: flex;
-  flex-direction: column;
-  gap: 56px;
 }
 .tiles {
   display: grid;
@@ -384,6 +448,7 @@
   display: flex;
   flex-direction: column;
   align-items: center;
+  justify-content: space-between; /* numbers line up even when labels wrap */
   gap: 12px;
   padding: 6px 28px;
   text-align: center;
@@ -418,108 +483,128 @@
   }
 }
 
-.facts__list details {
-  border-top: 1px solid var(--line);
-}
-.facts__list details:last-child {
-  border-bottom: 1px solid var(--line);
-}
-.facts__list summary {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 28px 0;
-  cursor: pointer;
-  list-style: none;
-}
-.facts__list summary::-webkit-details-marker {
-  display: none;
-}
-.facts__list summary::after {
-  content: "+";
-  font-size: 1.375rem;
-  color: var(--accent-text);
-}
-.facts__list details[open] summary::after {
-  content: "×";
-}
-.facts__list h3 {
-  font-size: var(--fs-h3);
-}
-.facts__list li {
-  display: grid;
-  grid-template-columns: minmax(0, 0.8fr) minmax(0, 1.4fr) minmax(0, 1fr);
-  gap: 6px 28px;
-  align-items: baseline;
-  padding: 16px 0;
-  border-top: 1px solid var(--line);
-  color: var(--text);
-}
-.facts__list li b {
-  font-family: var(--heading-font);
-  font-size: 1.125rem;
-}
-.facts__list li span:last-child {
-  text-align: right;
-}
-@media (max-width: 640px) {
-  .facts__list li {
-    grid-template-columns: minmax(0, 1fr);
-  }
-  .facts__list li span:last-child {
-    text-align: left;
-  }
-}
-
-/* 5. Case studies ------------------------------------------------------------ */
+/* 5. Case studies ------------------------------------------------------------
+   A huge title at the top right, then the projects as prints on a
+   clothesline (below). Grid and flex only. */
 .work {
-  padding-block: 126px;
+  padding-block: 126px 144px;
 }
-.block--wide .block__body {
-  --indent: 0px;
-}
-.work__count {
-  font-family: var(--body-font);
-  font-size: var(--fs-small);
-  font-weight: 500;
-  letter-spacing: 0.12em;
-  color: var(--text);
-  vertical-align: middle;
-}
-.work__list {
+.work__grid {
   display: grid;
   grid-template-columns: repeat(12, minmax(0, 1fr));
   column-gap: 24px;
-  row-gap: 158px;
-  padding-block: 64px 144px;
+}
+.work__title {
+  grid-column: 7 / -1;
+  grid-row: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  text-align: right;
+}
+.work__count {
+  margin-top: 16px;
+  font-family: var(--body-font);
+  font-size: var(--fs-small);
+  font-weight: 600;
+  letter-spacing: 0.12em;
+}
+/* Prints on a clothesline: a string sags across the section (an SVG curve
+   stretched over the list's top) and each project is a photo print hanging
+   from it on a wooden peg, swaying gently. Hovering (or tabbing to) a print
+   steadies it and lifts it. The peg is an in-flow pseudo-element of each
+   item's flex column; nothing is positioned. */
+.work__list {
+  grid-column: 1 / -1;
+  grid-row: 2;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  align-items: start;
+  gap: clamp(28px, 4vw, 72px);
+  margin-top: clamp(48px, 6vw, 96px);
+  padding: 4px clamp(8px, 2vw, 32px) 24px;
+  background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1000 60' preserveAspectRatio='none'%3E%3Cpath d='M0 4 Q 250 46 500 30 T 1000 4' fill='none' stroke='%23888' stroke-width='2.5' vector-effect='non-scaling-stroke'/%3E%3C/svg%3E") 0 0 / 100% 60px no-repeat;
 }
 .work__item {
-  grid-column: 2 / span 5;
+  --tilt: -2.5deg;
+  --drop: 18px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: var(--drop);
 }
 .work__item--2 {
-  grid-column: 5 / span 5;
+  --tilt: 2deg;
+  --drop: 34px;
 }
 .work__item--3 {
-  grid-column: 8 / span 5;
+  --tilt: -1.5deg;
+  --drop: 10px;
 }
-.work__item a {
-  display: grid;
-  grid-template-columns: auto minmax(0, 1fr);
-  column-gap: 16px;
-  row-gap: 14px;
+/* the wooden peg */
+.work__item::before {
+  content: "";
+  z-index: 1;
+  width: 14px;
+  height: 34px;
+  margin-bottom: -16px;
+  border-radius: 3px;
+  background: linear-gradient(90deg, #b88a5a, #d9b383 45%, #a87a4c);
+  box-shadow: 0 2px 3px rgb(0 0 0 / 0.3);
+}
+.work__card {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+  width: 100%;
+  color: var(--ink);
   text-decoration: none;
 }
-.work__num {
-  font-family: var(--heading-font);
-  font-size: 1.375rem;
-  color: transparent;
-  -webkit-text-stroke: 1px var(--text);
+.work__card:focus-visible {
+  outline: none;
+}
+.work__card:focus-visible .work__name {
+  text-decoration: underline;
+  text-decoration-color: var(--accent);
+  text-decoration-thickness: 3px;
+  text-underline-offset: 6px;
+}
+.work__print {
+  display: block;
+  padding: 12px 12px 36px;
+  border-radius: 3px;
+  background: #fbfaf6;
+  box-shadow: 0 16px 30px -14px rgb(0 0 0 / 0.5), 0 0 0 1px rgb(0 0 0 / 0.06);
+  rotate: var(--tilt);
+  transform-origin: 50% 0;
+  animation: print-sway 4.5s ease-in-out infinite alternate;
+  transition: rotate 0.5s ease, translate 0.4s ease;
+}
+.work__item--2 .work__print {
+  animation-delay: -1.5s;
+}
+.work__item--3 .work__print {
+  animation-delay: -3s;
+}
+.work__card:hover .work__print,
+.work__card:focus-visible .work__print {
+  animation: none;
+  rotate: 0deg;
+  translate: 0 -8px;
+}
+@keyframes print-sway {
+  from {
+    rotate: calc(var(--tilt) - 1.2deg);
+  }
+  to {
+    rotate: calc(var(--tilt) + 1.2deg);
+  }
 }
 .work__image {
-  overflow: hidden;
+  display: block;
   aspect-ratio: 4 / 3;
-  border-radius: var(--r-lg);
-  background: var(--surface);
+  overflow: hidden;
+  background: #e9e7e1;
   clip-path: inset(100% 0 0 0);
   transition: clip-path 1.2s cubic-bezier(0.76, 0, 0.24, 1);
 }
@@ -530,47 +615,88 @@
   width: 100%;
   height: 100%;
   object-fit: cover;
-  scale: 1.22;
-  translate: 0 calc(var(--py, 0) * 1%);
-  transition: scale 0.6s ease;
 }
-.work__item a:hover .work__image img {
-  scale: 1.26;
-}
-.work__caption {
-  grid-column: 2;
+.work__info {
   display: flex;
-  flex-wrap: wrap;
-  align-items: baseline;
-  justify-content: space-between;
-  gap: 4px 16px;
+  flex-direction: column;
+  gap: 8px;
+  padding-inline: 4px;
 }
-.work__caption b {
+.work__num {
   font-family: var(--heading-font);
-  font-size: 2.25rem;
-  font-weight: 600;
-  line-height: 1.1;
+  font-size: 1.25rem;
+  color: transparent;
+  -webkit-text-stroke: 1px var(--text);
 }
-.work__caption span {
+.work__name {
+  font-family: var(--heading-font);
+  font-size: clamp(1.5rem, 1.1rem + 1.2vw, 2.4rem);
+  font-weight: 600;
+  line-height: 1.05;
+}
+.work__meta {
+  font-size: var(--fs-small);
+  font-weight: 600;
+  color: var(--accent-text);
+}
+.work__summary {
+  color: var(--text);
+}
+.work__tags {
+  font-size: var(--fs-small);
   font-weight: 600;
   letter-spacing: 0.1em;
   text-transform: uppercase;
+  color: var(--text);
+}
+.work__cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  align-self: flex-start;
+  font-weight: 600;
+  border-bottom: 2px solid var(--accent);
+  transition: gap 0.2s ease;
+}
+.work__card:hover .work__cta {
+  gap: 14px;
 }
 @media (max-width: 860px) {
+  .work__grid {
+    grid-template-columns: minmax(0, 1fr);
+  }
+  .work__title {
+    grid-column: 1;
+    align-items: flex-start;
+    text-align: left;
+  }
   .work__list {
     grid-template-columns: minmax(0, 1fr);
-    row-gap: 64px;
+    gap: 48px;
+    margin-top: 40px;
+    padding-top: 0;
+    background: none;
   }
-  .work__item,
-  .work__item--2,
-  .work__item--3 {
-    grid-column: 1;
+  .work__item {
+    margin-top: 0;
+  }
+  .work__print {
+    max-width: 440px;
+    align-self: center;
   }
 }
 @media (prefers-reduced-motion: reduce) {
+  .work__print {
+    animation: none;
+  }
   .work__image {
     clip-path: none;
   }
+}
+
+/* a block whose body starts at the left edge, with no indent (Artwork) */
+.block--wide .block__body {
+  --indent: 0px;
 }
 
 /* 6. Skills marquee ---------------------------------------------------------- */
@@ -652,73 +778,132 @@
 .artwork__body {
   margin-top: calc(var(--title-lh) * -0.45);
 }
-.artwork__scroller {
-  height: calc(100vh + var(--travel, 0px));
+/* Dark gallery wall with a spotlight. The art sits in a staggered grid on a
+   dark wall; a dark layer (.spot__dark) shares the wall's grid cell on top of
+   it, with a soft transparent circle at the cursor (--mx, --my, set by
+   home.js), so the art shows only where the light falls. Keyboard focus moves
+   the light onto the focused piece. Where there is no hovering pointer (touch
+   screens), or for reduced motion, the lights are simply on. Grid only,
+   nothing positioned. */
+.spot {
+  --mx: 50%;
+  --my: 40%;
+  --r: clamp(140px, 16vw, 230px);
+  display: grid;
+  margin-top: 24px;
+  border-radius: var(--r-xl);
+  background: #0b0b0d;
+  overflow: hidden;
 }
-.artwork__sticky {
-  position: sticky;
-  top: calc(50vh - 260px);
-  display: flex;
-  flex-direction: column;
-  gap: 18px;
+.spot__wall {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(min(200px, 40vw), 1fr));
+  grid-auto-rows: clamp(140px, 13vw, 200px);
+  grid-auto-flow: dense;
+  gap: clamp(12px, 1.4vw, 20px);
+  padding: clamp(16px, 2.4vw, 40px);
 }
-.artwork__track {
-  display: flex;
-  gap: 14px;
-  width: max-content;
-  translate: var(--x, 0px) 0;
+.spot__wall li:nth-child(5n + 1) {
+  grid-row: span 2;
 }
-.artwork__item {
+.spot__wall li:nth-child(7n + 3) {
+  grid-column: span 2;
+}
+.spot__wall .artwork__item {
   display: block;
-  height: 430px;
+  width: 100%;
+  height: 100%;
   padding: 0;
   border: 0;
-  border-radius: var(--r-sm);
+  border-radius: 10px;
   overflow: hidden;
-  background: none;
+  background: #16161a;
   cursor: zoom-in;
 }
-.artwork__item img {
-  width: auto;
+.spot__wall .artwork__item img {
+  width: 100%;
   height: 100%;
+  object-fit: cover;
   transition: scale 0.5s ease;
 }
-.artwork__item:hover img {
-  scale: 1.03;
+.spot__wall .artwork__item:hover img {
+  scale: 1.05;
 }
-.artwork__progress {
-  height: 1px;
-  background: var(--line);
+.spot__wall .artwork__item:focus-visible {
+  outline: 3px solid var(--accent);
+  outline-offset: 3px;
 }
-.artwork__progress i {
-  display: block;
-  height: 100%;
-  background: var(--ink);
-  transform-origin: left;
-  scale: var(--progress, 0) 1;
+.spot__dark {
+  z-index: 1;
+  background: radial-gradient(
+    circle var(--r) at var(--mx) var(--my),
+    transparent 0,
+    rgb(11 11 13 / 0.35) 55%,
+    rgb(11 11 13 / 0.94) 100%
+  );
+  pointer-events: none;
+  transition: opacity 0.4s ease;
 }
-@media (max-width: 860px) {
-  .artwork__scroller {
-    height: auto;
+/* before the cursor arrives, a dim glow in the middle invites you in */
+.spot:not(.is-lit) .spot__dark {
+  --r: clamp(180px, 22vw, 320px);
+}
+/* The hint sits in the middle of the dark wall (same grid cell, on top) as a
+   glowing pill with a light-bulb icon, gently pulsing, until the cursor
+   arrives; then it fades away. Only where a hovering pointer exists. */
+.spot__wall,
+.spot__dark,
+.spot__hint {
+  grid-area: 1 / 1;
+}
+.spot__hint {
+  z-index: 2;
+  place-self: center;
+  display: none;
+  align-items: center;
+  gap: 10px;
+  margin: 0;
+  padding: 14px 22px;
+  border: 1px solid rgb(255 255 255 / 0.25);
+  border-radius: 99px;
+  background: rgb(20 20 24 / 0.75);
+  -webkit-backdrop-filter: blur(6px);
+  backdrop-filter: blur(6px);
+  box-shadow: 0 0 40px 6px color-mix(in srgb, var(--footer-accent) 35%, transparent);
+  color: #f4f4f0;
+  font-size: var(--fs-body);
+  font-weight: 600;
+  pointer-events: none;
+  animation: hint-glow 2.4s ease-in-out infinite;
+  transition: opacity 0.4s ease, scale 0.4s ease;
+}
+.spot__hint svg {
+  width: 22px;
+  height: 22px;
+  color: var(--footer-accent);
+}
+.spot.is-lit .spot__hint {
+  opacity: 0;
+  scale: 0.9;
+}
+@keyframes hint-glow {
+  50% {
+    box-shadow: 0 0 60px 14px color-mix(in srgb, var(--footer-accent) 50%, transparent);
   }
-  .artwork__sticky {
-    position: static;
+}
+@media (hover: hover) and (prefers-reduced-motion: no-preference) {
+  .spot__hint {
+    display: inline-flex;
   }
-  .artwork__track {
-    width: auto;
-    translate: none;
-    overflow-x: auto;
-    scroll-snap-type: x mandatory;
-    padding-bottom: 8px;
-  }
-  .artwork__track li {
-    scroll-snap-align: start;
-  }
-  .artwork__item {
-    height: 300px;
-  }
-  .artwork__progress {
+}
+@media (hover: none), (prefers-reduced-motion: reduce) {
+  .spot__dark {
     display: none;
+  }
+}
+@media (max-width: 640px) {
+  .spot__wall li:nth-child(7n + 3) {
+    grid-column: auto;
   }
 }
 
@@ -762,4 +947,79 @@
 .lightbox__count {
   min-width: 4em;
   text-align: center;
+}
+
+/* Scroll-driven motion ------------------------------------------------------
+   In browsers that can tie an animation to the scroll position, the hero swap
+   and the section hand-off run in pure CSS on the compositor, exactly in step
+   with the scroll instead of a frame behind it. home.js still sets --hero and
+   --cover, which the rules above use as the fallback elsewhere; animations
+   take precedence over those, so nothing fights. Skipped for reduced motion. */
+@media (prefers-reduced-motion: no-preference) {
+  @supports (animation-timeline: scroll()) {
+    /* Hero: as on Loire, both lines move up one word between 5vh and 20vh
+       of scrolling, together, on an ease-out curve. The bottom bar fades out
+       over the first few vh. */
+    .hero__reel {
+      transition: none;
+      animation: hero-reel 1ms cubic-bezier(0.33, 1, 0.68, 1) both;
+      animation-timeline: scroll(root);
+      animation-range: 5vh 20vh;
+    }
+    .hero__bar {
+      opacity: 1;
+      animation: hero-bar-out 1ms linear both;
+      animation-timeline: scroll(root);
+      animation-range: 2vh 7vh;
+    }
+  }
+
+  @supports (animation-timeline: view()) {
+    /* Section hand-off: each section watches the next one come up (its view
+       timeline, shared through timeline-scope) and drifts upward and dims
+       while it is covered: from the moment the next section enters at the
+       bottom until its top reaches the top of the screen. */
+    .sections {
+      timeline-scope: --s2, --s3, --s4, --s5, --s6;
+    }
+    .sections > section:nth-child(2) { view-timeline-name: --s2; }
+    .sections > section:nth-child(3) { view-timeline-name: --s3; }
+    .sections > section:nth-child(4) { view-timeline-name: --s4; }
+    .sections > section:nth-child(5) { view-timeline-name: --s5; }
+    .sections > section:nth-child(6) { view-timeline-name: --s6; }
+    .sections > section:not(:last-child) {
+      box-shadow: none;
+      animation: section-drift 1ms linear both;
+      animation-range: cover 0% cover 100vh;
+    }
+    .sections > section:nth-child(1) { animation: none; } /* hero stays put */
+    .sections > section.facts { animation: none; } /* short section: no gap under it */
+    .sections > section:nth-child(2) { animation-timeline: --s3; }
+    .sections > section:nth-child(3) { animation-timeline: --s4; }
+    .sections > section:nth-child(4) { animation-timeline: --s5; }
+    .sections > section:nth-child(5) { animation-timeline: --s6; }
+  }
+}
+@keyframes hero-reel {
+  from {
+    translate: 0 0;
+  }
+  to {
+    translate: 0 calc(-1 * var(--word));
+  }
+}
+@keyframes hero-bar-out {
+  to {
+    opacity: 0;
+  }
+}
+@keyframes section-drift {
+  from {
+    translate: 0 0;
+    filter: brightness(1);
+  }
+  to {
+    translate: 0 -22vh;
+    filter: brightness(0.75);
+  }
 }

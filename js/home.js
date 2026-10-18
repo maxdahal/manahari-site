@@ -1,5 +1,5 @@
-/* Home page behaviour: stacked sections, hero roll, statement fill, the
-   slide-out About card, case-study reveals, marquee, artwork row and lightbox. */
+/* Home page behaviour: stacked sections, hero swap, statement fill, the ID
+   badge, case-study reveals, marquee and the artwork lightbox. */
 (function () {
   "use strict";
 
@@ -83,35 +83,6 @@
       });
     }
 
-    /* About card: opens on hover or focus, and toggles on tap */
-    var peek = document.querySelector(".peek");
-    if (peek) {
-      var tab = peek.querySelector(".peek__tab");
-      var setOpen = function (open) {
-        peek.classList.toggle("is-open", open);
-        tab.setAttribute("aria-expanded", String(open));
-      };
-      var hover = window.matchMedia("(hover: hover)").matches;
-      /* with a mouse the card is already open on hover, so a click keeps it open */
-      tab.addEventListener("click", function () {
-        setOpen(hover ? true : !peek.classList.contains("is-open"));
-      });
-      if (hover) {
-        peek.addEventListener("mouseenter", function () {
-          setOpen(true);
-        });
-        peek.addEventListener("mouseleave", function () {
-          setOpen(false);
-        });
-      }
-      peek.addEventListener("keydown", function (event) {
-        if (event.key === "Escape") {
-          setOpen(false);
-          tab.focus();
-        }
-      });
-    }
-
     /* Case-study images: clip reveal when they arrive */
     var items = document.querySelectorAll(".work__item");
     if ("IntersectionObserver" in window && !reduceMotion) {
@@ -135,25 +106,25 @@
       });
     }
 
-    /* Artwork: vertical scroll moves the row sideways on wide screens */
-    var scroller = document.querySelector(".artwork__scroller");
+    /* Artwork spotlight: pass the cursor position to CSS (--mx, --my); the
+       light itself is a CSS gradient. Keyboard focus moves it onto a piece. */
     var track = document.querySelector(".artwork__track");
-    var travel = 0;
-    function sizeArtwork() {
-      if (!scroller || !track) return;
-      var wide = window.matchMedia("(min-width: 861px)").matches && !reduceMotion;
-      travel = wide ? Math.max(0, track.scrollWidth - scroller.clientWidth) : 0;
-      scroller.style.setProperty("--travel", travel + "px");
-      if (!wide) track.style.removeProperty("--x");
-    }
-    if (track) {
-      track.querySelectorAll("img").forEach(function (img) {
-        img.addEventListener("load", sizeArtwork);
+    var spot = document.querySelector(".spot");
+    if (spot) {
+      var aim = function (x, y) {
+        var r = spot.getBoundingClientRect();
+        spot.style.setProperty("--mx", (x - r.left).toFixed(0) + "px");
+        spot.style.setProperty("--my", (y - r.top).toFixed(0) + "px");
+        spot.classList.add("is-lit");
+      };
+      spot.addEventListener("pointermove", function (event) {
+        aim(event.clientX, event.clientY);
+      });
+      spot.addEventListener("focusin", function (event) {
+        var r = event.target.getBoundingClientRect();
+        aim(r.left + r.width / 2, r.top + r.height / 2);
       });
     }
-    window.addEventListener("resize", sizeArtwork);
-    window.addEventListener("load", sizeArtwork);
-    sizeArtwork();
 
     /* Everything that follows the scroll position */
     var hero = document.querySelector(".hero");
@@ -164,8 +135,15 @@
 
     function onScroll() {
       ticking = false;
-      if (reduceMotion) return;
       var vh = window.innerHeight;
+
+      /* Hero: where scroll-driven CSS animations are supported, the name to
+         role swap follows the scroll in CSS. Elsewhere this class triggers
+         the same swap as a CSS transition once you are a little way in. */
+      if (hero) {
+        hero.classList.toggle("is-swapped", window.scrollY > vh * 0.1);
+      }
+      if (reduceMotion) return;
 
       if (hero) {
         var h = clamp((-hero.getBoundingClientRect().top / (hero.offsetHeight - vh) - 0.04) / 0.5);
@@ -197,18 +175,9 @@
         });
       }
 
-      if (scroller && travel) {
-        var sticky = scroller.firstElementChild;
-        var top = scroller.getBoundingClientRect().top;
-        var stickTop = parseFloat(getComputedStyle(sticky).top) || 0;
-        var ap = clamp((stickTop - top) / travel);
-        track.style.setProperty("--x", (-ap * travel).toFixed(1) + "px");
-        sticky.style.setProperty("--progress", ap.toFixed(3));
-      }
-
       sections.forEach(function (section, i) {
         var next = sections[i + 1];
-        if (!next || next.id === "work") return;
+        if (!next) return;
         var nr = next.getBoundingClientRect();
         section.style.setProperty("--cover", clamp(1 - nr.top / vh).toFixed(3));
       });

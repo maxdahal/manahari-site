@@ -94,13 +94,17 @@
       });
     }
 
-    /* Design stage: switching projects brings the tab bar back into view */
+    /* Design stage: the section heading names the selected project, and
+       switching projects brings the switcher back into view */
     var projectTabs = document.getElementById("project-tabs");
-    onTabChange(projectTabs, function () {
-      var bar = projectTabs.closest(".project-tabs");
-      var top = bar.getBoundingClientRect().top;
+    var projectHeading = document.getElementById("design-work-h");
+    onTabChange(projectTabs, function (index) {
+      var tab = projectTabs.querySelectorAll('[role="tab"]')[index];
+      if (projectHeading && tab) projectHeading.textContent = tab.dataset.title;
+      var section = projectTabs.closest(".project-switch");
+      var top = section.getBoundingClientRect().top;
       if (top < 0 || top > window.innerHeight * 0.4) {
-        bar.scrollIntoView({ block: "start" });
+        section.scrollIntoView({ block: "start" });
       }
     });
   }

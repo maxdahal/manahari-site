@@ -211,7 +211,8 @@
   }
 
   /* Section band. How far it reaches depends on what opens the body:
-     - opening text, or anything short: covered in full
+     - opening text, anything short, or anything marked data-band-cover:
+       covered in full
      - an image, or a row of cards with images: the top part only, so it
        hangs out below the band (text set beside the image is covered in full)
      - a tall text panel (table, list, timeline): the band stops where it
@@ -243,7 +244,7 @@
       /* offsets, not on-screen boxes, so a reveal still sliding in does not count */
       var start = first.offsetTop - body.offsetTop;
       var end;
-      if (first.matches("p, h3, h4, blockquote") || h <= 160) end = start + h + 40;
+      if (first.matches("p, h3, h4, blockquote, [data-band-cover]") || h <= 160) end = start + h + 40;
       else if (opensWithImage(first)) {
         var beside = first.matches("figure, img, picture, video") ? 0 : textBeside(first);
         if (!beside) end = start + Math.max(120, Math.min(200, h * 0.4));
@@ -268,6 +269,36 @@
         if (body.firstElementChild) ro.observe(body.firstElementChild);
       });
     }
+  }
+
+  /* ID badge (Home and About): hovering the badge turns it over, the "Flip
+     my ID" button toggles it (tap, click or keyboard), Escape turns it back */
+  function initBadge() {
+    var peek = document.querySelector(".peek");
+    if (!peek) return;
+    var tab = peek.querySelector(".peek__tab");
+    var card = peek.querySelector(".badge__swing") || peek;
+    var setOpen = function (open) {
+      peek.classList.toggle("is-open", open);
+      tab.setAttribute("aria-expanded", String(open));
+    };
+    tab.addEventListener("click", function () {
+      setOpen(!peek.classList.contains("is-open"));
+    });
+    if (window.matchMedia("(hover: hover)").matches) {
+      card.addEventListener("mouseenter", function () {
+        setOpen(true);
+      });
+      card.addEventListener("mouseleave", function () {
+        setOpen(false);
+      });
+    }
+    peek.addEventListener("keydown", function (event) {
+      if (event.key === "Escape") {
+        setOpen(false);
+        tab.focus();
+      }
+    });
   }
 
   /* Reveal on scroll -------------------------------------------------------- */
@@ -361,6 +392,7 @@
     initMenu();
     initTabs();
     initBands();
+    initBadge();
     splitHeadings();
     initReveal();
     initCounters();

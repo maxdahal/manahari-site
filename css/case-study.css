@@ -1,7 +1,7 @@
 /* ==========================================================================
    Case studies: shared layout and components (Luna, KU Brand, Asian's)
    Sections:
-     1. Page layout and stages rail
+     1. Top bar, page layout and stages rail
      2. Hero
      3. Story in short
      4. Stage cards
@@ -11,8 +11,6 @@
 
 :root {
   --hero-bg: color-mix(in srgb, var(--ink) 4%, var(--bg));
-  --rail-w: 248px;
-  --rail-gap: 48px; /* space between the stages and the content */
   --stage-ink: #262626;
 }
 @media (prefers-color-scheme: dark) {
@@ -24,6 +22,21 @@
 :root[data-theme="dark"] {
   --hero-bg: #141417;
   --stage-ink: var(--ink);
+}
+
+/* the active stage's background in the stages list: a brighter blue than
+   the accent in the light theme (the deep KU blue looks grey when faded),
+   the accent itself in the dark theme */
+:root {
+  --wash-color: #2767ff;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --wash-color: var(--accent);
+  }
+}
+:root[data-theme="dark"] {
+  --wash-color: var(--accent);
 }
 
 /* the stage number sits on the tinted stage card */
@@ -39,156 +52,451 @@
   --stage-num: var(--accent-text);
 }
 
-/* 1. Page layout and stages rail ------------------------------------------- */
-.cs {
+/* 1. Top bar, page layout and stages rail ----------------------------------
+   Case studies have no site navigation: a slim bar stays at the top with a
+   way back to the projects, the case study's name and the theme switch. The
+   story is one continuous page and the stages list follows your reading. */
+:root {
+  --top-h: 60px;
+  /* the site header is gone, so anything that made room for it uses the bar */
+  --header-h: var(--top-h);
+  --header-top: 0px;
+}
+html {
+  /* links land below the bar and the stage opener stuck under it */
+  scroll-padding-top: calc(var(--top-h) + var(--opener-h, 0px) + 16px);
+}
+@media (prefers-reduced-motion: no-preference) {
+  html {
+    scroll-behavior: smooth;
+  }
+}
+.cs-top {
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  border-bottom: 1px solid var(--line);
+  background: color-mix(in srgb, var(--bg) 86%, transparent);
+  -webkit-backdrop-filter: blur(12px);
+  backdrop-filter: blur(12px);
+}
+.cs-top__bar {
   display: grid;
-  grid-template-columns: var(--rail-w) minmax(0, 1fr);
+  grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr);
+  align-items: center;
+  gap: 16px;
+  max-width: var(--max);
+  min-height: var(--top-h);
+  margin-inline: auto;
+  padding-inline: var(--gx);
+}
+/* the way back: a small, quiet pill that only takes the accent on hover */
+.cs-top__back {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  justify-self: start;
+  min-height: 36px;
+  padding: 0 14px 0 10px;
+  border: 1px solid var(--line);
+  border-radius: 99px;
+  font-size: var(--fs-small);
+  font-weight: 500;
+  color: var(--ink);
+  text-decoration: none;
+  transition: border-color 0.2s ease, color 0.2s ease;
+}
+.cs-top__back svg {
+  width: 16px;
+  height: 16px;
+  transition: translate 0.2s ease;
+}
+.cs-top__back:hover {
+  border-color: var(--accent);
+  color: var(--accent-text);
+}
+.cs-top__back:hover svg {
+  translate: -3px 0;
+}
+.cs-top__back:focus-visible {
+  outline: 3px solid var(--accent);
+  outline-offset: 2px;
+}
+.cs-top__name {
+  margin: 0;
+  font-family: var(--heading-font);
+  font-size: 1.125rem;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  color: var(--ink);
+  white-space: nowrap;
+}
+.cs-top .theme-toggle {
+  justify-self: end;
+}
+@media (max-width: 600px) {
+  .cs-top__bar {
+    grid-template-columns: minmax(0, 1fr) auto;
+  }
+  .cs-top__name {
+    display: none;
+  }
+}
+
+.cs {
   max-width: var(--max);
   margin-inline: auto;
   padding-inline: var(--gx);
 }
 .cs__content {
-  grid-column: 2;
   min-width: 0;
 }
 
-/* The rail stays above the content column. It has no card of its own: over
-   the plain page it looks like a simple list, and when a full-width band or
-   stage break scrolls behind it, the lines show through frosted glass. The
-   glass fills the whole strip to the left of the content, from the left edge
-   of the screen and from the top of the screen to the bottom: the negative
-   margin pulls the box out to the edge, the matching padding keeps the text
-   where it was, and the top padding clears the site header. */
-.rail {
-  grid-column: 1;
-  position: sticky;
-  top: 0;
-  z-index: 6;
-  align-self: start;
-  height: 100vh;
-  height: 100dvh;
-  overflow-y: auto;
-  scrollbar-width: none;
-  display: flex;
-  flex-direction: column;
-  gap: 2px;
-  --bleed: calc(var(--gx) + max(0px, (100vw - var(--max)) / 2));
-  margin: 0 var(--rail-gap) 0 calc(-1 * var(--bleed));
-  padding: calc(var(--header-h) + var(--header-top) + 32px) 12px 24px calc(var(--bleed) + 16px);
-  background: color-mix(in srgb, var(--bg) 25%, transparent);
-  -webkit-backdrop-filter: blur(10px) saturate(1.3);
-  backdrop-filter: blur(10px) saturate(1.3);
-  font-weight: 500;
-}
-.rail__title {
-  margin-bottom: 10px;
-  letter-spacing: 0.06em;
-  color: var(--ink);
-}
-.rail ol {
-  display: flex;
-  flex-direction: column;
-}
-.rail a {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  min-height: 38px;
-  margin-left: -16px;
-  padding-left: 14px;
-  border-left: 2px solid transparent;
-  font-weight: 400;
-  color: var(--text);
-  text-decoration: none;
-}
-.rail a:hover {
-  color: var(--ink);
-}
-.rail a[aria-current="true"] {
-  border-left-color: var(--accent);
-  background: linear-gradient(90deg, color-mix(in srgb, var(--accent) 14%, transparent), transparent);
-  color: var(--ink);
-}
-.rail__num {
-  min-width: 1.6em;
-  color: var(--text);
-}
+/* Stages list. On wide screens it is a column on the left that stays in
+   view; on smaller screens it lives in a sheet opened from the floating
+   stage chip (below). The stage you are reading is set large in the accent
+   colour and the others get smaller the further away they are (data-d, the
+   distance, is set by case-study.js), like a scroll wheel. Stage numbers
+   are small beside the names. The stage you are reading opens to list its
+   sections, marking the one you are in. */
+.rail,
 .rail__toggle {
   display: none;
 }
-
-@media (max-width: 1100px) {
-  :root {
-    --rail-w: 212px;
-    --rail-gap: 36px;
-  }
+.rail__title {
+  margin: 0 0 12px 10px;
+  font-size: var(--fs-small);
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--text);
 }
-
-/* On narrow screens the rail becomes a button fixed to the bottom of the screen
-   that opens the list of stages. */
-@media (max-width: 860px) {
+:is(.rail, .stage-sheet) > ol {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+/* each stage: its link, then a row for its sections that opens from 0 to
+   its full height when it is the stage you are reading */
+:is(.rail, .stage-sheet) > ol > li {
+  display: grid;
+  grid-template-rows: auto 0fr;
+  transition: grid-template-rows 0.45s cubic-bezier(0.2, 0.7, 0.2, 1);
+}
+:is(.rail, .stage-sheet) > ol > li:has(> a[aria-current="true"]) {
+  grid-template-rows: auto 1fr;
+}
+:is(.rail, .stage-sheet) > ol > li > a {
+  /* the active stage gets a small accent bar on its left edge and a wash
+     of the accent that starts at the bar and fades away towards the right
+     (mixed in oklch so the light theme's blue stays blue instead of
+     greying); the wash sweeps in from the left */
+  --wash: linear-gradient(90deg in oklch,
+    color-mix(in oklch, var(--wash-color) 34%, transparent) 0%,
+    color-mix(in oklch, var(--wash-color) 22%, transparent) 30%,
+    color-mix(in oklch, var(--wash-color) 10%, transparent) 60%,
+    transparent 90%);
+  display: flex;
+  align-items: baseline;
+  gap: 8px;
+  padding: 5px 10px 5px 7px;
+  border-left: 3px solid transparent;
+  background: var(--wash) no-repeat 0 0 / 0% 100%;
+  font-family: var(--heading-font);
+  font-size: 1rem;
+  font-weight: 500;
+  line-height: 1.15;
+  letter-spacing: 0.01em;
+  color: var(--text);
+  text-decoration: none;
+  opacity: 0.32;
+  transition: font-size 0.4s cubic-bezier(0.2, 0.7, 0.2, 1), color 0.3s ease, opacity 0.3s ease, background-size 0.45s ease, border-color 0.3s ease;
+}
+/* the stages away from the one you are reading fade to a hint; the
+   further away, the fainter */
+:is(.rail, .stage-sheet) > ol > li > a[data-d="2"] {
+  font-size: 1.125rem;
+  opacity: 0.42;
+}
+:is(.rail, .stage-sheet) > ol > li > a[data-d="1"] {
+  font-size: 1.3125rem;
+  opacity: 0.58;
+}
+:is(.rail, .stage-sheet) > ol > li > a[aria-current="true"] {
+  border-left-color: var(--accent);
+  background-size: 100% 100%;
+  font-size: 2rem;
+  font-weight: 600;
+  color: var(--accent-text);
+  opacity: 1;
+}
+:is(.rail, .stage-sheet) a:hover {
+  color: var(--ink);
+}
+:is(.rail, .stage-sheet) a:focus-visible {
+  outline: 3px solid var(--accent);
+  outline-offset: 2px;
+}
+.rail__label {
+  display: flex;
+  align-items: baseline;
+  gap: 8px;
+}
+/* the number: small body type beside the name, whatever the name's size */
+.rail__num {
+  flex: none;
+  font-family: var(--body-font);
+  font-size: 0.75rem;
+  font-weight: 400;
+  font-variant-numeric: tabular-nums;
+  letter-spacing: 0.04em;
+  color: var(--text);
+}
+a[aria-current="true"] .rail__num {
+  color: var(--accent-text);
+}
+/* the sections of the stage you are reading; hidden (and skipped by the
+   keyboard) while their row is closed */
+.rail__sub {
+  display: flex;
+  flex-direction: column;
+  margin-left: 10px;
+  min-height: 0;
+  overflow: hidden;
+  visibility: hidden;
+  border-left: 1px solid var(--line);
+  transition: visibility 0.45s;
+}
+li:has(> a[aria-current="true"]) > .rail__sub {
+  visibility: visible;
+}
+/* the sheet on smaller screens lists the stages only */
+.stage-sheet .rail__sub {
+  display: none;
+}
+.rail__sub li:first-child a {
+  margin-top: 4px;
+}
+.rail__sub li:last-child a {
+  margin-bottom: 10px;
+}
+.rail__sub a {
+  display: block;
+  margin-left: -1px;
+  padding: 5px 0 5px 12px;
+  border-left: 2px solid transparent;
+  font-size: var(--fs-small);
+  line-height: 1.35;
+  color: var(--text);
+  text-decoration: none;
+  opacity: 0.45;
+  transition: border-color 0.3s ease, color 0.3s ease, opacity 0.3s ease;
+}
+.rail__sub a[aria-current="location"] {
+  border-left-color: var(--accent);
+  font-weight: 600;
+  color: var(--accent-text);
+  opacity: 1;
+}
+/* faded links are too faint to read comfortably (below the WCAG contrast
+   minimum): the one you point at comes back to full strength, and the
+   whole list does when you move into it with the keyboard ([href] lifts
+   these rules above the fading ones) */
+:is(.rail, .stage-sheet) > ol li a[href]:hover,
+:is(.rail, .stage-sheet):has(a:focus-visible) > ol li a[href] {
+  opacity: 1;
+}
+@media (min-width: 1101px) {
   .cs {
-    grid-template-columns: minmax(0, 1fr);
-  }
-  .cs__content {
-    grid-column: 1;
+    display: grid;
+    grid-template-columns: minmax(170px, 210px) minmax(0, 1fr);
+    column-gap: clamp(32px, 4vw, 64px);
+    align-items: start;
   }
   .rail {
-    position: fixed;
-    top: auto;
-    left: 50%;
-    bottom: max(16px, env(safe-area-inset-bottom, 0px));
-    z-index: 30;
-    width: min(280px, calc(100vw - 32px));
-    translate: -50% 0;
-    height: auto;
-    overflow: visible;
-    margin: 0;
-    padding: 0;
-    border-radius: var(--r-md);
-    background: var(--surface);
-    box-shadow: var(--shadow);
-  }
-  .rail__title {
-    display: none;
-  }
-  .rail__toggle {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 12px;
-    min-height: 48px;
-    padding: 0 16px;
-    border: 0;
-    background: none;
-    font-weight: 500;
-    cursor: pointer;
-  }
-  .rail__toggle svg {
-    width: 16px;
-    height: 16px;
-    transition: rotate 0.2s;
-  }
-  .rail.is-open .rail__toggle svg {
-    rotate: 180deg;
-  }
-  .rail ol {
-    display: none;
-    order: -1;
-    padding: 8px 16px;
-    border-bottom: 1px solid var(--line);
-  }
-  .rail.is-open ol {
-    display: flex;
-  }
-  .rail a {
-    margin-left: 0;
+    position: sticky;
+    top: calc(var(--top-h) + 24px);
+    display: block;
+    /* the bottom margin keeps the list clear of the footer at the end */
+    margin-block: clamp(40px, 6vh, 72px) clamp(56px, 10vh, 120px);
   }
 }
 
+/* Floating stage chip (smaller screens; added by case-study.js): a pill held
+   at the bottom of the screen while you read the stages, with a ring for how
+   far through the case study you are and the stage you are in. Tapping it
+   opens the stages sheet. It is the last thing in the stages column, so it
+   only sticks while that column is on screen. Its width is fixed, so the
+   ring and the arrow stay put when the stage name changes. */
+.stage-chip {
+  position: sticky;
+  bottom: max(16px, env(safe-area-inset-bottom));
+  z-index: 30;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  width: min(100%, 248px);
+  min-height: 48px;
+  margin: clamp(40px, 6vh, 72px) auto 0;
+  padding: 0 16px 0 10px;
+  border: 1px solid var(--line);
+  border-radius: 99px;
+  background: color-mix(in srgb, var(--bg) 84%, transparent);
+  -webkit-backdrop-filter: blur(14px);
+  backdrop-filter: blur(14px);
+  box-shadow: 0 12px 28px -14px rgb(0 0 0 / 0.5);
+  font: inherit;
+  font-size: var(--fs-small);
+  font-weight: 600;
+  color: var(--ink);
+  cursor: pointer;
+}
+.stage-chip:focus-visible {
+  outline: 3px solid var(--accent);
+  outline-offset: 3px;
+}
+.stage-chip__ring {
+  flex: none;
+  width: 26px;
+  height: 26px;
+  border-radius: 50%;
+  background: conic-gradient(var(--accent) calc(var(--read, 0) * 1%), var(--line) 0);
+  -webkit-mask: radial-gradient(farthest-side, transparent calc(100% - 4px), #000 calc(100% - 3.5px));
+  mask: radial-gradient(farthest-side, transparent calc(100% - 4px), #000 calc(100% - 3.5px));
+}
+.stage-chip__num {
+  font-family: var(--heading-font);
+  font-size: 1.0625rem;
+  color: var(--accent-text);
+}
+.stage-chip__num:empty {
+  display: none;
+}
+.stage-chip__name {
+  flex: 1;
+  min-width: 0;
+  text-align: left;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.stage-chip svg {
+  flex: none;
+  width: 18px;
+  height: 18px;
+  color: var(--text);
+}
+@media (min-width: 1101px) {
+  .stage-chip {
+    display: none;
+  }
+}
+/* the ring follows the whole story: empty when the stages begin at the top
+   of the screen, full when their end reaches the bottom */
+@property --read {
+  syntax: "<number>";
+  inherits: true;
+  initial-value: 0;
+}
+@supports (animation-timeline: view()) {
+  .cs__content {
+    view-timeline: --story block;
+  }
+  .stage-chip__ring {
+    animation: story-read linear both;
+    animation-timeline: --story;
+    animation-range: contain 0% contain 100%;
+  }
+}
+@keyframes story-read {
+  from {
+    --read: 0;
+  }
+  to {
+    --read: 100;
+  }
+}
+
+/* Stages sheet: a dialog that slides up from the bottom with the stages
+   list; the page behind dims. It closes with Escape, the close button, a
+   tap outside or choosing a stage. */
+.stage-sheet {
+  width: min(100% - 16px, 520px);
+  max-width: none;
+  max-height: min(80vh, 640px);
+  margin: auto auto 8px;
+  padding: 20px 16px 24px;
+  border: 1px solid var(--line);
+  border-radius: 24px;
+  background: var(--bg);
+  color: var(--ink);
+  box-shadow: 0 -10px 40px -10px rgb(0 0 0 / 0.5);
+  translate: 0 0;
+  transition: translate 0.35s cubic-bezier(0.2, 0.7, 0.2, 1), overlay 0.35s allow-discrete, display 0.35s allow-discrete;
+}
+.stage-sheet:not([open]) {
+  translate: 0 110%;
+}
+@starting-style {
+  .stage-sheet[open] {
+    translate: 0 110%;
+  }
+}
+.stage-sheet::backdrop {
+  background: rgb(0 0 0 / 0.45);
+  -webkit-backdrop-filter: blur(4px);
+  backdrop-filter: blur(4px);
+  opacity: 1;
+  transition: opacity 0.35s ease, overlay 0.35s allow-discrete, display 0.35s allow-discrete;
+}
+.stage-sheet:not([open])::backdrop {
+  opacity: 0;
+}
+@starting-style {
+  .stage-sheet[open]::backdrop {
+    opacity: 0;
+  }
+}
+.stage-sheet__head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 8px;
+}
+.stage-sheet__head .rail__title {
+  margin: 0 0 0 10px;
+}
+.stage-sheet__close {
+  display: grid;
+  place-items: center;
+  width: 44px;
+  height: 44px;
+  border: 1px solid var(--line);
+  border-radius: 50%;
+  background: none;
+  color: var(--ink);
+  cursor: pointer;
+}
+.stage-sheet__close svg {
+  width: 18px;
+  height: 18px;
+}
+.stage-sheet__close:focus-visible {
+  outline: 3px solid var(--accent);
+  outline-offset: 2px;
+}
+@media (prefers-reduced-motion: reduce) {
+  :is(.rail, .stage-sheet) li,
+  :is(.rail, .stage-sheet) a,
+  .rail__sub,
+  .stage-sheet,
+  .stage-sheet::backdrop {
+    transition: none;
+  }
+}
 /* 2. Hero ------------------------------------------------------------------- */
 .cs-hero {
-  padding: calc(var(--header-h) + var(--header-top) + 40px) 0 86px;
+  padding: 40px 0 86px;
   background: var(--hero-bg);
 }
 /* two columns: the project summary, and the project access card beside it */
@@ -235,24 +543,81 @@
   background: var(--surface-2);
 }
 
+/* Project details: the outcome comes first, set like the stats on ku.edu
+   (big bold numbers in the accent with short capital captions under them)
+   with a line on what was delivered; then role, timeline, team and tools. */
 .meta {
-  display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 24px 40px;
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
   margin-top: 16px;
-  padding-top: 24px;
+  padding-top: 28px;
   border-top: 1px solid var(--line);
 }
-.meta dt {
-  font-weight: 500;
+.meta__outcome {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+.meta__label,
+.meta__facts dt {
+  font-family: var(--body-font);
+  font-size: var(--fs-small);
+  font-weight: 600;
+  line-height: 1.4;
   letter-spacing: 0.12em;
   text-transform: uppercase;
+  color: var(--text);
 }
-.meta dd {
+.meta__stats {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 24px clamp(32px, 5vw, 64px);
+}
+.meta__stats li {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  max-width: 15rem;
+}
+.meta__num {
+  font-family: var(--heading-font);
+  font-size: clamp(3.25rem, 2.25rem + 3vw, 5rem);
+  font-weight: 700;
+  line-height: 0.9;
+  letter-spacing: -0.01em;
+  color: var(--accent-text);
+}
+.meta__cap {
+  font-size: var(--fs-small);
+  font-weight: 600;
+  line-height: 1.4;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--accent-text);
+}
+.meta__summary {
+  max-width: 40em;
+  line-height: var(--lh-body);
+  color: var(--text);
+}
+.meta__facts {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 24px 40px;
+  padding-top: 28px;
+  border-top: 1px solid var(--line);
+}
+.meta__facts div {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+.meta__facts dd {
   font-weight: 500;
   line-height: 1.5;
 }
-.meta .wide {
+.meta__facts .wide {
   grid-column: 1 / -1;
 }
 
@@ -279,10 +644,6 @@
   letter-spacing: 0.12em;
   text-transform: uppercase;
 }
-.access .chips {
-  padding-top: 12px;
-  border-top: 1px solid var(--line);
-}
 
 @media (max-width: 1100px) {
   .cs-hero__inner {
@@ -298,7 +659,7 @@
   .access {
     position: static;
   }
-  .meta {
+  .meta__facts {
     grid-template-columns: minmax(0, 1fr);
   }
 }
@@ -327,103 +688,218 @@
   text-align: left;
 }
 
-/* 4. Stage cards ------------------------------------------------------------ */
+/* 4. Stage openers --------------------------------------------------------- */
+/* Each stage opens with its number and title side by side: a large outlined
+   number, then the title beside an accent rule with the stage's sections
+   and reading time under it (added by case-study.js), above a hairline. */
 .stage {
   display: flex;
   flex-direction: column;
-  padding-top: clamp(32px, 5vh, 56px);
+  padding-top: clamp(48px, 8vh, 96px);
 }
-/* A stage break, after the KU Brand Center: a tinted band, edge to edge
-   (it runs behind the stages rail, which sits on top in its own card), drawn
-   over with faint blueprint grid lines. The stage name sits on the band at
-   its lower left and the stage number at the right, both drawn as outlines. */
 .stage__card {
-  --grid-line: color-mix(in srgb, var(--accent) 22%, transparent);
   display: grid;
-  grid-template-columns: minmax(0, 1fr) auto;
-  align-items: end;
-  gap: 24px;
-  min-height: clamp(220px, 30vh, 300px);
-  margin-bottom: 16px;
-  background:
-    radial-gradient(ellipse 70% 120% at 100% 60%, transparent 0, var(--stage) 75%),
-    linear-gradient(90deg, var(--grid-line) 1px, transparent 1px) 0 0 / 56px 56px,
-    linear-gradient(var(--grid-line) 1px, transparent 1px) 0 0 / 56px 56px,
-    var(--stage);
-  box-shadow: 0 0 0 100vmax var(--stage);
-  clip-path: inset(0 -100vmax);
-  color: var(--stage-ink);
+  grid-template-columns: auto minmax(0, 1fr);
+  align-items: center;
+  gap: clamp(16px, 2.5vw, 36px);
+  margin-bottom: 8px;
+  padding-bottom: clamp(24px, 4vh, 40px);
+  border-bottom: 1px solid var(--line);
 }
-/* Ghost title: the stage name again, very large and faint, behind everything
-   in the band. It comes from the card's data-ghost attribute (pure CSS, no
-   script) and shares the card's single grid row instead of being positioned.
-   contain: size stops it from making the band taller; it sits at the bottom
-   and its lower part is cut off by the band's edge. Screen readers skip
-   generated content like this, so the name is not read twice. */
-.stage__card::before {
-  content: attr(data-ghost);
-  grid-area: 1 / 1 / 2 / -1;
-  align-self: stretch;
-  contain: size;
-  display: flex;
-  align-items: flex-end;
-  overflow: hidden;
-  font-family: var(--heading-font);
-  font-size: clamp(7rem, 3rem + 13vw, 15rem);
-  font-weight: 700;
-  line-height: 0.78;
-  letter-spacing: -0.02em;
-  white-space: nowrap;
-  color: color-mix(in srgb, var(--accent) 9%, transparent);
-  pointer-events: none;
-  user-select: none;
-}
-.stage__label,
 .stage__big {
   grid-row: 1;
-}
-.stage__big {
-  grid-column: 2;
-}
-.stage__label {
   grid-column: 1;
-  display: flex;
-  flex-direction: column;
-  gap: 6px;
-  padding: 40px 0 32px;
-}
-/* the stage name and number are outlines only; the fill stays transparent so
-   the band and its grid lines show through the letters */
-.stage__title {
-  font-size: var(--fs-stage);
-  line-height: 1.1;
-  letter-spacing: 0;
-  color: transparent;
-  -webkit-text-stroke: 1.5px var(--ink);
-}
-@supports not (-webkit-text-stroke: 1px black) {
-  .stage__title {
-    color: var(--ink);
-  }
-}
-.stage__big {
-  align-self: center;
   font-family: var(--heading-font);
-  font-size: clamp(3.5rem, 2.5rem + 4vw, 6.5rem);
+  font-size: clamp(4.5rem, 3rem + 5vw, 8.5rem);
   font-weight: 600;
   line-height: 0.8;
   letter-spacing: -0.03em;
   color: transparent;
-  -webkit-text-stroke: 1.5px color-mix(in srgb, var(--accent-text) 70%, transparent);
+  -webkit-text-stroke: 1.5px var(--accent-text);
   user-select: none;
 }
-@media (max-width: 640px) {
-  .stage__card {
-    min-height: 180px;
-    gap: 12px;
+@supports not (-webkit-text-stroke: 1px black) {
+  .stage__big {
+    color: var(--accent-text);
   }
-  .stage__label {
-    padding-block: 28px 24px;
+}
+.stage__label {
+  grid-row: 1;
+  grid-column: 2;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding-left: clamp(14px, 1.6vw, 20px);
+  border-left: 3px solid var(--accent);
+}
+.stage__title {
+  font-size: var(--fs-stage);
+  line-height: 1.05;
+  letter-spacing: 0;
+  color: var(--ink);
+}
+.stage__meta {
+  margin: 0;
+  font-size: var(--fs-small);
+  color: var(--text);
+}
+/* the opener is type only; the stage's pictures stay in its story */
+.stage__visual {
+  display: none;
+}
+/* Sticky openers: the opener stays under the top bar while you read its
+   stage and is pushed away by the next stage's opener (sticky inside its
+   own stage). As it reaches the top it shrinks to a slim header, following
+   the scroll rather than jumping: the number, title and padding shrink and
+   the reading time fades, over the first 160px of scrolling into the stage
+   (the stage's view timeline, with the top bar inset). Browsers without
+   scroll-driven animations keep the openers in place, not sticky. */
+@supports (animation-timeline: view()) {
+  :root {
+    --opener-h: 64px; /* height of a shrunk opener, for links and pinned drawings */
+  }
+  .stage {
+    view-timeline: --stage block;
+    view-timeline-inset: var(--top-h) 0px;
+  }
+  .stage__card {
+    position: sticky;
+    top: var(--top-h);
+    z-index: 10;
+    background: var(--bg);
+  }
+  .stage__card,
+  .stage__big,
+  .stage__title,
+  .stage__meta {
+    animation-timing-function: linear;
+    animation-fill-mode: both;
+    animation-timeline: --stage;
+    animation-range: exit-crossing clamp(48px, 8vh, 96px) exit-crossing calc(clamp(48px, 8vh, 96px) + 160px);
+  }
+  .stage__card {
+    animation-name: opener-card;
+  }
+  .stage__big {
+    animation-name: opener-num;
+  }
+  .stage__title {
+    animation-name: opener-title;
+  }
+  .stage__meta {
+    overflow: hidden;
+    animation-name: opener-meta;
+  }
+}
+@keyframes opener-card {
+  to {
+    padding-block: 12px;
+  }
+}
+@keyframes opener-num {
+  to {
+    font-size: 2.5rem;
+  }
+}
+@keyframes opener-title {
+  to {
+    font-size: 1.75rem;
+  }
+}
+@keyframes opener-meta {
+  from {
+    max-height: 2em;
+  }
+  to {
+    max-height: 0;
+    opacity: 0;
+  }
+}
+@media (max-width: 860px) {
+  .stage:has(> .stage__card) {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch; /* notes take the screen width, wide tables scroll inside */
+  }
+}
+
+/* Marked-up document: each stage's story reads like a clean document with
+   handwritten notes in the margin. The sections are separated by thin rules;
+   on wide screens each section's body gets a margin column, and its callouts
+   (the core constraint, hypotheses, quotes, "instead of" notes) move into it
+   as handwritten notes in the Kalam hand, each with a small arrow pointing
+   back at the text beside it. The big Outcome statements stay in the text.
+   On narrower screens the notes stay in the flow, still handwritten. The
+   margin column is grid placement only; nothing is positioned. */
+.stage:has(> .stage__card) {
+  padding-bottom: clamp(32px, 5vh, 64px);
+}
+.stage:has(> .stage__card) .block + .block {
+  margin-top: 24px;
+  border-top: 1px solid var(--line);
+}
+/* inside the document there is no wide band behind section titles */
+.stage:has(> .stage__card) .block__body {
+  margin-top: 0;
+  padding: 20px 0 32px;
+  border-image: none;
+}
+/* the margin note */
+.stage .callout:not(.callout--statement) {
+  gap: 2px;
+  max-width: 340px;
+  padding: 4px 0 4px 44px;
+  font-family: "Kalam", var(--body-font);
+  color: var(--accent-text);
+  rotate: -1.2deg;
+  transform-origin: 0 0;
+}
+.stage .callout:not(.callout--statement)::before {
+  content: "";
+  width: 34px;
+  height: 22px;
+  margin: 2px 0 -24px -44px;
+  background: currentColor;
+  -webkit-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 34 22' fill='none' stroke='black' stroke-width='2.4' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M32 18C22 18 12 14 5 5'/%3E%3Cpath d='M4 12 5 4l8 1'/%3E%3C/svg%3E") center / contain no-repeat;
+  mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 34 22' fill='none' stroke='black' stroke-width='2.4' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M32 18C22 18 12 14 5 5'/%3E%3Cpath d='M4 12 5 4l8 1'/%3E%3C/svg%3E") center / contain no-repeat;
+}
+.stage .callout:not(.callout--statement) .eyebrow {
+  font-family: "Kalam", var(--body-font);
+  font-size: var(--fs-small);
+  font-weight: 400;
+  letter-spacing: 0.02em;
+  text-transform: none;
+  color: var(--text);
+}
+.stage .callout:not(.callout--statement) p:not(.eyebrow) {
+  font-size: 1.15rem;
+  line-height: 1.4;
+}
+@media (min-width: 1200px) {
+  /* a margin column beside each section's text; callouts sit in it, level
+     with the paragraph they follow */
+  .stage:has(> .stage__card) .block__body {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(200px, 260px);
+    column-gap: 36px;
+    row-gap: 27px;
+    align-items: start;
+  }
+  .stage:has(> .stage__card) .block__body > * {
+    grid-column: 1;
+  }
+  .stage:has(> .stage__card) .block__body > .callout:not(.callout--statement) {
+    grid-column: 2;
+    padding-left: 40px;
+  }
+  /* the step-by-step story uses both columns */
+  .stage:has(> .stage__card) .block__body > .steps--story {
+    grid-column: 1 / -1;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .stage .callout:not(.callout--statement) {
+    rotate: none;
   }
 }
 
@@ -1034,6 +1510,88 @@ a.card:hover {
 @media (max-width: 860px) {
   .step {
     grid-template-columns: minmax(0, 1fr);
+  }
+}
+/* Scrollytelling, in the manner of Apple's feature pages (case-study.js
+   adds .steps--story). On wider screens the steps sit on one large tile: the
+   text of each step scrolls by in large type on the left while the drawings
+   share one spot on the right, pinned and centred in the screen; the step
+   you are reading brings its drawing in with a fade and a slight zoom. The
+   steps unwrap into one grid (display: contents) so every drawing can sit in
+   the same cell beside all the text. */
+@media (min-width: 861px) {
+  .steps--story {
+    --story-top: calc(var(--top-h) + var(--opener-h, 0px));
+    display: grid;
+    grid-template-columns: minmax(0, 5fr) minmax(0, 7fr);
+    gap: 0 clamp(32px, 5vw, 80px);
+    padding: 0 clamp(24px, 4vw, 64px);
+    border-radius: 32px;
+    background: color-mix(in srgb, var(--ink) 5%, var(--bg));
+  }
+  .steps--story > .step {
+    display: contents;
+  }
+  .steps--story .step__text {
+    grid-column: 1;
+    justify-content: center;
+    gap: 14px;
+    min-height: calc(100vh - var(--story-top));
+  }
+  .steps--story .step__text b {
+    font-family: var(--body-font, inherit);
+    font-size: var(--fs-small);
+    font-weight: 600;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+  }
+  .steps--story .step__text b::before {
+    content: "Step ";
+  }
+  .steps--story .step__text h4 {
+    font-size: clamp(1.75rem, 2.8vw, 2.75rem);
+    line-height: 1.1;
+    color: var(--text);
+    transition: color 0.4s ease;
+  }
+  .steps--story .is-active .step__text h4 {
+    color: var(--ink);
+  }
+  .steps--story .step__text p {
+    font-size: clamp(1.0625rem, 1.3vw, 1.25rem);
+    line-height: 1.6;
+  }
+  .steps--story .step__figure {
+    position: sticky;
+    top: var(--story-top);
+    grid-column: 2;
+    grid-row: 1 / span 20;
+    align-self: start;
+    justify-content: center;
+    height: calc(100vh - var(--story-top));
+    opacity: 0;
+    scale: 0.92;
+    pointer-events: none;
+    transition: opacity 0.6s ease, scale 0.8s cubic-bezier(0.2, 0.7, 0.2, 1);
+  }
+  .steps--story .is-active .step__figure {
+    opacity: 1;
+    scale: 1;
+    pointer-events: auto;
+  }
+  .steps--story .step__figure svg {
+    max-height: calc(100vh - var(--story-top) - 120px);
+    box-shadow: 0 30px 60px -30px rgb(0 0 0 / 0.5);
+  }
+  .steps--story .step__figure figcaption {
+    text-align: center;
+  }
+}
+@media (min-width: 861px) and (prefers-reduced-motion: reduce) {
+  .steps--story .step__text h4,
+  .steps--story .step__figure {
+    scale: 1;
+    transition: none;
   }
 }
 

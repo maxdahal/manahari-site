@@ -8,12 +8,55 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&amp;family=Antonio:wght@400;500;600;700&amp;display=swap">
+  <!-- Kalam (handwriting, Devanagari) for the intro's "namaste" and the hero's "design", only those letters -->
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Kalam:wght@400&amp;text=%E0%A4%A8%E0%A4%AE%E0%A4%B8%E0%A5%8D%E0%A4%A4%E0%A5%87design&amp;display=block">
   <link rel="stylesheet" href="css/site.css">
   <link rel="stylesheet" href="css/home.css">
+  <script>
+    /* The "hello" intro plays on a fresh visit and on a refresh, but not when
+       you come back to Home from another page of this site (a link or Back).
+       Runs before the page paints, so the intro never flashes. */
+    (function () {
+      try {
+        var nav = performance.getEntriesByType("navigation")[0];
+        var reload = nav && nav.type === "reload";
+        var fromSite = document.referrer && new URL(document.referrer).origin === location.origin;
+        if (fromSite && !reload) document.documentElement.classList.add("no-hello");
+      } catch (e) {}
+      /* While the intro plays, the page is locked at the top: no scrolling,
+         and a refresh starts from the top instead of where you were. The
+         lock lifts when the intro has faded (5.6s + 0.6s, as in home.css). */
+      var root = document.documentElement;
+      var plays = !root.classList.contains("no-hello") &&
+        !window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+      if (plays) {
+        /* the browser would otherwise jump back to where you were before a
+           refresh; the intro always starts the page from the top */
+        if ("scrollRestoration" in history) history.scrollRestoration = "manual";
+        var toTop = function () {
+          window.scrollTo(0, 0);
+        };
+        root.classList.add("hello-lock");
+        toTop();
+        window.addEventListener("DOMContentLoaded", toTop);
+        window.addEventListener("load", toTop);
+        setTimeout(function () {
+          root.classList.remove("hello-lock");
+        }, 6200);
+      }
+    })();
+  </script>
   <script src="js/site.js"></script>
   <script src="js/home.js" defer></script>
 </head>
 <body>
+  <!-- Intro: "hello" writes itself, then "namaste" in Nepali, then the screen fades away (pure CSS) -->
+  <div class="hello" aria-hidden="true">
+    <svg class="hello__word" viewBox="0 0 460 190" focusable="false">
+      <path pathLength="1" d="M30 150 C60 140 100 90 110 50 C118 20 95 10 85 40 C75 70 70 120 68 150 C75 120 95 95 115 100 C135 105 128 140 135 150 C145 160 165 140 175 125 C200 120 215 100 200 92 C185 85 165 110 175 135 C185 155 215 155 235 135 C255 110 275 60 272 35 C270 15 250 20 252 50 C254 90 250 130 260 148 C268 158 285 150 295 130 C310 105 330 60 327 35 C325 15 305 20 307 50 C309 90 305 130 315 148 C323 158 340 150 352 128 C360 105 390 95 400 110 C412 130 395 158 375 152 C355 145 358 110 385 105 C400 102 415 108 430 100"/>
+    </svg>
+    <p class="hello__namaste" lang="ne">नमस्ते</p>
+  </div>
   <a class="skip-link" href="#main">Skip to content</a>
   <header class="site-header">
     <div class="site-header__bar">
@@ -49,15 +92,19 @@
   <main class="page" id="main">
     <div class="sections">
 
-      <!-- Hero: the name rolls up and "UX Engineer." rises in as you scroll -->
+      <!-- Hero: the name swaps to "UX Developer." as you scroll -->
       <section class="hero" id="top" aria-label="Introduction">
         <div class="hero__sticky">
           <div class="hero__words">
-            <h1 class="hero__name"><span class="hero__line"><span>Manahari</span></span><span class="hero__line"><span>Dahal</span></span></h1>
-            <p class="hero__role" aria-hidden="true"><span class="hero__line"><span>UX</span></span><span class="hero__line"><span>Engineer<i>.</i></span></span></p>
+            <!-- Each line is a window holding the name word with the role word right under
+                 it. Scrolling moves both up one word, so "Manahari Dahal" becomes "UX Developer." -->
+            <h1 class="hero__name">
+              <span class="hero__line"><span class="hero__reel"><span class="hero__word">Manahari</span><span class="hero__word hero__word--role" aria-hidden="true">UX</span></span></span>
+              <span class="hero__line"><span class="hero__reel"><span class="hero__word">Dahal</span><span class="hero__word hero__word--role" aria-hidden="true">Developer<i>.</i></span></span></span>
+            </h1>
           </div>
           <div class="hero__bar container">
-            <p><i class="dot" aria-hidden="true"></i>Design and code, with a specialty in healthcare.</p>
+            <p class="tagline"><i class="dot" aria-hidden="true"></i><span>I <span class="tagline__hand">design</span> and <span class="tagline__code">code</span><span class="tagline__caret" aria-hidden="true"></span></span></p>
             <p class="hero__links"><a href="https://www.linkedin.com/in/manaharidahal/" target="_blank" rel="noopener">LinkedIn</a><a href="https://dribbble.com/manaharidahal" target="_blank" rel="noopener">Dribbble</a></p>
           </div>
         </div>
@@ -67,102 +114,99 @@
       <section class="intro" id="about-me" aria-labelledby="intro-h">
         <div class="container intro__inner">
           <div class="intro__top">
-            <p class="label"><i class="dot" aria-hidden="true"></i>About me</p>
-            <h2 class="statement" id="intro-h" data-fill>I design products and build them in code. Most recently, I designed three projects for a surgical console at Karl Storz.</h2>
-          </div>
-          <div class="peek">
-            <p class="peek__ghost" aria-hidden="true"></p>
-            <p class="peek__hint" aria-hidden="true"><i class="dot"></i>Hover or tap to reveal<svg viewBox="0 0 64 40" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 30C14 4 44 2 59 24"/><path d="M50 22l9 3 2-9"/></svg></p>
-            <div class="peek__card" id="peek-card">
-              <img class="peek__photo" src="assets/images/index-01-5d96ff329c.webp" alt="Portrait of Manahari Dahal" width="900" height="900" loading="lazy">
-              <div class="peek__text">
-                <h3>Manahari Dahal</h3>
-                <p class="peek__role">UX Engineer</p>
-                <p>I work in both UX design and frontend, so I can design an idea and build it myself.</p>
-                <dl class="peek__facts">
-                  <div><dt>Based in</dt><dd>the US</dd></div>
-                  <div><dt>Available for</dt><dd>UX design and UX engineering roles</dd></div>
-                </dl>
-                <p class="peek__links">
-                  <a class="peek__icon" href="https://www.linkedin.com/in/manaharidahal/" target="_blank" rel="noopener" aria-label="LinkedIn"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-4 0v7h-4v-7a6 6 0 0 1 6-6z"/><rect width="4" height="12" x="2" y="9"/><circle cx="4" cy="4" r="2"/></svg></a>
-                  <a class="peek__icon" href="https://dribbble.com/manaharidahal" target="_blank" rel="noopener" aria-label="Dribbble"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M19.13 5.09C15.22 9.14 10 10.44 2.25 10.94"/><path d="M21.75 12.84c-6.62-1.41-12.14 1-16.38 6.32"/><path d="M8.56 2.75c4.37 6 6 9.42 8 17.72"/></svg></a>
-                  <a class="peek__more" href="about.html">More about me <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></a>
-                </p>
+            <h2 class="intro__title" id="intro-h">About me</h2>
+            <p class="statement" data-fill>I design products and build them in code. Most recently, I designed three projects for a surgical console at Karl Storz.</p>
+
+            <!-- ID badge on a lanyard: sways gently; hover, focus or the button straightens it and flips it to the details on the back -->
+            <div class="peek badge">
+              <div class="badge__swing">
+                <span class="badge__strap" aria-hidden="true"></span>
+                <span class="badge__clip" aria-hidden="true"></span>
+                <div class="badge__card">
+                  <div class="badge__face badge__front">
+                    <span class="badge__slot" aria-hidden="true"></span>
+                    <img class="badge__photo" src="assets/images/index-01-5d96ff329c.webp" alt="Portrait of Manahari Dahal" width="900" height="900" loading="lazy">
+                    <h3 class="badge__name">Manahari Dahal</h3>
+                    <p class="badge__role">UX Developer</p>
+                    <p class="badge__status"><i class="dot" aria-hidden="true"></i>Available for new roles</p>
+                  </div>
+                  <div class="badge__face badge__back" id="peek-card">
+                    <p class="badge__about">I work in both UX design and frontend, so I can design an idea and build it myself.</p>
+                    <dl class="badge__facts">
+                      <div><dt>Based in</dt><dd>the US</dd></div>
+                      <div><dt>Available for</dt><dd>UX design and UX engineering roles</dd></div>
+                    </dl>
+                    <p class="badge__links">
+                      <a class="badge__icon" href="https://www.linkedin.com/in/manaharidahal/" target="_blank" rel="noopener" aria-label="LinkedIn"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-4 0v7h-4v-7a6 6 0 0 1 6-6z"/><rect width="4" height="12" x="2" y="9"/><circle cx="4" cy="4" r="2"/></svg></a>
+                      <a class="badge__icon" href="https://dribbble.com/manaharidahal" target="_blank" rel="noopener" aria-label="Dribbble"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M19.13 5.09C15.22 9.14 10 10.44 2.25 10.94"/><path d="M21.75 12.84c-6.62-1.41-12.14 1-16.38 6.32"/><path d="M8.56 2.75c4.37 6 6 9.42 8 17.72"/></svg></a>
+                      <a class="badge__more" href="about.html">More about me <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></a>
+                    </p>
+                  </div>
+                </div>
               </div>
+              <button class="peek__tab badge__flip" type="button" aria-expanded="false" aria-controls="peek-card">Flip my ID <span aria-hidden="true">↻</span></button>
             </div>
-            <button class="peek__tab" type="button" aria-expanded="false" aria-controls="peek-card"><i class="dot" aria-hidden="true"></i>Available for new roles</button>
           </div>
         </div>
       </section>
 
       <!-- Numbers and background -->
-      <section class="facts" aria-label="Stats and background">
-        <div class="container facts__inner">
+      <section class="facts" aria-label="Stats">
+        <div class="container">
           <div class="tiles">
             <div><span>Years in UX and frontend</span><b><span data-count="6">6</span><small>+</small></b></div>
-            <div><span>UX case studies</span><b><span data-count="3">3</span></b></div>
-            <div><span>Traffic growth across ku.edu</span><b><span data-count="30">30</span><small>%</small></b></div>
-          </div>
-          <div class="facts__list">
-            <details open>
-              <summary><h3>Education</h3></summary>
-              <ul>
-                <li><b>UNC Chapel Hill</b><span>M.S. Information Science, Human-Computer Interaction</span><span>Expected 2027</span></li>
-                <li><b>Brigham Young University–Idaho</b><span>B.S. Computer Science</span><span>2022</span></li>
-              </ul>
-            </details>
-            <details>
-              <summary><h3>Skills</h3></summary>
-              <ul>
-                <li><b>Product Design</b><span>Wireframing, prototyping, UI design, usability testing, interaction design</span><span></span></li>
-                <li><b>Web Development</b><span>HTML, CSS, JavaScript, TypeScript, React, Next.js, Webflow, landing pages</span><span></span></li>
-                <li><b>Branding</b><span>Brand strategy, style guides, typography, color, storytelling</span><span></span></li>
-                <li><b>Tools</b><span>Figma, Adobe XD, Illustrator, Photoshop, Framer, Git</span><span></span></li>
-              </ul>
-            </details>
-            <details>
-              <summary><h3>Experience</h3></summary>
-              <ul>
-                <li><b>UX Design Intern</b><span>Karl Storz · Morrisville, NC</span><span>May to Aug 2026</span></li>
-                <li><b>UX Designer</b><span>App Team Carolina · Chapel Hill, NC</span><span>Sep 2025 to May 2026</span></li>
-                <li><b>Frontend Developer</b><span>University of Kansas · Lawrence, KS</span><span>Jun 2022 to Apr 2025</span></li>
-              </ul>
-            </details>
+            <div><span>Degrees in computer science and HCI</span><b><span data-count="3">3</span></b></div>
+            <div><span>Industries: healthcare, higher education, mapping and food</span><b><span data-count="4">4</span></b></div>
           </div>
         </div>
       </section>
 
       <!-- Case studies -->
       <section class="work" id="work" aria-labelledby="work-h">
-        <div class="container">
-          <div class="block block--wide">
-            <h2 class="block__title" id="work-h">UX <span class="muted">Case Studies</span> <small class="work__count">03</small></h2>
-            <div class="block__body">
-              <ol class="work__list">
-                <li class="work__item work__item--1">
-                  <a href="luna.html">
-                    <span class="work__num" aria-hidden="true">01</span>
-                    <span class="work__image"><img src="assets/images/card-luna.webp" alt="" loading="lazy" width="1100" height="619"></span>
-                    <span class="work__caption"><b>Luna</b><span>Healthcare, Medical device</span></span>
-                  </a>
-                </li>
-                <li class="work__item work__item--2">
-                  <a href="ku-brand.html">
-                    <span class="work__num" aria-hidden="true">02</span>
-                    <span class="work__image"><img src="assets/images/card-ku-brand.webp" alt="" loading="lazy" width="2000" height="856"></span>
-                    <span class="work__caption"><b>KU Brand</b><span>Higher education, Brand system</span></span>
-                  </a>
-                </li>
-                <li class="work__item work__item--3">
-                  <a href="asians.html">
-                    <span class="work__num" aria-hidden="true">03</span>
-                    <span class="work__image"><img src="assets/images/card-asians.webp" alt="" loading="lazy" width="1100" height="666"></span>
-                    <span class="work__caption"><b>Asian's</b><span>Mobile app, Food and dining</span></span>
-                  </a>
-                </li>
-              </ol>
-            </div>
-          </div>
+        <div class="container work__grid">
+          <h2 class="work__title" id="work-h">Case studies <small class="work__count">(03)</small></h2>
+          <!-- Each project is a photo print pegged to a sagging clothesline -->
+          <ol class="work__list">
+            <li class="work__item work__item--1">
+              <a class="work__card" href="luna.html">
+                <span class="work__print"><span class="work__image"><img src="assets/images/card-luna.webp" alt="" loading="lazy" width="1100" height="619"></span></span>
+                <span class="work__info">
+                  <span class="work__num" aria-hidden="true">01</span>
+                  <b class="work__name">Luna Surgical Console</b>
+                  <span class="work__meta">UX Design Internship · Karl Storz · 2026</span>
+                  <span class="work__summary">Three fixes for a surgical console where the team has one second to read the screen: arm identity, a gallery with a video editor, and live annotation.</span>
+                  <span class="work__tags">Healthcare · Medical device</span>
+                  <span class="work__cta">View case study <span aria-hidden="true">→</span></span>
+                </span>
+              </a>
+            </li>
+            <li class="work__item work__item--2">
+              <a class="work__card" href="ku-brand.html">
+                <span class="work__print"><span class="work__image"><img src="assets/images/card-ku-brand.webp" alt="" loading="lazy" width="2000" height="856"></span></span>
+                <span class="work__info">
+                  <span class="work__num" aria-hidden="true">02</span>
+                  <b class="work__name">KU Brand</b>
+                  <span class="work__meta">Branding · University of Kansas · 2023 to 2024</span>
+                  <span class="work__summary">Turned KU’s new identity into a design system and a brand site for campus partners. Traffic across ku.edu grew 30% after launch, to about 100k visitors a month.</span>
+                  <span class="work__tags">Higher education · Brand system</span>
+                  <span class="work__cta">View case study <span aria-hidden="true">→</span></span>
+                </span>
+              </a>
+            </li>
+            <li class="work__item work__item--3">
+              <a class="work__card" href="asians.html">
+                <span class="work__print"><span class="work__image"><img src="assets/images/card-asians.webp" alt="" loading="lazy" width="1100" height="666"></span></span>
+                <span class="work__info">
+                  <span class="work__num" aria-hidden="true">03</span>
+                  <b class="work__name">Asian’s</b>
+                  <span class="work__meta">Volunteer UX Research and Design · Berkeley, CA · 2021 to 2022</span>
+                  <span class="work__summary">Online ordering for a small family restaurant where language barriers led to wrong orders. Researched with guests and staff, sketched and tested a prototype.</span>
+                  <span class="work__tags">Mobile app · Food and dining</span>
+                  <span class="work__cta">View case study <span aria-hidden="true">→</span></span>
+                </span>
+              </a>
+            </li>
+          </ol>
         </div>
       </section>
 
@@ -180,7 +224,7 @@
         </div>
       </section>
 
-      <!-- Artwork: scrolling down moves the row of artwork sideways -->
+      <!-- Artwork: a dark gallery wall lit by a spotlight that follows the cursor -->
       <section class="artwork" id="artwork" aria-labelledby="art-h">
         <div class="container">
           <div class="block block--wide">
@@ -189,22 +233,22 @@
               <p>Art I make for fun</p>
             </div>
             <div class="block__body artwork__body">
-              <div class="artwork__scroller">
-                <div class="artwork__sticky">
-                  <ul class="artwork__track" aria-label="Artwork. Select one to view it larger.">
-                    <li><button type="button" class="artwork__item"><img src="assets/images/index-02-bf139d0c00.webp" alt="Animated pixel-art elk under a moon" loading="lazy" width="400" height="400"></button></li>
-                    <li><button type="button" class="artwork__item"><img src="assets/images/index-03-f2827196b8.webp" alt="Silhouettes against a glowing orange sunset" loading="lazy" width="770" height="656"></button></li>
-                    <li><button type="button" class="artwork__item"><img src="assets/images/index-04-e40c5c0484.webp" alt="Autumn forest path in mist" loading="lazy" width="1100" height="778"></button></li>
-                    <li><button type="button" class="artwork__item"><img src="assets/images/index-05-7eab617767.webp" alt="Digital painting of glossy red lips" loading="lazy" width="880" height="1100"></button></li>
-                    <li><button type="button" class="artwork__item"><img src="assets/images/index-06-bdfabfe408.webp" alt="Illustrated desk with laptop, plants and string lights" loading="lazy" width="843" height="1100"></button></li>
-                    <li><button type="button" class="artwork__item"><img src="assets/images/index-07-8517c6c4d5.webp" alt="Elk head silhouette filled with a night mountain landscape" loading="lazy" width="843" height="1100"></button></li>
-                    <li><button type="button" class="artwork__item"><img src="assets/images/index-08-ca15fe9d96.webp" alt="Figure with a broom on rocks before a lighthouse" loading="lazy" width="880" height="1100"></button></li>
-                    <li><button type="button" class="artwork__item"><img src="assets/images/index-09-17d8af1698.webp" alt="Hiker waving at snowy blue mountains" loading="lazy" width="1100" height="825"></button></li>
-                    <li><button type="button" class="artwork__item"><img src="assets/images/index-10-d2339b5db6.svg" alt="Volcano illustration" loading="lazy" width="513" height="513"></button></li>
-                    <li><button type="button" class="artwork__item"><img src="assets/images/index-11-424bf2862f.webp" alt="Flame illustration" loading="lazy" width="680" height="740"></button></li>
-                  </ul>
-                  <div class="artwork__progress" aria-hidden="true"><i></i></div>
-                </div>
+              <!-- A dark gallery wall: a spotlight follows the cursor and lights up the art under it; click opens a piece large -->
+              <div class="spot">
+                <ul class="artwork__track spot__wall" aria-label="Artwork. Select one to view it larger.">
+                  <li><button type="button" class="artwork__item"><img src="assets/images/index-02-bf139d0c00.webp" alt="Animated pixel-art elk under a moon" loading="lazy" width="400" height="400"></button></li>
+                  <li><button type="button" class="artwork__item"><img src="assets/images/index-03-f2827196b8.webp" alt="Silhouettes against a glowing orange sunset" loading="lazy" width="770" height="656"></button></li>
+                  <li><button type="button" class="artwork__item"><img src="assets/images/index-04-e40c5c0484.webp" alt="Autumn forest path in mist" loading="lazy" width="1100" height="778"></button></li>
+                  <li><button type="button" class="artwork__item"><img src="assets/images/index-05-7eab617767.webp" alt="Digital painting of glossy red lips" loading="lazy" width="880" height="1100"></button></li>
+                  <li><button type="button" class="artwork__item"><img src="assets/images/index-06-bdfabfe408.webp" alt="Illustrated desk with laptop, plants and string lights" loading="lazy" width="843" height="1100"></button></li>
+                  <li><button type="button" class="artwork__item"><img src="assets/images/index-07-8517c6c4d5.webp" alt="Elk head silhouette filled with a night mountain landscape" loading="lazy" width="843" height="1100"></button></li>
+                  <li><button type="button" class="artwork__item"><img src="assets/images/index-08-ca15fe9d96.webp" alt="Figure with a broom on rocks before a lighthouse" loading="lazy" width="880" height="1100"></button></li>
+                  <li><button type="button" class="artwork__item"><img src="assets/images/index-09-17d8af1698.webp" alt="Hiker waving at snowy blue mountains" loading="lazy" width="1100" height="825"></button></li>
+                  <li><button type="button" class="artwork__item"><img src="assets/images/index-10-d2339b5db6.svg" alt="Volcano illustration" loading="lazy" width="513" height="513"></button></li>
+                  <li><button type="button" class="artwork__item"><img src="assets/images/index-11-424bf2862f.webp" alt="Flame illustration" loading="lazy" width="680" height="740"></button></li>
+                </ul>
+                <span class="spot__dark" aria-hidden="true"></span>
+                <p class="spot__hint" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 21h6"/><path d="M12 3a6 6 0 0 0-4 10.5c.8.8 1 1.5 1 2.5h6c0-1 .2-1.7 1-2.5A6 6 0 0 0 12 3z"/></svg>Move your cursor to light up the art</p>
               </div>
             </div>
           </div>

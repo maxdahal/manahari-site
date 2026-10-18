@@ -24,17 +24,16 @@ html {
 }
 
 /* Paper: a fine grain over the whole page, like paper. A fixed layer of
-   SVG noise sits above everything (it ignores the pointer), blended into
-   the colours beneath, so the grain runs unbroken under the pinned bar and
+   SVG noise sits above everything (it ignores the pointer): dark specks
+   with no blend mode, so it reads the same in every browser, and the grain runs unbroken under the pinned bar and
    headers too. */
 body::after {
   content: "";
   position: fixed;
   inset: 0;
   z-index: 9999;
-  background: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E") 0 0 / 240px auto;
-  opacity: 0.3;
-  mix-blend-mode: multiply;
+  background: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n' color-interpolation-filters='sRGB'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 -1 0 0 0 1'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E") 0 0 / 240px auto;
+  opacity: 0.09;
   pointer-events: none;
 }
 @media (prefers-color-scheme: dark) {

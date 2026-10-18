@@ -126,7 +126,7 @@
       if (reduceMotion) return;
 
       if (hero) {
-        var h = clamp((-hero.getBoundingClientRect().top / (vh * 0.3) - 0.04) / 0.5);
+        var h = clamp((-hero.getBoundingClientRect().top / (hero.offsetHeight - vh) - 0.04) / 0.5);
         hero.style.setProperty("--hero", h.toFixed(3));
       }
 

@@ -138,12 +138,11 @@ html.hello-lock {
 }
 
 /* 2. Hero -------------------------------------------------------------------- */
-/* The hero holds for 30vh of scrolling (110vh tall, its 80vh content
-   sticky, so About me already shows under it):
+/* The hero holds for 30vh of scrolling (130vh tall, its content sticky):
    the name swaps between 5vh and 20vh, rests a moment as "UX Developer.",
    and only then does About me start to slide up over it. */
 .hero {
-  height: 110vh;
+  height: 130vh;
 }
 /* Left out of the hand-off drift: the hero (the name never moves) and the
    short stats section. A section shorter than the screen would drift up and
@@ -158,7 +157,7 @@ html.hello-lock {
   top: 0;
   display: grid;
   grid-template-rows: 1fr auto;
-  height: 80vh;
+  height: 100vh;
 }
 .hero__words {
   display: grid;
@@ -339,6 +338,7 @@ html.hello-lock {
 .intro {
   display: grid;
   align-items: center;
+  min-height: 100vh;
   padding-block: clamp(72px, 11vh, 120px);
 }
 .intro__inner {
@@ -476,6 +476,7 @@ html.hello-lock {
   --device-shadow: 0 24px 40px rgb(0 0 0 / 0.22);
   --bezel-edge: transparent;
   position: relative;
+  min-height: 100vh;
   padding-block: clamp(56px, 8vh, 88px);
 }
 @media (prefers-color-scheme: dark) {
@@ -515,6 +516,10 @@ html.hello-lock {
   flex-direction: column;
   align-items: flex-start;
   gap: 16px;
+}
+.work__title {
+  font-size: var(--fs-stage);
+  line-height: 1.05;
 }
 .work__count {
   font-family: var(--body-font);
@@ -733,14 +738,38 @@ html.hello-lock {
 .shelf__info {
   display: flex;
   flex-direction: column;
-  gap: 6px;
-  padding: 22px 0.8cqw 0;
+  gap: 10px;
+  padding: 20px 0.8cqw 0;
 }
-.shelf__meta {
-  font-size: 0.75rem;
+/* the name with an arrow that slides on hover, then two tags */
+.shelf__name {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3em;
+}
+.shelf__name svg {
+  width: 0.62em;
+  height: 0.62em;
+  color: var(--accent-text);
+  transition: translate 0.2s ease;
+}
+.shelf__card:hover .shelf__name svg,
+.shelf__card:focus-visible .shelf__name svg {
+  translate: 4px 0;
+}
+.shelf__tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+.shelf__tags i {
+  padding: 3px 10px;
+  border: 1px solid color-mix(in srgb, var(--accent) 35%, transparent);
+  border-radius: 999px;
+  background: color-mix(in srgb, var(--accent) 9%, transparent);
+  font-size: 0.8125rem;
+  font-style: normal;
   font-weight: 600;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
   color: var(--accent-text);
 }
 .shelf__name {
@@ -754,22 +783,6 @@ html.hello-lock {
 }
 .shelf--asians .shelf__name {
   font-size: clamp(1.4rem, 1.1rem + 0.8vw, 1.9rem);
-}
-.shelf__summary {
-  color: var(--text);
-}
-.shelf__cta {
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  align-self: flex-start;
-  margin-top: 4px;
-  font-weight: 600;
-  border-bottom: 2px solid var(--accent);
-  transition: gap 0.2s ease;
-}
-.shelf__card:hover .shelf__cta {
-  gap: 14px;
 }
 
 /* Plants. They move a little: the snake plant's leaves sway from their
@@ -1003,7 +1016,7 @@ html.hello-lock {
   --row: clamp(48px, 7vw, 100px);
   --stage: min(100vh, calc(var(--row) * 2 + 120px));
   --stage-top: calc((100vh - var(--stage)) / 2);
-  --hold: 25vh;
+  --hold: 50vh;
   height: calc(var(--stage) + var(--stage-top) + var(--hold));
   overflow: clip;
 }
@@ -1058,6 +1071,7 @@ html.hello-lock {
 
 /* 7. Artwork and lightbox ---------------------------------------------------- */
 .artwork {
+  min-height: 100vh;
   padding-block: clamp(72px, 11vh, 120px) 36px;
 }
 .artwork__head {
@@ -1322,17 +1336,17 @@ html.hello-lock {
 
 /* Paper (light mode): a fine grain over the whole page, like paper, the
    same as the case studies. A fixed layer of SVG noise sits above
-   everything (it ignores the pointer), blended into the colours beneath,
-   so the grain runs unbroken across the stacked sections. Dark mode keeps
-   its plain background. */
+   everything (it ignores the pointer): dark specks with no blend mode, so
+   it reads the same in every browser, even over animated layers, and the
+   grain runs unbroken across the stacked sections. Dark mode keeps its
+   plain background. */
 body::after {
   content: "";
   position: fixed;
   inset: 0;
   z-index: 9999;
-  background: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E") 0 0 / 240px auto;
-  opacity: 0.3;
-  mix-blend-mode: multiply;
+  background: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n' color-interpolation-filters='sRGB'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 -1 0 0 0 1'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E") 0 0 / 240px auto;
+  opacity: 0.09;
   pointer-events: none;
 }
 @media (prefers-color-scheme: dark) {

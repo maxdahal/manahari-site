@@ -889,7 +889,7 @@ html {
   gap: 10px;
   max-width: calc(100% - 32px);
   min-height: 48px;
-  padding: 0 16px 0 18px;
+  padding: 0 16px 0 9px;
   border: 0;
   border-radius: 999px;
   background: var(--ink);
@@ -913,11 +913,33 @@ html {
   outline: 3px solid var(--accent);
   outline-offset: 3px;
 }
-.outline-chip__label {
-  font-size: 0.6875rem;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
-  color: var(--accent);
+/* a ring that fills with the accent as you read through the page, with the
+   stage number inside */
+.outline-chip__ring {
+  --p: 0;
+  position: relative;
+  display: grid;
+  place-items: center;
+  flex: none;
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  background: conic-gradient(var(--accent) calc(var(--p) * 1turn), color-mix(in srgb, var(--bg) 22%, transparent) 0);
+}
+.outline-chip__ring::before {
+  content: "";
+  position: absolute;
+  inset: 3px;
+  border-radius: 50%;
+  background: var(--ink);
+}
+.outline-chip__num {
+  position: relative;
+  font-family: var(--heading-font);
+  font-size: 0.8125rem;
+  font-weight: 600;
+  line-height: 1;
+  font-variant-numeric: tabular-nums;
 }
 .outline-chip__name {
   overflow: hidden;

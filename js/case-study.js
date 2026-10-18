@@ -367,11 +367,25 @@
     chip.type = "button";
     chip.setAttribute("aria-haspopup", "dialog");
     chip.innerHTML =
-      '<span class="outline-chip__label">Stage</span>' +
+      '<span class="outline-chip__ring" aria-hidden="true"><span class="outline-chip__num">\u2022</span></span>' +
+      '<span class="sr-only">Now reading: </span>' +
       '<span class="outline-chip__name">' + (stages[0] ? stages[0].firstChild.textContent.trim() : "") + "</span>" +
       icon("m18 15-6-6-6 6");
     document.body.appendChild(chip);
     var name = chip.querySelector(".outline-chip__name");
+    var num = chip.querySelector(".outline-chip__num");
+    /* the same numbers as the outline: the opening stage and the things to
+       try have none (a dot and a play mark instead) */
+    function label(stage) {
+      var i = stages.indexOf(stage);
+      if (i <= 0) return "\u2022";
+      if (stage.classList.contains("cp-outline__play")) return "\u25B8";
+      var n = stages.slice(1, i + 1).filter(function (s) {
+        return !s.classList.contains("cp-outline__play");
+      }).length;
+      return String(n).padStart(2, "0");
+    }
+    var ring = chip.querySelector(".outline-chip__ring");
 
     var small = window.matchMedia("(max-width: 1100px)");
     function place() {
@@ -406,7 +420,13 @@
       tick = false;
       var stage = nav.querySelector(".cp-outline__stage.is-in");
       var text = stage ? stage.firstChild.textContent.trim() : name.textContent;
-      if (name.textContent !== text) name.textContent = text;
+      if (name.textContent !== text) {
+        name.textContent = text;
+        num.textContent = label(stage);
+      }
+      /* the ring fills as you read through the page */
+      var max = document.documentElement.scrollHeight - window.innerHeight;
+      ring.style.setProperty("--p", max > 0 ? Math.min(1, window.scrollY / max).toFixed(3) : "0");
       chip.classList.toggle("is-shown", window.scrollY > window.innerHeight * 0.6);
     }
     window.addEventListener("scroll", function () {

@@ -1175,6 +1175,152 @@ html.hello-lock {
   border-radius: 6px 6px 0 0;
   background: var(--stand);
 }
+/* The sleeping cat on top of the Luna monitor. It is the monitor's first
+   item, at the right, pulled down so its belly rests on the top of the
+   screen and its tail hangs over the edge (drawn above the screen). Sized
+   to the monitor. Breathing, floating z's, a tail twitch and an ear flick
+   now and then are pure CSS; all of it stops with the pause button and for
+   reduced motion. */
+.cat {
+  position: relative;
+  z-index: 1;
+  align-self: flex-end;
+  width: 22%;
+  height: auto;
+  margin: 0 3% -6.97% 0; /* its belly line sits on the screen's top edge */
+  overflow: visible;
+  pointer-events: none;
+}
+.cat__fur {
+  fill: #e6a46a;
+}
+.cat__inner {
+  fill: #f4c9a4;
+}
+.cat__stripe {
+  fill: none;
+  stroke: #c47d43;
+  stroke-width: 3;
+  stroke-linecap: round;
+}
+.cat__face {
+  fill: none;
+  stroke: #4a2e1c;
+  stroke-width: 1.6;
+  stroke-linecap: round;
+}
+.cat__nose {
+  fill: #c9645a;
+}
+.cat__tail {
+  fill: none;
+  stroke: #e6a46a;
+  stroke-width: 7;
+  stroke-linecap: round;
+  transform-box: fill-box;
+  transform-origin: 0 0;
+  animation: cat-tail 9s ease-in-out infinite;
+}
+.cat__body {
+  transform-box: fill-box;
+  transform-origin: 50% 100%;
+  animation: cat-breathe 3.6s ease-in-out infinite;
+}
+.cat__head {
+  transform-box: fill-box;
+  transform-origin: 70% 100%;
+  animation: cat-head 3.6s ease-in-out infinite;
+}
+.cat__ear--right {
+  transform-box: fill-box;
+  transform-origin: 20% 100%;
+  animation: cat-ear 11s ease-in-out infinite;
+}
+.cat__z {
+  font-family: var(--body-font);
+  font-size: 16px;
+  font-weight: 600;
+  fill: var(--text);
+  opacity: 0;
+  animation: cat-z 4.5s ease-out infinite;
+}
+.cat__z:nth-child(2) {
+  animation-delay: 1.5s;
+}
+.cat__z:nth-child(3) {
+  animation-delay: 3s;
+}
+@keyframes cat-breathe {
+  50% {
+    transform: scale(1.015, 1.06);
+  }
+}
+@keyframes cat-head {
+  50% {
+    transform: translateY(-0.8px);
+  }
+}
+/* the tail rests, then flicks twice near the end of each cycle */
+@keyframes cat-tail {
+  0%, 80%, 100% {
+    transform: rotate(0deg);
+  }
+  85% {
+    transform: rotate(9deg);
+  }
+  90% {
+    transform: rotate(-4deg);
+  }
+  94% {
+    transform: rotate(6deg);
+  }
+}
+@keyframes cat-ear {
+  0%, 90%, 100% {
+    transform: rotate(0deg);
+  }
+  93% {
+    transform: rotate(-14deg);
+  }
+  96% {
+    transform: rotate(4deg);
+  }
+}
+/* each z drifts up and to the right, growing and fading */
+@keyframes cat-z {
+  0% {
+    opacity: 0;
+    transform: translate(0, 0) scale(0.6);
+  }
+  20% {
+    opacity: 0.9;
+  }
+  100% {
+    opacity: 0;
+    transform: translate(26px, -30px) scale(1.25);
+  }
+}
+.cat__z {
+  transform-box: fill-box;
+  transform-origin: 50% 50%;
+}
+:root.motion-paused .cat :is(.cat__tail, .cat__body, .cat__head, .cat__ear--right, .cat__z) {
+  animation-play-state: paused;
+}
+@media (prefers-reduced-motion: reduce) {
+  .cat :is(.cat__tail, .cat__body, .cat__head, .cat__ear--right) {
+    animation: none;
+  }
+  /* one still z, so it still reads as asleep */
+  .cat__z {
+    animation: none;
+  }
+  .cat__z:first-child {
+    opacity: 0.8;
+    transform: translate(12px, -12px);
+  }
+}
+
 .device--laptop {
   width: 82.5%;
 }

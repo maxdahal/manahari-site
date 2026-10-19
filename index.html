@@ -244,6 +244,29 @@
                 <a class="shelf__card" href="/luna">
                   <span class="shelf__stage">
                     <span class="device device--monitor">
+                      <!-- A ginger cat asleep on top of the monitor, tail hanging over the
+                           screen: it breathes, dreams in z's and twitches its tail (pure CSS) -->
+                      <svg class="cat" viewBox="0 0 120 100" aria-hidden="true" focusable="false">
+                        <g class="cat__zs">
+                          <text class="cat__z" x="40" y="24">z</text>
+                          <text class="cat__z" x="40" y="24">z</text>
+                          <text class="cat__z" x="40" y="24">z</text>
+                        </g>
+                        <path class="cat__tail" d="M98 60 C111 61 116 69 114 80 C113 88 110 92 112 97"/>
+                        <g class="cat__body">
+                          <path class="cat__fur" d="M20 62 C20 44 34 30 58 28 C84 26 104 36 106 54 C107 58 106 62 103 62 Z"/>
+                          <path class="cat__stripe" d="M62 31 C66 38 66 46 63 52 M74 30 C79 38 79 47 75 54 M86 34 C91 41 91 49 88 55"/>
+                          <ellipse class="cat__fur" cx="47" cy="60" rx="9" ry="4"/>
+                        </g>
+                        <g class="cat__head">
+                          <path class="cat__fur cat__ear" d="M16 45 L19 28 L29 39 Z"/>
+                          <path class="cat__fur cat__ear cat__ear--right" d="M31 38 L41 27 L44 42 Z"/>
+                          <path class="cat__inner" d="M19 41 L20.5 32 L26 38 Z M34 38 L40 31.5 L41.5 40 Z"/>
+                          <ellipse class="cat__fur" cx="30" cy="50" rx="17" ry="13.5"/>
+                          <path class="cat__face" d="M21 50 q3.5 3 7 0 M33 50 q3.5 3 7 0"/>
+                          <path class="cat__nose" d="M29 55 l2.4 0 l-1.2 1.6 Z"/>
+                        </g>
+                      </svg>
                       <span class="device__screen" data-land><img src="assets/images/card-luna.webp" alt="" loading="lazy" width="1100" height="619"></span>
                       <span class="device__neck"></span>
                       <span class="device__foot"></span>

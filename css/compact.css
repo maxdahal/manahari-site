@@ -57,6 +57,20 @@ html {
 .cp-outline {
   margin-top: clamp(40px, 10vh, 120px);
 }
+/* the crumbs head the outline column; the copy at the top of the story is
+   for smaller screens, where the column is hidden */
+.cp-side > .cp-crumbs {
+  padding-left: 25px; /* the arrow sits over the stage numbers */
+}
+.cp-crumbs--top {
+  display: none;
+}
+@media (max-width: 1100px) {
+  .cp-crumbs--top {
+    display: flex;
+    margin-bottom: -16px;
+  }
+}
 .cp-outline > ol {
   padding-left: 14px;
 }

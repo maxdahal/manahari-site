@@ -1286,38 +1286,6 @@ html {
 .cp-bar__links a[aria-current] {
   color: var(--accent-text);
 }
-/* Detail pages (About and the case studies) show where you are instead of
-   the page links: a breadcrumb trail after the mark, "md. / Work / Luna".
-   The mark is the first step (home); the parent page is a grey link and
-   the page you are on is in ink. It stays on every screen size. */
-.cp-bar__start:has(.bar-crumbs) {
-  gap: 10px;
-}
-.bar-crumbs {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  min-width: 0;
-  font-size: 0.875rem;
-  color: var(--muted);
-}
-.bar-crumbs a {
-  display: inline-flex;
-  align-items: center;
-  min-height: 44px;
-  color: var(--muted);
-  text-decoration: none;
-  transition: color 0.2s ease;
-}
-.bar-crumbs a:hover {
-  color: var(--ink);
-}
-.bar-crumbs [aria-current] {
-  overflow: hidden;
-  color: var(--ink);
-  text-overflow: ellipsis;
-  white-space: nowrap;
-}
 .cp-bar a:focus-visible {
   outline: 3px solid var(--ink);
   outline-offset: 2px;
@@ -1453,5 +1421,55 @@ html {
 @media (min-width: 1101px) {
   .menu {
     display: none;
+  }
+}
+
+/* The way back on the detail pages, under the top bar: an arrow and the
+   parent page, then the page you are on ("<- Projects / Luna"). On the
+   case studies it heads the outline column, lined up with the stages; on
+   About it lines up with the page. */
+.cp-crumbs {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 4px 8px;
+  font-size: 0.875rem;
+  color: var(--muted);
+}
+.cp-crumbs a {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  min-height: 32px;
+  color: var(--muted);
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+.cp-crumbs a svg {
+  width: 15px;
+  height: 15px;
+  transition: translate 0.2s ease;
+}
+.cp-crumbs a:hover {
+  color: var(--ink);
+}
+.cp-crumbs a:hover svg {
+  translate: -3px 0;
+}
+.cp-crumbs [aria-current] {
+  color: var(--ink);
+}
+.cp-crumbs a:focus-visible {
+  outline: 3px solid var(--ink);
+  outline-offset: 2px;
+  border-radius: 4px;
+}
+.page-crumbs {
+  padding-top: 20px;
+}
+@media (prefers-reduced-motion: reduce) {
+  .cp-crumbs a,
+  .cp-crumbs a svg {
+    transition: none;
   }
 }

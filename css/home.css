@@ -1304,11 +1304,45 @@ html.hello-lock {
   transform-box: fill-box;
   transform-origin: 50% 50%;
 }
+/* the yarn: a dusty blue ball under the chin, its loose thread over the
+   cat's back and down the side of the monitor, swaying from where it
+   leaves the top edge */
+.cat__yarn circle {
+  fill: #7fa8d8;
+}
+.cat__yarn path {
+  fill: none;
+  stroke: #557fb3;
+  stroke-width: 1.3;
+  stroke-linecap: round;
+}
+.cat__thread {
+  fill: none;
+  stroke: #7fa8d8;
+  stroke-width: 2;
+  stroke-linecap: round;
+}
+.cat__thread--hang {
+  transform-box: fill-box;
+  transform-origin: 0 0;
+  animation: cat-thread 5s ease-in-out infinite;
+}
+@keyframes cat-thread {
+  0%, 100% {
+    transform: rotate(-2deg);
+  }
+  50% {
+    transform: rotate(2.5deg);
+  }
+}
+:root.motion-paused .cat .cat__thread--hang {
+  animation-play-state: paused;
+}
 :root.motion-paused .cat :is(.cat__tail, .cat__body, .cat__head, .cat__ear--right, .cat__z) {
   animation-play-state: paused;
 }
 @media (prefers-reduced-motion: reduce) {
-  .cat :is(.cat__tail, .cat__body, .cat__head, .cat__ear--right) {
+  .cat :is(.cat__tail, .cat__body, .cat__head, .cat__ear--right, .cat__thread--hang) {
     animation: none;
   }
   /* one still z, so it still reads as asleep */

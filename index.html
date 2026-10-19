@@ -244,8 +244,10 @@
                 <a class="shelf__card" href="/luna">
                   <span class="shelf__stage">
                     <span class="device device--monitor">
-                      <!-- A ginger cat asleep on top of the monitor, tail hanging over the
-                           screen: it breathes, dreams in z's and twitches its tail (pure CSS) -->
+                      <!-- A ginger cat asleep on top of the monitor, hugging a ball of yarn
+                           whose loose thread runs over its back and down the side of the
+                           monitor; it breathes, dreams in z's, twitches its tail and the
+                           thread sways (pure CSS) -->
                       <svg class="cat" viewBox="0 0 120 100" aria-hidden="true" focusable="false">
                         <g class="cat__zs">
                           <text class="cat__z" x="40" y="24">z</text>
@@ -258,6 +260,13 @@
                           <path class="cat__stripe" d="M62 31 C66 38 66 46 63 52 M74 30 C79 38 79 47 75 54 M86 34 C91 41 91 49 88 55"/>
                           <ellipse class="cat__fur" cx="47" cy="60" rx="9" ry="4"/>
                         </g>
+                        <path class="cat__thread" d="M60 49 C70 37 90 33 101 42 C110 49 126 50 133 62"/>
+                        <path class="cat__thread cat__thread--hang" d="M133 62 C136 88 130 116 134 146 C136 160 131 170 135 182 C137 188 133 192 136 196"/>
+                        <g class="cat__yarn">
+                          <circle cx="55" cy="54.5" r="8.5"/>
+                          <path d="M48 50 C53 47 60 48 63 52 M47 55 C53 52 60 54 63 58 M50 61 C54 57 58 51 57 46"/>
+                        </g>
+                        <ellipse class="cat__fur" cx="50" cy="61" rx="5.5" ry="3.2"/>
                         <g class="cat__head">
                           <path class="cat__fur cat__ear" d="M16 45 L19 28 L29 39 Z"/>
                           <path class="cat__fur cat__ear cat__ear--right" d="M31 38 L41 27 L44 42 Z"/>

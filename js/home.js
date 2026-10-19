@@ -139,8 +139,88 @@
     });
   }
 
+  /* The long yarn thread over the shelves: it leaves the cat's paw at the
+     monitor's top edge, runs down the side of the monitor with a curl,
+     sags across to the laptop, droops in a loose loop over its screen,
+     drops down its side into a tangled clump on the KU shelf, then sags on
+     to the phone and winds round it (only the turns across its front show,
+     wrapping just past its edges) before the loose end hangs free. Drawn from where the devices
+     are, so it fits any layout; redrawn when the wall changes size. */
+  function initThread() {
+    var svg = document.querySelector(".thread");
+    var wall = document.querySelector(".shelves");
+    if (!svg || !wall) return;
+    var front = svg.querySelector(".thread__line");
+    function rect(sel) {
+      var el = wall.querySelector(sel);
+      return el && el.getBoundingClientRect();
+    }
+    function n(v) {
+      return v.toFixed(1);
+    }
+    /* a small loose curl ending a little to the right of where it starts */
+    function curl(s) {
+      return " c" + n(s * 1.2) + " " + n(-s * 1.1) + " " + n(s * 1.7) + " " + n(s * 0.6) + " " + n(s * 0.3) + " " + n(s * 0.5) +
+        " c" + n(-s * 0.8) + " " + n(-s * 0.1) + " " + n(-s * 0.4) + " " + n(-s) + " " + n(s * 0.6) + " " + n(-s * 0.7);
+    }
+    /* a hanging sag from a to b, dipping a little below the lower end */
+    function sag(a, b) {
+      var dx = b.x - a.x, dy = b.y - a.y;
+      var dip = Math.min(90, Math.hypot(dx, dy) * 0.22);
+      var low = Math.max(a.y, b.y);
+      return " C" + n(a.x + dx * 0.25) + " " + n(low + dip) + " " + n(b.x - dx * 0.25) + " " + n(low + dip * 0.5) + " " + n(b.x) + " " + n(b.y);
+    }
+    function draw() {
+      var box = svg.getBoundingClientRect();
+      var cat = rect(".cat"), scr = rect(".shelf--luna .device__screen"), lid = rect(".device__lid"), ph = rect(".device--phone");
+      if (!cat || !scr || !lid || !ph || !box.width) return;
+      svg.setAttribute("viewBox", "0 0 " + n(box.width) + " " + n(box.height));
+      var X = function (x) { return x - box.left; };
+      var Y = function (y) { return y - box.top; };
+      var s = Math.max(5, Math.min(10, scr.width / 45));
+      /* the cat's thread meets the monitor's edge here (see the cat drawing) */
+      var a = { x: X(cat.left + cat.width * 133 / 120), y: Y(cat.top + cat.height * 0.62) };
+      var m = { x: X(scr.right) + 3, y: Y(scr.top + scr.height * 0.55) };
+      var lw = lid.width, lh = lid.height, lt = Y(lid.top), lx = X(lid.left);
+      var l0 = { x: lx + lw * 0.28, y: lt };
+      var l1 = { x: X(lid.right) - 6, y: lt };
+      var l2 = { x: X(lid.right) + 4, y: Y(lid.bottom) };
+      /* the tangle: a clump of curls lying on the KU shelf beside the laptop */
+      var k = { x: l2.x + Math.max(14, lw * 0.07), y: l2.y + 3 };
+      var pl = X(ph.left) + 2, pr = X(ph.right) - 2, pt = Y(ph.top), phh = ph.height, pm = (pl + pr) / 2;
+      var py = function (f) { return pt + phh * f; };
+      /* a turn across the front of the phone, bowing down like round a can */
+      var turn = function (f0, f1, x0, x1) {
+        return " Q" + n(pm) + " " + n(py((f0 + f1) / 2 + 0.07)) + " " + n(x1) + " " + n(py(f1));
+      };
+      var d = "M" + n(a.x) + " " + n(a.y) +
+        " C" + n(a.x + 6) + " " + n(a.y + (m.y - a.y) * 0.4) + " " + n(m.x - 6) + " " + n(m.y - (m.y - a.y) * 0.3) + " " + n(m.x) + " " + n(m.y) +
+        curl(s) +
+        sag({ x: m.x + s * 0.9, y: m.y - s * 0.2 }, l0) +
+        /* over the lid, a loose loop drooping in front of the screen */
+        " C" + n(l0.x + lw * 0.04) + " " + n(lt + lh * 0.55) + " " + n(lx + lw * 0.58) + " " + n(lt + lh * 0.6) + " " + n(lx + lw * 0.6) + " " + n(lt + 1) +
+        curl(s * 0.8) +
+        " Q" + n(lx + lw * 0.82) + " " + n(lt - 5) + " " + n(l1.x) + " " + n(l1.y) +
+        " C" + n(l1.x + 12) + " " + n(lt + lh * 0.3) + " " + n(l2.x - 4) + " " + n(lt + lh * 0.7) + " " + n(l2.x) + " " + n(l2.y) +
+        " Q" + n((l2.x + k.x) / 2) + " " + n(k.y + 4) + " " + n(k.x) + " " + n(k.y) +
+        curl(s * 1.5) + curl(-s * 1.2) + curl(s * 1.3) + curl(-s * 1.0) + curl(s * 0.9) +
+        sag({ x: k.x + s * 1.1, y: k.y - s * 0.9 }, { x: pl - 2, y: py(0.14) }) +
+        turn(0.14, 0.3, pl - 2, pr + 3) +
+        " M" + n(pl - 3) + " " + n(py(0.46)) + turn(0.46, 0.62, pl - 3, pr + 3) +
+        " M" + n(pl - 3) + " " + n(py(0.78)) + turn(0.78, 0.93, pl - 3, pr + 5) +
+        /* the loose end hangs free */
+        " C" + n(pr + 14) + " " + n(py(1.0)) + " " + n(pr + 6) + " " + n(py(1.07)) + " " + n(pr + 12) + " " + n(py(1.14));
+      front.setAttribute("d", d);
+    }
+    draw();
+    window.addEventListener("load", draw);
+    if (window.ResizeObserver) new ResizeObserver(draw).observe(wall);
+    else window.addEventListener("resize", draw);
+  }
+
   function start() {
     splitHeroName();
+    initThread();
     motionToggle();
     buildSkillRings();
     var sections = [].slice.call(document.querySelectorAll(".sections > section"));

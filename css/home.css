@@ -1094,6 +1094,7 @@ html.hello-lock {
 .shelves {
   container-type: inline-size;
   position: relative;
+  display: grid;
   max-width: 980px;
   margin: clamp(32px, 4vw, 56px) auto 0;
 }
@@ -1105,6 +1106,25 @@ html.hello-lock {
   padding: 0;
   margin: 0;
   list-style: none;
+}
+/* the long yarn thread over the wall: same cell as the list, on top */
+.shelves__list,
+.thread {
+  grid-area: 1 / 1;
+}
+.thread {
+  z-index: 2;
+  width: 100%;
+  height: 100%;
+  overflow: visible;
+  pointer-events: none;
+}
+.thread path {
+  fill: none;
+  stroke: #7fa8d8;
+  stroke-width: 1.8;
+  stroke-linecap: round;
+  stroke-linejoin: round;
 }
 .shelf--ku {
   margin-top: 22cqw;
@@ -1303,43 +1323,6 @@ html.hello-lock {
 .cat__z {
   transform-box: fill-box;
   transform-origin: 50% 50%;
-}
-/* The yarn: a thread from under the cat's paw runs over its back and down
-   the side of the monitor into a big ball of yarn sitting on the shelf in
-   front of the monitor's base, its loose end trailing over the shelf's
-   front edge. The ball is the monitor's last item, at the right, pulled up
-   by its own height so it sits on the shelf (no positioning). */
-.yarn {
-  position: relative;
-  z-index: 2;
-  align-self: flex-end;
-  width: 18%;
-  height: auto;
-  margin: -18% -2% 0 0;
-  overflow: visible;
-  pointer-events: none;
-  filter: drop-shadow(0 4px 6px rgb(0 0 0 / 0.18));
-}
-.yarn__ball {
-  fill: #7fa8d8;
-}
-.yarn__wind {
-  fill: none;
-  stroke-width: 2.4;
-  stroke-linecap: round;
-}
-.yarn__wind--dark {
-  stroke: #5b85b9;
-}
-.yarn__wind--light {
-  stroke: #a9c6e8;
-  stroke-width: 2;
-}
-.yarn__end {
-  fill: none;
-  stroke: #7fa8d8;
-  stroke-width: 3.2;
-  stroke-linecap: round;
 }
 .cat__thread {
   fill: none;

@@ -244,10 +244,10 @@
                 <a class="shelf__card" href="/luna">
                   <span class="shelf__stage">
                     <span class="device device--monitor">
-                      <!-- A ginger cat asleep on top of the monitor, hugging a ball of yarn
-                           whose loose thread runs over its back and down the side of the
-                           monitor; it breathes, dreams in z's, twitches its tail and the
-                           thread sways (pure CSS) -->
+                      <!-- A ginger cat asleep on top of the monitor with a yarn thread under
+                           its paw; the thread runs over its back and down the side of the
+                           monitor into a big ball of yarn on the shelf (the last item of the
+                           monitor). It breathes, dreams in z's and twitches its tail (pure CSS) -->
                       <svg class="cat" viewBox="0 0 120 100" aria-hidden="true" focusable="false">
                         <g class="cat__zs">
                           <text class="cat__z" x="40" y="24">z</text>
@@ -260,12 +260,8 @@
                           <path class="cat__stripe" d="M62 31 C66 38 66 46 63 52 M74 30 C79 38 79 47 75 54 M86 34 C91 41 91 49 88 55"/>
                           <ellipse class="cat__fur" cx="47" cy="60" rx="9" ry="4"/>
                         </g>
-                        <path class="cat__thread" d="M60 49 C70 37 90 33 101 42 C110 49 126 50 133 62"/>
-                        <path class="cat__thread cat__thread--hang" d="M133 62 C136 88 130 116 134 146 C136 160 131 170 135 182 C137 188 133 192 136 196"/>
-                        <g class="cat__yarn">
-                          <circle cx="55" cy="54.5" r="8.5"/>
-                          <path d="M48 50 C53 47 60 48 63 52 M47 55 C53 52 60 54 63 58 M50 61 C54 57 58 51 57 46"/>
-                        </g>
+                        <path class="cat__thread" d="M50 60 C58 40 88 32 101 42 C110 49 126 50 133 62"/>
+                        <path class="cat__thread cat__thread--hang" d="M133 62 C137 140 130 250 136 320 C137 340 134 356 134 368"/>
                         <ellipse class="cat__fur" cx="50" cy="61" rx="5.5" ry="3.2"/>
                         <g class="cat__head">
                           <path class="cat__fur cat__ear" d="M16 45 L19 28 L29 39 Z"/>
@@ -279,6 +275,12 @@
                       <span class="device__screen" data-land><img src="assets/images/card-luna.webp" alt="" loading="lazy" width="1100" height="619"></span>
                       <span class="device__neck"></span>
                       <span class="device__foot"></span>
+                      <svg class="yarn" viewBox="0 0 100 100" aria-hidden="true" focusable="false">
+                        <circle class="yarn__ball" cx="50" cy="50" r="46"/>
+                        <path class="yarn__wind yarn__wind--dark" d="M10 34 C34 18 70 20 92 40 M7 52 C32 34 72 36 95 58 M10 70 C34 52 70 54 90 74 M22 86 C42 70 66 72 80 88"/>
+                        <path class="yarn__wind yarn__wind--light" d="M30 8 C18 34 20 68 40 94 M50 4 C38 32 40 68 58 96 M70 8 C58 34 60 66 76 90 M86 22 C76 42 78 64 88 78"/>
+                        <path class="yarn__end" d="M86 72 C96 82 100 94 98 104 C96 114 101 122 98 132 C97 138 100 142 98 146"/>
+                      </svg>
                     </span>
                     <svg class="plant plant--snake" viewBox="0 0 120 250" aria-hidden="true">
                       <path class="plant__sway" fill="#3f7d4e" d="M58 190 C52 130 46 70 54 8 C64 70 66 130 64 190 Z"/>

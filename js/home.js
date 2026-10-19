@@ -352,18 +352,25 @@
      season starts from today's date and a visitor's pick is remembered. */
   var SEASONS = {
     spring: {
-      count: 26, land: 12, size: [12, 20], speed: [6, 9], flutter: ["flutter", "flutter flutter--r"],
+      count: 26, land: 12, wind: 0.4, size: [12, 20], speed: [6, 9], flutter: ["flutter", "flutter flutter--r"],
       colors: ["#f4b6c8", "#f9cfdc", "#eaa0b8", "#f7c4d4"],
       shape: '<path d="M12 2 C16 6 17 12 14 18 C13 20 12.5 21 12 22 C11.5 21 11 20 10 18 C7 12 8 6 12 2 Z"/>'
     },
+    /* dandelion seeds: greyed, with hair-thin threads, carried across on a
+       breeze (kind.breeze) instead of falling; their colour comes from the
+       CSS (--seed), so they suit light and dark paper */
     summer: {
-      count: 18, land: 0, rise: true, size: [6, 11], speed: [6, 9], flutter: ["hover"], glow: true,
-      colors: ["#e0a92a", "#ecc04e", "#ffe27a"],
-      shape: '<circle cx="12" cy="12" r="8"/>'
+      count: 22, land: 4, seed: true, breeze: true, size: [18, 28], speed: [10, 16], flutter: ["hover"],
+      colors: ["var(--seed)"],
+      shape: '<path d="M12 9.5 L12 20 M12 9.5 L3.0 9.5 M12 9.5 L3.1 7.9 M12 9.5 L3.5 6.4 M12 9.5 L4.2 5.0 M12 9.5 L5.1 3.7 M12 9.5 L6.2 2.6 M12 9.5 L7.5 1.7 M12 9.5 L8.9 1.0 M12 9.5 L10.4 0.6 M12 9.5 L12.0 0.5 M12 9.5 L13.6 0.6 M12 9.5 L15.1 1.0 M12 9.5 L16.5 1.7 M12 9.5 L17.8 2.6 M12 9.5 L18.9 3.7 M12 9.5 L19.8 5.0 M12 9.5 L20.5 6.4 M12 9.5 L20.9 7.9 M12 9.5 L21.0 9.5" fill="none" stroke="var(--seed)" stroke-width="0.35" stroke-linecap="round"/><ellipse cx="12" cy="21" rx="0.9" ry="1.8" fill="var(--seed-core)"/>'
     },
     autumn: {
       count: 22, land: 10, size: [16, 30], speed: [4.5, 7.5], flutter: ["flutter", "flutter flutter--r"],
       colors: ["#d9682b", "#e8a33d", "#b8442a", "#c97b2a", "#9c3b1e", "#e0b04a"],
+      wind: 0.35,
+      /* a few small maple leaves among the others */
+      extra: { share: 0.3, scale: 0.7, colors: ["#c8402a", "#d9552c", "#b8342a", "#e0782f"],
+        shape: '<path d="M12 1 L13.6 5.6 L16.8 4 L16 8.4 L20.8 7.6 L18.8 11.2 L22.4 12.4 L17.6 15.2 L18.4 17.6 L13.2 16.4 L12.8 22.4 L11.2 22.4 L10.8 16.4 L5.6 17.6 L6.4 15.2 L1.6 12.4 L5.2 11.2 L3.2 7.6 L8 8.4 L7.2 4 L10.4 5.6 Z"/><path d="M12 6 L12 22 M12 13 L17 9.5 M12 13 L7 9.5" fill="none" stroke="rgb(70 20 10 / 0.4)" stroke-width="0.8" stroke-linecap="round"/>' },
       shape: '<path d="M12 1 C17 5 22 10 19 16 C17 20 14 22 12 23 C10 22 7 20 5 16 C2 10 7 5 12 1 Z"/>' +
         '<path d="M12 4 L12 23 M12 11 L16 8 M12 15 L8 12" fill="none" stroke="rgb(80 30 10 / 0.45)" stroke-width="1" stroke-linecap="round"/>'
     },
@@ -397,13 +404,15 @@
     function piece(kind, size) {
       var el = document.createElement("span");
       el.className = "falling__piece";
+      var look = kind.extra && Math.random() < kind.extra.share ? kind.extra : kind;
+      if (look !== kind) size = Math.round(size * look.scale);
       el.style.width = el.style.height = size + "px";
-      var color = kind.colors[Math.floor(Math.random() * kind.colors.length)];
+      var color = look.colors[Math.floor(Math.random() * look.colors.length)];
       var inner = document.createElement("span");
       inner.className = kind.flutter[Math.floor(Math.random() * kind.flutter.length)];
       inner.style.animationDuration = (1.2 + Math.random() * 1.2).toFixed(2) + "s";
       inner.innerHTML = '<svg viewBox="0 0 24 24" fill="' + color + '"' +
-        (kind.glow ? ' style="filter: drop-shadow(0 0 6px ' + color + ')"' : "") + ">" + kind.shape + "</svg>";
+        (kind.glow ? ' style="filter: drop-shadow(0 0 6px ' + color + ')"' : "") + ">" + look.shape + "</svg>";
       el.appendChild(inner);
       layer.appendChild(el);
       return el;
@@ -437,6 +446,10 @@
         return surfaces[0];
       }
 
+      /* Wind: on each play it blows one way; some of the falling pieces
+         (kind.wind of them) get caught by a gust partway down, swept
+         sideways with a little lift, then fall on */
+      var windDir = Math.random() < 0.5 ? 1 : -1;
       for (var i = 0; i < kind.count; i++) {
         var size = Math.round(between(kind.size));
         var el = piece(kind, size);
@@ -446,11 +459,11 @@
         if (landing) {
           var s = pickSurface();
           var x = s.x + 8 + Math.random() * Math.max(0, s.w - 16) - size / 2;
-          var y = s.y - size * (kind.snow ? 0.85 : 0.6);
+          var y = s.y - size * (kind.snow ? 0.85 : kind.seed ? 0.95 : 0.6);
           var startY = -40;
           var fall = (between(kind.speed) * 1000 * (y - startY)) / h;
-          var tilt = kind.snow ? 0 : (Math.random() > 0.5 ? 1 : -1) * (70 + Math.random() * 35);
-          var hop = kind.snow ? 4 : 12;
+          var tilt = kind.snow || kind.seed ? 0 : (Math.random() > 0.5 ? 1 : -1) * (70 + Math.random() * 35);
+          var hop = kind.snow || kind.seed ? 4 : 12;
           var at = function (dy, r) {
             return "translate(" + x.toFixed(0) + "px," + (y - dy).toFixed(0) + "px) rotate(" + r + "deg)";
           };
@@ -469,7 +482,7 @@
           /* the flutter dies down as it lands */
           el.firstChild.className = "";
           el.firstChild.animate(
-            kind.snow
+            kind.snow || kind.seed
               ? [{ transform: "translateX(-8px)" }, { transform: "translateX(8px)", offset: 0.4 }, { transform: "none", offset: 0.8 }, { transform: "none" }]
               : [
                   { transform: "translateX(-22px) rotate(-30deg)" },
@@ -496,6 +509,48 @@
                   { opacity: 0.5, offset: 0.8 },
                   { transform: "translate(" + left + "px," + to + "px)", opacity: 0 }
                 ]
+              : kind.breeze
+              ? (function () {
+                  /* drifts across the section with the wind, tilted into it,
+                     bobbing on the air and sinking only a little */
+                  var y0 = h * (0.05 + Math.random() * 0.6);
+                  var x0 = windDir > 0 ? -40 - Math.random() * 60 : w + 40 + Math.random() * 60;
+                  var span = windDir * w * (0.7 + Math.random() * 0.5);
+                  var sink = h * (0.08 + Math.random() * 0.18);
+                  var tilt = windDir * (12 + Math.random() * 14);
+                  var bob = 14 + Math.random() * 18;
+                  var frames = [];
+                  for (var k = 0; k <= 6; k++) {
+                    var f = k / 6;
+                    frames.push({
+                      offset: f,
+                      transform: "translate(" + (x0 + span * f).toFixed(0) + "px," + (y0 + sink * f + Math.sin(f * Math.PI * 3) * bob).toFixed(0) + "px) rotate(" + (tilt + Math.sin(f * Math.PI * 4) * 8).toFixed(1) + "deg)",
+                      opacity: k === 0 || k === 6 ? 0 : 1
+                    });
+                  }
+                  return frames;
+                })()
+              : Math.random() < (kind.wind || 0)
+              ? (function () {
+                  /* start upwind, so the gust carries it across */
+                  var x0 = windDir > 0 ? 20 + Math.random() * w * 0.55 : w * 0.45 + Math.random() * (w * 0.55 - 20);
+                  var dx = windDir * w * (0.22 + Math.random() * 0.28);
+                  var at = function (x, y) {
+                    return "translate(" + x.toFixed(0) + "px," + y.toFixed(0) + "px)";
+                  };
+                  var gust = 0.3 + Math.random() * 0.2;
+                  var yAt = function (f) {
+                    return from + (to - from) * f;
+                  };
+                  return [
+                    { transform: at(x0, from), opacity: 0 },
+                    { opacity: 1, offset: 0.08 },
+                    { transform: at(x0 + dx * 0.05, yAt(gust)), offset: gust, easing: "cubic-bezier(0.5, 0, 0.3, 1)" },
+                    { transform: at(x0 + dx, yAt(gust + 0.06)), offset: gust + 0.22, easing: "ease-in" },
+                    { opacity: 1, offset: 0.88 },
+                    { transform: at(x0 + dx * 1.15, to), opacity: 0 }
+                  ];
+                })()
               : [
                   { transform: "translate(" + left + "px," + from + "px)", opacity: 0 },
                   { opacity: 1, offset: 0.08 },

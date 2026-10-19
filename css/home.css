@@ -1304,16 +1304,41 @@ html.hello-lock {
   transform-box: fill-box;
   transform-origin: 50% 50%;
 }
-/* the yarn: a dusty blue ball under the chin, its loose thread over the
-   cat's back and down the side of the monitor, swaying from where it
-   leaves the top edge */
-.cat__yarn circle {
+/* The yarn: a thread from under the cat's paw runs over its back and down
+   the side of the monitor into a big ball of yarn sitting on the shelf in
+   front of the monitor's base, its loose end trailing over the shelf's
+   front edge. The ball is the monitor's last item, at the right, pulled up
+   by its own height so it sits on the shelf (no positioning). */
+.yarn {
+  position: relative;
+  z-index: 2;
+  align-self: flex-end;
+  width: 18%;
+  height: auto;
+  margin: -18% -2% 0 0;
+  overflow: visible;
+  pointer-events: none;
+  filter: drop-shadow(0 4px 6px rgb(0 0 0 / 0.18));
+}
+.yarn__ball {
   fill: #7fa8d8;
 }
-.cat__yarn path {
+.yarn__wind {
   fill: none;
-  stroke: #557fb3;
-  stroke-width: 1.3;
+  stroke-width: 2.4;
+  stroke-linecap: round;
+}
+.yarn__wind--dark {
+  stroke: #5b85b9;
+}
+.yarn__wind--light {
+  stroke: #a9c6e8;
+  stroke-width: 2;
+}
+.yarn__end {
+  fill: none;
+  stroke: #7fa8d8;
+  stroke-width: 3.2;
   stroke-linecap: round;
 }
 .cat__thread {
@@ -1322,27 +1347,11 @@ html.hello-lock {
   stroke-width: 2;
   stroke-linecap: round;
 }
-.cat__thread--hang {
-  transform-box: fill-box;
-  transform-origin: 0 0;
-  animation: cat-thread 5s ease-in-out infinite;
-}
-@keyframes cat-thread {
-  0%, 100% {
-    transform: rotate(-2deg);
-  }
-  50% {
-    transform: rotate(2.5deg);
-  }
-}
-:root.motion-paused .cat .cat__thread--hang {
-  animation-play-state: paused;
-}
 :root.motion-paused .cat :is(.cat__tail, .cat__body, .cat__head, .cat__ear--right, .cat__z) {
   animation-play-state: paused;
 }
 @media (prefers-reduced-motion: reduce) {
-  .cat :is(.cat__tail, .cat__body, .cat__head, .cat__ear--right, .cat__thread--hang) {
+  .cat :is(.cat__tail, .cat__body, .cat__head, .cat__ear--right) {
     animation: none;
   }
   /* one still z, so it still reads as asleep */
@@ -1556,6 +1565,21 @@ html.hello-lock {
   z-index: 1;
   overflow: hidden;
   pointer-events: none;
+}
+/* dandelion seeds: greyed out in both themes, soft and faint */
+.work {
+  --seed: rgb(120 118 112 / 0.7);
+  --seed-core: rgb(110 104 94 / 0.8);
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) .work {
+    --seed: rgb(190 188 182 / 0.6);
+    --seed-core: rgb(170 165 155 / 0.7);
+  }
+}
+:root[data-theme="dark"] .work {
+  --seed: rgb(190 188 182 / 0.6);
+  --seed-core: rgb(170 165 155 / 0.7);
 }
 .falling__piece {
   position: absolute;

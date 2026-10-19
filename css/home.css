@@ -1552,24 +1552,20 @@ html.hello-lock {
   background: #0b0b0d;
   overflow: hidden;
 }
+/* the art hangs in columns, each piece at its own shape (masonry, pure CSS
+   columns), so nothing is cropped; the columns narrow to two on phones */
 .spot__wall {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(min(200px, 40vw), 1fr));
-  grid-auto-rows: clamp(140px, 13vw, 200px);
-  grid-auto-flow: dense;
-  gap: clamp(12px, 1.4vw, 20px);
+  columns: 4 200px;
+  column-gap: clamp(12px, 1.4vw, 20px);
   padding: clamp(16px, 2.4vw, 40px);
 }
-.spot__wall li:nth-child(5n + 1) {
-  grid-row: span 2;
-}
-.spot__wall li:nth-child(7n + 3) {
-  grid-column: span 2;
+.spot__wall li {
+  break-inside: avoid;
+  margin-bottom: clamp(12px, 1.4vw, 20px);
 }
 .spot__wall .artwork__item {
   display: block;
   width: 100%;
-  height: 100%;
   padding: 0;
   border: 0;
   border-radius: 10px;
@@ -1578,9 +1574,9 @@ html.hello-lock {
   cursor: zoom-in;
 }
 .spot__wall .artwork__item img {
+  display: block;
   width: 100%;
-  height: 100%;
-  object-fit: cover;
+  height: auto;
   transition: scale 0.5s ease;
 }
 .spot__wall .artwork__item:hover img {
@@ -1663,8 +1659,8 @@ html.hello-lock {
   }
 }
 @media (max-width: 640px) {
-  .spot__wall li:nth-child(7n + 3) {
-    grid-column: auto;
+  .spot__wall {
+    columns: 2;
   }
 }
 

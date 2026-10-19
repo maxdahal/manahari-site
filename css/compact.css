@@ -1007,3 +1007,18 @@ html {
     animation: none;
   }
 }
+
+/* Tall pictures (portrait sketches, moodboards) would run as wide as the
+   column and come out over a screen tall. Every picture in a figure is
+   capped at most of the screen's height; the frame hugs it and lines up
+   with the text and the caption on the left. Wide pictures still fill the
+   column as before. */
+.cp-main .figure__media {
+  width: fit-content;
+  max-width: 100%;
+}
+.cp-main .figure__media img {
+  width: auto;
+  max-width: 100%;
+  max-height: min(72vh, 640px);
+}

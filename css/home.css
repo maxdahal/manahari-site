@@ -321,6 +321,10 @@ html.hello-lock {
   width: 15px;
   height: 15px;
   margin-right: 3px;
+  opacity: 0.75;
+}
+.side-link:is(:hover, :focus-visible) svg {
+  opacity: 1;
 }
 .side-link:hover {
   color: var(--ink);
@@ -332,76 +336,78 @@ html.hello-lock {
 }
 /* For recruiters: a quiet outlined button under the outline, set apart from
    the page links, that opens a short summary in a dialog */
-/* the note and the button, a small block under the outline */
+/* the note and the button, a small block under the outline. Kept quiet
+   (the outline's dim grey, no border) so the outline stays the focal
+   point; it turns dark when pointed at or focused */
 .recruiter-cta {
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  gap: 8px;
+  gap: 4px;
   max-width: 200px;
   margin: 28px 0 0 14px;
 }
 .recruiter-cta__note {
   margin: 0;
-  padding-left: 11px;
+  padding-left: 14px;
   font-family: "Kalam", var(--body-font);
-  font-size: 0.9375rem;
+  font-size: 0.875rem;
   line-height: 1.3;
-  color: var(--accent-text);
+  color: var(--outline-dim);
   rotate: -1.5deg;
-}
-.recruiter-cta .recruiter-button {
-  margin: 0;
-  animation: recruiter-glow 1.6s ease-in-out calc(var(--intro, 0s) + 1.5s) 2;
-}
-/* a soft accent glow, twice, to catch the eye; then it stays still */
-@keyframes recruiter-glow {
-  50% {
-    border-color: var(--accent);
-    box-shadow: 0 0 0 6px color-mix(in srgb, var(--accent) 18%, transparent);
-  }
-}
-:root.motion-paused .recruiter-cta .recruiter-button {
-  animation: none;
-}
-@media (prefers-reduced-motion: reduce) {
-  .recruiter-cta .recruiter-button {
-    animation: none;
-  }
 }
 .recruiter-button {
   display: inline-flex;
   align-items: center;
-  align-self: flex-start;
   gap: 8px;
-  min-height: 36px;
-  margin: 24px 0 0 14px;
-  padding: 0 14px;
-  border: 1px solid var(--line);
-  border-radius: 999px;
+  min-height: 32px;
+  padding: 3px 8px 3px 14px;
+  border: 0;
+  border-radius: 6px;
   background: transparent;
-  color: var(--ink);
+  color: var(--outline-dim);
   font: inherit;
   font-size: 0.875rem;
   font-weight: 500;
   cursor: pointer;
-  transition: background-color 0.2s ease, border-color 0.2s ease;
+  transition: color 0.2s ease;
 }
 .recruiter-button svg {
-  width: 16px;
-  height: 16px;
-  color: var(--accent-text);
+  width: 15px;
+  height: 15px;
+  opacity: 0.75;
 }
-.recruiter-button:hover {
-  border-color: var(--ink);
-  background: color-mix(in srgb, var(--ink) 6%, transparent);
+.recruiter-cta:hover .recruiter-cta__note,
+.recruiter-button:is(:hover, :focus-visible) {
+  color: var(--ink);
+}
+.recruiter-button:is(:hover, :focus-visible) svg {
+  opacity: 1;
 }
 .recruiter-button:focus-visible {
   outline: 3px solid var(--ink);
   outline-offset: 2px;
 }
+/* larger screens: the button under the outline is a pill again, with the
+   faint hairline border; the border darkens on hover */
+@media (min-width: 1101px) {
+  .recruiter-cta .recruiter-button {
+    min-height: 36px;
+    margin-top: 4px;
+    padding: 0 14px;
+    border: 1px solid var(--line);
+    border-radius: 999px;
+    transition: color 0.2s ease, border-color 0.2s ease;
+  }
+  .recruiter-cta .recruiter-button:is(:hover, :focus-visible) {
+    border-color: var(--ink);
+  }
+}
 .recruiter-button--menu {
   margin: 0 0 8px;
+  padding-left: 0;
+  font-size: 1rem;
+  color: var(--ink);
 }
 /* the dialog: a card in the middle of the screen over a dimmed page */
 .recruiter {

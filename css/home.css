@@ -283,20 +283,21 @@ html.hello-lock {
   top: var(--bar-h);
   display: flex;
   flex-direction: column;
-  justify-content: space-between; /* the outline at the top, Resume and LinkedIn at the bottom */
+  /* the outline at the top; Resume and LinkedIn centred in the space under it */
   height: calc(100vh - var(--bar-h));
   padding-block: 20px 28px;
   overflow-y: auto;
   scrollbar-width: none;
 }
-/* at the bottom of the column, set apart by a hairline: the resume and LinkedIn,
+/* in the open space under the outline (auto margins above and below centre
+   them there), set apart by a hairline: the resume and LinkedIn,
    each with its icon, in the outline's quiet grey. They use the outline's
    own gap, padding and left edge, so all the items share one even rhythm */
 .doc-side__foot {
   display: flex;
   flex-direction: column;
   gap: 2px;
-  margin: 24px 0 0 14px;
+  margin: auto 0 auto 14px;
   padding-top: 14px;
   border-top: 1px solid var(--line);
 }

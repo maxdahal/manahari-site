@@ -288,13 +288,14 @@ html.hello-lock {
   overflow-y: auto;
   scrollbar-width: none;
 }
-/* under the outline, set apart by a hairline: the resume and LinkedIn,
-   each with its icon, in the outline's quiet grey */
+/* at the foot of the outline column, set apart by a hairline: the resume
+   and LinkedIn, each with its icon, in the outline's quiet grey; the auto
+   top margin pushes them to the bottom of the column */
 .doc-side__foot {
   display: flex;
   flex-direction: column;
   gap: 2px;
-  margin: 24px 0 0 14px;
+  margin: auto 0 0 14px;
   padding-top: 16px;
   border-top: 1px solid var(--line);
 }

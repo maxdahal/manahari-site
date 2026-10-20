@@ -288,6 +288,40 @@ html.hello-lock {
   overflow-y: auto;
   scrollbar-width: none;
 }
+/* under the outline, set apart by a hairline: the resume and LinkedIn,
+   each with its icon, in the outline's quiet grey */
+.doc-side__foot {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  margin: 24px 0 0 14px;
+  padding-top: 16px;
+  border-top: 1px solid var(--line);
+}
+.side-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  min-height: 32px;
+  padding-left: 11px;
+  font-size: 0.875rem;
+  color: var(--outline-dim);
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+.side-link svg {
+  flex: none;
+  width: 16px;
+  height: 16px;
+}
+.side-link:hover {
+  color: var(--ink);
+}
+.side-link:focus-visible {
+  outline: 3px solid var(--ink);
+  outline-offset: 2px;
+  border-radius: 4px;
+}
 .doc-main {
   grid-column: 2;
   grid-row: 1;

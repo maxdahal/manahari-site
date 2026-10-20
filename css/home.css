@@ -283,37 +283,43 @@ html.hello-lock {
   top: var(--bar-h);
   display: flex;
   flex-direction: column;
+  justify-content: flex-end; /* the outline and its links sit at the bottom */
   height: calc(100vh - var(--bar-h));
-  padding-block: 20px;
+  padding-block: 20px 28px;
   overflow-y: auto;
   scrollbar-width: none;
 }
-/* at the foot of the outline column, set apart by a hairline: the resume
-   and LinkedIn, each with its icon, in the outline's quiet grey; the auto
-   top margin pushes them to the bottom of the column */
+/* under the outline, set apart by a hairline: the resume and LinkedIn,
+   each with its icon, in the outline's quiet grey. They use the outline's
+   own gap, padding and left edge, so all the items share one even rhythm */
 .doc-side__foot {
   display: flex;
   flex-direction: column;
   gap: 2px;
-  margin: auto 0 0 14px;
-  padding-top: 16px;
+  margin: 14px 0 0 14px;
+  padding-top: 14px;
   border-top: 1px solid var(--line);
 }
 .side-link {
-  display: inline-flex;
+  display: flex;
   align-items: center;
-  gap: 10px;
-  min-height: 32px;
-  padding-left: 11px;
+  gap: 8px;
+  padding: 3px 8px 3px 11px;
+  border-left: 3px solid transparent;
   font-size: 0.875rem;
   color: var(--outline-dim);
   text-decoration: none;
   transition: color 0.2s ease;
 }
+.side-link {
+  font-size: 0.875rem;
+  line-height: 1.35;
+}
 .side-link svg {
   flex: none;
-  width: 16px;
-  height: 16px;
+  width: 15px;
+  height: 15px;
+  margin-right: 3px;
 }
 .side-link:hover {
   color: var(--ink);
@@ -338,7 +344,7 @@ html.hello-lock {
 }
 
 .cp-outline {
-  margin-top: clamp(40px, 10vh, 120px);
+  margin-top: 0;
 }
 .cp-outline > ol {
   padding-left: 14px;

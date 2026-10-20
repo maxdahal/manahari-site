@@ -388,6 +388,48 @@ html.hello-lock {
   outline: 3px solid var(--ink);
   outline-offset: 2px;
 }
+/* An entrance, once, after the intro: the note rises in, then the button nudges with its outline briefly in the accent and
+   settles back to grey. Skipped for reduced motion and when motion is
+   paused. --cta-wait is when it starts (later while the "hello" plays). */
+.recruiter-cta {
+  --cta-wait: 4s;
+}
+.no-hello .recruiter-cta {
+  --cta-wait: 1.2s;
+}
+@media (prefers-reduced-motion: no-preference) {
+  :root:not(.motion-paused) .recruiter-cta__note {
+    animation: cta-write 0.8s var(--cta-wait) cubic-bezier(0.2, 0.7, 0.2, 1) backwards;
+  }
+  :root:not(.motion-paused) .recruiter-cta .recruiter-button {
+    animation: cta-nudge 1.4s calc(var(--cta-wait) + 0.7s) ease-in-out;
+  }
+}
+@keyframes cta-write {
+  from {
+    opacity: 0;
+    translate: 0 8px;
+  }
+}
+@keyframes cta-nudge {
+  0%, 100% {
+    translate: 0 0;
+  }
+  15%, 45% {
+    translate: 4px 0;
+    border-color: var(--accent);
+    color: var(--ink);
+  }
+  30% {
+    translate: -2px 0;
+    border-color: var(--accent);
+    color: var(--ink);
+  }
+  60% {
+    translate: 0 0;
+    border-color: var(--accent);
+  }
+}
 /* larger screens: the button under the outline is a pill again, with the
    faint hairline border; the border darkens on hover */
 @media (min-width: 1101px) {

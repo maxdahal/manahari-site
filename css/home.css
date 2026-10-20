@@ -330,6 +330,410 @@ html.hello-lock {
   outline-offset: 2px;
   border-radius: 4px;
 }
+/* For recruiters: a quiet outlined button under the outline, set apart from
+   the page links, that opens a short summary in a dialog */
+/* the note and the button, a small block under the outline */
+.recruiter-cta {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 8px;
+  max-width: 200px;
+  margin: 28px 0 0 14px;
+}
+.recruiter-cta__note {
+  margin: 0;
+  padding-left: 11px;
+  font-family: "Kalam", var(--body-font);
+  font-size: 0.9375rem;
+  line-height: 1.3;
+  color: var(--accent-text);
+  rotate: -1.5deg;
+}
+.recruiter-cta .recruiter-button {
+  margin: 0;
+  animation: recruiter-glow 1.6s ease-in-out calc(var(--intro, 0s) + 1.5s) 2;
+}
+/* a soft accent glow, twice, to catch the eye; then it stays still */
+@keyframes recruiter-glow {
+  50% {
+    border-color: var(--accent);
+    box-shadow: 0 0 0 6px color-mix(in srgb, var(--accent) 18%, transparent);
+  }
+}
+:root.motion-paused .recruiter-cta .recruiter-button {
+  animation: none;
+}
+@media (prefers-reduced-motion: reduce) {
+  .recruiter-cta .recruiter-button {
+    animation: none;
+  }
+}
+.recruiter-button {
+  display: inline-flex;
+  align-items: center;
+  align-self: flex-start;
+  gap: 8px;
+  min-height: 36px;
+  margin: 24px 0 0 14px;
+  padding: 0 14px;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  background: transparent;
+  color: var(--ink);
+  font: inherit;
+  font-size: 0.875rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background-color 0.2s ease, border-color 0.2s ease;
+}
+.recruiter-button svg {
+  width: 16px;
+  height: 16px;
+  color: var(--accent-text);
+}
+.recruiter-button:hover {
+  border-color: var(--ink);
+  background: color-mix(in srgb, var(--ink) 6%, transparent);
+}
+.recruiter-button:focus-visible {
+  outline: 3px solid var(--ink);
+  outline-offset: 2px;
+}
+.recruiter-button--menu {
+  margin: 0 0 8px;
+}
+/* the dialog: a card in the middle of the screen over a dimmed page */
+.recruiter {
+  width: min(860px, calc(100vw - 32px));
+  max-height: calc(100vh - 16px);
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  padding: 0;
+  border: 1px solid var(--line);
+  border-radius: 18px;
+  background: var(--paper) 0 0 / 240px auto, var(--bg);
+  color: var(--ink);
+  box-shadow: 0 30px 60px -20px rgb(0 0 0 / 0.45);
+}
+/* while it is open the page behind does not scroll; the scrollbar's space
+   is kept, so nothing shifts sideways */
+html:has(.recruiter[open]) {
+  overflow: hidden;
+  scrollbar-gutter: stable;
+}
+.recruiter::backdrop {
+  background: rgb(10 10 12 / 0.55);
+  -webkit-backdrop-filter: blur(3px);
+  backdrop-filter: blur(3px);
+}
+.recruiter[open] {
+  animation: recruiter-in 0.25s cubic-bezier(0.2, 0.7, 0.2, 1);
+}
+@keyframes recruiter-in {
+  from {
+    opacity: 0;
+    translate: 0 10px;
+  }
+}
+.recruiter__inner {
+  display: flex;
+  flex-direction: column;
+  gap: 22px;
+  padding: clamp(22px, 3.5vw, 32px);
+}
+/* the head: name and role on the left, availability and close on the right */
+.recruiter__head {
+  display: flex;
+  align-items: flex-start;
+  gap: 16px;
+  padding-bottom: 20px;
+  border-bottom: 1px solid var(--line);
+}
+.recruiter__head > div {
+  flex: 1;
+  min-width: 0;
+}
+.recruiter__name {
+  margin: 0;
+  font-size: clamp(1.6rem, 1.3rem + 1vw, 2rem);
+  line-height: 1.05;
+}
+.recruiter__role {
+  margin: 6px 0 0;
+  font-weight: 600;
+  color: var(--accent-text);
+}
+.recruiter__kicker {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  margin: 10px 0 0;
+  font-size: 0.8125rem;
+  font-weight: 600;
+  white-space: nowrap;
+  color: var(--text);
+}
+.recruiter__close {
+  flex: none;
+}
+/* two columns split by a hairline: who you are on the left (degrees,
+   skills), what you have done on the right (experience) */
+.recruiter__cols {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1.15fr);
+  gap: 28px;
+}
+.recruiter__col {
+  display: flex;
+  flex-direction: column;
+  gap: 22px;
+  min-width: 0;
+}
+.recruiter__col--exp {
+  padding-left: 28px;
+  border-left: 1px solid var(--line);
+}
+.recruiter__block {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.recruiter__label {
+  margin: 0;
+  font-family: var(--body-font);
+  font-size: 0.8125rem;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--text);
+}
+/* the two degrees: compact cards, each led by an accent badge */
+.recruiter__degrees {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.degree {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  padding: 12px 14px;
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  background: color-mix(in srgb, var(--accent) 7%, transparent);
+}
+.degree__badge {
+  flex: none;
+  width: 2.2em;
+  font-family: var(--heading-font);
+  font-size: 1.5rem;
+  font-weight: 700;
+  line-height: 1;
+  color: var(--accent-text);
+}
+.degree__body {
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+  min-width: 0;
+}
+.degree__field {
+  font-weight: 600;
+  line-height: 1.3;
+}
+.degree__school {
+  font-size: 0.9375rem;
+  line-height: 1.35;
+}
+.degree__meta {
+  font-size: 0.8125rem;
+  line-height: 1.35;
+  color: var(--text);
+}
+/* skills as tags; the first ten show, "See more" shows the rest */
+.recruiter__skills {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 5px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.recruiter__skills li {
+  padding: 2px 9px;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  font-size: 0.8125rem;
+  line-height: 1.45;
+}
+/* once open, the extra skills sit a little quieter than the first ten */
+.recruiter__skills .is-more {
+  color: var(--text);
+}
+.recruiter__skills:not(.is-open) .is-more {
+  display: none;
+}
+.recruiter__more {
+  align-self: flex-start;
+  padding: 2px 0;
+  border: 0;
+  background: none;
+  color: var(--accent-text);
+  font: inherit;
+  font-size: 0.875rem;
+  font-weight: 600;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  cursor: pointer;
+}
+.recruiter__more:focus-visible {
+  outline: 3px solid var(--ink);
+  outline-offset: 2px;
+  border-radius: 4px;
+}
+/* the jobs, written like the resume: title, @ employer, dates */
+.recruiter__jobs {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.recruiter__jobs li {
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+}
+.recruiter__role-line {
+  line-height: 1.4;
+}
+.recruiter__title {
+  font-weight: 600;
+}
+.recruiter__role-line i {
+  font-style: normal;
+  color: var(--accent-text);
+}
+.recruiter__jobs time {
+  font-size: 0.8125rem;
+  font-variant-numeric: tabular-nums;
+  color: var(--text);
+}
+/* skills run the full width under both columns, set apart by a hairline */
+.recruiter__skills-block {
+  padding-top: 20px;
+  border-top: 1px solid var(--line);
+}
+/* the foot: the two buttons, then LinkedIn and email on the right */
+.recruiter__foot {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 10px;
+  padding-top: 20px;
+  border-top: 1px solid var(--line);
+}
+.recruiter__foot .button {
+  min-height: 44px;
+}
+.recruiter__links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px 18px;
+  margin-left: auto;
+  font-size: 0.875rem;
+}
+.recruiter__links a {
+  color: var(--text);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+.recruiter__links a:hover {
+  color: var(--ink);
+}
+/* shorter laptop screens: tighter spacing so the panel fits without scrolling */
+@media (max-height: 820px) and (min-width: 641px) {
+  .recruiter__inner {
+    gap: 16px;
+    padding-block: 22px;
+  }
+  .recruiter__head,
+  .recruiter__foot {
+    padding-block: 0 16px;
+  }
+  .recruiter__foot {
+    padding-block: 16px 0;
+  }
+  .recruiter__col {
+    gap: 16px;
+  }
+  .recruiter__jobs {
+    gap: 9px;
+  }
+  .recruiter__skills-block {
+    padding-top: 14px;
+  }
+  .degree {
+    padding: 10px 12px;
+  }
+}
+@media (max-height: 740px) and (min-width: 641px) {
+  .recruiter__inner {
+    gap: 12px;
+    padding-block: 18px;
+  }
+  .recruiter__head {
+    padding-bottom: 12px;
+  }
+  .recruiter__foot,
+  .recruiter__skills-block {
+    padding-top: 12px;
+  }
+  .recruiter__block {
+    gap: 8px;
+  }
+  .recruiter__jobs {
+    gap: 6px;
+  }
+  .degree {
+    padding: 8px 12px;
+  }
+}
+/* phones: one column, the hairline turns into a top rule */
+@media (max-width: 640px) {
+  .recruiter__head {
+    flex-wrap: wrap;
+  }
+  .recruiter__head > div {
+    flex-basis: calc(100% - 60px);
+  }
+  .recruiter__kicker {
+    order: 3;
+    margin-top: 0;
+  }
+  .recruiter__cols {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 22px;
+  }
+  .recruiter__col--exp {
+    padding: 22px 0 0;
+    border-left: 0;
+    border-top: 1px solid var(--line);
+  }
+  .recruiter__links {
+    margin-left: 0;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .recruiter[open] {
+    animation: none;
+  }
+}
 .doc-main {
   grid-column: 2;
   grid-row: 1;

@@ -1473,3 +1473,9 @@ html {
     transition: none;
   }
 }
+
+/* Text inside a dialog is already on screen when it opens, so it skips the
+   scroll-in text entrances above (they would leave it faded or blurred) */
+main dialog :is(h2, h3, h4, p, li, blockquote, dt, dd) {
+  animation: none !important;
+}

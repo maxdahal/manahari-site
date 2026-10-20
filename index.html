@@ -91,6 +91,7 @@
       <a href="#contact">Contact<small>05</small></a>
     </nav>
     <div class="menu__foot">
+      <button class="recruiter-button recruiter-button--menu" type="button" data-recruiter aria-haspopup="dialog"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="7" width="18" height="13" rx="2"/><path d="M8 7V5a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2M3 13h18"/></svg>For recruiters</button>
       <a href="mailto:manahari.dahal1@gmail.com">manahari.dahal1@gmail.com</a>
       <span><a href="/resume.pdf" target="_blank" rel="noopener">Resume</a><a href="https://www.linkedin.com/in/manaharidahal/" target="_blank" rel="noopener">LinkedIn</a><a href="https://dribbble.com/manaharidahal" target="_blank" rel="noopener">Dribbble</a></span>
     </div>
@@ -121,6 +122,11 @@
           <li><a href="#contact" class="cp-outline__stage">Contact</a></li>
         </ol>
       </nav>
+      <!-- a short summary for recruiters, opened in a dialog (home.js) -->
+      <div class="recruiter-cta">
+      <p class="recruiter-cta__note" id="recruiter-note">Hiring and short on time? Here’s everything in one minute.</p>
+      <button class="recruiter-button" type="button" data-recruiter aria-haspopup="dialog" aria-describedby="recruiter-note"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="7" width="18" height="13" rx="2"/><path d="M8 7V5a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2M3 13h18"/></svg>For recruiters</button>
+      </div>
       <!-- the resume and LinkedIn, set the same way as the outline's items -->
       <div class="doc-side__foot">
         <a class="side-link" href="/resume.pdf" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8z"/><path d="M14 3v5h5M9 13h6M9 17h4"/></svg>Resume<span class="sr-only"> (PDF, opens in a new tab)</span></a>
@@ -378,6 +384,64 @@
         <span class="lightbox__count" aria-live="polite"></span>
         <button class="icon-button" type="button" data-step="1" aria-label="Next artwork"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m9 18 6-6-6-6"/></svg></button>
         <button class="icon-button" type="button" data-close aria-label="Close"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg></button>
+      </div>
+    </dialog>
+
+    <!-- For recruiters: a one-screen summary with the ways to go deeper -->
+    <dialog class="recruiter" aria-labelledby="recruiter-h">
+      <div class="recruiter__inner">
+        <header class="recruiter__head">
+          <div>
+            <h2 class="recruiter__name" id="recruiter-h">Manahari Dahal</h2>
+            <p class="recruiter__role">UX / Product Designer who builds in code</p>
+          </div>
+          <p class="recruiter__kicker"><i class="dot" aria-hidden="true"></i>Available for new roles</p>
+          <button class="icon-button recruiter__close" type="button" data-close aria-label="Close"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg></button>
+        </header>
+        <div class="recruiter__cols">
+          <div class="recruiter__col">
+            <section class="recruiter__block" aria-labelledby="recruiter-edu">
+              <h3 class="recruiter__label" id="recruiter-edu">Education</h3>
+              <ul class="recruiter__degrees">
+                <li class="degree">
+                  <span class="degree__badge" aria-hidden="true">M.S.</span>
+                  <span class="degree__body">
+                    <b class="degree__field"><span class="sr-only">Master of Science, </span>Information Science (HCI)</b>
+                    <span class="degree__school">UNC Chapel Hill</span>
+                    <span class="degree__meta">May 2027 (expected) · Health Informatics cert.</span>
+                  </span>
+                </li>
+                <li class="degree">
+                  <span class="degree__badge" aria-hidden="true">B.S.</span>
+                  <span class="degree__body">
+                    <b class="degree__field"><span class="sr-only">Bachelor of Science, </span>Computer Science</b>
+                    <span class="degree__school">BYU–Idaho</span>
+                    <span class="degree__meta">April 2022 · GPA 3.9</span>
+                  </span>
+                </li>
+              </ul>
+            </section>
+          </div>
+          <section class="recruiter__col recruiter__col--exp recruiter__block" aria-labelledby="recruiter-exp">
+            <h3 class="recruiter__label" id="recruiter-exp">Experience</h3>
+            <ul class="recruiter__jobs">
+              <li><span class="recruiter__role-line"><b class="recruiter__title">UI/UX Design Intern</b> <i>@</i> <span class="recruiter__org">Karl Storz (Asensus Surgical)</span></span><time>May – Aug 2026</time></li>
+              <li><span class="recruiter__role-line"><b class="recruiter__title">UX Designer</b> <i>@</i> <span class="recruiter__org">AppTeamCarolina</span></span><time>Sep 2025 – May 2026</time></li>
+              <li><span class="recruiter__role-line"><b class="recruiter__title">UX Designer / Front-End Developer</b> <i>@</i> <span class="recruiter__org">University of Kansas</span></span><time>Jun 2022 – Apr 2025</time></li>
+              <li><span class="recruiter__role-line"><b class="recruiter__title">UI/UX Design and Front-End Intern</b> <i>@</i> <span class="recruiter__org">ESRI</span></span><time>Jun – Aug 2021</time></li>
+            </ul>
+          </section>
+        </div>
+        <section class="recruiter__block recruiter__skills-block" aria-labelledby="recruiter-skills">
+          <h3 class="recruiter__label" id="recruiter-skills">Skills</h3>
+          <ul class="recruiter__skills" id="recruiter-skill-list"><li>Figma</li><li>Prototyping</li><li>Wireframing</li><li>User research</li><li>Usability testing</li><li>Interaction design</li><li>Design systems</li><li>Accessibility (WCAG)</li><li>HTML and CSS</li><li>React</li><li class="is-more">User flows</li><li class="is-more">Visual design</li><li class="is-more">Typography</li><li class="is-more">Layout</li><li class="is-more">Heuristic analysis</li><li class="is-more">Component libraries</li><li class="is-more">Adobe Creative Suite</li><li class="is-more">JavaScript (TypeScript)</li><li class="is-more">Tailwind CSS</li><li class="is-more">Next.js</li><li class="is-more">Drupal</li><li class="is-more">Git</li><li class="is-more">AI-assisted design and development</li><li class="is-more">Design documentation</li><li class="is-more">Design critiques</li><li class="is-more">Agile</li><li class="is-more">Miro</li><li class="is-more">Jira</li><li class="is-more">Trello</li></ul>
+          <button class="recruiter__more" type="button" aria-expanded="false" aria-controls="recruiter-skill-list">See 19 more</button>
+        </section>
+        <footer class="recruiter__foot">
+          <a class="button button--primary" href="#work" data-close>See case studies <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></a>
+          <a class="button" href="/resume.pdf" target="_blank" rel="noopener">Resume<span class="sr-only"> (PDF, opens in a new tab)</span></a>
+          <span class="recruiter__links"><a href="https://www.linkedin.com/in/manaharidahal/" target="_blank" rel="noopener">LinkedIn</a><a href="mailto:manahari.dahal1@gmail.com">manahari.dahal1@gmail.com</a></span>
+        </footer>
       </div>
     </dialog>
   </main>

@@ -139,8 +139,54 @@
     });
   }
 
+  /* For recruiters: the buttons (under the outline and in the phone menu)
+     open the summary dialog; Close, Escape or a click on the dimmed page
+     shut it, and focus goes back to the button that opened it */
+  function initRecruiter() {
+    var dialog = document.querySelector(".recruiter");
+    if (!dialog || !dialog.showModal) return;
+    var opener = null;
+    document.querySelectorAll("[data-recruiter]").forEach(function (button) {
+      button.addEventListener("click", function () {
+        opener = button;
+        var menu = document.getElementById("menu");
+        if (menu && menu.classList.contains("is-open")) {
+          var toggle = document.querySelector(".menu-button");
+          if (toggle) toggle.click();
+        }
+        dialog.showModal();
+      });
+    });
+    dialog.querySelectorAll("[data-close]").forEach(function (el) {
+      el.addEventListener("click", function () {
+        /* a link moves on to the page; the close button hands focus back */
+        if (el.tagName === "A") opener = null;
+        dialog.close();
+      });
+    });
+    dialog.addEventListener("click", function (event) {
+      if (event.target === dialog) dialog.close();
+    });
+    /* "See more" shows every skill, and turns into "See fewer" */
+    var more = dialog.querySelector(".recruiter__more");
+    var list = dialog.querySelector(".recruiter__skills");
+    if (more && list) {
+      var label = more.textContent;
+      more.addEventListener("click", function () {
+        var open = !list.classList.contains("is-open");
+        list.classList.toggle("is-open", open);
+        more.setAttribute("aria-expanded", String(open));
+        more.textContent = open ? "See fewer" : label;
+      });
+    }
+    dialog.addEventListener("close", function () {
+      if (opener && opener.offsetParent) opener.focus();
+    });
+  }
+
   function start() {
     splitHeroName();
+    initRecruiter();
     motionToggle();
     buildSkillRings();
     var sections = [].slice.call(document.querySelectorAll(".sections > section"));

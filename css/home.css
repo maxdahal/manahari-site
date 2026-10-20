@@ -1141,25 +1141,6 @@ html.hello-lock {
   margin: 0;
   list-style: none;
 }
-/* the long yarn thread over the wall: same cell as the list, on top */
-.shelves__list,
-.thread {
-  grid-area: 1 / 1;
-}
-.thread {
-  z-index: 2;
-  width: 100%;
-  height: 100%;
-  overflow: visible;
-  pointer-events: none;
-}
-.thread path {
-  fill: none;
-  stroke: #7fa8d8;
-  stroke-width: 1.8;
-  stroke-linecap: round;
-  stroke-linejoin: round;
-}
 .shelf--ku {
   margin-top: 22cqw;
 }
@@ -1358,12 +1339,6 @@ html.hello-lock {
   transform-box: fill-box;
   transform-origin: 50% 50%;
 }
-.cat__thread {
-  fill: none;
-  stroke: #7fa8d8;
-  stroke-width: 2;
-  stroke-linecap: round;
-}
 :root.motion-paused .cat :is(.cat__tail, .cat__body, .cat__head, .cat__ear--right, .cat__z) {
   animation-play-state: paused;
 }
@@ -1438,6 +1413,100 @@ html.hello-lock {
   flex-direction: column;
   gap: 10px;
   padding: 20px 0.8cqw 0;
+}
+
+/* Wall frames: the same three projects, hung on the wall as framed
+   pictures instead of standing on shelves as devices. Each screen sits on
+   a cream mat inside a wooden frame (the shelves' wood, so it follows the
+   theme), hanging from a nail on a thin wire. The shelf boards, the device
+   stands and the plants on the shelves go; the hanging pothos stays, and
+   the cat sleeps on top of the Luna frame. Pointing at a picture tips it on
+   its nail. Everything stays in the flex flow: the wire is the device's
+   ::before. */
+.shelves--frames {
+  --frame-wood: linear-gradient(135deg, var(--wood-top), var(--wood) 45%, var(--wood-edge));
+  --mat: #f4f1ea;
+}
+.shelves--frames :is(.shelf__board, .device__neck, .device__foot, .device__base, .device__dots, .plant--snake, .plant--succulent) {
+  display: none;
+}
+.shelves--frames .shelf__stage {
+  justify-content: center;
+}
+.shelves--frames .device {
+  transform-origin: 50% 0;
+  transition: rotate 0.5s cubic-bezier(0.3, 1.6, 0.5, 1);
+}
+.shelves--frames .shelf__card:is(:hover, :focus-visible) .device {
+  translate: none;
+  rotate: -1.5deg;
+}
+/* the nail and the wire, drawn above the frame */
+.shelves--frames .device::before {
+  content: "";
+  order: -2;
+  width: 56%;
+  height: max(26px, 4cqw);
+  background:
+    radial-gradient(circle at 50% 3px, var(--ink) 0 2.5px, transparent 3px),
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 30' preserveAspectRatio='none'%3E%3Cpath d='M0 30 L50 3 L100 30' fill='none' stroke='%23857a6a' stroke-width='1.2' vector-effect='non-scaling-stroke'/%3E%3C/svg%3E")
+      no-repeat center / 100% 100%;
+}
+/* the Asian's picture is the phone element itself, so its wire hangs from
+   the column above it instead of inside the frame */
+.shelves--frames .shelf__stage {
+  flex-direction: column;
+  align-items: center;
+}
+.shelves--frames .shelf--asians .device::before {
+  content: none;
+}
+.shelves--frames .shelf--asians .shelf__stage::before {
+  content: "";
+  width: 44%;
+  height: max(26px, 4cqw);
+  background:
+    radial-gradient(circle at 50% 3px, var(--ink) 0 2.5px, transparent 3px),
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 30' preserveAspectRatio='none'%3E%3Cpath d='M0 30 L50 3 L100 30' fill='none' stroke='%23857a6a' stroke-width='1.2' vector-effect='non-scaling-stroke'/%3E%3C/svg%3E")
+      no-repeat center / 100% 100%;
+}
+.shelves--frames .cat {
+  order: -1;
+  /* lifted by its own height, so it rests on the frame with the wire behind */
+  margin-top: -11.4%;
+}
+.shelves--frames :is(.device__screen, .device__lid, .device--phone) {
+  width: 100%;
+  padding: max(8px, 1.3cqw);
+  border: 0;
+  border-radius: 3px;
+  background: var(--frame-wood);
+  box-shadow:
+    inset 0 0 0 1px rgb(0 0 0 / 0.18),
+    inset 0 2px 0 rgb(255 255 255 / 0.18),
+    0 18px 28px -14px rgb(0 0 0 / 0.45);
+}
+.shelves--frames .device img {
+  padding: max(8px, 1.5cqw);
+  border-radius: 0;
+  background: var(--mat);
+  box-shadow: inset 0 1px 3px rgb(0 0 0 / 0.25);
+  object-fit: contain;
+}
+.shelves--frames .device--laptop {
+  width: 86%;
+}
+.shelves--frames .device--phone {
+  width: 66%;
+}
+/* the name sits a little below the frame */
+.shelves--frames .shelf__info {
+  padding-top: 24px;
+}
+@media (prefers-reduced-motion: reduce) {
+  .shelves--frames .device {
+    transition: none;
+  }
 }
 /* the name with an arrow that slides on hover, then two tags */
 .shelf__name {

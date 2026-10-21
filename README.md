@@ -1,15 +1,18 @@
 # Manahari Dahal portfolio: site files
 
-Plain HTML, CSS and JavaScript, with no framework, library or build step. Open any `.html` file through a local server (for example `python3 -m http.server 8000`) and edit the files directly.
+Plain HTML, CSS and JavaScript, with no framework, library or build step. Serve the folder locally and edit the files directly. Pages link to clean URLs like `/work/luna` (Vercel maps them to `work/luna.html`), so use a server that does the same, for example `npx vercel dev`, or open `/work/luna.html` directly with `python3 -m http.server 8000`.
 
 ## What's in the folder
 
 ```
-index.html        Home: intro, About me, case studies on shelves, artwork, contact
-about.html        The full About page (reached from "More about me" on the ID badge)
-luna.html         Case study: Luna Surgical Console (with the arm panel sandbox)
-ku-brand.html     Case study: KU Brand (with the color sandbox and wireframe video)
-asians.html       Case study: Asian's
+index.html        Home: hero, selected work, about, capabilities, artwork,
+                  design system, contact
+about.html        The full About page (/about)
+work/luna.html    Case study: Luna Surgical Console (/work/luna, arm panel sandbox)
+work/ku-brand.html  Case study: KU Brand (/work/ku-brand, color sandbox, video)
+work/asians.html  Case study: Asian's (/work/asians)
+vercel.json       Clean URLs, and redirects from the old /luna, /ku-brand and
+                  /asians addresses
 css/
   site.css        Every page: tokens, paper grain, top bar, menu, buttons, tabs,
                   section band, cards, figures, footer, motion, scroll text
@@ -45,18 +48,18 @@ Every interface color is a token at the top of `css/site.css`, light values firs
 | `--ink` | #1A1A1E | #E6E6E1 |
 | `--text` | #4A4A4A | #B5B5B5 |
 | `--accent` | #E65F2E | #FF7A45 |
-| `--accent-text` | #B0441C | #FF9D73 |
+| `--accent-text` | #A43E19 | #FF9D73 |
 
 `--paper` holds the paper grain (dark specks in light mode, light specks in dark mode); it is baked into the page, section and footer backgrounds. Colors that belong to the work shown, not the site, are tokens in that page's CSS: Luna's arm and status colors, KU's brand colors, the Asian's app palette.
 
-Headings use Antonio; everything else uses Inter. The sandboxes use JetBrains Mono. Body text is 18px (16px on small screens).
+Headings use Figtree; everything else uses Inter. The sandboxes use JetBrains Mono. Body text is 18px (16px on small screens).
 
 ## Behaviour
 
-- **Navigation**: from 1101px wide, the outline on the left of Home and the case studies does the navigating. Below that, the top bar has a hamburger that opens a full-height menu, and case studies get a stage button at the bottom that opens the outline in a sheet.
+- **Navigation**: the top bar links to Work, About, Artwork and Contact. On the case studies the outline on the left takes over from 1101px wide. Below 1101px the top bar has a hamburger that opens a full-height menu, and case studies get a stage button at the bottom that opens the outline in a sheet. Without JavaScript the top bar keeps its links.
 - **Tabs**: any `[role="tablist"]` with `[role="tab"]` buttons pointing at panels with `aria-controls` works on its own, with arrow keys, Home and End.
-- **Scroll text**: headings, labels, paragraphs and list items ease in as they scroll into view (pure CSS scroll-driven animations; text simply shows in browsers without them).
+- **Scroll text**: section headings rise gently into view (pure CSS scroll-driven animations); body text simply shows.
 - **Page changes** cross-fade (cross-document view transitions) where the browser supports it.
-- **Intro**: the "hello" plays once per visit (session storage).
+- **Hello**: the handwritten "hello" in the hero draws itself once per visit (session storage) and never blocks the page.
 - **Theme**: follows the device until someone uses the toggle; the choice is kept in `localStorage` under `mt-theme`.
 - **Motion**: everything respects `prefers-reduced-motion`, and Home has a pause button for anything that moves on its own.

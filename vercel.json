@@ -1,4 +1,36 @@
 {
   "cleanUrls": true,
-  "trailingSlash": false
+  "trailingSlash": false,
+  "redirects": [
+    {
+      "source": "/luna",
+      "destination": "/work/luna",
+      "permanent": true
+    },
+    {
+      "source": "/ku-brand",
+      "destination": "/work/ku-brand",
+      "permanent": true
+    },
+    {
+      "source": "/asians",
+      "destination": "/work/asians",
+      "permanent": true
+    },
+    {
+      "source": "/luna.html",
+      "destination": "/work/luna",
+      "permanent": true
+    },
+    {
+      "source": "/ku-brand.html",
+      "destination": "/work/ku-brand",
+      "permanent": true
+    },
+    {
+      "source": "/asians.html",
+      "destination": "/work/asians",
+      "permanent": true
+    }
+  ]
 }

@@ -530,7 +530,7 @@ html {
 /* ==========================================================================
    Type scale for the case study. One size per role, so the same kind of
    text always looks the same, whichever component it sits in. The display
-   face (Antonio) is for titles and numbers, the body face (Inter) for
+   face (Figtree) is for titles and numbers, the body face (Inter) for
    reading and labels. Handwritten margin notes (Kalam) keep their own look.
    ========================================================================== */
 .cp {
@@ -709,7 +709,7 @@ html {
   font-weight: 700;
 }
 
-/* Antonio is for the page title (h1) and the stage headers (h2) only;
+/* Figtree is for the page title (h1) and the stage headers (h2) only;
    everything else in the story reads in Inter. This catches any component
    that sets the display face itself (numbers, card titles, labels). Code,
    the handwritten notes and the KU color sandbox keep their own faces. */
@@ -765,12 +765,10 @@ html {
   }
 }
 
-/* Stage headers: a thin rule carrying the stage number, then a large,
-   faint, outlined, all-caps ghost of the stage name, with the stage name
-   itself overlapping its lower part. The number and the ghost come from the
-   stage's data-num and data-ghost attributes, drawn as generated content
-   that screen readers skip ("/ ''"); the number badge inside the heading
-   is no longer shown. */
+/* Stage headers: a thin rule carrying the stage number, then the stage
+   name. The number comes from the stage's data-num attribute, drawn as
+   generated content that screen readers skip ("/ ''"); the number badge
+   inside the heading is not shown. */
 .cp-sec[data-ghost]::before {
   content: attr(data-num) / "";
   order: -2;
@@ -789,32 +787,6 @@ html {
 /* the overview has no number: its rule runs the full width */
 .cp-sec[data-ghost]:not([data-num])::before {
   background-size: 100% 1px;
-}
-.cp-sec[data-ghost]::after {
-  content: attr(data-ghost) / "";
-  order: -1;
-  display: block;
-  max-width: 100%;
-  overflow: hidden;
-  margin-bottom: -0.5em;
-  font-family: var(--heading-font);
-  font-size: clamp(3.5rem, 2rem + 5vw, 6.5rem);
-  font-weight: 700;
-  line-height: 0.9;
-  letter-spacing: 0.01em;
-  text-transform: uppercase;
-  white-space: nowrap;
-  color: transparent;
-  -webkit-text-stroke: 1px var(--ink);
-  opacity: 0.14;
-  pointer-events: none;
-  user-select: none;
-}
-@supports not (-webkit-text-stroke: 1px black) {
-  .cp-sec[data-ghost]::after {
-    color: var(--ink);
-    opacity: 0.06;
-  }
 }
 .cp-sec[data-ghost] > .cp-sec__label {
   position: relative;
@@ -1035,4 +1007,48 @@ html {
   width: auto;
   max-width: 100%;
   max-height: min(72vh, 640px);
+}
+
+/* My contribution: what I did beside what the team did, right under the
+   story in short, so a reader never has to guess who did what */
+.cp-contrib {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+  margin-top: var(--space-6);
+  padding: var(--space-5);
+  border: 1px solid var(--line);
+  border-radius: var(--r-lg);
+  background: color-mix(in srgb, var(--surface) 55%, transparent);
+}
+.cp-contrib__cols {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: var(--space-6);
+}
+.cp-contrib__title {
+  margin-bottom: var(--space-2);
+  font-size: var(--t-card);
+  font-weight: 700;
+}
+.cp-contrib ul {
+  display: grid;
+  gap: var(--space-2);
+  margin: 0;
+  padding-left: 1.1em;
+  color: var(--text);
+}
+@media (max-width: 720px) {
+  .cp-contrib__cols {
+    grid-template-columns: minmax(0, 1fr);
+    gap: var(--space-5);
+  }
+}
+/* draft only: text still to be filled in, marked so it cannot be missed */
+.placeholder {
+  padding: 1px 6px;
+  border: 1px dashed var(--accent-text);
+  border-radius: 4px;
+  background: color-mix(in srgb, var(--accent) 10%, transparent);
+  color: var(--accent-text);
 }

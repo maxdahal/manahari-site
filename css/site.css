@@ -27,10 +27,10 @@
   --outline-dim: #717170; /* inactive outline links: 4.6:1 on the page */
   --line: rgba(26, 26, 30, 0.14);
   /* orange: #e65f2e for fills and marks; text in the accent uses a darker
-     shade (#b0441c, 5.4:1 on the page) and filled buttons use dark text
+     shade (#a43e19, 6.1:1 on the page) and filled buttons use dark text
      (#1a1a1e, 4.9:1), since the bright orange is too light for small text */
   --accent: #e65f2e;
-  --accent-text: #b0441c;
+  --accent-text: #a43e19;
   --on-accent: #1a1a1e;
   /* see-through, so the paper grain shows through the tinted band */
   --band: color-mix(in srgb, var(--accent) 9%, transparent);
@@ -44,7 +44,7 @@
   --warn: #9a6a00;
 
   /* type */
-  --heading-font: "Antonio", "Arial Narrow", Impact, sans-serif;
+  --heading-font: "Figtree", "Inter", system-ui, -apple-system, "Segoe UI", sans-serif;
   --body-font: "Inter", system-ui, -apple-system, "Segoe UI", sans-serif;
   /* Type scale, largest to smallest, so the size of a heading always matches
      its level: h1 page title > h2 stage title > section title > subhead >
@@ -62,9 +62,23 @@
   --fs-statement: clamp(1.5rem, 1.2rem + 1.1vw, 2.25rem); /* 24-36: pull statements */
   --lh-body: 1.6;
 
+  /* spacing scale: 4px and 8px steps */
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 12px;
+  --space-4: 16px;
+  --space-5: 24px;
+  --space-6: 32px;
+  --space-7: 40px;
+  --space-8: 48px;
+  --space-9: 64px;
+  --space-10: 80px;
+  --space-11: 96px;
+  --space-12: 128px;
+
   /* space and shape */
   --gx: clamp(16px, calc(44px + (100vw - 1100px) * 0.12), 88px);
-  --max: 1560px;
+  --max: 1280px; /* page container; about 1100px of content inside the gutters */
   --indent: clamp(0px, calc((100vw - 860px) * 0.2), 88px);
   --r-sm: 8px;
   --r: 10px;
@@ -194,11 +208,11 @@ button {
   color: inherit;
 }
 
-/* Keyboard focus: a neutral ink ring everywhere, so the accent stays for
-   the few marks that need it; ink keeps full contrast on the paper */
+/* Keyboard focus: a 3px ring in the accent text color (5:1 or better on
+   the paper in both themes), set a little away from the element */
 :focus-visible {
-  outline: 2px solid var(--ink);
-  outline-offset: 3px;
+  outline: 3px solid var(--accent-text);
+  outline-offset: 4px;
 }
 
 b,
@@ -776,7 +790,13 @@ body,
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  gap: 8px;
+  gap: 0;
+}
+/* each link is a 44px tall tap target; the label above keeps its own space */
+.site-footer__col > a {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
 }
 .site-footer__col a {
   color: var(--ink);
@@ -801,6 +821,7 @@ body,
 .site-footer__legal a {
   display: inline-flex;
   align-items: center;
+  min-height: 44px;
   gap: 6px;
   color: var(--ink);
   text-decoration: none;
@@ -838,161 +859,37 @@ body,
   }
 }
 
-/* Scroll text: text eases in as it scrolls into view, pure CSS (each
-   element's own view timeline), with a different entrance per kind of text
-   so it does not feel repeated:
-     section titles    rise out of a mask
-     eyebrows, labels  wipe in from the left
-     subheads          slide in from the left
-     paragraphs        drift up out of a soft blur
-     quotes, statements  grow in from a little smaller
-     list items        come up with a slight tilt, alternating sides
-   Each finishes within the first ~220px of scrolling, so nothing is half
-   faded while you read it. Text already on screen at load shows as is.
-   Pinned (sticky) text, like the About chapters, is left out: its view
-   timeline stops while it is pinned. Skipped for reduced motion, while motion is paused (.motion-paused), and
-   in browsers without scroll-driven animations (text just shows). Decorative
-   or interactive areas with their own motion are left alone. */
+/* Scroll text: section headings rise gently into view as they scroll in
+   (pure CSS, each heading's own view timeline). Body text, lists and quotes
+   simply show, so reading is never held up. It finishes within ~200px of
+   scrolling; headings already on screen at load show as they are. Skipped
+   for reduced motion and in browsers without scroll-driven animations. */
 @supports (animation-timeline: view()) {
   @media (prefers-reduced-motion: no-preference) {
-    /* text sliding in from the side must not widen the page */
-    main {
-      overflow-x: clip;
-    }
-    :root:not(.motion-paused) main :is(h2, h3, h4, p, li, blockquote, dt, dd):not(:is(.hero, .sandbox-wrap, .badge, .shelves, .spot, .console, .cp-outline, nav, figure, table, .tabs, [role="tablist"], .seasons, .motion, .lightbox, .skills3d, li, .chapter) *):not(.hero *),
-    :root:not(.motion-paused) main :is(.shelf__name, .shelf__tags) {
-      animation: st-up linear both;
-      animation-timeline: view();
-      animation-range: entry 0px entry 220px;
-    }
-    :root:not(.motion-paused) main :is(h2, .doc-head__title, .block__title, .cp-sec__label):not(:is(.sandbox-wrap, .badge, .shelves) *) {
-      animation-name: st-rise;
-    }
-    :root:not(.motion-paused) main :is(.eyebrow, .label, .cp-label, .card__label, .timeline-group__title):not(:is(.sandbox-wrap, .badge, .seasons) *) {
-      animation: st-wipe linear both;
+    main :is(h2, .doc-head__title, .block__title, .cp-sec__label):not(:is(.sandbox-wrap, .badge, .chapter, dialog) *) {
+      animation: st-rise linear both;
       animation-timeline: view();
       animation-range: entry 0px entry 200px;
     }
-    :root:not(.motion-paused) main :is(h3, h4):not(:is(.sandbox-wrap, .badge, .shelves, .spot, .console, figure, table, nav, li, .chapter) *) {
-      animation-name: st-slide;
-    }
-    :root:not(.motion-paused) main .shelf__tags {
-      animation-name: st-wipe;
-    }
-    :root:not(.motion-paused) main :is(blockquote, .statement, [class*="quote"]):not(:is(.sandbox-wrap, .badge) *) {
-      animation-name: st-zoom;
-    }
-    :root:not(.motion-paused) main li:not(:is(.sandbox-wrap, .badge, .shelves, .spot, .console, .cp-outline, nav, figure, table, .seasons, .chapter) *):nth-child(odd) {
-      animation-name: st-tilt-l;
-    }
-    :root:not(.motion-paused) main li:not(:is(.sandbox-wrap, .badge, .shelves, .spot, .console, .cp-outline, nav, figure, table, .seasons, .chapter) *):nth-child(even) {
-      animation-name: st-tilt-r;
-    }
-  }
-}
-@keyframes st-up {
-  from {
-    opacity: 0;
-    transform: translateY(26px);
-    filter: blur(5px);
   }
 }
 @keyframes st-rise {
   from {
     opacity: 0;
-    transform: translateY(0.45em);
-    clip-path: inset(0 0 100% 0);
-  }
-  to {
-    clip-path: inset(-1em -100vw -0.5em -100vw);
-  }
-}
-@keyframes st-wipe {
-  from {
-    opacity: 0;
-    transform: translateX(-8px);
-    clip-path: inset(0 100% 0 0);
-  }
-  to {
-    clip-path: inset(-1em -100vw -1em -1em);
-  }
-}
-@keyframes st-slide {
-  from {
-    opacity: 0;
-    transform: translateX(-32px);
-  }
-}
-@keyframes st-zoom {
-  from {
-    opacity: 0;
-    transform: scale(0.94);
-    filter: blur(3px);
-  }
-}
-@keyframes st-tilt-l {
-  from {
-    opacity: 0;
-    transform: translate(-14px, 18px) rotate(-1.5deg);
-  }
-}
-@keyframes st-tilt-r {
-  from {
-    opacity: 0;
-    transform: translate(14px, 18px) rotate(1.5deg);
+    transform: translateY(14px);
   }
 }
 
-.reveal {
+/* Reveal: a block fades up once as it scrolls into view. Only when the
+   script runs (it adds .js to <html>), so without it everything shows. */
+.js .reveal {
   opacity: 0;
   translate: 0 24px;
   transition: opacity 0.7s ease, translate 0.7s ease;
 }
-.reveal.is-in {
+.js .reveal.is-in {
   opacity: 1;
   translate: 0 0;
-}
-
-.split-word {
-  display: inline-block;
-  white-space: pre;
-}
-.split-letter {
-  display: inline-block;
-  opacity: 0;
-  translate: 0 0.4em;
-  transition: opacity 0.5s ease, translate 0.5s ease;
-  transition-delay: calc(var(--i) * 18ms);
-}
-.is-in .split-letter {
-  opacity: 1;
-  translate: 0 0;
-}
-
-.cursor-ring {
-  position: fixed;
-  top: 0;
-  left: 0;
-  z-index: 90;
-  width: 34px;
-  height: 34px;
-  border: 1px solid var(--accent);
-  border-radius: 50%;
-  pointer-events: none;
-  opacity: 0;
-  transition: opacity 0.2s, width 0.2s, height 0.2s;
-}
-.cursor-ring.is-on {
-  opacity: 1;
-}
-.cursor-ring.is-link {
-  width: 54px;
-  height: 54px;
-}
-@media (hover: none) {
-  .cursor-ring {
-    display: none;
-  }
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -1003,13 +900,9 @@ body,
     animation-duration: 0.01ms !important;
     scroll-behavior: auto !important;
   }
-  .reveal,
-  .split-letter {
+  .js .reveal {
     opacity: 1;
     translate: none;
-  }
-  .cursor-ring {
-    display: none;
   }
 }
 
@@ -1257,6 +1150,10 @@ html {
   letter-spacing: -0.02em;
   color: var(--ink);
   text-decoration: none;
+  /* a 44px tap target round the small mark */
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
 }
 .bar-mark i {
   font-style: normal;
@@ -1298,13 +1195,8 @@ html {
     display: none;
   }
 }
-/* phones: smaller round buttons, so the mark, the four links and the
-   buttons share one row */
+/* phones: the round buttons sit a little closer together */
 @media (max-width: 520px) {
-  .cp-bar .icon-button {
-    width: 40px;
-    height: 40px;
-  }
   .cp-bar__end {
     gap: 6px;
   }
@@ -1478,4 +1370,13 @@ html {
    scroll-in text entrances above (they would leave it faded or blurred) */
 main dialog :is(h2, h3, h4, p, li, blockquote, dt, dd) {
   animation: none !important;
+}
+
+/* Without the script the menu cannot open, so the top bar keeps its links
+   and the menu button hides */
+html:not(.js) .cp-bar__links {
+  display: flex;
+}
+html:not(.js) .cp-bar .menu-button {
+  display: none;
 }

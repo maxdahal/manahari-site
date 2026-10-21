@@ -1,10 +1,11 @@
 /* Shared behaviour for every page: theme, menu, tabs, section bands, the ID
-   badge, reveals, counters and the cursor ring. Each feature looks for its own
+   badge, reveals and counters. Each feature looks for its own
    markup and does nothing when that markup is not on the page. */
 (function () {
   "use strict";
 
   var root = document.documentElement;
+  root.classList.add("js");
   var reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
   var THEME_KEY = "mt-theme";
 
@@ -117,32 +118,6 @@
     });
   }
 
-  /* Split headings into letters for the reveal ----------------------------- */
-  function splitHeadings() {
-    if (reduceMotion) return;
-    document.querySelectorAll("[data-split]").forEach(function (heading) {
-      var text = heading.textContent.trim().replace(/\s+/g, " ");
-      heading.setAttribute("aria-label", text);
-      heading.textContent = "";
-      var index = 0;
-      text.split(" ").forEach(function (word, w) {
-        var wordSpan = document.createElement("span");
-        wordSpan.className = "split-word";
-        wordSpan.setAttribute("aria-hidden", "true");
-        word.split("").forEach(function (letter) {
-          var span = document.createElement("span");
-          span.className = "split-letter";
-          span.style.setProperty("--i", index++);
-          span.textContent = letter;
-          wordSpan.appendChild(span);
-        });
-        heading.appendChild(wordSpan);
-        if (w < text.split(" ").length - 1) heading.appendChild(document.createTextNode(" "));
-      });
-      heading.classList.add("reveal-split");
-    });
-  }
-
   /* Section band. How far it reaches depends on what opens the body:
      - opening text, anything short, or anything marked data-band-cover:
        covered in full
@@ -236,7 +211,7 @@
 
   /* Reveal on scroll -------------------------------------------------------- */
   function initReveal() {
-    var items = document.querySelectorAll(".reveal, .reveal-split");
+    var items = document.querySelectorAll(".reveal");
     if (reduceMotion || !("IntersectionObserver" in window)) {
       items.forEach(function (el) {
         el.classList.add("is-in");
@@ -290,45 +265,14 @@
     });
   }
 
-  /* Cursor ring (pointer devices only) -------------------------------------- */
-  function initCursor() {
-    if (reduceMotion || !window.matchMedia("(hover: hover) and (pointer: fine)").matches) return;
-    var ring = document.createElement("div");
-    ring.className = "cursor-ring";
-    ring.setAttribute("aria-hidden", "true");
-    document.body.appendChild(ring);
-    var x = 0,
-      y = 0,
-      cx = 0,
-      cy = 0;
-    document.addEventListener("mousemove", function (event) {
-      x = event.clientX;
-      y = event.clientY;
-      ring.classList.add("is-on");
-      ring.classList.toggle("is-link", !!event.target.closest("a, button, [role=tab], summary"));
-    });
-    document.addEventListener("mouseleave", function () {
-      ring.classList.remove("is-on");
-    });
-    (function loop() {
-      cx += (x - cx) * 0.2;
-      cy += (y - cy) * 0.2;
-      var size = ring.offsetWidth / 2;
-      ring.style.transform = "translate(" + (cx - size) + "px," + (cy - size) + "px)";
-      requestAnimationFrame(loop);
-    })();
-  }
-
   function start() {
     initTheme();
     initMenu();
     initTabs();
     initBands();
     initBadge();
-    splitHeadings();
     initReveal();
     initCounters();
-    initCursor();
   }
 
   window.Site = { initTabs: initTabs, reduceMotion: reduceMotion };

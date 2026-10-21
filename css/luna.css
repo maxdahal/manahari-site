@@ -865,6 +865,21 @@
   background: color-mix(in srgb, var(--bad-text, #a1121c) 12%, transparent);
   color: var(--bad-text, #a1121c);
 }
+/* on the dark page the red and green labels go light, to stay readable */
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) .arm-tag--dropped {
+    color: #ff9a92;
+  }
+  :root:not([data-theme="light"]) .arm-tag--shipped {
+    color: #7fd9a0;
+  }
+}
+:root[data-theme="dark"] .arm-tag--dropped {
+  color: #ff9a92;
+}
+:root[data-theme="dark"] .arm-tag--shipped {
+  color: #7fd9a0;
+}
 .arm-tag--shipped {
   background: color-mix(in srgb, var(--ok-text, #0d5228) 14%, transparent);
   color: var(--ok-text, #0d5228);
@@ -919,7 +934,8 @@
   display: none;
   padding: 3px 8px;
   border-radius: 4px;
-  background: var(--sev-error);
+  /* a shade darker than the error red, so the small white label reads at 5:1 */
+  background: color-mix(in srgb, var(--sev-error) 86%, #000);
   color: #fff;
   font-size: 0.8125rem;
   font-weight: 700;

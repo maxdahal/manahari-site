@@ -1187,6 +1187,34 @@ html:has(.recruiter[open]) {
   line-height: 0.85;
   letter-spacing: -0.035em;
 }
+/* "hello" above the name: the intro's own drawing, in the accent; it
+   writes itself once after the intro (still for reduced motion or pause) */
+.hero__hello {
+  width: 1.7em;
+  height: auto;
+  margin: 0 0 -0.08em -1.6em;
+  overflow: visible;
+  rotate: -6deg;
+}
+.hero__hello path {
+  fill: none;
+  stroke: var(--accent);
+  stroke-width: 12;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  stroke-dasharray: 1;
+  stroke-dashoffset: 0;
+}
+@media (prefers-reduced-motion: no-preference) {
+  :root:not(.motion-paused) .hero__hello path {
+    animation: hello-write-from 1.6s cubic-bezier(0.45, 0.05, 0.55, 0.95) calc(var(--intro, 0s) + 0.1s) backwards;
+  }
+}
+@keyframes hello-write-from {
+  from {
+    stroke-dashoffset: 1;
+  }
+}
 .hero__line {
   display: grid;
   grid-template-rows: var(--slot);

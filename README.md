@@ -62,4 +62,4 @@ Headings use Figtree; everything else uses Inter. The sandboxes use JetBrains Mo
 - **Page changes** cross-fade (cross-document view transitions) where the browser supports it.
 - **Hello**: the handwritten "hello" in the hero draws itself once per visit (session storage) and never blocks the page.
 - **Theme**: follows the device until someone uses the toggle; the choice is kept in `localStorage` under `mt-theme`.
-- **Motion**: everything respects `prefers-reduced-motion`, and Home has a pause button for anything that moves on its own.
+- **Motion**: kept small (the hello, heading rises, hover and focus changes), and all of it respects `prefers-reduced-motion`.

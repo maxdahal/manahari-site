@@ -975,21 +975,25 @@ body,
    its centre. Label text: white on the light-mode orange (4.9:1), dark on
    the dark-mode one (6.2:1). */
 :root {
-  /* light paper: a deeper terracotta so it shows, with white label text */
-  --cursor: #a85c3f;
+  /* light paper: a warm burnt orange so it shows, with white label text (4.8:1) */
+  --cursor: #b4572a;
+  --cursor-glow: 0;
   --cursor-text: #ffffff;
-  /* the ring sits down and to the right of the dot, which marks the click point */
-  --cursor-shift: 7px;
+  /* the dot trails below and to the right of the system pointer */
+  --cursor-dx: 18px;
+  --cursor-dy: 28px;
 }
 @media (prefers-color-scheme: dark) {
   :root:not([data-theme="light"]) {
     --cursor: #cf8a6a;
     --cursor-text: #1a1a1e;
+    --cursor-glow: 1;
   }
 }
 :root[data-theme="dark"] {
   --cursor: #cf8a6a;
   --cursor-text: #1a1a1e;
+  --cursor-glow: 1;
 }
 .cursor-dot,
 .cursor-ring {
@@ -1006,18 +1010,15 @@ body,
   opacity: 1;
 }
 .cursor-dot {
-  width: 6px;
-  height: 6px;
-  margin: -3px 0 0 -3px;
-  background: var(--cursor);
+  display: none;
 }
 .cursor-ring {
   display: grid;
   place-items: center;
-  width: 34px;
-  height: 34px;
-  margin: calc(var(--cursor-shift) - 17px) 0 0 calc(var(--cursor-shift) - 17px);
-  border: 1.5px solid color-mix(in srgb, var(--cursor) 80%, transparent);
+  width: 12px;
+  height: 12px;
+  margin: calc(var(--cursor-dy) - 6px) 0 0 calc(var(--cursor-dx) - 6px);
+  background: var(--cursor);
   color: var(--cursor-text);
   transition:
     width 0.35s cubic-bezier(0.2, 0.9, 0.3, 1.2),
@@ -1030,10 +1031,9 @@ body,
 }
 /* over plain links and buttons: the ring grows a little and fills faintly */
 .cursor-link .cursor-ring {
-  width: 48px;
-  height: 48px;
-  margin: calc(var(--cursor-shift) - 24px) 0 0 calc(var(--cursor-shift) - 24px);
-  background: color-mix(in srgb, var(--cursor) 16%, transparent);
+  width: 18px;
+  height: 18px;
+  margin: calc(var(--cursor-dy) - 9px) 0 0 calc(var(--cursor-dx) - 9px);
 }
 /* over something with a label: a filled badge with the label; the dot hides */
 .cursor-label .cursor-ring {
@@ -1074,6 +1074,8 @@ body,
   margin: calc(50% - var(--glow) / 2);
   border-radius: 50%;
   background: radial-gradient(circle, color-mix(in srgb, var(--cursor) 16%, transparent), transparent 68%);
+  /* the glow only on dark paper; on light paper it reads as a shadow */
+  opacity: var(--cursor-glow, 1);
   transition: width 0.35s ease, height 0.35s ease, margin 0.35s ease, opacity 0.25s ease;
 }
 .cursor-ring span {
@@ -1084,11 +1086,6 @@ body,
 }
 .cursor-label .cursor-ring::before {
   opacity: 0;
-}
-/* the dot and ring replace the system pointer while they are showing */
-.has-cursor,
-.has-cursor * {
-  cursor: none !important;
 }
 /* a dialog sits above everything, so inside one the system pointer comes
    back and the dot and ring step aside */

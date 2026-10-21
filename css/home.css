@@ -954,15 +954,18 @@ html:has(.recruiter[open]) {
 /* The hero holds for 30vh of scrolling (130vh tall, its content sticky
    under the top bar): the name swaps between 5vh and 20vh and rests a
    moment as "UX Developer." before About me comes up. */
+/* a compact hero, so the case studies are in view on the first screen */
 .hero {
-  height: 130vh;
+  height: auto;
 }
 .hero__sticky {
-  position: sticky;
-  top: var(--bar-h);
   display: grid;
-  grid-template-rows: 1fr auto;
-  height: calc(100vh - var(--bar-h));
+  min-height: clamp(260px, 38vh, 380px);
+}
+@media (max-width: 640px) {
+  .hero__sticky {
+    min-height: 230px;
+  }
 }
 .hero__words {
   display: grid;
@@ -1010,7 +1013,7 @@ html:has(.recruiter[open]) {
   initial-value: 0deg;
 }
 .skills3d {
-  --r: min(34vw, 400px, 44vh); /* the ring's radius */
+  --r: min(27vw, 340px); /* the ring's radius: about the name's width */
   grid-area: 1 / 1;
   display: grid;
   place-items: center;
@@ -1023,7 +1026,7 @@ html:has(.recruiter[open]) {
 /* without the outline the hero has the full width: wider rings */
 @media (max-width: 1100px) {
   .skills3d {
-    --r: min(43vw, 400px, 44vh);
+    --r: min(36vw, 340px);
   }
 }
 .hero__name {
@@ -1179,7 +1182,7 @@ html:has(.recruiter[open]) {
   align-items: center;
   margin: 0;
   font-family: var(--body-font);
-  font-size: clamp(3rem, 10vw, 8.5rem);
+  font-size: clamp(2.5rem, 6vw, 5rem);
   font-weight: 600;
   line-height: 0.85;
   letter-spacing: -0.035em;
@@ -1569,10 +1572,11 @@ html:has(.recruiter[open]) {
 }
 @media (max-width: 520px) {
   .seasons__group {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
     width: 100%;
   }
   .seasons__btn {
-    flex: 1;
     justify-content: center;
     padding: 0 6px;
   }

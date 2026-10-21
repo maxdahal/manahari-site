@@ -291,33 +291,62 @@
   }
 
   /* Cursor ring (pointer devices only) -------------------------------------- */
+  /* Cursor: a small muted-orange dot on the pointer and a thin ring that
+     trails softly behind it. Over anything with a data-cursor label (case
+     studies, artwork, the recruiter button…) the ring grows into a round
+     badge showing that label, like "View project", and the dot hides; over
+     other links and buttons the ring grows a little. The real pointer stays
+     underneath, so clicking is as precise as ever. Only for a mouse or
+     trackpad, and off for reduced motion. */
   function initCursor() {
     if (reduceMotion || !window.matchMedia("(hover: hover) and (pointer: fine)").matches) return;
+    var dot = document.createElement("div");
+    dot.className = "cursor-dot";
+    dot.setAttribute("aria-hidden", "true");
     var ring = document.createElement("div");
     ring.className = "cursor-ring";
     ring.setAttribute("aria-hidden", "true");
+    var label = document.createElement("span");
+    ring.appendChild(label);
     document.body.appendChild(ring);
+    document.body.appendChild(dot);
     var x = 0,
       y = 0,
       cx = 0,
-      cy = 0;
+      cy = 0,
+      current = null;
     document.addEventListener("mousemove", function (event) {
       x = event.clientX;
       y = event.clientY;
-      ring.classList.add("is-on");
-      ring.classList.toggle("is-link", !!event.target.closest("a, button, [role=tab], summary"));
+      dot.style.transform = "translate(" + x + "px," + y + "px)";
+      document.documentElement.classList.add("has-cursor");
+      var labelled = event.target.closest("[data-cursor]");
+      var text = labelled ? labelled.getAttribute("data-cursor") : "";
+      if (text !== current) {
+        current = text;
+        label.textContent = text;
+        document.documentElement.classList.toggle("cursor-label", !!text);
+      }
+      document.documentElement.classList.toggle("cursor-link", !text && !!event.target.closest("a, button, [role=tab], summary, label"));
     });
     document.addEventListener("mouseleave", function () {
-      ring.classList.remove("is-on");
+      document.documentElement.classList.remove("has-cursor");
+    });
+    document.addEventListener("mousedown", function () {
+      document.documentElement.classList.add("cursor-down");
+    });
+    document.addEventListener("mouseup", function () {
+      document.documentElement.classList.remove("cursor-down");
     });
     (function loop() {
-      cx += (x - cx) * 0.2;
-      cy += (y - cy) * 0.2;
-      var size = ring.offsetWidth / 2;
-      ring.style.transform = "translate(" + (cx - size) + "px," + (cy - size) + "px)";
+      cx += (x - cx) * 0.18;
+      cy += (y - cy) * 0.18;
+      ring.style.transform = "translate(" + cx.toFixed(1) + "px," + cy.toFixed(1) + "px)";
       requestAnimationFrame(loop);
     })();
   }
+
+
 
   function start() {
     initTheme();

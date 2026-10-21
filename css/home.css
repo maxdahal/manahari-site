@@ -1969,6 +1969,27 @@ html:has(.recruiter[open]) {
   }
 }
 /* the name with an arrow that slides on hover, then two tags */
+/* under each name: the problem in one line, then role and methods */
+.shelf__problem {
+  color: var(--ink);
+  line-height: 1.45;
+}
+.shelf__meta {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  font-size: 0.875rem;
+  line-height: 1.45;
+  color: var(--text);
+}
+.shelf__meta b {
+  margin-right: 6px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--ink);
+}
 .shelf__name {
   display: inline-flex;
   align-items: center;

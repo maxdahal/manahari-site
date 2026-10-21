@@ -969,27 +969,141 @@ body,
   translate: 0 0;
 }
 
+/* The cursor: a dot on the pointer and a ring trailing behind it, both in
+   a muted orange. Each is fixed at the top left and moved by transform
+   (site.js); a negative margin centres it on the pointer so it grows from
+   its centre. Label text: white on the light-mode orange (4.9:1), dark on
+   the dark-mode one (6.2:1). */
+:root {
+  /* light paper: a deeper terracotta so it shows, with white label text */
+  --cursor: #a85c3f;
+  --cursor-text: #ffffff;
+  /* the ring sits down and to the right of the dot, which marks the click point */
+  --cursor-shift: 7px;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --cursor: #cf8a6a;
+    --cursor-text: #1a1a1e;
+  }
+}
+:root[data-theme="dark"] {
+  --cursor: #cf8a6a;
+  --cursor-text: #1a1a1e;
+}
+.cursor-dot,
 .cursor-ring {
   position: fixed;
   top: 0;
   left: 0;
   z-index: 90;
-  width: 34px;
-  height: 34px;
-  border: 1px solid var(--accent);
   border-radius: 50%;
   pointer-events: none;
   opacity: 0;
-  transition: opacity 0.2s, width 0.2s, height 0.2s;
+  transition: opacity 0.2s ease;
 }
-.cursor-ring.is-on {
+.has-cursor :is(.cursor-dot, .cursor-ring) {
   opacity: 1;
 }
-.cursor-ring.is-link {
-  width: 54px;
-  height: 54px;
+.cursor-dot {
+  width: 6px;
+  height: 6px;
+  margin: -3px 0 0 -3px;
+  background: var(--cursor);
+}
+.cursor-ring {
+  display: grid;
+  place-items: center;
+  width: 34px;
+  height: 34px;
+  margin: calc(var(--cursor-shift) - 17px) 0 0 calc(var(--cursor-shift) - 17px);
+  border: 1.5px solid color-mix(in srgb, var(--cursor) 80%, transparent);
+  color: var(--cursor-text);
+  transition:
+    width 0.35s cubic-bezier(0.2, 0.9, 0.3, 1.2),
+    height 0.35s cubic-bezier(0.2, 0.9, 0.3, 1.2),
+    margin 0.35s cubic-bezier(0.2, 0.9, 0.3, 1.2),
+    background-color 0.25s ease,
+    border-color 0.25s ease,
+    opacity 0.2s ease,
+    scale 0.15s ease;
+}
+/* over plain links and buttons: the ring grows a little and fills faintly */
+.cursor-link .cursor-ring {
+  width: 48px;
+  height: 48px;
+  margin: calc(var(--cursor-shift) - 24px) 0 0 calc(var(--cursor-shift) - 24px);
+  background: color-mix(in srgb, var(--cursor) 16%, transparent);
+}
+/* over something with a label: a filled badge with the label; the dot hides */
+.cursor-label .cursor-ring {
+  width: 92px;
+  height: 92px;
+  margin: -46px 0 0 -46px;
+  border-color: var(--cursor);
+  background: var(--cursor);
+}
+.cursor-label .cursor-dot {
+  opacity: 0;
+}
+.cursor-ring span {
+  padding: 0 10px;
+  font-size: 0.8125rem;
+  font-weight: 600;
+  line-height: 1.15;
+  text-align: center;
+  opacity: 0;
+  transition: opacity 0.2s ease;
+}
+.cursor-label .cursor-ring span {
+  opacity: 1;
+  transition-delay: 0.08s;
+}
+.cursor-down .cursor-ring {
+  scale: 0.85;
+}
+/* the soft spotlight: a warm glow around the ring, tightening over links
+   and fading out under a label badge */
+.cursor-ring::before {
+  --glow: 200px;
+  content: "";
+  grid-area: 1 / 1;
+  width: var(--glow);
+  height: var(--glow);
+  /* bigger than the ring, so centred on it by hand (the ring is square) */
+  margin: calc(50% - var(--glow) / 2);
+  border-radius: 50%;
+  background: radial-gradient(circle, color-mix(in srgb, var(--cursor) 16%, transparent), transparent 68%);
+  transition: width 0.35s ease, height 0.35s ease, margin 0.35s ease, opacity 0.25s ease;
+}
+.cursor-ring span {
+  grid-area: 1 / 1;
+}
+.cursor-link .cursor-ring::before {
+  --glow: 130px;
+}
+.cursor-label .cursor-ring::before {
+  opacity: 0;
+}
+/* the dot and ring replace the system pointer while they are showing */
+.has-cursor,
+.has-cursor * {
+  cursor: none !important;
+}
+/* a dialog sits above everything, so inside one the system pointer comes
+   back and the dot and ring step aside */
+html:has(dialog[open]),
+html:has(dialog[open]) * {
+  cursor: auto !important;
+}
+html:has(dialog[open]) :is(a, button, [role="tab"], summary, label) {
+  cursor: pointer !important;
+}
+html:has(dialog[open]) :is(.cursor-dot, .cursor-ring) {
+  opacity: 0 !important;
 }
 @media (hover: none) {
+  .cursor-dot,
   .cursor-ring {
     display: none;
   }
@@ -1008,6 +1122,7 @@ body,
     opacity: 1;
     translate: none;
   }
+  .cursor-dot,
   .cursor-ring {
     display: none;
   }

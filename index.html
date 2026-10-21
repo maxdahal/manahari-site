@@ -72,7 +72,7 @@
   <header class="cp-bar">
     <div class="cp-bar__start">
       <a class="bar-mark" href="#top" aria-label="Manahari Dahal, home">md<i>.</i></a>
-      <nav class="cp-bar__links" aria-label="Main"><a href="#top" aria-current="page">Home</a><a href="#about-me">About</a><a href="#work">Work</a><a href="#contact">Contact</a></nav>
+      <nav class="cp-bar__links" aria-label="Main"><a href="#top" aria-current="page">Home</a><a href="#work">Work</a><a href="#about-me">About</a><a href="#contact">Contact</a></nav>
     </div>
     <div class="cp-bar__end">
       <button class="icon-button motion-toggle" type="button" aria-pressed="false" aria-label="Pause motion" title="Pause motion"><svg class="icon-pause" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M9 5v14M15 5v14"/></svg><svg class="icon-play" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M8 5.5v13l11-6.5z"/></svg></button>
@@ -85,8 +85,8 @@
   <div class="menu" id="menu">
     <nav class="menu__links" aria-label="Menu">
       <a href="#top" aria-current="page">Home<small>01</small></a>
-      <a href="#about-me">About<small>02</small></a>
-      <a href="#work">Work<small>03</small></a>
+      <a href="#work">Work<small>02</small></a>
+      <a href="#about-me">About<small>03</small></a>
       <a href="#artwork">Artwork<small>04</small></a>
       <a href="#contact">Contact<small>05</small></a>
     </nav>
@@ -110,7 +110,6 @@
       <nav class="cp-outline" aria-label="On this page">
         <ol>
           <li><a href="#top" class="cp-outline__stage">Intro</a></li>
-          <li><a href="#about-me" class="cp-outline__stage">About me</a></li>
           <li><a href="#work" class="cp-outline__stage">Case studies</a>
             <ol>
               <li><a href="/luna">Luna</a></li>
@@ -118,6 +117,7 @@
               <li><a href="/asians">Asian’s</a></li>
             </ol>
           </li>
+          <li><a href="#about-me" class="cp-outline__stage">About me</a></li>
           <li><a href="#artwork" class="cp-outline__stage">Artwork</a></li>
           <li><a href="#contact" class="cp-outline__stage">Contact</a></li>
         </ol>
@@ -125,11 +125,11 @@
       <!-- a short summary for recruiters, opened in a dialog (home.js) -->
       <div class="recruiter-cta">
       <p class="recruiter-cta__note" id="recruiter-note">Hiring and short on time? Here’s everything in one minute.</p>
-      <button class="recruiter-button" type="button" data-recruiter aria-haspopup="dialog" aria-describedby="recruiter-note"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="7" width="18" height="13" rx="2"/><path d="M8 7V5a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2M3 13h18"/></svg>For recruiters</button>
+      <button class="recruiter-button" type="button" data-cursor="Quick summary" data-recruiter aria-haspopup="dialog" aria-describedby="recruiter-note"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="7" width="18" height="13" rx="2"/><path d="M8 7V5a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2M3 13h18"/></svg>For recruiters</button>
       </div>
       <!-- the resume and LinkedIn, set the same way as the outline's items -->
       <div class="doc-side__foot">
-        <a class="side-link" href="/resume.pdf" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8z"/><path d="M14 3v5h5M9 13h6M9 17h4"/></svg>Resume<span class="sr-only"> (PDF, opens in a new tab)</span></a>
+        <a class="side-link" data-cursor="Open resume" href="/resume.pdf" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8z"/><path d="M14 3v5h5M9 13h6M9 17h4"/></svg>Resume<span class="sr-only"> (PDF, opens in a new tab)</span></a>
         <a class="side-link" href="https://www.linkedin.com/in/manaharidahal/" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-4 0v7h-4v-7a6 6 0 0 1 6-6z"/><rect width="4" height="12" x="2" y="9"/><circle cx="4" cy="4" r="2"/></svg>LinkedIn<span class="sr-only"> (opens in a new tab)</span></a>
       </div>
     </div>
@@ -166,53 +166,10 @@
         </div>
       </section>
 
-      <!-- About me: a statement that fills in, and a card that slides out -->
-      <section class="intro" id="about-me" aria-labelledby="intro-h">
-        <div class="container intro__inner">
-          <header class="doc-head" data-num="02" data-ghost="About">
-            <h2 class="doc-head__title" id="intro-h">About me</h2>
-          </header>
-          <div class="intro__top">
-            <p class="statement" data-fill>I design products and build them in code. Most recently, I designed three projects for a surgical console at Karl Storz.</p>
-
-            <!-- ID badge on a lanyard: sways gently; hover, focus or the button straightens it and flips it to the details on the back -->
-            <div class="peek badge">
-              <div class="badge__swing">
-                <span class="badge__strap" aria-hidden="true"></span>
-                <span class="badge__clip" aria-hidden="true"></span>
-                <div class="badge__card">
-                  <div class="badge__face badge__front">
-                    <span class="badge__slot" aria-hidden="true"></span>
-                    <img class="badge__photo" src="assets/images/index-01-5d96ff329c.webp" alt="Portrait of Manahari Dahal" width="900" height="900" loading="lazy">
-                    <h3 class="badge__name">Manahari Dahal</h3>
-                    <p class="badge__role">UX Developer</p>
-                    <p class="badge__status"><i class="dot" aria-hidden="true"></i>Available for new roles</p>
-                  </div>
-                  <div class="badge__face badge__back" id="peek-card">
-                    <p class="badge__about">I work in both UX design and frontend, so I can design an idea and build it myself.</p>
-                    <dl class="badge__facts">
-                      <div><dt>From</dt><dd>Nepal</dd></div>
-                      <div><dt>Based in</dt><dd>the US</dd></div>
-                      <div><dt>Available for</dt><dd>UX design and UX engineering roles</dd></div>
-                    </dl>
-                    <p class="badge__links">
-                      <a class="badge__icon" href="https://www.linkedin.com/in/manaharidahal/" target="_blank" rel="noopener" aria-label="LinkedIn"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-4 0v7h-4v-7a6 6 0 0 1 6-6z"/><rect width="4" height="12" x="2" y="9"/><circle cx="4" cy="4" r="2"/></svg></a>
-                      <a class="badge__icon" href="https://dribbble.com/manaharidahal" target="_blank" rel="noopener" aria-label="Dribbble"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M19.13 5.09C15.22 9.14 10 10.44 2.25 10.94"/><path d="M21.75 12.84c-6.62-1.41-12.14 1-16.38 6.32"/><path d="M8.56 2.75c4.37 6 6 9.42 8 17.72"/></svg></a>
-                      <a class="badge__more" href="/about">More about me <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></a>
-                    </p>
-                  </div>
-                </div>
-              </div>
-              <button class="peek__tab badge__flip" type="button" aria-expanded="false" aria-controls="peek-card">Flip my ID <span aria-hidden="true">↻</span></button>
-            </div>
-          </div>
-        </div>
-      </section>
-
       <!-- Case studies -->
       <section class="work" id="work" aria-labelledby="work-h">
         <div class="container">
-          <header class="doc-head" data-num="03" data-ghost="Case studies">
+          <header class="doc-head" data-num="02" data-ghost="Case studies">
             <h2 class="doc-head__title" id="work-h">Case studies <small class="work__count">(03)</small></h2>
           </header>
           <div class="work__head">
@@ -252,7 +209,7 @@
 
             <ol class="shelves__list">
               <li class="shelf shelf--luna">
-                <a class="shelf__card" href="/luna">
+                <a class="shelf__card" href="/luna" data-cursor="View project">
                   <span class="shelf__stage">
                     <span class="device device--monitor">
                       <!-- A ginger cat asleep on top of the Luna monitor, its tail hanging
@@ -297,12 +254,13 @@
                   <span class="shelf__board" data-land></span>
                   <span class="shelf__info">
                     <b class="shelf__name">Luna <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></b>
-                    <span class="shelf__tags"><i>Healthcare</i><i>Product design</i></span>
+                    <span class="shelf__problem">A surgery team had one second to understand a screen.</span>
+                    <span class="shelf__meta"><span><b>Role</b> UX Design Intern</span><span><b>Methods</b> Heuristic analysis · Exploratory and moderated usability testing · Voice-assisted interaction</span></span>
                   </span>
                 </a>
               </li>
               <li class="shelf shelf--ku">
-                <a class="shelf__card" href="/ku-brand">
+                <a class="shelf__card" href="/ku-brand" data-cursor="View project">
                   <span class="shelf__stage">
                     <span class="device device--laptop">
                       <span class="device__lid" data-land><span class="device__dots"><i></i><i></i><i></i></span><img src="assets/images/card-ku-brand.webp" alt="" loading="lazy" width="2000" height="856"></span>
@@ -323,19 +281,21 @@
                   <span class="shelf__board" data-land></span>
                   <span class="shelf__info">
                     <b class="shelf__name">KU Brand <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></b>
-                    <span class="shelf__tags"><i>Design system</i><i>Web</i></span>
+                    <span class="shelf__problem">People struggled to find guidelines and assets on the old site.</span>
+                    <span class="shelf__meta"><span><b>Role</b> UX Design and Research, Frontend Development, Graphic Design</span><span><b>Methods</b> Open-ended interviews and brand-perception research · Information architecture and content reorganization · Frontend implementation</span></span>
                   </span>
                 </a>
               </li>
               <li class="shelf shelf--asians">
-                <a class="shelf__card" href="/asians">
+                <a class="shelf__card" href="/asians" data-cursor="View project">
                   <span class="shelf__stage">
                     <span class="device device--phone" data-land><img src="assets/images/asians-22-2937d5f56f.webp" alt="" loading="lazy" width="384" height="798"></span>
                   </span>
                   <span class="shelf__board" data-land></span>
                   <span class="shelf__info">
                     <b class="shelf__name">Asian’s <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></b>
-                    <span class="shelf__tags"><i>Mobile app</i><i>UX research</i></span>
+                    <span class="shelf__problem">A small family restaurant had no online ordering, and language barriers led to wrong orders.</span>
+                    <span class="shelf__meta"><span><b>Role</b> UX Researcher &amp; Designer, project lead</span><span><b>Methods</b> Survey · Interviews with guests and staff · Usability tests · Card sorting</span></span>
                   </span>
                 </a>
               </li>
@@ -344,6 +304,50 @@
         </div>
         <div class="falling" aria-hidden="true"></div>
       </section>
+
+      <!-- About me: a statement that fills in, and a card that slides out -->
+      <section class="intro" id="about-me" aria-labelledby="intro-h">
+        <div class="container intro__inner">
+          <header class="doc-head" data-num="03" data-ghost="About">
+            <h2 class="doc-head__title" id="intro-h">About me</h2>
+          </header>
+          <div class="intro__top">
+            <p class="statement" data-fill>I design products and build them in code. Most recently, I designed three projects for a surgical console at Karl Storz.</p>
+
+            <!-- ID badge on a lanyard: sways gently; hover, focus or the button straightens it and flips it to the details on the back -->
+            <div class="peek badge">
+              <div class="badge__swing">
+                <span class="badge__strap" aria-hidden="true"></span>
+                <span class="badge__clip" aria-hidden="true"></span>
+                <div class="badge__card">
+                  <div class="badge__face badge__front">
+                    <span class="badge__slot" aria-hidden="true"></span>
+                    <img class="badge__photo" src="assets/images/index-01-5d96ff329c.webp" alt="Portrait of Manahari Dahal" width="900" height="900" loading="lazy">
+                    <h3 class="badge__name">Manahari Dahal</h3>
+                    <p class="badge__role">UX Developer</p>
+                    <p class="badge__status"><i class="dot" aria-hidden="true"></i>Available for new roles</p>
+                  </div>
+                  <div class="badge__face badge__back" id="peek-card">
+                    <p class="badge__about">I work in both UX design and frontend, so I can design an idea and build it myself.</p>
+                    <dl class="badge__facts">
+                      <div><dt>From</dt><dd>Nepal</dd></div>
+                      <div><dt>Based in</dt><dd>the US</dd></div>
+                      <div><dt>Available for</dt><dd>UX design and UX engineering roles</dd></div>
+                    </dl>
+                    <p class="badge__links">
+                      <a class="badge__icon" href="https://www.linkedin.com/in/manaharidahal/" target="_blank" rel="noopener" aria-label="LinkedIn"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-4 0v7h-4v-7a6 6 0 0 1 6-6z"/><rect width="4" height="12" x="2" y="9"/><circle cx="4" cy="4" r="2"/></svg></a>
+                      <a class="badge__icon" href="https://dribbble.com/manaharidahal" target="_blank" rel="noopener" aria-label="Dribbble"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M19.13 5.09C15.22 9.14 10 10.44 2.25 10.94"/><path d="M21.75 12.84c-6.62-1.41-12.14 1-16.38 6.32"/><path d="M8.56 2.75c4.37 6 6 9.42 8 17.72"/></svg></a>
+                      <a class="badge__more" href="/about" data-cursor="Read more">More about me <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></a>
+                    </p>
+                  </div>
+                </div>
+              </div>
+              <button class="peek__tab badge__flip" type="button" aria-expanded="false" aria-controls="peek-card">Flip my ID <span aria-hidden="true">↻</span></button>
+            </div>
+          </div>
+        </div>
+      </section>
+
 
       <!-- Artwork: a dark gallery wall lit by a spotlight that follows the cursor -->
       <section class="artwork" id="artwork" aria-labelledby="art-h">
@@ -357,16 +361,16 @@
               <!-- A dark gallery wall: a spotlight follows the cursor and lights up the art under it; click opens a piece large -->
               <div class="spot">
                 <ul class="artwork__track spot__wall" aria-label="Artwork. Select one to view it larger.">
-                  <li><button type="button" class="artwork__item"><img src="assets/images/index-02-bf139d0c00.webp" alt="Animated pixel-art elk under a moon" loading="lazy" width="400" height="400"></button></li>
-                  <li><button type="button" class="artwork__item"><img src="assets/images/index-03-f2827196b8.webp" alt="Silhouettes against a glowing orange sunset" loading="lazy" width="770" height="656"></button></li>
-                  <li><button type="button" class="artwork__item"><img src="assets/images/index-04-e40c5c0484.webp" alt="Autumn forest path in mist" loading="lazy" width="1100" height="778"></button></li>
-                  <li><button type="button" class="artwork__item"><img src="assets/images/index-05-7eab617767.webp" alt="Digital painting of glossy red lips" loading="lazy" width="880" height="1100"></button></li>
-                  <li><button type="button" class="artwork__item"><img src="assets/images/index-06-bdfabfe408.webp" alt="Illustrated desk with laptop, plants and string lights" loading="lazy" width="843" height="1100"></button></li>
-                  <li><button type="button" class="artwork__item"><img src="assets/images/index-07-8517c6c4d5.webp" alt="Elk head silhouette filled with a night mountain landscape" loading="lazy" width="843" height="1100"></button></li>
-                  <li><button type="button" class="artwork__item"><img src="assets/images/index-08-ca15fe9d96.webp" alt="Figure with a broom on rocks before a lighthouse" loading="lazy" width="880" height="1100"></button></li>
-                  <li><button type="button" class="artwork__item"><img src="assets/images/index-09-17d8af1698.webp" alt="Hiker waving at snowy blue mountains" loading="lazy" width="1100" height="825"></button></li>
-                  <li><button type="button" class="artwork__item"><img src="assets/images/index-10-d2339b5db6.svg" alt="Volcano illustration" loading="lazy" width="513" height="513"></button></li>
-                  <li><button type="button" class="artwork__item"><img src="assets/images/index-11-424bf2862f.webp" alt="Flame illustration" loading="lazy" width="680" height="740"></button></li>
+                  <li><button type="button" class="artwork__item" data-cursor="View larger"><img src="assets/images/index-02-bf139d0c00.webp" alt="Animated pixel-art elk under a moon" loading="lazy" width="400" height="400"></button></li>
+                  <li><button type="button" class="artwork__item" data-cursor="View larger"><img src="assets/images/index-03-f2827196b8.webp" alt="Silhouettes against a glowing orange sunset" loading="lazy" width="770" height="656"></button></li>
+                  <li><button type="button" class="artwork__item" data-cursor="View larger"><img src="assets/images/index-04-e40c5c0484.webp" alt="Autumn forest path in mist" loading="lazy" width="1100" height="778"></button></li>
+                  <li><button type="button" class="artwork__item" data-cursor="View larger"><img src="assets/images/index-05-7eab617767.webp" alt="Digital painting of glossy red lips" loading="lazy" width="880" height="1100"></button></li>
+                  <li><button type="button" class="artwork__item" data-cursor="View larger"><img src="assets/images/index-06-bdfabfe408.webp" alt="Illustrated desk with laptop, plants and string lights" loading="lazy" width="843" height="1100"></button></li>
+                  <li><button type="button" class="artwork__item" data-cursor="View larger"><img src="assets/images/index-07-8517c6c4d5.webp" alt="Elk head silhouette filled with a night mountain landscape" loading="lazy" width="843" height="1100"></button></li>
+                  <li><button type="button" class="artwork__item" data-cursor="View larger"><img src="assets/images/index-08-ca15fe9d96.webp" alt="Figure with a broom on rocks before a lighthouse" loading="lazy" width="880" height="1100"></button></li>
+                  <li><button type="button" class="artwork__item" data-cursor="View larger"><img src="assets/images/index-09-17d8af1698.webp" alt="Hiker waving at snowy blue mountains" loading="lazy" width="1100" height="825"></button></li>
+                  <li><button type="button" class="artwork__item" data-cursor="View larger"><img src="assets/images/index-10-d2339b5db6.svg" alt="Volcano illustration" loading="lazy" width="513" height="513"></button></li>
+                  <li><button type="button" class="artwork__item" data-cursor="View larger"><img src="assets/images/index-11-424bf2862f.webp" alt="Flame illustration" loading="lazy" width="680" height="740"></button></li>
                 </ul>
                 <span class="spot__dark" aria-hidden="true"></span>
                 <p class="spot__hint" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 21h6"/><path d="M12 3a6 6 0 0 0-4 10.5c.8.8 1 1.5 1 2.5h6c0-1 .2-1.7 1-2.5A6 6 0 0 0 12 3z"/></svg><span class="spot__say-mouse">Move your cursor to light up the art</span><span class="spot__say-touch">Scroll to light up the art</span></p>

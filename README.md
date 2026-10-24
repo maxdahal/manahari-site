@@ -7,17 +7,17 @@ Plain HTML, CSS and JavaScript, with no framework, library or build step. Open a
 ```
 index.html        Home: intro, About me, case studies on shelves, artwork, contact
 about.html        The full About page (reached from "More about me" on the ID badge)
-luna.html         Case study: Luna Surgical Console (with the arm panel sandbox)
-ku-brand.html     Case study: KU Brand (with the color sandbox and wireframe video)
-asians.html       Case study: Asian's
+work/surgical-console.html   Case study: Surgical Console (with the arm panel sandbox)
+work/ku-brand.html   Case study: KU Brand (with the color sandbox and wireframe video)
+work/asians.html     Case study: Asian's
 css/
   site.css        Every page: tokens, paper grain, top bar, menu, buttons, tabs,
                   section band, cards, figures, footer, motion, scroll text
   compact.css     The case-study layout: outline column, sections, type scale,
                   and the stage button and sheet on smaller screens
   case-study.css  Components shared by the three case studies
-  sandbox.css     The Storybook-style sandbox frame (Luna and KU Brand)
-  home.css, about.css, luna.css, ku.css, asians.css   Page-only styles
+  sandbox.css     The Storybook-style sandbox frame (Surgical Console and KU Brand)
+  home.css, about.css, console.css, ku.css, asians.css   Page-only styles
 js/
   site.js         Every page: theme, menu, tabs, section bands, ID badge,
                   reveals, counters, cursor ring
@@ -25,7 +25,7 @@ js/
                   scrollytelling steps, principle tooltips, flip cards,
                   wireframe video, links into tabs
   sandbox.js      Shared sandbox behaviour: tabs, entrance demo, outline pulse
-  home.js, about.js, luna.js, ku.js, asians.js   Page-only behaviour
+  home.js, about.js, console.js, ku.js, asians.js   Page-only behaviour
 assets/
   images/         Images the pages use
   video/          The KU wireframe video (mp4 and webm)
@@ -47,7 +47,7 @@ Every interface color is a token at the top of `css/site.css`, light values firs
 | `--accent` | #E65F2E | #FF7A45 |
 | `--accent-text` | #B0441C | #FF9D73 |
 
-`--paper` holds the paper grain (dark specks in light mode, light specks in dark mode); it is baked into the page, section and footer backgrounds. Colors that belong to the work shown, not the site, are tokens in that page's CSS: Luna's arm and status colors, KU's brand colors, the Asian's app palette.
+`--paper` holds the paper grain (dark specks in light mode, light specks in dark mode); it is baked into the page, section and footer backgrounds. Colors that belong to the work shown, not the site, are tokens in that page's CSS: the console's arm and status colors, KU's brand colors, the Asian's app palette.
 
 Headings use Antonio; everything else uses Inter. The sandboxes use JetBrains Mono. Body text is 18px (16px on small screens).
 

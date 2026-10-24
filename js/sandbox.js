@@ -1,5 +1,5 @@
 /* Sandbox: what every case-study sandbox shares (see sandbox.css). Each
-   page's own script (ku.js, luna.js) builds on it:
+   page's own script (ku.js, console.js) builds on it:
    - Sandbox.tabs(root): the panel's tabs, by click or by arrow keys, Home
      and End when a tab has focus.
    - Sandbox.reveal(root, steps, gap): once the sandbox is a third in view it

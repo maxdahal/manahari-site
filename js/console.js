@@ -1,4 +1,4 @@
-/* Luna page behaviour: room diagram, component rules, screen regions,
+/* Surgical Console page behaviour: room diagram, component rules, screen regions,
    fidelity layers, heuristic filter and the Design stage's project tabs. */
 (function () {
   "use strict";
@@ -125,7 +125,6 @@
 (function () {
   "use strict";
 
-  var ARMS = { 1: "Orange", 2: "Light blue", 3: "Dark blue", 4: "Magenta" };
   var SIDE = { 1: "L", 2: "L", 3: "R", 4: "R" };
   var STATES = ["Running", "Warning", "Error", "Inactive"];
   var DESIGNS = {
@@ -143,11 +142,11 @@
     },
     c: {
       name: "C · Bar, dot and word (kept)",
-      note: "Color showed identity. The dot and the word showed state. Kept. The robot already gave each arm its own color: orange, light blue, dark blue and magenta. I kept those colors and showed them only as a bar along the top of the arm panel."
+      note: "Color showed identity. The dot and the word showed state. Kept. The robot already gave each arm its own color. I kept those colors and showed them only as a bar along the top of the arm panel."
     },
     final: {
       name: "A + C · Final design (shipped)",
-      note: "Warnings on the picture, and a color bar on each arm. The state showed as a dot and a word: Running, Warning, Error or Inactive. A magenta arm in error stayed magenta, and still looked like an error."
+      note: "Warnings on the picture, and a color bar on each arm. The state showed as a dot and a word: Running, Warning, Error or Inactive. An arm in error kept its own color, and still looked like an error."
     }
   };
 
@@ -272,7 +271,7 @@
           if (Number(q.dataset.pick) === target) q.classList.add("is-right");
         });
         if (!right) p.classList.add("is-wrong");
-        result.textContent = (right ? "Right. " : "Not quite. ") + "Arm " + target + " (" + ARMS[target] + ") had " + (state(target) === "Error" ? "an error" : "a warning") + ". You answered in " + (ms / 1000).toFixed(1) + "s.";
+        result.textContent = (right ? "Right. " : "Not quite. ") + "Arm " + target + " had " + (state(target) === "Error" ? "an error" : "a warning") + ". You answered in " + (ms / 1000).toFixed(1) + "s.";
         target = null;
         after.hidden = false;
         renderScores();
@@ -302,7 +301,7 @@
     });
 
     window.Sandbox.tabs(root);
-    window.Sandbox.attention("luna-sandbox-seen");
+    window.Sandbox.attention("console-sandbox-seen");
     render();
     renderScores();
 

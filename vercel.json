@@ -2,8 +2,25 @@
   "cleanUrls": true,
   "trailingSlash": false,
   "redirects": [
-    { "source": "/luna", "destination": "/work/luna", "permanent": true },
-    { "source": "/ku-brand", "destination": "/work/ku-brand", "permanent": true },
-    { "source": "/asians", "destination": "/work/asians", "permanent": true }
+    {
+      "source": "/luna",
+      "destination": "/work/surgical-console",
+      "permanent": true
+    },
+    {
+      "source": "/work/luna",
+      "destination": "/work/surgical-console",
+      "permanent": true
+    },
+    {
+      "source": "/ku-brand",
+      "destination": "/work/ku-brand",
+      "permanent": true
+    },
+    {
+      "source": "/asians",
+      "destination": "/work/asians",
+      "permanent": true
+    }
   ]
 }

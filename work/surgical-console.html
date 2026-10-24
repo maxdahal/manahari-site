@@ -3,11 +3,11 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Luna Surgical Console — Manahari</title>
+  <title>Surgical Console — Manahari</title>
   <link rel="icon" href="/assets/icons/favicon.svg" type="image/svg+xml">
   <link rel="icon" href="/assets/icons/favicon-32.png" sizes="32x32" type="image/png">
   <link rel="apple-touch-icon" href="/assets/icons/apple-touch-icon.png">
-  <meta name="description" content="UX design internship at Karl Storz. Three projects for a robotic surgery console: arm identity, a gallery with a video editor, and live annotation.">
+  <meta name="description" content="UX design internship. Three projects for a robotic surgery console: arm identity, a gallery with a video editor, and live annotation.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&amp;family=Antonio:wght@400;500;600;700&amp;display=swap">
@@ -17,12 +17,12 @@
   <link rel="stylesheet" href="/css/site.css">
   <link rel="stylesheet" href="/css/case-study.css">
   <link rel="stylesheet" href="/css/sandbox.css">
-  <link rel="stylesheet" href="/css/luna.css">
+  <link rel="stylesheet" href="/css/console.css">
   <link rel="stylesheet" href="/css/compact.css">
   <script src="/js/site.js"></script>
   <script src="/js/case-study.js" defer></script>
   <script src="/js/sandbox.js" defer></script>
-  <script src="/js/luna.js" defer></script>
+  <script src="/js/console.js" defer></script>
 </head>
 <body class="cp-page">
   <a class="skip-link" href="#main">Skip to content</a>
@@ -53,20 +53,21 @@
   </div>
   <div class="cp">
     <div class="cp-side">
-      <nav class="cp-crumbs" aria-label="Breadcrumbs"><a href="/#work"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m12 19-7-7 7-7M19 12H5"/></svg>Projects</a><span class="cp-crumbs__sep" aria-hidden="true">/</span><span aria-current="page">Luna</span></nav>
+      <nav class="cp-crumbs" aria-label="Breadcrumbs"><a href="/#work"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m12 19-7-7 7-7M19 12H5"/></svg>Projects</a><span class="cp-crumbs__sep" aria-hidden="true">/</span><span aria-current="page">Surgical Console</span></nav>
       <nav class="cp-outline" aria-label="On this page">
         <ol><li><a href="#overview" class="cp-outline__stage">Overview</a><ol><li><a href="#product-sec">The product</a></li><li><a href="#path-sec">How the story runs</a></li><li><a href="#principles">Vision &amp; principles</a></li></ol></li><li><a href="#empathize" class="cp-outline__stage">Research</a></li><li><a href="#define" class="cp-outline__stage">The challenge</a><ol><li><a href="#problem-sec">The problems</a></li><li><a href="#today-sec">Where project 1 started</a></li><li><a href="#old-sec">Where project 2 started</a></li><li><a href="#new-sec">Where project 3 started</a></li><li><a href="#strategy-sec">Strategy</a></li></ol></li><li><a href="#ideate" class="cp-outline__stage">Exploring ideas</a></li><li><a href="#design" class="cp-outline__stage">Design decisions</a><ol><li><a href="#design-work-sec">Component system</a></li><li><a href="#ed-sec">Project 2 · Inside the video editor</a></li></ol></li><li><a href="#sandbox" class="cp-outline__stage cp-outline__play" data-attn>Arm sandbox <span class="cp-outline__tag">Try it</span></a></li><li><a href="#prototype" class="cp-outline__stage">Prototype and build</a></li><li><a href="#test" class="cp-outline__stage">Testing and iteration</a><ol><li><a href="#hev-sec">Heuristic evaluation</a></li><li><a href="#six-sec">Feedback</a></li></ol></li><li><a href="#result" class="cp-outline__stage">Outcome</a><ol><li><a href="#together-sec">All three together</a></li><li><a href="#outcome-sec">Outcome</a></li></ol></li><li><a href="#learn" class="cp-outline__stage">Reflection</a></li></ol>
       </nav>
     </div>
 
     <main class="cp-main" id="main">
-      <nav class="cp-crumbs cp-crumbs--top" aria-label="Breadcrumbs"><a href="/#work"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m12 19-7-7 7-7M19 12H5"/></svg>Projects</a><span class="cp-crumbs__sep" aria-hidden="true">/</span><span aria-current="page">Luna</span></nav>
+      <nav class="cp-crumbs cp-crumbs--top" aria-label="Breadcrumbs"><a href="/#work"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m12 19-7-7 7-7M19 12H5"/></svg>Projects</a><span class="cp-crumbs__sep" aria-hidden="true">/</span><span aria-current="page">Surgical Console</span></nav>
+      <div class="notice notice--top" role="note"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9.88 9.88a3 3 0 1 0 4.24 4.24"/><path d="M10.73 5.08A10.43 10.43 0 0 1 12 5c7 0 10 7 10 7a13.16 13.16 0 0 1-1.67 2.68"/><path d="M6.61 6.61A13.53 13.53 0 0 0 2 12s3 7 10 7a9.74 9.74 0 0 0 5.39-1.61"/><path d="m2 2 20 20"/></svg><p>I have masked the company and product names.</p></div>
       <header class="cp-hero">
         <div class="cp-hero__intro">
-          <p class="cp-sub">UX Design Internship · Karl Storz · 2026</p>
-          <h1 class="cp-title">Luna Surgical Console</h1>
+          <p class="cp-sub">UX Design Internship · 2026</p>
+          <h1 class="cp-title">Surgical Console</h1>
         </div>
-        <figure class="cp-hero__image"><img src="/assets/images/luna-01-7142ae9c81.webp" alt="The live video editor in annotation mode, with numbered pins and a measurement on the feed" width="1280" height="720"></figure>
+        <figure class="cp-hero__image"><img src="/assets/images/console-01-7142ae9c81.webp" alt="The live video editor in annotation mode, with numbered pins and a measurement on the feed" width="1280" height="720"></figure>
         <aside class="cp-hero__aside" aria-label="Project quick links">
           <div class="cp-card">
             <p class="cp-card__title">Project access</p>
@@ -87,7 +88,7 @@
           <dl class="cp-facts">
               <div><dt>Role</dt><dd>UX Design Intern</dd></div>
               <div><dt>Timeline</dt><dd>Summer 2026 (3 months)</dd></div>
-              <div><dt>Methods</dt><dd>Heuristic evaluation, exploratory and moderated usability testing, iterative versions (V1 to V6), component system, interactive prototype</dd></div>
+              <div><dt>Methods</dt><dd>Heuristic evaluation, moderated and unmoderated usability testing, A/B tests, timed usability sessions, iterative versions (V1 to V6), component system, interactive prototype</dd></div>
               <div><dt>Mentorship</dt><dd>Design Mentor &amp; Clinical Supervisor (names masked)</dd></div>
               <div><dt>Tools</dt><dd class="chips"><span class="chip chip--pill">Figma</span><span class="chip chip--pill">Interactive Prototype</span></dd></div>
             </dl>
@@ -121,6 +122,11 @@
               <div class="callout reveal">
                 <p class="eyebrow">The core constraint</p>
                 <p>Nobody used this screen for fun. Surgeons glanced at it for one second, so every action had to feel instant.</p>
+                <ul class="cp-list">
+                  <li><b>Tight timelines.</b></li>
+                  <li><b>Many stakeholders to align:</b> surgeons, hardware engineers, software engineers, PMs and executive leadership.</li>
+                  <li><b>The operating room:</b> screen distance, lighting, gloved interaction, and voice UI in noisy rooms.</li>
+                </ul>
               </div>
             </div>
           </section>
@@ -130,7 +136,7 @@
             <div class="block__body">
               <figure class="drawing reveal">
                 <p class="figure__tag">Drawn for this case study</p>
-<svg viewBox="0 0 1400 540" role="img" aria-label="Top view of the system: a patient on the table with four robotic arms around them, each arm with its own screen, and one central unit with the main controls.">
+<svg viewBox="0 0 1400 540" role="img" aria-label="Top view of the system: a patient on the table with robotic arms around them, each arm with its own screen, and one central unit with the main controls.">
 <rect x="560" y="150" width="280" height="210" rx="44" fill="rgba(255,255,255,.035)" stroke="#6f787d" stroke-width="1.6"/>
 <text x="700" y="252" font-size="26" fill="#c9d0d4" font-weight="600" text-anchor="middle" font-family="Inter,sans-serif">
                           Patient
@@ -138,56 +144,56 @@
 <text x="700" y="280" font-size="19" fill="#8b959a" font-weight="400" text-anchor="middle" font-family="Inter,sans-serif">
                           On the table
                         </text>
-<path d="M300 110L430 135L570 200" stroke="#E8833A" stroke-width="10" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
-<circle cx="430" cy="135" r="9" fill="#0f0f11" stroke="#E8833A" stroke-width="3"/>
-<circle cx="300" cy="110" r="30" fill="#1c1c20" stroke="#E8833A" stroke-width="3"/>
+<path d="M300 110L430 135L570 200" stroke="#b9a4ff" stroke-width="10" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+<circle cx="430" cy="135" r="9" fill="#0f0f11" stroke="#b9a4ff" stroke-width="3"/>
+<circle cx="300" cy="110" r="30" fill="#1c1c20" stroke="#b9a4ff" stroke-width="3"/>
 <text x="300" y="118" font-size="22" fill="#e8f7fa" font-weight="600" text-anchor="middle" font-family="Inter,sans-serif">
                           1
                         </text>
 <rect x="110" y="40" width="150" height="80" rx="12" fill="rgba(255,255,255,.035)" stroke="#6f787d" stroke-width="1.6"/>
-<rect x="110" y="40" width="150" height="6" rx="3" fill="#E8833A"/>
+<rect x="110" y="40" width="150" height="6" rx="3" fill="#b9a4ff"/>
 <text x="185" y="80" font-size="21" fill="#c9d0d4" font-weight="600" text-anchor="middle" font-family="Inter,sans-serif">
                           Arm 1
                         </text>
 <text x="185" y="103" font-size="18" fill="#8b959a" font-weight="400" text-anchor="middle" font-family="Inter,sans-serif">
                           Own screen
                         </text>
-<path d="M1100 110L970 135L830 200" stroke="#58C2E8" stroke-width="10" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
-<circle cx="970" cy="135" r="9" fill="#0f0f11" stroke="#58C2E8" stroke-width="3"/>
-<circle cx="1100" cy="110" r="30" fill="#1c1c20" stroke="#58C2E8" stroke-width="3"/>
+<path d="M1100 110L970 135L830 200" stroke="#e3c48f" stroke-width="10" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+<circle cx="970" cy="135" r="9" fill="#0f0f11" stroke="#e3c48f" stroke-width="3"/>
+<circle cx="1100" cy="110" r="30" fill="#1c1c20" stroke="#e3c48f" stroke-width="3"/>
 <text x="1100" y="118" font-size="22" fill="#e8f7fa" font-weight="600" text-anchor="middle" font-family="Inter,sans-serif">
                           2
                         </text>
 <rect x="1150" y="40" width="150" height="80" rx="12" fill="rgba(255,255,255,.035)" stroke="#6f787d" stroke-width="1.6"/>
-<rect x="1150" y="40" width="150" height="6" rx="3" fill="#58C2E8"/>
+<rect x="1150" y="40" width="150" height="6" rx="3" fill="#e3c48f"/>
 <text x="1225" y="80" font-size="21" fill="#c9d0d4" font-weight="600" text-anchor="middle" font-family="Inter,sans-serif">
                           Arm 2
                         </text>
 <text x="1225" y="103" font-size="18" fill="#8b959a" font-weight="400" text-anchor="middle" font-family="Inter,sans-serif">
                           Own screen
                         </text>
-<path d="M300 430L430 405L570 320" stroke="#2E5FD0" stroke-width="10" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
-<circle cx="430" cy="405" r="9" fill="#0f0f11" stroke="#2E5FD0" stroke-width="3"/>
-<circle cx="300" cy="430" r="30" fill="#1c1c20" stroke="#2E5FD0" stroke-width="3"/>
+<path d="M300 430L430 405L570 320" stroke="#2f8f6e" stroke-width="10" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+<circle cx="430" cy="405" r="9" fill="#0f0f11" stroke="#2f8f6e" stroke-width="3"/>
+<circle cx="300" cy="430" r="30" fill="#1c1c20" stroke="#2f8f6e" stroke-width="3"/>
 <text x="300" y="438" font-size="22" fill="#e8f7fa" font-weight="600" text-anchor="middle" font-family="Inter,sans-serif">
                           3
                         </text>
 <rect x="110" y="400" width="150" height="80" rx="12" fill="rgba(255,255,255,.035)" stroke="#6f787d" stroke-width="1.6"/>
-<rect x="110" y="400" width="150" height="6" rx="3" fill="#2E5FD0"/>
+<rect x="110" y="400" width="150" height="6" rx="3" fill="#2f8f6e"/>
 <text x="185" y="440" font-size="21" fill="#c9d0d4" font-weight="600" text-anchor="middle" font-family="Inter,sans-serif">
                           Arm 3
                         </text>
 <text x="185" y="463" font-size="18" fill="#8b959a" font-weight="400" text-anchor="middle" font-family="Inter,sans-serif">
                           Own screen
                         </text>
-<path d="M1100 430L970 405L830 320" stroke="#C23B8E" stroke-width="10" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
-<circle cx="970" cy="405" r="9" fill="#0f0f11" stroke="#C23B8E" stroke-width="3"/>
-<circle cx="1100" cy="430" r="30" fill="#1c1c20" stroke="#C23B8E" stroke-width="3"/>
+<path d="M1100 430L970 405L830 320" stroke="#f49ac9" stroke-width="10" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+<circle cx="970" cy="405" r="9" fill="#0f0f11" stroke="#f49ac9" stroke-width="3"/>
+<circle cx="1100" cy="430" r="30" fill="#1c1c20" stroke="#f49ac9" stroke-width="3"/>
 <text x="1100" y="438" font-size="22" fill="#e8f7fa" font-weight="600" text-anchor="middle" font-family="Inter,sans-serif">
                           4
                         </text>
 <rect x="1150" y="400" width="150" height="80" rx="12" fill="rgba(255,255,255,.035)" stroke="#6f787d" stroke-width="1.6"/>
-<rect x="1150" y="400" width="150" height="6" rx="3" fill="#C23B8E"/>
+<rect x="1150" y="400" width="150" height="6" rx="3" fill="#f49ac9"/>
 <text x="1225" y="440" font-size="21" fill="#c9d0d4" font-weight="600" text-anchor="middle" font-family="Inter,sans-serif">
                           Arm 4
                         </text>
@@ -206,7 +212,7 @@
                           Top view
                         </text>
 </svg>
-                <figcaption>The system around the patient, drawn as an illustration. Four robotic arms surround the patient and each has its own screen. One central unit holds the main controls. A setup can use three or four arms.</figcaption>
+                <figcaption>The system around the patient, drawn as an illustration. Robotic arms surround the patient and each has its own screen. One central unit holds the main controls.</figcaption>
               </figure>
               <figure class="drawing reveal">
                 <p class="figure__tag">Drawn for this case study</p>
@@ -221,10 +227,10 @@
 <text x="180" y="342" font-size="18.2" fill="#8b959a" font-weight="400" text-anchor="middle" letter-spacing="0" font-family="Inter,sans-serif">
                           Haptics
                         </text>
-<circle cx="150" cy="196" r="7" fill="#E8833A" stroke="none" stroke-width="0"/>
-<circle cx="170" cy="196" r="7" fill="#58C2E8" stroke="none" stroke-width="0"/>
-<circle cx="190" cy="196" r="7" fill="#2E5FD0" stroke="none" stroke-width="0"/>
-<circle cx="210" cy="196" r="7" fill="#C23B8E" stroke="none" stroke-width="0"/>
+<circle cx="150" cy="196" r="7" fill="#b9a4ff" stroke="none" stroke-width="0"/>
+<circle cx="170" cy="196" r="7" fill="#e3c48f" stroke="none" stroke-width="0"/>
+<circle cx="190" cy="196" r="7" fill="#2f8f6e" stroke="none" stroke-width="0"/>
+<circle cx="210" cy="196" r="7" fill="#f49ac9" stroke="none" stroke-width="0"/>
 <text x="180" y="228" font-size="15.4" fill="#8b959a" font-weight="400" text-anchor="middle" letter-spacing="0" font-family="Inter,sans-serif">
                           Arm color LEDs
                         </text>
@@ -274,7 +280,7 @@
 <path d="M850 126L1076 126" stroke="#559DD0" stroke-width="2.4" fill="none" stroke-dasharray="8 7"/>
 <path d="M1076 126l-12 -8 M1076 126l-12 8" stroke="#559DD0" stroke-width="2.4" fill="none" stroke-linecap="round"/>
 </svg>
-                <figcaption>The Luna console, redrawn as a wireframe. The wall monitor showed only the live video and the marks.</figcaption>
+                <figcaption>The console, redrawn as a wireframe. The wall monitor showed only the live video and the marks.</figcaption>
               </figure>
             </div>
           </section>
@@ -422,7 +428,7 @@
             <div class="block__body">
               <figure class="drawing reveal">
                 <p class="figure__tag">Drawn for this case study</p>
-<svg viewBox="0 0 760 250" role="img" aria-label="Wireframe of the old alerts list: every message looks the same and names an arm by number. Four arms stand beside it, and a dashed line asks which one is arm 2.">
+<svg viewBox="0 0 760 250" role="img" aria-label="Wireframe of the old alerts list: every message looks the same and names an arm by number. The arms stand beside it, and a dashed line asks which one is arm 2.">
 <rect x="10" y="10" width="300" height="230" rx="10" fill="rgba(255,255,255,.035)" stroke="#6f787d" stroke-width="1.6"/>
 <text x="26" y="38" font-size="13.8" fill="#8b959a" font-weight="600" text-anchor="start" letter-spacing="1.5" font-family="Inter,sans-serif">
                             Alerts
@@ -460,7 +466,7 @@
                             4
                           </text>
 <text x="380" y="234" font-size="14.9" fill="#8b959a" font-weight="400" text-anchor="start" letter-spacing="0" font-family="Inter,sans-serif">
-                            Four real arms in the room
+                            The real arms in the room
                           </text>
 <path d="M300 150 C350 70 470 50 507 92" stroke="#F2A93B" stroke-width="2" fill="none" stroke-dasharray="6 6"/>
 <text x="340" y="34" font-size="16.1" fill="#F2A93B" font-weight="600" text-anchor="start" letter-spacing="0" font-family="Inter,sans-serif">
@@ -749,7 +755,7 @@
 <path d="M262 96L232 104" stroke="#E5483D" stroke-width="1.6" fill="none"/>
 </svg><figcaption><b>A · Warning on the picture</b> A label with L or R sat next to the instrument. Kept.</figcaption></figure>
                   <figure class="drawing"><svg viewBox="0 0 400 250" role="img" aria-label="Sketch B: the whole arm panel is filled with the arm color, and the error dot is red.">
-<rect x="10" y="10" width="380" height="230" rx="10" fill="rgba(194,59,142,.35)" stroke="#C23B8E" stroke-width="2"/>
+<rect x="10" y="10" width="380" height="230" rx="10" fill="rgba(194,59,142,.35)" stroke="#f49ac9" stroke-width="2"/>
 <text x="30" y="50" font-size="25.2" fill="#fff" font-weight="600" text-anchor="start" letter-spacing="0" font-family="Inter,sans-serif">
                                     Right Primary
                                   </text>
@@ -763,7 +769,7 @@
 </svg><figcaption><b>B · Arm color as a fill</b> The whole panel took the arm color. Dropped, because it hid the state.</figcaption></figure>
                   <figure class="drawing"><svg viewBox="0 0 400 250" role="img" aria-label="Sketch C: the arm color is a bar along the top edge of the panel. The state shows as a dot and a word.">
 <rect x="10" y="10" width="380" height="230" rx="10" fill="rgba(255,255,255,.035)" stroke="#6f787d" stroke-width="1.6"/>
-<rect x="10" y="10" width="380" height="14" rx="7" fill="#C23B8E"/>
+<rect x="10" y="10" width="380" height="14" rx="7" fill="#f49ac9"/>
 <text x="30" y="62" font-size="25.2" fill="#c9d0d4" font-weight="600" text-anchor="start" letter-spacing="0" font-family="Inter,sans-serif">
                                     Right Primary
                                   </text>
@@ -1075,10 +1081,10 @@
                     <span class="card__label">Rule 2 · Identity</span>
                     <h4>Each robotic arm keeps its existing color</h4>
                     <ul class="arms arms--compact">
-                      <li class="arm arm--1"><b>Arm 1</b><span>Orange</span><span class="arm__state"><i class="sev sev--running"></i>Running</span></li>
-                      <li class="arm arm--2"><b>Arm 2</b><span>Light blue</span><span class="arm__state"><i class="sev sev--warning"></i>Warning</span></li>
-                      <li class="arm arm--3"><b>Arm 3</b><span>Dark blue</span><span class="arm__state"><i class="sev sev--error"></i>Error</span></li>
-                      <li class="arm arm--4"><b>Arm 4</b><span>Magenta</span><span class="arm__state"><i class="sev sev--inactive"></i>Inactive</span></li>
+                      <li class="arm arm--1"><b>Arm 1</b><span class="arm__state"><i class="sev sev--running"></i>Running</span></li>
+                      <li class="arm arm--2"><b>Arm 2</b><span class="arm__state"><i class="sev sev--warning"></i>Warning</span></li>
+                      <li class="arm arm--3"><b>Arm 3</b><span class="arm__state"><i class="sev sev--error"></i>Error</span></li>
+                      <li class="arm arm--4"><b>Arm 4</b><span class="arm__state"><i class="sev sev--inactive"></i>Inactive</span></li>
                     </ul>
                     <p>The arm color showed only as a thin bar on the top edge of the panel.</p>
                   </div>
@@ -1088,19 +1094,19 @@
                     <p class="body-text">An active tool turned into a solid block, so you spotted it right away.</p>
                     <p class="body-text">Actions stayed as outlines. Delete was the only red control in the editor.</p>
                     <div class="parts">
-                      <img src="/assets/images/luna-02-6d4cfe0c27.svg" alt="Draw tool" width="112" height="204">
-                      <img src="/assets/images/luna-03-4174205457.svg" alt="Pin tool" width="112" height="204">
-                      <img src="/assets/images/luna-04-dfcdaea043.svg" alt="Measure tool" width="112" height="204">
-                      <img src="/assets/images/luna-05-05381c69b5.svg" alt="Measure tags" width="96" height="172">
-                      <img src="/assets/images/luna-06-0898b212a4.svg" alt="Notes tool" width="112" height="204">
+                      <img src="/assets/images/console-02-6d4cfe0c27.svg" alt="Draw tool" width="112" height="204">
+                      <img src="/assets/images/console-03-4174205457.svg" alt="Pin tool" width="112" height="204">
+                      <img src="/assets/images/console-04-dfcdaea043.svg" alt="Measure tool" width="112" height="204">
+                      <img src="/assets/images/console-05-05381c69b5.svg" alt="Measure tags" width="96" height="172">
+                      <img src="/assets/images/console-06-0898b212a4.svg" alt="Notes tool" width="112" height="204">
                     </div>
                     <div class="parts">
-                      <img src="/assets/images/luna-07-4432b6d695.svg" alt="Redo action" width="112" height="204">
-                      <img src="/assets/images/luna-08-844bd38853.svg" alt="Screenshot action" width="112" height="204">
-                      <img src="/assets/images/luna-09-0240aff6ec.svg" alt="Clear all action" width="112" height="204">
-                      <img src="/assets/images/luna-10-6ae6d92f1e.svg" alt="Delete action" width="112" height="196">
-                      <img src="/assets/images/luna-11-edf12b671a.svg" alt="Duplicate action" width="112" height="204">
-                      <img src="/assets/images/luna-12-f1b48348ab.svg" alt="Fullscreen action" width="112" height="204">
+                      <img src="/assets/images/console-07-4432b6d695.svg" alt="Redo action" width="112" height="204">
+                      <img src="/assets/images/console-08-844bd38853.svg" alt="Screenshot action" width="112" height="204">
+                      <img src="/assets/images/console-09-0240aff6ec.svg" alt="Clear all action" width="112" height="204">
+                      <img src="/assets/images/console-10-6ae6d92f1e.svg" alt="Delete action" width="112" height="196">
+                      <img src="/assets/images/console-11-edf12b671a.svg" alt="Duplicate action" width="112" height="204">
+                      <img src="/assets/images/console-12-f1b48348ab.svg" alt="Fullscreen action" width="112" height="204">
                     </div>
                   </div>
 
@@ -1109,7 +1115,7 @@
                     <p class="body-text">Every state used a color, a word and an icon together, which helped color-blind staff.</p>
                     <p class="body-text">System banners followed the same rule.</p>
                     <figure class="figure">
-                      <div class="parts"><img src="/assets/images/luna-13-9e8502df90.svg" alt="Three states, Running, Warning and Error, each shown by color, by word, by icon, and by all three together" width="980" height="440"></div>
+                      <div class="parts"><img src="/assets/images/console-13-9e8502df90.svg" alt="Three states, Running, Warning and Error, each shown by color, by word, by icon, and by all three together" width="980" height="440"></div>
                       <figcaption>Each state shown by color, by word, by icon, and by all three together.</figcaption>
                     </figure>
                   </div>
@@ -1118,10 +1124,10 @@
                     <h4 class="subhead">Captures</h4>
                     <figure class="figure">
                       <div class="parts">
-                        <img src="/assets/images/luna-14-53d587ef8d.svg" alt="Gallery tab" width="453" height="290">
-                        <img src="/assets/images/luna-15-f1c113985a.svg" alt="Screenshots panel" width="428" height="202">
-                        <img src="/assets/images/luna-16-cec2e33647.svg" alt="Captures panel opened as a grid of saved images" width="428" height="244">
-                        <img src="/assets/images/luna-17-79778c49b0.svg" alt="Media popup" width="426" height="604">
+                        <img src="/assets/images/console-14-53d587ef8d.svg" alt="Gallery tab" width="453" height="290">
+                        <img src="/assets/images/console-15-f1c113985a.svg" alt="Screenshots panel" width="428" height="202">
+                        <img src="/assets/images/console-16-cec2e33647.svg" alt="Captures panel opened as a grid of saved images" width="428" height="244">
+                        <img src="/assets/images/console-17-79778c49b0.svg" alt="Media popup" width="426" height="604">
                       </div>
                       <figcaption>A number badge showed how many images and clips you saved.</figcaption>
                     </figure>
@@ -1137,17 +1143,17 @@
               <div class="block__body">
                 <p class="principles">Principles used <a href="#pr-awareness" data-principle>Situational awareness</a> <a href="#pr-clarity" data-principle>Clarity</a></p>
                 <ul class="arms">
-                  <li class="arm arm--1"><b>Arm 1</b><span>Orange</span><span class="arm__state"><i class="sev sev--running"></i>Running</span><i class="arm__lines" aria-hidden="true"></i></li>
-                  <li class="arm arm--2"><b>Arm 2</b><span>Light blue</span><span class="arm__state"><i class="sev sev--warning"></i>Warning</span><i class="arm__lines" aria-hidden="true"></i></li>
-                  <li class="arm arm--3"><b>Arm 3</b><span>Dark blue</span><span class="arm__state"><i class="sev sev--error"></i>Error</span><i class="arm__lines" aria-hidden="true"></i></li>
-                  <li class="arm arm--4"><b>Arm 4</b><span>Magenta</span><span class="arm__state"><i class="sev sev--inactive"></i>Inactive</span><i class="arm__lines" aria-hidden="true"></i></li>
+                  <li class="arm arm--1"><b>Arm 1</b><span class="arm__state"><i class="sev sev--running"></i>Running</span><i class="arm__lines" aria-hidden="true"></i></li>
+                  <li class="arm arm--2"><b>Arm 2</b><span class="arm__state"><i class="sev sev--warning"></i>Warning</span><i class="arm__lines" aria-hidden="true"></i></li>
+                  <li class="arm arm--3"><b>Arm 3</b><span class="arm__state"><i class="sev sev--error"></i>Error</span><i class="arm__lines" aria-hidden="true"></i></li>
+                  <li class="arm arm--4"><b>Arm 4</b><span class="arm__state"><i class="sev sev--inactive"></i>Inactive</span><i class="arm__lines" aria-hidden="true"></i></li>
                 </ul>
                 <div class="arm-key"><span><i class="arm-key__bar"></i>Top bar: which arm</span><span><i class="arm-key__dot"></i>Dot and word: its state</span></div>
                 <div class="split">
                   <div>
                     <h4 class="subhead">What I did</h4>
-                    <p>The robot already gave each arm its own color: orange, light blue, dark blue and magenta. I kept those colors and showed them only as a bar along the top of the arm panel.</p>
-                    <p>The state showed as a dot and a word: Running, Warning, Error or Inactive. A magenta arm in error stayed magenta, and still looked like an error.</p>
+                    <p>The robot already gave each arm its own color. I kept those colors and showed them only as a bar along the top of the arm panel.</p>
+                    <p>The state showed as a dot and a word: Running, Warning, Error or Inactive. An arm in error kept its own color, and still looked like an error.</p>
                   </div>
                   <div class="callout">
                     <p class="eyebrow">Instead of</p>
@@ -1172,19 +1178,19 @@
                     </div>
                     <div role="tabpanel" id="gal-p0" aria-labelledby="gal-t0">
                       <figure class="figure">
-                      <div class="figure__media"><img src="/assets/images/luna-18-bceb1fb1ce.webp" alt="The new editor with numbered pins, a 3.27 cm measurement, a timeline and a tool bar" loading="lazy" width="1280" height="720"></div>
+                      <div class="figure__media"><img src="/assets/images/console-18-bceb1fb1ce.webp" alt="The new editor with numbered pins, a 3.27 cm measurement, a timeline and a tool bar" loading="lazy" width="1280" height="720"></div>
                       <figcaption>The new editor. Pins carried numbers, the measurement sat on the video, and tools lived in one bottom bar under a timeline.</figcaption>
                     </figure>
                     </div>
                     <div role="tabpanel" id="gal-p1" aria-labelledby="gal-t1" hidden>
                       <figure class="figure">
-                      <div class="figure__media"><img src="/assets/images/luna-19-cc6b761fa7.webp" alt="The recording state with a red REC badge and a Stop button" loading="lazy" width="1280" height="720"></div>
+                      <div class="figure__media"><img src="/assets/images/console-19-cc6b761fa7.webp" alt="The recording state with a red REC badge and a Stop button" loading="lazy" width="1280" height="720"></div>
                       <figcaption>Recording. The first control became a red Stop, and the markup tools dimmed.</figcaption>
                     </figure>
                     </div>
                     <div role="tabpanel" id="gal-p2" aria-labelledby="gal-t2" hidden>
                       <figure class="figure">
-                      <div class="figure__media"><img src="/assets/images/luna-20-5fb9ae48d8.webp" alt="The new gallery with a procedures list and All, Images and Videos tabs" loading="lazy" width="1280" height="720"></div>
+                      <div class="figure__media"><img src="/assets/images/console-20-5fb9ae48d8.webp" alt="The new gallery with a procedures list and All, Images and Videos tabs" loading="lazy" width="1280" height="720"></div>
                       <figcaption>The new gallery. Procedures by date on the left, one track for All, Images and Videos.</figcaption>
                     </figure>
                     </div>
@@ -1217,7 +1223,7 @@
                 <p class="principles">Principles used <a href="#pr-awareness" data-principle>Situational awareness</a> <a href="#pr-clarity" data-principle>Clarity</a></p>
                 <p class="lead">I placed each region by how often people look at it and reach for it.</p>
                 <figure class="figure">
-                  <div class="figure__media"><img src="/assets/images/luna-21-d36600b9b3.webp" alt="The live video editor: a back button and breadcrumb at the top, numbered pins and a 3.27 cm measurement on the feed, a timeline below, and one tool bar at the bottom" loading="lazy" width="1920" height="1080"></div>
+                  <div class="figure__media"><img src="/assets/images/console-21-d36600b9b3.webp" alt="The live video editor: a back button and breadcrumb at the top, numbered pins and a 3.27 cm measurement on the feed, a timeline below, and one tool bar at the bottom" loading="lazy" width="1920" height="1080"></div>
                   <figcaption>The live video editor. The feed sits in the center with no permanent overlays. The timeline and the tool bar sit below it.</figcaption>
                 </figure>
 
@@ -1253,7 +1259,7 @@
 
                 <h4 class="subhead">The editor in its other states</h4>
                 <figure class="figure">
-                  <div class="figure__media"><img src="/assets/images/luna-22-4900e38a87.webp" alt="The live video editor while recording: a red REC badge and timer at the top left, a timeline with markers, Stop and Snap at the bottom left, and a controls rail on the right" loading="lazy" width="1600" height="900"></div>
+                  <div class="figure__media"><img src="/assets/images/console-22-4900e38a87.webp" alt="The live video editor while recording: a red REC badge and timer at the top left, a timeline with markers, Stop and Snap at the bottom left, and a controls rail on the right" loading="lazy" width="1600" height="900"></div>
                   <figcaption>Recording on: The markup tools dimmed, so nobody edited by accident while recording.</figcaption>
                 </figure>
                 <div class="switcher">
@@ -1262,18 +1268,18 @@
                     <button type="button" role="tab" id="gf-t1" aria-controls="gf-p1" aria-selected="false">Images</button>
                     <button type="button" role="tab" id="gf-t2" aria-controls="gf-p2" aria-selected="false">Videos</button>
                   </div>
-                  <div class="figure__media" role="tabpanel" id="gf-p0" aria-labelledby="gf-t0"><img src="/assets/images/luna-23-efa1ebb08d.webp" alt="Gallery, all media" loading="lazy" width="1600" height="900"></div>
-                  <div class="figure__media" role="tabpanel" id="gf-p1" aria-labelledby="gf-t1" hidden><img src="/assets/images/luna-24-662d520da5.webp" alt="Gallery, images" loading="lazy" width="1600" height="900"></div>
-                  <div class="figure__media" role="tabpanel" id="gf-p2" aria-labelledby="gf-t2" hidden><img src="/assets/images/luna-25-76b1a46dd1.webp" alt="Gallery, videos" loading="lazy" width="1600" height="900"></div>
+                  <div class="figure__media" role="tabpanel" id="gf-p0" aria-labelledby="gf-t0"><img src="/assets/images/console-23-efa1ebb08d.webp" alt="Gallery, all media" loading="lazy" width="1600" height="900"></div>
+                  <div class="figure__media" role="tabpanel" id="gf-p1" aria-labelledby="gf-t1" hidden><img src="/assets/images/console-24-662d520da5.webp" alt="Gallery, images" loading="lazy" width="1600" height="900"></div>
+                  <div class="figure__media" role="tabpanel" id="gf-p2" aria-labelledby="gf-t2" hidden><img src="/assets/images/console-25-76b1a46dd1.webp" alt="Gallery, videos" loading="lazy" width="1600" height="900"></div>
                   <p class="note-line">Gallery after the case: Each image got the name of its procedure step, not a random file name.</p>
                 </div>
                 <div class="figure-pair">
                   <figure class="figure">
-                    <div class="figure__media"><img src="/assets/images/luna-26-279be3c21e.webp" alt="The instruments panel with the arm color as a bar along the top" loading="lazy" width="1600" height="900"></div>
+                    <div class="figure__media"><img src="/assets/images/console-26-279be3c21e.webp" alt="The instruments panel with the arm color as a bar along the top" loading="lazy" width="1600" height="900"></div>
                     <figcaption>Instruments panel: The arm color showed as a plain bar along the top.</figcaption>
                   </figure>
                   <figure class="figure">
-                    <div class="figure__media"><img src="/assets/images/luna-27-056df30be1.svg" alt="Wireframe of the editor in voice standby: a microphone in the center of the feed and the words Voice standby, Waiting for the wake phrase" loading="lazy" width="800" height="450"></div>
+                    <div class="figure__media"><img src="/assets/images/console-27-056df30be1.svg" alt="Wireframe of the editor in voice standby: a microphone in the center of the feed and the words Voice standby, Waiting for the wake phrase" loading="lazy" width="800" height="450"></div>
                     <figcaption>Voice standby: The system was awake and waited for the wake phrase.</figcaption>
                   </figure>
                 </div>
@@ -1294,7 +1300,7 @@
                   <div role="tabpanel" id="lv-p0" aria-labelledby="lv-t0">
                     <figure class="figure">
                     <div class="figure__media dashboard">
-                      <img src="/assets/images/luna-19-cc6b761fa7.webp" alt="Dashboard final v3: the live video feed with controls, a timeline and a tool bar" loading="lazy" width="1280" height="720">
+                      <img src="/assets/images/console-19-cc6b761fa7.webp" alt="Dashboard final v3: the live video feed with controls, a timeline and a tool bar" loading="lazy" width="1280" height="720">
                       <div class="dashboard__marks" aria-hidden="true">
                         <span class="dashboard__main">Main screen view<small>What the room sees</small></span>
                         <span class="dashboard__edit"></span>
@@ -1409,19 +1415,19 @@
           </div>
 
           <!-- Arm panel sandbox, laid out like the KU color sandbox (sandbox.css,
-               sandbox.js; Luna's own parts in luna.css and luna.js): the designs
+               sandbox.js; the console's own parts in console.css and console.js): the designs
                I tested down the left, the console in the middle, and tabs for
                each arm's state, the one-second glance test and my notes. -->
-          <div class="sandbox-wrap sandbox-wrap--luna" id="sandbox">
+          <div class="sandbox-wrap sandbox-wrap--console" id="sandbox">
             <div class="sandbox-wrap__head">
               <p class="sandbox-wrap__tag"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5.5v13l11-6.5z"/></svg>Interactive</p>
               <h4 class="sandbox-wrap__title">Find the arm that needs help</h4>
-              <p class="sandbox-wrap__text">Four arms, four colors, one second. Switch between the designs I tested, from the old number-only panels to the final design, and set each arm’s state. Then take the glance test: the screen shows for one second, and you pick the arm that needs help.</p>
+              <p class="sandbox-wrap__text">Every arm, its own color, one second. Switch between the designs I tested, from the old number-only panels to the final design, and set each arm’s state. Then take the glance test: the screen shows for one second, and you pick the arm that needs help.</p>
             </div>
-            <div class="sandbox-wrap__strip" aria-hidden="true"><i style="--c:#ff6b1a;--i:0"></i><i style="--c:#7cc4f2;--i:1"></i><i style="--c:#2b4c9b;--i:2"></i><i style="--c:#d6329e;--i:3"></i><i style="--c:#2e9e5b;--i:4"></i><i style="--c:#e0a93b;--i:5"></i><i style="--c:#d93a2b;--i:6"></i><i style="--c:#8a8a86;--i:7"></i></div>
+            <div class="sandbox-wrap__strip" aria-hidden="true"><i style="--c:#b9a4ff;--i:0"></i><i style="--c:#e3c48f;--i:1"></i><i style="--c:#1f5f4a;--i:2"></i><i style="--c:#f49ac9;--i:3"></i><i style="--c:#2e9e5b;--i:4"></i><i style="--c:#e0a93b;--i:5"></i><i style="--c:#d93a2b;--i:6"></i><i style="--c:#8a8a86;--i:7"></i></div>
             <section class="sandbox" aria-labelledby="sandbox-h" data-arms>
               <div class="sandbox__bar">
-                <p class="sandbox__crumb">Luna <span aria-hidden="true">/</span> <b id="sandbox-h">Arm panel sandbox</b></p>
+                <p class="sandbox__crumb">Surgical Console <span aria-hidden="true">/</span> <b id="sandbox-h">Arm panel sandbox</b></p>
                 <div class="sandbox__tools">
                   <button type="button" class="sandbox__btn" data-fault><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M16 3h5v5M4 20 21 3M21 16v5h-5M15 15l6 6M4 4l5 5"/></svg>Random fault</button>
                   <button type="button" class="sandbox__btn sandbox__btn--go" data-glance><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7S2 12 2 12z"/><circle cx="12" cy="12" r="3"/></svg>Glance test · 1s</button>
@@ -1443,7 +1449,7 @@
                         <span class="console__flag console__flag--l" data-flag="l"></span>
                         <span class="console__flag console__flag--r" data-flag="r"></span>
                       </div>
-                      <ul class="console__arms"><li class="carm" data-arm="1" style="--arm:#ff6b1a"><b class="carm__name">Arm 1</b><span class="carm__color">Orange</span><span class="carm__state"><i class="carm__dot"></i><em class="carm__word">Running</em></span><i class="carm__lines" aria-hidden="true"></i></li><li class="carm" data-arm="2" style="--arm:#7cc4f2"><b class="carm__name">Arm 2</b><span class="carm__color">Light blue</span><span class="carm__state"><i class="carm__dot"></i><em class="carm__word">Warning</em></span><i class="carm__lines" aria-hidden="true"></i></li><li class="carm" data-arm="3" style="--arm:#2b4c9b"><b class="carm__name">Arm 3</b><span class="carm__color">Dark blue</span><span class="carm__state"><i class="carm__dot"></i><em class="carm__word">Error</em></span><i class="carm__lines" aria-hidden="true"></i></li><li class="carm" data-arm="4" style="--arm:#d6329e"><b class="carm__name">Arm 4</b><span class="carm__color">Magenta</span><span class="carm__state"><i class="carm__dot"></i><em class="carm__word">Inactive</em></span><i class="carm__lines" aria-hidden="true"></i></li></ul>
+                      <ul class="console__arms"><li class="carm" data-arm="1" style="--arm:#b9a4ff"><b class="carm__name">Arm 1</b><span class="carm__state"><i class="carm__dot"></i><em class="carm__word">Running</em></span><i class="carm__lines" aria-hidden="true"></i></li><li class="carm" data-arm="2" style="--arm:#e3c48f"><b class="carm__name">Arm 2</b><span class="carm__state"><i class="carm__dot"></i><em class="carm__word">Warning</em></span><i class="carm__lines" aria-hidden="true"></i></li><li class="carm" data-arm="3" style="--arm:#1f5f4a"><b class="carm__name">Arm 3</b><span class="carm__state"><i class="carm__dot"></i><em class="carm__word">Error</em></span><i class="carm__lines" aria-hidden="true"></i></li><li class="carm" data-arm="4" style="--arm:#f49ac9"><b class="carm__name">Arm 4</b><span class="carm__state"><i class="carm__dot"></i><em class="carm__word">Inactive</em></span><i class="carm__lines" aria-hidden="true"></i></li></ul>
                       <p class="console__list" data-list></p>
                       <div class="console__quiz" data-quiz hidden>
                         <p class="console__ask">Which arm needs help?</p>
@@ -1461,19 +1467,19 @@
                     </div>
                     <div class="sandbox__pane" role="tabpanel" id="lb-pan-0" aria-labelledby="lb-tab-0">
                         <div class="sandbox__row">
-                          <p class="sandbox__label" id="arm-1-l"><span class="arm-swatch" style="--arm:#ff6b1a" aria-hidden="true"></span>Arm 1<span class="play__picked">Orange</span></p>
+                          <p class="sandbox__label" id="arm-1-l"><span class="arm-swatch" style="--arm:#b9a4ff" aria-hidden="true"></span>Arm 1</p>
                           <div class="arm-states" role="radiogroup" aria-labelledby="arm-1-l"><label class="arm-state"><input type="radio" name="arm-1" value="Running" checked><span>Running</span></label><label class="arm-state"><input type="radio" name="arm-1" value="Warning"><span>Warning</span></label><label class="arm-state"><input type="radio" name="arm-1" value="Error"><span>Error</span></label><label class="arm-state"><input type="radio" name="arm-1" value="Inactive"><span>Inactive</span></label></div>
                         </div>
                         <div class="sandbox__row">
-                          <p class="sandbox__label" id="arm-2-l"><span class="arm-swatch" style="--arm:#7cc4f2" aria-hidden="true"></span>Arm 2<span class="play__picked">Light blue</span></p>
+                          <p class="sandbox__label" id="arm-2-l"><span class="arm-swatch" style="--arm:#e3c48f" aria-hidden="true"></span>Arm 2</p>
                           <div class="arm-states" role="radiogroup" aria-labelledby="arm-2-l"><label class="arm-state"><input type="radio" name="arm-2" value="Running"><span>Running</span></label><label class="arm-state"><input type="radio" name="arm-2" value="Warning" checked><span>Warning</span></label><label class="arm-state"><input type="radio" name="arm-2" value="Error"><span>Error</span></label><label class="arm-state"><input type="radio" name="arm-2" value="Inactive"><span>Inactive</span></label></div>
                         </div>
                         <div class="sandbox__row">
-                          <p class="sandbox__label" id="arm-3-l"><span class="arm-swatch" style="--arm:#2b4c9b" aria-hidden="true"></span>Arm 3<span class="play__picked">Dark blue</span></p>
+                          <p class="sandbox__label" id="arm-3-l"><span class="arm-swatch" style="--arm:#1f5f4a" aria-hidden="true"></span>Arm 3</p>
                           <div class="arm-states" role="radiogroup" aria-labelledby="arm-3-l"><label class="arm-state"><input type="radio" name="arm-3" value="Running"><span>Running</span></label><label class="arm-state"><input type="radio" name="arm-3" value="Warning"><span>Warning</span></label><label class="arm-state"><input type="radio" name="arm-3" value="Error" checked><span>Error</span></label><label class="arm-state"><input type="radio" name="arm-3" value="Inactive"><span>Inactive</span></label></div>
                         </div>
                         <div class="sandbox__row">
-                          <p class="sandbox__label" id="arm-4-l"><span class="arm-swatch" style="--arm:#d6329e" aria-hidden="true"></span>Arm 4<span class="play__picked">Magenta</span></p>
+                          <p class="sandbox__label" id="arm-4-l"><span class="arm-swatch" style="--arm:#f49ac9" aria-hidden="true"></span>Arm 4</p>
                           <div class="arm-states" role="radiogroup" aria-labelledby="arm-4-l"><label class="arm-state"><input type="radio" name="arm-4" value="Running"><span>Running</span></label><label class="arm-state"><input type="radio" name="arm-4" value="Warning"><span>Warning</span></label><label class="arm-state"><input type="radio" name="arm-4" value="Error"><span>Error</span></label><label class="arm-state"><input type="radio" name="arm-4" value="Inactive" checked><span>Inactive</span></label></div>
                         </div>
                     </div>
@@ -1506,9 +1512,9 @@
                   <button type="button" role="tab" id="fid-t2" aria-controls="fid-stage" aria-selected="false">Prototype</button>
                 </div>
                 <div class="fidelity__stage" id="fid-stage" role="tabpanel" aria-labelledby="fid-t0" data-level="0">
-                  <img class="fidelity__layer" src="/assets/images/luna-30-127e4df147.svg" alt="Wireframe of the live video editor" width="1600" height="900">
-                  <img class="fidelity__layer fidelity__layer--grey" src="/assets/images/luna-01-7142ae9c81.webp" alt="Greyscale prototype of the live video editor" width="1600" height="900">
-                  <img class="fidelity__layer" src="/assets/images/luna-01-7142ae9c81.webp" alt="Prototype of the live video editor in annotation mode" width="1600" height="900">
+                  <img class="fidelity__layer" src="/assets/images/console-30-127e4df147.svg" alt="Wireframe of the live video editor" width="1600" height="900">
+                  <img class="fidelity__layer fidelity__layer--grey" src="/assets/images/console-01-7142ae9c81.webp" alt="Greyscale prototype of the live video editor" width="1600" height="900">
+                  <img class="fidelity__layer" src="/assets/images/console-01-7142ae9c81.webp" alt="Prototype of the live video editor in annotation mode" width="1600" height="900">
                 </div>
               </div>
               <p class="note-line">I built a prototype in Figma to check annotation mode, tap target size and how views switch.</p>
@@ -1549,7 +1555,7 @@
               <p class="note-line">How the control changed: annotation took 6 versions (pills, switches, toggles). I ended with a mode and a check button to exit.</p>
               <div class="callout">
                 <p class="eyebrow">Usability testing</p>
-                <p>Exploratory and moderated usability testing cut task-completion time by more than 50%, with fewer interaction steps and fewer observed errors.</p>
+                <p>Moderated and unmoderated usability testing, A/B tests and timed sessions, including unmoderated tests with senior software engineers, cut task-completion time by more than 50%, with fewer interaction steps and fewer observed errors.</p>
               </div>
             </div>
           </section>
@@ -1603,7 +1609,7 @@
               <p class="note-line">* From my own review of the prototype.</p>
               <div class="callout">
                 <p class="eyebrow">Outcome</p>
-                <p>The company ended the robotic surgery program.</p>
+                <p>The project ended before launch.</p>
                 <p>My clinical supervisor said the component system and annotation mode could be the basis for future console software.</p>
               </div>
               <h4 class="subhead">What I handed over</h4>
@@ -1647,14 +1653,14 @@
                   </ol>
                   <p class="note-line">To follow privacy and NDA rules, I changed the screens and hid all patient and staff names.</p>
                 </div>
-                <figure class="takeaways__aside"><img src="/assets/images/luna-01-7142ae9c81.webp" alt="The final live video editor in annotation mode" loading="lazy" width="1600" height="900"></figure>
+                <figure class="takeaways__aside"><img src="/assets/images/console-01-7142ae9c81.webp" alt="The final live video editor in annotation mode" loading="lazy" width="1600" height="900"></figure>
               </div>
 
               <nav class="more" aria-label="More case studies">
                 <p class="eyebrow">More case studies</p>
                 <div class="more__grid">
-                  <a class="more__card" data-cursor="View project" href="/work/ku-brand"><img src="/assets/images/luna-31-821cc9624b.webp" alt="" loading="lazy" width="640" height="400"><span class="more__meta"><b>KU Brand</b><span>Branding, UX design and research</span></span></a>
-                  <a class="more__card" data-cursor="View project" href="/work/asians"><img src="/assets/images/luna-32-3022eb5e3b.webp" alt="" loading="lazy" width="640" height="400"><span class="more__meta"><b>Asian’s</b><span>UX research and design</span></span></a>
+                  <a class="more__card" data-cursor="View project" href="/work/ku-brand"><img src="/assets/images/console-31-821cc9624b.webp" alt="" loading="lazy" width="640" height="400"><span class="more__meta"><b>KU Brand</b><span>Branding, UX design and research</span></span></a>
+                  <a class="more__card" data-cursor="View project" href="/work/asians"><img src="/assets/images/console-32-3022eb5e3b.webp" alt="" loading="lazy" width="640" height="400"><span class="more__meta"><b>Asian’s</b><span>UX research and design</span></span></a>
                 </div>
                 <a class="text-link" href="/#work">Back to projects</a>
               </nav>

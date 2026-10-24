@@ -1,4 +1,4 @@
-/* Case-study behaviour shared by Luna, KU Brand and Asian's: the outline
+/* Case-study behaviour shared by Surgical Console, KU Brand and Asian's: the outline
    button and sheet on smaller screens, the step-by-step drawings
    (scrollytelling), principle tooltips, flip cards, the wireframe
    video and opening a tab from a link. */

@@ -1,8 +1,8 @@
 /* ==========================================================================
    Sandbox: a small interactive playground inside a case study, laid out
-   like Storybook. Shared by the KU color sandbox and the Luna arm panel
+   like Storybook. Shared by the KU color sandbox and the Surgical Console arm panel
    sandbox; each page's own pieces (and its colors) live in ku.css and
-   luna.css, and its behaviour in ku.js and luna.js on top of sandbox.js.
+   console.css, and its behaviour in ku.js and console.js on top of sandbox.js.
    ========================================================================== */
 
 /* The sandbox ----------------------------------------------------------------
@@ -340,7 +340,7 @@
    border whose colors turn once as it arrives, a soft wash behind it, an
    "Interactive" tag, its own heading and a strip of colors. Each page sets
    the colors (--sb-ring, --sb-wash, --sb-shadow, --sb-glow): KU uses its
-   brand palette, Luna its arm colors. When it scrolls into view
+   brand palette, Surgical Console its arm colors. When it scrolls into view
    (sandbox.js adds .is-in) it rises into place, the border turns and the
    strip fills in, then the page's demo runs until the visitor touches it.
    Without JS, or with reduced motion, it simply sits there. */
@@ -463,7 +463,7 @@
 /* The sandbox speaks in a technical, terminal-like face (JetBrains Mono),
    so it feels like a tool rather than part of the story. Anything marked
    data-real keeps a plain sans: it stands in for the real product (KU's
-   Brand Center page, Luna's console). The heading gets a prompt and a
+   Brand Center page, the console's console). The heading gets a prompt and a
    blinking cursor (still for reduced motion). */
 .sandbox-wrap {
   --mono: "JetBrains Mono", ui-monospace, "SFMono-Regular", Menlo, Consolas, monospace;

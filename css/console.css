@@ -1,6 +1,6 @@
 /* ==========================================================================
-   Luna case study: components only this page uses
-   The alert colors and arm colors below belong to the Luna console itself,
+   Surgical Console case study: components only this page uses
+   The alert colors and arm colors below belong to the Surgical Console console itself,
    not to the site palette.
    ========================================================================== */
 
@@ -9,10 +9,10 @@
   --sev-warning: #e0a93b;
   --sev-error: #d93a2b;
   --sev-inactive: #8a8a86;
-  --arm-1: #ff6b1a;
-  --arm-2: #7cc4f2;
-  --arm-3: #2b4c9b;
-  --arm-4: #d6329e;
+  --arm-1: #b9a4ff;
+  --arm-2: #e3c48f;
+  --arm-3: #1f5f4a;
+  --arm-4: #f49ac9;
   --console: #282828;
   --console-ink: #fcfcfc;
   --console-text: #b9b9b9;
@@ -124,7 +124,7 @@
    Big, plain cards in a grid (no sideways scrolling), one per project. The
    selected card is filled with the accent colour AND shows a check mark, so
    the choice does not depend on colour alone. The section heading above
-   follows the selected card (luna.js). */
+   follows the selected card (console.js). */
 .project-switch {
   scroll-margin-top: calc(var(--header-h) + var(--header-top) + 16px);
 }
@@ -796,7 +796,7 @@
   --warn-text: #e0a93b;
 }
 
-/* Arm panel sandbox: Luna's own pieces ---------------------------------------
+/* Arm panel sandbox: the console's own pieces ---------------------------------------
    The frame, panel and tabs are in sandbox.css. Here: the arm colors for the
    frame, the console with its four arm panels drawn five ways (data-design:
    before = numbers only, a = warning on the picture, b = arm color as a
@@ -804,14 +804,14 @@
    state controls, the one-second glance
    test and the "across the room" view. The console is always dark, like the
    real one. */
-.sandbox-wrap--luna {
-  --sb-ring: #ff6b1a, #7cc4f2, #2b4c9b, #d6329e, #ff6b1a;
+.sandbox-wrap--console {
+  --sb-ring: #b9a4ff, #e3c48f, #1f5f4a, #f49ac9, #b9a4ff;
   --sb-wash:
     radial-gradient(circle at 0% 0%, rgb(255 107 26 / 0.18), transparent 40%),
     radial-gradient(circle at 100% 0%, rgb(124 196 242 / 0.24), transparent 40%),
     radial-gradient(circle at 100% 100%, rgb(214 50 158 / 0.14), transparent 42%);
   --sb-shadow: rgb(43 76 155 / 0.4);
-  --sb-glow: #7cc4f2;
+  --sb-glow: #e3c48f;
 }
 .sandbox__btn--go {
   border-color: var(--accent);

@@ -1082,3 +1082,10 @@ html {
   padding-left: 1.1em;
   list-style: disc;
 }
+/* The masked-names banner above a case study's title */
+.notice--top {
+  margin-bottom: 24px;
+}
+.notice--top p {
+  margin: 0;
+}

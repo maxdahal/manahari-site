@@ -1448,7 +1448,7 @@ html:has(.recruiter[open]) {
 
 /* 4. Case studies ------------------------------------------------------------
    Each project sits on its own floating wall shelf, on the screen it was
-   made for: Luna on a monitor, KU on a laptop, Asian's on a phone. The
+   made for: Surgical Console on a monitor, KU on a laptop, Asian's on a phone. The
    shelves step down from left to right. Everything is sized in container
    units (cqw) of .shelves, so the whole wall scales with the page and the
    steps stay in proportion. Below 860px the shelves stack.
@@ -1702,7 +1702,7 @@ html:has(.recruiter[open]) {
   border-radius: 6px 6px 0 0;
   background: var(--stand);
 }
-/* The sleeping cat on top of the Luna monitor. It is the monitor's first
+/* The sleeping cat on top of the Surgical Console monitor. It is the monitor's first
    item, at the right, pulled down so its belly rests on the top of the
    screen and its tail hangs over the edge (drawn above the screen). Sized
    to the monitor. Breathing, floating z's, a tail twitch and an ear flick
@@ -1912,7 +1912,7 @@ html:has(.recruiter[open]) {
    a cream mat inside a wooden frame (the shelves' wood, so it follows the
    theme), hanging from a nail on a thin wire. The shelf boards, the device
    stands and the plants on the shelves go; the hanging pothos stays, and
-   the cat sleeps on top of the Luna frame. Pointing at a picture tips it on
+   the cat sleeps on top of the Surgical Console frame. Pointing at a picture tips it on
    its nail. Everything stays in the flex flow: the wire is the device's
    ::before. */
 .shelves--frames {

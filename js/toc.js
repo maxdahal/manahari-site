@@ -48,10 +48,18 @@
   /* Pictures load lazily as the page scrolls past them and push the
      content down, so a jump can stop short of its section: once the
      scroll settles, aim again (instantly) until the heading is in place. */
+  /* a part folded behind its title opens when you jump to it */
+  function openFold(target) {
+    var fold = target && target.querySelector(":scope > details.a-fold");
+    if (fold) fold.open = true;
+  }
+  if (location.hash) openFold(document.getElementById(location.hash.slice(1)));
+
   links.forEach(function (a) {
     a.addEventListener("click", function () {
       var target = document.getElementById(a.getAttribute("href").slice(1));
       if (!target) return;
+      openFold(target);
       var tries = 0;
       function settle() {
         var off = target.getBoundingClientRect().top

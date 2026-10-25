@@ -1626,5 +1626,5 @@
 /* Everything under a green part title sits in a little from it, so the
    titles stand out at the edge; the titles stay where they are. */
 .article .a-part > :not(h3) {
-  margin-inline-start: clamp(16px, 2vw, 28px);
+  margin-inline-start: clamp(24px, 3.2vw, 48px);
 }

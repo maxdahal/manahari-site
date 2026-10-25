@@ -977,3 +977,108 @@
     justify-content: center;
   }
 }
+
+/* Artwork viewer: laid out like the case study picture viewer. The count
+   sits top left and close top right, with previous and next on either side
+   of the artwork (below it on phones). The bar's buttons join the dialog's
+   grid directly. */
+.pv .lightbox {
+  height: 100dvh;
+  padding: clamp(12px, 3vw, 24px);
+  background: #08080a;
+}
+.pv .lightbox[open] {
+  grid-template-columns: auto minmax(0, 1fr) auto;
+  grid-template-rows: auto minmax(0, 1fr);
+  grid-template-areas:
+    "count . close"
+    "prev  img next";
+  gap: 12px clamp(8px, 2vw, 24px);
+  place-items: center;
+}
+.pv .lightbox__bar {
+  display: contents;
+}
+.pv .lightbox img {
+  grid-area: img;
+  width: 100%;
+  height: 100%;
+  min-height: 0;
+  object-fit: contain;
+  border-radius: 0;
+}
+.pv .lightbox__count {
+  grid-area: count;
+  justify-self: start;
+  min-width: 0;
+  font-size: 0.9375rem;
+  font-variant-numeric: tabular-nums;
+  text-align: left;
+}
+.pv .lightbox [data-close] {
+  grid-area: close;
+  justify-self: end;
+}
+.pv .lightbox [data-step="-1"] {
+  grid-area: prev;
+}
+.pv .lightbox [data-step="1"] {
+  grid-area: next;
+}
+.pv .lightbox .icon-button {
+  width: 48px;
+  height: 48px;
+  border: 1px solid rgb(255 255 255 / 0.25);
+  border-radius: 999px;
+  background: rgb(255 255 255 / 0.06);
+  color: #f2f2ee;
+  transition: background-color 0.2s ease, color 0.2s ease, border-color 0.2s ease;
+}
+.pv .lightbox .icon-button svg {
+  width: 22px;
+  height: 22px;
+}
+.pv .lightbox .icon-button:hover {
+  border-color: #d0ff71;
+  background: #d0ff71;
+  color: #0b0b0c;
+}
+.pv .lightbox .icon-button:focus-visible {
+  outline: 3px solid #d0ff71;
+  outline-offset: 3px;
+}
+@media (max-width: 640px) {
+  .pv .lightbox[open] {
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+    grid-template-rows: auto minmax(0, 1fr) auto;
+    grid-template-areas:
+      "count close"
+      "img   img"
+      "prev  next";
+  }
+  .pv .lightbox [data-step="-1"] {
+    justify-self: end;
+  }
+  .pv .lightbox [data-step="1"] {
+    justify-self: start;
+  }
+}
+
+/* A plain top bar instead of the floating pill: full width at the very
+   top, the page colour with a hairline under it, and the content lined up
+   with the page. */
+.pv .pv-nav {
+  top: 0;
+  padding: 0 var(--gx);
+  border-bottom: 1px solid var(--line);
+  background: var(--bg);
+}
+.pv-nav__pill {
+  min-height: 72px;
+  padding: 0;
+  border: 0;
+  border-radius: 0;
+  background: none;
+  backdrop-filter: none;
+  box-shadow: none;
+}

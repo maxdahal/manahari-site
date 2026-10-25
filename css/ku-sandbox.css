@@ -262,3 +262,33 @@
 .play__headline {
   overflow-wrap: anywhere;
 }
+
+/* the sandbox stays dark in both themes, so the brand colors always read
+   against the same ground: it takes the dark theme's tokens for itself */
+.sandbox-wrap--ku {
+  color-scheme: dark;
+  --bg: #0f0f11;
+  --surface: #18181b;
+  --surface-2: #212125;
+  --ink: #e6e6e1;
+  --text: #b5b5b5;
+  --muted: color-mix(in srgb, #b5b5b5 80%, #0f0f11);
+  --line: rgba(230, 230, 225, 0.14);
+  --accent: #d0ff71;
+  --accent-text: #d0ff71;
+  --on-accent: #0b0b0c;
+  --ok: #5dd68a;
+  --warn: #e0a93b;
+  --ok-text: #5dd68a;
+  --warn-text: #e0a93b;
+  background-color: #0f0f11;
+  color: var(--text);
+}
+.sandbox-wrap--ku :is(.sandbox-wrap__title, .sandbox-wrap__text) {
+  color: var(--ink);
+}
+/* the preview's text takes the picked text color, not the page's paragraph
+   color */
+.article .sandbox-wrap--ku .play__preview :is(p, span) {
+  color: inherit;
+}

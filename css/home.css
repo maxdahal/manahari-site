@@ -28,10 +28,6 @@
   color: var(--text);
 }
 
-.muted {
-  color: var(--text);
-}
-
 /* 0. Hello intro ------------------------------------------------------------
    Pure CSS, after Apple's "hello". Timeline:
      0.2s - 2.2s  "hello" writes itself as one continuous line (its stroke is
@@ -118,11 +114,6 @@ html.hello-lock {
    outline goes and the page takes the full width. */
 :root {
   --gap-stage: clamp(72px, 11vh, 120px);
-}
-.cp-outline a:focus-visible {
-  outline: 3px solid var(--ink);
-  outline-offset: 2px;
-  border-radius: 4px;
 }
 
 /* The tip under the pause-motion button: a small dark note with an arrow
@@ -267,95 +258,12 @@ html.hello-lock {
   animation-name: hero-rise, none !important;
 }
 
-.doc {
-  position: relative;
-  z-index: 1;
-  display: grid;
-  grid-template-columns: minmax(180px, 220px) minmax(0, 1fr);
-  column-gap: clamp(32px, 4vw, 64px);
-  padding-inline: max(var(--gx), calc((100% - var(--max)) / 2 + var(--gx)));
-  background: var(--paper) 0 0 / 240px auto, var(--bg);
-}
-.doc-side {
-  grid-column: 1;
-  grid-row: 1;
-  position: sticky;
-  top: var(--bar-h);
-  display: flex;
-  flex-direction: column;
-  /* the outline at the top; Resume and LinkedIn centred in the space under it */
-  height: calc(100vh - var(--bar-h));
-  padding-block: 20px 28px;
-  overflow-y: auto;
-  scrollbar-width: none;
-}
-/* in the open space under the outline (auto margins above and below centre
-   them there), set apart by a hairline: the resume and LinkedIn,
-   each with its icon, in the outline's quiet grey. They use the outline's
-   own gap, padding and left edge, so all the items share one even rhythm */
-.doc-side__foot {
-  display: flex;
-  flex-direction: column;
-  gap: 2px;
-  margin: 18px 0 auto 14px;
-  padding-top: 14px;
-  border-top: 1px solid var(--line);
-}
-.side-link {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  padding: 3px 8px 3px 11px;
-  border-left: 3px solid transparent;
-  font-size: 0.875rem;
-  color: var(--outline-dim);
-  text-decoration: none;
-  transition: color 0.2s ease;
-}
-.side-link {
-  font-size: 0.875rem;
-  line-height: 1.35;
-}
-.side-link svg {
-  flex: none;
-  width: 15px;
-  height: 15px;
-  margin-right: 3px;
-  opacity: 0.75;
-}
-.side-link:is(:hover, :focus-visible) svg {
-  opacity: 1;
-}
-.side-link:hover {
-  color: var(--ink);
-}
-.side-link:focus-visible {
-  outline: 3px solid var(--ink);
-  outline-offset: 2px;
-  border-radius: 4px;
-}
 /* For recruiters: a quiet outlined button under the outline, set apart from
    the page links, that opens a short summary in a dialog */
 /* the note and the button, a small block under the outline. Kept quiet
    (the outline's dim grey, no border) so the outline stays the focal
    point; it turns dark when pointed at or focused */
-.recruiter-cta {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  gap: 4px;
-  max-width: 200px;
-  margin: auto 0 0 14px; /* with the links below, centred in the space under the outline */
-}
-.recruiter-cta__note {
-  margin: 0;
-  padding-left: 14px;
-  font-family: "Kalam", var(--body-font);
-  font-size: 0.875rem;
-  line-height: 1.3;
-  color: var(--outline-dim);
-  rotate: -1.5deg;
-}
+
 .recruiter-button {
   display: inline-flex;
   align-items: center;
@@ -377,13 +285,7 @@ html.hello-lock {
   height: 15px;
   opacity: 0.75;
 }
-.recruiter-cta:hover .recruiter-cta__note,
-.recruiter-button:is(:hover, :focus-visible) {
-  color: var(--ink);
-}
-.recruiter-button:is(:hover, :focus-visible) svg {
-  opacity: 1;
-}
+
 .recruiter-button:focus-visible {
   outline: 3px solid var(--ink);
   outline-offset: 2px;
@@ -391,9 +293,7 @@ html.hello-lock {
 /* An entrance, once, after the intro: the note rises in, then the button nudges with its outline briefly in the accent and
    settles back to grey. Skipped for reduced motion and when motion is
    paused. --cta-wait is when it starts (later while the "hello" plays). */
-.recruiter-cta {
-  --cta-wait: 4s;
-}
+
 .no-hello .recruiter-cta {
   --cta-wait: 1.2s;
 }
@@ -432,19 +332,7 @@ html.hello-lock {
 }
 /* larger screens: the button under the outline is a pill again, with the
    faint hairline border; the border darkens on hover */
-@media (min-width: 1101px) {
-  .recruiter-cta .recruiter-button {
-    min-height: 36px;
-    margin-top: 4px;
-    padding: 0 14px;
-    border: 1px solid var(--line);
-    border-radius: 999px;
-    transition: color 0.2s ease, border-color 0.2s ease;
-  }
-  .recruiter-cta .recruiter-button:is(:hover, :focus-visible) {
-    border-color: var(--ink);
-  }
-}
+
 .recruiter-button--menu {
   margin: 0 0 8px;
   padding-left: 0;
@@ -782,81 +670,13 @@ html:has(.recruiter[open]) {
     animation: none;
   }
 }
-.doc-main {
-  grid-column: 2;
-  grid-row: 1;
-  min-width: 0;
-}
+
 /* the sections' own side margins come from the document now */
-.doc-main .container {
-  max-width: none;
-  padding-inline: 0;
-}
+
 .sections {
   overflow-x: clip;
 }
 
-.cp-outline {
-  margin-top: clamp(40px, 10vh, 120px);
-}
-.cp-outline > ol {
-  padding-left: 14px;
-}
-.cp-outline ol {
-  display: flex;
-  flex-direction: column;
-  gap: 2px;
-}
-.cp-outline ol ol {
-  margin: 2px 0 6px 12px;
-}
-.cp-outline a {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  padding: 3px 8px 3px 11px;
-  border-radius: 0 6px 6px 0;
-  /* the wash and the bar that mark the section you are reading, as on the
-     case study pages; the bar is the link's left border, so nothing is
-     positioned */
-  border-left: 3px solid transparent;
-  background: linear-gradient(90deg in oklch,
-      color-mix(in oklch, var(--accent) 20%, transparent),
-      color-mix(in oklch, var(--accent) 8%, transparent) 55%,
-      transparent)
-    no-repeat 0 0 / 0% 100%;
-  font-size: 0.875rem;
-  line-height: 1.35;
-  color: var(--muted);
-  text-decoration: none;
-  transition: color 0.2s ease, background-size 0.4s ease, border-color 0.3s ease;
-}
-.cp-outline ol ol a {
-  font-size: 0.8125rem;
-}
-/* each part of the page is numbered, small, the same numbers its stage
-   header carries; screen readers skip the number */
-.cp-outline > ol {
-  counter-reset: part;
-}
-.cp-outline > ol > li {
-  counter-increment: part;
-}
-.cp-outline > ol > li > a::before {
-  content: counter(part) "." / "";
-  min-width: 1.4em;
-  margin-right: -2px;
-  font-size: 0.8125rem;
-  font-weight: 600;
-  font-variant-numeric: tabular-nums;
-  opacity: 0.7;
-}
-.cp-outline ol ol {
-  margin-left: calc(12px + 1.4em);
-}
-.cp-outline a:hover {
-  color: var(--ink);
-}
 /* the section you are reading: the bar, the wash, orange and bold; the
    others fade back to just above the 4.5:1 contrast text needs */
 .cp-outline a:not([aria-current]) {
@@ -870,11 +690,6 @@ html:has(.recruiter[open]) {
   background-size: 100% 100%;
   color: var(--accent-text);
   font-weight: 600;
-}
-@media (prefers-reduced-motion: reduce) {
-  .cp-outline a {
-    transition: none;
-  }
 }
 
 /* every section after the hero opens like a case study stage */
@@ -936,18 +751,6 @@ html:has(.recruiter[open]) {
   font-size: clamp(1.75rem, 1.4rem + 1.1vw, 2.375rem);
   line-height: 1.05;
   letter-spacing: -0.005em;
-}
-
-@media (max-width: 1100px) {
-  .doc {
-    grid-template-columns: minmax(0, 1fr);
-  }
-  .doc-side {
-    display: none;
-  }
-  .doc-main {
-    grid-column: 1;
-  }
 }
 
 /* 2. Hero -------------------------------------------------------------------- */
@@ -1321,130 +1124,21 @@ html:has(.recruiter[open]) {
   }
 }
 
-.hero__bar {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  justify-content: space-between;
-  gap: 12px 24px;
-  padding-bottom: 28px;
-  color: var(--text);
-  opacity: calc(1 - var(--hero, 0) * 5);
-}
-.hero__bar p:first-child {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  color: var(--ink);
-}
 /* Tagline: "I design and code." with a little personality. "design" is
    handwritten (Kalam) and tilted;
    "code" is monospaced with a blinking text cursor after it. */
-.tagline__hand {
-  display: inline-block;
-  margin-inline: 0.1em;
-  font-family: "Kalam", var(--body-font);
-  font-size: 1.4em;
-  line-height: 1;
-  color: var(--ink);
-  rotate: -4deg;
-}
-.tagline__code {
-  margin-inline: 0.15em 0;
-  padding: 0.05em 0.35em;
-  border-radius: 6px;
-  background: color-mix(in srgb, var(--ink) 8%, transparent);
-  font-family: ui-monospace, "SFMono-Regular", Menlo, Consolas, monospace;
-  font-size: 0.95em;
-}
-.tagline__caret {
-  display: inline-block;
-  width: 0.55em;
-  height: 1.05em;
-  margin-left: 0.15em;
-  vertical-align: -0.15em;
-  background: var(--ink);
-  animation: caret-blink 1.1s steps(1) infinite;
-}
+
 @keyframes caret-blink {
   50% {
     opacity: 0;
   }
 }
-@media (prefers-reduced-motion: reduce) {
-  .tagline__caret {
-    animation: none;
-  }
-}
-.hero__links {
-  display: flex;
-  gap: 24px;
-}
-.hero__links a {
-  color: var(--text);
-  text-decoration: none;
-}
-.hero__links a:hover {
-  color: var(--ink);
-}
 
-/* 3. About me ---------------------------------------------------------------- */
-.intro {
-  padding-bottom: clamp(32px, 6vh, 64px);
-}
-.intro__inner {
-  display: flex;
-  flex-direction: column;
-}
 /* Same language as Case studies: a huge title (here on the left, mirroring
    Case studies on the right) on the same 12-column grid, with the statement
    set large beside it. */
-.intro__top {
-  display: grid;
-  grid-template-columns: repeat(12, minmax(0, 1fr));
-  column-gap: 24px;
-  row-gap: 32px;
-  align-items: end;
-}
-.statement {
-  grid-column: 6 / -1;
-  grid-row: 1;
-  align-self: start;
-  max-width: 26ch;
-  font-family: var(--heading-font);
-  font-size: var(--fs-statement);
-  font-weight: 600;
-  line-height: 1.2;
-  letter-spacing: -0.02em;
-  color: var(--ink);
-}
-@media (max-width: 860px) {
-  .statement {
-    grid-column: 1 / -1;
-  }
-}
-.fill-word {
-  background: linear-gradient(90deg, var(--ink) var(--f, 0%), color-mix(in srgb, var(--ink) 26%, transparent) var(--f, 0%));
-  -webkit-background-clip: text;
-  background-clip: text;
-  color: transparent;
-}
 
 /* the ID badge (styles in site.css) hangs under the About me title */
-.intro .badge {
-  grid-column: 1 / span 4;
-  grid-row: 1;
-  justify-self: center;
-  align-self: start;
-  margin-top: -16px;
-}
-@media (max-width: 860px) {
-  .intro .badge {
-    grid-column: 1 / -1;
-    grid-row: auto;
-    margin-top: 16px;
-  }
-}
 
 /* 4. Case studies ------------------------------------------------------------
    Each project sits on its own floating wall shelf, on the screen it was
@@ -1907,121 +1601,11 @@ html:has(.recruiter[open]) {
   padding: 20px 0.8cqw 0;
 }
 
-/* Wall frames: the same three projects, hung on the wall as framed
-   pictures instead of standing on shelves as devices. Each screen sits on
-   a cream mat inside a wooden frame (the shelves' wood, so it follows the
-   theme), hanging from a nail on a thin wire. The shelf boards, the device
-   stands and the plants on the shelves go; the hanging pothos stays, and
-   the cat sleeps on top of the Surgical Console frame. Pointing at a picture tips it on
-   its nail. Everything stays in the flex flow: the wire is the device's
-   ::before. */
-.shelves--frames {
-  --frame-wood: linear-gradient(135deg, var(--wood-top), var(--wood) 45%, var(--wood-edge));
-  --mat: #f4f1ea;
-}
-.shelves--frames :is(.shelf__board, .device__neck, .device__foot, .device__base, .device__dots, .plant--snake, .plant--succulent) {
-  display: none;
-}
-.shelves--frames .shelf__stage {
-  justify-content: center;
-}
-.shelves--frames .device {
-  transform-origin: 50% 0;
-  transition: rotate 0.5s cubic-bezier(0.3, 1.6, 0.5, 1);
-}
-.shelves--frames .shelf__card:is(:hover, :focus-visible) .device {
-  translate: none;
-  rotate: -1.5deg;
-}
-/* the nail and the wire, drawn above the frame */
-.shelves--frames .device::before {
-  content: "";
-  order: -2;
-  width: 56%;
-  height: max(26px, 4cqw);
-  background:
-    radial-gradient(circle at 50% 3px, var(--ink) 0 2.5px, transparent 3px),
-    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 30' preserveAspectRatio='none'%3E%3Cpath d='M0 30 L50 3 L100 30' fill='none' stroke='%23857a6a' stroke-width='1.2' vector-effect='non-scaling-stroke'/%3E%3C/svg%3E")
-      no-repeat center / 100% 100%;
-}
-/* the Asian's picture is the phone element itself, so its wire hangs from
-   the column above it instead of inside the frame */
-.shelves--frames .shelf__stage {
-  flex-direction: column;
-  align-items: center;
-}
-.shelves--frames .shelf--asians .device::before {
-  content: none;
-}
-.shelves--frames .shelf--asians .shelf__stage::before {
-  content: "";
-  width: 44%;
-  height: max(26px, 4cqw);
-  background:
-    radial-gradient(circle at 50% 3px, var(--ink) 0 2.5px, transparent 3px),
-    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 30' preserveAspectRatio='none'%3E%3Cpath d='M0 30 L50 3 L100 30' fill='none' stroke='%23857a6a' stroke-width='1.2' vector-effect='non-scaling-stroke'/%3E%3C/svg%3E")
-      no-repeat center / 100% 100%;
-}
-.shelves--frames .cat {
-  order: -1;
-  /* lifted by its own height, so it rests on the frame with the wire behind */
-  margin-top: -11.4%;
-}
-.shelves--frames :is(.device__screen, .device__lid, .device--phone) {
-  width: 100%;
-  padding: max(8px, 1.3cqw);
-  border: 0;
-  border-radius: 3px;
-  background: var(--frame-wood);
-  box-shadow:
-    inset 0 0 0 1px rgb(0 0 0 / 0.18),
-    inset 0 2px 0 rgb(255 255 255 / 0.18),
-    0 18px 28px -14px rgb(0 0 0 / 0.45);
-}
-.shelves--frames .device img {
-  padding: max(8px, 1.5cqw);
-  border-radius: 0;
-  background: var(--mat);
-  box-shadow: inset 0 1px 3px rgb(0 0 0 / 0.25);
-  object-fit: contain;
-}
-.shelves--frames .device--laptop {
-  width: 86%;
-}
-.shelves--frames .device--phone {
-  width: 66%;
-}
 /* the name sits a little below the frame */
-.shelves--frames .shelf__info {
-  padding-top: 24px;
-}
-@media (prefers-reduced-motion: reduce) {
-  .shelves--frames .device {
-    transition: none;
-  }
-}
+
 /* the name with an arrow that slides on hover, then two tags */
 /* under each name: the problem in one line, then role and methods */
-.shelf__problem {
-  color: var(--ink);
-  line-height: 1.45;
-}
-.shelf__meta {
-  display: flex;
-  flex-direction: column;
-  gap: 4px;
-  font-size: 0.875rem;
-  line-height: 1.45;
-  color: var(--text);
-}
-.shelf__meta b {
-  margin-right: 6px;
-  font-size: 0.75rem;
-  font-weight: 600;
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
-  color: var(--ink);
-}
+
 .shelf__name {
   display: inline-flex;
   align-items: center;
@@ -2037,29 +1621,9 @@ html:has(.recruiter[open]) {
 .shelf__card:focus-visible .shelf__name svg {
   translate: 4px 0;
 }
-.shelf__tags {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 6px;
-}
-/* topic tags in neutral grey, so the orange stays for things you act on */
-.shelf__tags i {
-  padding: 3px 10px;
-  border: 1px solid var(--line);
-  border-radius: 999px;
-  background: color-mix(in srgb, var(--ink) 5%, transparent);
-  font-size: 0.8125rem;
-  font-style: normal;
-  font-weight: 500;
-  color: var(--text);
-  transition: background-color 0.2s ease, border-color 0.2s ease, color 0.2s ease;
-}
+
 /* pointing at a project lights its tags up in the accent */
-.shelf__card:is(:hover, :focus-visible) .shelf__tags i {
-  border-color: color-mix(in srgb, var(--accent) 40%, transparent);
-  background: color-mix(in srgb, var(--accent) 12%, transparent);
-  color: var(--accent-text);
-}
+
 .shelf__name {
   font-family: var(--heading-font);
   font-size: clamp(1.6rem, 1.1rem + 1.4vw, 2.5rem);
@@ -2606,12 +2170,7 @@ html:has(.recruiter[open]) {
       animation-timeline: scroll(root);
       animation-range: 5vh 20vh;
     }
-    .hero__bar {
-      opacity: 1;
-      animation: hero-bar-out 1ms linear both;
-      animation-timeline: scroll(root);
-      animation-range: 2vh 7vh;
-    }
+    
   }
 }
 @keyframes hero-reel {

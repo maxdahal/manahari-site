@@ -5,34 +5,38 @@ Plain HTML, CSS and JavaScript, with no framework, library or build step. Open a
 ## What's in the folder
 
 ```
-index.html        Home: intro, About me, case studies on shelves, artwork, contact
-about.html        The full About page (reached from "More about me" on the ID badge)
-work/surgical-console.html   Case study: Surgical Console (with the arm panel sandbox)
-work/ku-brand.html   Case study: KU Brand (with the color sandbox and wireframe video)
+index.html        Home: hero, case studies on shelves, About me, artwork, contact
+about.html        The full About page (from "More about me")
+work/surgical-console.html   Case study: Surgical Console (arm panel sandbox)
+work/ku-brand.html   Case study: KU Brand (color sandbox, wireframe video)
 work/asians.html     Case study: Asian's
 css/
-  site.css        Every page: tokens, paper grain, top bar, menu, buttons, tabs,
-                  section band, cards, figures, footer, motion, scroll text
-  compact.css     The case-study layout: outline column, sections, type scale,
-                  and the stage button and sheet on smaller screens
-  case-study.css  Components shared by the three case studies
-  sandbox.css     The Storybook-style sandbox frame (Surgical Console and KU Brand)
-  home.css, about.css, console.css, ku.css, asians.css   Page-only styles
+  site.css        Every page: tokens, paper grain, top bar, menu, buttons,
+                  motion button, cursor, scroll text
+  portavia.css    The top bar, Home and About layouts, and the case-study bar
+  home.css        Home only: hero, shelves, seasons, artwork, recruiter summary
+  article.css     The case studies: outline, sections, cards, figures,
+                  picture viewer, moving heroes, role buttons
+  sandbox.css     The sandbox frame both case-study sandboxes share
+  arm-sandbox.css, ku-sandbox.css   Each sandbox's own pieces
 js/
-  site.js         Every page: theme, menu, tabs, section bands, ID badge,
-                  reveals, counters, cursor ring
-  case-study.js   The three case studies: stage button and sheet,
-                  scrollytelling steps, principle tooltips, flip cards,
-                  wireframe video, links into tabs
-  sandbox.js      Shared sandbox behaviour: tabs, entrance demo, outline pulse
-  home.js, about.js, console.js, ku.js, asians.js   Page-only behaviour
+  site.js         Every page: motion button, hero videos, theme, menu,
+                  ID badge, cursor ring
+  home.js         Home: hero, skill rings, recruiter summary, nav, seasons,
+                  artwork lightbox
+  toc.js          Case studies: marks the current section in the outline
+                  and the phone tab strip; Show all
+  viewer.js       Case studies: pictures open full screen with previous/next
+  roles.js        Surgical Console: the role buttons over the room diagram
+  sandbox.js      Shared sandbox behaviour: tabs, entrance demo, Try it pulse
+  arm-sandbox.js, ku.js   Each sandbox's own behaviour
 assets/
   images/         Images the pages use
   video/          The KU wireframe video (mp4 and webm)
   icons/          Favicon (svg, 32px png) and the Apple touch icon
 ```
 
-Each page loads `site.css`, then its layout and page files. A rule in a page file only affects that page.
+The case-study pages are generated: each picture carries its width and height, so the page never shifts while pictures load.
 
 ## Colors and type
 
@@ -44,19 +48,19 @@ Every interface color is a token at the top of `css/site.css`, light values firs
 | `--surface` | #F1F1EC | #18181B |
 | `--ink` | #1A1A1E | #E6E6E1 |
 | `--text` | #4A4A4A | #B5B5B5 |
-| `--accent` | #E65F2E | #FF7A45 |
-| `--accent-text` | #B0441C | #FF9D73 |
+| `--accent` | #6C4EE6 | #D0FF71 |
+| `--accent-text` | #5B3FD1 | #D0FF71 |
 
-`--paper` holds the paper grain (dark specks in light mode, light specks in dark mode); it is baked into the page, section and footer backgrounds. Colors that belong to the work shown, not the site, are tokens in that page's CSS: the console's arm and status colors, KU's brand colors, the Asian's app palette.
+`--paper` holds the paper grain (dark specks in light mode, light specks in dark mode); it is baked into the page, section and footer backgrounds. Colors that belong to the work shown, not the site, are tokens in that page's CSS: the console's arm and status colors, and KU's brand colors.
 
-Headings use Antonio; everything else uses Inter. The sandboxes use JetBrains Mono. Body text is 18px (16px on small screens).
+Headings use Antonio; everything else uses Inter. The sandboxes use JetBrains Mono, and the handwritten notes Kalam. Body text is 18px (16px on small screens).
 
 ## Behaviour
 
-- **Navigation**: from 1101px wide, the outline on the left of Home and the case studies does the navigating. Below that, the top bar has a hamburger that opens a full-height menu, and case studies get a stage button at the bottom that opens the outline in a sheet.
-- **Tabs**: any `[role="tablist"]` with `[role="tab"]` buttons pointing at panels with `aria-controls` works on its own, with arrow keys, Home and End.
-- **Scroll text**: headings, labels, paragraphs and list items ease in as they scroll into view (pure CSS scroll-driven animations; text simply shows in browsers without them).
+- **Navigation**: a full-width top bar on Home and About (a menu below 860px). Case studies have a breadcrumb bar; from 1101px an outline on the left lists every section, showing only the current section's parts (Show all opens the rest); below that, a tab strip under the breadcrumb.
+- **Scroll text**: headings, labels, paragraphs and list items ease in as they arrive and out under the top bar (pure CSS scroll-driven animations; text simply shows in browsers without them).
+- **Pictures**: on the case studies every picture opens full screen, with previous and next, arrow keys and swipe.
 - **Page changes** cross-fade (cross-document view transitions) where the browser supports it.
 - **Intro**: the "hello" plays once per visit (session storage).
 - **Theme**: follows the device until someone uses the toggle; the choice is kept in `localStorage` under `mt-theme`.
-- **Motion**: everything respects `prefers-reduced-motion`, and Home has a pause button for anything that moves on its own.
+- **Motion**: everything respects `prefers-reduced-motion`, and every page has a pause button for anything that moves on its own.

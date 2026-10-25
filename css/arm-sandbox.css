@@ -18,7 +18,6 @@
   --console-text: #b9b9b9;
 }
 
-
 /* Arm panel sandbox: the console's own pieces ---------------------------------------
    The frame, panel and tabs are in sandbox.css. Here: the arm colors for the
    frame, the console with its four arm panels drawn five ways (data-design:
@@ -176,9 +175,7 @@
 .carm__name {
   font-size: 0.875rem;
 }
-.carm__color {
-  color: var(--console-text);
-}
+
 .carm__state {
   display: flex;
   align-items: center;
@@ -328,9 +325,7 @@
   column-gap: 6px;
   align-items: center;
 }
-[data-arms] .sandbox__label .play__picked {
-  grid-column: 1 / -1;
-}
+
 .arm-swatch {
   display: inline-block;
   width: 12px;
@@ -421,7 +416,6 @@
     transition: none;
   }
 }
-
 
 /* ---- no absolute positioning: the same overlays, stacked with grid ------ */
 .arm-chip--bar {

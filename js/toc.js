@@ -10,6 +10,15 @@
     var id = a.getAttribute("href").slice(1);
     if (ids.indexOf(id) < 0) ids.push(id);
   });
+  /* in page order: the tab strip (acts only) comes before the outline in
+     the markup, so list order alone would put every act ahead of its parts */
+  ids = ids.filter(function (id) {
+    return document.getElementById(id);
+  });
+  ids.sort(function (a, b) {
+    var pos = document.getElementById(a).compareDocumentPosition(document.getElementById(b));
+    return pos & Node.DOCUMENT_POSITION_FOLLOWING ? -1 : 1;
+  });
   var targets = ids.map(function (id) {
     return document.getElementById(id);
   });
@@ -45,9 +54,6 @@
   window.addEventListener("resize", mark);
   mark();
 
-  /* Pictures load lazily as the page scrolls past them and push the
-     content down, so a jump can stop short of its section: once the
-     scroll settles, aim again (instantly) until the heading is in place. */
   /* the outline shows only the current section's parts; "Show all" opens
      every section, and "Show less" folds them back */
   var outline = document.querySelector(".a-outline");
@@ -59,32 +65,4 @@
       all.textContent = open ? "Show less" : "Show all";
     });
   }
-
-  /* a part folded behind its title opens when you jump to it */
-  function openFold(target) {
-    var fold = target && target.querySelector(":scope > details.a-fold");
-    if (fold) fold.open = true;
-  }
-  if (location.hash) openFold(document.getElementById(location.hash.slice(1)));
-
-  links.forEach(function (a) {
-    a.addEventListener("click", function () {
-      var target = document.getElementById(a.getAttribute("href").slice(1));
-      if (!target) return;
-      openFold(target);
-      var tries = 0;
-      function settle() {
-        var off = target.getBoundingClientRect().top
-          - parseFloat(getComputedStyle(target).scrollMarginTop || 0)
-          - parseFloat(getComputedStyle(document.documentElement).scrollPaddingTop || 0);
-        if (Math.abs(off) > 4 && tries++ < 4) {
-          target.scrollIntoView({ behavior: "instant", block: "start" });
-          setTimeout(settle, 250);
-        } else {
-          mark();
-        }
-      }
-      setTimeout(settle, 900);
-    });
-  });
 })();

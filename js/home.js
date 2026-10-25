@@ -1,5 +1,6 @@
-/* Home page behaviour: stacked sections, hero swap, statement fill, the ID
-   badge, the case-study seasons and the artwork lightbox. */
+/* Home page behaviour: the hero name and skill rings, the recruiter
+   summary, the motion tip, nav jumps and highlight, the hero swap, the
+   case-study seasons, the artwork spotlight and lightbox. */
 (function () {
   "use strict";
 
@@ -7,13 +8,6 @@
   var clamp = function (v) {
     return Math.max(0, Math.min(1, v));
   };
-
-  /* Progress of an element through the viewport, 0 to 1, between two lines */
-  function progress(el, startLine, endLine) {
-    var r = el.getBoundingClientRect();
-    var vh = window.innerHeight;
-    return clamp((vh * startLine - r.top) / (vh * startLine - vh * endLine));
-  }
 
   /* Hero name: one span per letter, numbered for the CSS stagger. The h1
      keeps its words as its accessible name so it is not read letter by letter. */
@@ -214,13 +208,10 @@
       if (document.readyState === "complete") setTimeout(arrive, 100);
       else window.addEventListener("load", arrive);
     }
-    /* other scripts (and the board links) use the same jump */
-    if (window.Site) window.Site.goTo = goTo;
-
     /* Nav: marks the section you are reading, the last one whose top has
        passed the middle of the screen (each section is a screen tall, with
        room above its content, so the middle matches what you see) */
-    var outlineLinks = [].slice.call(document.querySelectorAll('.pv-nav__links a[href^="#"], .cp-outline a[href^="#"]'));
+    var outlineLinks = [].slice.call(document.querySelectorAll('.pv-nav__links a[href^="#"]'));
     var outlineTargets = outlineLinks.map(function (link) {
       return document.getElementById(link.getAttribute("href").slice(1));
     });
@@ -254,22 +245,6 @@
       );
       window.addEventListener("resize", markOutline);
       markOutline();
-    }
-
-    /* Statement: split into words that fill with color as you scroll */
-    var statement = document.querySelector("[data-fill]");
-    var words = [];
-    if (statement && !reduceMotion) {
-      var text = statement.textContent.trim();
-      statement.textContent = "";
-      text.split(/\s+/).forEach(function (word, i, all) {
-        var span = document.createElement("span");
-        span.className = "fill-word";
-        span.textContent = word;
-        statement.appendChild(span);
-        if (i < all.length - 1) statement.appendChild(document.createTextNode(" "));
-        words.push(span);
-      });
     }
 
     /* Case studies: the season switch and what falls on the shelves */
@@ -316,15 +291,6 @@
         var h = clamp((-hero.getBoundingClientRect().top / (hero.offsetHeight - vh) - 0.04) / 0.5);
         hero.style.setProperty("--hero", h.toFixed(3));
       }
-
-      if (words.length && statement) {
-        var p = progress(statement, 0.92, 0.4);
-        words.forEach(function (word, i) {
-          var f = clamp((p - 0.04 - i * (0.6 / Math.max(1, words.length - 1))) / 0.22);
-          word.style.setProperty("--f", (f * 100).toFixed(1) + "%");
-        });
-      }
-
 
     }
     window.addEventListener(

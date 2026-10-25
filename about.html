@@ -10,12 +10,10 @@
   <meta name="description" content="About Manahari Dahal, a UX engineer in the US. Available for UX design and UX engineering roles.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&amp;family=Antonio:wght@400;500;600;700&amp;display=swap">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&amp;family=Antonio:wght@400;500;600;700&amp;family=Kalam:wght@400&amp;display=swap">
   <link rel="stylesheet" href="css/site.css">
   <link rel="stylesheet" href="css/portavia.css">
-  <link rel="stylesheet" href="css/about.css">
   <script src="js/site.js"></script>
-  <script src="js/about.js" defer></script>
 </head>
 <body class="pv">
   <a class="skip-link" href="#main">Skip to content</a>
@@ -122,20 +120,23 @@
         </div>
       </section>
 
-      <section class="pv-block" id="research" aria-labelledby="research-h">
+      <section class="pv-block pv-recog" id="research" aria-labelledby="research-h">
         <h2 class="pv-h2" id="research-h">Research &amp; recognition</h2>
-        <div class="pv-two">
-          <div><h3 class="pv-h3">Research</h3><ol class="pv-jobs">
-            <li class="pv-job"><div class="pv-job__top"><h4 class="pv-job__role">Master’s paper</h4><span class="pv-job__when">In progress</span></div></li>
-            <li class="pv-job"><div class="pv-job__top"><h4 class="pv-job__role">ASIS&amp;T</h4><span class="pv-job__when">Accepted</span></div><p class="pv-job__org">Poster · 2 pages</p></li>
-            <li class="pv-job"><div class="pv-job__top"><h4 class="pv-job__role">School symposiums</h4><span class="pv-job__when">Once</span></div><p class="pv-job__org">Presented</p></li>
-          </ol></div>
-          <div><h3 class="pv-h3">Awards &amp; honors</h3><ol class="pv-jobs">
-            <li class="pv-job"><div class="pv-job__top"><h4 class="pv-job__role">Michael Hooker Fellow</h4><span class="pv-job__when">2026</span></div></li>
-            <li class="pv-job"><div class="pv-job__top"><h4 class="pv-job__role">Emerging Scholar Award</h4><span class="pv-job__when">Fall 2017, Spring 2018</span></div><p class="pv-job__org">Received twice</p></li>
-            <li class="pv-job"><div class="pv-job__top"><h4 class="pv-job__role">Academic Recognition Award</h4><span class="pv-job__when">2016 to 2018</span></div></li>
-            <li class="pv-job"><div class="pv-job__top"><h4 class="pv-job__role">BYU–Idaho Scholarship</h4><span class="pv-job__when">2019 to 2022</span></div></li>
-          </ol></div>
+
+        <h3 class="pv-h3">Research</h3>
+        <ul class="pv-papers">
+          <li class="pv-paper"><p class="pv-paper__title">Master’s paper</p><p class="pv-paper__stamp">In progress</p></li>
+          <li class="pv-paper"><p class="pv-paper__title">ASIS&amp;T</p><p class="pv-paper__note">Poster · 2 pages</p><p class="pv-paper__stamp">Accepted</p></li>
+          <li class="pv-paper"><p class="pv-paper__title">School symposiums</p><p class="pv-paper__note">Once</p><p class="pv-paper__stamp">Presented</p></li>
+        </ul>
+
+        <h3 class="pv-h3">Awards &amp; honors</h3>
+        <div class="pv-awards" role="list">
+          <div class="pv-awards__axis" aria-hidden="true"><span>2016</span><span>2017</span><span>2018</span><span>2019</span><span>2020</span><span>2021</span><span>2022</span><span>2023</span><span>2024</span><span>2025</span><span>2026</span></div>
+          <div class="pv-award" role="listitem"><div class="pv-award__name"><p class="pv-award__title">Michael Hooker Fellow</p><p class="pv-award__when">2026</p></div><div class="pv-award__track" aria-hidden="true"><i class="pv-award__medal" style="grid-column: 11 / 12; --s: 1"></i></div></div>
+          <div class="pv-award" role="listitem"><div class="pv-award__name"><p class="pv-award__title">Emerging Scholar Award</p><p class="pv-award__when">Fall 2017, Spring 2018 · Received twice</p></div><div class="pv-award__track" aria-hidden="true"><i class="pv-award__medal" style="grid-column: 2 / 3; --s: 1"></i><i class="pv-award__medal" style="grid-column: 3 / 4; --s: 1"></i></div></div>
+          <div class="pv-award" role="listitem"><div class="pv-award__name"><p class="pv-award__title">Academic Recognition Award</p><p class="pv-award__when">2016 to 2018</p></div><div class="pv-award__track" aria-hidden="true"><i class="pv-award__bar" style="grid-column: 1 / 4; --s: 3"></i></div></div>
+          <div class="pv-award" role="listitem"><div class="pv-award__name"><p class="pv-award__title">BYU–Idaho Scholarship</p><p class="pv-award__when">2019 to 2022</p></div><div class="pv-award__track" aria-hidden="true"><i class="pv-award__bar" style="grid-column: 4 / 8; --s: 4"></i></div></div>
         </div>
       </section>
 

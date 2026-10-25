@@ -209,13 +209,13 @@
     document.body.appendChild(chip);
     var name = chip.querySelector(".outline-chip__name");
     var num = chip.querySelector(".outline-chip__num");
-    /* the same numbers as the outline: the opening stage and the things to
-       try have none (a dot and a play mark instead) */
+    /* the same numbers as the outline: the things to try have none (a play
+       mark instead), and before the first act there is a dot */
     function label(stage) {
       var i = stages.indexOf(stage);
-      if (i <= 0) return "\u2022";
+      if (i < 0) return "\u2022";
       if (stage.classList.contains("cp-outline__play")) return "\u25B8";
-      var n = stages.slice(1, i + 1).filter(function (s) {
+      var n = stages.slice(0, i + 1).filter(function (s) {
         return !s.classList.contains("cp-outline__play");
       }).length;
       return String(n).padStart(2, "0");
@@ -255,7 +255,7 @@
       tick = false;
       var stage = nav.querySelector(".cp-outline__stage.is-in");
       var text = stage ? stage.firstChild.textContent.trim() : name.textContent;
-      if (name.textContent !== text) {
+      if (name.textContent !== text || num.textContent !== label(stage)) {
         name.textContent = text;
         num.textContent = label(stage);
       }

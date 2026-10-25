@@ -827,16 +827,15 @@ html {
   display: none;
 }
 
-/* Outline numbers, as on the homepage: each stage carries the same small
-   number as its stage header ("1." for 01 Empathize). The overview and the
-   things to try have no stage number; they keep an empty slot so every name
-   lines up. The number is the link's ::after, moved in front of the name
+/* Outline numbers, as on the homepage: each act carries the same small
+   number as its header ("1." for 01 The setup). The things to try have no
+   number; they keep an empty slot so every name lines up. The number is the link's ::after, moved in front of the name
    (::before is the accent bar); screen readers skip it. The outline text is
    a step smaller, also as on the homepage. */
 .cp-outline > ol {
   counter-reset: stage;
 }
-.cp-outline > ol > li:not(:first-child):has(> .cp-outline__stage:not(.cp-outline__play)) {
+.cp-outline > ol > li:has(> .cp-outline__stage:not(.cp-outline__play)) {
   counter-increment: stage;
 }
 .cp-outline > ol > li > a::after {
@@ -850,7 +849,7 @@ html {
   font-variant-numeric: tabular-nums;
   opacity: 0.7;
 }
-.cp-outline > ol > li:not(:first-child) > .cp-outline__stage:not(.cp-outline__play)::after {
+.cp-outline > ol > li > .cp-outline__stage:not(.cp-outline__play)::after {
   content: counter(stage) "." / "";
 }
 .cp-outline a {

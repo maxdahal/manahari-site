@@ -55,7 +55,7 @@
     <div class="cp-side">
       <nav class="cp-crumbs" aria-label="Breadcrumbs"><a href="/#work"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m12 19-7-7 7-7M19 12H5"/></svg>Projects</a><span class="cp-crumbs__sep" aria-hidden="true">/</span><span aria-current="page">Surgical Console</span></nav>
       <nav class="cp-outline" aria-label="On this page">
-        <ol><li><a href="#overview" class="cp-outline__stage">Overview</a><ol><li><a href="#product-sec">The product</a></li><li><a href="#path-sec">How the story runs</a></li><li><a href="#principles">Vision &amp; principles</a></li></ol></li><li><a href="#research" class="cp-outline__stage">Research</a></li><li><a href="#define" class="cp-outline__stage">The challenge</a><ol><li><a href="#problem-sec">The problems</a></li><li><a href="#today-sec">Where project 1 started</a></li><li><a href="#old-sec">Where project 2 started</a></li><li><a href="#new-sec">Where project 3 started</a></li><li><a href="#strategy-sec">Strategy</a></li></ol></li><li><a href="#ideate" class="cp-outline__stage">Exploring ideas</a></li><li><a href="#design" class="cp-outline__stage">Design decisions</a><ol><li><a href="#design-work-sec">Component system</a></li><li><a href="#ed-sec">Project 2 · Inside the video editor</a></li></ol></li><li><a href="#sandbox" class="cp-outline__stage cp-outline__play" data-attn>Arm sandbox <span class="cp-outline__tag">Try it</span></a></li><li><a href="#prototype" class="cp-outline__stage">Prototype and build</a></li><li><a href="#test" class="cp-outline__stage">Testing and iteration</a><ol><li><a href="#hev-sec">Heuristic evaluation</a></li><li><a href="#six-sec">Feedback</a></li></ol></li><li><a href="#result" class="cp-outline__stage">Outcome</a><ol><li><a href="#together-sec">All three together</a></li><li><a href="#outcome-sec">Outcome</a></li></ol></li><li><a href="#learn" class="cp-outline__stage">Reflection</a></li></ol>
+        <ol><li><a href="#setup" class="cp-outline__stage">The setup</a><ol><li><a href="#product-sec">The product</a></li><li><a href="#users-sec">Users and environment</a></li><li><a href="#problem-sec">The problems</a></li><li><a href="#today-sec">Where project 1 started</a></li><li><a href="#old-sec">Where project 2 started</a></li><li><a href="#new-sec">Where project 3 started</a></li></ol></li><li><a href="#tradeoffs" class="cp-outline__stage">Trade-offs</a><ol><li><a href="#strategy-sec">Strategy</a></li><li><a href="#principles">Vision &amp; principles</a></li><li><a href="#sketches-sec">Lo-fi sketches</a></li><li><a href="#design-work-sec">Component system</a></li><li><a href="#ed-sec">Project 2 · Inside the video editor</a></li><li><a href="#wire-sec">From wireframe to prototype</a></li></ol></li><li><a href="#sandbox" class="cp-outline__stage cp-outline__play" data-attn>Arm sandbox <span class="cp-outline__tag">Try it</span></a></li><li><a href="#impact" class="cp-outline__stage">Resolution and impact</a><ol><li><a href="#hev-sec">Heuristic evaluation</a></li><li><a href="#six-sec">Feedback</a></li><li><a href="#together-sec">All three together</a></li><li><a href="#outcome-sec">Outcome</a></li><li><a href="#take-sec">Takeaways</a></li></ol></li></ol>
       </nav>
     </div>
 
@@ -71,7 +71,7 @@
         <aside class="cp-hero__aside" aria-label="Project quick links">
           <div class="cp-card">
             <p class="cp-card__title">Project access</p>
-            <div class="cp-card__links"><a class="button button--primary" href="#ideate">View wireframes <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect width="7" height="7" x="3" y="3" rx="1"/><rect width="7" height="7" x="14" y="3" rx="1"/><rect width="7" height="7" x="14" y="14" rx="1"/><rect width="7" height="7" x="3" y="14" rx="1"/></svg></a>
+            <div class="cp-card__links"><a class="button button--primary" href="#tradeoffs">View wireframes <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect width="7" height="7" x="3" y="3" rx="1"/><rect width="7" height="7" x="14" y="3" rx="1"/><rect width="7" height="7" x="14" y="14" rx="1"/><rect width="7" height="7" x="3" y="14" rx="1"/></svg></a>
               <a class="button button--play" href="#sandbox"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5.5v13l11-6.5z"/></svg>Play with the arm panels</a></div>
             <div class="cp-card__part"><p class="cp-card__title">Focus</p><div class="cp-topics"><span class="chip">Arm identity</span><span class="chip">Gallery</span><span class="chip">Video editor</span><span class="chip">Live annotation</span></div></div>
           </div>
@@ -109,10 +109,11 @@
         </div>
       </section>
 
-      <section class="cp-sec stage" id="overview" aria-labelledby="overview-cp-h" data-ghost="Overview">
-        <h2 class="cp-sec__label" id="overview-cp-h">Overview</h2>
+            <section class="cp-sec stage" id="setup" aria-labelledby="setup-cp-h" data-ghost="The setup" data-num="01">
+        <h2 class="cp-sec__label" id="setup-cp-h"><span>01</span>The setup</h2>
 
-          <section class="block" aria-labelledby="overview-cp-h" id="ov-sec">
+
+          <section class="block" aria-labelledby="setup-cp-h" id="ov-sec">
             <div class="block__body">
               <div class="grid-3 pieces reveal">
                 <a class="card" href="#p-arm"><span class="card__num">01</span><h3>Arm identity</h3><p>A color bar on each arm panel shows a nurse which arm has an error or warning.</p></a>
@@ -285,42 +286,9 @@
             </div>
           </section>
 
-          <section class="block" aria-labelledby="path-h" id="path-sec">
-            <h3 class="block__title" id="path-h" data-split>How the story runs</h3>
-            <div class="block__body">
-              <div class="table-wrap reveal" role="region" aria-label="Table: one design process, three projects" tabindex="0">
-                <table class="table">
-                  <thead>
-                    <tr><th scope="col">Project</th><th scope="col">Research</th><th scope="col">The challenge</th><th scope="col">Exploring ideas</th><th scope="col">Design decisions</th><th scope="col">Testing and iteration</th></tr>
-                  </thead>
-                  <tbody>
-                    <tr><th scope="row" class="is-accent">1 · Arm identity</th><td>Nurses glanced at the arms from across the room.</td><td>Which arm, what happened, and what to do.</td><td>Warnings on the picture, and a color bar on each arm.</td><td>Arm panels and the dashboard.</td><td>H5 and H6 in the test plan.</td></tr>
-                    <tr><th scope="row">2 · Gallery and video editor</th><td>Residents looked back at images and video days later.</td><td>Find one moment without scrubbing through an hour of footage.</td><td>A gallery named by procedure step, and a video timeline.</td><td>The new gallery and video editor.</td><td>H3 in the test plan.</td></tr>
-                    <tr><th scope="row">3 · Live annotation</th><td>Scrub nurses could not see what the surgeon pointed at.</td><td>A mark reaches the main screen within a second.</td><td>Tools on a second screen, and marks only on the main screen.</td><td>Dashboard final v3.</td><td>H1, H2 and H4 in the test plan.</td></tr>
-                  </tbody>
-                </table>
-              </div>
-            </div>
-          </section>
+          
 
-          <section class="block" id="principles" aria-labelledby="principles-h">
-            <h3 class="block__title" id="principles-h" data-split>Vision &amp; principles</h3>
-            <div class="block__body">
-              <ul class="grid-3 reveal">
-                <li class="card" id="pr-informed-control"><span class="card__label">01</span><h4>Informed control</h4><p>The user can tell what the system just did and what it will do next.</p></li>
-                <li class="card" id="pr-trust"><span class="card__label">02</span><h4>Trust and reliability</h4><p>The same tap gives the same result. Nothing appears without a clear reason.</p></li>
-                <li class="card" id="pr-awareness"><span class="card__label">03</span><h4>Situational awareness</h4><p>The anatomy matters most. The interface stays secondary to it.</p></li>
-                <li class="card" id="pr-extensibility"><span class="card__label">04</span><h4>Extensibility</h4><p>I built the components first, so one color scale worked in every screen.</p></li>
-                <li class="card" id="pr-clarity"><span class="card__label">05</span><h4>Clarity</h4><p>Every mode has its name on screen and a marked way out.</p></li>
-                <li class="card" id="pr-familiarity"><span class="card__label">06</span><h4>Familiarity</h4><p>I used controls people already know instead of inventing new ones.</p></li>
-              </ul>
-              <p class="note-line">The team’s main goal was “designing for confidence.” Six principles came from that goal, and each project below points to the ones it follows.</p>
-            </div>
-          </section>
-      </section>
-
-      <section class="cp-sec stage" id="research" aria-labelledby="research-cp-h" data-ghost="Research" data-num="01">
-        <h2 class="cp-sec__label" id="research-cp-h"><span>01</span>Research</h2>
+      
           
 
           <section class="block" aria-labelledby="users-h" id="users-sec">
@@ -384,10 +352,7 @@
               </div>
             </div>
           </section>
-      </section>
-
-      <section class="cp-sec stage" id="define" aria-labelledby="define-cp-h" data-ghost="The challenge" data-num="02">
-        <h2 class="cp-sec__label" id="define-cp-h"><span>02</span>The challenge</h2>
+      
           
 
           <section class="block" aria-labelledby="problem-h" id="problem-sec">
@@ -713,6 +678,12 @@
             </div>
           </section>
 
+      
+      </section>
+
+      <section class="cp-sec stage" id="tradeoffs" aria-labelledby="tradeoffs-cp-h" data-ghost="Trade-offs" data-num="02">
+        <h2 class="cp-sec__label" id="tradeoffs-cp-h"><span>02</span>Trade-offs</h2>
+
           <section class="block" aria-labelledby="strategy-h" id="strategy-sec">
             <h3 class="block__title" id="strategy-h" data-split>Strategy</h3>
             <div class="block__body">
@@ -722,17 +693,23 @@
                 <div class="card"><span class="card__label">Walk</span><h4>Rebuild with components</h4><p>I made annotation its own mode and used the new console grid.</p></div>
                 <div class="card"><span class="card__label">Run</span><h4>Use the same rules everywhere</h4><p>I used one alert scale and one component library in the editor, gallery, and service screens.</p></div>
               </div>
-              <h4 class="subhead">Early hypothesis</h4>
-              <div class="callout reveal">
-                <p class="eyebrow">If this, then that</p>
-                <p>My hypothesis: if surgeons could mark, measure and save images on the live video without looking away, everyone in the room would see what the surgeon saw.</p>
-              </div>
+              
             </div>
           </section>
-      </section>
-
-      <section class="cp-sec stage" id="ideate" aria-labelledby="ideate-cp-h" data-ghost="Exploring ideas" data-num="03">
-        <h2 class="cp-sec__label" id="ideate-cp-h"><span>03</span>Exploring ideas</h2>
+          <section class="block" id="principles" aria-labelledby="principles-h">
+            <h3 class="block__title" id="principles-h" data-split>Vision &amp; principles</h3>
+            <div class="block__body">
+              <ul class="grid-3 reveal">
+                <li class="card" id="pr-informed-control"><span class="card__label">01</span><h4>Informed control</h4><p>The user can tell what the system just did and what it will do next.</p></li>
+                <li class="card" id="pr-trust"><span class="card__label">02</span><h4>Trust and reliability</h4><p>The same tap gives the same result. Nothing appears without a clear reason.</p></li>
+                <li class="card" id="pr-awareness"><span class="card__label">03</span><h4>Situational awareness</h4><p>The anatomy matters most. The interface stays secondary to it.</p></li>
+                <li class="card" id="pr-extensibility"><span class="card__label">04</span><h4>Extensibility</h4><p>I built the components first, so one color scale worked in every screen.</p></li>
+                <li class="card" id="pr-clarity"><span class="card__label">05</span><h4>Clarity</h4><p>Every mode has its name on screen and a marked way out.</p></li>
+                <li class="card" id="pr-familiarity"><span class="card__label">06</span><h4>Familiarity</h4><p>I used controls people already know instead of inventing new ones.</p></li>
+              </ul>
+              <p class="note-line">The team’s main goal was “designing for confidence.” Six principles came from that goal, and each project below points to the ones it follows.</p>
+            </div>
+          </section>
           
 
           <section class="block" aria-labelledby="sketches-h" id="sketches-sec">
@@ -1021,10 +998,7 @@
               </div>
             </div>
           </section>
-      </section>
-
-      <section class="cp-sec stage" id="design" aria-labelledby="design-cp-h" data-ghost="Design decisions" data-num="04">
-        <h2 class="cp-sec__label" id="design-cp-h"><span>04</span>Design decisions</h2>
+      
           
 
           <!-- One section holds the project switcher; its heading follows the selected project -->
@@ -1496,10 +1470,7 @@
               </div>
             </section>
           </div>
-      </section>
-
-      <section class="cp-sec stage" id="prototype" aria-labelledby="prototype-cp-h" data-ghost="Prototype and build" data-num="05">
-        <h2 class="cp-sec__label" id="prototype-cp-h"><span>05</span>Prototype and build</h2>
+      
           
 
           <section class="block" aria-labelledby="wire-h" id="wire-sec">
@@ -1521,10 +1492,12 @@
               <p class="body-text">I can’t show the prototype here because of privacy rules. It uses real clinical workflows from the project. I am happy to walk through it with you in a call.</p>
             </div>
           </section>
+      
       </section>
 
-      <section class="cp-sec stage" id="test" aria-labelledby="test-cp-h" data-ghost="Testing and iteration" data-num="06">
-        <h2 class="cp-sec__label" id="test-cp-h"><span>06</span>Testing and iteration</h2>
+      <section class="cp-sec stage" id="impact" aria-labelledby="impact-cp-h" data-ghost="Resolution and impact" data-num="03">
+        <h2 class="cp-sec__label" id="impact-cp-h"><span>03</span>Resolution and impact</h2>
+
           
 
           <section class="block" aria-labelledby="hev-h" id="hev-sec">
@@ -1579,10 +1552,7 @@
               <p class="note-line">I treated it as a styling problem, but it was a state problem: how does a person know which mode the screen is in, and how do they get out? Once I designed the mode, the button design became straightforward.</p>
             </div>
           </section>
-      </section>
-
-      <section class="cp-sec stage" id="result" aria-labelledby="result-cp-h" data-ghost="Outcome" data-num="07">
-        <h2 class="cp-sec__label" id="result-cp-h"><span>07</span>Outcome</h2>
+      
           
 
           <section class="block" aria-labelledby="together-h" id="together-sec">
@@ -1620,10 +1590,7 @@
               </div>
             </div>
           </section>
-      </section>
-
-      <section class="cp-sec stage" id="learn" aria-labelledby="learn-cp-h" data-ghost="Reflection" data-num="08">
-        <h2 class="cp-sec__label" id="learn-cp-h"><span>08</span>Reflection</h2>
+      
           
 
           <section class="block block--plain" aria-label="Still unfinished">
@@ -1666,7 +1633,9 @@
               </nav>
             </div>
           </section>
+      
       </section>
+
 
     </main>
 

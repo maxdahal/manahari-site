@@ -1853,3 +1853,38 @@
 .article .room__people circle {
   fill: var(--accent);
 }
+
+/* ==========================================================================
+   Light mode: a 5% tint barely shows on the light page, so cards, fold-out
+   rows and folds become white with a clear edge, and secondary text
+   (labels, captions, numbers' notes, the outline) gets darker.
+   ========================================================================== */
+@media (prefers-color-scheme: light) {
+  :root:not([data-theme="dark"]) .article {
+    --muted: color-mix(in srgb, var(--text) 94%, var(--bg));
+    --outline-dim: #5c5c5b;
+  }
+  :root:not([data-theme="dark"]) .article :is(.card-pt, .acc, .a-fold, .contrib__team, .did) {
+    border: 1px solid rgb(26 26 30 / 0.12);
+    background: #fff;
+    box-shadow: 0 1px 2px rgb(26 26 30 / 0.05);
+  }
+}
+:root[data-theme="light"] .article {
+  --muted: color-mix(in srgb, var(--text) 94%, var(--bg));
+  --outline-dim: #5c5c5b;
+}
+:root[data-theme="light"] .article :is(.card-pt, .acc, .a-fold, .contrib__team, .did) {
+  border: 1px solid rgb(26 26 30 / 0.12);
+  background: #fff;
+  box-shadow: 0 1px 2px rgb(26 26 30 / 0.05);
+}
+/* the outline sits outside .article, so it gets the darker dim too */
+@media (prefers-color-scheme: light) {
+  :root:not([data-theme="dark"]) .a-outline {
+    --outline-dim: #5c5c5b;
+  }
+}
+:root[data-theme="light"] .a-outline {
+  --outline-dim: #5c5c5b;
+}

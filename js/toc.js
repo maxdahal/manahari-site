@@ -30,10 +30,28 @@
     targets.forEach(function (t, i) {
       if (t && t.getBoundingClientRect().top <= line) current = ids[i];
     });
+    /* the outline marks the exact section; the strip lists only the acts,
+       so it marks the act that holds it */
+    var here = document.getElementById(current);
     links.forEach(function (a) {
-      if (a.getAttribute("href") === "#" + current) a.setAttribute("aria-current", "location");
+      var target = document.getElementById(a.getAttribute("href").slice(1));
+      var on = a.closest(".a-sections")
+        ? target && target !== document.getElementById("main") && target.contains(here)
+          || a.getAttribute("href") === "#" + current
+        : a.getAttribute("href") === "#" + current;
+      if (on) a.setAttribute("aria-current", "location");
       else a.removeAttribute("aria-current");
     });
+    /* the section strip (narrow screens) scrolls sideways: keep the
+       current section's pill in view, without moving the page */
+    var strip = document.querySelector(".a-sections");
+    var pill = strip && strip.querySelector("a[aria-current]");
+    if (pill && strip.scrollWidth > strip.clientWidth) {
+      var sb = strip.getBoundingClientRect(), pb = pill.getBoundingClientRect();
+      if (pb.left < sb.left + 16 || pb.right > sb.right - 16) {
+        strip.scrollLeft += pb.left - sb.left - 16;
+      }
+    }
     /* the outline scrolls on its own when it is taller than the screen:
        keep the marked link inside it */
     var box = document.querySelector(".a-outline");

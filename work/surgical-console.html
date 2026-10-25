@@ -701,13 +701,13 @@
           <section class="block" id="principles" aria-labelledby="principles-h">
             <h3 class="block__title" id="principles-h" data-split>Vision &amp; principles</h3>
             <div class="block__body">
-              <ul class="grid-3 reveal">
-                <li class="card" id="pr-informed-control"><span class="card__label">01</span><h4>Informed control</h4><p>The user can tell what the system just did and what it will do next.</p></li>
-                <li class="card" id="pr-trust"><span class="card__label">02</span><h4>Trust and reliability</h4><p>The same tap gives the same result. Nothing appears without a clear reason.</p></li>
-                <li class="card" id="pr-awareness"><span class="card__label">03</span><h4>Situational awareness</h4><p>The anatomy matters most. The interface stays secondary to it.</p></li>
-                <li class="card" id="pr-extensibility"><span class="card__label">04</span><h4>Extensibility</h4><p>I built the components first, so one color scale worked in every screen.</p></li>
-                <li class="card" id="pr-clarity"><span class="card__label">05</span><h4>Clarity</h4><p>Every mode has its name on screen and a marked way out.</p></li>
-                <li class="card" id="pr-familiarity"><span class="card__label">06</span><h4>Familiarity</h4><p>I used controls people already know instead of inventing new ones.</p></li>
+              <ul class="items reveal">
+                <li id="pr-informed-control"><span class="card__label">01</span><h4>Informed control</h4><p>The user can tell what the system just did and what it will do next.</p></li>
+                <li id="pr-trust"><span class="card__label">02</span><h4>Trust and reliability</h4><p>The same tap gives the same result. Nothing appears without a clear reason.</p></li>
+                <li id="pr-awareness"><span class="card__label">03</span><h4>Situational awareness</h4><p>The anatomy matters most. The interface stays secondary to it.</p></li>
+                <li id="pr-extensibility"><span class="card__label">04</span><h4>Extensibility</h4><p>I built the components first, so one color scale worked in every screen.</p></li>
+                <li id="pr-clarity"><span class="card__label">05</span><h4>Clarity</h4><p>Every mode has its name on screen and a marked way out.</p></li>
+                <li id="pr-familiarity"><span class="card__label">06</span><h4>Familiarity</h4><p>I used controls people already know instead of inventing new ones.</p></li>
               </ul>
               <p class="note-line">The team’s main goal was “designing for confidence.” Six principles came from that goal, and each project below points to the ones it follows.</p>
             </div>
@@ -1514,7 +1514,7 @@
                     <button type="button" data-filter="open" aria-pressed="false">Open 4</button>
                   </div>
                 </div>
-                <ol class="heuristics__list">
+                <ol class="heuristics__list items">
                   <li data-status="ok"><span>H1</span><div><h4>Visibility of System Status</h4><p>I added 3 cues (a cyan border on the video, a top banner, and a tool rail) so surgeons knew marks were live.</p><span class="sr-only">Fixed.</span></div></li>
                   <li data-status="open"><span>H2</span><div><h4>Match Between the System and the Real World</h4><p>I replaced engineering codes with clinical words. Some system errors still needed a review.</p><span class="sr-only">Still open.</span></div></li>
                   <li data-status="ok"><span>H3</span><div><h4>User Control and Freedom</h4><p>I made a separate mode with a check button to exit, instead of a confusing toggle.</p><span class="sr-only">Fixed.</span></div></li>
@@ -1538,19 +1538,14 @@
           <section class="block" aria-labelledby="six-h" id="six-sec">
             <h3 class="block__title" id="six-h" data-split>Feedback</h3>
             <div class="block__body">
-              <div class="table-wrap reveal" role="region" aria-label="Table: one control, six versions" tabindex="0">
-                <table class="table">
-                  <thead><tr><th scope="col">Version</th><th scope="col">What it was</th><th scope="col">Why it changed</th></tr></thead>
-                  <tbody>
-                    <tr><th scope="row">V1</th><td>Watch and Annotate as two segments over the feed</td><td>Watching is not a mode. It is what the screen does when nobody asks for anything.</td></tr>
-                    <tr><th scope="row">V2</th><td>A switch inside the toolbar</td><td>Next to the tools, it looked like one more tool, not the thing that turns the tools on.</td></tr>
-                    <tr><th scope="row">V3</th><td>A floating glass pill on the feed</td><td>Too prominent, and it sat on top of a picture that mattered more.</td></tr>
-                    <tr><th scope="row">V4</th><td>The same pill, tap again to leave</td><td>A toggle makes the user remember which state they are in. Leaving needs its own button.</td></tr>
-                    <tr><th scope="row">V5</th><td>A Done button with a cross icon</td><td>A cross means cancel and throw away. Done means finish and keep. The two meanings conflicted.</td></tr>
-                    <tr><th scope="row">V6</th><td>A mode: the rail slides in, the feed gets a cyan edge, a banner names it, a round tick ends it</td><td>This is the current version. The word on its own was not enough, so the tools arrive with movement.</td></tr>
-                  </tbody>
-                </table>
-              </div>
+              <ol class="items reveal" aria-label="One control, six versions">
+                <li><b>V1</b><h4>Watch and Annotate as two segments over the feed</h4><p>Watching is not a mode. It is what the screen does when nobody asks for anything.</p></li>
+                <li><b>V2</b><h4>A switch inside the toolbar</h4><p>Next to the tools, it looked like one more tool, not the thing that turns the tools on.</p></li>
+                <li><b>V3</b><h4>A floating glass pill on the feed</h4><p>Too prominent, and it sat on top of a picture that mattered more.</p></li>
+                <li><b>V4</b><h4>The same pill, tap again to leave</h4><p>A toggle makes the user remember which state they are in. Leaving needs its own button.</p></li>
+                <li><b>V5</b><h4>A Done button with a cross icon</h4><p>A cross means cancel and throw away. Done means finish and keep. The two meanings conflicted.</p></li>
+                <li><b>V6</b><h4>A mode: the rail slides in, the feed gets a cyan edge, a banner names it, a round tick ends it</h4><p>This is the current version. The word on its own was not enough, so the tools arrive with movement.</p></li>
+              </ol>
               <p class="note-line">I treated it as a styling problem, but it was a state problem: how does a person know which mode the screen is in, and how do they get out? Once I designed the mode, the button design became straightforward.</p>
             </div>
           </section>
@@ -1612,7 +1607,7 @@
             <div class="block__body">
               <div class="takeaways">
                 <div>
-                  <ol>
+                  <ol class="items">
                     <li><b>01</b><div><h4>Write the reason before drawing the screen</h4><p>If I could not name the old pattern a choice replaced, I only drew a shape. I made no decision.</p></div></li>
                     <li><b>02</b><div><h4>Build components before full screens</h4><p>I set the alert rules early, which kept four complex parts consistent without extra fixes.</p></div></li>
                     <li><b>03</b><div><h4>Test with a working prototype early</h4><p>A running prototype showed a bug where a tap went through to the layer below. Static mockups hid it.</p></div></li>

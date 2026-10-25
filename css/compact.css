@@ -549,7 +549,7 @@ html {
   --t-stage: 3.5rem;      /* act header */
   --t-section: 1.875rem;  /* section title */
   --t-quote: 1.25rem;     /* statements */
-  --t-sub: 1.1875rem;     /* subheads */
+  --t-sub: 1.0625rem;     /* subheads: the same as card titles */
   --t-card: 1.0625rem;    /* titles inside cards and lists */
   --t-lead: 1.25rem;      /* opening paragraphs */
   --t-body: 1.0625rem;    /* reading text */
@@ -557,6 +557,15 @@ html {
   --t-meta: 0.875rem;     /* plain labels, buttons */
   --t-label: 0.8125rem;   /* small capital labels */
   --t-tiny: 0.8125rem;      /* tags */
+  /* the components shared with the rest of the site size their text with
+     the site tokens; inside a case study those point at this scale, so a
+     card title or a paragraph is the same size in every component */
+  --fs-small: var(--t-small);
+  --fs-body: var(--t-body);
+  --fs-lead: var(--t-lead);
+  --fs-h3: var(--t-card);
+  --fs-sub: var(--t-card);
+  --fs-statement: var(--t-quote);
 }
 
 /* display sizes */
@@ -1151,4 +1160,94 @@ html {
   .phases__arrow svg {
     rotate: 90deg;
   }
+}
+
+/* Numbers inside the interactive pieces (flip cards, rows, decisions) are
+   card-title size, like every other title inside a section */
+.cp-main :is(.flip__num, .rows__num, .decisions__title span) {
+  font-size: var(--t-card);
+}
+
+/* One list for anything longer than a single row: principles, findings,
+   versions, decisions, takeaways. Each item is a row read top to bottom:
+   a small label on the left (number, version or name), then the title and
+   its text. A hairline separates the rows. */
+.cp-main .items {
+  display: flex;
+  flex-direction: column;
+  max-width: var(--measure);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.cp-main .items > li {
+  display: grid;
+  grid-template-columns: 104px minmax(0, 1fr);
+  column-gap: 16px;
+  row-gap: 4px;
+  align-items: baseline;
+  padding: 16px 0;
+  border-top: 1px solid var(--line);
+}
+.cp-main .items > li > :first-child {
+  grid-row: 1 / span 3;
+  margin: 0;
+  font-family: var(--body-font);
+  font-size: var(--t-label);
+  font-weight: 600;
+  line-height: 1.6;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--accent-text);
+}
+.cp-main .items > li > :not(:first-child) {
+  grid-column: 2;
+}
+.cp-main .items :is(h3, h4) {
+  margin: 0;
+  font-size: var(--t-card);
+  font-weight: 600;
+  line-height: 1.3;
+}
+.cp-main .items p {
+  margin: 0;
+  font-size: var(--t-body);
+  line-height: 1.6;
+  color: var(--text);
+}
+.cp-main .items > li > div {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+/* findings keep their status color on the label */
+.cp-main .heuristics__list.items > li > span {
+  color: var(--ok-text);
+}
+.cp-main .heuristics__list.items > li[data-status="open"] > span {
+  color: var(--warn-text);
+}
+@media (max-width: 640px) {
+  .cp-main .items > li {
+    grid-template-columns: minmax(0, 1fr);
+  }
+  .cp-main .items > li > :first-child {
+    grid-row: auto;
+  }
+  .cp-main .items > li > :not(:first-child) {
+    grid-column: 1;
+  }
+}
+/* every small label is the same size: card numbers and names, and the
+   note label */
+.cp-main :is(.card__label, .card__num, .notice__label) {
+  font-size: var(--t-label);
+}
+/* the small line under a statement is a caption; the cue on the build
+   video is a plain label */
+.cp-main .callout--statement p.callout__small {
+  font-size: var(--t-small);
+}
+.cp-main :is(.motion__cue, .motion__verb) {
+  font-size: var(--t-meta);
 }

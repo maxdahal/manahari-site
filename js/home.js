@@ -218,7 +218,8 @@
     if (window.Site) window.Site.goTo = goTo;
 
     /* Nav: marks the section you are reading, the last one whose top has
-       passed the upper third of the screen */
+       passed the middle of the screen (each section is a screen tall, with
+       room above its content, so the middle matches what you see) */
     var outlineLinks = [].slice.call(document.querySelectorAll('.pv-nav__links a[href^="#"], .cp-outline a[href^="#"]'));
     var outlineTargets = outlineLinks.map(function (link) {
       return document.getElementById(link.getAttribute("href").slice(1));
@@ -226,7 +227,7 @@
     var outlineTick = false;
     function markOutline() {
       outlineTick = false;
-      var line = window.innerHeight / 3;
+      var line = window.innerHeight / 2;
       var current = 0;
       outlineTargets.forEach(function (target, i) {
         if (!target) return;

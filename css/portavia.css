@@ -931,7 +931,7 @@
   margin-top: clamp(56px, 9vh, 104px);
 }
 .hero__summary {
-  margin-top: clamp(104px, 15vh, 160px);
+  margin-top: clamp(176px, 26vh, 260px);
 }
 @media (max-width: 860px) {
   .hero__summary {
@@ -1081,4 +1081,78 @@
   background: none;
   backdrop-filter: none;
   box-shadow: none;
+}
+
+/* Homepage: like Portavia, each section gets a screen to itself, with its
+   content in the middle, so you see one section at a time. */
+.pv-main:not(.pv-about-page) .sections > section:not(.hero) {
+  min-height: 100svh;
+  padding-block: clamp(120px, 18vh, 200px);
+}
+.pv-main:not(.pv-about-page) .sections > :is(.work, .artwork) {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+.pv-main:not(.pv-about-page) .sections > :is(.work, .artwork) > * {
+  width: 100%;
+}
+.pv-main:not(.pv-about-page) .sections > :is(.pv-about, .pv-contact) {
+  align-content: center;
+}
+
+/* Tooltips for the pause and theme buttons: the label (aria-label, which
+   site.js keeps current) appears under the button on hover or keyboard
+   focus. It shares the button's grid cell and is moved down, so no
+   absolute positioning; it lines up with the button's right edge, since the
+   buttons sit at the right of the bar. */
+:is(.motion-toggle, .theme-toggle) {
+  display: grid;
+  /* one cell the size of the button, so the wider label cannot stretch it
+     and push the icon off centre */
+  grid-template: 100% / 100%;
+  place-items: center;
+  overflow: visible;
+}
+:is(.motion-toggle, .theme-toggle) > svg {
+  grid-area: 1 / 1;
+}
+:is(.motion-toggle, .theme-toggle)::after {
+  content: attr(aria-label);
+  grid-area: 1 / 1;
+  align-self: end;
+  justify-self: unsafe end;
+  width: max-content;
+  padding: 6px 10px;
+  border-radius: 8px;
+  background: var(--ink);
+  color: var(--bg);
+  font-family: var(--body-font);
+  font-size: 0.8125rem;
+  font-weight: 500;
+  line-height: 1.2;
+  letter-spacing: 0;
+  text-transform: none;
+  white-space: nowrap;
+  pointer-events: none;
+  opacity: 0;
+  translate: 0 calc(100% + 14px);
+  transition: opacity 0.15s ease, translate 0.15s ease;
+}
+:is(.motion-toggle, .theme-toggle):is(:hover, :focus-visible)::after {
+  opacity: 1;
+  translate: 0 calc(100% + 8px);
+}
+@media (hover: none) {
+  :is(.motion-toggle, .theme-toggle):hover:not(:focus-visible)::after {
+    opacity: 0;
+  }
+}
+/* the homepage's one-time motion tip sits below the full-width bar */
+.pv .motion-tip {
+  top: 84px;
+}
+/* the hidden labels must never widen the page */
+.cp-bar {
+  overflow-x: clip;
 }

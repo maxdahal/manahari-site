@@ -848,7 +848,8 @@ body,
      quotes, statements  grow in from a little smaller
      list items        come up with a slight tilt, alternating sides
    Each finishes within the first ~220px of scrolling, so nothing is half
-   faded while you read it. Text already on screen at load shows as is.
+   faded while you read it, and fades out again as it leaves at the top
+   (st-out, from just under the top bar). Text already on screen at load shows as is.
    Pinned (sticky) text, like the About chapters, is left out: its view
    timeline stops while it is pinned. Skipped for reduced motion, while motion is paused (.motion-paused), and
    in browsers without scroll-driven animations (text just shows). Decorative
@@ -861,33 +862,39 @@ body,
     }
     :root:not(.motion-paused) main :is(h2, h3, h4, p, li, blockquote, dt, dd):not(:is(.hero, .sandbox-wrap, .badge, .shelves, .spot, .console, .cp-outline, nav, figure, table, .tabs, [role="tablist"], .seasons, .motion, .lightbox, .skills3d, li, .chapter) *):not(.hero *),
     :root:not(.motion-paused) main :is(.shelf__name, .shelf__tags) {
-      animation: st-up linear both;
-      animation-timeline: view();
-      animation-range: entry 0px entry 220px;
+      animation: var(--st-in, st-up) linear both, st-out linear both;
+      animation-timeline: view(), view();
+      animation-range: entry 0px entry 220px, exit -48px exit 70%;
     }
     :root:not(.motion-paused) main :is(h2, .doc-head__title, .block__title, .cp-sec__label):not(:is(.sandbox-wrap, .badge, .shelves) *) {
-      animation-name: st-rise;
+      --st-in: st-rise;
     }
     :root:not(.motion-paused) main :is(.eyebrow, .label, .cp-label, .card__label, .timeline-group__title):not(:is(.sandbox-wrap, .badge, .seasons) *) {
-      animation: st-wipe linear both;
-      animation-timeline: view();
-      animation-range: entry 0px entry 200px;
+      animation: st-wipe linear both, st-out linear both;
+      animation-timeline: view(), view();
+      animation-range: entry 0px entry 200px, exit -48px exit 70%;
     }
     :root:not(.motion-paused) main :is(h3, h4):not(:is(.sandbox-wrap, .badge, .shelves, .spot, .console, figure, table, nav, li, .chapter) *) {
-      animation-name: st-slide;
+      --st-in: st-slide;
     }
     :root:not(.motion-paused) main .shelf__tags {
-      animation-name: st-wipe;
+      --st-in: st-wipe;
     }
     :root:not(.motion-paused) main :is(blockquote, .statement, [class*="quote"]):not(:is(.sandbox-wrap, .badge) *) {
-      animation-name: st-zoom;
+      --st-in: st-zoom;
     }
     :root:not(.motion-paused) main li:not(:is(.sandbox-wrap, .badge, .shelves, .spot, .console, .cp-outline, nav, figure, table, .seasons, .chapter) *):nth-child(odd) {
-      animation-name: st-tilt-l;
+      --st-in: st-tilt-l;
     }
     :root:not(.motion-paused) main li:not(:is(.sandbox-wrap, .badge, .shelves, .spot, .console, .cp-outline, nav, figure, table, .seasons, .chapter) *):nth-child(even) {
-      animation-name: st-tilt-r;
+      --st-in: st-tilt-r;
     }
+  }
+}
+@keyframes st-out {
+  to {
+    opacity: 0;
+    transform: translateY(-14px);
   }
 }
 @keyframes st-up {
@@ -1591,3 +1598,4 @@ html {
 main dialog :is(h2, h3, h4, p, li, blockquote, dt, dd) {
   animation: none !important;
 }
+

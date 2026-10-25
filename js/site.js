@@ -322,14 +322,16 @@
          (scale) happens in place and never pulls the dot toward the corner */
       dot.style.translate = x + "px " + y + "px";
       document.documentElement.classList.add("has-cursor");
-      var labelled = event.target.closest("[data-cursor]");
+      /* the target can be the document itself (no .closest) */
+      var el = event.target instanceof Element ? event.target : document.body;
+      var labelled = el.closest("[data-cursor]");
       var text = labelled ? labelled.getAttribute("data-cursor") : "";
       if (text !== current) {
         current = text;
         label.textContent = text;
         document.documentElement.classList.toggle("cursor-label", !!text);
       }
-      document.documentElement.classList.toggle("cursor-link", !text && !!event.target.closest("a, button, [role=tab], summary, label"));
+      document.documentElement.classList.toggle("cursor-link", !text && !!el.closest("a, button, [role=tab], summary, label"));
     });
     document.addEventListener("mouseleave", function () {
       document.documentElement.classList.remove("has-cursor");
@@ -362,7 +364,9 @@
       root.classList.toggle("motion-paused", paused);
       button.setAttribute("aria-pressed", String(paused));
       button.setAttribute("aria-label", paused ? "Play motion" : "Pause motion");
-      button.title = paused ? "Play motion" : "Pause motion";
+      /* the CSS tooltip under the button reads the label (no native title,
+         so the two never show at once) */
+      button.removeAttribute("title");
       document.dispatchEvent(new CustomEvent("motionchange", { detail: { paused: paused } }));
     }
     apply(root.classList.contains("motion-paused"));

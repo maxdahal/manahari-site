@@ -24,17 +24,13 @@
   --a-1: 12px;
   --a-2: 16px;
   --a-3: 32px;
-  --a-4: 72px;
-  --a-5: 128px;
+  --a-4: 104px;
+  --a-5: 184px;
   max-width: calc(var(--a-col) + 2 * var(--gx));
   margin: 0 auto;
   padding: 48px var(--gx) var(--a-5);
 }
 
-/* the scroll text effects stay off here: every line is simply there */
-#main.article :is(h1, h2, h3, h4, p, li, blockquote, dt, dd, figcaption, span) {
-  animation: none;
-}
 
 /* ---- text ---------------------------------------------------------------- */
 .article p,
@@ -1367,8 +1363,9 @@
   .a-bar {
     grid-template-areas: "crumbs end";
   }
+  /* the page's scroll padding already clears the bar */
   .article [id] {
-    scroll-margin-top: 96px;
+    scroll-margin-top: 24px;
   }
 }
 .a-outline ol {
@@ -1537,4 +1534,28 @@
     grid-row: 2;
     justify-self: start;
   }
+}
+
+/* the breadcrumb row keeps the full bar height on every screen, so on
+   phones the crumbs and buttons are not pressed against the top edge */
+.a-bar {
+  grid-template-rows: minmax(var(--bar-h), auto);
+}
+
+/* key parts, listed under their act in the left outline */
+.a-outline__sub {
+  display: flex;
+  flex-direction: column;
+  margin: 2px 0 6px;
+  padding: 0;
+  list-style: none;
+}
+.a-outline .a-outline__sub a {
+  padding: 5px 0 5px 38px;
+  font-size: 0.8125rem;
+}
+/* the act stays marked while you are inside one of its key parts */
+.a-outline li:has(.a-outline__sub a[aria-current]) > a {
+  border-left-color: color-mix(in srgb, var(--accent) 45%, transparent);
+  color: var(--ink);
 }

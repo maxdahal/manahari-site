@@ -76,18 +76,8 @@
     var root = document.documentElement;
     var button = document.querySelector(".motion-toggle");
     if (!button) return;
-    function apply(paused) {
-      root.classList.toggle("motion-paused", paused);
-      button.setAttribute("aria-pressed", String(paused));
-      document.dispatchEvent(new CustomEvent("motionchange", { detail: { paused: paused } }));
-    }
-    apply(root.classList.contains("motion-paused"));
+    /* the button itself is wired in site.js; pressing it also closes the tip */
     button.addEventListener("click", function () {
-      var paused = !root.classList.contains("motion-paused");
-      try {
-        sessionStorage.setItem("motion", paused ? "paused" : "playing");
-      } catch (e) {}
-      apply(paused);
       hideTip();
     });
 
@@ -157,6 +147,11 @@
         dialog.showModal();
       });
     });
+    /* the About page's Quick summary lands here with ?summary: open it */
+    if (/[?&]summary\b/.test(location.search)) {
+      history.replaceState(null, "", location.pathname + location.hash);
+      dialog.showModal();
+    }
     dialog.querySelectorAll("[data-close]").forEach(function (el) {
       el.addEventListener("click", function () {
         /* a link moves on to the page; the close button hands focus back */
@@ -222,9 +217,9 @@
     /* other scripts (and the board links) use the same jump */
     if (window.Site) window.Site.goTo = goTo;
 
-    /* Outline: marks the section you are reading, the last one whose top
-       has passed the upper third of the screen; at the very bottom, Contact */
-    var outlineLinks = [].slice.call(document.querySelectorAll('.cp-outline a[href^="#"]'));
+    /* Nav: marks the section you are reading, the last one whose top has
+       passed the upper third of the screen */
+    var outlineLinks = [].slice.call(document.querySelectorAll('.pv-nav__links a[href^="#"], .cp-outline a[href^="#"]'));
     var outlineTargets = outlineLinks.map(function (link) {
       return document.getElementById(link.getAttribute("href").slice(1));
     });
@@ -237,16 +232,11 @@
         if (!target) return;
         /* the footer waits under the page, so it is "reached" only where
            the page above it ends */
-        var top = target.matches(".site-footer")
-          ? document.querySelector(".doc").getBoundingClientRect().bottom
-          : target.getBoundingClientRect().top;
+        var top = target.getBoundingClientRect().top;
         if (top <= line) current = i;
       });
-      if (window.innerHeight + window.scrollY >= document.documentElement.scrollHeight - 2) {
-        current = outlineLinks.length - 1;
-      }
       outlineLinks.forEach(function (link, i) {
-        if (i === current) link.setAttribute("aria-current", "location");
+        if (i === current) link.setAttribute("aria-current", i === 0 ? "page" : "location");
         else link.removeAttribute("aria-current");
       });
     }

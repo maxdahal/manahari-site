@@ -318,7 +318,9 @@
     document.addEventListener("mousemove", function (event) {
       x = event.clientX;
       y = event.clientY;
-      dot.style.transform = "translate(" + x + "px," + y + "px)";
+      /* position through the translate property, so the press shrink
+         (scale) happens in place and never pulls the dot toward the corner */
+      dot.style.translate = x + "px " + y + "px";
       document.documentElement.classList.add("has-cursor");
       var labelled = event.target.closest("[data-cursor]");
       var text = labelled ? labelled.getAttribute("data-cursor") : "";
@@ -341,14 +343,40 @@
     (function loop() {
       cx += (x - cx) * 0.18;
       cy += (y - cy) * 0.18;
-      ring.style.transform = "translate(" + cx.toFixed(1) + "px," + cy.toFixed(1) + "px)";
+      ring.style.translate = cx.toFixed(1) + "px " + cy.toFixed(1) + "px";
       requestAnimationFrame(loop);
     })();
   }
 
 
 
+  /* Pause motion: the button in the top bar on every page. The choice holds
+     for the rest of the visit (this tab's session) on every page. */
+  try {
+    if (sessionStorage.getItem("motion") === "paused") root.classList.add("motion-paused");
+  } catch (e) {}
+  function initMotion() {
+    var button = document.querySelector(".motion-toggle");
+    if (!button) return;
+    function apply(paused) {
+      root.classList.toggle("motion-paused", paused);
+      button.setAttribute("aria-pressed", String(paused));
+      button.setAttribute("aria-label", paused ? "Play motion" : "Pause motion");
+      button.title = paused ? "Play motion" : "Pause motion";
+      document.dispatchEvent(new CustomEvent("motionchange", { detail: { paused: paused } }));
+    }
+    apply(root.classList.contains("motion-paused"));
+    button.addEventListener("click", function () {
+      var paused = !root.classList.contains("motion-paused");
+      try {
+        sessionStorage.setItem("motion", paused ? "paused" : "playing");
+      } catch (e) {}
+      apply(paused);
+    });
+  }
+
   function start() {
+    initMotion();
     initTheme();
     initMenu();
     initTabs();

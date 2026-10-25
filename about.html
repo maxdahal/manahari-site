@@ -12,23 +12,26 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&amp;family=Antonio:wght@400;500;600;700&amp;display=swap">
   <link rel="stylesheet" href="css/site.css">
+  <link rel="stylesheet" href="css/portavia.css">
   <link rel="stylesheet" href="css/about.css">
   <script src="js/site.js"></script>
   <script src="js/about.js" defer></script>
 </head>
-<body>
+<body class="pv">
   <a class="skip-link" href="#main">Skip to content</a>
-  <header class="cp-bar">
-    <div class="cp-bar__start">
-      <a class="bar-mark" href="/" aria-label="Manahari Dahal, home">md<i>.</i></a>
-    </div>
-    <div class="cp-bar__end">
+  <header class="cp-bar pv-nav">
+    <div class="pv-nav__pill">
+      <a class="pv-nav__me bar-mark" href="/" aria-label="Manahari Dahal, home">md<i>.</i></a>
+      <nav class="pv-nav__links" aria-label="Main"><a href="/"><span class="roll"><span data-text="Home">Home</span></span></a><a href="/#work"><span class="roll"><span data-text="Work">Work</span></span></a><a href="/about" aria-current="page"><span class="roll"><span data-text="About">About</span></span></a><a href="/#artwork"><span class="roll"><span data-text="Artwork">Artwork</span></span></a></nav>
+      <div class="pv-nav__right">
+        <div class="cp-bar__end">
+      <button class="icon-button motion-toggle" type="button" aria-pressed="false" aria-label="Pause motion" title="Pause motion"><svg class="icon-pause" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M9 5v14M15 5v14"/></svg><svg class="icon-play" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M8 5.5v13l11-6.5z"/></svg></button>
       <button class="icon-button theme-toggle" type="button" aria-label="Switch theme"><svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20.985 12.486a9 9 0 1 1-9.473-9.472c.405-.022.617.46.402.803a6 6 0 0 0 8.268 8.268c.344-.215.825-.004.803.401"/></svg><svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2m-7.07-17.07 1.41 1.41m11.32 11.32 1.41 1.41M2 12h2m16 0h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"/></svg></button>
       <button class="icon-button menu-button" type="button" aria-expanded="false" aria-controls="menu" aria-label="Open menu"><span class="menu-button__lines" aria-hidden="true"><i></i><i></i><i></i></span></button>
     </div>
+      </div>
+    </div>
   </header>
-  <!-- Menu for smaller screens: covers the whole screen under the top bar
-       (site.js opens and closes it with the button in the bar) -->
   <div class="menu" id="menu">
     <nav class="menu__links" aria-label="Menu">
       <a href="/">Home<small>01</small></a>
@@ -42,12 +45,31 @@
       <span><a href="/resume.pdf" data-cursor="Open resume" target="_blank" rel="noopener">Resume</a><a href="https://www.linkedin.com/in/manaharidahal/" target="_blank" rel="noopener">LinkedIn</a><a href="https://dribbble.com/manaharidahal" target="_blank" rel="noopener">Dribbble</a></span>
     </div>
   </div>
-
-  <main class="page" id="main">
-    <div class="container page-crumbs"><nav class="cp-crumbs" aria-label="Breadcrumbs"><a href="/"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m12 19-7-7 7-7M19 12H5"/></svg>Home</a><span class="cp-crumbs__sep" aria-hidden="true">/</span><span aria-current="page">About me</span></nav></div>
-    <section class="about-intro container" aria-labelledby="about-h">
-      <!-- The same ID badge as on Home: sways; hover or the button flips it to the details -->
-      <div class="peek badge">
+  <main class="pv-main pv-about-page" id="main">
+    <div class="sections">
+      <section class="pv-about pv-about--top" aria-labelledby="about-h">
+        <div class="pv-about__text">
+          <h1 class="pv-h1" id="about-h">About me</h1>
+          <p class="pv-name">Manahari Dahal</p>
+          <p class="pv-lede">I design products and build them in code. Most recently, I designed three projects for a surgical console at Karl Storz.</p>
+          <p class="pv-lede">Hi, I’m Manahari, a UX engineer in the US. I do both the design and the code, so I can take an idea all the way to something people can use. I’m also proficient in AI tools for AI-assisted design and development.</p>
+          <ul class="pv-stats">
+            <li><b>6+</b><span>Years in UX and frontend</span></li>
+            <li><b>3</b><span>Degrees in computer science and HCI</span></li>
+            <li><b>4</b><span>Industries: healthcare, higher education, mapping and food</span></li>
+          </ul>
+          <dl class="pv-info">
+            <div><dt>From :</dt><dd>Nepal</dd></div>
+            <div><dt>Based in :</dt><dd>the US</dd></div>
+            <div><dt>Available for :</dt><dd>UX design and UX engineering roles</dd></div>
+          </dl>
+          <p class="pv-actions">
+            <a class="pv-btn pv-btn--fill" href="/?summary" data-cursor="Quick summary">Quick summary</a>
+            <a class="pv-btn" href="/resume.pdf" target="_blank" rel="noopener" data-cursor="Open resume">Resume</a>
+          </p>
+        </div>
+        <div class="pv-about__badge">
+          <div class="peek badge">
         <div class="badge__swing">
           <span class="badge__strap" aria-hidden="true"></span>
           <span class="badge__clip" aria-hidden="true"></span>
@@ -76,249 +98,73 @@
         </div>
         <button class="peek__tab badge__flip" type="button" aria-expanded="false" aria-controls="peek-card">Flip my ID <span aria-hidden="true">↻</span></button>
       </div>
-      <div class="about-intro__text">
-        <p class="label">About me</p>
-        <h1 class="statement" id="about-h" data-fill>I design products and build them in code. Most recently, I designed three projects for a surgical console at Karl Storz.</h1>
-        <p class="body-text">Hi, I’m Manahari, a UX engineer in the US. I do both the design and the code, so I can take an idea all the way to something people can use.</p>
-        <p class="about-intro__facts"><span><span class="muted">Based in</span> the US</span><span><span class="muted">Available for</span> UX design and UX engineering roles</span></p>
-        <ul class="about-intro__stats">
-          <li><b>6+</b><span>Years in UX and frontend</span></li>
-          <li><b>3</b><span>Degrees in computer science and HCI</span></li>
-          <li><b>4</b><span>Industries: healthcare, higher education, mapping and food</span></li>
-        </ul>
-      </div>
-    </section>
-
-    <!-- Education and experience, told as chapters by place, oldest first -->
-    <section class="chapters container" id="journey" aria-labelledby="journey-h">
-      <div class="block block--center">
-        <p class="eyebrow">01 · My path</p>
-        <h2 class="block__title" id="journey-h">Education &amp; experience</h2>
-        <div class="block__body">
-          <p class="body-text chapters__lead">My path so far, in four chapters.</p>
-          <article class="chapter" aria-labelledby="ch1-h">
-            <div class="chapter__media">
-              <!-- Photo stack: the chapter card on top, then the photos. Add a photo with
-                   <img class="chapter__card chapter__photo" style="--i: N" ...> (N counts up from 1)
-                   and set --flips on the article to the number of photos. -->
-              <div class="chapter__stack">
-                <div class="chapter__card chapter__panel" style="--i: 0" aria-hidden="true"><span class="chapter__num">01</span><span class="chapter__panel-place">Louisiana</span></div>
-              </div>
-            </div>
-            <div class="chapter__text">
-              <p class="chapter__kicker">Chapter 01 · Until 2018</p>
-              <h3 class="chapter__place" id="ch1-h">Louisiana</h3>
-              <p class="chapter__intro">Where I started in computer science.</p>
-              <ol class="chapter__entries">
-                <li class="chapter__entry">
-                  <p class="chapter__role"><b>Associate’s degree, Computer Science</b><span class="pill">2018</span></p>
-                  <p class="chapter__org">University of Louisiana at Monroe</p>
-                </li>
-              </ol>
-            </div>
-          </article>
-          <article class="chapter" aria-labelledby="ch2-h">
-            <div class="chapter__media">
-              <!-- Photo stack: the chapter card on top, then the photos. Add a photo with
-                   <img class="chapter__card chapter__photo" style="--i: N" ...> (N counts up from 1)
-                   and set --flips on the article to the number of photos. -->
-              <div class="chapter__stack">
-                <div class="chapter__card chapter__panel" style="--i: 0" aria-hidden="true"><span class="chapter__num">02</span><span class="chapter__panel-place">Idaho</span></div>
-              </div>
-            </div>
-            <div class="chapter__text">
-              <p class="chapter__kicker">Chapter 02 · 2018 to 2022</p>
-              <h3 class="chapter__place" id="ch2-h">Idaho</h3>
-              <p class="chapter__intro">I finished my computer science degree and found UX through research work on campus and a summer internship at Esri.</p>
-              <ol class="chapter__entries">
-                <li class="chapter__entry">
-                  <p class="chapter__role"><b>B.S. Computer Science</b><span class="pill">2022</span></p>
-                  <p class="chapter__org">Brigham Young University–Idaho</p>
-                </li>
-                <li class="chapter__entry">
-                  <p class="chapter__role"><b>UI/UX and Frontend Intern</b><span class="pill">Jun to Aug 2021</span></p>
-                  <p class="chapter__org">Esri · Redlands, CA</p>
-                </li>
-                <li class="chapter__entry">
-                  <p class="chapter__role"><b>UX Researcher and IT Content Developer</b><span class="pill">Sep 2019 to Jun 2021</span></p>
-                  <p class="chapter__org">BYU–Idaho · Rexburg, ID</p>
-                </li>
-              </ol>
-            </div>
-          </article>
-          <article class="chapter chapter--stack" style="--flips: 3" aria-labelledby="ch3-h">
-            <div class="chapter__media">
-              <!-- Photo stack: the chapter card on top, then the photos. Add a photo with
-                   <img class="chapter__card chapter__photo" style="--i: N" ...> (N counts up from 1)
-                   and set --flips on the article to the number of photos. -->
-              <div class="chapter__stack">
-                <div class="chapter__card chapter__panel" style="--i: 0" aria-hidden="true"><span class="chapter__num">03</span><span class="chapter__panel-place">Kansas</span></div>
-                <img class="chapter__card chapter__photo" style="--i: 1" src="assets/images/card-ku-brand.webp" alt="The University of Kansas Campanile against the sky" width="2000" height="856" loading="lazy">
-                <img class="chapter__card chapter__photo" style="--i: 2" src="assets/images/ku-brand-02-b29a48186b.webp" alt="Kansans walking together through the Flint Hills prairie" width="570" height="407" loading="lazy">
-                <img class="chapter__card chapter__photo" style="--i: 3" src="assets/images/ku-brand-08-d133a6bf5f.webp" alt="The Jayhawk statue on campus" width="570" height="407" loading="lazy">
-              </div>
-            </div>
-            <div class="chapter__text">
-              <p class="chapter__kicker">Chapter 03 · 2022 to 2025</p>
-              <h3 class="chapter__place" id="ch3-h">Kansas</h3>
-              <p class="chapter__intro">I built the University of Kansas brand site as a frontend developer, from research to the pages campus partners use.</p>
-              <ol class="chapter__entries">
-                <li class="chapter__entry">
-                  <p class="chapter__role"><b>Frontend Developer</b><span class="pill">Jun 2022 to Apr 2025</span></p>
-                  <p class="chapter__org">University of Kansas · Lawrence, KS</p>
-                  <p class="chapter__desc">Research, design and frontend for the University of Kansas brand site.</p>
-                  <ul class="dot-list"><li>Traffic across ku.edu grew 30% after launch</li><li>A team of 20+ designers, marketers and project managers</li></ul>
-                  <a class="text-link" href="/work/ku-brand">Read the KU Brand case study <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></a>
-                </li>
-              </ol>
-            </div>
-          </article>
-          <article class="chapter chapter--stack" style="--flips: 1" aria-labelledby="ch4-h">
-            <div class="chapter__media">
-              <!-- Photo stack: the chapter card on top, then the photos. Add a photo with
-                   <img class="chapter__card chapter__photo" style="--i: N" ...> (N counts up from 1)
-                   and set --flips on the article to the number of photos. -->
-              <div class="chapter__stack">
-                <div class="chapter__card chapter__panel" style="--i: 0" aria-hidden="true"><span class="chapter__num">04</span><span class="chapter__panel-place">North Carolina</span></div>
-                <img class="chapter__card chapter__photo" style="--i: 1" src="assets/images/card-console.webp" alt="The surgical console redesign" width="1100" height="619" loading="lazy">
-              </div>
-            </div>
-            <div class="chapter__text">
-              <p class="chapter__kicker">Chapter 04 · 2025 to now</p>
-              <h3 class="chapter__place" id="ch4-h">North Carolina</h3>
-              <p class="chapter__intro">I’m studying human-computer interaction at UNC Chapel Hill while designing for a surgical console and student apps.</p>
-              <ol class="chapter__entries">
-                <li class="chapter__entry">
-                  <p class="chapter__role"><b>M.S. Information Science, Human-Computer Interaction</b><span class="pill">Expected 2027</span></p>
-                  <p class="chapter__org">UNC Chapel Hill</p>
-                </li>
-                <li class="chapter__entry">
-                  <p class="chapter__role"><b>Graduate Research Assistant</b><span class="pill">Feb 2026 to Present</span></p>
-                  <p class="chapter__org">UNC Chapel Hill · Chapel Hill, NC</p>
-                </li>
-                <li class="chapter__entry">
-                  <p class="chapter__role"><b>UX Design Intern</b><span class="pill">May to Aug 2026</span></p>
-                  <p class="chapter__org">Karl Storz · Morrisville, NC</p>
-                  <p class="chapter__desc">Three fixes for a robotic surgery console.</p>
-                  <ul class="dot-list"><li>Arm identity, so a nurse can tell which arm needs help</li><li>A gallery with a video editor</li><li>Live annotation on a second screen</li></ul>
-                </li>
-                <li class="chapter__entry">
-                  <p class="chapter__role"><b>UX Designer</b><span class="pill">Sep 2025 to May 2026</span></p>
-                  <p class="chapter__org">App Team Carolina · Chapel Hill, NC</p>
-                </li>
-              </ol>
-            </div>
-          </article>
         </div>
-      </div>
-    </section>
+      </section>
 
-    <section class="timeline-section container" id="research" aria-labelledby="research-h">
-      <div class="block block--center">
-        <p class="eyebrow">02 · Research</p>
-        <h2 class="block__title" id="research-h">Research &amp; recognition</h2>
-        <div class="block__body">
-          <div class="timeline-wrap">
-            <div class="timeline-group">
-              <h3 class="timeline-group__title">Research</h3>
-              <ol class="timeline">
-                <li><i class="timeline__dot" aria-hidden="true"></i><div class="timeline__body"><p class="timeline__top"><b>Master’s paper</b><span class="pill">In progress</span></p></div></li>
-                <li><i class="timeline__dot" aria-hidden="true"></i><div class="timeline__body"><p class="timeline__top"><b>ASIS&amp;T</b><span class="pill">Accepted</span></p><p class="timeline__org">Poster · 2 pages</p></div></li>
-                <li><i class="timeline__dot" aria-hidden="true"></i><div class="timeline__body"><p class="timeline__top"><b>School symposiums</b><span class="pill">Once</span></p><p class="timeline__org">Presented</p></div></li>
-              </ol>
-            </div>
-            <div class="timeline-group">
-              <h3 class="timeline-group__title">Awards &amp; honors</h3>
-              <ol class="timeline">
-                <li><i class="timeline__dot" aria-hidden="true"></i><div class="timeline__body"><p class="timeline__top"><b>Michael Hooker Fellow</b><span class="pill">2026</span></p></div></li>
-                <li><i class="timeline__dot" aria-hidden="true"></i><div class="timeline__body"><p class="timeline__top"><b>Emerging Scholar Award</b><span class="pill">Fall 2017, Spring 2018</span></p><p class="timeline__org">Received twice</p></div></li>
-                <li><i class="timeline__dot" aria-hidden="true"></i><div class="timeline__body"><p class="timeline__top"><b>Academic Recognition Award</b><span class="pill">2016 to 2018</span></p></div></li>
-                <li><i class="timeline__dot" aria-hidden="true"></i><div class="timeline__body"><p class="timeline__top"><b>BYU–Idaho Scholarship</b><span class="pill">2019 to 2022</span></p></div></li>
-              </ol>
-            </div>
-          </div>
+      <section class="pv-block" id="skills" aria-labelledby="skills-h">
+        <h2 class="pv-h2" id="skills-h">Skills &amp; expertise</h2>
+        <div class="pv-accs">
+          <details class="pv-acc" open><summary><h3>1. Product Design</h3></summary><ul><li>User research: interviews, surveys, focus groups and card sorting</li><li>Wireframing and prototyping</li><li>UI design for web and mobile apps</li><li>Usability testing, heuristic evaluation and user feedback analysis</li><li>Interaction design and micro-animations</li><li>AI-assisted design and development</li></ul></details>
+          <details class="pv-acc"><summary><h3>2. Web Development</h3></summary><ul><li>Responsive design using HTML, CSS, JavaScript, TypeScript, React and Next.js</li><li>Landing page design and optimization</li><li>Webflow development and customization</li><li>Website maintenance and updates</li></ul></details>
+          <details class="pv-acc"><summary><h3>3. Branding</h3></summary><ul><li>Brand strategy and identity development</li><li>Visual style guide creation</li><li>Typography and color scheme selection</li><li>Brand storytelling and messaging</li></ul></details>
+          <details class="pv-acc"><summary><h3>4. Tools</h3></summary><ul><li>Figma, Adobe XD, Illustrator, Photoshop, Framer, Git</li></ul></details>
         </div>
-      </div>
-    </section>
+      </section>
 
-    <section class="timeline-section container" id="skills" aria-labelledby="skills-h">
-      <div class="block block--center">
-        <p class="eyebrow">03 · Skills</p>
-        <h2 class="block__title" id="skills-h">Skills &amp; expertise</h2>
-        <div class="block__body">
-          <div class="timeline-wrap skills">
-            <details open>
-              <summary><h3>Product Design</h3></summary>
-              <ul>
-                <li>User research: interviews, surveys, focus groups and card sorting</li>
-                <li>Wireframing and prototyping</li>
-                <li>UI design for web and mobile apps</li>
-                <li>Usability testing, heuristic evaluation and user feedback analysis</li>
-                <li>Interaction design and micro-animations</li>
-              </ul>
-            </details>
-            <details>
-              <summary><h3>Web Development</h3></summary>
-              <ul>
-                <li>Responsive design using HTML, CSS, JavaScript, TypeScript, React and Next.js</li>
-                <li>Landing page design and optimization</li>
-                <li>Webflow development and customization</li>
-                <li>Website maintenance and updates</li>
-              </ul>
-            </details>
-            <details>
-              <summary><h3>Branding</h3></summary>
-              <ul>
-                <li>Brand strategy and identity development</li>
-                <li>Visual style guide creation</li>
-                <li>Typography and color scheme selection</li>
-                <li>Brand storytelling and messaging</li>
-              </ul>
-            </details>
-            <details>
-              <summary><h3>Tools</h3></summary>
-              <ul>
-                <li>Figma, Adobe XD, Illustrator, Photoshop, Framer, Git</li>
-              </ul>
-            </details>
-          </div>
+      <section class="pv-block" id="journey" aria-labelledby="journey-h">
+        <h2 class="pv-h2" id="journey-h">Education &amp; experience</h2>
+        <p class="pv-lede">My path so far, in four chapters.</p>
+        <div class="pv-chapters">
+          <article class="pv-chapter"><p class="pv-chapter__when">Chapter 04 · 2025 to now</p><h3 class="pv-chapter__place">North Carolina</h3><p class="pv-chapter__intro">I’m studying human-computer interaction at UNC Chapel Hill while designing for a surgical console and student apps.</p><ol class="pv-jobs"><li class="pv-job"><div class="pv-job__top"><h4 class="pv-job__role">M.S. Information Science, Human-Computer Interaction</h4><span class="pv-job__when">Expected 2027</span></div><p class="pv-job__org">UNC Chapel Hill</p></li><li class="pv-job"><div class="pv-job__top"><h4 class="pv-job__role">Graduate Research Assistant</h4><span class="pv-job__when">Feb 2026 to Present</span></div><p class="pv-job__org">UNC Chapel Hill · Chapel Hill, NC</p></li><li class="pv-job"><div class="pv-job__top"><h4 class="pv-job__role">UX Design Intern</h4><span class="pv-job__when">May to Aug 2026</span></div><p class="pv-job__org">Karl Storz · Morrisville, NC</p><p class="pv-job__desc">Three fixes for a robotic surgery console: arm identity, so a nurse can tell which arm needs help; a gallery with a video editor; and live annotation on a second screen.</p></li><li class="pv-job"><div class="pv-job__top"><h4 class="pv-job__role">UX Designer</h4><span class="pv-job__when">Sep 2025 to May 2026</span></div><p class="pv-job__org">App Team Carolina · Chapel Hill, NC</p></li></ol></article>
+          <article class="pv-chapter"><p class="pv-chapter__when">Chapter 03 · 2022 to 2025</p><h3 class="pv-chapter__place">Kansas</h3><p class="pv-chapter__intro">I built the University of Kansas brand site as a frontend developer, from research to the pages campus partners use.</p><ol class="pv-jobs"><li class="pv-job"><div class="pv-job__top"><h4 class="pv-job__role">Frontend Developer</h4><span class="pv-job__when">Jun 2022 to Apr 2025</span></div><p class="pv-job__org">University of Kansas · Lawrence, KS</p><p class="pv-job__desc">Research, design and frontend for the University of Kansas brand site. Traffic across ku.edu grew 30% after launch, with a team of 20+ designers, marketers and project managers. <a href="/work/ku-brand">Read the KU Brand case study</a></p></li></ol></article>
+          <article class="pv-chapter"><p class="pv-chapter__when">Chapter 02 · 2018 to 2022</p><h3 class="pv-chapter__place">Idaho</h3><p class="pv-chapter__intro">I finished my computer science degree and found UX through research work on campus and a summer internship at Esri.</p><ol class="pv-jobs"><li class="pv-job"><div class="pv-job__top"><h4 class="pv-job__role">B.S. Computer Science</h4><span class="pv-job__when">2022</span></div><p class="pv-job__org">Brigham Young University–Idaho</p></li><li class="pv-job"><div class="pv-job__top"><h4 class="pv-job__role">UI/UX and Frontend Intern</h4><span class="pv-job__when">Jun to Aug 2021</span></div><p class="pv-job__org">Esri · Redlands, CA</p></li><li class="pv-job"><div class="pv-job__top"><h4 class="pv-job__role">UX Researcher and IT Content Developer</h4><span class="pv-job__when">Sep 2019 to Jun 2021</span></div><p class="pv-job__org">BYU–Idaho · Rexburg, ID</p></li></ol></article>
+          <article class="pv-chapter"><p class="pv-chapter__when">Chapter 01 · Until 2018</p><h3 class="pv-chapter__place">Louisiana</h3><p class="pv-chapter__intro">Where I started in computer science.</p><ol class="pv-jobs"><li class="pv-job"><div class="pv-job__top"><h4 class="pv-job__role">Associate’s degree, Computer Science</h4><span class="pv-job__when">2018</span></div><p class="pv-job__org">University of Louisiana at Monroe</p></li></ol></article>
         </div>
-      </div>
-    </section>
-    <div class="page-end"></div>
+      </section>
+
+      <section class="pv-block" id="research" aria-labelledby="research-h">
+        <h2 class="pv-h2" id="research-h">Research &amp; recognition</h2>
+        <div class="pv-two">
+          <div><h3 class="pv-h3">Research</h3><ol class="pv-jobs">
+            <li class="pv-job"><div class="pv-job__top"><h4 class="pv-job__role">Master’s paper</h4><span class="pv-job__when">In progress</span></div></li>
+            <li class="pv-job"><div class="pv-job__top"><h4 class="pv-job__role">ASIS&amp;T</h4><span class="pv-job__when">Accepted</span></div><p class="pv-job__org">Poster · 2 pages</p></li>
+            <li class="pv-job"><div class="pv-job__top"><h4 class="pv-job__role">School symposiums</h4><span class="pv-job__when">Once</span></div><p class="pv-job__org">Presented</p></li>
+          </ol></div>
+          <div><h3 class="pv-h3">Awards &amp; honors</h3><ol class="pv-jobs">
+            <li class="pv-job"><div class="pv-job__top"><h4 class="pv-job__role">Michael Hooker Fellow</h4><span class="pv-job__when">2026</span></div></li>
+            <li class="pv-job"><div class="pv-job__top"><h4 class="pv-job__role">Emerging Scholar Award</h4><span class="pv-job__when">Fall 2017, Spring 2018</span></div><p class="pv-job__org">Received twice</p></li>
+            <li class="pv-job"><div class="pv-job__top"><h4 class="pv-job__role">Academic Recognition Award</h4><span class="pv-job__when">2016 to 2018</span></div></li>
+            <li class="pv-job"><div class="pv-job__top"><h4 class="pv-job__role">BYU–Idaho Scholarship</h4><span class="pv-job__when">2019 to 2022</span></div></li>
+          </ol></div>
+        </div>
+      </section>
+
+      <section class="pv-contact" id="contact" aria-labelledby="contact-h">
+        <figure class="pv-contact__photo"><img src="assets/images/index-01-5d96ff329c.webp" alt="" width="900" height="900" loading="lazy">
+          <span class="pv-hi" aria-hidden="true"><svg viewBox="0 0 460 190" focusable="false"><path pathLength="1" d="M30 150 C60 140 100 90 110 50 C118 20 95 10 85 40 C75 70 70 120 68 150 C75 120 95 95 115 100 C135 105 128 140 135 150 C145 160 165 140 175 125 C200 120 215 100 200 92 C185 85 165 110 175 135 C185 155 215 155 235 135 C255 110 275 60 272 35 C270 15 250 20 252 50 C254 90 250 130 260 148 C268 158 285 150 295 130 C310 105 330 60 327 35 C325 15 305 20 307 50 C309 90 305 130 315 148 C323 158 340 150 352 128 C360 105 390 95 400 110 C412 130 395 158 375 152 C355 145 358 110 385 105 C400 102 415 108 430 100"/></svg></span></figure>
+        <div class="pv-contact__text">
+          <h2 class="pv-h2" id="contact-h">Let’s connect.</h2>
+          <p class="pv-lede">Open to UX design and UX engineering roles.</p>
+          <p class="pv-actions">
+            <a class="pv-btn pv-btn--fill" href="mailto:manahari.dahal1@gmail.com">Email me</a>
+            <a class="pv-btn" href="/resume.pdf" target="_blank" rel="noopener" data-cursor="Open resume">Resume</a>
+          </p>
+        </div>
+      </section>
+    </div>
   </main>
-  <footer class="site-footer" id="contact">
-    <div class="container">
-      <div class="site-footer__grid">
-        <div class="site-footer__lead">
-          <p class="site-footer__label">Contact</p>
-          <h2>Let’s connect.</h2>
-          <p class="site-footer__note">Open to UX design and UX engineering roles.</p>
-          <a class="button button--primary site-footer__cta" href="mailto:manahari.dahal1@gmail.com">Email me <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></a>
-        </div>
-        <nav class="site-footer__col" aria-label="Footer">
-          <p class="site-footer__label">Navigation</p>
-            <a href="/">Home</a>
-            <a href="/#about-me">About</a>
-            <a href="/#work">Projects</a>
-            <a href="/#artwork">Artwork</a>
-        </nav>
-        <div class="site-footer__col">
-          <p class="site-footer__label">Follow me</p>
-          <a href="https://www.linkedin.com/in/manaharidahal/" target="_blank" rel="noopener">LinkedIn</a>
-          <a href="https://dribbble.com/manaharidahal" target="_blank" rel="noopener">Dribbble</a>
-        </div>
-        <div class="site-footer__col">
-          <p class="site-footer__label">Email</p>
-          <a href="mailto:manahari.dahal1@gmail.com">manahari.dahal1@gmail.com</a>
-        </div>
+  <footer class="pv-footer">
+    <div class="pv-footer__inner">
+      <div class="pv-footer__cols">
+        <div><p>Email :</p><a href="mailto:manahari.dahal1@gmail.com">manahari.dahal1@gmail.com</a></div>
+        <div><p>Resume :</p><a href="/resume.pdf" target="_blank" rel="noopener">Open the PDF</a></div>
+        <div><p>Social :</p><span class="pv-footer__icons"><a href="https://www.linkedin.com/in/manaharidahal/" target="_blank" rel="noopener" aria-label="LinkedIn"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-4 0v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg></a><a href="https://dribbble.com/manaharidahal" target="_blank" rel="noopener" aria-label="Dribbble"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M8.56 2.75c4.37 6.03 6.02 9.42 8.03 17.72m2.54-15.38c-3.72 4.35-8.94 5.66-16.88 5.85m19.5 1.9c-3.5-.93-6.63-.82-8.94 0-2.58.92-5.01 2.86-7.44 6.32"/></svg></a></span></div>
       </div>
-      <div class="site-footer__legal">
+      <div class="pv-footer__legal">
         <p>© 2026 Manahari Dahal</p>
-        <a href="#main">Back to top <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 19V5"/><path d="m5 12 7-7 7 7"/></svg></a>
+        <a href="#main">Back to top</a>
       </div>
     </div>
   </footer>
-
 </body>
 </html>

@@ -641,3 +641,236 @@
     flex-basis: 100%;
   }
 }
+
+/* the outcome at the top, between the facts and the picture */
+.a-outcome {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  max-width: var(--a-read);
+  margin-top: var(--a-3);
+}
+.a-outcome .label {
+  color: var(--accent-text);
+}
+
+/* open points: a short accent label (when there is one), the name, then
+   its text; clear room between points so each reads as its own item */
+.article .points {
+  gap: 24px;
+}
+.article .points .label {
+  color: var(--accent-text);
+}
+.article .points .label.is-ok { color: var(--ok-text); }
+.article .points .label.is-open { color: var(--warn-text); }
+
+/* room for the floating pill bar above the article */
+.pv .article {
+  padding-top: 112px;
+}
+/* numbers sit side by side, not as a bulleted list */
+.article .stats {
+  flex-direction: row;
+  flex-wrap: wrap;
+  padding-left: 0;
+  list-style: none;
+}
+
+/* ==========================================================================
+   Three ways to lay out points, chosen by what they are:
+     cards   a few short points side by side (two columns; an odd last one
+             runs the full width)
+     steps   points with an order: a large number or word, then the point
+     accs    long reference lists only: names, each opening to its text
+   ========================================================================== */
+.article .cards {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 12px;
+  max-width: none;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.article .card-pt {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  padding: 20px 22px;
+  border-radius: 14px;
+  background: color-mix(in srgb, var(--ink) 5%, transparent);
+}
+.article .cards > .card-pt:last-child:nth-child(odd) {
+  grid-column: 1 / -1;
+}
+.article .card-pt h4 {
+  margin: 0;
+  font-size: 1.0625rem;
+  font-weight: 600;
+  line-height: 1.4;
+  color: var(--ink);
+}
+.article .card-pt p {
+  font-size: 1rem;
+  line-height: 1.6;
+}
+.article .card-pt .label {
+  color: var(--accent-text);
+}
+.article .card-pt .label.is-ok { color: var(--ok-text); }
+.article .card-pt .label.is-open { color: var(--warn-text); }
+.article .card-pt ul {
+  gap: 4px;
+}
+
+.article .steps {
+  display: flex;
+  flex-direction: column;
+  gap: 28px;
+  max-width: var(--a-read);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.article .step {
+  display: grid;
+  grid-template-columns: 88px minmax(0, 1fr);
+  gap: 20px;
+  align-items: baseline;
+}
+.article .step__num {
+  font-family: var(--heading-font);
+  font-size: 2.25rem;
+  font-weight: 700;
+  line-height: 1;
+  text-transform: uppercase;
+  color: var(--accent-text);
+}
+.article .step > div {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+.article .step h4 {
+  margin: 0;
+  font-size: 1.0625rem;
+  font-weight: 600;
+  line-height: 1.4;
+  color: var(--ink);
+}
+@media (max-width: 760px) {
+  .article .cards {
+    grid-template-columns: minmax(0, 1fr);
+  }
+  .article .step {
+    grid-template-columns: 64px minmax(0, 1fr);
+    gap: 14px;
+  }
+  .article .step__num {
+    font-size: 1.75rem;
+  }
+}
+.article :is(.card-pt, .step) h4 {
+  font-family: var(--body-font);
+  letter-spacing: 0;
+  text-transform: none;
+}
+/* the number sits level with the top of its point */
+.article .step {
+  align-items: start;
+}
+.article .step__num {
+  margin-top: -2px;
+}
+
+/* ==========================================================================
+   On this page: a sticky outline at the top right, beside the article.
+   It hides below 1180px, where the article needs the whole width.
+   ========================================================================== */
+.a-layout {
+  display: grid;
+  grid-template-columns: minmax(0, 1040px) 200px;
+  justify-content: center;
+  column-gap: 56px;
+  padding-inline: var(--gx);
+}
+.a-layout > .article {
+  max-width: none;
+  margin: 0;
+  padding-inline: 0;
+}
+.a-toc {
+  position: sticky;
+  top: 104px;
+  align-self: start;
+  max-height: calc(100vh - 128px);
+  margin-top: 112px;
+  overflow-y: auto;
+}
+.a-toc__title {
+  margin: 0 0 12px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+.a-toc ol {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.a-toc ol ol {
+  margin: 2px 0 10px;
+  padding-left: 12px;
+  border-left: 1px solid var(--line);
+}
+.a-toc a {
+  display: block;
+  padding: 4px 0;
+  font-size: 0.8125rem;
+  line-height: 1.35;
+  color: var(--muted);
+  text-decoration: none;
+}
+.a-toc a.a-toc__act {
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: var(--ink);
+}
+.a-toc a:hover {
+  color: var(--ink);
+}
+.a-toc a[aria-current] {
+  color: var(--accent-text);
+}
+.a-toc a:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+  border-radius: 4px;
+}
+/* jumps land below the pill bar */
+.article [id] {
+  scroll-margin-top: 96px;
+}
+@media (max-width: 1179px) {
+  .a-layout {
+    display: block;
+    padding-inline: 0;
+  }
+  .a-layout > .article {
+    max-width: calc(1040px + 2 * var(--gx));
+    margin: 0 auto;
+    padding-inline: var(--gx);
+  }
+  .a-toc {
+    display: none;
+  }
+}
+.a-toc {
+  scrollbar-width: thin;
+}

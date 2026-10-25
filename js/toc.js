@@ -48,6 +48,18 @@
   /* Pictures load lazily as the page scrolls past them and push the
      content down, so a jump can stop short of its section: once the
      scroll settles, aim again (instantly) until the heading is in place. */
+  /* the outline shows only the current section's parts; "Show all" opens
+     every section, and "Show less" folds them back */
+  var outline = document.querySelector(".a-outline");
+  var all = outline && outline.querySelector(".a-outline__all");
+  if (all) {
+    all.addEventListener("click", function () {
+      var open = outline.classList.toggle("is-all");
+      all.setAttribute("aria-expanded", String(open));
+      all.textContent = open ? "Show less" : "Show all";
+    });
+  }
+
   /* a part folded behind its title opens when you jump to it */
   function openFold(target) {
     var fold = target && target.querySelector(":scope > details.a-fold");

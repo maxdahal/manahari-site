@@ -1,0 +1,264 @@
+/* ==========================================================================
+   KU Brand color sandbox ("Try it"): KU's colors and the sandbox's own
+   pieces (from the earlier case study's ku.css). The frame, panel and tabs
+   are in sandbox.css. The holding box is drawn as an inset outline with its
+   two Lake pinpoints as background dots, and the swatches stack their
+   hidden input with grid, so nothing uses absolute positioning.
+   ========================================================================== */
+/* 1. Brand colors ---------------------------------------------------------- */
+:root {
+  --ku-blue: #0051ba;
+  --ku-crimson: #e8000d;
+  --ku-night: #003459;
+  --ku-lake: #2767ff;
+  --ku-sky: #73cbf2;
+  --ku-fog: #8e9fbc;
+  --ku-steam: #dde5ed;
+  --ku-fire: #ff3042;
+  --ku-brick: #971b2f;
+  --ku-wheat: #f2a900;
+  --ku-terra: #c66e4e;
+  --ku-tallgrass: #be9a79;
+  --ku-limestone: #d7d2cb;
+  --ku-yellow: #ffc82d;
+  --ku-gray: #85898a;
+  --ku-text: #333333;
+}
+
+/* 4. Color sandbox: KU's own pieces --------------------------------------
+   The frame, panel and tabs are in sandbox.css. Here: the palette for the
+   frame, the preview card, the color swatches and the contrast results. */
+.sandbox-wrap--ku {
+  --sb-ring: #0051ba, #73cbf2, #f2a900, #e8000d, #971b2f, #2767ff, #0051ba;
+  --sb-wash:
+    radial-gradient(circle at 0% 0%, rgb(115 203 242 / 0.3), transparent 42%),
+    radial-gradient(circle at 100% 0%, rgb(242 169 0 / 0.22), transparent 38%),
+    radial-gradient(circle at 100% 100%, rgb(232 0 13 / 0.12), transparent 40%);
+  --sb-shadow: rgb(0 81 186 / 0.45);
+  --sb-glow: #73cbf2;
+}
+.play__preview {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  width: 100%;
+  max-width: 470px;
+  padding: 26px 28px;
+  border-radius: 12px;
+  background: var(--pg-bg, #73cbf2);
+  color: var(--pg-fg, #003459);
+  box-shadow: 0 12px 30px -16px rgb(0 0 0 / 0.35);
+  transition: background-color 0.25s ease, color 0.25s ease;
+}
+.sandbox .play__preview .play__eyebrow {
+  font-size: 0.8125rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+.sandbox .play__preview .play__headline {
+  font-size: clamp(1.6rem, 1.2rem + 1.2vw, 2.2rem);
+  font-weight: 700;
+  line-height: 1;
+  text-transform: uppercase;
+}
+.sandbox .play__preview .play__body {
+  font-size: 0.9375rem;
+  line-height: 1.5;
+}
+.play__links {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 14px;
+  margin-top: 6px;
+  font-size: 0.875rem;
+  font-weight: 600;
+}
+.play__button {
+  padding: 7px 14px;
+  border: 2px solid currentColor;
+  border-radius: 999px;
+}
+.play__link {
+  text-decoration: underline;
+  text-underline-offset: 4px;
+}
+/* KU's holding box: a thin Fire line, with Lake pinpoints at two corners */
+.play__frame {
+  inset: 12px;
+  border: 1.5px solid var(--ku-fire);
+  pointer-events: none;
+}
+.play__frame i {
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+  background: var(--ku-lake);
+}
+.play__frame i:first-child {
+  top: -5px;
+  left: -5px;
+}
+.play__frame i:last-child {
+  right: -5px;
+  bottom: -5px;
+}
+.play__preview.is-plain .play__frame {
+  display: none;
+}
+.play__swatches {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
+}
+.play__sw {
+  position: relative;
+  cursor: pointer;
+}
+.play__sw input {
+  inset: 0;
+  margin: 0;
+  opacity: 0;
+  cursor: pointer;
+}
+.play__sw span {
+  display: block;
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  background: var(--c);
+  box-shadow: inset 0 0 0 1px rgb(0 0 0 / 0.18);
+}
+.play__sw b {
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+.play__sw input:checked + span {
+  box-shadow: inset 0 0 0 1px rgb(0 0 0 / 0.18), 0 0 0 2px var(--bg), 0 0 0 4px var(--ink);
+}
+.play__sw input:focus-visible + span {
+  outline: 3px solid var(--ink);
+  outline-offset: 4px;
+}
+
+.sandbox__a11y {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr);
+  align-items: center;
+  gap: 4px 28px;
+}
+.play__ratio {
+  grid-row: span 2;
+  font-family: var(--heading-font);
+  font-size: 1.125rem;
+  font-weight: 600;
+}
+.play__ratio b {
+  font-size: 2.75rem;
+  line-height: 1;
+  font-variant-numeric: tabular-nums;
+}
+.play__checks {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px 18px;
+}
+.play__checks li {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.875rem;
+  font-weight: 500;
+}
+.play__checks small {
+  font-size: 0.8125rem;
+  color: var(--text);
+}
+.play__checks small::before {
+  content: "needs ";
+}
+.play__mark {
+  min-width: 40px;
+  padding: 1px 7px;
+  border-radius: 999px;
+  font-size: 0.8125rem;
+  font-weight: 700;
+  text-align: center;
+}
+.is-pass .play__mark {
+  background: color-mix(in srgb, var(--ok-text) 16%, transparent);
+  color: var(--ok-text);
+}
+.is-fail .play__mark {
+  background: color-mix(in srgb, var(--bad-text) 14%, transparent);
+  color: var(--bad-text);
+}
+.play__verdict {
+  font-size: 0.9375rem;
+  font-weight: 600;
+}
+.play__verdict.is-pass {
+  color: var(--ok-text);
+}
+.play__verdict.is-fail {
+  color: var(--bad-text);
+}
+@media (max-width: 860px) {
+  .sandbox__a11y {
+    grid-template-columns: minmax(0, 1fr);
+  }
+  .play__ratio {
+    grid-row: auto;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .play__preview {
+    transition: none;
+  }
+}
+
+.cp-main .sandbox-wrap .play__ratio b {
+  letter-spacing: -0.04em;
+}
+
+
+/* ---- no absolute positioning ------------------------------------------- */
+.play__frame {
+  display: none;
+}
+.play__preview:not(.is-plain) {
+  outline: 1.5px solid var(--ku-fire);
+  outline-offset: -12px;
+  background-image:
+    radial-gradient(circle, var(--ku-lake) 4.5px, transparent 5px),
+    radial-gradient(circle, var(--ku-lake) 4.5px, transparent 5px);
+  background-position: 7px 7px, calc(100% - 7px) calc(100% - 7px);
+  background-size: 10px 10px;
+  background-repeat: no-repeat;
+}
+.play__sw {
+  display: inline-grid;
+}
+.play__sw > * {
+  grid-area: 1 / 1;
+}
+.play__sw input {
+  width: 100%;
+  height: 100%;
+}
+
+/* on narrow screens the canvas and the preview shrink with the panel, and
+   the headline wraps instead of pushing them wider */
+.sandbox__canvas,
+.play__preview {
+  min-width: 0;
+  max-width: 100%;
+}
+.play__headline {
+  overflow-wrap: anywhere;
+}

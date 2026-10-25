@@ -88,7 +88,6 @@
   cursor: pointer;
 }
 .sandbox__switch input {
-  position: absolute;
   opacity: 0;
   width: 1px;
   height: 1px;
@@ -103,7 +102,6 @@
 }
 .sandbox__switch span::after {
   content: "";
-  position: absolute;
   top: 2px;
   left: 2px;
   width: 14px;
@@ -290,7 +288,6 @@
   padding: 12px 14px;
 }
 .sandbox__code .sandbox__btn {
-  position: absolute;
   top: 18px;
   right: 24px;
 }
@@ -377,7 +374,7 @@
   align-items: flex-start;
   gap: 8px;
 }
-.cp-main .sandbox-wrap .sandbox-wrap__tag {
+:is(.cp-main, .article) .sandbox-wrap .sandbox-wrap__tag {
   display: inline-flex;
   align-items: center;
   gap: 6px;
@@ -395,14 +392,14 @@
   height: 12px;
   fill: currentColor;
 }
-.cp-main .sandbox-wrap .sandbox-wrap__title {
+:is(.cp-main, .article) .sandbox-wrap .sandbox-wrap__title {
   font-family: var(--heading-font);
   font-size: clamp(1.75rem, 1.3rem + 1.4vw, 2.4rem);
   font-weight: 600;
   line-height: 1.1;
   color: var(--ink);
 }
-.cp-main .sandbox-wrap .sandbox-wrap__text {
+:is(.cp-main, .article) .sandbox-wrap .sandbox-wrap__text {
   max-width: 40em;
   color: var(--text);
 }
@@ -468,17 +465,17 @@
 .sandbox-wrap {
   --mono: "JetBrains Mono", ui-monospace, "SFMono-Regular", Menlo, Consolas, monospace;
 }
-.cp-main .sandbox-wrap,
-.cp-main .sandbox-wrap :is(p, h4, button, span, b, small, li, label, code, pre) {
+:is(.cp-main, .article) .sandbox-wrap,
+:is(.cp-main, .article) .sandbox-wrap :is(p, h4, button, span, b, small, li, label, code, pre) {
   font-family: var(--mono);
   letter-spacing: -0.01em;
 }
-.cp-main .sandbox-wrap [data-real],
-.cp-main .sandbox-wrap [data-real] * {
+:is(.cp-main, .article) .sandbox-wrap [data-real],
+:is(.cp-main, .article) .sandbox-wrap [data-real] * {
   font-family: var(--body-font);
   letter-spacing: normal;
 }
-.cp-main .sandbox-wrap .sandbox-wrap__title {
+:is(.cp-main, .article) .sandbox-wrap .sandbox-wrap__title {
   font-family: var(--mono);
   font-size: clamp(1.4rem, 1.05rem + 1.1vw, 1.95rem);
   font-weight: 700;
@@ -501,18 +498,66 @@
 @keyframes sb-caret {
   50% { opacity: 0; }
 }
-.cp-main .sandbox-wrap .sandbox-wrap__text {
+:is(.cp-main, .article) .sandbox-wrap .sandbox-wrap__text {
   font-size: 0.9375rem;
   line-height: 1.6;
 }
-.cp-main .sandbox-wrap .sandbox-wrap__tag {
+:is(.cp-main, .article) .sandbox-wrap .sandbox-wrap__tag {
   letter-spacing: 0.08em;
 }
-.cp-main .sandbox-wrap .sandbox__crumb {
+:is(.cp-main, .article) .sandbox-wrap .sandbox__crumb {
   font-size: 0.8125rem;
 }
 @media (prefers-reduced-motion: reduce) {
   .sandbox-wrap__title::after {
     animation: none;
+  }
+}
+
+/* no absolute positioning: the switch's hidden input takes no room, its
+   knob sits in the track by grid, and the code panel's Copy button shares
+   the code's grid cell */
+.sandbox__switch input {
+  width: 0;
+  height: 0;
+  margin: 0;
+  appearance: none;
+}
+.sandbox__switch span {
+  display: grid;
+  align-items: center;
+  box-sizing: border-box;
+  padding: 2px;
+}
+.sandbox__code {
+  display: grid;
+}
+.sandbox__code > * {
+  grid-area: 1 / 1;
+}
+.sandbox__code .sandbox__btn {
+  align-self: start;
+  justify-self: end;
+  margin: 18px 24px 0 0;
+}
+
+/* columns never grow past the sandbox: the panel, its tabs and the canvas
+   shrink with it, and the tab row scrolls sideways inside itself if it
+   must */
+.sandbox__main {
+  grid-template-columns: minmax(0, 1fr);
+}
+.sandbox__main > *,
+.sandbox__panel,
+.sandbox__pane {
+  min-width: 0;
+}
+.sandbox__tabs {
+  overflow-x: auto;
+  scrollbar-width: none;
+}
+@media (max-width: 860px) {
+  .sandbox__body {
+    grid-template-columns: minmax(0, 1fr);
   }
 }

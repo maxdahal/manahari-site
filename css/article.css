@@ -1329,7 +1329,7 @@
 @media (min-width: 1101px) {
   .a-layout {
     display: grid;
-    grid-template-columns: 200px minmax(0, 1040px);
+    grid-template-columns: 220px minmax(0, 1040px);
     justify-content: center;
     column-gap: 48px;
     padding-inline: var(--gx);
@@ -2038,12 +2038,78 @@
   fill: currentColor;
 }
 /* the sandbox's outline entry stays on one line, its tag included */
-.a-outline a[href="#arm-sandbox"] {
+.a-outline a:has(.a-outline__tag) {
   align-items: center;
   gap: 8px;
   white-space: nowrap;
 }
-.a-outline a[href="#arm-sandbox"] .a-outline__tag {
+.a-outline a:has(.a-outline__tag) .a-outline__tag {
   flex: none;
   margin-left: 0;
+}
+
+/* ==========================================================================
+   Outline: only the section you are in shows its parts; the others fold to
+   their numbered title. "Show all" opens every section's parts.
+   ========================================================================== */
+.a-outline:not(.is-all) > ol > li:not(:has(a[aria-current])) > .a-outline__sub {
+  display: none;
+}
+.a-outline__all {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  min-height: 36px;
+  margin: 12px 0 0 14px;
+  padding: 0 14px;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  background: none;
+  font: inherit;
+  font-size: 0.8125rem;
+  font-weight: 600;
+  color: var(--text);
+  cursor: pointer;
+}
+.a-outline__all::after {
+  content: "+";
+  font-weight: 700;
+  color: var(--accent-text);
+}
+.a-outline.is-all .a-outline__all::after {
+  content: "\2212";
+}
+.a-outline__all:hover {
+  border-color: var(--accent);
+  color: var(--ink);
+}
+.a-outline__all:focus-visible {
+  outline: 3px solid var(--accent);
+  outline-offset: 2px;
+}
+/* a section with parts carries a small chevron: pointing right while its
+   parts are folded, turning down when they show, so it reads as something
+   to click */
+.a-outline > ol > li:has(> .a-outline__sub) > a::after {
+  content: "";
+  flex: none;
+  width: 7px;
+  height: 7px;
+  margin: 0 4px 0 auto;
+  border-right: 2px solid currentColor;
+  border-bottom: 2px solid currentColor;
+  rotate: -45deg;
+  align-self: center;
+  opacity: 0.7;
+  transition: rotate 0.2s ease;
+}
+.a-outline > ol > li:has(> .a-outline__sub a[aria-current]) > a::after,
+.a-outline > ol > li:has(> a[aria-current]) > a::after,
+.a-outline.is-all > ol > li > a::after {
+  rotate: 45deg;
+}
+@media (prefers-reduced-motion: reduce) {
+  .a-outline > ol > li > a::after {
+    transition: none;
+  }
 }

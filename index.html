@@ -101,19 +101,37 @@
   </div>
   <main class="pv-main" id="main">
     <div class="sections">
-      <section class="pv-hero" id="top" aria-labelledby="hero-h">
-        <div class="pv-hero__stack">
-          <p class="pv-hero__name">Manahari Dahal</p>
-          <h1 class="pv-hero__title" id="hero-h">UX Developer<span class="pv-hi" aria-hidden="true"><svg viewBox="0 0 460 190" focusable="false"><path pathLength="1" d="M30 150 C60 140 100 90 110 50 C118 20 95 10 85 40 C75 70 70 120 68 150 C75 120 95 95 115 100 C135 105 128 140 135 150 C145 160 165 140 175 125 C200 120 215 100 200 92 C185 85 165 110 175 135 C185 155 215 155 235 135 C255 110 275 60 272 35 C270 15 250 20 252 50 C254 90 250 130 260 148 C268 158 285 150 295 130 C310 105 330 60 327 35 C325 15 305 20 307 50 C309 90 305 130 315 148 C323 158 340 150 352 128 C360 105 390 95 400 110 C412 130 395 158 375 152 C355 145 358 110 385 105 C400 102 415 108 430 100"/></svg></span></h1>
-          <p class="pv-hero__lede">I design products and build them in code.</p>
-          <div class="pv-hero__summary">
+      <section class="hero" id="top" aria-label="Introduction">
+        <div class="hero__sticky">
+          <div class="hero__words">
+            <!-- Each line is a window holding the name word with the role word right under
+                 it. Scrolling moves both up one word, so "Manahari Dahal" becomes "UX Developer." -->
+            <!-- Two rings of skills orbit the name in 3D, drawn twice: the far half of
+                 each ring passes behind the name, the near half in front of it.
+                 Decorative; home.js fills the letters, the turning is pure CSS. -->
+            <div class="skills3d skills3d--back" aria-hidden="true">
+              <div class="skills3d__tilt skills3d__tilt--a"><div class="skills3d__spin" data-text="UX Research · Prototyping · Design Systems · "></div></div>
+              <div class="skills3d__tilt skills3d__tilt--b"><div class="skills3d__spin" data-text="Product Design · Frontend · UX Development · "></div></div>
+            </div>
+            <h1 class="hero__name">
+              <!-- the same hand-drawn "hello" as the intro, in the accent -->
+              <svg class="hero__hello" viewBox="0 0 460 190" aria-hidden="true" focusable="false"><path pathLength="1" d="M30 150 C60 140 100 90 110 50 C118 20 95 10 85 40 C75 70 70 120 68 150 C75 120 95 95 115 100 C135 105 128 140 135 150 C145 160 165 140 175 125 C200 120 215 100 200 92 C185 85 165 110 175 135 C185 155 215 155 235 135 C255 110 275 60 272 35 C270 15 250 20 252 50 C254 90 250 130 260 148 C268 158 285 150 295 130 C310 105 330 60 327 35 C325 15 305 20 307 50 C309 90 305 130 315 148 C323 158 340 150 352 128 C360 105 390 95 400 110 C412 130 395 158 375 152 C355 145 358 110 385 105 C400 102 415 108 430 100"/></svg>
+              <span class="hero__line"><span class="hero__reel"><span class="hero__word">Manahari</span><span class="hero__word hero__word--role" aria-hidden="true">UX</span></span></span>
+              <span class="hero__line"><span class="hero__reel"><span class="hero__word">Dahal</span><span class="hero__word hero__word--role" aria-hidden="true">Developer<i>.</i></span></span></span>
+            </h1>
+            <div class="skills3d skills3d--front" aria-hidden="true">
+              <div class="skills3d__tilt skills3d__tilt--a"><div class="skills3d__spin" data-text="UX Research · Prototyping · Design Systems · "></div></div>
+              <div class="skills3d__tilt skills3d__tilt--b"><div class="skills3d__spin" data-text="Product Design · Frontend · UX Development · "></div></div>
+            </div>
+          </div>
+        </div>
+        <div class="hero__summary">
             <p class="pv-hero__note" id="hero-note">Hiring and short on time? Here’s everything in one minute.</p>
             <p class="pv-actions">
               <button class="pv-btn pv-btn--fill" type="button" data-recruiter aria-haspopup="dialog" aria-describedby="hero-note" data-cursor="Quick summary">Quick summary</button>
               <a class="pv-btn" href="/resume.pdf" target="_blank" rel="noopener" data-cursor="Open resume">Resume</a>
             </p>
           </div>
-        </div>
       </section>
 
       <section class="work" id="work" aria-labelledby="work-h">

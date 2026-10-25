@@ -874,3 +874,126 @@
 .a-toc {
   scrollbar-width: thin;
 }
+
+/* ==========================================================================
+   Case study hero, as before: the title across the top; the picture with a
+   card beside it holding the project links and the focus; then the outcome
+   numbers and the facts.
+   ========================================================================== */
+.a-hero2 {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(240px, 300px);
+  grid-template-areas:
+    "intro intro"
+    "image aside"
+    "meta  meta";
+  gap: 24px clamp(24px, 3vw, 40px);
+  align-items: stretch;
+}
+.a-hero2__intro {
+  grid-area: intro;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 16px;
+}
+.a-hero2__image {
+  grid-area: image;
+  margin: 0;
+}
+.a-hero2__image img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  aspect-ratio: 16 / 10;
+  object-fit: cover;
+  border-radius: 16px;
+}
+.a-hero2__aside {
+  grid-area: aside;
+  display: flex;
+}
+.a-card {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  width: 100%;
+  padding: 22px;
+  border: 1px solid var(--line);
+  border-radius: 16px;
+  background: color-mix(in srgb, var(--ink) 4%, transparent);
+}
+.article .a-card__title {
+  margin: 0;
+  font-size: 0.8125rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+.a-card .a-links {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  gap: 8px;
+  margin: 0;
+}
+.a-card .a-links .button {
+  justify-content: center;
+}
+.a-card__part {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-top: auto;
+  padding-top: 14px;
+  border-top: 1px solid var(--line);
+}
+.article .a-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin: 0;
+}
+.a-chip {
+  padding: 4px 10px;
+  border-radius: 999px;
+  background: color-mix(in srgb, var(--accent) 16%, transparent);
+  font-size: 0.8125rem;
+  font-weight: 500;
+  color: var(--accent-text);
+}
+.a-hero2__meta {
+  grid-area: meta;
+  display: flex;
+  flex-direction: column;
+  gap: 28px;
+  margin-top: 16px;
+}
+.a-hero2__meta .a-outcome {
+  margin-top: 0;
+  max-width: none;
+}
+.a-hero2__meta .a-facts {
+  margin: 0;
+}
+@media (max-width: 860px) {
+  .a-hero2 {
+    grid-template-columns: minmax(0, 1fr);
+    grid-template-areas:
+      "intro"
+      "image"
+      "aside"
+      "meta";
+  }
+}
+/* the picture keeps its own shape; the card beside it matches its height */
+.a-hero2__image img {
+  height: auto;
+}
+.a-hero2 {
+  align-items: start;
+}
+.a-hero2__aside {
+  align-self: stretch;
+}

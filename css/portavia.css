@@ -906,3 +906,74 @@
     transition: none;
   }
 }
+
+/* the earlier hero, back under the pill bar: the name in its skill rings,
+   then the quick summary for recruiters right under it */
+.pv-main .sections > .hero {
+  padding-block: 96px 48px;
+}
+.hero__summary {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  margin-top: 8px;
+  padding-inline: var(--gx);
+  text-align: center;
+}
+.hero__summary .pv-actions {
+  justify-content: center;
+}
+/* the summary sits clear of the rings, and above them */
+.hero__summary {
+  position: relative;
+  z-index: 3;
+  margin-top: clamp(56px, 9vh, 104px);
+}
+.hero__summary {
+  margin-top: clamp(104px, 15vh, 160px);
+}
+@media (max-width: 860px) {
+  .hero__summary {
+    margin-top: 72px;
+  }
+}
+
+/* the quick summary for recruiters: its own soft card under the name, the
+   note on the left and the two buttons on the right */
+.hero__summary {
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
+  gap: 16px 32px;
+  width: min(100% - 2 * var(--gx), 760px);
+  margin-inline: auto;
+  padding: 22px 22px 22px 32px;
+  border: 1px solid var(--line);
+  border-radius: 24px;
+  background: color-mix(in srgb, var(--ink) 5%, transparent);
+  text-align: left;
+}
+.hero__summary .pv-hero__note {
+  flex: 1 1 260px;
+  font-size: 1.0625rem;
+  font-weight: 400;
+  line-height: 1.5;
+  color: var(--ink);
+}
+.hero__summary .pv-actions {
+  flex: none;
+  justify-content: flex-end;
+}
+@media (max-width: 640px) {
+  .hero__summary {
+    flex-direction: column;
+    align-items: stretch;
+    padding: 22px;
+    text-align: center;
+  }
+  .hero__summary .pv-actions {
+    justify-content: center;
+  }
+}

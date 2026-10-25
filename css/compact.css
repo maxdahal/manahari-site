@@ -484,6 +484,10 @@ html {
     grid-column: 2;
     max-width: 300px;
   }
+  /* a row of cards that its note sits beside */
+  .cp-sec .block__body:has(> .callout:not(.callout--statement)) > .grid-3--beside-note {
+    grid-column: 1;
+  }
 }
 
 /* Smaller screens: no outline; the breadcrumb and the theme switch share a

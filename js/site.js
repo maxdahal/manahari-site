@@ -132,15 +132,10 @@
       cx = 0,
       cy = 0,
       current = null;
-    document.addEventListener("mousemove", function (event) {
-      x = event.clientX;
-      y = event.clientY;
-      /* position through the translate property, so the press shrink
-         (scale) happens in place and never pulls the dot toward the corner */
-      dot.style.translate = x + "px " + y + "px";
-      document.documentElement.classList.add("has-cursor");
-      /* the target can be the document itself (no .closest) */
-      var el = event.target instanceof Element ? event.target : document.body;
+    /* the label (e.g. "View") and link state follow what is under the
+       pointer; the target can be the document itself (no .closest) */
+    function aim(target) {
+      var el = target instanceof Element ? target : document.body;
       var labelled = el.closest("[data-cursor]");
       var text = labelled ? labelled.getAttribute("data-cursor") : "";
       if (text !== current) {
@@ -149,7 +144,27 @@
         document.documentElement.classList.toggle("cursor-label", !!text);
       }
       document.documentElement.classList.toggle("cursor-link", !text && !!el.closest("a, button, [role=tab], summary, label"));
+    }
+    document.addEventListener("mousemove", function (event) {
+      x = event.clientX;
+      y = event.clientY;
+      /* position through the translate property, so the press shrink
+         (scale) happens in place and never pulls the dot toward the corner */
+      dot.style.translate = x + "px " + y + "px";
+      document.documentElement.classList.add("has-cursor");
+      aim(event.target);
     });
+    /* scrolling moves the page under a still pointer: look again at what
+       is under it, or a label like "View" would stay behind */
+    var looking = false;
+    window.addEventListener("scroll", function () {
+      if (looking || !document.documentElement.classList.contains("has-cursor")) return;
+      looking = true;
+      requestAnimationFrame(function () {
+        looking = false;
+        aim(document.elementFromPoint(x, y));
+      });
+    }, { passive: true });
     document.addEventListener("mouseleave", function () {
       document.documentElement.classList.remove("has-cursor");
     });
@@ -166,8 +181,6 @@
       requestAnimationFrame(loop);
     })();
   }
-
-
 
   /* Pause motion: the button in the top bar on every page. The choice holds
      for the rest of the visit (this tab's session) on every page. */

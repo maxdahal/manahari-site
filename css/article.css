@@ -1543,15 +1543,19 @@
 }
 
 /* key parts, listed under their act in the left outline */
-.a-outline__sub {
+/* nested as in the earlier outline: indented under the section's name,
+   on a short rail of their own */
+.a-outline .a-outline__sub {
   display: flex;
   flex-direction: column;
-  margin: 2px 0 6px;
+  gap: 2px;
+  /* the rail starts right under the section's name (after its number) */
+  margin: 4px 0 8px 44px;
   padding: 0;
   list-style: none;
 }
 .a-outline .a-outline__sub a {
-  padding: 5px 0 5px 38px;
+  padding: 4px 0 4px 12px;
   font-size: 0.8125rem;
 }
 /* the act stays marked while you are inside one of its key parts */

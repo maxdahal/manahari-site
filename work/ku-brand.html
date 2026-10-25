@@ -11,21 +11,11 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&amp;family=Antonio:wght@400;500;600;700&amp;display=swap">
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Kalam:wght@400&amp;display=swap">
-  <!-- JetBrains Mono: the technical face inside the color sandbox -->
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&amp;display=swap">
   <link rel="stylesheet" href="/css/site.css">
-  <link rel="stylesheet" href="/css/case-study.css">
-  <link rel="stylesheet" href="/css/sandbox.css">
-  <link rel="stylesheet" href="/css/ku.css">
-  <link rel="stylesheet" href="/css/compact.css">
+  <link rel="stylesheet" href="/css/article.css">
   <script src="/js/site.js"></script>
-  <script src="/js/case-study.js" defer></script>
-  <script src="/js/sandbox.js" defer></script>
-  <script src="/js/ku.js" defer></script>
-
 </head>
-<body class="cp-page">
+<body class="cp-page a-page">
   <a class="skip-link" href="#main">Skip to content</a>
   <header class="cp-bar">
     <div class="cp-bar__start">
@@ -52,214 +42,19 @@
       <span><a href="/resume.pdf" data-cursor="Open resume" target="_blank" rel="noopener">Resume</a><a href="https://www.linkedin.com/in/manaharidahal/" target="_blank" rel="noopener">LinkedIn</a><a href="https://dribbble.com/manaharidahal" target="_blank" rel="noopener">Dribbble</a></span>
     </div>
   </div>
-  <div class="cp">
-    <div class="cp-side">
-      <nav class="cp-crumbs" aria-label="Breadcrumbs"><a href="/#work"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m12 19-7-7 7-7M19 12H5"/></svg>Projects</a><span class="cp-crumbs__sep" aria-hidden="true">/</span><span aria-current="page">KU Brand</span></nav>
-      <nav class="cp-outline" aria-label="On this page">
-        <ol><li><a href="#setup" class="cp-outline__stage">The setup</a><ol><li><a href="#interviews">User interviews</a></li><li><a href="#problem">The problem</a></li></ol></li><li><a href="#tradeoffs" class="cp-outline__stage">Trade-offs</a><ol><li><a href="#ia">Information architecture</a></li><li><a href="#identity">New identity</a></li><li><a href="#platform">The new platform</a></li><li><a href="#wireframes">Low-fi to high-fi</a></li><li><a href="#decisions">Design system decisions</a></li><li><a href="#build">Bringing it together</a></li></ol></li><li><a href="#sandbox" class="cp-outline__stage cp-outline__play" data-attn>Color sandbox <span class="cp-outline__tag">Try it</span></a></li><li><a href="#impact" class="cp-outline__stage">Resolution and impact</a><ol><li><a href="#testing">Testing</a></li><li><a href="#outcome">The new brand system</a></li><li><a href="#didnt">What didn’t work</a></li><li><a href="#takeaways">Takeaways</a></li></ol></li></ol>
-      </nav>
-    </div>
-
-    <main class="cp-main" id="main">
-      <nav class="cp-crumbs cp-crumbs--top" aria-label="Breadcrumbs"><a href="/#work"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m12 19-7-7 7-7M19 12H5"/></svg>Projects</a><span class="cp-crumbs__sep" aria-hidden="true">/</span><span aria-current="page">KU Brand</span></nav>
-      <header class="cp-hero">
-        <div class="cp-hero__intro">
-          <p class="cp-sub">Branding · University of Kansas · Jan 2023 to Apr 2024</p>
-          <h1 class="cp-title">KU Brand</h1>
-        </div>
-        <figure class="cp-hero__image"><img src="/assets/images/ku-brand-01-ff9ed1298f.webp" alt="The KU Brand Center home page hero, with the Campanile against the sky and the brand grid over it" width="2200" height="942"></figure>
-        <aside class="cp-hero__aside" aria-label="Project quick links">
-          <div class="cp-card">
-            <p class="cp-card__title">Project access</p>
-            <div class="cp-card__links"><a class="button button--primary" href="https://brand.ku.edu" target="_blank" rel="noopener">Live Demo <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 3h6v6"/><path d="M10 14 21 3"/><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/></svg></a>
-              <a class="button button--play" href="#sandbox"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5.5v13l11-6.5z"/></svg>Play with KU colors</a></div>
-            <div class="cp-card__part"><p class="cp-card__title">Focus</p><div class="cp-topics"><span class="chip">Research</span><span class="chip">Brand system</span><span class="chip">Frontend</span></div></div>
-          </div>
-        </aside>
-        <div class="cp-hero__meta">
-          <section class="cp-outcome" aria-labelledby="cp-outcome-h">
-            <h2 class="cp-outcome__label" id="cp-outcome-h">Outcome</h2>
-            <ul class="meta__stats">
-                <li><span class="meta__num">+30%</span><span class="meta__cap">Traffic across ku.edu after launch (a team result)</span></li>
-                <li><span class="meta__num">~100K</span><span class="meta__cap">Visitors a month across ku.edu and its subdomains</span></li>
-              </ul>
-            <p class="cp-outcome__text">A new brand site for KU Communicators and campus partners, live at brand.ku.edu.</p>
-          </section>
-          <dl class="cp-facts">
-              <div><dt>Role</dt><dd>UX Design and Research, Frontend Development, Graphic Design</dd></div>
-              <div><dt>Timeline</dt><dd>Jan 2023 to Apr 2024</dd></div>
-              <div><dt>Methods</dt><dd>Interviews, focus groups, A/B tests of early concepts, information architecture, frontend build</dd></div>
-              <div><dt>Team</dt><dd>20+ designers, marketers and project managers</dd></div>
-              <div><dt>Tools</dt><dd class="chips"><span class="chip chip--pill">Figma</span><span class="chip chip--pill">HTML</span><span class="chip chip--pill">CSS</span><span class="chip chip--pill">JavaScript</span></dd></div>
-            </dl>
-        </div>
-      </header>
-      <section class="cp-story" aria-label="The story in short"><p class="cp-label">The story in short</p>
-      <p class="story__text">KU refreshed its identity, and its brand site had to catch up. People struggled to find guidelines and assets on the old site. I talked with Kansans about what KU meant to them, then helped turn the new identity into a design system and a brand site for campus partners. It is live at brand.ku.edu, and traffic across ku.edu and its subdomains grew 30% after launch, to 100k+ daily visitors, with 50k+ primary users.</p></section>
-      <section class="cp-contrib" aria-labelledby="contrib-h">
-        <h2 class="cp-label" id="contrib-h">My contribution</h2>
-        <p class="cp-contrib__bg">My background: M.S. Information Science (HCI) student at UNC Chapel Hill, B.S. Computer Science.</p>
-        <div class="cp-contrib__cols">
-          <div><h3 class="cp-contrib__title">What I did</h3><ul><li>Interviews with Kansans, alumni, students, faculty and staff</li><li>Mapped and grouped the content so people could find guidelines easily</li><li>Designed and built the redesigned brand site pages (HTML, CSS, JavaScript)</li></ul></div>
-          <div><h3 class="cp-contrib__title">The team and others</h3><ul><li>The rebrand itself was a campus-wide effort with hundreds of contributors; the core team had 20+ designers, marketers and project managers</li><li>Traffic across ku.edu grew 30% after launch. That is a team result, not mine alone</li></ul></div>
-        </div>
-      </section>
-
-            <section class="cp-sec stage" id="setup" aria-labelledby="setup-cp-h" data-ghost="The setup" data-num="01">
-        <h2 class="cp-sec__label" id="setup-cp-h"><span>01</span>The setup</h2>
-
-          <section class="block" aria-labelledby="setup-cp-h" id="ov-sec">
-            <div class="block__body">
-              <p class="body-text">I worked on research, design and the redesigned pages, so KU Communicators and campus partners can find what they need.</p>
-              <div class="callout reveal">
-                <p class="eyebrow">My role</p>
-                <p>I worked as a product designer and frontend developer on a team of 20+ designers, marketers and project managers.</p>
-              </div>
-            </div>
-          </section>
-      
-          
-
-          <section class="block" id="interviews" aria-labelledby="interviews-h">
-            <h3 class="block__title" id="interviews-h" data-split>User interviews</h3>
-            <div class="block__body">
-              <p class="body-text">I met with Kansans, alumni, students, faculty and staff. I asked open questions about identity, traditions and how they feel about KU, then looked for patterns.</p>
-              <figure class="figure photo reveal">
-                <div class="figure__media"><img src="/assets/images/ku-brand-02-b29a48186b.webp" alt="Kansans walking together through the Flint Hills prairie" loading="lazy" width="570" height="407"></div>
-                <figcaption>Photo from the KU Brand Center. It shows the Kansas people and places the interviews were about.</figcaption>
-              </figure>
-              
-            </div>
-          </section>
-      
-          
-
-          <section class="block" id="problem" aria-labelledby="problem-h">
-            <h3 class="block__title" id="problem-h" data-split>The problem</h3>
-            <div class="block__body">
-              <div class="goal reveal">
-                <div class="goal__text">
-                  <p class="eyebrow">Goal</p>
-                  <p class="goal__statement">Build a brand site that reflects the new identity and makes guidelines and assets easy to find.</p>
-                </div>
-                <div class="grid-2 issues">
-                  <div class="card"><p class="eyebrow eyebrow--muted">Issue 1</p><h3>An outdated site</h3><p>The old brand site did not match the new identity.</p></div>
-                  <div class="card"><p class="eyebrow eyebrow--muted">Issue 2</p><h3>Hard to find things</h3><p>KU Communicators had trouble finding clear guidelines and updated assets.</p></div>
-                </div>
-              </div>
-              <div class="pair">
-                <h4>The solution</h4>
-                <p>We reorganized the content and redesigned the pages. I mapped the content, proposed layouts, and worked with a developer to build the logos, type and color tokens into every page.</p>
-              </div>
-            </div>
-          </section>
-      
-      </section>
-
-      <section class="cp-sec stage" id="tradeoffs" aria-labelledby="tradeoffs-cp-h" data-ghost="Trade-offs" data-num="02">
-        <h2 class="cp-sec__label" id="tradeoffs-cp-h"><span>02</span>Trade-offs</h2>
-
-          
-
-          <section class="block" id="ia" aria-labelledby="ia-h">
-            <h3 class="block__title" id="ia-h" data-split>Information architecture</h3>
-            <div class="block__body">
-              <p class="body-text">I mapped the content people needed most and grouped the guidelines to make sense. I proposed layouts and turned brand rules into usable components.</p>
-              
-              <div class="pair">
-                <h4>Focus groups</h4>
-                <p>I tested early brand elements and layouts with small focus groups, and watched people use the old site. I used what I saw to refine hierarchy, language and direction.</p>
-              </div>
-            </div>
-          </section>
-      
-          
-
-          <section class="block" id="identity" aria-labelledby="identity-h">
-            <h3 class="block__title" id="identity-h" data-split>New identity</h3>
-            <div class="block__body">
-              <p class="body-text">The refreshed brand became a digital system. It defined how logos, colors, typography and spacing showed up across the site. This graphic shows the core elements in the brand colors.</p>
-              <figure class="figure brand-art reveal">
-                <div class="figure__media">
-<svg viewBox="0 0 1056 340" preserveAspectRatio="xMidYMid slice" role="img" aria-label="Abstract graphic in KU blue, crimson and yellow, with a tower, a grid and simple shapes">
-<rect width="1056" height="340" fill="#0051BA"/>
-<defs>
-<pattern id="kug" width="44" height="44" patternUnits="userSpaceOnUse">
-<path d="M44 0H0V44" fill="none" stroke="#fff" stroke-opacity=".16"/>
-</pattern>
-</defs>
-<rect class="kua-g" data-s="-.05" width="1056" height="340" fill="url(#kug)"/>
-<g class="kua-l" data-s=".12">
-<circle cx="190" cy="250" r="150" fill="#2767FF"/>
-<circle cx="190" cy="250" r="86" fill="#73CBF2"/>
-</g>
-<g class="kua-m" data-s=".22">
-<path d="M0 340V190A150 150 0 0 1 150 340Z" fill="#E8000D"/>
-<rect x="560" y="64" width="190" height="276" fill="#D7D2CB"/>
-<rect x="590" y="94" width="14" height="70" fill="#003459"/>
-<rect x="622" y="94" width="14" height="70" fill="#003459"/>
-<rect x="654" y="94" width="14" height="70" fill="#003459"/>
-<rect x="686" y="94" width="14" height="70" fill="#003459"/>
-<path d="M590 340V250a30 30 0 0 1 60 0V340Z" fill="#003459"/>
-</g>
-<g class="kua-t" data-s=".38">
-<rect x="820" y="0" width="120" height="340" fill="#003459"/>
-<rect x="852" y="40" width="10" height="150" fill="#DDE5ED"/>
-<rect x="898" y="40" width="10" height="150" fill="#DDE5ED"/>
-<circle cx="880" cy="250" r="26" fill="#FFC82D"/>
-</g>
-<g class="kua-s" data-s=".5">
-<circle cx="410" cy="96" r="44" fill="#FFC82D"/>
-<rect x="330" y="220" width="170" height="120" fill="#8E9FBC"/>
-</g>
-</svg>
-                </div>
-                <figcaption>A simple graphic built from the KU brand colors and grid.</figcaption>
-              </figure>
-              <div class="pair">
-                <h4>Visual system updates</h4>
-                <p>We adjusted the type scale, tightened spacing and cleaned up the color tokens, mostly from testing and small fixes.</p>
-              </div>
-              <div class="pair">
-                <h4>Making the brand easy to use</h4>
-                <p>I reorganized the site so people could find what they needed. I grouped the content naturally and cleaned up confusing or outdated sections.</p>
-              </div>
-            </div>
-          </section>
-
-          <section class="block" id="platform" aria-labelledby="platform-h">
-            <h3 class="block__title" id="platform-h" data-split>The new platform</h3>
-            <div class="block__body">
-              <p class="body-text">“Towering Toward the Blue” comes from a line in KU’s Alma Mater. It became the brand platform for how KU looks, sounds and feels. The logo, Jayhawk and crimson and blue stayed. We checked each design choice against it.</p>
-              <div class="grid-3 reveal">
-                <div class="card"><p class="eyebrow">Look</p><h3>Bold and clear</h3><p>Strong type, a visible grid and wide space.</p></div>
-                <div class="card"><p class="eyebrow">Sound</p><h3>Confident and warm</h3><p>Active voice. Skyward words like climb, soar and build.</p></div>
-                <div class="card"><p class="eyebrow">Feel</p><h3>Proud of Kansas</h3><p>Real campus photos and the colors people already knew.</p></div>
-              </div>
-            </div>
-          </section>
-
-          <section class="block" id="wireframes" aria-labelledby="wireframes-h">
-            <h3 class="block__title" id="wireframes-h" data-split>Low-fi to high-fi</h3>
-            <div class="block__body">
-              <p class="body-text">I started with boxes and added detail one layer at a time. Each step answered one question before the next began. I kept the early steps grey on purpose, so we discussed structure before color.</p>
-              <!-- The four steps below, played as one short video. It waits on
-                   its poster with a big play button; playing it brings up the
-                   video controls (case-study.js). -->
-              <figure class="figure motion">
-                <div class="figure__media motion__frame">
-                  <video class="motion__video" muted playsinline preload="metadata" width="1280" height="720" poster="/assets/images/ku-brand-wireframes-poster.webp" aria-label="The Brand Center home page built up in four steps: boxes only, a grey wireframe, the brand frame, then photos and color.">
-                    <source src="/assets/video/ku-brand-wireframes.webm" type="video/webm">
-                    <source src="/assets/video/ku-brand-wireframes.mp4" type="video/mp4">
-                  </video>
-                  <button class="motion__start" type="button"><span class="motion__disc" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M8 5.5v13l11-6.5z"/></svg></span><span class="motion__cue"><span class="motion__verb">Play</span> the build · 9s</span></button>
-                </div>
-                <figcaption>The home page coming together, from boxes to the final design. Each step is shown on its own below.</figcaption>
-              </figure>
-              <ol class="steps">
-                <li class="step reveal">
-                  <div class="step__text"><b>1</b><h4>Boxes only</h4><p>I drew boxes and labels, with no color and no real text. This showed the order and size of each block: the hero, positioning, goal and four guideline cards.</p></div>
-                  <figure class="step__figure"><svg viewBox="0 0 640 640" role="img" aria-label="Boxes-only sketch of the Brand Center home page" xmlns="http://www.w3.org/2000/svg">
+  
+  <main class="article" id="main">
+    <a class="a-back" href="/#work"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m12 19-7-7 7-7M19 12H5"/></svg>All case studies</a>
+    
+    <header class="a-head">
+      <p class="a-tag">Branding · University of Kansas · Jan 2023 to Apr 2024</p>
+      <h1 class="a-title">KU Brand</h1>
+      <p class="a-sub">KU refreshed its identity, and its brand site had to catch up. People struggled to find guidelines and assets on the old site. I talked with Kansans about what KU meant to them, then helped turn the new identity into a design system and a brand site for campus partners. It is live at brand.ku.edu, and traffic across ku.edu and its subdomains grew 30% after launch, to 100k+ daily visitors, with 50k+ primary users.</p>
+      <dl class="a-facts"><div><dt>Role</dt><dd>UX Design and Research, Frontend Development, Graphic Design</dd></div><div><dt>Timeline</dt><dd>Jan 2023 to Apr 2024</dd></div><div><dt>Methods</dt><dd>Interviews, focus groups, A/B tests of early concepts, information architecture, frontend build</dd></div><div><dt>Team</dt><dd>20+ designers, marketers and project managers</dd></div><div><dt>Tools</dt><dd>Figma, HTML, CSS, JavaScript</dd></div></dl>
+      <div class="a-links"><a class="button button--primary" href="https://brand.ku.edu" target="_blank" rel="noopener">Live Demo</a></div>
+    </header>
+    <figure class="a-hero"><img src="/assets/images/ku-brand-01-ff9ed1298f.webp" alt="The KU Brand Center home page hero, with the Campanile against the sky and the brand grid over it" loading="lazy"></figure>
+    <section class="a-act a-act--intro"><section class="a-part"><h3>My contribution</h3><p>My background: M.S. Information Science (HCI) student at UNC Chapel Hill, B.S. Computer Science.</p><div class="a-two"><div><p class="points-head">What I did</p><ul><li>Interviews with Kansans, alumni, students, faculty and staff</li><li>Mapped and grouped the content so people could find guidelines easily</li><li>Designed and built the redesigned brand site pages (HTML, CSS, JavaScript)</li></ul></div><div><p class="points-head">The team and others</p><ul><li>The rebrand itself was a campus-wide effort with hundreds of contributors; the core team had 20+ designers, marketers and project managers</li><li>Traffic across ku.edu grew 30% after launch. That is a team result, not mine alone</li></ul></div></div></section></section><section class="a-act" id="setup"><h2>The setup</h2><section class="a-part"><h3>Overview</h3><p>I worked on research, design and the redesigned pages, so KU Communicators and campus partners can find what they need.</p><div class="a-quote"><p class="label">My role</p><p>I worked as a product designer and frontend developer on a team of 20+ designers, marketers and project managers.</p></div></section><section class="a-part"><h3>User interviews</h3><div class="row"><div><p>I met with Kansans, alumni, students, faculty and staff. I asked open questions about identity, traditions and how they feel about KU, then looked for patterns.</p></div><figure><img src="/assets/images/ku-brand-02-b29a48186b.webp" alt="Kansans walking together through the Flint Hills prairie" loading="lazy"><figcaption>Photo from the KU Brand Center. It shows the Kansas people and places the interviews were about.</figcaption></figure></div></section><section class="a-part"><h3>The problem</h3><div class="a-quote"><p class="label">Goal</p><p>Build a brand site that reflects the new identity and makes guidelines and assets easy to find.</p></div><ul class="accs "><li><details class="acc"><summary><span class="acc__label">Issue 1</span><span class="acc__name">An outdated site</span></summary><div class="acc__body"><p>The old brand site did not match the new identity.</p></div></details></li><li><details class="acc"><summary><span class="acc__label">Issue 2</span><span class="acc__name">Hard to find things</span></summary><div class="acc__body"><p>KU Communicators had trouble finding clear guidelines and updated assets.</p></div></details></li></ul><p class="points-head">The solution</p><p>We reorganized the content and redesigned the pages. I mapped the content, proposed layouts, and worked with a developer to build the logos, type and color tokens into every page.</p></section></section><section class="a-act" id="tradeoffs"><h2>Trade-offs</h2><section class="a-part"><h3>Information architecture</h3><p>I mapped the content people needed most and grouped the guidelines to make sense. I proposed layouts and turned brand rules into usable components.</p><p class="points-head">Focus groups</p><p>I tested early brand elements and layouts with small focus groups, and watched people use the old site. I used what I saw to refine hierarchy, language and direction.</p></section><section class="a-part"><h3>New identity</h3><p>The refreshed brand became a digital system. It defined how logos, colors, typography and spacing showed up across the site.</p><ul class="accs "><li><details class="acc"><summary><span class="acc__name">Visual system updates</span></summary><div class="acc__body"><p>We adjusted the type scale, tightened spacing and cleaned up the color tokens, mostly from testing and small fixes.</p></div></details></li><li><details class="acc"><summary><span class="acc__name">Making the brand easy to use</span></summary><div class="acc__body"><p>I reorganized the site so people could find what they needed. I grouped the content naturally and cleaned up confusing or outdated sections.</p></div></details></li></ul></section><section class="a-part"><h3>The new platform</h3><p>“Towering Toward the Blue” comes from a line in KU’s Alma Mater. It became the brand platform for how KU looks, sounds and feels. The logo, Jayhawk and crimson and blue stayed. We checked each design choice against it.</p><ul class="accs "><li><details class="acc"><summary><span class="acc__label">Look</span><span class="acc__name">Bold and clear</span></summary><div class="acc__body"><p>Strong type, a visible grid and wide space.</p></div></details></li><li><details class="acc"><summary><span class="acc__label">Sound</span><span class="acc__name">Confident and warm</span></summary><div class="acc__body"><p>Active voice. Skyward words like climb, soar and build.</p></div></details></li><li><details class="acc"><summary><span class="acc__label">Feel</span><span class="acc__name">Proud of Kansas</span></summary><div class="acc__body"><p>Real campus photos and the colors people already knew.</p></div></details></li></ul></section><section class="a-part"><h3>Low-fi to high-fi</h3><p>I started with boxes and added detail one layer at a time. Each step answered one question before the next began. I kept the early steps grey on purpose, so we discussed structure before color.</p><figure><video controls muted playsinline preload="metadata" width="1280" height="720" poster="/assets/images/ku-brand-wireframes-poster.webp" aria-label="The Brand Center home page coming together, from boxes to the final design"><source src="/assets/video/ku-brand-wireframes.webm" type="video/webm"><source src="/assets/video/ku-brand-wireframes.mp4" type="video/mp4"></video><figcaption>The home page coming together, from boxes to the final design.</figcaption></figure><div class="row"><div><p class="points-head">1 · Boxes only</p><p>I drew boxes and labels, with no color and no real text. This showed the order and size of each block: the hero, positioning, goal and four guideline cards.</p></div><figure><svg viewBox="0 0 640 640" role="img" aria-label="Boxes-only sketch of the Brand Center home page" xmlns="http://www.w3.org/2000/svg">
 <rect width="640" height="640" fill="#10151c"/>
 <rect x="10" y="10" width="620" height="26" rx="3" fill="none" stroke="rgba(255,255,255,.55)" stroke-width="1.5" stroke-dasharray="5 4"/>
 <text x="320" y="27" font-size="11" fill="rgba(255,255,255,0.85)" text-anchor="middle" font-weight="500" font-family="Inter,sans-serif">
@@ -312,11 +107,7 @@
 <text x="320" y="608" font-size="11" fill="rgba(255,255,255,0.85)" text-anchor="middle" font-weight="500" font-family="Inter,sans-serif">
                                 Footer
                               </text>
-</svg><figcaption>Step 1. Structure only.</figcaption></figure>
-                </li>
-                <li class="step reveal">
-                  <div class="step__text"><b>2</b><h4>Grey wireframe</h4><p>I added the real navigation, headings and copy. The slogan was the main text in the hero. Now we could check the hierarchy and the reading order.</p></div>
-                  <figure class="step__figure"><svg viewBox="0 0 640 700" role="img" aria-label="Wireframe of the Brand Center home page" xmlns="http://www.w3.org/2000/svg">
+</svg><figcaption>Step 1. Structure only.</figcaption></figure></div><div class="row row--flip"><div><p class="points-head">2 · Grey wireframe</p><p>I added the real navigation, headings and copy. The slogan was the main text in the hero. Now we could check the hierarchy and the reading order.</p></div><figure><svg viewBox="0 0 640 700" role="img" aria-label="Wireframe of the Brand Center home page" xmlns="http://www.w3.org/2000/svg">
 <rect width="640" height="700" fill="#10151c"/>
 <rect x="0" y="0" width="640" height="36" rx="0" fill="rgba(255,255,255,0.06)"/>
 <rect x="16" y="10" width="70" height="16" rx="3" fill="#2767ff"/>
@@ -409,11 +200,7 @@
 <rect x="0" y="650" width="640" height="50" rx="0" fill="rgba(255,255,255,0.06)"/>
 <rect x="40" y="666" width="200" height="4" rx="2" fill="rgba(255,255,255,0.18)"/>
 <rect x="40" y="676" width="120" height="4" rx="2" fill="rgba(255,255,255,0.18)"/>
-</svg><figcaption>Step 2. Real content, still grey.</figcaption></figure>
-                </li>
-                <li class="step reveal">
-                  <div class="step__text"><b>3</b><h4>Brand frame</h4><p>I added the holding box and pinpoints from the graphic elements. They showed how the brand frame sits on the page.</p></div>
-                  <figure class="step__figure"><svg viewBox="0 0 640 700" role="img" aria-label="Wireframe of the Brand Center home page" xmlns="http://www.w3.org/2000/svg">
+</svg><figcaption>Step 2. Real content, still grey.</figcaption></figure></div><div class="row"><div><p class="points-head">3 · Brand frame</p><p>I added the holding box and pinpoints from the graphic elements. They showed how the brand frame sits on the page.</p></div><figure><svg viewBox="0 0 640 700" role="img" aria-label="Wireframe of the Brand Center home page" xmlns="http://www.w3.org/2000/svg">
 <rect width="640" height="700" fill="#10151c"/>
 <rect x="0" y="0" width="640" height="36" rx="0" fill="rgba(255,255,255,0.06)"/>
 <rect x="16" y="10" width="70" height="16" rx="3" fill="#2767ff"/>
@@ -512,11 +299,7 @@
 <text x="184" y="486" font-size="9" fill="rgba(255,255,255,0.55)" text-anchor="start" font-weight="400" font-family="Inter,sans-serif">
                                 Holding box with pinpoints
                               </text>
-</svg><figcaption>Step 3. The red box and blue dots mark the holding box and pinpoints.</figcaption></figure>
-                </li>
-                <li class="step reveal">
-                  <div class="step__text"><b>4</b><h4>High fidelity</h4><p>I added photos from the Brand Center, Kansas Blue and Crimson. Some layouts looked clean at this stage but felt hard to use, so I kept checking them against the grey versions.</p></div>
-                  <figure class="step__figure"><svg viewBox="0 0 640 700" role="img" aria-label="High-fidelity version of the Brand Center home page" xmlns="http://www.w3.org/2000/svg">
+</svg><figcaption>Step 3. The red box and blue dots mark the holding box and pinpoints.</figcaption></figure></div><div class="row row--flip"><div><p class="points-head">4 · High fidelity</p><p>I added photos from the Brand Center, Kansas Blue and Crimson. Some layouts looked clean at this stage but felt hard to use, so I kept checking them against the grey versions.</p></div><figure><svg viewBox="0 0 640 700" role="img" aria-label="High-fidelity version of the Brand Center home page" xmlns="http://www.w3.org/2000/svg">
 <rect width="640" height="700" fill="#10151c"/>
 <rect x="0" y="0" width="640" height="36" rx="0" fill="rgba(255,255,255,0.06)"/>
 <rect x="16" y="10" width="70" height="16" rx="3" fill="#2767ff"/>
@@ -605,17 +388,7 @@
 <rect x="40" y="490" width="134" height="136" rx="4" fill="none" stroke="#ff3042" stroke-width="1"/>
 <circle cx="40" cy="490" r="4" fill="#2767ff"/>
 <circle cx="174" cy="626" r="4" fill="#2767ff"/>
-</svg><figcaption>Step 4. Photos and color.</figcaption></figure>
-                </li>
-              </ol>
-              <section class="reel" aria-labelledby="reel-wf-title">
-                <div class="reel__head">
-                  <p class="reel__kicker">Behind the scenes</p>
-                  <h4 class="reel__title" id="reel-wf-title">The same steps on two more pages</h4>
-                  <p class="reel__intro">I used the same steps for the guideline page and the downloads page.</p>
-                </div>
-                <div class="reel__grid">
-                  <figure class="step__figure"><svg viewBox="0 0 640 660" role="img" aria-label="Wireframe of a guideline page for color palettes" xmlns="http://www.w3.org/2000/svg">
+</svg><figcaption>Step 4. Photos and color.</figcaption></figure></div><p class="points-head">The same steps on two more pages</p><p>I used the same steps for the guideline page and the downloads page.</p><div class="figs" style="--n: 2"><figure><svg viewBox="0 0 640 660" role="img" aria-label="Wireframe of a guideline page for color palettes" xmlns="http://www.w3.org/2000/svg">
   <rect width="640" height="660" fill="#10151c"/>
   <rect x="0" y="0" width="640" height="36" rx="0" fill="rgba(255,255,255,0.06)"/>
   <rect x="16" y="10" width="70" height="16" rx="3" fill="#2767ff"/>
@@ -719,8 +492,7 @@
   <rect x="56" y="576" width="520" height="4" rx="2" fill="rgba(255,255,255,0.18)"/>
   <rect x="56" y="585" width="520" height="4" rx="2" fill="rgba(255,255,255,0.18)"/>
   <rect x="56" y="594" width="312" height="4" rx="2" fill="rgba(255,255,255,0.18)"/>
-  </svg><figcaption>Guideline page. A side menu keeps people oriented. Swatches come first, then pairings to use and avoid.</figcaption></figure>
-                  <figure class="step__figure"><svg viewBox="0 0 640 660" role="img" aria-label="Wireframe of the downloads page" xmlns="http://www.w3.org/2000/svg">
+  </svg><figcaption>Guideline page. A side menu keeps people oriented. Swatches come first, then pairings to use and avoid.</figcaption></figure><figure><svg viewBox="0 0 640 660" role="img" aria-label="Wireframe of the downloads page" xmlns="http://www.w3.org/2000/svg">
   <rect width="640" height="660" fill="#10151c"/>
   <rect x="0" y="0" width="640" height="36" rx="0" fill="rgba(255,255,255,0.06)"/>
   <rect x="16" y="10" width="70" height="16" rx="3" fill="#2767ff"/>
@@ -840,264 +612,8 @@
   <text x="526" y="601" font-size="10" fill="rgba(255,255,255,0.95)" text-anchor="middle" font-weight="500" font-family="Inter,sans-serif">
                                 Request
                               </text>
-  </svg><figcaption>Downloads page. Filters on top, one card per file, and a path to request an official mark.</figcaption></figure>
-                </div>
-              </section>
-            </div>
-          </section>
-
-          <section class="block" id="decisions" aria-labelledby="decisions-h">
-            <h3 class="block__title" id="decisions-h" data-split>Design system decisions</h3>
-            <div class="block__body">
-              <ol class="items reveal">
-                <li><span class="eyebrow">Decision 1</span><h3>Keep the two core colors</h3><p>Kansas Blue (#0051ba) and Crimson (#e8000d) stayed, the colors people already knew.</p></li>
-                <li><span class="eyebrow">Decision 2</span><h3>Name every color</h3><p>Each color got a plain name, like Night, Lake and Sky, so everyone used the same words.</p></li>
-                <li><span class="eyebrow">Decision 3</span><h3>Never rely on color alone</h3><p>Every pairing passed a WCAG contrast check first. We listed the pairings to use and the ones to avoid.</p></li>
-                <li><span class="eyebrow">Decision 4</span><h3>Pick type by job</h3><p>Roc Grotesk and Moret for headlines. Gotham Narrow or Freight Text for body. KU’s rule set web body text at 12 to 16 px.</p></li>
-                <li><span class="eyebrow">Decision 5</span><h3>Use the grid and frames</h3><p>Square grid units for layouts, a thin Fire line for holding boxes, Lake dots for pinpoints.</p></li>
-                <li><span class="eyebrow">Decision 6</span><h3>Write in the brand voice</h3><p>Active voice, present or future tense, and “toward” instead of “towards”. We kept tower images rare.</p></li>
-              </ol>
-
-              <!-- Color sandbox, laid out like Storybook: a toolbar, the pairs from
-                   the system down the left, the live canvas, and a panel with
-                   tabs for the controls, the accessibility check and the code
-                   (js/ku.js) -->
-              <div class="sandbox-wrap sandbox-wrap--ku" id="sandbox">
-                <div class="sandbox-wrap__head">
-                  <p class="sandbox-wrap__tag"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5.5v13l11-6.5z"/></svg>Interactive</p>
-                  <h4 class="sandbox-wrap__title">Try the KU color system yourself</h4>
-                  <p class="sandbox-wrap__text">Pick any two of the 17 brand colors, or one of the 8 pairs from the system, and see whether it passes the same contrast check we used.</p>
-                </div>
-                <div class="sandbox-wrap__strip" aria-hidden="true"><i style="--c:#0051ba;--i:0"></i><i style="--c:#e8000d;--i:1"></i><i style="--c:#003459;--i:2"></i><i style="--c:#2767ff;--i:3"></i><i style="--c:#73cbf2;--i:4"></i><i style="--c:#8e9fbc;--i:5"></i><i style="--c:#dde5ed;--i:6"></i><i style="--c:#ff3042;--i:7"></i><i style="--c:#971b2f;--i:8"></i><i style="--c:#f2a900;--i:9"></i><i style="--c:#c66e4e;--i:10"></i><i style="--c:#be9a79;--i:11"></i><i style="--c:#d7d2cb;--i:12"></i><i style="--c:#ffc82d;--i:13"></i><i style="--c:#85898a;--i:14"></i><i style="--c:#333333;--i:15"></i><i style="--c:#ffffff;--i:16"></i></div>
-              <section class="sandbox" aria-labelledby="sandbox-h" data-play>
-                <div class="sandbox__bar">
-                  <p class="sandbox__crumb">KU Brand <span aria-hidden="true">/</span> <b id="sandbox-h">Color sandbox</b></p>
-                  <div class="sandbox__tools">
-                    <button type="button" class="sandbox__btn" data-swap><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 4 3 8l4 4M3 8h14M17 20l4-4-4-4M21 16H7"/></svg>Swap</button>
-                    <button type="button" class="sandbox__btn" data-shuffle><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M16 3h5v5M4 20 21 3M21 16v5h-5M15 15l6 6M4 4l5 5"/></svg>Passing pair</button>
-                    <label class="sandbox__switch"><input type="checkbox" data-frame checked><span aria-hidden="true"></span>Holding box</label>
-                  </div>
-                </div>
-                <div class="sandbox__body">
-                  <nav class="sandbox__side" aria-label="Pairs from the system">
-                    <p class="sandbox__group">Use</p>
-                    <ul><li><button type="button" class="play__preset is-pass" data-fg="white" data-bg="blue"><span class="play__aa" style="color:#ffffff;background:#0051ba" aria-hidden="true">Aa</span>White on Kansas Blue</button></li><li><button type="button" class="play__preset is-pass" data-fg="night" data-bg="sky"><span class="play__aa" style="color:#003459;background:#73cbf2" aria-hidden="true">Aa</span>Night on Sky</button></li><li><button type="button" class="play__preset is-pass" data-fg="text" data-bg="steam"><span class="play__aa" style="color:#333333;background:#dde5ed" aria-hidden="true">Aa</span>Gray text on Steam</button></li><li><button type="button" class="play__preset is-pass" data-fg="white" data-bg="brick"><span class="play__aa" style="color:#ffffff;background:#971b2f" aria-hidden="true">Aa</span>White on Brick</button></li></ul>
-                    <p class="sandbox__group">Avoid</p>
-                    <ul><li><button type="button" class="play__preset is-fail" data-fg="white" data-bg="sky"><span class="play__aa" style="color:#ffffff;background:#73cbf2" aria-hidden="true">Aa</span>White on Sky</button></li><li><button type="button" class="play__preset is-fail" data-fg="night" data-bg="lake"><span class="play__aa" style="color:#003459;background:#2767ff" aria-hidden="true">Aa</span>Night on Lake</button></li><li><button type="button" class="play__preset is-fail" data-fg="white" data-bg="gray"><span class="play__aa" style="color:#ffffff;background:#85898a" aria-hidden="true">Aa</span>White on Signature Gray</button></li><li><button type="button" class="play__preset is-fail" data-fg="text" data-bg="crimson"><span class="play__aa" style="color:#333333;background:#e8000d" aria-hidden="true">Aa</span>Gray text on Crimson</button></li></ul>
-                  </nav>
-                  <div class="sandbox__main">
-                    <div class="sandbox__canvas">
-                      <div class="play__preview" data-preview data-real>
-                        <p class="play__eyebrow">Brand Center</p>
-                        <p class="play__headline">Towering Toward the Blue</p>
-                        <p class="play__body">Logos, colors, type and graphics for everyone who tells KU’s story.</p>
-                        <p class="play__links"><span class="play__button">Explore the brand</span><span class="play__link">Download logos</span></p>
-                        <span class="play__frame" aria-hidden="true"><i></i><i></i></span>
-                      </div>
-                    </div>
-                    <div class="sandbox__panel">
-                      <div class="sandbox__tabs" role="tablist" aria-label="Sandbox panels">
-                        <button type="button" role="tab" id="sb-tab-0" aria-controls="sb-pan-0" aria-selected="true">Controls</button>
-                        <button type="button" role="tab" id="sb-tab-1" aria-controls="sb-pan-1" aria-selected="false" tabindex="-1">Accessibility <span class="sandbox__badge" data-badge></span></button>
-                        <button type="button" role="tab" id="sb-tab-2" aria-controls="sb-pan-2" aria-selected="false" tabindex="-1">Code</button>
-                      </div>
-                      <div class="sandbox__pane" role="tabpanel" id="sb-pan-0" aria-labelledby="sb-tab-0">
-                      <div class="sandbox__row">
-                        <p class="sandbox__label" id="sb-fg-l">Text<span class="play__picked" data-picked="fg"></span></p>
-                        <div class="play__swatches" role="radiogroup" aria-labelledby="sb-fg-l"><label class="play__sw" title="White #ffffff"><input type="radio" name="play-fg" value="white" data-hex="#ffffff" data-name="White" data-token=""><span style="--c:#ffffff"></span><b>White</b></label><label class="play__sw" title="Text gray #333333"><input type="radio" name="play-fg" value="text" data-hex="#333333" data-name="Text gray" data-token="--ku-text"><span style="--c:#333333"></span><b>Text gray</b></label><label class="play__sw" title="Kansas Blue #0051ba"><input type="radio" name="play-fg" value="blue" data-hex="#0051ba" data-name="Kansas Blue" data-token="--ku-blue"><span style="--c:#0051ba"></span><b>Kansas Blue</b></label><label class="play__sw" title="Crimson #e8000d"><input type="radio" name="play-fg" value="crimson" data-hex="#e8000d" data-name="Crimson" data-token="--ku-crimson"><span style="--c:#e8000d"></span><b>Crimson</b></label><label class="play__sw" title="Night #003459"><input type="radio" name="play-fg" value="night" data-hex="#003459" data-name="Night" data-token="--ku-night" checked><span style="--c:#003459"></span><b>Night</b></label><label class="play__sw" title="Lake #2767ff"><input type="radio" name="play-fg" value="lake" data-hex="#2767ff" data-name="Lake" data-token="--ku-lake"><span style="--c:#2767ff"></span><b>Lake</b></label><label class="play__sw" title="Sky #73cbf2"><input type="radio" name="play-fg" value="sky" data-hex="#73cbf2" data-name="Sky" data-token="--ku-sky"><span style="--c:#73cbf2"></span><b>Sky</b></label><label class="play__sw" title="Fog #8e9fbc"><input type="radio" name="play-fg" value="fog" data-hex="#8e9fbc" data-name="Fog" data-token="--ku-fog"><span style="--c:#8e9fbc"></span><b>Fog</b></label><label class="play__sw" title="Steam #dde5ed"><input type="radio" name="play-fg" value="steam" data-hex="#dde5ed" data-name="Steam" data-token="--ku-steam"><span style="--c:#dde5ed"></span><b>Steam</b></label><label class="play__sw" title="Fire #ff3042"><input type="radio" name="play-fg" value="fire" data-hex="#ff3042" data-name="Fire" data-token="--ku-fire"><span style="--c:#ff3042"></span><b>Fire</b></label><label class="play__sw" title="Brick #971b2f"><input type="radio" name="play-fg" value="brick" data-hex="#971b2f" data-name="Brick" data-token="--ku-brick"><span style="--c:#971b2f"></span><b>Brick</b></label><label class="play__sw" title="Wheat #f2a900"><input type="radio" name="play-fg" value="wheat" data-hex="#f2a900" data-name="Wheat" data-token="--ku-wheat"><span style="--c:#f2a900"></span><b>Wheat</b></label><label class="play__sw" title="Terra Cotta #c66e4e"><input type="radio" name="play-fg" value="terra" data-hex="#c66e4e" data-name="Terra Cotta" data-token="--ku-terra"><span style="--c:#c66e4e"></span><b>Terra Cotta</b></label><label class="play__sw" title="Tallgrass #be9a79"><input type="radio" name="play-fg" value="tallgrass" data-hex="#be9a79" data-name="Tallgrass" data-token="--ku-tallgrass"><span style="--c:#be9a79"></span><b>Tallgrass</b></label><label class="play__sw" title="Limestone #d7d2cb"><input type="radio" name="play-fg" value="limestone" data-hex="#d7d2cb" data-name="Limestone" data-token="--ku-limestone"><span style="--c:#d7d2cb"></span><b>Limestone</b></label><label class="play__sw" title="Jayhawk Yellow #ffc82d"><input type="radio" name="play-fg" value="yellow" data-hex="#ffc82d" data-name="Jayhawk Yellow" data-token="--ku-yellow"><span style="--c:#ffc82d"></span><b>Jayhawk Yellow</b></label><label class="play__sw" title="Signature Gray #85898a"><input type="radio" name="play-fg" value="gray" data-hex="#85898a" data-name="Signature Gray" data-token="--ku-gray"><span style="--c:#85898a"></span><b>Signature Gray</b></label></div>
-                      </div>
-                      <div class="sandbox__row">
-                        <p class="sandbox__label" id="sb-bg-l">Background<span class="play__picked" data-picked="bg"></span></p>
-                        <div class="play__swatches" role="radiogroup" aria-labelledby="sb-bg-l"><label class="play__sw" title="White #ffffff"><input type="radio" name="play-bg" value="white" data-hex="#ffffff" data-name="White" data-token=""><span style="--c:#ffffff"></span><b>White</b></label><label class="play__sw" title="Text gray #333333"><input type="radio" name="play-bg" value="text" data-hex="#333333" data-name="Text gray" data-token="--ku-text"><span style="--c:#333333"></span><b>Text gray</b></label><label class="play__sw" title="Kansas Blue #0051ba"><input type="radio" name="play-bg" value="blue" data-hex="#0051ba" data-name="Kansas Blue" data-token="--ku-blue"><span style="--c:#0051ba"></span><b>Kansas Blue</b></label><label class="play__sw" title="Crimson #e8000d"><input type="radio" name="play-bg" value="crimson" data-hex="#e8000d" data-name="Crimson" data-token="--ku-crimson"><span style="--c:#e8000d"></span><b>Crimson</b></label><label class="play__sw" title="Night #003459"><input type="radio" name="play-bg" value="night" data-hex="#003459" data-name="Night" data-token="--ku-night"><span style="--c:#003459"></span><b>Night</b></label><label class="play__sw" title="Lake #2767ff"><input type="radio" name="play-bg" value="lake" data-hex="#2767ff" data-name="Lake" data-token="--ku-lake"><span style="--c:#2767ff"></span><b>Lake</b></label><label class="play__sw" title="Sky #73cbf2"><input type="radio" name="play-bg" value="sky" data-hex="#73cbf2" data-name="Sky" data-token="--ku-sky" checked><span style="--c:#73cbf2"></span><b>Sky</b></label><label class="play__sw" title="Fog #8e9fbc"><input type="radio" name="play-bg" value="fog" data-hex="#8e9fbc" data-name="Fog" data-token="--ku-fog"><span style="--c:#8e9fbc"></span><b>Fog</b></label><label class="play__sw" title="Steam #dde5ed"><input type="radio" name="play-bg" value="steam" data-hex="#dde5ed" data-name="Steam" data-token="--ku-steam"><span style="--c:#dde5ed"></span><b>Steam</b></label><label class="play__sw" title="Fire #ff3042"><input type="radio" name="play-bg" value="fire" data-hex="#ff3042" data-name="Fire" data-token="--ku-fire"><span style="--c:#ff3042"></span><b>Fire</b></label><label class="play__sw" title="Brick #971b2f"><input type="radio" name="play-bg" value="brick" data-hex="#971b2f" data-name="Brick" data-token="--ku-brick"><span style="--c:#971b2f"></span><b>Brick</b></label><label class="play__sw" title="Wheat #f2a900"><input type="radio" name="play-bg" value="wheat" data-hex="#f2a900" data-name="Wheat" data-token="--ku-wheat"><span style="--c:#f2a900"></span><b>Wheat</b></label><label class="play__sw" title="Terra Cotta #c66e4e"><input type="radio" name="play-bg" value="terra" data-hex="#c66e4e" data-name="Terra Cotta" data-token="--ku-terra"><span style="--c:#c66e4e"></span><b>Terra Cotta</b></label><label class="play__sw" title="Tallgrass #be9a79"><input type="radio" name="play-bg" value="tallgrass" data-hex="#be9a79" data-name="Tallgrass" data-token="--ku-tallgrass"><span style="--c:#be9a79"></span><b>Tallgrass</b></label><label class="play__sw" title="Limestone #d7d2cb"><input type="radio" name="play-bg" value="limestone" data-hex="#d7d2cb" data-name="Limestone" data-token="--ku-limestone"><span style="--c:#d7d2cb"></span><b>Limestone</b></label><label class="play__sw" title="Jayhawk Yellow #ffc82d"><input type="radio" name="play-bg" value="yellow" data-hex="#ffc82d" data-name="Jayhawk Yellow" data-token="--ku-yellow"><span style="--c:#ffc82d"></span><b>Jayhawk Yellow</b></label><label class="play__sw" title="Signature Gray #85898a"><input type="radio" name="play-bg" value="gray" data-hex="#85898a" data-name="Signature Gray" data-token="--ku-gray"><span style="--c:#85898a"></span><b>Signature Gray</b></label></div>
-                      </div>
-                      </div>
-                      <div class="sandbox__pane sandbox__a11y" role="tabpanel" id="sb-pan-1" aria-labelledby="sb-tab-1" hidden>
-                        <p class="play__ratio"><b data-ratio>7.06</b> : 1</p>
-                        <ul class="play__checks">
-                          <li data-check="4.5"><span class="play__mark"></span>Body text <small>4.5</small></li>
-                          <li data-check="3"><span class="play__mark"></span>Large text and icons <small>3</small></li>
-                          <li data-check="7"><span class="play__mark"></span>Enhanced (AAA) <small>7</small></li>
-                        </ul>
-                        <p class="play__verdict" data-verdict aria-live="polite"></p>
-                      </div>
-                      <div class="sandbox__pane sandbox__code" role="tabpanel" id="sb-pan-2" aria-labelledby="sb-tab-2" hidden>
-                        <pre class="code" tabindex="0"><code data-code></code></pre>
-                        <button type="button" class="sandbox__btn" data-copy>Copy</button>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </section>
-              </div>
-
-              <section class="reel" aria-labelledby="reel-sys-title">
-                <div class="reel__head">
-                  <p class="reel__kicker">Behind the scenes</p>
-                  <h4 class="reel__title" id="reel-sys-title">Code, type and graphics</h4>
-                </div>
-                <div class="system">
-                  <div class="system__panel" role="group" aria-labelledby="sys-p2-h"><h5 class="system__part" id="sys-p2-h">Code</h5>
-                    <pre class="code" tabindex="0"><code>--ku-blue: #0051ba;     /* Kansas Blue, primary */
-  --ku-crimson: #e8000d;  /* Crimson, primary */
-  --ku-night: #003459;    /* text on light blue */
-  --ku-lake: #2767ff;     /* links, pinpoints */
-  --ku-sky: #73cbf2;
-  --ku-steam: #dde5ed;    /* page tint */
-  --ku-fire: #ff3042;     /* holding box line */
-  --ku-brick: #971b2f;
-  --ku-text: #333333;
-  --space-unit: 8px;      /* square grid unit */
-  --text-body: 16px;      /* web body: 12 to 16 */</code></pre>
-                  </div>
-
-                  <div class="system__panel" role="group" aria-labelledby="sys-p3-h"><h5 class="system__part" id="sys-p3-h">Type</h5>
-                    <div class="table-wrap" role="region" aria-label="Table: typefaces" tabindex="0">
-                      <table class="table">
-                        <thead><tr><th scope="col">Role</th><th scope="col">Typeface</th><th scope="col">Used for</th></tr></thead>
-                        <tbody>
-                          <tr><th scope="row">Display</th><td>Roc Grotesk, wide width</td><td>Headlines</td></tr>
-                          <tr><th scope="row">Headline accent</th><td>Moret</td><td>Subheads</td></tr>
-                          <tr><th scope="row">Body</th><td>Gotham Narrow, or Freight Text online</td><td>12 to 16 px</td></tr>
-                          <tr><th scope="row">Fallback</th><td>Arial and Palatino</td><td>Email and slides</td></tr>
-                        </tbody>
-                      </table>
-                    </div>
-                  </div>
-
-                  <div class="system__panel" role="group" aria-labelledby="sys-p4-h"><h5 class="system__part" id="sys-p4-h">Graphics</h5>
-                    <p class="body-text">Graphic elements we used as components.</p>
-                    <div class="grid-3">
-                      <div class="card"><p class="eyebrow">Grid</p><h3>Visible grid</h3><p>Square units that frame a layout.</p></div>
-                      <div class="card"><p class="eyebrow">Frame</p><h3>Holding box</h3><p>A 1 pt Fire line with Lake pinpoints.</p></div>
-                      <div class="card"><p class="eyebrow">Accent</p><h3>Crimson square</h3><p>A crimson square with a radial fade.</p></div>
-                      <div class="card"><p class="eyebrow">Data</p><h3>Discovery burst</h3><p>A radial burst that stands for research.</p></div>
-                      <div class="card"><p class="eyebrow">Stars</p><h3>Stars and spark stars</h3><p>Small star shapes for ideas and sparks.</p></div>
-                      <div class="card"><p class="eyebrow">Place</p><h3>Sunflower</h3><p>Kansas’s state flower, for optimism.</p></div>
-                    </div>
-                  </div>
-                </div>
-              </section>
-            </div>
-          </section>
-      
-          
-
-          <section class="block" id="build" aria-labelledby="build-h">
-            <h3 class="block__title" id="build-h" data-split>Bringing it together</h3>
-            <div class="block__body">
-              <div class="intro-split reveal">
-                <p class="intro-split__text">I worked with other designers and a developer to build the logos, typography, color tokens, spacing rules and accessibility updates into every page.</p>
-                <ol class="numbered numbered--label">
-                  <li><b>Type</b><h3>Typography</h3><p>I used one type scale for every page.</p></li>
-                  <li><b>Color</b><h3>Color tokens</h3><p>We cleaned up and named the tokens.</p></li>
-                  <li><b>Space</b><h3>Spacing rules</h3><p>We made the spacing tighter and more even.</p></li>
-                </ol>
-              </div>
-            </div>
-          </section>
-      
-      </section>
-
-      <section class="cp-sec stage" id="impact" aria-labelledby="impact-cp-h" data-ghost="Resolution and impact" data-num="03">
-        <h2 class="cp-sec__label" id="impact-cp-h"><span>03</span>Resolution and impact</h2>
-
-          
-
-          <section class="block" id="testing" aria-labelledby="testing-h">
-            <h3 class="block__title" id="testing-h" data-split>Testing</h3>
-            <div class="block__body">
-              <p class="body-text">Focus groups and A/B tests of early concepts showed what was not working yet. They raised concerns about tone, the order of importance, and how people would really use some concepts.</p>
-              <ul class="body-text cp-list"><li>We changed the tone of the copy.</li><li>We changed the order of importance on the pages.</li><li>We simplified the layouts that confused people.</li></ul>
-              <div class="card reveal"><p class="eyebrow eyebrow--muted">Real use</p><h3>Clean in Figma, hard to use</h3><p>Real people found some of these layouts confusing.</p></div>
-            </div>
-          </section>
-      
-          
-
-          <section class="block" id="outcome" aria-labelledby="outcome-h">
-            <h3 class="block__title" id="outcome-h" data-split>The new brand system</h3>
-            <div class="block__body">
-              <div class="stats stats--ruled reveal">
-                <div><b><span data-count="30">30</span>%</b><span>Traffic growth across ku.edu after launch</span></div>
-                <div><b><span data-count="20">20</span>+</b><span>Designers, marketers and project managers on the team</span></div>
-                <div><b><span data-count="6">6</span></b><span>Design rules written down once</span></div>
-              </div>
-              <div class="callout callout--statement reveal">
-                <p class="eyebrow">Outcome</p>
-                <p>The new identity now sits in one system of logos, colors, type and usage rules.</p>
-                <p>After the new brand site launched, traffic across all ku.edu domains and subdomains grew 30%, to 100k+ daily visitors, with 50k+ primary users.</p>
-                <p class="callout__small">You can see the live site at brand.ku.edu.</p>
-              </div>
-              <a class="text-link" href="https://brand.ku.edu" target="_blank" rel="noopener">Visit the live brand site <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 3h6v6"/><path d="M10 14 21 3"/><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/></svg></a>
-            </div>
-          </section>
-      
-          
-
-          <section class="block" id="didnt" aria-labelledby="didnt-h">
-            <h3 class="block__title" id="didnt-h" data-split>What didn’t work</h3>
-            <div class="block__body">
-              <div class="grid-2 reveal">
-                <div class="card"><p class="eyebrow eyebrow--muted">Surveys</p><h3>Surveys lacked depth</h3><p>Many people rushed through them.</p></div>
-                <div class="card"><p class="eyebrow eyebrow--muted">Familiarity</p><h3>People liked the old brand</h3><p>Many preferred the old fonts, colors and logo: status quo bias and the mere exposure effect.</p></div>
-              </div>
-            </div>
-          </section>
-
-          <section class="block" id="takeaways" aria-labelledby="take-h">
-            <h3 class="block__title" id="take-h" data-split>Takeaways</h3>
-            <div class="block__body">
-              <div class="takeaways">
-                <div>
-                  <ol class="items">
-                    <li><b>01</b><div><h4>Update visuals early</h4><p>It made the build smoother and more consistent.</p></div></li>
-                    <li><b>02</b><div><h4>Test outside the design tool</h4><p>Layouts that look clean in Figma can feel hard to use for real people.</p></div></li>
-                  </ol>
-                </div>
-                <figure class="takeaways__aside"><img src="/assets/images/ku-brand-08-d133a6bf5f.webp" alt="The Jayhawk statue on campus" loading="lazy" width="570" height="407"></figure>
-              </div>
-
-              <nav class="more" aria-label="More case studies">
-                <p class="eyebrow">More case studies</p>
-                <div class="more__grid">
-                  <a class="more__card" data-cursor="View project" href="/work/surgical-console"><img src="/assets/images/ku-brand-09-c78000167a.webp" alt="" loading="lazy" width="640" height="400"><span class="more__meta"><b>Surgical Console</b><span>UX design internship</span></span></a>
-                  <a class="more__card" data-cursor="View project" href="/work/asians"><img src="/assets/images/console-32-3022eb5e3b.webp" alt="" loading="lazy" width="640" height="400"><span class="more__meta"><b>Asian’s</b><span>UX research and design</span></span></a>
-                </div>
-                <a class="text-link" href="/#work">Back to projects</a>
-              </nav>
-            </div>
-          </section>
-      
-      </section>
-
-
-    </main>
-
-  </div>
-  <script>
-    /* Outline: mark the section you are reading (and its stage) */
-    (function () {
-      var links = [].slice.call(document.querySelectorAll(".cp-outline a"));
-      var targets = links.map(function (a) { return document.querySelector(a.getAttribute("href")); });
-      var current = null;
-      function mark() {
-        var line = window.innerHeight / 3, here = null;
-        /* sections inside a closed tab take no space; skip them */
-        targets.forEach(function (t, i) { if (t && t.getClientRects().length && t.getBoundingClientRect().top <= line) here = i; });
-        if (here === current) return;
-        current = here;
-        links.forEach(function (a) { a.removeAttribute("aria-current"); a.classList.remove("is-in"); });
-        if (here === null) return;
-        var a = links[here];
-        a.setAttribute("aria-current", "location");
-        var stage = a.closest("ol").closest("li");
-        if (stage) stage.querySelector(".cp-outline__stage").classList.add("is-in");
-        else a.classList.add("is-in");
-      }
-      window.addEventListener("scroll", mark, { passive: true });
-      window.addEventListener("resize", mark);
-      mark();
-    })();
-  </script>
+  </svg><figcaption>Downloads page. Filters on top, one card per file, and a path to request an official mark.</figcaption></figure></div></section><section class="a-part"><h3>Design system decisions</h3><ul class="accs "><li><details class="acc"><summary><span class="acc__name">Keep the two core colors</span></summary><div class="acc__body"><p>Kansas Blue (#0051ba) and Crimson (#e8000d) stayed, the colors people already knew.</p></div></details></li><li><details class="acc"><summary><span class="acc__name">Name every color</span></summary><div class="acc__body"><p>Each color got a plain name, like Night, Lake and Sky, so everyone used the same words.</p></div></details></li><li><details class="acc"><summary><span class="acc__name">Never rely on color alone</span></summary><div class="acc__body"><p>Every pairing passed a WCAG contrast check first. We listed the pairings to use and the ones to avoid.</p></div></details></li><li><details class="acc"><summary><span class="acc__name">Pick type by job</span></summary><div class="acc__body"><p>Roc Grotesk and Moret for headlines. Gotham Narrow or Freight Text for body. KU’s rule set web body text at 12 to 16 px.</p></div></details></li><li><details class="acc"><summary><span class="acc__name">Use the grid and frames</span></summary><div class="acc__body"><p>Square grid units for layouts, a thin Fire line for holding boxes, Lake dots for pinpoints.</p></div></details></li><li><details class="acc"><summary><span class="acc__name">Write in the brand voice</span></summary><div class="acc__body"><p>Active voice, present or future tense, and “toward” instead of “towards”. We kept tower images rare.</p></div></details></li></ul></section><section class="a-part"><h3>Bringing it together</h3><p>I worked with other designers and a developer to build the logos, typography, color tokens, spacing rules and accessibility updates into every page.</p><ul class="accs "><li><details class="acc"><summary><span class="acc__name">Typography</span></summary><div class="acc__body"><p>I used one type scale for every page.</p></div></details></li><li><details class="acc"><summary><span class="acc__name">Color tokens</span></summary><div class="acc__body"><p>We cleaned up and named the tokens.</p></div></details></li><li><details class="acc"><summary><span class="acc__name">Spacing rules</span></summary><div class="acc__body"><p>We made the spacing tighter and more even.</p></div></details></li></ul></section></section><section class="a-act" id="impact"><h2>Resolution and impact</h2><section class="a-part"><h3>Testing</h3><p>Focus groups and A/B tests of early concepts showed what was not working yet. They raised concerns about tone, the order of importance, and how people would really use some concepts.</p><ul><li>We changed the tone of the copy.</li><li>We changed the order of importance on the pages.</li><li>We simplified the layouts that confused people.</li></ul><ul class="accs "><li><details class="acc"><summary><span class="acc__label">Real use</span><span class="acc__name">Clean in Figma, hard to use</span></summary><div class="acc__body"><p>Real people found some of these layouts confusing.</p></div></details></li></ul></section><section class="a-part"><h3>The new brand system</h3><ul class="stats"><li><b>30%</b><span>Traffic growth across ku.edu after launch</span></li><li><b>20+</b><span>Designers, marketers and project managers on the team</span></li><li><b>6</b><span>Design rules written down once</span></li></ul><p>The new identity now sits in one system of logos, colors, type and usage rules.</p><p>After the new brand site launched, traffic across all ku.edu domains and subdomains grew 30%, to 100k+ daily visitors, with 50k+ primary users.</p><p>You can see the live site at <a href="https://brand.ku.edu" target="_blank" rel="noopener">brand.ku.edu</a>.</p></section><section class="a-part"><h3>What didn’t work</h3><ul class="accs "><li><details class="acc"><summary><span class="acc__name">Surveys lacked depth</span></summary><div class="acc__body"><p>Many people rushed through them.</p></div></details></li><li><details class="acc"><summary><span class="acc__name">People liked the old brand</span></summary><div class="acc__body"><p>Many preferred the old fonts, colors and logo: status quo bias and the mere exposure effect.</p></div></details></li></ul></section><section class="a-part"><h3>Takeaways</h3><ul class="accs "><li><details class="acc"><summary><span class="acc__name">Update visuals early</span></summary><div class="acc__body"><p>It made the build smoother and more consistent.</p></div></details></li><li><details class="acc"><summary><span class="acc__name">Test outside the design tool</span></summary><div class="acc__body"><p>Layouts that look clean in Figma can feel hard to use for real people.</p></div></details></li></ul><figure><img src="/assets/images/ku-brand-08-d133a6bf5f.webp" alt="The Jayhawk statue on campus" loading="lazy"></figure></section></section>
+    <section class="a-act" aria-labelledby="more-h"><h2 id="more-h">More projects</h2><nav class="a-more" aria-label="More case studies"><a href="/work/surgical-console" data-cursor="View project"><img src="/assets/images/card-console.webp" alt="" loading="lazy" width="640" height="400"><b>Surgical Console</b><span>UX design internship</span></a><a href="/work/asians" data-cursor="View project"><img src="/assets/images/console-32-3022eb5e3b.webp" alt="" loading="lazy" width="640" height="400"><b>Asian’s</b><span>UX research and design</span></a></nav></section>
+  </main>
 </body>
 </html>

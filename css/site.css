@@ -26,12 +26,12 @@
   --text: #4a4a4a;
   --outline-dim: #717170; /* inactive outline links: 4.6:1 on the page */
   --line: rgba(26, 26, 30, 0.14);
-  /* orange: #e65f2e for fills and marks; text in the accent uses a darker
-     shade (#b0441c, 5.4:1 on the page) and filled buttons use dark text
-     (#1a1a1e, 4.9:1), since the bright orange is too light for small text */
-  --accent: #e65f2e;
-  --accent-text: #b0441c;
-  --on-accent: #1a1a1e;
+  /* light theme: lavender. #6c4ee6 for fills and marks (5.1:1 on the
+     page, white text on it 5.4:1), and a deeper #5b3fd1 for text in the
+     accent (6.5:1). The dark theme uses lime instead, below. */
+  --accent: #6c4ee6;
+  --accent-text: #5b3fd1;
+  --on-accent: #ffffff;
   /* see-through, so the paper grain shows through the tinted band */
   --band: color-mix(in srgb, var(--accent) 9%, transparent);
   --stage: color-mix(in srgb, var(--accent) 15%, #ffffff);
@@ -86,8 +86,8 @@
     --text: #b5b5b5;
     --outline-dim: #7d7d7e;
     --line: rgba(230, 230, 225, 0.14);
-    --accent: #ff7a45;
-    --accent-text: #ff9d73;
+    --accent: #d0ff71;
+    --accent-text: #d0ff71;
     --on-accent: #0b0b0c;
     --stage: color-mix(in srgb, var(--accent) 15%, var(--bg));
     --header-line: #2a2a2e;
@@ -105,8 +105,8 @@
   --text: #b5b5b5;
   --outline-dim: #7d7d7e;
   --line: rgba(230, 230, 225, 0.14);
-  --accent: #ff7a45;
-  --accent-text: #ff9d73;
+  --accent: #d0ff71;
+  --accent-text: #d0ff71;
   --on-accent: #0b0b0c;
   --stage: color-mix(in srgb, var(--accent) 15%, var(--bg));
   --header-line: #2a2a2e;
@@ -976,7 +976,7 @@ body,
    the dark-mode one (6.2:1). */
 :root {
   /* light paper: a warm burnt orange so it shows, with white label text (4.8:1) */
-  --cursor: #b4572a;
+  --cursor: #6c4ee6;
   --cursor-glow: 0;
   --cursor-text: #ffffff;
   /* the dot trails below and to the right of the system pointer */
@@ -985,13 +985,13 @@ body,
 }
 @media (prefers-color-scheme: dark) {
   :root:not([data-theme="light"]) {
-    --cursor: #cf8a6a;
+    --cursor: #d0ff71;
     --cursor-text: #1a1a1e;
     --cursor-glow: 1;
   }
 }
 :root[data-theme="dark"] {
-  --cursor: #cf8a6a;
+  --cursor: #d0ff71;
   --cursor-text: #1a1a1e;
   --cursor-glow: 1;
 }

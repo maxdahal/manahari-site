@@ -1,0 +1,643 @@
+/* ==========================================================================
+   Case study pages: one long article, like the earlier portfolio. No side
+   navigation; one centered column; pictures as wide as the column. Loaded
+   after site.css (tokens, top bar, menu, theme, cursor) and nothing else.
+
+   Hierarchy, five levels, each clearly different from the next:
+     1  page title     Antonio 700, capitals, 56-112px, ink
+     2  act title      Antonio 700, capitals, 40-64px, accent
+     3  part title     Inter 600, 20px, accent
+     4  point name     Inter 600, 17px, ink
+     5  text           Inter 400, 17px, grey; labels and captions 14px muted
+
+   Spacing, one scale:
+     12px  a title to its text, a point name to its text
+     16px  paragraph to paragraph, point to point
+     32px  text to a picture, a group to what follows
+     72px  part to part (with a small accent dot halfway)
+     128px act to act
+   ========================================================================== */
+
+.article {
+  --a-col: 1040px;
+  --a-read: 720px;
+  --a-1: 12px;
+  --a-2: 16px;
+  --a-3: 32px;
+  --a-4: 72px;
+  --a-5: 128px;
+  max-width: calc(var(--a-col) + 2 * var(--gx));
+  margin: 0 auto;
+  padding: 48px var(--gx) var(--a-5);
+}
+
+/* the scroll text effects stay off here: every line is simply there */
+#main.article :is(h1, h2, h3, h4, p, li, blockquote, dt, dd, figcaption, span) {
+  animation: none;
+}
+
+/* ---- text ---------------------------------------------------------------- */
+.article p,
+.article li,
+.article dd {
+  margin: 0;
+  font-family: var(--body-font);
+  font-size: 1.0625rem;
+  font-weight: 400;
+  line-height: 1.7;
+  color: var(--text);
+}
+.article strong {
+  font-weight: 600;
+  color: var(--ink);
+}
+.article a:not(.button, .a-back, .a-more a) {
+  color: var(--ink);
+  text-decoration: underline;
+  text-decoration-color: var(--accent);
+  text-decoration-thickness: 2px;
+  text-underline-offset: 4px;
+}
+.article ul {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin: 0;
+  padding-left: 1.2em;
+  list-style: disc;
+}
+.article li::marker {
+  color: var(--accent);
+}
+.article .small,
+.article figcaption {
+  font-size: 0.875rem;
+  line-height: 1.5;
+  color: var(--muted);
+}
+.article .label {
+  margin: 0;
+  font-size: 0.8125rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+/* ---- 1. the top ----------------------------------------------------------- */
+.a-back {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  margin-bottom: var(--a-3);
+  font-size: 0.875rem;
+  color: var(--muted);
+  text-decoration: none;
+}
+.a-back:hover {
+  color: var(--ink);
+}
+.a-back svg {
+  width: 16px;
+  height: 16px;
+}
+.a-note {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin: 0 0 var(--a-3);
+  padding: 12px 16px;
+  border: 1px solid var(--line);
+  border-radius: 12px;
+}
+.a-note svg {
+  flex: none;
+  width: 18px;
+  height: 18px;
+  color: var(--accent-text);
+}
+.a-note p {
+  font-size: 0.9375rem;
+  line-height: 1.5;
+}
+.a-head {
+  display: flex;
+  flex-direction: column;
+  gap: var(--a-2);
+}
+.a-tag {
+  align-self: flex-start;
+  margin: 0;
+  padding: 4px 12px;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  font-size: 0.8125rem;
+  line-height: 1.5;
+  color: var(--accent-text);
+}
+.a-title {
+  margin: 0;
+  font-family: var(--heading-font);
+  font-size: clamp(3.5rem, 2rem + 5vw, 7rem);
+  font-weight: 700;
+  line-height: 0.95;
+  letter-spacing: -0.01em;
+  text-transform: uppercase;
+  color: var(--ink);
+}
+.a-sub {
+  max-width: var(--a-read);
+}
+.a-facts {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: var(--a-2) var(--a-3);
+  margin: var(--a-2) 0 0;
+}
+.a-facts div {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+.a-facts dt {
+  font-size: 0.8125rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--accent-text);
+}
+.a-facts dd {
+  font-size: 0.9375rem;
+  line-height: 1.5;
+  color: var(--ink);
+}
+.a-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: var(--a-1);
+}
+.a-hero {
+  margin: var(--a-3) 0 0;
+}
+.a-hero img,
+.a-hero video {
+  display: block;
+  width: 100%;
+  height: auto;
+  border-radius: 16px;
+}
+
+/* ---- 2. acts --------------------------------------------------------------- */
+.a-act {
+  padding-top: var(--a-5);
+}
+.a-act > h2 {
+  margin: 0;
+  font-family: var(--heading-font);
+  font-size: clamp(2.5rem, 1.8rem + 2.5vw, 4rem);
+  font-weight: 700;
+  line-height: 1;
+  letter-spacing: 0;
+  text-transform: uppercase;
+  color: var(--accent-text);
+}
+
+/* ---- 3. parts -------------------------------------------------------------- */
+.a-part {
+  display: flex;
+  flex-direction: column;
+  gap: var(--a-2);
+  padding-top: var(--a-4);
+}
+.a-act > h2 + .a-part {
+  padding-top: var(--a-3);
+}
+/* the small dot between two parts */
+.a-part + .a-part::before {
+  content: "";
+  align-self: center;
+  width: 6px;
+  height: 6px;
+  margin: calc(var(--a-4) / -2 - 3px) 0 calc(var(--a-4) / 2 - 3px);
+  border-radius: 50%;
+  background: var(--accent);
+}
+.a-part > h3 {
+  margin: 0;
+  font-family: var(--body-font);
+  font-size: 1.25rem;
+  font-weight: 600;
+  line-height: 1.35;
+  letter-spacing: -0.01em;
+  color: var(--accent-text);
+}
+.a-part > :is(p, ul, .points, .a-quote, .stats, details, dl) {
+  max-width: var(--a-read);
+}
+.a-part > h3 + * {
+  margin-top: calc(var(--a-1) - var(--a-2));
+}
+.a-part > :is(figure, .figs, .row) {
+  margin: calc(var(--a-3) - var(--a-2)) 0;
+}
+
+/* ---- 4. points: a name, then its text ------------------------------------ */
+.points {
+  display: flex;
+  flex-direction: column;
+  gap: var(--a-2);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.points > * {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  margin: 0;
+}
+.points :is(h4, .point-name) {
+  margin: 0;
+  font-family: var(--body-font);
+  font-size: 1.0625rem;
+  font-weight: 600;
+  line-height: 1.5;
+  color: var(--ink);
+}
+.points .label {
+  margin-bottom: 2px;
+}
+.points .is-ok { color: var(--ok-text); }
+.points .is-open { color: var(--warn-text); }
+.points-head {
+  margin: var(--a-1) 0 0;
+  font-family: var(--body-font);
+  font-size: 1.0625rem;
+  font-weight: 600;
+  color: var(--ink);
+}
+
+/* ---- 5. pictures ---------------------------------------------------------- */
+.article figure {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin: 0;
+}
+.article figure :is(img, svg, video) {
+  display: block;
+  width: 100%;
+  height: auto;
+  border-radius: 16px;
+}
+.figs {
+  display: grid;
+  grid-template-columns: repeat(var(--n, 2), minmax(0, 1fr));
+  gap: var(--a-2);
+}
+.figs figure :is(img, svg) {
+  border-radius: 12px;
+}
+.figs--icons {
+  --n: 6;
+}
+.figs--icons figure :is(img) {
+  border-radius: 8px;
+  background: var(--surface);
+}
+
+/* text beside a picture, taking turns */
+.row {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: var(--a-3);
+  align-items: center;
+}
+.row > div {
+  display: flex;
+  flex-direction: column;
+  gap: var(--a-2);
+}
+.row--flip > :first-child {
+  order: 2;
+}
+
+/* ---- 6. quotes, notes, numbers, more -------------------------------------- */
+.a-quote {
+  margin: var(--a-1) 0;
+  padding: 0 0 0 var(--a-2);
+  border-left: 2px solid var(--accent);
+}
+.a-quote p {
+  color: var(--ink);
+}
+.a-quote .label {
+  margin-bottom: 4px;
+}
+.a-pull {
+  max-width: 820px;
+  margin: var(--a-3) auto;
+  font-family: var(--heading-font);
+  font-size: clamp(1.5rem, 1.2rem + 1vw, 2rem);
+  font-weight: 500;
+  line-height: 1.25;
+  text-align: center;
+  color: var(--ink);
+}
+.stats {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--a-3) 64px;
+  margin: var(--a-1) 0;
+  padding: 0;
+  list-style: none;
+}
+.stats li {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  max-width: 220px;
+}
+.stats b {
+  font-family: var(--heading-font);
+  font-size: 3rem;
+  font-weight: 700;
+  line-height: 1;
+  color: var(--ink);
+}
+.stats span {
+  font-size: 0.875rem;
+  line-height: 1.5;
+  color: var(--muted);
+}
+/* a long list folded away, opened on request */
+.article details {
+  border: 1px solid var(--line);
+  border-radius: 12px;
+}
+.article summary {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 14px 18px;
+  font-weight: 600;
+  color: var(--ink);
+  cursor: pointer;
+  list-style: none;
+}
+.article summary::-webkit-details-marker {
+  display: none;
+}
+.article summary::after {
+  content: "+";
+  font-size: 1.25rem;
+  font-weight: 400;
+  color: var(--accent-text);
+}
+.article details[open] summary::after {
+  content: "\2212";
+}
+.article details > .points {
+  padding: 4px 18px 18px;
+}
+.article summary:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+  border-radius: 12px;
+}
+.a-two {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: var(--a-3);
+}
+.a-two > div {
+  display: flex;
+  flex-direction: column;
+  gap: var(--a-1);
+}
+
+/* more projects */
+.a-more {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: var(--a-3);
+  margin-top: var(--a-3);
+}
+.a-more a {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  color: var(--ink);
+  text-decoration: none;
+}
+.a-more img {
+  display: block;
+  width: 100%;
+  height: auto;
+  aspect-ratio: 16 / 10;
+  object-fit: cover;
+  border-radius: 16px;
+}
+.a-more b {
+  font-family: var(--heading-font);
+  font-size: 1.75rem;
+  font-weight: 700;
+  line-height: 1.1;
+  text-transform: uppercase;
+}
+.a-more span {
+  font-size: 0.875rem;
+  color: var(--muted);
+}
+.a-more a:hover b {
+  color: var(--accent-text);
+}
+
+/* ---- 7. phones ------------------------------------------------------------ */
+@media (max-width: 760px) {
+  .article {
+    --a-4: 56px;
+    --a-5: 96px;
+    padding-top: 32px;
+  }
+  .row,
+  .a-two,
+  .a-more {
+    grid-template-columns: minmax(0, 1fr);
+  }
+  .row--flip > :first-child {
+    order: 0;
+  }
+  .figs {
+    --n: 1;
+  }
+  .figs--three {
+    --n: 3;
+  }
+  .figs--icons {
+    --n: 3;
+  }
+}
+
+/* status colors for the review list */
+:root {
+  --ok-text: #0d5228;
+  --warn-text: #5e3f00;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --ok-text: #5dd68a;
+    --warn-text: #e0a93b;
+  }
+}
+:root[data-theme="dark"] {
+  --ok-text: #5dd68a;
+  --warn-text: #e0a93b;
+}
+/* the opening part (my contribution) sits closer to the picture */
+.a-act--intro {
+  padding-top: var(--a-4);
+}
+.a-act--intro > .a-part:first-child {
+  padding-top: 0;
+}
+/* three phone screens side by side stay at reading width, so a tall
+   phone picture never fills the screen */
+.figs--three {
+  max-width: var(--a-read);
+}
+
+/* these beat the plain text and list defaults above */
+.article .points {
+  padding-left: 0;
+  list-style: none;
+}
+.article .points-head {
+  font-size: 1.0625rem;
+  font-weight: 600;
+  line-height: 1.5;
+  color: var(--ink);
+}
+.article .a-pull {
+  font-family: var(--heading-font);
+  font-size: clamp(1.5rem, 1.2rem + 1vw, 2rem);
+  font-weight: 500;
+  line-height: 1.25;
+  color: var(--ink);
+}
+.article .a-tag {
+  font-size: 0.8125rem;
+  line-height: 1.5;
+  color: var(--accent-text);
+}
+.article .a-sub {
+  color: var(--text);
+}
+/* a group heading is small grey capitals, so it never reads like one of
+   the point names under it */
+.article .points-head {
+  margin-top: var(--a-2);
+  font-size: 0.8125rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+.article .points {
+  gap: 20px;
+}
+
+/* ==========================================================================
+   Accordions: a list of points shows only the names; each opens to its text.
+   Quiet rows on a soft tint, no lines; a plus turns into a minus when open.
+   ========================================================================== */
+.article .accs {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  max-width: var(--a-read);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.article .accs > li {
+  margin: 0;
+}
+.article .acc {
+  border: 0;
+  border-radius: 12px;
+  background: color-mix(in srgb, var(--ink) 5%, transparent);
+}
+.article .acc > summary,
+.article .acc--plain {
+  display: flex;
+  align-items: baseline;
+  gap: 12px;
+  padding: 14px 18px;
+  font-weight: 400;
+  list-style: none;
+}
+.article .acc > summary {
+  cursor: pointer;
+}
+.article .acc > summary::-webkit-details-marker {
+  display: none;
+}
+.article .acc > summary::after {
+  content: "+";
+  margin-left: auto;
+  font-size: 1.25rem;
+  font-weight: 400;
+  line-height: 1;
+  color: var(--accent-text);
+}
+.article .acc[open] > summary::after {
+  content: "\2212";
+}
+.article .acc > summary:hover .acc__name {
+  color: var(--accent-text);
+}
+.article .acc > summary:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+  border-radius: 12px;
+}
+.article .acc__label {
+  flex: none;
+  min-width: 4.5em;
+  font-size: 0.8125rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--accent-text);
+}
+.article .acc__label.is-ok { color: var(--ok-text); }
+.article .acc__label.is-open { color: var(--warn-text); }
+.article .acc__name {
+  font-size: 1.0625rem;
+  font-weight: 600;
+  line-height: 1.5;
+  color: var(--ink);
+}
+.article .acc__body {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding: 0 18px 16px;
+}
+.article .acc__body p,
+.article .acc__body li {
+  font-size: 1rem;
+}
+@media (max-width: 760px) {
+  .article .acc > summary,
+  .article .acc--plain {
+    flex-wrap: wrap;
+    row-gap: 2px;
+  }
+  .article .acc__label {
+    flex-basis: 100%;
+  }
+}

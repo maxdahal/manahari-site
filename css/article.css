@@ -1990,3 +1990,9 @@
 .article .acc__label.is-open {
   background: color-mix(in srgb, var(--warn-text) 16%, transparent);
 }
+/* in three columns, an odd last item stays in its own column */
+@media (min-width: 1101px) {
+  .article .dids > .did:last-child:nth-child(odd) {
+    grid-column: auto;
+  }
+}

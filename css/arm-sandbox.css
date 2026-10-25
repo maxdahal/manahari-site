@@ -1,0 +1,1037 @@
+/* ==========================================================================
+   Surgical Console arm panel sandbox ("Try it"), brought back from the
+   earlier case study: the shared sandbox frame (from sandbox.css), the
+   console colors and the console sandbox pieces (from console.css).
+   Overlays use grid stacking instead of absolute positioning.
+   ========================================================================== */
+:root {
+  --sev-running: #2e9e5b;
+  --sev-warning: #e0a93b;
+  --sev-error: #d93a2b;
+  --sev-inactive: #8a8a86;
+  --arm-1: #b9a4ff;
+  --arm-2: #e3c48f;
+  --arm-3: #1f5f4a;
+  --arm-4: #f49ac9;
+  --console: #282828;
+  --console-ink: #fcfcfc;
+  --console-text: #b9b9b9;
+}
+
+/* ==========================================================================
+   Sandbox: a small interactive playground inside a case study, laid out
+   like Storybook. Shared by the KU color sandbox and the Surgical Console arm panel
+   sandbox; each page's own pieces (and its colors) live in ku.css and
+   console.css, and its behaviour in ku.js and console.js on top of sandbox.js.
+   ========================================================================== */
+
+/* The sandbox ----------------------------------------------------------------
+   Laid out like Storybook, in the page's own colors and one fixed height so
+   nothing needs scrolling: a toolbar, the pairs from the system down the
+   left, the live canvas, and a panel with tabs for the controls, the
+   accessibility check and the code. Pass and fail are always written out,
+   never shown by color alone. Below 860px it stacks. */
+.sandbox {
+  overflow: hidden;
+  margin-top: 8px;
+  border: 1px solid var(--line);
+  border-radius: 16px;
+  background: var(--surface);
+}
+.sandbox__bar {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px 12px;
+  padding: 8px 10px 8px 16px;
+  border-bottom: 1px solid var(--line);
+  background: var(--bg);
+}
+.sandbox__crumb {
+  font-size: 0.875rem;
+  color: var(--text);
+}
+.sandbox__crumb b {
+  font-weight: 600;
+  color: var(--ink);
+}
+.sandbox__tools {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 6px;
+}
+.sandbox__btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  min-height: 36px;
+  padding: 0 12px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: var(--bg);
+  color: var(--ink);
+  font: inherit;
+  font-size: 0.8125rem;
+  font-weight: 600;
+  cursor: pointer;
+}
+.sandbox__btn:hover {
+  border-color: var(--ink);
+}
+.sandbox__btn:focus-visible,
+.sandbox__tabs [role="tab"]:focus-visible,
+.play__preset:focus-visible {
+  outline: 3px solid var(--ink);
+  outline-offset: 2px;
+}
+.sandbox__btn svg {
+  width: 15px;
+  height: 15px;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+/* the holding box toggle, drawn as a switch */
+.sandbox__switch {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  min-height: 36px;
+  padding: 0 6px 0 8px;
+  font-size: 0.8125rem;
+  font-weight: 600;
+  cursor: pointer;
+}
+.sandbox__switch input {
+  opacity: 0;
+  width: 1px;
+  height: 1px;
+}
+.sandbox__switch span {
+  position: relative;
+  width: 32px;
+  height: 18px;
+  border-radius: 999px;
+  background: color-mix(in srgb, var(--ink) 30%, var(--bg));
+  transition: background 0.15s ease;
+}
+.sandbox__switch span::after {
+  content: "";
+  top: 2px;
+  left: 2px;
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  background: #fff;
+  transition: translate 0.15s ease;
+}
+.sandbox__switch input:checked + span {
+  background: var(--accent);
+}
+.sandbox__switch input:checked + span::after {
+  translate: 14px 0;
+}
+.sandbox__switch input:focus-visible + span {
+  outline: 3px solid var(--ink);
+  outline-offset: 2px;
+}
+
+.sandbox__body {
+  display: grid;
+  grid-template-columns: 196px minmax(0, 1fr);
+  height: 540px;
+}
+.sandbox__side {
+  overflow-y: auto;
+  padding: 10px 8px;
+  border-right: 1px solid var(--line);
+  background: var(--bg);
+}
+.sandbox__side ul {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+.sandbox .sandbox__group {
+  padding: 8px 8px 4px;
+  font-size: 0.8125rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--text);
+}
+.sandbox .sandbox__group:first-child {
+  padding-top: 2px;
+}
+.play__preset {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  width: 100%;
+  min-height: 36px;
+  padding: 4px 8px;
+  border: 0;
+  border-radius: 6px;
+  background: transparent;
+  color: var(--ink);
+  font: inherit;
+  font-size: 0.8125rem;
+  line-height: 1.3;
+  text-align: left;
+  cursor: pointer;
+}
+.play__preset:hover {
+  background: color-mix(in srgb, var(--ink) 6%, transparent);
+}
+.play__preset[aria-pressed="true"] {
+  background: color-mix(in srgb, var(--accent) 14%, transparent);
+  color: var(--accent-text);
+  font-weight: 600;
+}
+.play__aa {
+  display: grid;
+  flex: none;
+  place-items: center;
+  width: 24px;
+  height: 24px;
+  border-radius: 5px;
+  box-shadow: inset 0 0 0 1px rgb(0 0 0 / 0.12);
+  font-size: 0.8125rem;
+  font-weight: 700;
+}
+
+.sandbox__main {
+  display: grid;
+  grid-template-rows: minmax(0, 1fr) 214px;
+  min-width: 0;
+}
+/* the canvas: a dotted backdrop, the preview centred on it */
+.sandbox__canvas {
+  display: grid;
+  place-items: center;
+  padding: 18px;
+  overflow: hidden;
+  background-color: var(--surface);
+  background-image: radial-gradient(color-mix(in srgb, var(--ink) 14%, transparent) 1px, transparent 1px);
+  background-size: 16px 16px;
+}
+
+/* the panel under the canvas, with its tabs */
+.sandbox__panel {
+  display: flex;
+  flex-direction: column;
+  min-height: 0;
+  border-top: 1px solid var(--line);
+  background: var(--bg);
+}
+.sandbox__tabs {
+  display: flex;
+  gap: 4px;
+  padding: 0 10px;
+  border-bottom: 1px solid var(--line);
+}
+.sandbox__tabs [role="tab"] {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  min-height: 40px;
+  padding: 0 10px;
+  border: 0;
+  border-bottom: 2px solid transparent;
+  background: none;
+  color: var(--text);
+  font: inherit;
+  font-size: 0.8125rem;
+  font-weight: 600;
+  cursor: pointer;
+}
+.sandbox__tabs [role="tab"][aria-selected="true"] {
+  border-bottom-color: var(--accent);
+  color: var(--ink);
+}
+.sandbox__badge {
+  padding: 1px 7px;
+  border-radius: 999px;
+  font-size: 0.8125rem;
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+}
+.sandbox__badge.is-pass {
+  background: color-mix(in srgb, var(--ok-text) 16%, transparent);
+  color: var(--ok-text);
+}
+.sandbox__badge.is-fail {
+  background: color-mix(in srgb, var(--bad-text) 14%, transparent);
+  color: var(--bad-text);
+}
+.sandbox__pane {
+  flex: 1;
+  min-height: 0;
+  overflow-y: auto;
+  padding: 10px 16px 12px;
+}
+.sandbox__pane[hidden] {
+  display: none;
+}
+.sandbox__row {
+  display: grid;
+  grid-template-columns: 108px minmax(0, 1fr);
+  align-items: center;
+  gap: 12px;
+  padding: 6px 0;
+}
+.sandbox__row + .sandbox__row {
+  border-top: 1px solid var(--line);
+}
+.sandbox__label {
+  display: flex;
+  flex-direction: column;
+  font-size: 0.8125rem;
+  font-weight: 600;
+}
+.play__picked {
+  font-size: 0.8125rem;
+  font-weight: 400;
+  font-variant-numeric: tabular-nums;
+  color: var(--text);
+}
+.sandbox__code {
+  position: relative;
+}
+.sandbox__code .code {
+  margin: 0;
+  padding: 12px 14px;
+}
+.sandbox__code .sandbox__btn {
+  top: 18px;
+  right: 24px;
+}
+
+@media (max-width: 860px) {
+  .sandbox__body {
+    grid-template-columns: minmax(0, 1fr);
+    height: auto;
+  }
+  /* the pairs become one row that scrolls sideways */
+  .sandbox__side {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    overflow-x: auto;
+    border-right: 0;
+    border-bottom: 1px solid var(--line);
+  }
+  .sandbox__side ul {
+    flex-direction: row;
+  }
+  .sandbox .sandbox__group {
+    padding: 0 4px 0 8px;
+  }
+  .play__preset {
+    white-space: nowrap;
+  }
+  .sandbox__main {
+    grid-template-rows: auto auto;
+  }
+  .sandbox__canvas {
+    padding: 16px 12px;
+  }
+  .sandbox__row {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 8px;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .sandbox__switch span,
+  .sandbox__switch span::after {
+    transition: none;
+  }
+}
+
+/* The sandbox stands out from the story around it, in its own look: a
+   border whose colors turn once as it arrives, a soft wash behind it, an
+   "Interactive" tag, its own heading and a strip of colors. Each page sets
+   the colors (--sb-ring, --sb-wash, --sb-shadow, --sb-glow): KU uses its
+   brand palette, Surgical Console its arm colors. When it scrolls into view
+   (sandbox.js adds .is-in) it rises into place, the border turns and the
+   strip fills in, then the page's demo runs until the visitor touches it.
+   Without JS, or with reduced motion, it simply sits there. */
+@property --sb-turn {
+  syntax: "<angle>";
+  inherits: false;
+  initial-value: 0deg;
+}
+.sandbox-wrap {
+  --sb-ring: var(--accent), var(--accent);
+  --sb-wash: linear-gradient(transparent, transparent);
+  --sb-shadow: rgb(0 0 0 / 0.25);
+  --sb-glow: var(--accent);
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+  margin-top: 36px;
+  padding: clamp(18px, 2.6vw, 30px);
+  border: 3px solid transparent;
+  border-radius: 24px;
+  background:
+    var(--sb-wash) padding-box,
+    linear-gradient(var(--bg), var(--bg)) padding-box,
+    conic-gradient(from var(--sb-turn), var(--sb-ring)) border-box;
+  box-shadow: 0 30px 60px -32px var(--sb-shadow);
+  scroll-margin-top: calc(var(--bar-h, 60px) + 24px);
+}
+.sandbox-wrap .sandbox {
+  margin-top: 0;
+}
+.sandbox-wrap__head {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 8px;
+}
+:is(.cp-main, .article) .sandbox-wrap .sandbox-wrap__tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 4px 12px 4px 10px;
+  border-radius: 999px;
+  background: var(--accent);
+  color: var(--on-accent);
+  font-size: 0.8125rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+.sandbox-wrap__tag svg {
+  width: 12px;
+  height: 12px;
+  fill: currentColor;
+}
+:is(.cp-main, .article) .sandbox-wrap .sandbox-wrap__title {
+  font-family: var(--heading-font);
+  font-size: clamp(1.75rem, 1.3rem + 1.4vw, 2.4rem);
+  font-weight: 600;
+  line-height: 1.1;
+  color: var(--ink);
+}
+:is(.cp-main, .article) .sandbox-wrap .sandbox-wrap__text {
+  max-width: 40em;
+  color: var(--text);
+}
+/* all 17 brand colors in one strip */
+.sandbox-wrap__strip {
+  display: flex;
+  height: 10px;
+  overflow: hidden;
+  border-radius: 999px;
+  box-shadow: inset 0 0 0 1px rgb(0 0 0 / 0.08);
+}
+.sandbox-wrap__strip i {
+  flex: 1;
+  background: var(--c);
+}
+
+/* the entrance, only when ku.js has set it up (.js-reveal) */
+.sandbox-wrap.js-reveal {
+  opacity: 0;
+  translate: 0 56px;
+  scale: 0.96;
+  transition: opacity 0.6s ease, translate 0.9s cubic-bezier(0.2, 0.7, 0.2, 1), scale 0.9s cubic-bezier(0.2, 0.7, 0.2, 1);
+}
+.sandbox-wrap.js-reveal .sandbox-wrap__strip i {
+  scale: 1 0;
+  transition: scale 0.35s cubic-bezier(0.2, 0.7, 0.2, 1);
+  transition-delay: calc(0.45s + var(--i) * 0.04s);
+}
+.sandbox-wrap.js-reveal.is-in {
+  opacity: 1;
+  translate: 0 0;
+  scale: 1;
+  animation: sb-turn 1.8s 0.3s cubic-bezier(0.4, 0, 0.2, 1) both, sb-glow 2.2s 0.6s ease-out both;
+}
+.sandbox-wrap.js-reveal.is-in .sandbox-wrap__strip i {
+  scale: 1 1;
+}
+@keyframes sb-turn {
+  from { --sb-turn: 0deg; }
+  to { --sb-turn: 360deg; }
+}
+@keyframes sb-glow {
+  0% { box-shadow: 0 30px 60px -32px var(--sb-shadow), 0 0 0 0 color-mix(in srgb, var(--sb-glow) 55%, transparent); }
+  60% { box-shadow: 0 30px 60px -32px var(--sb-shadow), 0 0 0 18px transparent; }
+  100% { box-shadow: 0 30px 60px -32px var(--sb-shadow), 0 0 0 0 transparent; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .sandbox-wrap.js-reveal,
+  .sandbox-wrap.js-reveal .sandbox-wrap__strip i {
+    opacity: 1;
+    translate: none;
+    scale: none;
+    transition: none;
+    animation: none;
+  }
+}
+
+/* The sandbox speaks in a technical, terminal-like face (JetBrains Mono),
+   so it feels like a tool rather than part of the story. Anything marked
+   data-real keeps a plain sans: it stands in for the real product (KU's
+   Brand Center page, the console's console). The heading gets a prompt and a
+   blinking cursor (still for reduced motion). */
+.sandbox-wrap {
+  --mono: "JetBrains Mono", ui-monospace, "SFMono-Regular", Menlo, Consolas, monospace;
+}
+:is(.cp-main, .article) .sandbox-wrap,
+:is(.cp-main, .article) .sandbox-wrap :is(p, h4, button, span, b, small, li, label, code, pre) {
+  font-family: var(--mono);
+  letter-spacing: -0.01em;
+}
+:is(.cp-main, .article) .sandbox-wrap [data-real],
+:is(.cp-main, .article) .sandbox-wrap [data-real] * {
+  font-family: var(--body-font);
+  letter-spacing: normal;
+}
+:is(.cp-main, .article) .sandbox-wrap .sandbox-wrap__title {
+  font-family: var(--mono);
+  font-size: clamp(1.4rem, 1.05rem + 1.1vw, 1.95rem);
+  font-weight: 700;
+  letter-spacing: -0.03em;
+}
+.sandbox-wrap__title::before {
+  content: "> ";
+  color: var(--accent-text);
+}
+.sandbox-wrap__title::after {
+  content: "";
+  display: inline-block;
+  width: 0.55em;
+  height: 1em;
+  margin-left: 0.15em;
+  vertical-align: -0.12em;
+  background: var(--accent);
+  animation: sb-caret 1.1s steps(1) infinite;
+}
+@keyframes sb-caret {
+  50% { opacity: 0; }
+}
+:is(.cp-main, .article) .sandbox-wrap .sandbox-wrap__text {
+  font-size: 0.9375rem;
+  line-height: 1.6;
+}
+:is(.cp-main, .article) .sandbox-wrap .sandbox-wrap__tag {
+  letter-spacing: 0.08em;
+}
+:is(.cp-main, .article) .sandbox-wrap .sandbox__crumb {
+  font-size: 0.8125rem;
+}
+@media (prefers-reduced-motion: reduce) {
+  .sandbox-wrap__title::after {
+    animation: none;
+  }
+}
+
+
+/* Arm panel sandbox: the console's own pieces ---------------------------------------
+   The frame, panel and tabs are in sandbox.css. Here: the arm colors for the
+   frame, the console with its four arm panels drawn five ways (data-design:
+   before = numbers only, a = warning on the picture, b = arm color as a
+   fill, c = bar, dot and word, final = a and c together, as shipped), the
+   state controls, the one-second glance
+   test and the "across the room" view. The console is always dark, like the
+   real one. */
+.sandbox-wrap--console {
+  --sb-ring: #b9a4ff, #e3c48f, #1f5f4a, #f49ac9, #b9a4ff;
+  --sb-wash:
+    radial-gradient(circle at 0% 0%, rgb(255 107 26 / 0.18), transparent 40%),
+    radial-gradient(circle at 100% 0%, rgb(124 196 242 / 0.24), transparent 40%),
+    radial-gradient(circle at 100% 100%, rgb(214 50 158 / 0.14), transparent 42%);
+  --sb-shadow: rgb(43 76 155 / 0.4);
+  --sb-glow: #e3c48f;
+}
+.sandbox__btn--go {
+  border-color: var(--accent);
+  background: color-mix(in srgb, var(--accent) 12%, var(--bg));
+  color: var(--accent-text);
+}
+.arm-chip {
+  background: #3a3a3a;
+  color: #fff;
+}
+.arm-chip--pic {
+  background: #20262a;
+  color: var(--sev-error);
+}
+.arm-chip--fill {
+  background: var(--arm-4);
+}
+.arm-chip--bar {
+  position: relative;
+  background: #3a3a3a;
+}
+.arm-chip--bar i {
+  top: 0;
+  right: 0;
+  left: 0;
+  height: 6px;
+  border-radius: 5px 5px 0 0;
+  background: var(--arm-4);
+}
+.arm-chip--final {
+  display: grid;
+  place-items: center;
+  padding-top: 4px;
+  color: var(--sev-error);
+}
+/* the verdict beside each design: kept, dropped, shipped */
+.arm-tag {
+  margin-left: 4px;
+  padding: 1px 6px;
+  border-radius: 999px;
+  font-size: 0.8125rem;
+  font-weight: 700;
+  white-space: nowrap;
+}
+.arm-tag--kept {
+  background: color-mix(in srgb, var(--ink) 8%, transparent);
+  color: var(--text);
+}
+.arm-tag--dropped {
+  background: color-mix(in srgb, var(--bad-text, #a1121c) 12%, transparent);
+  color: var(--bad-text, #a1121c);
+}
+.arm-tag--shipped {
+  background: color-mix(in srgb, var(--ok-text, #0d5228) 14%, transparent);
+  color: var(--ok-text, #0d5228);
+}
+
+/* the console */
+.console {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  width: 100%;
+  max-width: 560px;
+  padding: 12px;
+  border-radius: 12px;
+  background: #1a1d1f;
+  color: var(--console-ink);
+  box-shadow: 0 14px 34px -16px rgb(0 0 0 / 0.5);
+  transition: scale 0.35s ease, filter 0.35s ease;
+}
+.sandbox__canvas.is-far .console {
+  scale: 0.55;
+  filter: blur(1.1px);
+}
+.console__video {
+  position: relative;
+  height: 96px;
+  overflow: hidden;
+  border-radius: 8px;
+  background: radial-gradient(ellipse at 50% 120%, #4a2a2a, #121516 70%);
+}
+.console__tool {
+  bottom: -10px;
+  width: 10px;
+  height: 80px;
+  border-radius: 5px;
+  background: linear-gradient(#9aa3a8, #5b656a);
+}
+.console__tool--l {
+  left: 34%;
+  rotate: 28deg;
+}
+.console__tool--r {
+  right: 34%;
+  rotate: -28deg;
+}
+/* design A: a label with L or R next to the instrument, on the picture */
+.console__flag {
+  top: 16px;
+  display: none;
+  padding: 3px 8px;
+  border-radius: 4px;
+  background: var(--sev-error);
+  color: #fff;
+  font-size: 0.8125rem;
+  font-weight: 700;
+}
+.console__flag.is-warning {
+  background: var(--sev-warning);
+  color: #1a1a1a;
+}
+.console__flag--l {
+  left: 18%;
+}
+.console__flag--r {
+  right: 18%;
+}
+.console:is([data-design="a"], [data-design="final"]) .console__flag.is-on {
+  display: block;
+}
+.console__arms {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 8px;
+}
+.carm {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  min-width: 0;
+  padding: 12px 10px 10px;
+  border-top: 6px solid transparent;
+  border-radius: 6px;
+  background: var(--console);
+  font-size: 0.8125rem;
+}
+.carm__name {
+  font-size: 0.875rem;
+}
+.carm__color {
+  color: var(--console-text);
+}
+.carm__state {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin-top: 4px;
+}
+.carm__dot {
+  flex: none;
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+  background: var(--sev, var(--sev-running));
+}
+.carm__word {
+  font-style: normal;
+}
+.carm__lines {
+  display: block;
+  height: 5px;
+  margin-top: 6px;
+  border-radius: 3px;
+  background: rgb(255 255 255 / 0.14);
+}
+.carm[data-state="Running"] { --sev: var(--sev-running); }
+.carm[data-state="Warning"] { --sev: var(--sev-warning); }
+.carm[data-state="Error"] { --sev: var(--sev-error); }
+.carm[data-state="Inactive"] { --sev: var(--sev-inactive); }
+/* C and the final design: the arm color as a bar on top, the state as a
+   dot and a word */
+.console:is([data-design="c"], [data-design="final"]) .carm {
+  border-top-color: var(--arm);
+}
+/* B: the whole panel takes the arm color; the state is only a word */
+.console[data-design="b"] .carm {
+  border-top-color: var(--arm);
+  background: var(--arm);
+  color: #111;
+}
+.console[data-design="b"] .carm[data-arm="3"] {
+  color: #fff;
+}
+.console[data-design="b"] .carm__color {
+  color: inherit;
+  opacity: 0.8;
+}
+.console[data-design="b"] .carm__dot,
+.console[data-design="b"] .carm__lines {
+  display: none;
+}
+/* before and A: no arm colors, the arm is only a number */
+.console:is([data-design="before"], [data-design="a"]) .carm__color {
+  visibility: hidden;
+}
+.console[data-design="before"] .carm__state,
+.console[data-design="a"] .carm__state {
+  display: none;
+}
+.console__list {
+  display: none;
+  padding: 8px 10px;
+  border-radius: 6px;
+  background: #24282b;
+  color: var(--console-text);
+  font-size: 0.8125rem;
+}
+.console[data-design="before"] .console__list {
+  display: block;
+}
+.console__list b {
+  color: var(--console-ink);
+}
+
+/* the glance test: after one second the console is covered by the question */
+.console__quiz {
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  padding: 16px;
+  border-radius: 12px;
+  background: rgb(18 21 22 / 0.97);
+  text-align: center;
+}
+.console__quiz[hidden] {
+  display: none;
+}
+.console__ask {
+  font-size: 1.0625rem;
+  font-weight: 600;
+}
+.console__picks {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 8px;
+}
+.console__pick,
+.console__again {
+  min-height: 44px;
+  padding: 0 18px;
+  border: 1px solid rgb(255 255 255 / 0.3);
+  border-radius: 8px;
+  background: #2a2f32;
+  color: #fff;
+  font: inherit;
+  font-weight: 600;
+  cursor: pointer;
+}
+.console__pick:hover,
+.console__again:hover {
+  border-color: #fff;
+}
+.console__pick:focus-visible,
+.console__again:focus-visible {
+  outline: 3px solid var(--ink);
+  outline-offset: 2px;
+}
+.console__pick.is-right {
+  border-color: var(--sev-running);
+  background: color-mix(in srgb, var(--sev-running) 35%, #2a2f32);
+}
+.console__pick.is-wrong {
+  border-color: var(--sev-error);
+  background: color-mix(in srgb, var(--sev-error) 35%, #2a2f32);
+}
+.console__result {
+  min-height: 1.4em;
+  font-size: 0.9375rem;
+}
+.console__after {
+  display: flex;
+  gap: 8px;
+}
+.console__after[hidden] {
+  display: none;
+}
+.console__again--ghost {
+  background: transparent;
+}
+
+/* controls: one row per arm, its four states as a segmented control */
+[data-arms] .sandbox__label {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  column-gap: 6px;
+  align-items: center;
+}
+[data-arms] .sandbox__label .play__picked {
+  grid-column: 1 / -1;
+}
+.arm-swatch {
+  display: inline-block;
+  width: 12px;
+  height: 12px;
+  border-radius: 3px;
+  background: var(--arm);
+  vertical-align: -1px;
+}
+.arm-states {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
+}
+.arm-state {
+  position: relative;
+  cursor: pointer;
+}
+.arm-state input {
+  inset: 0;
+  margin: 0;
+  opacity: 0;
+  cursor: pointer;
+}
+.arm-state span {
+  display: inline-flex;
+  align-items: center;
+  min-height: 28px;
+  padding: 0 10px;
+  border: 1px solid var(--line);
+  border-radius: 6px;
+  font-size: 0.8125rem;
+  font-weight: 600;
+}
+.arm-state input:checked + span {
+  border-color: var(--ink);
+  background: var(--ink);
+  color: var(--bg);
+}
+.arm-state input:focus-visible + span {
+  outline: 3px solid var(--ink);
+  outline-offset: 2px;
+}
+.glance__intro,
+.arm-notes__text {
+  font-size: 0.875rem;
+  line-height: 1.55;
+  color: var(--text);
+}
+.arm-notes__title {
+  margin-bottom: 6px;
+  font-size: 0.875rem;
+  font-weight: 700;
+}
+.glance__scores {
+  display: grid;
+  gap: 4px;
+  margin-top: 10px;
+}
+.glance__scores li {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 8px;
+  padding: 6px 10px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  font-size: 0.8125rem;
+  color: var(--text);
+}
+.glance__scores b {
+  color: var(--ink);
+}
+.glance__name {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.glance__num {
+  flex: none;
+}
+@media (max-width: 860px) {
+  .console__arms {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .console {
+    transition: none;
+  }
+}
+
+/* ---- no absolute positioning: the same overlays, stacked with grid ------ */
+.sandbox__switch input {
+  position: static;
+  width: 0;
+  height: 0;
+  margin: 0;
+  appearance: none;
+}
+.sandbox__switch span {
+  position: static;
+  display: grid;
+  align-items: center;
+  box-sizing: border-box;
+  padding: 2px;
+}
+.sandbox__switch span::after {
+  position: static;
+}
+.sandbox__code {
+  position: static;
+  display: grid;
+}
+.sandbox__code > * {
+  grid-area: 1 / 1;
+}
+.sandbox__code .sandbox__btn {
+  position: static;
+  align-self: start;
+  justify-self: end;
+  margin: 18px 24px 0 0;
+}
+.arm-chip--bar {
+  position: static;
+  box-shadow: inset 0 6px 0 var(--arm-4);
+}
+.arm-chip--bar i {
+  display: none;
+}
+.console__video {
+  position: static;
+  display: grid;
+}
+.console__video > * {
+  grid-area: 1 / 1;
+}
+.console__tool {
+  position: static;
+  align-self: end;
+  translate: 0 10px;
+}
+.console__tool--l {
+  justify-self: start;
+  margin-left: 34%;
+}
+.console__tool--r {
+  justify-self: end;
+  margin-right: 34%;
+}
+.console__flag {
+  position: static;
+  align-self: start;
+  margin-top: 16px;
+}
+.console__flag--l {
+  justify-self: start;
+  margin-left: 18%;
+}
+.console__flag--r {
+  justify-self: end;
+  margin-right: 18%;
+}
+.console {
+  position: static;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  grid-template-rows: auto auto auto;
+}
+.console__quiz {
+  position: static;
+  grid-row: 1 / -1;
+  grid-column: 1;
+}
+.console__quiz[hidden] {
+  display: none;
+}
+.arm-state {
+  position: static;
+  display: inline-grid;
+}
+.arm-state > * {
+  grid-area: 1 / 1;
+}
+.arm-state input {
+  position: static;
+  width: 100%;
+  height: 100%;
+}

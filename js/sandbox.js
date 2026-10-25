@@ -2,7 +2,7 @@
    page's own script (ku.js, console.js) builds on it:
    - Sandbox.tabs(root): the panel's tabs, by click or by arrow keys, Home
      and End when a tab has focus.
-   - Sandbox.reveal(root, steps, gap): once the sandbox is a third in view it
+   - Sandbox.reveal(root, steps, gap): once the sandbox's top is a third up the screen it
      rises in (CSS), then runs the demo steps one after another, gap ms
      apart, until the visitor touches, clicks or tabs into it. Nothing moves
      for reduced motion.
@@ -63,7 +63,9 @@
           run(0);
         }, 1300);
       },
-      { threshold: 0.3 }
+      /* once its top is a third of the way up the screen: a share of the
+         sandbox would never be reached on a phone, where it stacks tall */
+      { rootMargin: "0px 0px -33% 0px" }
     );
     io.observe(wrap);
   }

@@ -1996,3 +1996,54 @@
     grid-column: auto;
   }
 }
+
+/* "Try it": the arm sandbox's entry in the outline carries a small tag that
+   pulses until the visitor goes there once (sandbox.js), and the hero has a
+   tinted play button for it */
+.a-outline__tag {
+  display: inline-block;
+  margin-left: 6px;
+  padding: 1px 7px;
+  border-radius: 999px;
+  background: var(--accent);
+  font-size: 0.6875rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--on-accent);
+  vertical-align: 1px;
+}
+@media (prefers-reduced-motion: no-preference) {
+  :root:not(.motion-paused) .a-outline a[data-attn] .a-outline__tag {
+    animation: a-try 1.6s ease-in-out infinite;
+  }
+}
+@keyframes a-try {
+  50% {
+    box-shadow: 0 0 0 5px color-mix(in srgb, var(--accent) 30%, transparent);
+  }
+}
+.button--play {
+  gap: 8px;
+  border: 2px solid var(--accent);
+  background: color-mix(in srgb, var(--accent) 12%, var(--bg));
+  color: var(--accent-text);
+}
+.button--play:hover {
+  background: color-mix(in srgb, var(--accent) 22%, var(--bg));
+}
+.button--play svg {
+  width: 14px;
+  height: 14px;
+  fill: currentColor;
+}
+/* the sandbox's outline entry stays on one line, its tag included */
+.a-outline a[href="#arm-sandbox"] {
+  align-items: center;
+  gap: 8px;
+  white-space: nowrap;
+}
+.a-outline a[href="#arm-sandbox"] .a-outline__tag {
+  flex: none;
+  margin-left: 0;
+}

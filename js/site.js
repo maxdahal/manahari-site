@@ -357,6 +357,25 @@
   try {
     if (sessionStorage.getItem("motion") === "paused") root.classList.add("motion-paused");
   } catch (e) {}
+  /* Hero videos: play muted on a loop unless motion is reduced or paused
+     with the motion button; they follow the button after that. */
+  function initHeroVideo() {
+    var videos = [].slice.call(document.querySelectorAll("[data-hero-video]"));
+    if (!videos.length) return;
+    var reduce = window.matchMedia("(prefers-reduced-motion: reduce)");
+    function sync() {
+      var stop = reduce.matches || root.classList.contains("motion-paused");
+      videos.forEach(function (v) {
+        if (stop) v.pause();
+        else {
+          var p = v.play();
+          if (p && p.catch) p.catch(function () {});
+        }
+      });
+    }
+    document.addEventListener("motionchange", sync);
+    sync();
+  }
   function initMotion() {
     var button = document.querySelector(".motion-toggle");
     if (!button) return;
@@ -381,6 +400,7 @@
 
   function start() {
     initMotion();
+    initHeroVideo();
     initTheme();
     initMenu();
     initTabs();

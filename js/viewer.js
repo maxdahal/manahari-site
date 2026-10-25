@@ -4,7 +4,7 @@
 (function () {
   "use strict";
   var imgs = [].slice.call(document.querySelectorAll("main figure img")).filter(function (img) {
-    return !img.closest("a, button");
+    return !img.closest("a, button, .hero-loop");
   });
   if (!imgs.length) return;
 

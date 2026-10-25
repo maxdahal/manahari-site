@@ -997,3 +997,118 @@
 .a-hero2__aside {
   align-self: stretch;
 }
+
+/* ==========================================================================
+   My contribution: the background as tags, methods as labeled rows, what I
+   did as a grid of short cards with a check, the team in its own card.
+   ========================================================================== */
+.article .contrib__bg {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px;
+}
+.contrib__bg-label {
+  margin-right: 4px;
+  font-size: 0.8125rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+.article .contrib__bg .a-chip {
+  font-size: 0.875rem;
+}
+.article .contrib__facts {
+  display: grid;
+  gap: 12px;
+  max-width: var(--a-read);
+  margin: 0;
+}
+.contrib__facts div {
+  display: grid;
+  grid-template-columns: 120px minmax(0, 1fr);
+  gap: 16px;
+}
+.article .contrib__facts dt {
+  font-size: 0.8125rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  line-height: 1.9;
+  color: var(--accent-text);
+}
+.article .contrib__facts dd {
+  margin: 0;
+  font-size: 1rem;
+  line-height: 1.6;
+  color: var(--ink);
+}
+.contrib {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-top: 8px;
+}
+.article .dids {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 10px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.article .did {
+  display: grid;
+  grid-template-columns: 22px minmax(0, 1fr);
+  gap: 12px;
+  align-items: start;
+  padding: 16px 18px;
+  border-radius: 14px;
+  background: color-mix(in srgb, var(--ink) 5%, transparent);
+  font-size: 1rem;
+  line-height: 1.55;
+  color: var(--ink);
+}
+.dids > .did:last-child:nth-child(odd) {
+  grid-column: 1 / -1;
+}
+.did__icon {
+  width: 22px;
+  height: 22px;
+  padding: 3px;
+  border-radius: 50%;
+  background: var(--accent);
+  color: var(--on-accent);
+}
+.contrib__team {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-top: 12px;
+  padding: 18px 20px;
+  border: 1px solid var(--line);
+  border-radius: 14px;
+}
+.article .contrib__team ul {
+  gap: 6px;
+}
+.article .contrib__team li {
+  color: var(--ink);
+}
+@media (max-width: 760px) {
+  .article .dids {
+    grid-template-columns: minmax(0, 1fr);
+  }
+  .contrib__facts div {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 2px;
+  }
+}
+/* the side card hugs its content: no stretched gap under the links */
+.a-hero2__aside {
+  align-self: start;
+}
+.a-card__part {
+  margin-top: 0;
+}

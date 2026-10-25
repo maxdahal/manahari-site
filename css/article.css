@@ -1837,3 +1837,19 @@
   flex-direction: column;
   gap: 10px;
 }
+
+/* the room diagram (who stands where), drawn in the page's own colours */
+.article .room__areas rect {
+  fill: color-mix(in srgb, var(--ink) 4%, transparent);
+  stroke: color-mix(in srgb, var(--ink) 30%, transparent);
+}
+.article .room__labels text {
+  fill: var(--text);
+  font-family: var(--body-font);
+  font-size: 0.8125rem;
+  letter-spacing: 0.06em;
+  text-anchor: middle;
+}
+.article .room__people circle {
+  fill: var(--accent);
+}

@@ -24,8 +24,8 @@
   --a-1: 12px;
   --a-2: 16px;
   --a-3: 32px;
-  --a-4: 104px;
-  --a-5: 184px;
+  --a-4: 144px;
+  --a-5: 240px;
   max-width: calc(var(--a-col) + 2 * var(--gx));
   margin: 0 auto;
   padding: 48px var(--gx) var(--a-5);
@@ -454,8 +454,8 @@
 /* ---- 7. phones ------------------------------------------------------------ */
 @media (max-width: 760px) {
   .article {
-    --a-4: 56px;
-    --a-5: 96px;
+    --a-4: 80px;
+    --a-5: 128px;
     padding-top: 32px;
   }
   .row,

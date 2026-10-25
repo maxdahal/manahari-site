@@ -355,8 +355,8 @@ html {
    - before each section title inside a stage: clear room (--gap-section)
    - inside a section: tight and even (--gap-inside), just enough to read */
 .cp {
-  --gap-stage: clamp(72px, 11vh, 120px);
-  --gap-section: clamp(44px, 6.5vh, 64px);
+  --gap-stage: clamp(96px, 14vh, 160px);
+  --gap-section: clamp(48px, 7vh, 72px);
   --gap-inside: 16px;
 }
 
@@ -416,7 +416,7 @@ html {
    section (site.js measures it as --band-h), then the content carries on
    below it. */
 .cp-sec .block {
-  --title-lh: calc(clamp(1.3125rem, 1.15rem + 0.5vw, 1.5rem) * 1.25);
+  --title-lh: calc(clamp(1.5rem, 1.25rem + 0.6vw, 1.875rem) * 1.15);
 }
 .cp-sec .block__title {
   position: relative;
@@ -442,6 +442,12 @@ html {
 /* the first section right under a stage header needs less room */
 .cp-sec__label + .block {
   padding-top: calc(var(--gap-section) * 0.6);
+}
+/* every later section in an act opens with a hairline, so each part reads
+   as its own piece */
+.cp-sec > .block:not(.block--continued) ~ .block:not(.block--continued) {
+  margin-top: calc(var(--gap-section) * 0.5);
+  border-top: 1px solid var(--line);
 }
 
 /* Details side by side: rows of cards share the full width in equal
@@ -540,8 +546,8 @@ html {
 .cp {
   --t-title: 3rem;        /* page title */
   --t-stat: 2.5rem;       /* big numbers */
-  --t-stage: 2.25rem;     /* stage header */
-  --t-section: 1.5rem;    /* section title */
+  --t-stage: 3.5rem;      /* act header */
+  --t-section: 1.875rem;  /* section title */
   --t-quote: 1.25rem;     /* statements */
   --t-sub: 1.1875rem;     /* subheads */
   --t-card: 1.0625rem;    /* titles inside cards and lists */
@@ -558,14 +564,16 @@ html {
   font-size: clamp(2.25rem, 1.8rem + 1.6vw, var(--t-title));
 }
 .cp-sec__label {
-  font-size: clamp(1.75rem, 1.4rem + 1vw, var(--t-stage));
+  font-size: clamp(2.25rem, 1.6rem + 2vw, var(--t-stage));
 }
+/* section titles: a clear step under the act header and a clear step
+   over the card titles */
 .cp-main .block__title {
   font-family: var(--body-font);
-  font-size: clamp(1.3125rem, 1.15rem + 0.5vw, var(--t-section));
+  font-size: clamp(1.5rem, 1.25rem + 0.6vw, var(--t-section));
   font-weight: 600;
-  line-height: 1.25;
-  letter-spacing: -0.015em;
+  line-height: 1.15;
+  letter-spacing: -0.02em;
 }
 .cp-main :is(h4, .subhead),
 .cp-main .steps--story .step__text h4 {
@@ -574,6 +582,16 @@ html {
   font-weight: 600;
   line-height: 1.2;
   letter-spacing: 0;
+}
+/* a subhead inside a section is a small capital label in the accent, a
+   clear step below the section title */
+.cp-main .block__body > .subhead {
+  margin-top: 16px;
+  font-size: var(--t-label);
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--accent-text);
 }
 .cp-main :is(.card, .grid-2, .grid-3, .rules-list, .numbered, .path) h3,
 .cp-main .more__meta b {
@@ -1091,4 +1109,46 @@ html {
 }
 .notice--top p {
   margin: 0;
+}
+
+/* Crawl, walk, run: three steps in a row, each a tinted card, with an
+   arrow between them; on narrow screens they stack and the arrows point
+   down */
+.cp-main .phases {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr) auto minmax(0, 1fr);
+  align-items: stretch;
+  gap: 12px;
+}
+.cp-main .phases .card {
+  gap: 8px;
+  padding: 20px;
+  border: 1px solid var(--line);
+  border-top: 3px solid var(--accent);
+  border-radius: var(--r);
+  background: color-mix(in srgb, var(--surface) 60%, transparent);
+}
+.cp-main .phases .card__label {
+  font-size: var(--t-label);
+  color: var(--accent-text);
+}
+.cp-main .phases .card h4 {
+  font-size: var(--t-card);
+}
+.phases__arrow {
+  display: grid;
+  place-items: center;
+  color: var(--accent-text);
+}
+.phases__arrow svg {
+  width: 22px;
+  height: 22px;
+}
+@media (max-width: 720px) {
+  .cp-main .phases {
+    grid-template-columns: minmax(0, 1fr);
+  }
+  .phases__arrow svg {
+    rotate: 90deg;
+  }
 }

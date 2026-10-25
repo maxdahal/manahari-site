@@ -209,16 +209,6 @@
 .a-act > h2 + .a-part {
   padding-top: var(--a-3);
 }
-/* the small dot between two parts */
-.a-part + .a-part::before {
-  content: "";
-  align-self: center;
-  width: 6px;
-  height: 6px;
-  margin: calc(var(--a-4) / -2 - 3px) 0 calc(var(--a-4) / 2 - 3px);
-  border-radius: 50%;
-  background: var(--accent);
-}
 .a-part > h3 {
   margin: 0;
   font-family: var(--body-font);

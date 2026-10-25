@@ -1,22 +1,28 @@
-/* Case study outline: marks the part you are reading, the last one whose
-   title has passed the upper third of the screen. */
+/* Case study section lists (the outline on the left, and the tab strip on
+   narrow screens): mark the section you are reading, the last one whose
+   top has passed the upper third of the screen. */
 (function () {
   "use strict";
-  var links = [].slice.call(document.querySelectorAll(".a-toc a[href^='#']"));
+  var links = [].slice.call(document.querySelectorAll(".a-outline a[href^='#'], .a-sections a[href^='#']"));
   if (!links.length) return;
-  var targets = links.map(function (a) {
-    return document.getElementById(a.getAttribute("href").slice(1));
+  var ids = [];
+  links.forEach(function (a) {
+    var id = a.getAttribute("href").slice(1);
+    if (ids.indexOf(id) < 0) ids.push(id);
+  });
+  var targets = ids.map(function (id) {
+    return document.getElementById(id);
   });
   var ticking = false;
   function mark() {
     ticking = false;
     var line = window.innerHeight / 3;
-    var current = 0;
+    var current = ids[0];
     targets.forEach(function (t, i) {
-      if (t && t.getBoundingClientRect().top <= line) current = i;
+      if (t && t.getBoundingClientRect().top <= line) current = ids[i];
     });
-    links.forEach(function (a, i) {
-      if (i === current) a.setAttribute("aria-current", "location");
+    links.forEach(function (a) {
+      if (a.getAttribute("href") === "#" + current) a.setAttribute("aria-current", "location");
       else a.removeAttribute("aria-current");
     });
   }

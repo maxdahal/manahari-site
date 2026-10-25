@@ -1888,3 +1888,105 @@
 :root[data-theme="light"] .a-outline {
   --outline-dim: #5c5c5b;
 }
+
+/* ==========================================================================
+   Role buttons over the room diagram: the chosen role's dot lights up in
+   the accent, and a short note in a hand (Kalam) says where they stand and
+   what they do.
+   ========================================================================== */
+.article .roles {
+  display: flex;
+  flex-direction: column;
+  gap: var(--a-2);
+}
+.article .roles__tabs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+.article .roles__tabs button {
+  min-height: 44px;
+  padding: 0 18px;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  background: none;
+  font: inherit;
+  font-size: 0.9375rem;
+  font-weight: 600;
+  color: var(--text);
+  cursor: pointer;
+  transition: background-color 0.2s ease, color 0.2s ease, border-color 0.2s ease;
+}
+.article .roles__tabs button:hover {
+  border-color: var(--accent);
+  color: var(--ink);
+}
+.article .roles__tabs button[aria-selected="true"] {
+  border-color: var(--accent);
+  background: var(--accent);
+  color: var(--on-accent);
+}
+.article .roles__tabs button:focus-visible {
+  outline: 3px solid var(--accent);
+  outline-offset: 3px;
+}
+.article .roles__stage {
+  display: grid;
+  grid-template-columns: minmax(0, 3fr) minmax(0, 2fr);
+  gap: var(--a-3);
+  align-items: center;
+}
+.article .roles__notes {
+  display: grid;
+}
+.article .roles__note {
+  margin: 0;
+  font-family: "Kalam", cursive;
+  font-size: clamp(1.375rem, 1.1rem + 0.9vw, 1.875rem);
+  line-height: 1.35;
+  color: var(--ink);
+  rotate: -2deg;
+}
+.article .room .person {
+  fill: color-mix(in srgb, var(--ink) 35%, transparent);
+  transition: fill 0.3s ease, r 0.3s ease;
+}
+.article .room[data-selected="0"] .person[data-role="0"],
+.article .room[data-selected="1"] .person[data-role="1"],
+.article .room[data-selected="2"] .person[data-role="2"],
+.article .room[data-selected="3"] .person[data-role="3"] {
+  fill: var(--accent);
+  r: 12px;
+  stroke: color-mix(in srgb, var(--accent) 35%, transparent);
+  stroke-width: 10px;
+}
+@media (max-width: 760px) {
+  .article .roles__stage {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .article .room .person {
+    transition: none;
+  }
+}
+
+/* every card and fold-out row keeps a 1px edge in both themes (clear in
+   light, invisible in dark), so switching themes never changes their size
+   and nothing on the page shifts */
+.article :is(.card-pt, .acc, .did) {
+  border: 1px solid transparent;
+}
+/* review results read as small tinted badges, clear in both themes */
+.article .acc__label:is(.is-ok, .is-open) {
+  min-width: 0;
+  padding: 3px 9px;
+  border-radius: 999px;
+  letter-spacing: 0.06em;
+}
+.article .acc__label.is-ok {
+  background: color-mix(in srgb, var(--ok-text) 16%, transparent);
+}
+.article .acc__label.is-open {
+  background: color-mix(in srgb, var(--warn-text) 16%, transparent);
+}

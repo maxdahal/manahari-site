@@ -860,7 +860,7 @@ body,
     main {
       overflow-x: clip;
     }
-    :root:not(.motion-paused) main :is(h2, h3, h4, p, li, blockquote, dt, dd):not(:is(.hero, .sandbox-wrap, .badge, .shelves, .spot, .console, .cp-outline, nav, figure, table, .tabs, [role="tablist"], .seasons, .motion, .lightbox, .skills3d, li, .chapter) *):not(.hero *),
+    :root:not(.motion-paused) main :is(h2, h3, h4, p, li, blockquote, dt, dd):not(:is(.hero, .sandbox-wrap, .badge, .shelves, .spot, .console, .cp-outline, .accs, nav, figure, table, .tabs, [role="tablist"], .seasons, .motion, .lightbox, .skills3d, li, .chapter) *):not(.hero *),
     :root:not(.motion-paused) main :is(.shelf__name, .shelf__tags) {
       animation: var(--st-in, st-up) linear both, st-out linear both;
       animation-timeline: view(), view();
@@ -883,10 +883,10 @@ body,
     :root:not(.motion-paused) main :is(blockquote, .statement, [class*="quote"]):not(:is(.sandbox-wrap, .badge) *) {
       --st-in: st-zoom;
     }
-    :root:not(.motion-paused) main li:not(:is(.sandbox-wrap, .badge, .shelves, .spot, .console, .cp-outline, nav, figure, table, .seasons, .chapter) *):nth-child(odd) {
+    :root:not(.motion-paused) main li:not(:is(.sandbox-wrap, .badge, .shelves, .spot, .console, .cp-outline, .accs, nav, figure, table, .seasons, .chapter) *):nth-child(odd) {
       --st-in: st-tilt-l;
     }
-    :root:not(.motion-paused) main li:not(:is(.sandbox-wrap, .badge, .shelves, .spot, .console, .cp-outline, nav, figure, table, .seasons, .chapter) *):nth-child(even) {
+    :root:not(.motion-paused) main li:not(:is(.sandbox-wrap, .badge, .shelves, .spot, .console, .cp-outline, .accs, nav, figure, table, .seasons, .chapter) *):nth-child(even) {
       --st-in: st-tilt-r;
     }
   }

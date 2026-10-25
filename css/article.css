@@ -1618,3 +1618,48 @@
 .article .a-part > :not(h3) {
   margin-inline-start: clamp(24px, 3.2vw, 48px);
 }
+
+/* ==========================================================================
+   Outline, with every part listed. The section you are in reads clearly;
+   the others dim back (to --outline-dim, which still meets 4.5:1). The link
+   you are reading is marked as in the earlier outline: an accent bar, a soft
+   accent wash fading out to the right, and accent text in bold.
+   ========================================================================== */
+.a-outline > ol > li > a,
+.a-outline .a-outline__sub a {
+  color: var(--text);
+}
+.a-outline > ol:has(a[aria-current]) > li:not(:has(a[aria-current])) a {
+  color: var(--outline-dim);
+}
+.a-outline a:hover,
+.a-outline > ol:has(a[aria-current]) > li:not(:has(a[aria-current])) a:hover {
+  color: var(--ink);
+}
+.a-outline a[aria-current] {
+  border-left-color: var(--accent);
+  background: linear-gradient(90deg,
+      color-mix(in srgb, var(--accent) 18%, transparent),
+      color-mix(in srgb, var(--accent) 6%, transparent) 55%,
+      transparent);
+  font-weight: 600;
+  color: var(--accent-text);
+}
+.a-outline a[aria-current] .a-outline__num {
+  color: var(--accent-text);
+}
+/* the act stays marked, more quietly, while you read one of its parts */
+.a-outline li:has(.a-outline__sub a[aria-current]) > a {
+  border-left-color: color-mix(in srgb, var(--accent) 45%, transparent);
+  font-weight: 600;
+  color: var(--ink);
+}
+/* a long outline scrolls on its own, inside the screen */
+@media (min-width: 1101px) {
+  .a-outline {
+    max-height: calc(100dvh - var(--bar-h) - 72px);
+    overflow-y: auto;
+    overscroll-behavior: contain;
+    scrollbar-width: thin;
+  }
+}

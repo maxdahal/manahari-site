@@ -25,6 +25,16 @@
       if (a.getAttribute("href") === "#" + current) a.setAttribute("aria-current", "location");
       else a.removeAttribute("aria-current");
     });
+    /* the outline scrolls on its own when it is taller than the screen:
+       keep the marked link inside it */
+    var box = document.querySelector(".a-outline");
+    var on = box && box.querySelector("a[aria-current]");
+    if (on && box.scrollHeight > box.clientHeight) {
+      var b = box.getBoundingClientRect(), r = on.getBoundingClientRect();
+      if (r.top < b.top + 24 || r.bottom > b.bottom - 24) {
+        box.scrollTop += r.top - b.top - box.clientHeight / 3;
+      }
+    }
   }
   window.addEventListener("scroll", function () {
     if (!ticking) {

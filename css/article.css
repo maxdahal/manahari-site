@@ -1972,3 +1972,11 @@
     scroll-snap-align: start;
   }
 }
+/* small screens: the notice's icon sits on top, its text below */
+@media (max-width: 560px) {
+  .a-note {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 8px;
+  }
+}

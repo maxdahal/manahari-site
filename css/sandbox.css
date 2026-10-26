@@ -561,3 +561,40 @@
     grid-template-columns: minmax(0, 1fr);
   }
 }
+
+/* the open/close button exists only on phones; there, a closed sandbox
+   shows just its title, intro and strip */
+.sandbox-wrap__open {
+  display: none;
+}
+@media (max-width: 760px) {
+  .sandbox-wrap__open {
+    display: inline-flex;
+    align-self: flex-start;
+    align-items: center;
+    gap: 8px;
+    min-height: 44px;
+    padding: 0 20px;
+    border: 0;
+    border-radius: 999px;
+    background: var(--accent);
+    font: inherit;
+    font-size: 0.9375rem;
+    font-weight: 700;
+    color: var(--on-accent);
+    cursor: pointer;
+  }
+  .sandbox-wrap__open::after {
+    content: "+";
+  }
+  .sandbox-wrap__open[aria-expanded="true"]::after {
+    content: "\2212";
+  }
+  .sandbox-wrap__open:focus-visible {
+    outline: 3px solid var(--ink);
+    outline-offset: 3px;
+  }
+  .sandbox-wrap.is-collapsed .sandbox {
+    display: none;
+  }
+}

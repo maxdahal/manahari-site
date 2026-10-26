@@ -93,5 +93,38 @@
     });
   }
 
+  /* On phones a sandbox starts closed: its title, intro and color strip
+     show, with a button to open the rest (CSS hides it only below 760px,
+     so larger screens are unchanged). Links to #sandbox open it too. */
+  function collapse() {
+    [].forEach.call(document.querySelectorAll(".sandbox-wrap"), function (wrap, i) {
+      var box = wrap.querySelector(".sandbox");
+      if (!box || wrap.querySelector(".sandbox-wrap__open")) return;
+      if (!box.id) box.id = "sandbox-box-" + i;
+      var button = document.createElement("button");
+      button.type = "button";
+      button.className = "sandbox-wrap__open";
+      button.setAttribute("aria-controls", box.id);
+      wrap.insertBefore(button, box);
+      function set(open) {
+        wrap.classList.toggle("is-collapsed", !open);
+        button.setAttribute("aria-expanded", String(open));
+        button.textContent = open ? "Close the sandbox" : "Open the sandbox";
+      }
+      set(false);
+      button.addEventListener("click", function () {
+        set(wrap.classList.contains("is-collapsed"));
+      });
+      [].forEach.call(document.querySelectorAll('a[href="#sandbox"]'), function (link) {
+        link.addEventListener("click", function () {
+          set(true);
+        });
+      });
+      if (location.hash === "#sandbox") set(true);
+    });
+  }
+  if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", collapse);
+  else collapse();
+
   window.Sandbox = { tabs: tabs, reveal: reveal, attention: attention };
 })();

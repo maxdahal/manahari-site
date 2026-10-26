@@ -1318,6 +1318,13 @@ html:has(.recruiter[open]) {
   max-width: 980px;
   margin: clamp(32px, 4vw, 56px) auto 0;
 }
+/* larger screens: the shelves (everything on them is sized to the shelf's
+   width) fill the content column */
+@media (min-width: 1280px) {
+  .shelves {
+    max-width: 100%;
+  }
+}
 .shelves__list {
   display: grid;
   grid-template-columns: 640fr 400fr minmax(200px, 230fr);

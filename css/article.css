@@ -1451,7 +1451,7 @@
    sit forward on it. (Matched by id with an attribute selector, so it
    weighs like a class.)
    ========================================================================== */
-.article .a-part[id^="the-problem"] {
+.article :is(.a-part[id^="the-problem"], .a-part[id="annotation-became-a-mode"]) {
   gap: var(--a-2);
   margin-top: var(--a-3);
   padding: clamp(24px, 4vw, 48px);
@@ -1460,7 +1460,7 @@
   border-radius: 20px;
   background: color-mix(in srgb, var(--accent) 6%, var(--bg));
 }
-.article .a-part[id^="the-problem"] > h3 {
+.article :is(.a-part[id^="the-problem"], .a-part[id="annotation-became-a-mode"]) > h3 {
   font-family: var(--heading-font);
   font-size: clamp(1.75rem, 1.3rem + 1.4vw, 2.5rem);
   font-weight: 700;
@@ -1469,14 +1469,14 @@
   text-transform: uppercase;
 }
 /* the panel already sets it apart, so its content needs no indent */
-.article .a-part[id^="the-problem"] > :not(h3) {
+.article :is(.a-part[id^="the-problem"], .a-part[id="annotation-became-a-mode"]) > :not(h3) {
   margin-inline-start: 0;
 }
-.article .a-part[id^="the-problem"] .card-pt {
+.article :is(.a-part[id^="the-problem"], .a-part[id="annotation-became-a-mode"]) .card-pt {
   border: 1px solid color-mix(in srgb, var(--accent) 22%, transparent);
   background: var(--bg);
 }
-.article .a-part[id^="the-problem"] .card-pt > .label {
+.article :is(.a-part[id^="the-problem"], .a-part[id="annotation-became-a-mode"]) .card-pt > .label {
   color: var(--accent-text);
 }
 
@@ -1846,5 +1846,84 @@
 @media (prefers-reduced-motion: reduce) {
   .a-outline > ol > li > a::after {
     transition: none;
+  }
+}
+
+/* ==========================================================================
+   First screen: the problem and my part in a line each under the title,
+   and a before/after pair as the picture
+   ========================================================================== */
+.a-lead {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  max-width: 62ch;
+  margin: 20px 0 0;
+}
+.a-lead > div {
+  display: grid;
+  grid-template-columns: 7.5em minmax(0, 1fr);
+  gap: 12px;
+  align-items: baseline;
+}
+.a-lead dt {
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--accent-text);
+}
+.a-lead dd {
+  margin: 0;
+  font-size: 1.0625rem;
+  line-height: 1.55;
+  color: var(--ink);
+}
+.hero-compare {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 14px;
+}
+.hero-compare figure {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin: 0;
+}
+.article .hero-compare figure > :is(svg, img) {
+  width: 100%;
+  height: auto;
+  aspect-ratio: 16 / 10;
+  object-fit: cover;
+  border-radius: 12px;
+  background: var(--surface);
+}
+.article .hero-compare__tag {
+  align-self: flex-start;
+  margin: 0;
+  padding: 3px 10px;
+  border-radius: 999px;
+  background: color-mix(in srgb, var(--ink) 10%, transparent);
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--ink);
+}
+.article .hero-compare figure:last-child .hero-compare__tag {
+  background: var(--accent);
+  color: var(--on-accent);
+}
+.hero-compare figcaption {
+  font-size: 0.875rem;
+  line-height: 1.45;
+}
+@media (max-width: 560px) {
+  .hero-compare {
+    grid-template-columns: minmax(0, 1fr);
+  }
+  .a-lead > div {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 2px;
   }
 }

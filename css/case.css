@@ -219,15 +219,29 @@ body.cs :is(.button, .pv-btn) {
   text-transform: none;
 }
 
-/* ---- the sticky index on the left --------------------------------------- */
+/* ---- the sticky index, at the bottom left, in regular weight -----------
+   The side column runs the page's full height with the index at its foot;
+   sticking to the bottom pulls it up into the screen's lower-left corner,
+   where it stays as you read (a longer list grows upward). */
 body.cs .a-outline {
   font-family: var(--cs-font);
 }
-body.cs .a-outline a {
+body.cs .a-side .a-outline :is(a, .a-outline__num, .a-outline__all) {
+  font-weight: 400;
   letter-spacing: -0.005em;
 }
-body.cs .a-outline > ol > li > a {
-  font-weight: 600;
+@media (min-width: 1101px) {
+  body.cs .a-side {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+  }
+  body.cs .a-outline {
+    top: auto;
+    bottom: 32px;
+    margin-top: 0;
+    margin-bottom: 32px;
+  }
 }
 
 /* ---- the section strip on narrow screens -------------------------------- */

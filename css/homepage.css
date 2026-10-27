@@ -351,16 +351,11 @@ body:has(.cv-hero) {
   padding: clamp(80px, 12vh, 140px) max(var(--gx), (100% - 1240px) / 2);
   font-family: var(--cv-font);
 }
+/* the hand-drawn "hello" keeps its round sticker, the scribble centred */
 .cv-contact__hi .pv-hi {
-  display: block;
-  width: clamp(110px, 12vw, 170px);
-  color: var(--accent-text);
-}
-.cv-contact__hi .pv-hi svg {
-  display: block;
-  width: 100%;
-  height: auto;
-  stroke: currentColor;
+  width: clamp(96px, 9vw, 128px);
+  height: clamp(96px, 9vw, 128px);
+  rotate: -8deg;
 }
 .cv-contact__title {
   font-size: clamp(3rem, 1rem + 8.4vw, 10rem);
@@ -394,4 +389,74 @@ body:has(.cv-hero) {
   .cv-email {
     transition: none;
   }
+}
+
+/* ==========================================================================
+   Fewer capitals: sentence case across the home page, section headings set
+   large, and the Quick summary centred under the headline.
+   ========================================================================== */
+.pv .cv-label {
+  font-size: 0.875rem;
+  letter-spacing: 0.01em;
+  text-transform: none;
+}
+.cv-title,
+.pv .cv-statement__text,
+.cv-project__name,
+.cv-more {
+  text-transform: none;
+}
+.cv-title {
+  letter-spacing: -0.05em;
+}
+.cv-more {
+  font-size: 1rem;
+  letter-spacing: 0;
+}
+
+/* section headings, large, with the accent dot as their full stop */
+.cv-heading {
+  display: flex;
+  align-items: baseline;
+  gap: 0.06em;
+  margin: 0;
+  font-family: var(--cv-font);
+  font-size: clamp(2.75rem, 1.2rem + 4.4vw, 6rem);
+  font-weight: 700;
+  line-height: 0.95;
+  letter-spacing: -0.045em;
+  color: var(--ink);
+}
+.cv-heading .cv-dot {
+  width: 0.16em;
+  height: 0.16em;
+}
+.cv-work__head,
+.cv-art__head {
+  align-items: flex-end;
+  margin-bottom: clamp(32px, 5vh, 56px);
+}
+
+/* the Quick summary, centred under the headline */
+.cv-hero__foot {
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 18px;
+  text-align: center;
+}
+.pv .cv-hero__foot .cv-hero__lede {
+  max-width: none;
+}
+.cv-hero__foot .pv-actions {
+  justify-content: center;
+}
+
+/* the home page's buttons, in the same plain face */
+.pv-main .sections > section:is(.cv-hero, .cv-contact) .pv-btn {
+  font-family: var(--cv-font);
+  font-size: 1rem;
+  font-weight: 600;
+  letter-spacing: 0;
+  text-transform: none;
 }

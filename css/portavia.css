@@ -871,12 +871,12 @@
   height: 22px;
 }
 .pv .lightbox .icon-button:hover {
-  border-color: #d0ff71;
-  background: #d0ff71;
-  color: #0b0b0c;
+  border-color: #80a7c5;
+  background: #80a7c5;
+  color: #12181f;
 }
 .pv .lightbox .icon-button:focus-visible {
-  outline: 3px solid #d0ff71;
+  outline: 3px solid #80a7c5;
   outline-offset: 3px;
 }
 @media (max-width: 640px) {

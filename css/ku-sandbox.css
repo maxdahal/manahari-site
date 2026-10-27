@@ -267,16 +267,16 @@
    against the same ground: it takes the dark theme's tokens for itself */
 .sandbox-wrap--ku {
   color-scheme: dark;
-  --bg: #0f0f11;
-  --surface: #18181b;
-  --surface-2: #212125;
-  --ink: #e6e6e1;
-  --text: #b5b5b5;
-  --muted: color-mix(in srgb, #b5b5b5 80%, #0f0f11);
-  --line: rgba(230, 230, 225, 0.14);
-  --accent: #d0ff71;
-  --accent-text: #d0ff71;
-  --on-accent: #0b0b0c;
+  --bg: #12181f;
+  --surface: #1a232e;
+  --surface-2: color-mix(in srgb, #1a232e 88%, #f1f5f9);
+  --ink: #f1f5f9;
+  --text: #f1f5f9;
+  --muted: #a0aec0;
+  --line: #1e293b;
+  --accent: #80a7c5;
+  --accent-text: #8eb1cb;
+  --on-accent: #12181f;
   --ok: #5dd68a;
   --warn: #e0a93b;
   --ok-text: #5dd68a;

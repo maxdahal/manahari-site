@@ -1272,12 +1272,12 @@
   height: 22px;
 }
 .viewer__btn:hover {
-  border-color: #d0ff71;
-  background: #d0ff71;
-  color: #0b0b0c;
+  border-color: #80a7c5;
+  background: #80a7c5;
+  color: #12181f;
 }
 .viewer__btn:focus-visible {
-  outline: 3px solid #d0ff71;
+  outline: 3px solid #80a7c5;
   outline-offset: 3px;
 }
 .viewer__caption {
@@ -1596,8 +1596,8 @@
    ========================================================================== */
 @media (prefers-color-scheme: light) {
   :root:not([data-theme="dark"]) .article {
-    --muted: color-mix(in srgb, var(--text) 94%, var(--bg));
-    --outline-dim: #5c5c5b;
+    --muted: var(--text-2);
+    --outline-dim: var(--text-2);
   }
   :root:not([data-theme="dark"]) .article :is(.card-pt, .acc, .a-fold, .contrib__team, .did) {
     border: 1px solid rgb(26 26 30 / 0.12);
@@ -1606,8 +1606,8 @@
   }
 }
 :root[data-theme="light"] .article {
-  --muted: color-mix(in srgb, var(--text) 94%, var(--bg));
-  --outline-dim: #5c5c5b;
+  --muted: var(--text-2);
+  --outline-dim: var(--text-2);
 }
 :root[data-theme="light"] .article :is(.card-pt, .acc, .a-fold, .contrib__team, .did) {
   border: 1px solid rgb(26 26 30 / 0.12);

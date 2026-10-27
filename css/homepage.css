@@ -8,7 +8,7 @@
    - the case studies: each fills the window, its name huge over the
      darkened picture, with a counter (01 / 03)
    The artwork and contact sections below keep their own styles.
-   Plain Helvetica; the site's own accent (lavender in light, lime in dark).
+   Plain Helvetica; the site's own accent (steel blue in both themes).
    Loaded after portavia.css, only on the home page.
    ========================================================================== */
 body:has(.cv-hero) {

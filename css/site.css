@@ -19,18 +19,22 @@
   color-scheme: light;
 
   /* color */
-  --bg: #f9f9f6;
-  --surface: #f1f1ec;
-  --surface-2: #e9e9e4;
-  --ink: #1a1a1e;
-  --text: #4a4a4a;
-  --outline-dim: #717170; /* inactive outline links: 4.6:1 on the page */
-  --line: rgba(26, 26, 30, 0.14);
-  /* light theme: lavender. #6c4ee6 for fills and marks (5.1:1 on the
-     page, white text on it 5.4:1), and a deeper #5b3fd1 for text in the
-     accent (6.5:1). The dark theme uses lime instead, below. */
-  --accent: #6c4ee6;
-  --accent-text: #5b3fd1;
+  /* A calm, low-glare palette in both themes: a soft slate-mint page, white
+     cards, slate-charcoal text, slate grey for secondary text and a steel
+     blue accent. Every text colour meets WCAG AAA (7:1) on both the page and
+     the cards: primary 14.4:1, secondary 7.1:1, accent text 7.1:1, white on
+     the accent 7.1:1 (secondary and accent are nudged a shade darker than
+     #52606d and #3a5f7d for this). The dark theme is below. */
+  --bg: #f4f7f6;
+  --surface: #ffffff;
+  --surface-2: color-mix(in srgb, var(--surface) 94%, var(--ink));
+  --ink: #1e252b;
+  --text: #1e252b;
+  --text-2: #495561;
+  --outline-dim: #495561;
+  --line: #e2e8f0;
+  --accent: #385c7a;
+  --accent-text: #355773;
   --on-accent: #ffffff;
   /* see-through, so the paper grain shows through the tinted band */
   --band: color-mix(in srgb, var(--accent) 9%, transparent);
@@ -38,7 +42,7 @@
   --frame: #0f0f11;
   --frame-2: #17171a;
   --frame-line: rgba(255, 255, 255, 0.1);
-  --header-line: #d9d9d2;
+  --header-line: #e2e8f0;
   --shadow: 0 10px 30px rgba(0, 0, 0, 0.22);
   --ok: #1a8a42;
   --warn: #9a6a00;
@@ -76,21 +80,27 @@
   --header-top: 14px;
 }
 
+/* Dark theme: navy-charcoal page, a lifted surface for cards, soft
+   white text, a lighter slate for secondary text and an ice blue accent, all
+   at AAA (7:1) or more on the page and the cards (secondary #a0aec0 and the
+   accent text #8eb1cb are lifted from #94a3b8 and #5a8cb3 for this; dark
+   text on the accent #80a7c5 is 7.0:1). */
 @media (prefers-color-scheme: dark) {
   :root:not([data-theme="light"]) {
     color-scheme: dark;
-    --bg: #0f0f11;
-    --surface: #18181b;
-    --surface-2: #212125;
-    --ink: #e6e6e1;
-    --text: #b5b5b5;
-    --outline-dim: #7d7d7e;
-    --line: rgba(230, 230, 225, 0.14);
-    --accent: #d0ff71;
-    --accent-text: #d0ff71;
-    --on-accent: #0b0b0c;
+    --bg: #12181f;
+    --surface: #1a232e;
+    --surface-2: color-mix(in srgb, var(--surface) 88%, var(--ink));
+    --ink: #f1f5f9;
+    --text: #f1f5f9;
+    --text-2: #a0aec0;
+    --outline-dim: #a0aec0;
+    --line: #1e293b;
+    --accent: #80a7c5;
+    --accent-text: #8eb1cb;
+    --on-accent: #12181f;
     --stage: color-mix(in srgb, var(--accent) 15%, var(--bg));
-    --header-line: #2a2a2e;
+    --header-line: #1e293b;
     --shadow: 0 10px 30px rgba(0, 0, 0, 0.55);
     --ok: #5dd68a;
     --warn: #e0a93b;
@@ -98,18 +108,19 @@
 }
 :root[data-theme="dark"] {
   color-scheme: dark;
-  --bg: #0f0f11;
-  --surface: #18181b;
-  --surface-2: #212125;
-  --ink: #e6e6e1;
-  --text: #b5b5b5;
-  --outline-dim: #7d7d7e;
-  --line: rgba(230, 230, 225, 0.14);
-  --accent: #d0ff71;
-  --accent-text: #d0ff71;
-  --on-accent: #0b0b0c;
+  --bg: #12181f;
+  --surface: #1a232e;
+  --surface-2: color-mix(in srgb, var(--surface) 88%, var(--ink));
+  --ink: #f1f5f9;
+  --text: #f1f5f9;
+  --text-2: #a0aec0;
+  --outline-dim: #a0aec0;
+  --line: #1e293b;
+  --accent: #80a7c5;
+  --accent-text: #8eb1cb;
+  --on-accent: #12181f;
   --stage: color-mix(in srgb, var(--accent) 15%, var(--bg));
-  --header-line: #2a2a2e;
+  --header-line: #1e293b;
   --shadow: 0 10px 30px rgba(0, 0, 0, 0.55);
   --ok: #5dd68a;
   --warn: #e0a93b;
@@ -372,10 +383,10 @@ strong {
 /* 9. Paper and footer ------------------------------------------------------ */
 /* Paper: a fine grain baked into the backgrounds, in both themes, with no
    blend modes or overlays, so it reads the same in every browser. Light mode
-   has dark specks, dark mode faint light ones; the grain is in the SVG's
+   has faint slate specks, dark mode faint light ones; the grain is in the SVG's
    alpha, so it simply sits over the colour beneath. */
 :root {
-  --paper: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n' color-interpolation-filters='sRGB'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 -0.09 0 0 0 0.09'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  --paper: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n' color-interpolation-filters='sRGB'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 0.12 0 0 0 0 0.15 0 0 0 0 0.17 -0.08 0 0 0 0.08'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
 }
 @media (prefers-color-scheme: dark) {
   :root:not([data-theme="light"]) {
@@ -633,7 +644,7 @@ body,
    the dark-mode one (6.2:1). */
 :root {
   /* light paper: a warm burnt orange so it shows, with white label text (4.8:1) */
-  --cursor: #6c4ee6;
+  --cursor: var(--accent);
   --cursor-glow: 0;
   --cursor-text: #ffffff;
   /* the dot trails below and to the right of the system pointer */
@@ -642,14 +653,14 @@ body,
 }
 @media (prefers-color-scheme: dark) {
   :root:not([data-theme="light"]) {
-    --cursor: #d0ff71;
-    --cursor-text: #1a1a1e;
+    --cursor: var(--accent);
+    --cursor-text: var(--on-accent);
     --cursor-glow: 1;
   }
 }
 :root[data-theme="dark"] {
-  --cursor: #d0ff71;
-  --cursor-text: #1a1a1e;
+  --cursor: var(--accent);
+  --cursor-text: var(--on-accent);
   --cursor-glow: 1;
 }
 .cursor-dot,
@@ -988,7 +999,7 @@ html:has(dialog[open]) :is(.cursor-dot, .cursor-ring) {
    it, on the same paper. */
 :root {
   --bar-h: 60px;
-  --muted: color-mix(in srgb, var(--text) 80%, var(--bg));
+  --muted: var(--text-2);
 }
 html {
   scroll-padding-top: calc(var(--bar-h) + 24px);

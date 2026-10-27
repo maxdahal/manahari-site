@@ -16,6 +16,7 @@
   <link rel="stylesheet" href="css/site.css">
   <link rel="stylesheet" href="css/home.css">
   <link rel="stylesheet" href="css/portavia.css">
+  <link rel="stylesheet" href="css/homepage.css">
   <script>
     /* The "hello" intro plays once per visit (browser tab session): not
        again on a refresh, a link back to Home or Back. Runs before the page
@@ -59,6 +60,11 @@
   </script>
   <script src="js/site.js"></script>
   <script src="js/home.js" defer></script>
+  <!-- scroll choreography: GSAP and ScrollTrigger, then the page's own script -->
+  <script src="https://cdn.jsdelivr.net/npm/lenis@1.1.13/dist/lenis.min.js" defer></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js" defer></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js" defer></script>
+  <script src="js/scroll.js" defer></script>
   <!-- Vercel Web Analytics: cookie-free page views (enabled in the Vercel dashboard) -->
   <script>window.va = window.va || function () { (window.vaq = window.vaq || []).push(arguments); };</script>
   <script defer src="/_vercel/insights/script.js"></script>
@@ -104,233 +110,87 @@
   </div>
   <main class="pv-main" id="main">
     <div class="sections">
-      <section class="hero" id="top" aria-label="Introduction">
-        <div class="hero__sticky">
-          <div class="hero__words">
-            <!-- Each line is a window holding the name word with the role word right under
-                 it. Scrolling moves both up one word, so "Manahari Dahal" becomes "UX Developer." -->
-            <!-- Two rings of skills orbit the name in 3D, drawn twice: the far half of
-                 each ring passes behind the name, the near half in front of it.
-                 Decorative; home.js fills the letters, the turning is pure CSS. -->
-            <div class="skills3d skills3d--back" aria-hidden="true">
-              <div class="skills3d__tilt skills3d__tilt--a"><div class="skills3d__spin" data-text="UX Research · Prototyping · Design Systems · "></div></div>
-              <div class="skills3d__tilt skills3d__tilt--b"><div class="skills3d__spin" data-text="Product Design · Frontend · UX Development · "></div></div>
-            </div>
-            <h1 class="hero__name">
-              <!-- the same hand-drawn "hello" as the intro, in the accent -->
-              <svg class="hero__hello" viewBox="0 0 460 190" aria-hidden="true" focusable="false"><path pathLength="1" d="M30 150 C60 140 100 90 110 50 C118 20 95 10 85 40 C75 70 70 120 68 150 C75 120 95 95 115 100 C135 105 128 140 135 150 C145 160 165 140 175 125 C200 120 215 100 200 92 C185 85 165 110 175 135 C185 155 215 155 235 135 C255 110 275 60 272 35 C270 15 250 20 252 50 C254 90 250 130 260 148 C268 158 285 150 295 130 C310 105 330 60 327 35 C325 15 305 20 307 50 C309 90 305 130 315 148 C323 158 340 150 352 128 C360 105 390 95 400 110 C412 130 395 158 375 152 C355 145 358 110 385 105 C400 102 415 108 430 100"/></svg>
-              <span class="hero__line"><span class="hero__reel"><span class="hero__word">Manahari</span><span class="hero__word hero__word--role" aria-hidden="true">UX</span></span></span>
-              <span class="hero__line"><span class="hero__reel"><span class="hero__word">Dahal</span><span class="hero__word hero__word--role" aria-hidden="true">Developer<i>.</i></span></span></span>
-            </h1>
-            <div class="skills3d skills3d--front" aria-hidden="true">
-              <div class="skills3d__tilt skills3d__tilt--a"><div class="skills3d__spin" data-text="UX Research · Prototyping · Design Systems · "></div></div>
-              <div class="skills3d__tilt skills3d__tilt--b"><div class="skills3d__spin" data-text="Product Design · Frontend · UX Development · "></div></div>
-            </div>
-          </div>
+      <section class="cv-hero" id="top" aria-labelledby="cv-title">
+        <!-- After catalinvintila.design: one heavy sentence with pictures set
+             inside it, then a statement that lights up as you scroll, then
+             each case study filling the window. scroll.js runs the motion
+             (GSAP, with Lenis for the smooth scroll). -->
+        <div class="cv-hero__labels">
+          <p class="cv-label"><i class="cv-dot" aria-hidden="true"></i>Manahari Dahal — UX Developer</p>
+          <p class="cv-label">Available for new roles</p>
         </div>
-        <div class="hero__summary">
-            <p class="pv-hero__note" id="hero-note">Hiring and short on time? Here’s everything in one minute.</p>
-            <p class="pv-actions">
-              <button class="pv-btn pv-btn--fill" type="button" data-recruiter aria-haspopup="dialog" aria-describedby="hero-note" data-cursor="Quick summary">Quick summary</button>
-              <a class="pv-btn" href="/resume.pdf" target="_blank" rel="noopener" data-cursor="Open resume">Resume</a>
-            </p>
-          </div>
-      </section>
-
-      <section class="work" id="work" aria-labelledby="work-h">
-        <div class="container">
-          <header class="doc-head" data-num="02" data-ghost="Case studies">
-            <h2 class="doc-head__title" id="work-h">Case studies <small class="work__count">(03)</small></h2>
-          </header>
-          <div class="work__head">
-            <p class="work__lede">A surgical console, a website and a phone app.</p>
-            <!-- Season switch: picks what falls on the shelves (home.js) -->
-            <div class="seasons">
-              <span class="seasons__label" id="season-label">Season</span>
-              <div class="seasons__group" role="group" aria-labelledby="season-label">
-                <button class="seasons__btn" type="button" data-season="spring" aria-pressed="false"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 9a3 3 0 1 1 0-6 3 3 0 1 1 0 6zM12 21a3 3 0 1 1 0-6 3 3 0 1 1 0 6zM9 12a3 3 0 1 1-6 0 3 3 0 1 1 6 0zM21 12a3 3 0 1 1-6 0 3 3 0 1 1 6 0z"/></svg>Spring<svg class="seasons__check" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12l5 5L20 7"/></svg></button>
-                <button class="seasons__btn" type="button" data-season="summer" aria-pressed="false"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 8a4 4 0 1 0 0 8 4 4 0 1 0 0-8zM12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg>Summer<svg class="seasons__check" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12l5 5L20 7"/></svg></button>
-                <button class="seasons__btn" type="button" data-season="autumn" aria-pressed="true"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M11 20A7 7 0 0 1 9.8 6.1C15.5 5 17 4.5 19 2c1 2 2 4.2 2 8 0 5.5-4.8 10-10 10ZM2 21c0-3 1.9-5.4 5.2-6"/></svg>Autumn<svg class="seasons__check" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12l5 5L20 7"/></svg></button>
-                <button class="seasons__btn" type="button" data-season="winter" aria-pressed="false"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2v20M4.9 7l14.2 10M4.9 17L19.1 7M9 4l3 2 3-2M9 20l3-2 3 2"/></svg>Winter<svg class="seasons__check" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12l5 5L20 7"/></svg></button>
-              </div>
-            </div>
-          </div>
-
-          <!-- Each project stands on a floating wall shelf, on the screen it was
-               made for (add .shelves--frames to hang them on the wall in frames
-               instead). They step down from left to right. Petals, leaves, seeds
-               or snow fall over them; some land on the [data-land] surfaces. -->
-          <div class="shelves">
-            <svg class="plant plant--pothos" viewBox="0 0 180 300" aria-hidden="true">
-              <path class="plant__cord" d="M90 0 L62 168 M90 0 L118 168"/>
-              <path class="plant__vine" d="M70 184 C56 214 40 244 34 290 M84 186 C86 224 80 254 84 278 M106 184 C124 214 142 240 150 286"/>
-              <path fill="#6aa86f" d="M0 0 C-12 6 -12 20 0 26 C12 20 12 6 0 0 Z" transform="translate(52 214) rotate(30)"/>
-              <path fill="#5a9a63" d="M0 0 C-12 6 -12 20 0 26 C12 20 12 6 0 0 Z" transform="translate(36 260) rotate(15)"/>
-              <path fill="#7fb08a" d="M0 0 C-12 6 -12 20 0 26 C12 20 12 6 0 0 Z" transform="translate(84 232) rotate(-5)"/>
-              <path fill="#5a9a63" d="M0 0 C-12 6 -12 20 0 26 C12 20 12 6 0 0 Z" transform="translate(84 266) rotate(10)"/>
-              <path fill="#6aa86f" d="M0 0 C-12 6 -12 20 0 26 C12 20 12 6 0 0 Z" transform="translate(128 216) rotate(-30)"/>
-              <path fill="#7fb08a" d="M0 0 C-12 6 -12 20 0 26 C12 20 12 6 0 0 Z" transform="translate(146 262) rotate(-15)"/>
-              <path fill="#5a9a63" d="M60 144 C60 162 74 168 90 168 C106 168 120 162 120 144 C108 152 100 148 90 156 C80 148 72 152 60 144 Z"/>
-              <path fill="#e7e2d6" stroke="#cfc8b8" d="M58 168 L122 168 L114 192 L66 192 Z"/>
-              <circle class="plant__spring" cx="58" cy="226" r="5" fill="#f28db0"/>
-              <circle class="plant__spring" cx="128" cy="246" r="5" fill="#f7b3c8"/>
-              <circle class="plant__spring" cx="88" cy="292" r="4.5" fill="#f28db0"/>
-            </svg>
-
-            <ol class="shelves__list">
-              <li class="shelf shelf--console">
-                <a class="shelf__card" href="/work/surgical-console" data-cursor="View project">
-                  <span class="shelf__stage">
-                    <span class="device device--monitor">
-                      <!-- A ginger cat asleep on top of the Surgical Console monitor, its tail hanging
-                           over the edge: it breathes, dreams in z's and twitches its tail
-                           (pure CSS) -->
-                      <svg class="cat" viewBox="0 0 120 100" aria-hidden="true" focusable="false">
-                        <g class="cat__zs">
-                          <text class="cat__z" x="40" y="24">z</text>
-                          <text class="cat__z" x="40" y="24">z</text>
-                          <text class="cat__z" x="40" y="24">z</text>
-                        </g>
-                        <path class="cat__tail" d="M98 60 C111 61 116 69 114 80 C113 88 110 92 112 97"/>
-                        <g class="cat__body">
-                          <path class="cat__fur" d="M20 62 C20 44 34 30 58 28 C84 26 104 36 106 54 C107 58 106 62 103 62 Z"/>
-                          <path class="cat__stripe" d="M62 31 C66 38 66 46 63 52 M74 30 C79 38 79 47 75 54 M86 34 C91 41 91 49 88 55"/>
-                          <ellipse class="cat__fur" cx="47" cy="60" rx="9" ry="4"/>
-                        </g>
-                        <ellipse class="cat__fur" cx="50" cy="61" rx="5.5" ry="3.2"/>
-                        <g class="cat__head">
-                          <path class="cat__fur cat__ear" d="M16 45 L19 28 L29 39 Z"/>
-                          <path class="cat__fur cat__ear cat__ear--right" d="M31 38 L41 27 L44 42 Z"/>
-                          <path class="cat__inner" d="M19 41 L20.5 32 L26 38 Z M34 38 L40 31.5 L41.5 40 Z"/>
-                          <ellipse class="cat__fur" cx="30" cy="50" rx="17" ry="13.5"/>
-                          <path class="cat__face" d="M21 50 q3.5 3 7 0 M33 50 q3.5 3 7 0"/>
-                          <path class="cat__nose" d="M29 55 l2.4 0 l-1.2 1.6 Z"/>
-                        </g>
-                      </svg>
-                      <span class="device__screen" data-land><img src="assets/images/card-console.webp" alt="" loading="lazy" width="1100" height="619"></span>
-                      <span class="device__neck"></span>
-                      <span class="device__foot"></span>
-                    </span>
-                    <svg class="plant plant--snake" viewBox="0 0 120 250" aria-hidden="true">
-                      <path class="plant__sway" fill="#3f7d4e" d="M58 190 C52 130 46 70 54 8 C64 70 66 130 64 190 Z"/>
-                      <path class="plant__sway plant__sway--2" fill="#5a9a63" d="M50 192 C34 145 26 100 30 52 C44 98 52 140 58 192 Z"/>
-                      <path class="plant__sway plant__sway--3" fill="#4c8a58" d="M66 192 C78 148 90 110 92 66 C82 112 74 148 70 192 Z"/>
-                      <path class="plant__sway plant__sway--4" fill="#6aa86f" d="M44 194 C28 165 16 140 12 108 C28 138 40 160 52 194 Z"/>
-                      <rect x="28" y="184" width="64" height="14" rx="3" fill="#b3653f"/>
-                      <path fill="#c8754f" d="M32 198 L88 198 L81 248 L39 248 Z"/>
-                      <path class="plant__winter" d="M26 186 C30 176 44 179 52 181 C62 176 80 175 94 186 Z"/>
-                    </svg>
-                  </span>
-                  <span class="shelf__board" data-land></span>
-                  <span class="shelf__info">
-                    <b class="shelf__name">Surgical Console <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></b>
-                  </span>
-                </a>
-              </li>
-              <li class="shelf shelf--ku">
-                <a class="shelf__card" href="/work/ku-brand" data-cursor="View project">
-                  <span class="shelf__stage">
-                    <span class="device device--laptop">
-                      <span class="device__lid" data-land><span class="device__dots"><i></i><i></i><i></i></span><img src="assets/images/card-ku-brand.webp" alt="" loading="lazy" width="2000" height="856"></span>
-                      <span class="device__base"></span>
-                    </span>
-                    <svg class="plant plant--succulent" viewBox="0 0 90 72" aria-hidden="true">
-                      <ellipse cx="45" cy="30" rx="12" ry="20" fill="#7fb08a"/>
-                      <ellipse cx="28" cy="34" rx="10" ry="17" fill="#8fc09a" transform="rotate(-35 28 34)"/>
-                      <ellipse cx="62" cy="34" rx="10" ry="17" fill="#8fc09a" transform="rotate(35 62 34)"/>
-                      <ellipse cx="20" cy="42" rx="8" ry="13" fill="#9fcaa8" transform="rotate(-65 20 42)"/>
-                      <ellipse cx="70" cy="42" rx="8" ry="13" fill="#9fcaa8" transform="rotate(65 70 42)"/>
-                      <path fill="#e7e2d6" stroke="#cfc8b8" d="M22 46 L68 46 L63 72 L27 72 Z"/>
-                      <circle class="plant__spring" cx="45" cy="11" r="8" fill="#f28db0"/>
-                      <circle class="plant__spring" cx="45" cy="11" r="3.5" fill="#ffd36b"/>
-                      <path class="plant__winter" d="M20 47 C26 40 36 42 45 43 C54 41 64 40 70 47 Z"/>
-                    </svg>
-                  </span>
-                  <span class="shelf__board" data-land></span>
-                  <span class="shelf__info">
-                    <b class="shelf__name">KU Brand <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></b>
-                  </span>
-                </a>
-              </li>
-              <li class="shelf shelf--asians">
-                <a class="shelf__card" href="/work/asians" data-cursor="View project">
-                  <span class="shelf__stage">
-                    <span class="device device--phone" data-land><img src="assets/images/asians-22-2937d5f56f.webp" alt="" loading="lazy" width="384" height="798"></span>
-                  </span>
-                  <span class="shelf__board" data-land></span>
-                  <span class="shelf__info">
-                    <b class="shelf__name">Asian’s <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></b>
-                  </span>
-                </a>
-              </li>
-            </ol>
-          </div>
-        </div>
-        <div class="falling" aria-hidden="true"></div>
-      </section>
-
-      <section class="pv-about" id="about-me" aria-labelledby="about-h">
-        <div class="pv-about__text">
-          <h2 class="pv-h2" id="about-h">About me</h2>
-          <p class="pv-lede">I design products and build them in code. Most recently, I designed three projects for a surgical console at Karl Storz. I work in both UX design and frontend, so I can design an idea and build it myself. I’m also proficient in AI tools for AI-assisted design and development.</p>
-          <ul class="pv-stats">
-            <li><b>6+</b><span>Years in UX and frontend</span></li>
-            <li><b>3</b><span>Degrees in computer science and HCI</span></li>
-            <li><b>4</b><span>Industries: healthcare, higher education, mapping and food</span></li>
-          </ul>
-          <dl class="pv-info">
-            <div><dt>Based in :</dt><dd>the US</dd></div>
-            <div><dt>Email :</dt><dd><a href="mailto:manahari.dahal1@gmail.com">manahari.dahal1@gmail.com</a></dd></div>
-            <div><dt>Available for :</dt><dd>UX design and UX engineering roles</dd></div>
-          </dl>
-          <p class="pv-social">
-            <a href="https://www.linkedin.com/in/manaharidahal/" target="_blank" rel="noopener" aria-label="LinkedIn"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-4 0v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg></a>
-            <a href="https://dribbble.com/manaharidahal" target="_blank" rel="noopener" aria-label="Dribbble"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M8.56 2.75c4.37 6.03 6.02 9.42 8.03 17.72m2.54-15.38c-3.72 4.35-8.94 5.66-16.88 5.85m19.5 1.9c-3.5-.93-6.63-.82-8.94 0-2.58.92-5.01 2.86-7.44 6.32"/></svg></a>
-          </p>
+        <h1 class="cv-title" id="cv-title">
+          <span class="cv-line"><span class="cv-w">I</span> <span class="cv-w">design</span> <span class="cv-pill" aria-hidden="true"><img src="assets/images/index-01-5d96ff329c.webp" alt="" width="900" height="900"></span> <span class="cv-w">products</span></span>
+          <span class="cv-line"><span class="cv-w">and</span> <span class="cv-w">build</span> <span class="cv-w">them</span> <span class="cv-w">in</span></span>
+          <span class="cv-line cv-line--end"><span class="cv-pill cv-pill--wide" aria-hidden="true"><img src="assets/images/index-09-17d8af1698.webp" alt="" width="1100" height="825"></span> <span class="cv-w cv-accent">code.</span></span>
+        </h1>
+        <div class="cv-hero__foot">
+          <p class="cv-hero__lede">Most recently, I designed three projects for a surgical console at Karl Storz.</p>
           <p class="pv-actions">
-            <a class="pv-btn" href="/about" data-cursor="Read more">More about me</a>
+            <button class="pv-btn pv-btn--fill" type="button" data-recruiter aria-haspopup="dialog" data-cursor="Quick summary">Quick summary</button>
+            <a class="pv-btn" href="/resume.pdf" target="_blank" rel="noopener" data-cursor="Open resume">Resume</a>
           </p>
-        </div>
-        <div class="pv-about__badge">
-          <div class="peek badge">
-              <div class="badge__swing">
-                <span class="badge__strap" aria-hidden="true"></span>
-                <span class="badge__clip" aria-hidden="true"></span>
-                <div class="badge__card">
-                  <div class="badge__face badge__front">
-                    <span class="badge__slot" aria-hidden="true"></span>
-                    <img class="badge__photo" src="assets/images/index-01-5d96ff329c.webp" alt="Portrait of Manahari Dahal" width="900" height="900" loading="lazy">
-                    <h3 class="badge__name">Manahari Dahal</h3>
-                    <p class="badge__role">UX Developer</p>
-                    <p class="badge__status"><i class="dot" aria-hidden="true"></i>Available for new roles</p>
-                  </div>
-                  <div class="badge__face badge__back" id="peek-card">
-                    <p class="badge__about">I work in both UX design and frontend, so I can design an idea and build it myself.</p>
-                    <dl class="badge__facts">
-                      <div><dt>From</dt><dd>Nepal</dd></div>
-                      <div><dt>Based in</dt><dd>the US</dd></div>
-                      <div><dt>Available for</dt><dd>UX design and UX engineering roles</dd></div>
-                    </dl>
-                    <p class="badge__links">
-                      <a class="badge__icon" href="https://www.linkedin.com/in/manaharidahal/" target="_blank" rel="noopener" aria-label="LinkedIn"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-4 0v7h-4v-7a6 6 0 0 1 6-6z"/><rect width="4" height="12" x="2" y="9"/><circle cx="4" cy="4" r="2"/></svg></a>
-                      <a class="badge__icon" href="https://dribbble.com/manaharidahal" target="_blank" rel="noopener" aria-label="Dribbble"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M19.13 5.09C15.22 9.14 10 10.44 2.25 10.94"/><path d="M21.75 12.84c-6.62-1.41-12.14 1-16.38 6.32"/><path d="M8.56 2.75c4.37 6 6 9.42 8 17.72"/></svg></a>
-                      <a class="badge__more" href="/about" data-cursor="Read more">More about me <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></a>
-                    </p>
-                  </div>
-                </div>
-              </div>
-              <button class="peek__tab badge__flip" type="button" aria-expanded="false" aria-controls="peek-card">Flip my ID <span aria-hidden="true">↻</span></button>
-            </div>
         </div>
       </section>
 
-      <section class="artwork" id="artwork" aria-labelledby="art-h">
+      <section class="cv-statement" id="about-me" aria-labelledby="about-h">
+        <h2 class="cv-label" id="about-h"><i class="cv-dot" aria-hidden="true"></i>About me</h2>
+        <p class="cv-statement__text">I work in both UX design and frontend, so I can design an idea and build it myself. I’m also proficient in AI tools for AI-assisted design and development.</p>
+        <ul class="cv-stats">
+          <li><b>6+</b><span>Years in UX and frontend</span></li>
+          <li><b>3</b><span>Degrees in computer science and HCI</span></li>
+          <li><b>4</b><span>Industries: healthcare, higher education, mapping and food</span></li>
+        </ul>
+        <a class="cv-more" href="/about" data-cursor="More about me">More about me <span aria-hidden="true">→</span></a>
+      </section>
+
+      <section class="cv-work" id="work" aria-labelledby="work-h">
+        <header class="cv-work__head">
+          <h2 class="cv-label" id="work-h"><i class="cv-dot" aria-hidden="true"></i>Case studies</h2>
+          <p class="cv-label">A surgical console, a website and a phone app.</p>
+        </header>
+        <p class="cv-label cv-counter" aria-hidden="true"><span class="cv-counter__now">01</span>&nbsp;/ 03</p>
+        <ol class="cv-projects">
+          <li class="cv-project">
+            <a class="cv-project__link" href="/work/surgical-console" data-cursor="View project">
+              <figure class="cv-project__pic"><img src="assets/images/card-console.webp" alt="" width="1100" height="619" loading="lazy"></figure>
+              <div class="cv-project__words">
+                <p class="cv-label cv-project__tags">UX design internship</p>
+                <b class="cv-project__name">Surgical Console</b>
+                <p class="cv-label cv-project__meta"><span>2026</span></p>
+              </div>
+            </a>
+          </li>
+          <li class="cv-project">
+            <a class="cv-project__link" href="/work/ku-brand" data-cursor="View project">
+              <figure class="cv-project__pic"><img src="assets/images/card-ku-brand.webp" alt="" width="2000" height="856" loading="lazy"></figure>
+              <div class="cv-project__words">
+                <p class="cv-label cv-project__tags">Branding, UX design and research</p>
+                <b class="cv-project__name">KU Brand</b>
+                <p class="cv-label cv-project__meta"><span>2022 to 2025</span></p>
+              </div>
+            </a>
+          </li>
+          <li class="cv-project">
+            <a class="cv-project__link" href="/work/asians" data-cursor="View project">
+              <figure class="cv-project__pic"><img src="assets/images/asians-07-c40b497de9.webp" alt="" width="1600" height="675" loading="lazy"></figure>
+              <div class="cv-project__words">
+                <p class="cv-label cv-project__tags">UX research and design</p>
+                <b class="cv-project__name">Asian’s</b>
+                <p class="cv-label cv-project__meta"><span>2021 to 2022</span></p>
+              </div>
+            </a>
+          </li>
+        </ol>
+      </section>
+
+      <section class="artwork cv-art" id="artwork" aria-labelledby="art-h">
         <div class="container">
           <div class="block block--wide">
-            <header class="doc-head" data-num="04" data-ghost="Artwork">
-            <h2 class="doc-head__title" id="art-h">Artwork</h2>
-          </header>
-            <p class="artwork__lede">Art I make for fun</p>
+            <header class="cv-art__head">
+              <h2 class="cv-label" id="art-h"><i class="cv-dot" aria-hidden="true"></i>Artwork</h2>
+              <p class="cv-label">Art I make for fun</p>
+            </header>
             <div class="block__body artwork__body">
               <!-- A dark gallery wall: a spotlight follows the cursor and lights up the art under it; click opens a piece large -->
               <div class="spot">
@@ -339,8 +199,8 @@
                   <li><button type="button" class="artwork__item" data-cursor="View larger"><img src="assets/images/index-03-f2827196b8.webp" alt="Silhouettes against a glowing orange sunset" loading="lazy" width="770" height="656"></button></li>
                   <li><button type="button" class="artwork__item" data-cursor="View larger"><img src="assets/images/index-04-e40c5c0484.webp" alt="Autumn forest path in mist" loading="lazy" width="1100" height="778"></button></li>
                   <li><button type="button" class="artwork__item" data-cursor="View larger"><img src="assets/images/index-05-7eab617767.webp" alt="Digital painting of glossy red lips" loading="lazy" width="880" height="1100"></button></li>
-                  <li><button type="button" class="artwork__item" data-cursor="View larger"><img src="assets/images/index-06-bdfabfe408.webp" alt="Illustrated desk with laptop, plants and string lights" loading="lazy" width="843" height="1100"></button></li>
-                  <li><button type="button" class="artwork__item" data-cursor="View larger"><img src="assets/images/index-07-8517c6c4d5.webp" alt="Elk head silhouette filled with a night mountain landscape" loading="lazy" width="843" height="1100"></button></li>
+                  <li><button type="button" class="artwork__item" data-cursor="View larger"><img src="assets/images/index-06-bdfabfe408.webp" alt="Elk head silhouette filled with a night mountain landscape" loading="lazy" width="843" height="1100"></button></li>
+                  <li><button type="button" class="artwork__item" data-cursor="View larger"><img src="assets/images/index-07-8517c6c4d5.webp" alt="Illustrated desk with laptop, plants and string lights" loading="lazy" width="843" height="1100"></button></li>
                   <li><button type="button" class="artwork__item" data-cursor="View larger"><img src="assets/images/index-08-ca15fe9d96.webp" alt="Figure with a broom on rocks before a lighthouse" loading="lazy" width="880" height="1100"></button></li>
                   <li><button type="button" class="artwork__item" data-cursor="View larger"><img src="assets/images/index-09-17d8af1698.webp" alt="Hiker waving at snowy blue mountains" loading="lazy" width="1100" height="825"></button></li>
                   <li><button type="button" class="artwork__item" data-cursor="View larger"><img src="assets/images/index-10-d2339b5db6.svg" alt="Volcano illustration" loading="lazy" width="513" height="513"></button></li>
@@ -354,12 +214,14 @@
         </div>
       </section>
 
-      <section class="pv-contact" id="contact" aria-labelledby="contact-h">
-        <figure class="pv-contact__photo"><img src="assets/images/index-01-5d96ff329c.webp" alt="" width="900" height="900" loading="lazy">
-          <span class="pv-hi" aria-hidden="true"><svg viewBox="0 0 460 190" focusable="false"><path pathLength="1" d="M30 150 C60 140 100 90 110 50 C118 20 95 10 85 40 C75 70 70 120 68 150 C75 120 95 95 115 100 C135 105 128 140 135 150 C145 160 165 140 175 125 C200 120 215 100 200 92 C185 85 165 110 175 135 C185 155 215 155 235 135 C255 110 275 60 272 35 C270 15 250 20 252 50 C254 90 250 130 260 148 C268 158 285 150 295 130 C310 105 330 60 327 35 C325 15 305 20 307 50 C309 90 305 130 315 148 C323 158 340 150 352 128 C360 105 390 95 400 110 C412 130 395 158 375 152 C355 145 358 110 385 105 C400 102 415 108 430 100"/></svg></span></figure>
-        <div class="pv-contact__text">
-          <h2 class="pv-h2" id="contact-h">Let’s connect.</h2>
-          <p class="pv-lede">Open to UX design and UX engineering roles.</p>
+      <section class="cv-contact" id="contact" aria-labelledby="contact-h">
+        <div class="cv-contact__hi"><span class="pv-hi" aria-hidden="true"><svg viewBox="0 0 460 190" focusable="false"><path pathLength="1" d="M30 150 C60 140 100 90 110 50 C118 20 95 10 85 40 C75 70 70 120 68 150 C75 120 95 95 115 100 C135 105 128 140 135 150 C145 160 165 140 175 125 C200 120 215 100 200 92 C185 85 165 110 175 135 C185 155 215 155 235 135 C255 110 275 60 272 35 C270 15 250 20 252 50 C254 90 250 130 260 148 C268 158 285 150 295 130 C310 105 330 60 327 35 C325 15 305 20 307 50 C309 90 305 130 315 148 C323 158 340 150 352 128 C360 105 390 95 400 110 C412 130 395 158 375 152 C355 145 358 110 385 105 C400 102 415 108 430 100"/></svg></span></div>
+        <h2 class="cv-title cv-contact__title" id="contact-h">
+          <span class="cv-line"><span class="cv-w">Let’s</span> <span class="cv-pill" aria-hidden="true"><img src="assets/images/index-01-5d96ff329c.webp" alt="" width="900" height="900" loading="lazy"></span> <span class="cv-w cv-accent">connect.</span></span>
+        </h2>
+        <div class="cv-contact__foot">
+          <p class="cv-hero__lede">Open to UX design and UX engineering roles.</p>
+          <a class="cv-email" href="mailto:manahari.dahal1@gmail.com">manahari.dahal1@gmail.com</a>
           <p class="pv-actions">
             <a class="pv-btn pv-btn--fill" href="mailto:manahari.dahal1@gmail.com">Email me</a>
             <a class="pv-btn" href="/resume.pdf" target="_blank" rel="noopener" data-cursor="Open resume">Resume</a>

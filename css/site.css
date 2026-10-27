@@ -516,7 +516,8 @@ body,
    faded while you read it, and fades out again as it leaves at the top
    (st-out, from just under the top bar). Text already on screen at load shows as is.
    Pinned (sticky) text, like the About chapters, is left out: its view
-   timeline stops while it is pinned. Skipped for reduced motion, while motion is paused (.motion-paused), and
+   timeline stops while it is pinned. Skipped for reduced motion, while motion is paused (.motion-paused),
+   where GSAP choreographs the page instead (.has-gsap, set by scroll.js), and
    in browsers without scroll-driven animations (text just shows). Decorative
    or interactive areas with their own motion are left alone. */
 @supports (animation-timeline: view()) {
@@ -525,33 +526,33 @@ body,
     main {
       overflow-x: clip;
     }
-    :root:not(.motion-paused) main :is(h2, h3, h4, p, li, blockquote, dt, dd):not(:is(.hero, .sandbox-wrap, .badge, .shelves, .spot, .console, .cp-outline, .accs, nav, figure, table, .tabs, [role="tablist"], .seasons, .motion, .lightbox, .skills3d, li, .chapter) *):not(.hero *),
-    :root:not(.motion-paused) main :is(.shelf__name, .shelf__tags) {
+    :root:not(.motion-paused):not(.has-gsap) main :is(h2, h3, h4, p, li, blockquote, dt, dd):not(:is(.hero, .sandbox-wrap, .badge, .shelves, .spot, .console, .cp-outline, .accs, nav, figure, table, .tabs, [role="tablist"], .seasons, .motion, .lightbox, .skills3d, li, .chapter) *):not(.hero *),
+    :root:not(.motion-paused):not(.has-gsap) main :is(.shelf__name, .shelf__tags) {
       animation: var(--st-in, st-up) linear both, st-out linear both;
       animation-timeline: view(), view();
       animation-range: entry 0px entry 220px, exit -48px exit 70%;
     }
-    :root:not(.motion-paused) main :is(h2, .doc-head__title, .block__title, .cp-sec__label):not(:is(.sandbox-wrap, .badge, .shelves) *) {
+    :root:not(.motion-paused):not(.has-gsap) main :is(h2, .doc-head__title, .block__title, .cp-sec__label):not(:is(.sandbox-wrap, .badge, .shelves) *) {
       --st-in: st-rise;
     }
-    :root:not(.motion-paused) main :is(.eyebrow, .label, .cp-label, .card__label, .timeline-group__title):not(:is(.sandbox-wrap, .badge, .seasons) *) {
+    :root:not(.motion-paused):not(.has-gsap) main :is(.eyebrow, .label, .cp-label, .card__label, .timeline-group__title):not(:is(.sandbox-wrap, .badge, .seasons) *) {
       animation: st-wipe linear both, st-out linear both;
       animation-timeline: view(), view();
       animation-range: entry 0px entry 200px, exit -48px exit 70%;
     }
-    :root:not(.motion-paused) main :is(h3, h4):not(:is(.sandbox-wrap, .badge, .shelves, .spot, .console, figure, table, nav, li, .chapter) *) {
+    :root:not(.motion-paused):not(.has-gsap) main :is(h3, h4):not(:is(.sandbox-wrap, .badge, .shelves, .spot, .console, figure, table, nav, li, .chapter) *) {
       --st-in: st-slide;
     }
-    :root:not(.motion-paused) main .shelf__tags {
+    :root:not(.motion-paused):not(.has-gsap) main .shelf__tags {
       --st-in: st-wipe;
     }
-    :root:not(.motion-paused) main :is(blockquote, .statement, [class*="quote"]):not(:is(.sandbox-wrap, .badge) *) {
+    :root:not(.motion-paused):not(.has-gsap) main :is(blockquote, .statement, [class*="quote"]):not(:is(.sandbox-wrap, .badge) *) {
       --st-in: st-zoom;
     }
-    :root:not(.motion-paused) main li:not(:is(.sandbox-wrap, .badge, .shelves, .spot, .console, .cp-outline, .accs, nav, figure, table, .seasons, .chapter) *):nth-child(odd) {
+    :root:not(.motion-paused):not(.has-gsap) main li:not(:is(.sandbox-wrap, .badge, .shelves, .spot, .console, .cp-outline, .accs, nav, figure, table, .seasons, .chapter) *):nth-child(odd) {
       --st-in: st-tilt-l;
     }
-    :root:not(.motion-paused) main li:not(:is(.sandbox-wrap, .badge, .shelves, .spot, .console, .cp-outline, .accs, nav, figure, table, .seasons, .chapter) *):nth-child(even) {
+    :root:not(.motion-paused):not(.has-gsap) main li:not(:is(.sandbox-wrap, .badge, .shelves, .spot, .console, .cp-outline, .accs, nav, figure, table, .seasons, .chapter) *):nth-child(even) {
       --st-in: st-tilt-r;
     }
   }
@@ -1222,4 +1223,3 @@ html {
 main dialog :is(h2, h3, h4, p, li, blockquote, dt, dd) {
   animation: none !important;
 }
-

@@ -190,7 +190,9 @@
       var top = section
         ? section.getBoundingClientRect().top + window.scrollY - (bar ? bar.offsetHeight : 0)
         : document.documentElement.scrollHeight;
-      window.scrollTo({ top: Math.max(0, top), behavior: smooth && !reduceMotion ? "smooth" : "auto" });
+      /* with Lenis running (scroll.js), it does the glide */
+      if (window.lenis) window.lenis.scrollTo(Math.max(0, top), { immediate: !smooth });
+      else window.scrollTo({ top: Math.max(0, top), behavior: smooth && !reduceMotion ? "smooth" : "auto" });
       return true;
     }
     document.addEventListener("click", function (event) {
@@ -220,12 +222,18 @@
       outlineTick = false;
       var line = window.innerHeight / 2;
       var current = 0;
+      var best = -Infinity;
       outlineTargets.forEach(function (target, i) {
         if (!target) return;
         /* the footer waits under the page, so it is "reached" only where
            the page above it ends */
+        /* the section whose top passed the middle most recently, whatever
+           order the links are in */
         var top = target.getBoundingClientRect().top;
-        if (top <= line) current = i;
+        if (top <= line && top > best) {
+          best = top;
+          current = i;
+        }
       });
       outlineLinks.forEach(function (link, i) {
         if (i === current) link.setAttribute("aria-current", i === 0 ? "page" : "location");

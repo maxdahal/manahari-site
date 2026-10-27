@@ -1,0 +1,397 @@
+/* ==========================================================================
+   Home page, after catalinvintila.design.
+   - the hero: one heavy sentence in capitals with pictures set inside it
+     (the portrait and a painting, as rounded pills), the last word in the
+     accent, and small spaced labels around it
+   - the About statement: big capitals that light up word by word as you
+     scroll (scroll.js); without motion they simply show
+   - the case studies: each fills the window, its name huge over the
+     darkened picture, with a counter (01 / 03)
+   The artwork and contact sections below keep their own styles.
+   Plain Helvetica; the site's own accent (lavender in light, lime in dark).
+   Loaded after portavia.css, only on the home page.
+   ========================================================================== */
+body:has(.cv-hero) {
+  --cv-font: "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+.pv-main:not(.pv-about-page) .sections > section:is(.cv-hero, .cv-statement, .cv-work) {
+  width: 100%;
+  max-width: none;
+  padding-inline: max(var(--gx), (100% - 1240px) / 2);
+  font-family: var(--cv-font);
+}
+
+/* ---- small spaced labels ------------------------------------------------- */
+.pv .cv-label {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin: 0;
+  font-family: var(--cv-font);
+  font-size: 0.75rem;
+  font-weight: 500;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--text);
+}
+.cv-dot {
+  display: inline-block;
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--accent);
+}
+
+/* ---- the hero: a sentence with pictures in it ----------------------------- */
+.pv-main:not(.pv-about-page) .sections > section.cv-hero {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: clamp(32px, 6vh, 64px);
+  min-height: 100svh;
+  /* clear of the fixed top bar */
+  padding-block: clamp(96px, 13vh, 128px) clamp(32px, 6vh, 64px);
+}
+.cv-hero__labels {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 12px 32px;
+}
+.cv-title {
+  display: flex;
+  flex-direction: column;
+  margin: 0;
+  font-family: var(--cv-font);
+  font-size: clamp(2.75rem, 0.8rem + 7.2vw, 8.5rem);
+  font-weight: 700;
+  line-height: 0.95;
+  letter-spacing: -0.04em;
+  text-transform: uppercase;
+  color: var(--ink);
+}
+.cv-line {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  column-gap: 0.22em;
+  overflow: hidden;
+  padding-block: 0.04em;
+}
+.cv-line--end {
+  padding-left: 1.2em;
+}
+.cv-w {
+  display: inline-block;
+}
+.cv-accent {
+  color: var(--accent-text);
+}
+.cv-pill {
+  display: inline-block;
+  width: 1.5em;
+  height: 0.78em;
+  overflow: hidden;
+  border-radius: 999px;
+}
+.cv-pill--wide {
+  width: 2.1em;
+}
+/* a picture in the sentence widens a little under the cursor, nudging the
+   words aside */
+.cv-pill {
+  --grow: 0.6em;
+  transition: width 0.5s cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+.cv-pill:hover {
+  width: calc(1.5em + var(--grow));
+}
+.cv-pill--wide:hover {
+  width: calc(2.1em + var(--grow));
+}
+.cv-pill img {
+  transition: scale 0.6s ease;
+}
+.cv-pill:hover img {
+  scale: 1.08;
+}
+@media (prefers-reduced-motion: reduce) {
+  .cv-pill,
+  .cv-pill img {
+    transition: none;
+  }
+}
+.cv-pill img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.cv-hero__foot {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: flex-end;
+  gap: 20px 48px;
+}
+.pv .cv-hero__lede {
+  max-width: 34ch;
+  margin: 0;
+  font-size: clamp(1rem, 0.9rem + 0.3vw, 1.1875rem);
+  line-height: 1.5;
+  color: var(--text);
+}
+
+/* ---- the About statement ------------------------------------------------------ */
+.pv-main:not(.pv-about-page) .sections > section.cv-statement {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: clamp(28px, 5vh, 48px);
+  min-height: 100svh;
+  padding-block: clamp(80px, 12vh, 140px);
+}
+.pv .cv-statement__text {
+  max-width: 24ch;
+  margin: 0;
+  font-family: var(--cv-font);
+  font-size: clamp(1.75rem, 0.9rem + 2.8vw, 4rem);
+  font-weight: 700;
+  line-height: 1.02;
+  letter-spacing: -0.035em;
+  text-transform: uppercase;
+  color: var(--ink);
+}
+/* while the motion runs, the words start faint and light up as you
+   scroll (scroll.js); otherwise they simply show */
+.has-gsap .cv-statement__text .cv-sw {
+  opacity: 0.2;
+}
+.cv-stats {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 240px));
+  gap: 24px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.cv-stats li {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding-top: 14px;
+  border-top: 1px solid var(--line);
+}
+.cv-stats b {
+  font-size: clamp(2.25rem, 1.5rem + 1.6vw, 3.25rem);
+  font-weight: 700;
+  line-height: 1;
+  letter-spacing: -0.05em;
+  color: var(--ink);
+}
+.cv-stats span {
+  font-size: 0.875rem;
+  line-height: 1.4;
+  color: var(--text);
+}
+.cv-more {
+  align-self: flex-start;
+  font-size: 0.875rem;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--ink);
+  text-decoration: none;
+}
+.cv-more span {
+  display: inline-block;
+  color: var(--accent-text);
+  transition: translate 0.25s ease;
+}
+.cv-more:hover span {
+  translate: 6px 0;
+}
+
+/* ---- case studies: each fills the window ------------------------------------------ */
+.pv-main:not(.pv-about-page) .sections > section.cv-work {
+  padding-block: clamp(80px, 12vh, 140px) 0;
+}
+.cv-work__head {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 12px 32px;
+  margin-bottom: 24px;
+}
+.cv-projects {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  margin: 0 calc(-1 * max(var(--gx), (100vw - 1240px) / 2));
+  padding: 0;
+  list-style: none;
+}
+.cv-project__link {
+  display: grid;
+  min-height: 100svh;
+  overflow: hidden;
+  color: #ffffff;
+  text-decoration: none;
+  background: #0c0c0e;
+}
+.cv-project__link > * {
+  grid-area: 1 / 1;
+}
+.cv-project__pic {
+  margin: 0;
+  overflow: hidden;
+}
+.cv-project__pic img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 0.55;
+  transition: opacity 0.4s ease;
+}
+.cv-project__link:hover .cv-project__pic img {
+  opacity: 0.7;
+}
+.cv-project__words {
+  align-self: end;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  padding: clamp(28px, 6vh, 64px) max(var(--gx), (100vw - 1240px) / 2);
+}
+.pv .cv-project__words .cv-label {
+  color: rgb(255 255 255 / 0.82);
+}
+.cv-project__name {
+  font-family: var(--cv-font);
+  font-size: clamp(3.5rem, 1rem + 10vw, 12rem);
+  font-weight: 700;
+  line-height: 0.85;
+  letter-spacing: -0.05em;
+  text-transform: uppercase;
+}
+.cv-project__meta {
+  justify-content: flex-end;
+}
+
+/* one counter (01 / 03) held at the bottom of the window while the case
+   studies pass; scroll.js shows it over the panels and sets the number */
+.pv .cv-counter {
+  position: sticky;
+  top: calc(100svh - 72px);
+  z-index: 3;
+  height: 0;
+  overflow: visible;
+  color: #ffffff;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  font-variant-numeric: tabular-nums;
+}
+.pv .cv-counter.is-on {
+  opacity: 1;
+}
+.cv-project__link:focus-visible {
+  outline: 3px solid var(--accent);
+  outline-offset: -6px;
+}
+@media (prefers-reduced-motion: reduce) {
+  .cv-project__pic img,
+  .cv-more span {
+    transition: none;
+  }
+}
+
+/* ---- phones ---------------------------------------------------------------------- */
+@media (max-width: 640px) {
+  .cv-line--end {
+    padding-left: 0;
+  }
+  .cv-stats {
+    grid-template-columns: minmax(0, 1fr);
+  }
+  .cv-project__link {
+    min-height: 80svh;
+  }
+}
+
+/* ---- artwork: the gallery wall keeps its spotlight; the heading is in the
+   new labels ------------------------------------------------------------- */
+.pv-main:not(.pv-about-page) .sections > section.cv-art {
+  padding-block: clamp(80px, 12vh, 140px);
+  font-family: var(--cv-font);
+}
+.cv-art .container {
+  max-width: 1240px;
+}
+.cv-art__head {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 12px 32px;
+  margin-bottom: 24px;
+}
+.cv-art .artwork__body {
+  padding-top: 0;
+}
+
+/* ---- contact: a closing statement that echoes the hero ------------------------ */
+.pv-main:not(.pv-about-page) .sections > section.cv-contact {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: clamp(28px, 5vh, 48px);
+  width: 100%;
+  max-width: none;
+  min-height: 90svh;
+  padding: clamp(80px, 12vh, 140px) max(var(--gx), (100% - 1240px) / 2);
+  font-family: var(--cv-font);
+}
+.cv-contact__hi .pv-hi {
+  display: block;
+  width: clamp(110px, 12vw, 170px);
+  color: var(--accent-text);
+}
+.cv-contact__hi .pv-hi svg {
+  display: block;
+  width: 100%;
+  height: auto;
+  stroke: currentColor;
+}
+.cv-contact__title {
+  font-size: clamp(3rem, 1rem + 8.4vw, 10rem);
+}
+.cv-contact__foot {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: flex-end;
+  gap: 20px 48px;
+}
+.cv-email {
+  font-size: clamp(1.375rem, 0.8rem + 2.4vw, 3rem);
+  font-weight: 700;
+  letter-spacing: -0.035em;
+  overflow-wrap: anywhere;
+  color: var(--ink);
+  text-decoration: none;
+  background: linear-gradient(var(--accent), var(--accent)) 0 100% / 0 3px no-repeat;
+  transition: background-size 0.35s ease;
+}
+.cv-email:hover,
+.cv-email:focus-visible {
+  background-size: 100% 3px;
+}
+.cv-email:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 6px;
+}
+@media (prefers-reduced-motion: reduce) {
+  .cv-email {
+    transition: none;
+  }
+}

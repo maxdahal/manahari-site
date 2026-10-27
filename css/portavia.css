@@ -991,11 +991,9 @@
 
 /* ==========================================================================
    About: Research & recognition
-   Research reads as sheets of paper on a desk (cream in both themes, a
-   folded corner, slightly tilted), each with its status as a handwritten
-   stamp. Awards sit on a 2016 to 2026 track: a bar for a run of years, a
-   medal for a single year; the dates are also written out under each name,
-   and phones show only the list.
+   Research items are tiles like the intro's bento: a status badge, the
+   title in the display face, its note. Awards follow on a year path (see
+   below).
    ========================================================================== */
 .pv-recog .pv-h3 {
   margin: clamp(32px, 5vh, 56px) 0 20px;
@@ -1003,181 +1001,430 @@
 .pv-papers {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: clamp(16px, 2.5vw, 32px);
+  gap: 12px;
   margin: 0;
-  padding: 8px 0 0;
+  padding: 0;
   list-style: none;
 }
 .pv-paper {
   display: flex;
   flex-direction: column;
-  gap: 8px;
-  min-height: 210px;
-  padding: 26px 26px 22px;
-  background:
-    linear-gradient(225deg, transparent 50%, #e3d9c2 50%) top right / 30px 30px no-repeat,
-    repeating-linear-gradient(transparent 0 31px, rgb(60 70 110 / 0.12) 31px 32px) 0 64px / 100% 100% no-repeat,
-    #f7f1e3;
-  clip-path: polygon(0 0, calc(100% - 30px) 0, 100% 30px, 100% 100%, 0 100%);
-  color: #23211c;
-  box-shadow: 0 14px 30px rgb(0 0 0 / 0.18);
-  rotate: -1.6deg;
-  transition: rotate 0.3s ease, translate 0.3s ease;
+  gap: 10px;
+  padding: 22px 24px 26px;
+  border: 1px solid var(--line);
+  border-radius: 20px;
+  background: color-mix(in srgb, var(--ink) 4%, var(--bg));
 }
-.pv-paper:nth-child(2) {
-  rotate: 1.2deg;
-  translate: 0 10px;
+.pv-paper__stamp {
+  order: -1;
+  align-self: flex-start;
+  margin: 0 0 6px;
+  padding: 4px 12px;
+  border-radius: 999px;
+  background: color-mix(in srgb, var(--ok) 16%, transparent);
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--ok);
 }
-.pv-paper:nth-child(3) {
-  rotate: -0.8deg;
-}
-.pv-paper:hover {
-  rotate: 0deg;
-  translate: 0 -4px;
+/* still in progress: the accent, like everything current on the site */
+.pv-paper:first-child .pv-paper__stamp {
+  background: var(--accent);
+  color: var(--on-accent);
 }
 .pv-paper__title {
   margin: 0;
   font-family: var(--heading-font);
-  font-size: clamp(1.5rem, 1.2rem + 0.8vw, 2rem);
+  font-size: clamp(1.75rem, 1.35rem + 1vw, 2.25rem);
   font-weight: 700;
-  line-height: 1.1;
+  line-height: 1.05;
   text-transform: uppercase;
-  color: #1b1a17;
+  color: var(--ink);
 }
 .pv-paper__note {
   margin: 0;
   font-size: 0.9375rem;
-  color: #4a463d;
-}
-.pv-paper__stamp {
-  align-self: flex-start;
-  margin: auto 0 0;
-  padding: 2px 12px 0;
-  border: 2px solid currentColor;
-  border-radius: 8px;
-  font-family: "Kalam", cursive;
-  font-size: 1.375rem;
-  line-height: 1.4;
-  color: #5b3fd1;
-  rotate: -7deg;
-}
-.pv-paper:nth-child(2) .pv-paper__stamp {
-  color: #0d5228;
-  rotate: 5deg;
-}
-.pv-paper:nth-child(3) .pv-paper__stamp {
-  color: #1c4f9c;
-}
-
-.pv-awards {
-  --years: 11;
-  --name: minmax(200px, 280px);
-  display: flex;
-  flex-direction: column;
-}
-.pv-awards__axis,
-.pv-award {
-  display: grid;
-  grid-template-columns: var(--name) minmax(0, 1fr);
-  gap: 24px;
-  align-items: center;
-}
-.pv-awards__axis {
-  grid-template-columns: var(--name) repeat(var(--years), minmax(0, 1fr));
-  column-gap: 0;
-  padding-bottom: 10px;
-  border-bottom: 1px solid var(--line);
-  font-size: 0.8125rem;
-  font-variant-numeric: tabular-nums;
   color: var(--text);
-}
-.pv-awards__axis span {
-  text-align: center;
-}
-.pv-awards__axis span:first-child {
-  grid-column: 2;
-}
-.pv-award {
-  padding: 16px 0;
-  border-bottom: 1px solid var(--line);
-  transition: background-color 0.2s ease;
-}
-.pv-award:hover {
-  background: color-mix(in srgb, var(--accent) 6%, transparent);
-}
-.pv-award__name {
-  display: flex;
-  flex-direction: column;
-  gap: 2px;
-  padding-left: 4px;
-}
-.pv-award__title {
-  margin: 0;
-  font-size: 1.0625rem;
-  font-weight: 600;
-  color: var(--ink);
-}
-.pv-award__when {
-  margin: 0;
-  font-size: 0.875rem;
-  color: var(--text);
-}
-.pv-award__track {
-  display: grid;
-  grid-template-columns: repeat(var(--years), minmax(0, 1fr));
-  align-items: center;
-  height: 28px;
-  background: repeating-linear-gradient(90deg, transparent 0 calc(100% / var(--years) - 1px), var(--line) calc(100% / var(--years) - 1px) calc(100% / var(--years)));
-}
-.pv-award__track > * {
-  grid-row: 1;
-}
-.pv-award__bar {
-  height: 12px;
-  margin: 0 18%;
-  border-radius: 999px;
-  background: var(--accent);
-}
-.pv-award__medal {
-  justify-self: center;
-  width: 24px;
-  height: 24px;
-  border-radius: 50%;
-  background: conic-gradient(from 20deg, var(--accent), color-mix(in srgb, var(--accent) 55%, var(--bg)), var(--accent));
-  box-shadow: 0 0 0 4px color-mix(in srgb, var(--accent) 25%, transparent);
 }
 @media (max-width: 760px) {
   .pv-papers {
     grid-template-columns: minmax(0, 1fr);
   }
-  .pv-awards__axis,
-  .pv-award__track {
-    display: none;
-  }
-  .pv-award {
-    grid-template-columns: minmax(0, 1fr);
-  }
 }
-@media (prefers-reduced-motion: reduce) {
-  .pv-paper {
-    transition: none;
-  }
+
+/* ==========================================================================
+   About: the intro. The lead paragraph is larger; the stats and facts sit
+   in one bento grid under the text and the ID badge: three stat tiles with
+   the numbers in the display face, three fact tiles, and "Available for"
+   filled in the accent so it is the first thing a recruiter sees.
+   ========================================================================== */
+.pv-me .pv-me__lead {
+  font-size: clamp(1.25rem, 1.05rem + 0.6vw, 1.5rem);
+  line-height: 1.45;
+  color: var(--ink);
 }
-/* the year axis and every award row share the same name column, so each
-   bar and medal sits right under its years */
-.pv-award {
-  column-gap: 0;
+.pv-bento {
+  grid-column: 1 / -1;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 12px;
+  margin: clamp(24px, 4vh, 48px) 0 0;
+  padding: 0;
+  list-style: none;
 }
-.pv-award__name {
-  padding-right: 24px;
+.pv-bento > li {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  min-height: 140px;
+  padding: 22px 24px;
+  border: 1px solid var(--line);
+  border-radius: 20px;
+  background: color-mix(in srgb, var(--ink) 4%, var(--bg));
+}
+.pv-bento__stat {
+  justify-content: space-between;
+}
+.pv-bento__stat b {
+  font-family: var(--heading-font);
+  font-size: clamp(3rem, 2.2rem + 2.2vw, 4.25rem);
+  font-weight: 700;
+  line-height: 1;
+  color: var(--accent-text);
+}
+.pv-bento__stat span {
+  font-size: 0.9375rem;
+  line-height: 1.45;
+  color: var(--text);
+}
+.pv-bento__fact {
+  justify-content: flex-end;
+}
+.pv-bento__fact span {
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--text);
+}
+.pv-bento__fact b {
+  font-family: var(--heading-font);
+  font-size: clamp(1.5rem, 1.2rem + 0.9vw, 2rem);
+  font-weight: 700;
+  line-height: 1.1;
+  text-transform: uppercase;
+  color: var(--ink);
+}
+.pv-bento .pv-bento__fact--hot {
+  border-color: var(--accent);
+  background: var(--accent);
+}
+.pv-bento__fact--hot :is(span, b) {
+  color: var(--on-accent);
 }
 @media (max-width: 760px) {
-  .pv-award__name {
-    padding-right: 0;
+  .pv-bento {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+  .pv-bento > li {
+    min-height: 0;
+    padding: 18px;
+  }
+  /* two stats, the long third one across, the two facts side by side,
+     then availability across */
+  .pv-bento__stat:nth-child(3),
+  .pv-bento__fact--hot {
+    grid-column: 1 / -1;
   }
 }
-/* a bar runs from the middle of its first year to the middle of its last:
-   half a column in from each end (--s is how many years it spans) */
-.pv-award__bar {
-  margin: 0 calc(50% / var(--s, 1));
+
+/* Awards as wooden plaques on floating shelves that step up from left to
+   right, oldest to newest, with plants from the homepage shelves. Each
+   plaque is a different piece: a classic walnut frame with a brass plate,
+   a light oak board holding two small plates (an award received twice),
+   an arch-topped cherry plaque with a silver plate, a desk nameplate for the
+   job held 2022 to 2025 (not an award, so no plate), and a shield in dark
+   walnut for the newest, its plate in the accent. Wood and metal keep their
+   own colours in both themes. All in grid; each shelf is raised by its step
+   (a margin). Phones: two columns, still stepping up. */
+.pv-plaques {
+  --step: 40px;
+  --walnut: #5b3a22;
+  --walnut-2: #4a2e1a;
+  --oak: #b98a56;
+  --oak-2: #a87a48;
+  --cherry: #8a3f2a;
+  --cherry-2: #75331f;
+  --brass: linear-gradient(135deg, #d9b56a, #b08a3e 55%, #e2c47e);
+  --silver: linear-gradient(135deg, #e3e6ea, #aab1b8 55%, #d8dde2);
+  --engrave: #2f2410;
+  display: grid;
+  grid-template-columns: repeat(10, minmax(0, 1fr));
+  column-gap: clamp(10px, 1.6vw, 22px);
+  row-gap: clamp(18px, 2.4vw, 32px);
+  align-items: end;
+  margin: 0;
+  padding: clamp(24px, 3vw, 40px) clamp(14px, 2.5vw, 32px) clamp(28px, 4vw, 48px);
+  border: 1px solid var(--line);
+  border-radius: 20px;
+  background: color-mix(in srgb, var(--ink) 4%, var(--bg));
+  list-style: none;
+}
+.pv-plaque {
+  display: flex;
+  flex-direction: column;
+}
+/* shelves float at uneven heights, zig-zagging left to right */
+.pv-plaque {
+  --lift: 0;
+  margin-bottom: calc(var(--step) * var(--lift));
+  animation: pv-shelf-float 7s ease-in-out infinite alternate;
+}
+/* two interleaved rows: the shelves zig-zag up and down, left to right */
+.pv-plaque {
+  justify-self: center;
+  width: min(100%, 240px);
+}
+.pv-plaque:nth-child(odd) { grid-row: 1; }
+.pv-plaque:nth-child(even) { grid-row: 2; margin-top: calc(var(--step) * -1.5); }
+.pv-plaque:nth-child(1) { grid-column: 1 / 3; }
+.pv-plaque:nth-child(2) { grid-column: 3 / 5; animation-delay: -2s; }
+.pv-plaque:nth-child(3) { grid-column: 5 / 7; --lift: 0.75; animation-delay: -4.5s; }
+.pv-plaque:nth-child(4) { grid-column: 7 / 9; animation-delay: -1s; }
+.pv-plaque:nth-child(5) { grid-column: 9 / 11; --lift: 0.4; animation-delay: -3.5s; }
+/* shelves of different lengths, some pushed off-center */
+.pv-plaque:nth-child(1) .pv-plaque__shelf { margin-inline: 0 -10px; }
+.pv-plaque:nth-child(2) .pv-plaque__shelf { margin-inline: 12px 12px; }
+.pv-plaque:nth-child(3) .pv-plaque__shelf { margin-inline: -8px 4px; }
+.pv-plaque:nth-child(4) .pv-plaque__shelf { margin-inline: 6px -12px; }
+.pv-plaque:nth-child(5) .pv-plaque__shelf { margin-inline: -4px -4px; }
+@keyframes pv-shelf-float {
+  from { transform: translateY(0); }
+  to { transform: translateY(-8px); }
+}
+:root.motion-paused .pv-plaque {
+  animation-play-state: paused;
+}
+@media (prefers-reduced-motion: reduce) {
+  .pv-plaque {
+    animation: none;
+  }
+}
+
+/* what stands on a shelf: the plaque, and a plant beside some of them */
+.pv-plaque__stand {
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  gap: 4px;
+  padding: 0 4px;
+}
+.pv-plaque__wood {
+  flex: 1 1 auto;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 12px;
+  border-radius: 10px;
+  text-align: center;
+  box-shadow: 0 14px 22px -14px rgb(0 0 0 / 0.6), inset 0 1px 0 rgb(255 255 255 / 0.12);
+}
+.pv-plaque__plate {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  width: 100%;
+  padding: 14px 10px;
+  border-radius: 4px;
+  background: var(--brass);
+  box-shadow: inset 0 0 0 1px rgb(0 0 0 / 0.18), 0 1px 0 rgb(255 255 255 / 0.25);
+  color: var(--engrave);
+  container-type: inline-size;
+}
+.pv-plaque__years {
+  font-family: var(--heading-font);
+  font-size: clamp(0.9rem, 20cqi, 1.625rem);
+  font-weight: 700;
+  line-height: 1;
+  white-space: nowrap;
+}
+.pv-plaque__name {
+  margin: 0;
+  font-size: clamp(0.6875rem, 14cqi, 0.875rem);
+  overflow-wrap: anywhere;
+  hyphens: auto;
+  font-weight: 700;
+  line-height: 1.25;
+}
+.pv-plaque__when {
+  margin: 0;
+  font-size: 0.75rem;
+  line-height: 1.35;
+  opacity: 0.85;
+}
+
+/* 1 · classic walnut frame, brass plate */
+.pv-plaque--classic .pv-plaque__wood {
+  min-height: 190px;
+  background:
+    repeating-linear-gradient(100deg, rgb(255 255 255 / 0.04) 0 2px, transparent 2px 9px),
+    linear-gradient(var(--walnut), var(--walnut-2));
+}
+.pv-plaque--classic :is(.pv-plaque__wood, .pv-plaque__plate) {
+  padding-inline: 6px;
+}
+/* 2 · light oak board, two small plates (received twice) */
+.pv-plaque--double .pv-plaque__wood {
+  min-height: 190px;
+  background:
+    repeating-linear-gradient(95deg, rgb(0 0 0 / 0.05) 0 2px, transparent 2px 11px),
+    linear-gradient(var(--oak), var(--oak-2));
+  color: #2b1d0e;
+}
+.pv-plaque__name--top {
+  color: #2b1d0e;
+}
+.pv-plaque__plate--small {
+  padding: 8px 6px;
+}
+.pv-plaque__plate--small .pv-plaque__years {
+  font-size: 1rem;
+}
+.pv-plaque--double .pv-plaque__when {
+  color: #2b1d0e;
+}
+/* 3 · arch-topped cherry, silver plate */
+.pv-plaque--arch .pv-plaque__wood {
+  min-height: 220px;
+  padding-top: 40px;
+  border-radius: 999px 999px 10px 10px;
+  background:
+    repeating-linear-gradient(98deg, rgb(255 255 255 / 0.05) 0 2px, transparent 2px 8px),
+    linear-gradient(var(--cherry), var(--cherry-2));
+}
+.pv-plaque--arch .pv-plaque__plate {
+  background: var(--silver);
+}
+/* 4 · desk nameplate for the job (2022 to 2025): a low wooden bar */
+.pv-plaque--nameplate .pv-plaque__wood {
+  justify-content: flex-end;
+  gap: 2px;
+  min-height: 0;
+  padding: 14px 12px 12px;
+  border-radius: 6px 6px 3px 3px;
+  background:
+    repeating-linear-gradient(90deg, rgb(0 0 0 / 0.05) 0 2px, transparent 2px 13px),
+    linear-gradient(var(--oak), var(--oak-2));
+  color: #2b1d0e;
+}
+.pv-plaque__role {
+  margin: 0;
+  font-family: var(--heading-font);
+  font-size: 1.125rem;
+  font-weight: 700;
+  line-height: 1.05;
+  text-transform: uppercase;
+}
+.pv-plaque__org {
+  margin: 0;
+  font-size: 0.8125rem;
+  font-weight: 700;
+}
+/* 5 · shield in dark walnut, the newest, its plate in the accent */
+.pv-plaque--shield .pv-plaque__wood {
+  min-height: 250px;
+  padding: 18px 14px 56px;
+  border-radius: 10px 10px 0 0;
+  clip-path: polygon(0 0, 100% 0, 100% 72%, 50% 100%, 0 72%);
+  background:
+    repeating-linear-gradient(100deg, rgb(255 255 255 / 0.04) 0 2px, transparent 2px 9px),
+    linear-gradient(var(--walnut-2), #382212);
+}
+.pv-plaque--shield .pv-plaque__plate {
+  background: var(--accent);
+  color: var(--on-accent);
+}
+
+/* plants from the homepage shelves */
+.pv-plant {
+  flex: none;
+  overflow: visible;
+}
+.pv-plant--snake {
+  width: 64px;
+}
+.pv-plant--succulent {
+  width: 56px;
+  transform-origin: 50% 100%;
+  animation: pv-plant-breathe 3.6s ease-in-out infinite alternate;
+}
+.pv-plant__sway {
+  stroke: #b9cf72;
+  stroke-width: 1.5;
+  transform-box: fill-box;
+  transform-origin: 50% 100%;
+  animation: pv-plant-sway 4s ease-in-out infinite alternate;
+}
+.pv-plant__sway--2 { animation-duration: 4.8s; animation-delay: -1s; }
+.pv-plant__sway--3 { animation-duration: 5.4s; animation-delay: -2s; }
+.pv-plant__sway--4 { animation-duration: 4.4s; animation-delay: -0.5s; }
+@keyframes pv-plant-sway {
+  from { transform: rotate(-2.5deg); }
+  to { transform: rotate(2.5deg); }
+}
+@keyframes pv-plant-breathe {
+  from { transform: scale(1); }
+  to { transform: scale(1.06, 1.04); }
+}
+:root.motion-paused :is(.pv-plant--succulent, .pv-plant__sway) {
+  animation-play-state: paused;
+}
+@media (prefers-reduced-motion: reduce) {
+  :is(.pv-plant--succulent, .pv-plant__sway) {
+    animation: none;
+  }
+}
+
+/* the floating shelf under each piece */
+.pv-plaque__shelf {
+  height: 12px;
+  border-radius: 3px;
+  background: linear-gradient(#a9784a, #8a5f36);
+  box-shadow: 0 14px 18px -10px rgb(0 0 0 / 0.5), inset 0 1px 0 rgb(255 255 255 / 0.2);
+}
+
+@media (max-width: 1100px) {
+  .pv-plaques {
+    --step: 28px;
+  }
+  .pv-plant--snake {
+    width: 48px;
+  }
+}
+@media (max-width: 760px) {
+  .pv-plaques {
+    --step: 24px;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    row-gap: 32px;
+  }
+  .pv-plaque:nth-child(n) {
+    --lift: 0;
+    grid-area: auto;
+    justify-self: stretch;
+    width: 100%;
+    margin-top: 0;
+  }
+  .pv-plaque:nth-child(even) {
+    --lift: 2;
+  }
+  /* the newest takes the last row on its own */
+  .pv-plaque:last-child {
+    grid-column: 1 / -1;
+    justify-self: center;
+    width: 60%;
+  }
 }

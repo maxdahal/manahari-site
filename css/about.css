@@ -1,0 +1,84 @@
+/* ==========================================================================
+   About in the homepage's look (body.ab): Helvetica throughout, sentence
+   case, very large titles with the accent dot as their full stop. Loaded
+   after portavia.css and only changes how things look; the words, the ID
+   badge, the bento, the chapters and the plaques stay as they are.
+   case-scroll.js adds Lenis and GSAP reveals on top.
+   ========================================================================== */
+
+body.ab {
+  --ab-font: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  --heading-font: var(--ab-font);
+  --body-font: var(--ab-font);
+  font-family: var(--ab-font);
+}
+
+/* sentence case everywhere (the id keeps this above portavia.css) */
+#main *:not(svg, svg *),
+body.ab .pv-nav *,
+body.ab .pv-footer * {
+  text-transform: none;
+}
+
+/* ---- titles: very large, tight, the accent dot as their full stop ------- */
+#main .pv-h1 {
+  font-size: clamp(3.5rem, 0.6rem + 8vw, 9rem);
+  line-height: 0.9;
+  letter-spacing: -0.05em;
+}
+#main .pv-h2 {
+  font-size: clamp(2.75rem, 1.2rem + 4.4vw, 6rem);
+  line-height: 0.95;
+  letter-spacing: -0.045em;
+}
+#main :is(.pv-name, .pv-h3, .pv-chapter__place) {
+  font-weight: 700;
+  letter-spacing: -0.03em;
+}
+#main .pv-name {
+  font-size: clamp(1.5rem, 1.2rem + 1vw, 2rem);
+}
+#main :is(.pv-h3, .pv-chapter__place) {
+  font-size: clamp(1.75rem, 1.2rem + 1.6vw, 2.75rem);
+  line-height: 1.05;
+}
+
+/* the smaller display pieces: bold Helvetica in place of the tall face */
+#main :is(.pv-acc summary h3, .pv-paper__title, .pv-bento__fact b, .pv-bento__fact strong, .badge__name) {
+  font-weight: 700;
+  letter-spacing: -0.02em;
+}
+#main [class*="pv-plaque__"],
+#main [class*="pv-paper__stamp"],
+#main .pv-bento li * {
+  letter-spacing: -0.01em;
+}
+
+/* ---- buttons, as on the homepage ---------------------------------------- */
+body.ab .pv-btn {
+  font-family: var(--ab-font);
+  font-size: 1rem;
+  font-weight: 600;
+  letter-spacing: 0;
+}
+
+/* ---- for case-scroll.js: each title word in a mask it slides up out of,
+   the accent dot riding on the last word --------------------------------- */
+.cs-m {
+  display: inline-block;
+  overflow: hidden;
+  padding-bottom: 0.08em;
+  margin-bottom: -0.08em;
+  vertical-align: top;
+}
+.cs-w {
+  display: inline-block;
+}
+.cs-dot {
+  display: inline-block;
+  width: 0.15em;
+  height: 0.15em;
+  margin-left: 0.05em;
+  border-radius: 50%;
+  background: var(--accent);
+}

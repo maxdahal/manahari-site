@@ -32,16 +32,36 @@
   var saved = storedTheme();
   if (saved) root.setAttribute("data-theme", saved);
 
+  function setTheme(next) {
+    root.setAttribute("data-theme", next);
+    try {
+      localStorage.setItem(THEME_KEY, next);
+    } catch (e) {}
+    labelThemeButtons();
+  }
+  /* Switching eases from one theme to the other instead of flashing: a
+     cross-fade of the whole page where the browser has view transitions,
+     otherwise the colours themselves fade (.theme-fade in site.css). It is
+     instant for reduced motion or while motion is paused. */
+  function switchTheme(next) {
+    if (reduceMotion || root.classList.contains("motion-paused")) return setTheme(next);
+    if (document.startViewTransition) {
+      document.startViewTransition(function () {
+        setTheme(next);
+      });
+      return;
+    }
+    root.classList.add("theme-fade");
+    setTheme(next);
+    setTimeout(function () {
+      root.classList.remove("theme-fade");
+    }, 500);
+  }
   function initTheme() {
     labelThemeButtons();
     document.querySelectorAll(".theme-toggle").forEach(function (button) {
       button.addEventListener("click", function () {
-        var next = currentTheme() === "dark" ? "light" : "dark";
-        root.setAttribute("data-theme", next);
-        try {
-          localStorage.setItem(THEME_KEY, next);
-        } catch (e) {}
-        labelThemeButtons();
+        switchTheme(currentTheme() === "dark" ? "light" : "dark");
       });
     });
   }

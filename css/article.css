@@ -186,7 +186,7 @@
   letter-spacing: -0.01em;
   color: var(--accent-text);
 }
-.a-part > :is(p, ul, .points, .a-quote, .stats, details, dl) {
+.a-part > :is(p, ul, .a-quote, .stats, details, dl) {
   max-width: var(--a-read);
 }
 .a-part > h3 + * {
@@ -198,8 +198,6 @@
 
 /* ---- 4. points: a name, then its text ------------------------------------ */
 
-.points .is-ok { color: var(--ok-text); }
-.points .is-open { color: var(--warn-text); }
 .points-head {
   margin: var(--a-1) 0 0;
   font-family: var(--body-font);
@@ -372,7 +370,6 @@
     padding-top: 32px;
   }
   .row,
-  .a-two,
   .a-more {
     grid-template-columns: minmax(0, 1fr);
   }
@@ -465,8 +462,7 @@
   border-radius: 12px;
   background: color-mix(in srgb, var(--ink) 5%, transparent);
 }
-.article .acc > summary,
-.article .acc--plain {
+.article .acc > summary {
   display: flex;
   align-items: baseline;
   gap: 12px;
@@ -527,8 +523,7 @@
   font-size: 1rem;
 }
 @media (max-width: 760px) {
-  .article .acc > summary,
-  .article .acc--plain {
+  .article .acc > summary {
     flex-wrap: wrap;
     row-gap: 2px;
   }
@@ -548,12 +543,6 @@
 .a-outcome .label {
   color: var(--accent-text);
 }
-
-/* open points: a short accent label (when there is one), the name, then
-   its text; clear room between points so each reads as its own item */
-
-.article .points .label.is-ok { color: var(--ok-text); }
-.article .points .label.is-open { color: var(--warn-text); }
 
 /* room for the floating pill bar above the article */
 .pv .article {
@@ -689,10 +678,6 @@
   max-width: none;
   margin: 0;
   padding-inline: 0;
-}
-
-.a-toc a[aria-current] {
-  color: var(--accent-text);
 }
 
 /* jumps land below the pill bar */
@@ -1272,12 +1257,12 @@
   height: 22px;
 }
 .viewer__btn:hover {
-  border-color: #80a7c5;
-  background: #80a7c5;
-  color: #12181f;
+  border-color: #60a5fa;
+  background: #60a5fa;
+  color: #0f172a;
 }
 .viewer__btn:focus-visible {
-  outline: 3px solid #80a7c5;
+  outline: 3px solid #60a5fa;
   outline-offset: 3px;
 }
 .viewer__caption {
@@ -1313,7 +1298,6 @@
   grid-template-rows: minmax(var(--bar-h), auto);
 }
 
-/* key parts, listed under their act in the left outline */
 /* nested as in the earlier outline: indented under the section's name,
    on a short rail of their own */
 .a-outline .a-outline__sub {
@@ -1529,7 +1513,6 @@
 .article details:not(.acc) > :not(summary) {
   margin: 0 18px 18px;
 }
-/* a fold-out list beside a picture stays one column */
 
 /* what I did, in three columns on wide screens */
 @media (min-width: 1101px) {
@@ -1556,15 +1539,6 @@
    small "Read more".
    ========================================================================== */
 
-.article .a-more-text[open] {
-  align-self: stretch;
-  border: 1px solid var(--line);
-  border-radius: 14px;
-}
-
-.article .a-more-text[open] > summary {
-  border: 0;
-}
 /* one screen from sketch to final: its name, the three pictures, then what
    changed */
 .article .figset {
@@ -1599,7 +1573,7 @@
     --muted: var(--text-2);
     --outline-dim: var(--text-2);
   }
-  :root:not([data-theme="dark"]) .article :is(.card-pt, .acc, .a-fold, .contrib__team, .did) {
+  :root:not([data-theme="dark"]) .article :is(.card-pt, .acc, .contrib__team, .did) {
     border: 1px solid rgb(26 26 30 / 0.12);
     background: #fff;
     box-shadow: 0 1px 2px rgb(26 26 30 / 0.05);
@@ -1609,7 +1583,7 @@
   --muted: var(--text-2);
   --outline-dim: var(--text-2);
 }
-:root[data-theme="light"] .article :is(.card-pt, .acc, .a-fold, .contrib__team, .did) {
+:root[data-theme="light"] .article :is(.card-pt, .acc, .contrib__team, .did) {
   border: 1px solid rgb(26 26 30 / 0.12);
   background: #fff;
   box-shadow: 0 1px 2px rgb(26 26 30 / 0.05);

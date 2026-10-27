@@ -374,7 +374,7 @@
   align-items: flex-start;
   gap: 8px;
 }
-:is(.cp-main, .article) .sandbox-wrap .sandbox-wrap__tag {
+:is(.article) .sandbox-wrap .sandbox-wrap__tag {
   display: inline-flex;
   align-items: center;
   gap: 6px;
@@ -392,14 +392,14 @@
   height: 12px;
   fill: currentColor;
 }
-:is(.cp-main, .article) .sandbox-wrap .sandbox-wrap__title {
+:is(.article) .sandbox-wrap .sandbox-wrap__title {
   font-family: var(--heading-font);
   font-size: clamp(1.75rem, 1.3rem + 1.4vw, 2.4rem);
   font-weight: 600;
   line-height: 1.1;
   color: var(--ink);
 }
-:is(.cp-main, .article) .sandbox-wrap .sandbox-wrap__text {
+:is(.article) .sandbox-wrap .sandbox-wrap__text {
   max-width: 40em;
   color: var(--text);
 }
@@ -465,17 +465,17 @@
 .sandbox-wrap {
   --mono: "JetBrains Mono", ui-monospace, "SFMono-Regular", Menlo, Consolas, monospace;
 }
-:is(.cp-main, .article) .sandbox-wrap,
-:is(.cp-main, .article) .sandbox-wrap :is(p, h4, button, span, b, small, li, label, code, pre) {
+:is(.article) .sandbox-wrap,
+:is(.article) .sandbox-wrap :is(p, h4, button, span, b, small, li, label, code, pre) {
   font-family: var(--mono);
   letter-spacing: -0.01em;
 }
-:is(.cp-main, .article) .sandbox-wrap [data-real],
-:is(.cp-main, .article) .sandbox-wrap [data-real] * {
+:is(.article) .sandbox-wrap [data-real],
+:is(.article) .sandbox-wrap [data-real] * {
   font-family: var(--body-font);
   letter-spacing: normal;
 }
-:is(.cp-main, .article) .sandbox-wrap .sandbox-wrap__title {
+:is(.article) .sandbox-wrap .sandbox-wrap__title {
   font-family: var(--mono);
   font-size: clamp(1.4rem, 1.05rem + 1.1vw, 1.95rem);
   font-weight: 700;
@@ -498,14 +498,14 @@
 @keyframes sb-caret {
   50% { opacity: 0; }
 }
-:is(.cp-main, .article) .sandbox-wrap .sandbox-wrap__text {
+:is(.article) .sandbox-wrap .sandbox-wrap__text {
   font-size: 0.9375rem;
   line-height: 1.6;
 }
-:is(.cp-main, .article) .sandbox-wrap .sandbox-wrap__tag {
+:is(.article) .sandbox-wrap .sandbox-wrap__tag {
   letter-spacing: 0.08em;
 }
-:is(.cp-main, .article) .sandbox-wrap .sandbox__crumb {
+:is(.article) .sandbox-wrap .sandbox__crumb {
   font-size: 0.8125rem;
 }
 @media (prefers-reduced-motion: reduce) {

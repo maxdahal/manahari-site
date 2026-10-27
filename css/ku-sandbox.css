@@ -226,7 +226,6 @@
   letter-spacing: -0.04em;
 }
 
-
 /* ---- no absolute positioning ------------------------------------------- */
 .play__frame {
   display: none;
@@ -267,16 +266,16 @@
    against the same ground: it takes the dark theme's tokens for itself */
 .sandbox-wrap--ku {
   color-scheme: dark;
-  --bg: #12181f;
-  --surface: #1a232e;
-  --surface-2: color-mix(in srgb, #1a232e 88%, #f1f5f9);
-  --ink: #f1f5f9;
-  --text: #f1f5f9;
-  --muted: #a0aec0;
-  --line: #1e293b;
-  --accent: #80a7c5;
-  --accent-text: #8eb1cb;
-  --on-accent: #12181f;
+  --bg: #0f172a;
+  --surface: #1e293b;
+  --surface-2: color-mix(in srgb, #1e293b 88%, #f8fafc);
+  --ink: #f8fafc;
+  --text: #f8fafc;
+  --muted: #94a3b8;
+  --line: #334155;
+  --accent: #60a5fa;
+  --accent-text: #60a5fa;
+  --on-accent: #0f172a;
   --ok: #5dd68a;
   --warn: #e0a93b;
   --ok-text: #5dd68a;

@@ -9,9 +9,6 @@
   --sev-warning: #e0a93b;
   --sev-error: #d93a2b;
   --sev-inactive: #8a8a86;
-  --arm-1: #b9a4ff;
-  --arm-2: #e3c48f;
-  --arm-3: #1f5f4a;
   --arm-4: #f49ac9;
   --console: #282828;
   --console-ink: #fcfcfc;
@@ -217,18 +214,13 @@
 .console[data-design="b"] .carm[data-arm="3"] {
   color: #fff;
 }
-.console[data-design="b"] .carm__color {
-  color: inherit;
-  opacity: 0.8;
-}
+
 .console[data-design="b"] .carm__dot,
 .console[data-design="b"] .carm__lines {
   display: none;
 }
 /* before and A: no arm colors, the arm is only a number */
-.console:is([data-design="before"], [data-design="a"]) .carm__color {
-  visibility: hidden;
-}
+
 .console[data-design="before"] .carm__state,
 .console[data-design="a"] .carm__state {
   display: none;

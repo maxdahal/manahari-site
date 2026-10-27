@@ -5,28 +5,34 @@ Plain HTML, CSS and JavaScript, with no framework, library or build step. Open a
 ## What's in the folder
 
 ```
-index.html        Home: hero, case studies on shelves, About me, artwork, contact
+index.html        Home: hero, case studies, About me, artwork, contact
 about.html        The full About page (from "More about me")
 work/surgical-console.html   Case study: Surgical Console (arm panel sandbox)
 work/ku-brand.html   Case study: KU Brand (color sandbox, wireframe video)
 work/asians.html     Case study: Asian's
 css/
-  site.css        Every page: tokens, paper grain, top bar, menu, buttons,
-                  motion button, cursor, scroll text
-  portavia.css    The top bar, Home and About layouts, and the case-study bar
-  home.css        Home only: hero, shelves, seasons, artwork, recruiter summary
+  site.css        Every page: color tokens, paper grain, top bar, menu,
+                  buttons, motion button, cursor, theme fade
+  portavia.css    The top bar, Home and About layouts, footer, ID badge
+  home.css        Home: recruiter summary, motion tip, artwork, lightbox
+  homepage.css    Home: the hero sentence, case study panels, statement,
+                  artwork and contact headings
+  about.css       About in the homepage's look
   article.css     The case studies: outline, sections, cards, figures,
-                  picture viewer, moving heroes, role buttons
+                  picture viewer, role buttons
+  case.css        The case studies in the homepage's look
   sandbox.css     The sandbox frame both case-study sandboxes share
   arm-sandbox.css, ku-sandbox.css   Each sandbox's own pieces
 js/
-  site.js         Every page: motion button, hero videos, theme, menu,
-                  ID badge, cursor ring
-  home.js         Home: hero, skill rings, recruiter summary, nav, seasons,
-                  artwork lightbox
+  site.js         Every page: motion button, hero videos, theme (with its
+                  fade), menu, ID badge, cursor ring
+  home.js         Home: recruiter summary, motion tip, nav jumps and
+                  highlight, artwork spotlight and lightbox
+  scroll.js       Home: Lenis smooth scroll and GSAP scroll motion
+  case-scroll.js  Case studies and About: Lenis and GSAP scroll motion
   toc.js          Case studies: marks the current section in the outline
                   and the phone tab strip; Show all
-  viewer.js       Case studies: pictures open full screen with previous/next
+  viewer.js       Case studies: every picture and drawing opens full screen
   roles.js        Surgical Console: the role buttons over the room diagram
   sandbox.js      Shared sandbox behaviour: tabs, entrance demo, Try it pulse
   arm-sandbox.js, ku.js   Each sandbox's own behaviour
@@ -44,23 +50,23 @@ Every interface color is a token at the top of `css/site.css`, light values firs
 
 | Token | Light | Dark |
 |---|---|---|
-| `--bg` | #F9F9F6 | #0F0F11 |
-| `--surface` | #F1F1EC | #18181B |
-| `--ink` | #1A1A1E | #E6E6E1 |
-| `--text` | #4A4A4A | #B5B5B5 |
-| `--accent` | #6C4EE6 | #D0FF71 |
-| `--accent-text` | #5B3FD1 | #D0FF71 |
+| `--bg` | #F5F7F8 | #0F172A |
+| `--surface` | #FFFFFF | #1E293B |
+| `--ink`, `--text` | #111827 | #F8FAFC |
+| `--text-2` (secondary) | #4B5563 | #94A3B8 |
+| `--accent`, `--accent-text` | #2E5B82 | #60A5FA |
+| `--line` | #E5E7EB | #334155 |
 
-`--paper` holds the paper grain (dark specks in light mode, light specks in dark mode); it is baked into the page, section and footer backgrounds. Colors that belong to the work shown, not the site, are tokens in that page's CSS: the console's arm and status colors, and KU's brand colors.
+`--paper` holds the paper grain (faint slate specks in light mode, light specks in dark mode); it is baked into the page, section and footer backgrounds. Colors that belong to the work shown, not the site, are tokens in that page's CSS: the console's arm and status colors, and KU's brand colors.
 
-Headings use Antonio; everything else uses Inter. The sandboxes use JetBrains Mono, and the handwritten notes Kalam. Body text is 18px (16px on small screens).
+Home, About and the case studies use Helvetica; "code." in the home hero and the sandboxes use JetBrains Mono, and the handwritten notes Kalam. Body text is 18px (16px on small screens).
 
 ## Behaviour
 
 - **Navigation**: a full-width top bar on Home and About (a menu below 860px). Case studies have a breadcrumb bar; from 1101px an outline on the left lists every section, showing only the current section's parts (Show all opens the rest); below that, a tab strip under the breadcrumb.
-- **Scroll text**: headings, labels, paragraphs and list items ease in as they arrive and out under the top bar (pure CSS scroll-driven animations; text simply shows in browsers without them).
+- **Scroll motion**: Lenis smooth scroll with GSAP ScrollTrigger reveals on every page (`scroll.js`, `case-scroll.js`). If GSAP does not load, CSS scroll-driven animations ease the text in instead.
 - **Pictures**: on the case studies every picture opens full screen, with previous and next, arrow keys and swipe.
 - **Page changes** cross-fade (cross-document view transitions) where the browser supports it.
 - **Intro**: the "hello" plays once per visit (session storage).
-- **Theme**: follows the device until someone uses the toggle; the choice is kept in `localStorage` under `mt-theme`.
+- **Theme**: follows the device until someone uses the toggle; the choice is kept in `localStorage` under `mt-theme`. Switching cross-fades (instant with reduced motion or while motion is paused).
 - **Motion**: everything respects `prefers-reduced-motion`, and every page has a pause button for anything that moves on its own.

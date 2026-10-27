@@ -19,30 +19,25 @@
   color-scheme: light;
 
   /* color */
-  /* A calm, low-glare palette in both themes: a soft slate-mint page, white
-     cards, slate-charcoal text, slate grey for secondary text and a steel
-     blue accent. Every text colour meets WCAG AAA (7:1) on both the page and
-     the cards: primary 14.4:1, secondary 7.1:1, accent text 7.1:1, white on
-     the accent 7.1:1 (secondary and accent are nudged a shade darker than
-     #52606d and #3a5f7d for this). The dark theme is below. */
-  --bg: #f4f7f6;
+  /* A calm, crisp palette in both themes: a soft slate mist page, white
+     cards, ink-slate text, charcoal grey for secondary text and a steel blue
+     accent. Contrast on the page / on cards: primary 16.5 / 17.7:1,
+     secondary 7.0 / 7.6:1, accent 6.7 / 7.2:1, white on the accent 7.2:1.
+     The dark theme is below. */
+  --bg: #f5f7f8;
   --surface: #ffffff;
   --surface-2: color-mix(in srgb, var(--surface) 94%, var(--ink));
-  --ink: #1e252b;
-  --text: #1e252b;
-  --text-2: #495561;
-  --outline-dim: #495561;
-  --line: #e2e8f0;
-  --accent: #385c7a;
-  --accent-text: #355773;
+  --ink: #111827;
+  --text: #111827;
+  --text-2: #4b5563;
+  --outline-dim: #4b5563;
+  --line: #e5e7eb;
+  --accent: #2e5b82;
+  --accent-text: #2e5b82;
   --on-accent: #ffffff;
   /* see-through, so the paper grain shows through the tinted band */
   --band: color-mix(in srgb, var(--accent) 9%, transparent);
-  --stage: color-mix(in srgb, var(--accent) 15%, #ffffff);
-  --frame: #0f0f11;
-  --frame-2: #17171a;
-  --frame-line: rgba(255, 255, 255, 0.1);
-  --header-line: #e2e8f0;
+  --header-line: #e5e7eb;
   --shadow: 0 10px 30px rgba(0, 0, 0, 0.22);
   --ok: #1a8a42;
   --warn: #9a6a00;
@@ -58,12 +53,7 @@
      phones) and nothing reading-length is under 16px. */
   --fs-small: 1rem; /* 16 */
   --fs-body: 1.125rem; /* 18 */
-  --fs-lead: 1.375rem; /* 22 */
-  --fs-h3: 1.25rem; /* 20: card and list titles */
-  --fs-sub: clamp(1.25rem, 1.1rem + 0.45vw, 1.5rem); /* 20-24: subheads */
   --fs-h2: clamp(1.75rem, 1.35rem + 1.3vw, 2.5rem); /* 28-40: section titles */
-  --fs-stage: clamp(2.25rem, 1.6rem + 2.2vw, 3.75rem); /* 36-60: stage titles */
-  --fs-statement: clamp(1.5rem, 1.2rem + 1.1vw, 2.25rem); /* 24-36: pull statements */
   --lh-body: 1.6;
 
   /* space and shape */
@@ -75,32 +65,29 @@
   --r-md: 16px;
   --r-lg: 20px;
   --r-xl: 24px;
-  --r-pill: 999px;
   --header-h: 66px;
   --header-top: 14px;
 }
 
-/* Dark theme: navy-charcoal page, a lifted surface for cards, soft
-   white text, a lighter slate for secondary text and an ice blue accent, all
-   at AAA (7:1) or more on the page and the cards (secondary #a0aec0 and the
-   accent text #8eb1cb are lifted from #94a3b8 and #5a8cb3 for this; dark
-   text on the accent #80a7c5 is 7.0:1). */
+/* Dark theme: deep slate page, a lighter slate surface for cards, crisp
+   off-white text, cool grey for secondary text and a sky blue accent.
+   Contrast on the page / on cards: primary 17.1 / 14.0:1, secondary
+   7.0 / 5.7:1, accent 7.0 / 5.8:1, dark text on the accent 7.0:1. */
 @media (prefers-color-scheme: dark) {
   :root:not([data-theme="light"]) {
     color-scheme: dark;
-    --bg: #12181f;
-    --surface: #1a232e;
+    --bg: #0f172a;
+    --surface: #1e293b;
     --surface-2: color-mix(in srgb, var(--surface) 88%, var(--ink));
-    --ink: #f1f5f9;
-    --text: #f1f5f9;
-    --text-2: #a0aec0;
-    --outline-dim: #a0aec0;
-    --line: #1e293b;
-    --accent: #80a7c5;
-    --accent-text: #8eb1cb;
-    --on-accent: #12181f;
-    --stage: color-mix(in srgb, var(--accent) 15%, var(--bg));
-    --header-line: #1e293b;
+    --ink: #f8fafc;
+    --text: #f8fafc;
+    --text-2: #94a3b8;
+    --outline-dim: #94a3b8;
+    --line: #334155;
+    --accent: #60a5fa;
+    --accent-text: #60a5fa;
+    --on-accent: #0f172a;
+    --header-line: #334155;
     --shadow: 0 10px 30px rgba(0, 0, 0, 0.55);
     --ok: #5dd68a;
     --warn: #e0a93b;
@@ -108,19 +95,18 @@
 }
 :root[data-theme="dark"] {
   color-scheme: dark;
-  --bg: #12181f;
-  --surface: #1a232e;
+  --bg: #0f172a;
+  --surface: #1e293b;
   --surface-2: color-mix(in srgb, var(--surface) 88%, var(--ink));
-  --ink: #f1f5f9;
-  --text: #f1f5f9;
-  --text-2: #a0aec0;
-  --outline-dim: #a0aec0;
-  --line: #1e293b;
-  --accent: #80a7c5;
-  --accent-text: #8eb1cb;
-  --on-accent: #12181f;
-  --stage: color-mix(in srgb, var(--accent) 15%, var(--bg));
-  --header-line: #1e293b;
+  --ink: #f8fafc;
+  --text: #f8fafc;
+  --text-2: #94a3b8;
+  --outline-dim: #94a3b8;
+  --line: #334155;
+  --accent: #60a5fa;
+  --accent-text: #60a5fa;
+  --on-accent: #0f172a;
+  --header-line: #334155;
   --shadow: 0 10px 30px rgba(0, 0, 0, 0.55);
   --ok: #5dd68a;
   --warn: #e0a93b;
@@ -129,7 +115,6 @@
 @media (max-width: 860px) {
   :root {
     --fs-body: 1rem;
-    --fs-lead: 1.25rem;
   }
 }
 
@@ -342,14 +327,6 @@ strong {
   height: 18px;
 }
 
-/* tabs: buttons with role="tab" inside role="tablist" */
-
-.tabs [role="tab"][aria-selected="true"] {
-  border-color: var(--ink);
-  background: var(--ink);
-  color: var(--bg);
-}
-
 /* hidden means hidden, whatever display a component sets */
 [hidden] {
   display: none !important;
@@ -499,6 +476,25 @@ body,
 }
 
 /* 10. Motion --------------------------------------------------------------- */
+/* Switching theme eases instead of flashing (site.js): the browser's
+   cross-fade of the page where view transitions exist, otherwise the colours
+   fade while .theme-fade is on. */
+::view-transition-old(root),
+::view-transition-new(root) {
+  animation-duration: 0.45s;
+  animation-timing-function: ease;
+}
+.theme-fade,
+.theme-fade *,
+.theme-fade *::before,
+.theme-fade *::after {
+  transition:
+    background-color 0.45s ease,
+    color 0.45s ease,
+    border-color 0.45s ease,
+    fill 0.45s ease,
+    stroke 0.45s ease !important;
+}
 /* Moving between pages of the site cross-fades in place (cross-document view
    transitions) instead of blanking and repainting like a fresh load; the top
    bar stays put. Browsers without it navigate as before. */
@@ -537,33 +533,30 @@ body,
     main {
       overflow-x: clip;
     }
-    :root:not(.motion-paused):not(.has-gsap) main :is(h2, h3, h4, p, li, blockquote, dt, dd):not(:is(.hero, .sandbox-wrap, .badge, .shelves, .spot, .console, .cp-outline, .accs, nav, figure, table, .tabs, [role="tablist"], .seasons, .motion, .lightbox, .skills3d, li, .chapter) *):not(.hero *),
-    :root:not(.motion-paused):not(.has-gsap) main :is(.shelf__name, .shelf__tags) {
+    :root:not(.motion-paused):not(.has-gsap) main :is(h2, h3, h4, p, li, blockquote, dt, dd):not(:is(.sandbox-wrap, .badge, .spot, .console, .accs, nav, figure, table, [role="tablist"], .motion, .lightbox, li) *):not(.hero *) {
       animation: var(--st-in, st-up) linear both, st-out linear both;
       animation-timeline: view(), view();
       animation-range: entry 0px entry 220px, exit -48px exit 70%;
     }
-    :root:not(.motion-paused):not(.has-gsap) main :is(h2, .doc-head__title, .block__title, .cp-sec__label):not(:is(.sandbox-wrap, .badge, .shelves) *) {
+    :root:not(.motion-paused):not(.has-gsap) main :is(h2):not(:is(.sandbox-wrap, .badge) *) {
       --st-in: st-rise;
     }
-    :root:not(.motion-paused):not(.has-gsap) main :is(.eyebrow, .label, .cp-label, .card__label, .timeline-group__title):not(:is(.sandbox-wrap, .badge, .seasons) *) {
+    :root:not(.motion-paused):not(.has-gsap) main :is(.label):not(:is(.sandbox-wrap, .badge) *) {
       animation: st-wipe linear both, st-out linear both;
       animation-timeline: view(), view();
       animation-range: entry 0px entry 200px, exit -48px exit 70%;
     }
-    :root:not(.motion-paused):not(.has-gsap) main :is(h3, h4):not(:is(.sandbox-wrap, .badge, .shelves, .spot, .console, figure, table, nav, li, .chapter) *) {
+    :root:not(.motion-paused):not(.has-gsap) main :is(h3, h4):not(:is(.sandbox-wrap, .badge, .spot, .console, figure, table, nav, li) *) {
       --st-in: st-slide;
     }
-    :root:not(.motion-paused):not(.has-gsap) main .shelf__tags {
-      --st-in: st-wipe;
-    }
-    :root:not(.motion-paused):not(.has-gsap) main :is(blockquote, .statement, [class*="quote"]):not(:is(.sandbox-wrap, .badge) *) {
+    
+    :root:not(.motion-paused):not(.has-gsap) main :is(blockquote, [class*="quote"]):not(:is(.sandbox-wrap, .badge) *) {
       --st-in: st-zoom;
     }
-    :root:not(.motion-paused):not(.has-gsap) main li:not(:is(.sandbox-wrap, .badge, .shelves, .spot, .console, .cp-outline, .accs, nav, figure, table, .seasons, .chapter) *):nth-child(odd) {
+    :root:not(.motion-paused):not(.has-gsap) main li:not(:is(.sandbox-wrap, .badge, .spot, .console, .accs, nav, figure, table) *):nth-child(odd) {
       --st-in: st-tilt-l;
     }
-    :root:not(.motion-paused):not(.has-gsap) main li:not(:is(.sandbox-wrap, .badge, .shelves, .spot, .console, .cp-outline, .accs, nav, figure, table, .seasons, .chapter) *):nth-child(even) {
+    :root:not(.motion-paused):not(.has-gsap) main li:not(:is(.sandbox-wrap, .badge, .spot, .console, .accs, nav, figure, table) *):nth-child(even) {
       --st-in: st-tilt-r;
     }
   }
@@ -625,16 +618,6 @@ body,
     opacity: 0;
     transform: translate(14px, 18px) rotate(1.5deg);
   }
-}
-
-.reveal.is-in {
-  opacity: 1;
-  translate: 0 0;
-}
-
-.is-in .split-letter {
-  opacity: 1;
-  translate: 0 0;
 }
 
 /* The cursor: a dot on the pointer and a ring trailing behind it, both in
@@ -1044,16 +1027,11 @@ html {
   gap: clamp(8px, 2vw, 20px);
 }
 
-.cp-bar__links a[aria-current] {
-  color: var(--accent-text);
-}
 .cp-bar a:focus-visible {
   outline: 3px solid var(--ink);
   outline-offset: 2px;
   border-radius: 4px;
 }
-/* from laptop width the page outline on the left does the navigating
-   (home and case studies), so the top bar keeps only the mark and buttons */
 
 /* phones: smaller round buttons, so the mark, the four links and the
    buttons share one row */

@@ -1,10 +1,13 @@
 /* Case study pictures: each one opens full screen, with previous and next
    buttons to move through every picture on the page. Arrow keys work too,
-   Escape closes, and focus goes back to the picture you opened. */
+   Escape closes, and focus goes back to the picture you opened. Drawings
+   made in the page (inline SVG wireframes and sketches) open too: the
+   viewer shows a copy of the drawing as a picture. */
 (function () {
   "use strict";
-  var imgs = [].slice.call(document.querySelectorAll("main figure img")).filter(function (img) {
-    return !img.closest("a, button, .hero-loop");
+  var imgs = [].slice.call(document.querySelectorAll("main figure img, main figure svg[role='img']")).filter(function (img) {
+    /* (the room diagram is its own interactive piece) */
+    return !img.closest("a, button, .hero-loop, .roles, .sandbox-wrap");
   });
   if (!imgs.length) return;
 
@@ -29,21 +32,51 @@
   var current = 0;
   var opener = null;
 
+  /* a drawing as a picture: a copy with the styles its classes give it
+     written onto it, and a size from its viewBox */
+  var drawings = [];
+  function drawingSrc(svg) {
+    var i = drawings.indexOf(svg);
+    if (i < 0) {
+      var copy = svg.cloneNode(true);
+      var from = [svg].concat([].slice.call(svg.querySelectorAll("*")));
+      var to = [copy].concat([].slice.call(copy.querySelectorAll("*")));
+      from.forEach(function (el, n) {
+        if (!el.getAttribute("class")) return;
+        var cs = getComputedStyle(el);
+        ["fill", "stroke", "stroke-width", "opacity", "font-family", "font-size", "font-weight"].forEach(function (prop) {
+          to[n].style.setProperty(prop, cs.getPropertyValue(prop));
+        });
+      });
+      var box = (svg.getAttribute("viewBox") || "0 0 1600 900").split(/[\s,]+/);
+      copy.setAttribute("xmlns", "http://www.w3.org/2000/svg");
+      copy.setAttribute("width", box[2]);
+      copy.setAttribute("height", box[3]);
+      drawings.push(svg);
+      i = drawings.length - 1;
+      drawings[i].viewerSrc = URL.createObjectURL(new Blob([new XMLSerializer().serializeToString(copy)], { type: "image/svg+xml" }));
+    }
+    return drawings[i].viewerSrc;
+  }
+  function altOf(img) {
+    return img.tagName === "IMG" ? img.alt : img.getAttribute("aria-label") || "";
+  }
+
   function show(i) {
     current = (i + imgs.length) % imgs.length;
     var img = imgs[current];
     var cap = img.closest("figure").querySelector("figcaption");
-    big.src = img.currentSrc || img.src;
-    big.alt = img.alt;
+    big.src = img.tagName === "IMG" ? img.currentSrc || img.src : drawingSrc(img);
+    big.alt = altOf(img);
     count.textContent = current + 1 + " / " + imgs.length;
-    caption.textContent = cap ? cap.textContent : img.alt;
+    caption.textContent = cap ? cap.textContent : altOf(img);
   }
 
   imgs.forEach(function (img, i) {
     var btn = document.createElement("button");
     btn.type = "button";
     btn.className = "zoom";
-    btn.setAttribute("aria-label", "View full screen: " + (img.alt || "picture"));
+    btn.setAttribute("aria-label", "View full screen: " + (altOf(img) || "picture"));
     btn.setAttribute("aria-haspopup", "dialog");
     btn.setAttribute("data-cursor", "View");
     img.parentNode.insertBefore(btn, img);

@@ -31,6 +31,8 @@ body.cs .a-sections__num {
 body.cs .article {
   --a-col: 1180px;
   --a-read: 680px;
+  /* every picture, and every group of pictures, stops at one width */
+  --cs-pic: 880px;
 }
 @media (min-width: 1101px) {
   body.cs .a-layout {
@@ -78,11 +80,11 @@ body.cs .a-tag {
   background: var(--accent);
 }
 body.cs .a-hero2 {
-  grid-template-columns: minmax(0, 1fr) minmax(260px, 320px);
+  grid-template-columns: minmax(0, var(--cs-pic)) minmax(260px, 320px);
   grid-template-areas:
     "intro intro"
-    "image image"
-    "meta  aside";
+    "image aside"
+    "meta  meta";
   row-gap: clamp(32px, 5vw, 64px);
 }
 body.cs .a-hero2__intro {
@@ -185,6 +187,19 @@ body.cs .a-act:not(.a-act--intro)::before {
 }
 #main figure :is(img, svg, video) {
   border-radius: 12px;
+}
+@media (min-width: 761px) {
+  #main :is(figure, .figs, .row) {
+    width: 100%;
+    max-width: var(--cs-pic);
+  }
+}
+/* every picture opens full screen (viewer.js); drawings show it too */
+#main .zoom svg {
+  transition: opacity 0.3s ease;
+}
+#main .zoom:hover svg {
+  opacity: 0.9;
 }
 
 /* ---- the smaller pieces ------------------------------------------------- */

@@ -186,7 +186,10 @@
     function goTo(id, smooth) {
       var target = document.getElementById(id);
       if (!target) return false;
-      var section = target.closest(".sections > section");
+      var section = target.closest(".sections > section, .sections > .pin-spacer > section");
+      /* a section GSAP holds in place sits in a spacer: its top is the
+         spacer's (the section's own top stays put while it is held) */
+      if (section && section.parentElement.classList.contains("pin-spacer")) section = section.parentElement;
       var top = section
         ? section.getBoundingClientRect().top + window.scrollY - (bar ? bar.offsetHeight : 0)
         : document.documentElement.scrollHeight;

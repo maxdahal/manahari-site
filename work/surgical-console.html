@@ -17,15 +17,20 @@
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&amp;family=Kalam:wght@400&amp;display=swap">
   <link rel="stylesheet" href="/css/sandbox.css">
   <link rel="stylesheet" href="/css/arm-sandbox.css">
+  <link rel="stylesheet" href="/css/case.css">
   <script src="/js/sandbox.js" defer></script>
   <script src="/js/arm-sandbox.js" defer></script>
   <script src="/js/roles.js" defer></script>
   <script src="/js/site.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/lenis@1.1.13/dist/lenis.min.js" defer></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js" defer></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js" defer></script>
+  <script src="/js/case-scroll.js" defer></script>
   <!-- Vercel Web Analytics: cookie-free page views (enabled in the Vercel dashboard) -->
   <script>window.va = window.va || function () { (window.vaq = window.vaq || []).push(arguments); };</script>
   <script defer src="/_vercel/insights/script.js"></script>
 </head>
-<body class="cp-page a-page pv">
+<body class="cp-page a-page pv cs">
   <a class="skip-link" href="#main">Skip to content</a>
   <header class="cp-bar a-bar"><nav class="a-crumbs" aria-label="Breadcrumbs"><a href="/#work"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m12 19-7-7 7-7M19 12H5"/></svg>Projects</a><span class="a-crumbs__sep" aria-hidden="true">/</span><span aria-current="page">Surgical Console</span></nav><nav class="a-sections" aria-label="Sections"><ol><li><a href="#main"><span class="a-sections__num" aria-hidden="true">01</span>Overview</a></li><li><a href="#setup"><span class="a-sections__num" aria-hidden="true">02</span>The setup</a></li><li><a href="#tradeoffs"><span class="a-sections__num" aria-hidden="true">03</span>Engineering &amp; stakeholder trade-offs</a></li><li><a href="#impact"><span class="a-sections__num" aria-hidden="true">04</span>Resolution and impact</a></li></ol></nav><div class="a-bar__end"><button class="icon-button motion-toggle" type="button" aria-pressed="false" aria-label="Pause motion" title="Pause motion"><svg class="icon-pause" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M9 5v14M15 5v14"/></svg><svg class="icon-play" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M8 5.5v13l11-6.5z"/></svg></button><div class="cp-bar__end">
       <button class="icon-button theme-toggle" type="button" aria-label="Switch theme"><svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20.985 12.486a9 9 0 1 1-9.473-9.472c.405-.022.617.46.402.803a6 6 0 0 0 8.268 8.268c.344-.215.825-.004.803.401"/></svg><svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2m-7.07-17.07 1.41 1.41m11.32 11.32 1.41 1.41M2 12h2m16 0h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"/></svg></button>

@@ -1,0 +1,265 @@
+/* ==========================================================================
+   Case studies in the homepage's look (body.cs), after the Newcastle Art
+   Gallery's project pages: Helvetica throughout, sentence case, very large
+   titles with the accent dot as their full stop, a sticky numbered index on
+   the left, and big pictures. Loaded after article.css and only changes how
+   things look; the words and the order stay as they are. case-scroll.js
+   adds Lenis and GSAP reveals on top.
+   ========================================================================== */
+
+body.cs {
+  --cs-font: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  --heading-font: var(--cs-font);
+  --body-font: var(--cs-font);
+  font-family: var(--cs-font);
+}
+
+/* sentence case everywhere (the id keeps this above article.css's labels);
+   the small labels lose the wide tracking capitals needed */
+#main *:not(svg, svg *),
+body.cs .a-bar *,
+body.cs .a-side * {
+  text-transform: none;
+}
+#main :is(.label, .a-facts dt, .a-card__title, .contrib__bg-label, .contrib__facts dt, .acc__label, .step__num),
+body.cs .a-sections a,
+body.cs .a-sections__num {
+  letter-spacing: 0;
+}
+
+/* ---- the page's widths: text stays readable, pictures get bigger --------- */
+body.cs .article {
+  --a-col: 1180px;
+  --a-read: 680px;
+}
+@media (min-width: 1101px) {
+  body.cs .a-layout {
+    grid-template-columns: 200px minmax(0, 1180px);
+    column-gap: clamp(40px, 4vw, 72px);
+  }
+}
+
+/* ---- text ---------------------------------------------------------------- */
+#main :is(p, li, dd) {
+  font-size: 1.125rem;
+  line-height: 1.6;
+}
+#main :is(.small, figcaption) {
+  font-size: 0.9375rem;
+}
+#main .label {
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: var(--muted);
+}
+
+/* ---- the top: tag, a very large title, then the before and after across
+   the whole width, then the outcome and the project card side by side ---- */
+body.cs .a-tag {
+  border-color: color-mix(in srgb, var(--accent) 40%, transparent);
+  font-size: 0.875rem;
+  font-weight: 500;
+}
+#main .a-title {
+  font-family: var(--cs-font);
+  font-size: clamp(3.25rem, 0.6rem + 8vw, 10rem);
+  font-weight: 700;
+  line-height: 0.9;
+  letter-spacing: -0.05em;
+}
+/* the accent dot as its full stop, like the homepage's headings
+   (case-scroll.js puts it on the last word) */
+.cs-dot {
+  display: inline-block;
+  width: 0.15em;
+  height: 0.15em;
+  margin-left: 0.05em;
+  border-radius: 50%;
+  background: var(--accent);
+}
+body.cs .a-hero2 {
+  grid-template-columns: minmax(0, 1fr) minmax(260px, 320px);
+  grid-template-areas:
+    "intro intro"
+    "image image"
+    "meta  aside";
+  row-gap: clamp(32px, 5vw, 64px);
+}
+body.cs .a-hero2__intro {
+  gap: 24px;
+}
+#main .a-lead {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(260px, 100%), 1fr));
+  gap: 16px clamp(24px, 4vw, 64px);
+  width: 100%;
+  max-width: 960px;
+  margin: 8px 0 0;
+}
+#main .a-lead div {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+#main .a-lead dt {
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: var(--accent-text);
+}
+#main .a-lead dd {
+  margin: 0;
+  font-size: clamp(1.125rem, 1rem + 0.5vw, 1.375rem);
+  line-height: 1.45;
+  color: var(--ink);
+}
+body.cs .a-hero2__meta {
+  margin-top: 0;
+}
+@media (max-width: 860px) {
+  body.cs .a-hero2 {
+    grid-template-columns: minmax(0, 1fr);
+    grid-template-areas:
+      "intro"
+      "image"
+      "aside"
+      "meta";
+  }
+}
+
+/* ---- acts: a rule across the page, a small number, a very large title ---- */
+body.cs .article {
+  counter-reset: cs-act;
+}
+body.cs .a-act:not(.a-act--intro) {
+  counter-increment: cs-act;
+  margin-top: clamp(96px, 12vw, 176px);
+  padding-top: 24px;
+  border-top: 1px solid var(--line);
+}
+body.cs .a-act--intro {
+  padding-top: clamp(72px, 9vw, 128px);
+}
+body.cs .a-act--intro + .a-act--intro {
+  padding-top: clamp(56px, 7vw, 96px);
+}
+body.cs .a-act:not(.a-act--intro)::before {
+  content: counter(cs-act, decimal-leading-zero);
+  display: block;
+  margin-bottom: clamp(40px, 6vw, 80px);
+  font-size: 0.875rem;
+  font-weight: 500;
+  font-variant-numeric: tabular-nums;
+  color: var(--muted);
+}
+#main .a-act > h2 {
+  max-width: 14ch;
+  font-family: var(--cs-font);
+  font-size: clamp(2.75rem, 1.2rem + 4.4vw, 6rem);
+  font-weight: 700;
+  line-height: 0.95;
+  letter-spacing: -0.045em;
+  color: var(--ink);
+}
+#main .a-act > h2 + .a-part {
+  padding-top: clamp(48px, 6vw, 88px);
+}
+
+/* ---- parts: a large title, the text under it ---------------------------- */
+#main .a-part {
+  padding-top: clamp(80px, 9vw, 128px);
+}
+#main .a-part > h3 {
+  font-family: var(--cs-font);
+  font-size: clamp(1.75rem, 1.2rem + 1.6vw, 2.75rem);
+  font-weight: 700;
+  line-height: 1.05;
+  letter-spacing: -0.03em;
+  color: var(--ink);
+}
+#main .a-part > h3 + * {
+  margin-top: 0;
+}
+/* pictures get room around them */
+#main .a-part > :is(figure, .figs, .row) {
+  margin-block: clamp(16px, 2vw, 32px);
+}
+#main figure :is(img, svg, video) {
+  border-radius: 12px;
+}
+
+/* ---- the smaller pieces ------------------------------------------------- */
+#main :is(.card-pt, .step) h4,
+#main .points-head {
+  font-family: var(--cs-font);
+  font-size: 1.1875rem;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+}
+#main .step__num {
+  font-family: var(--cs-font);
+  font-weight: 700;
+}
+#main .stats b {
+  font-family: var(--cs-font);
+  letter-spacing: -0.04em;
+}
+#main .acc__name {
+  font-family: var(--cs-font);
+}
+#main .a-more b {
+  font-family: var(--cs-font);
+  letter-spacing: -0.02em;
+}
+
+/* ---- buttons, as on the homepage ---------------------------------------- */
+body.cs :is(.button, .pv-btn) {
+  font-family: var(--cs-font);
+  font-weight: 600;
+  letter-spacing: 0;
+  text-transform: none;
+}
+
+/* ---- the sticky index on the left --------------------------------------- */
+body.cs .a-outline {
+  font-family: var(--cs-font);
+}
+body.cs .a-outline a {
+  letter-spacing: -0.005em;
+}
+body.cs .a-outline > ol > li > a {
+  font-weight: 600;
+}
+
+/* ---- the section strip on narrow screens -------------------------------- */
+body.cs .a-sections a {
+  font-family: var(--cs-font);
+  font-size: 0.9375rem;
+}
+
+/* ---- for case-scroll.js: each title word in a mask it slides up out of;
+   pictures that settle keep their corners while they scale ------------- */
+.cs-m {
+  display: inline-block;
+  overflow: hidden;
+  padding-bottom: 0.08em;
+  margin-bottom: -0.08em;
+  vertical-align: top;
+}
+.cs-w {
+  display: inline-block;
+}
+.cs-zoom {
+  overflow: hidden;
+  border-radius: 12px;
+}
+
+/* with large part titles the text lines up under them, flush (on phones
+   the swipeable rows keep running out to the screen's edges) */
+#main .a-part > :not(h3) {
+  margin-inline-start: 0;
+}
+@media (max-width: 760px) {
+  #main .a-part > :is(.figs:not(.figs--three), .cards:has(> :nth-child(3))) {
+    margin-inline-start: calc(-1 * var(--gx));
+  }
+}

@@ -463,25 +463,79 @@ body:has(.cv-hero) {
 
 /* ==========================================================================
    The two words that say what they mean.
-   "design" sits in a design tool's selection frame: a thin outline in the
-   accent with square handles at its corners (an inset shadow and four
-   background squares, so nothing is positioned and the line keeps its
-   shape). --sel (0 to 1) lets scroll.js draw the frame in.
+   "design" is built the way it would be in a design tool, in pure CSS:
+   its selection frame traces itself round the word, the square handles pop
+   onto the corners, then the outlined letters fill in. The frame is four
+   background lines and four background squares (nothing is positioned, so
+   the line keeps its shape), sized by registered properties that one
+   keyframe animation moves. Without motion it simply shows built.
    "code." is set in a monospace face; scroll.js types it out letter by
    letter on load, and a caret blinks after it.
    ========================================================================== */
+@property --draw {
+  syntax: "<number>";
+  inherits: false;
+  initial-value: 1;
+}
+@property --knob {
+  syntax: "<number>";
+  inherits: false;
+  initial-value: 1;
+}
+@property --fill {
+  syntax: "<number>";
+  inherits: false;
+  initial-value: 1;
+}
 .cv-design {
-  --sel: 1;
-  --sel-c: color-mix(in srgb, var(--accent) calc(var(--sel) * 100%), transparent);
-  --h: 0.13em;
-  padding-inline: 0.08em;
-  box-shadow: inset 0 0 0 0.03em var(--sel-c);
+  --c: var(--accent);
+  --t: 0.03em;
+  --h: calc(var(--knob) * 0.13em);
+  --run: calc(var(--draw) * 100%);
+  padding: 0 0.08em 0.2em;
+  margin-bottom: -0.16em;
   background:
-    linear-gradient(var(--sel-c) 0 0) 0 0 / var(--h) var(--h),
-    linear-gradient(var(--sel-c) 0 0) 100% 0 / var(--h) var(--h),
-    linear-gradient(var(--sel-c) 0 0) 0 100% / var(--h) var(--h),
-    linear-gradient(var(--sel-c) 0 0) 100% 100% / var(--h) var(--h);
+    linear-gradient(var(--c) 0 0) 0 0 / var(--h) var(--h),
+    linear-gradient(var(--c) 0 0) 100% 0 / var(--h) var(--h),
+    linear-gradient(var(--c) 0 0) 0 100% / var(--h) var(--h),
+    linear-gradient(var(--c) 0 0) 100% 100% / var(--h) var(--h),
+    linear-gradient(var(--c) 0 0) 0 0 / var(--run) var(--t),
+    linear-gradient(var(--c) 0 0) 100% 0 / var(--t) var(--run),
+    linear-gradient(var(--c) 0 0) 100% 100% / var(--run) var(--t),
+    linear-gradient(var(--c) 0 0) 0 100% / var(--t) var(--run);
   background-repeat: no-repeat;
+  -webkit-text-fill-color: color-mix(in srgb, currentColor calc(var(--fill) * 100%), transparent);
+  -webkit-text-stroke: calc((1 - var(--fill)) * 0.02em) currentColor;
+}
+/* the descender of the g stays inside the frame */
+.cv-line:has(.cv-design) {
+  padding-bottom: 0.2em;
+  margin-bottom: -0.16em;
+}
+@media (prefers-reduced-motion: no-preference) {
+  :root:not(.motion-paused) .cv-design {
+    animation: cv-construct 2.4s cubic-bezier(0.65, 0, 0.35, 1) 0.8s both;
+  }
+}
+@keyframes cv-construct {
+  0% {
+    --draw: 0;
+    --knob: 0;
+    --fill: 0;
+  }
+  45% {
+    --draw: 1;
+    --knob: 0;
+  }
+  60% {
+    --knob: 1;
+    --fill: 0;
+  }
+  100% {
+    --draw: 1;
+    --knob: 1;
+    --fill: 1;
+  }
 }
 .cv-code {
   font-family: "JetBrains Mono", ui-monospace, "SF Mono", Menlo, monospace;

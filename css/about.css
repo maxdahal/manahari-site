@@ -15,8 +15,7 @@ body.ab {
 
 /* sentence case everywhere (the id keeps this above portavia.css) */
 #main *:not(svg, svg *),
-body.ab .pv-nav *,
-body.ab .pv-footer * {
+body.ab .pv-nav * {
   text-transform: none;
 }
 

@@ -394,3 +394,255 @@ body.cs .a-sections a {
     margin-inline: calc(-1 * var(--gx));
   }
 }
+
+/* ==========================================================================
+   The journal page, more closely (catalinvintila.design/journal):
+     top      a screen-tall opening: the tag at the top, the title low on the
+              left in medium weight; then a meta strip (the facts), a
+              context row between hairlines (the problem and my part), the
+              pictures and the outcome
+     acts     no giant titles: a small "01 —" over a medium heading in the
+              reading column
+     text     grey body text in the reading column, white-ish headings
+     pieces   cards, steps and the problem panels become plain rows on
+              hairlines instead of boxes
+     progress a thin accent line under the top bar fills as you read
+   ========================================================================== */
+
+/* ---- the opening ---------------------------------------------------------- */
+body.cs .a-hero2 {
+  grid-template-columns: minmax(0, 1fr) minmax(260px, 320px);
+  grid-template-areas:
+    "tag     tag"
+    "title   title"
+    "facts   facts"
+    "lead    lead"
+    "image   aside"
+    "outcome outcome";
+  row-gap: 0;
+  column-gap: clamp(24px, 3vw, 40px);
+}
+body.cs :is(.a-hero2__intro, .a-hero2__meta) {
+  display: contents;
+}
+body.cs .a-hero2 .a-tag {
+  grid-area: tag;
+  justify-self: start;
+}
+#main .a-hero2 .a-title {
+  grid-area: title;
+  align-self: end;
+  min-height: calc(100svh - var(--bar-h) - 260px);
+  display: flex;
+  align-items: flex-end;
+  padding-bottom: clamp(32px, 5vh, 56px);
+  font-size: clamp(3rem, 1rem + 6.5vw, 8rem);
+  font-weight: 500;
+  line-height: 0.95;
+  letter-spacing: -0.045em;
+}
+#main .a-hero2 .a-title .cs-line {
+  display: block;
+}
+#main .a-hero2 .a-facts {
+  grid-area: facts;
+  grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+  margin: 0;
+  padding: 20px 0 24px;
+  border-top: 1px solid var(--line);
+  border-bottom: 1px solid var(--line);
+}
+#main .a-hero2 .a-facts dd {
+  font-size: clamp(1.125rem, 1rem + 0.4vw, 1.375rem);
+  font-weight: 500;
+  letter-spacing: -0.01em;
+}
+#main .a-hero2 .a-lead {
+  grid-area: lead;
+  max-width: none;
+  margin: clamp(32px, 5vw, 56px) 0;
+  padding: 24px 0;
+  border-top: 1px solid var(--line);
+  border-bottom: 1px solid var(--line);
+}
+#main .a-hero2 .a-lead dd {
+  font-size: clamp(1.0625rem, 1rem + 0.3vw, 1.25rem);
+  font-weight: 500;
+}
+body.cs .a-hero2__image {
+  grid-area: image;
+}
+body.cs .a-hero2__aside {
+  grid-area: aside;
+}
+#main .a-hero2 .a-outcome {
+  grid-area: outcome;
+  margin-top: clamp(40px, 6vw, 72px);
+}
+@media (max-width: 860px) {
+  body.cs .a-hero2 {
+    grid-template-columns: minmax(0, 1fr);
+    grid-template-areas:
+      "tag"
+      "title"
+      "facts"
+      "lead"
+      "image"
+      "aside"
+      "outcome";
+    row-gap: 0;
+  }
+  body.cs .a-hero2__aside {
+    margin-top: 24px;
+  }
+  #main .a-hero2 .a-title {
+    min-height: 50svh;
+  }
+}
+
+/* ---- acts: "01 —" over a medium heading, in the reading column ---------- */
+body.cs .a-act:not(.a-act--intro) {
+  margin-top: clamp(80px, 10vw, 140px);
+  padding-top: 0;
+  border-top: 0;
+}
+body.cs .a-act:not(.a-act--intro)::before {
+  content: counter(cs-act, decimal-leading-zero) " \2014";
+  grid-column: read;
+  grid-row: 1;
+  font-size: 0.8125rem;
+  color: var(--muted);
+}
+#main .a-act > h2 {
+  grid-column: read;
+  grid-row: 2;
+  max-width: none;
+  margin-top: 8px;
+  font-size: clamp(1.75rem, 1.3rem + 1.4vw, 2.5rem);
+  font-weight: 500;
+  line-height: 1.1;
+  letter-spacing: -0.03em;
+}
+/* the accent dot belongs to the page title only */
+#main .a-act > h2 .cs-dot {
+  display: none;
+}
+#main .a-act > h2 + .a-part {
+  padding-top: clamp(32px, 4vw, 56px);
+}
+
+/* ---- parts and text ---------------------------------------------------- */
+#main .a-part {
+  padding-top: clamp(56px, 7vw, 96px);
+}
+#main .a-part > h3 {
+  font-size: clamp(1.25rem, 1.1rem + 0.5vw, 1.5rem);
+  font-weight: 500;
+  letter-spacing: -0.02em;
+}
+#main .a-part > :is(p, ul, ol:not(.steps)) ,
+#main .a-part > :is(p, ul, ol:not(.steps)) li {
+  color: var(--text-2);
+}
+#main .a-part > p {
+  font-size: 1.1875rem;
+  line-height: 1.65;
+}
+#main .a-part > p strong {
+  color: var(--ink);
+}
+
+/* ---- the problem panels: plain, like every other part ------------------ */
+#main :is(.a-part[id^="the-problem"], .a-part[id="annotation-became-a-mode"]) {
+  margin-top: 0;
+  padding: clamp(56px, 7vw, 96px) 0 0;
+  border: 0;
+  border-radius: 0;
+  background: none;
+}
+#main :is(.a-part[id^="the-problem"], .a-part[id="annotation-became-a-mode"]) > h3 {
+  font-size: clamp(1.25rem, 1.1rem + 0.5vw, 1.5rem);
+  font-weight: 500;
+  letter-spacing: -0.02em;
+}
+
+/* ---- cards and the contribution list: rows on hairlines, not boxes ------ */
+#main :is(.card-pt, .did, .contrib__team, .acc) {
+  padding: 16px 0 0;
+  border: 0;
+  border-top: 1px solid var(--line);
+  border-radius: 0;
+  background: none;
+  box-shadow: none;
+}
+#main .cards {
+  gap: 28px clamp(20px, 3vw, 40px);
+}
+#main .dids {
+  gap: 0 clamp(20px, 3vw, 40px);
+}
+#main .did {
+  padding-bottom: 14px;
+}
+#main .card-pt h4 {
+  font-weight: 500;
+}
+#main .card-pt :is(p, li) {
+  color: var(--text-2);
+}
+
+/* ---- steps: numbered rows on hairlines ----------------------------------- */
+#main .steps {
+  gap: 0;
+  max-width: var(--cs-pic);
+}
+#main .steps--cols {
+  column-gap: clamp(20px, 3vw, 40px);
+  row-gap: 0;
+}
+#main .step {
+  grid-template-columns: 72px minmax(0, 1fr);
+  gap: 16px;
+  padding: 16px 0;
+  border-top: 1px solid var(--line);
+}
+#main .step__num {
+  margin: 0;
+  font-size: 0.8125rem;
+  font-weight: 600;
+  line-height: 1.9;
+  color: var(--accent-text);
+}
+#main .step h4 {
+  font-weight: 500;
+}
+#main .step p {
+  color: var(--text-2);
+}
+
+/* ---- pull quotes, closer to the journal's ------------------------------- */
+#main .a-quote p {
+  font-weight: 500;
+}
+
+/* ---- reading progress: a thin line under the top bar --------------------- */
+@supports (animation-timeline: scroll()) {
+  body.cs .a-bar::after {
+    content: "";
+    grid-column: 1 / -1;
+    height: 2px;
+    margin-inline: calc(-1 * var(--gx));
+    background: var(--accent);
+    transform-origin: 0 50%;
+    animation: cs-progress linear both;
+    animation-timeline: scroll(root);
+  }
+}
+@keyframes cs-progress {
+  from {
+    transform: scaleX(0);
+  }
+  to {
+    transform: scaleX(1);
+  }
+}

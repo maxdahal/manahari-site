@@ -145,17 +145,6 @@
   gap: 24px;
 }
 
-.pv-footer__icons a {
-  display: inline-grid;
-  place-items: center;
-  width: 28px;
-  height: 28px;
-  color: var(--ink);
-}
-.pv-footer__icons svg {
-  width: 22px;
-  height: 22px;
-}
 .pv-actions {
   display: flex;
   flex-wrap: wrap;
@@ -228,59 +217,56 @@
   gap: 24px;
 }
 
-/* ---- footer: an accent band ---------------------------------------------- */
-.pv-footer {
-  margin-top: 40px;
-  background: var(--accent);
-  color: var(--on-accent);
-}
-.pv-footer__inner {
-  max-width: calc(var(--pv-w) + 2 * var(--gx));
-  margin-inline: auto;
-  padding: 40px var(--gx) 32px;
-}
-.pv-footer__cols {
+/* ---- the page's end: the last row of "Let's connect" on Home and About,
+   under a hairline: the copyright, the social links and Back to top ------- */
+.pv-end {
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
-  gap: 24px 48px;
+  align-items: center;
+  gap: 16px 32px;
+  margin-top: clamp(24px, 4vh, 48px);
+  padding-top: 20px;
+  border-top: 1px solid var(--line);
+  font-size: 0.9375rem;
+  color: var(--muted);
 }
-.pv-footer__cols p {
-  margin: 0 0 4px;
-  font-size: 0.875rem;
-  font-weight: 300;
+.pv-main .sections > .pv-contact > .pv-end {
+  grid-column: 1 / -1;
 }
-.pv-footer a {
-  font-size: 1.125rem;
-  font-weight: 600;
-  color: inherit;
+.pv-end p {
+  margin: 0;
+}
+.pv-end a {
+  color: var(--ink);
   text-decoration: none;
 }
-.pv-footer a:hover {
+.pv-end > a:hover {
   text-decoration: underline;
 }
-.pv-footer__icons {
+.pv-end__social {
   display: flex;
   gap: 12px;
 }
-.pv-footer__icons a {
-  color: inherit;
+.pv-end__social a {
+  display: inline-grid;
+  place-items: center;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  transition: color 0.2s ease, background-color 0.2s ease;
 }
-.pv-footer__legal {
-  display: flex;
-  justify-content: space-between;
-  gap: 16px;
-  margin-top: 32px;
-  padding-top: 16px;
-  border-top: 1px solid color-mix(in srgb, var(--on-accent) 20%, transparent);
-  font-size: 0.875rem;
+.pv-end__social a:hover {
+  background: color-mix(in srgb, var(--ink) 8%, transparent);
+  color: var(--accent-text);
 }
-.pv-footer__legal p {
-  margin: 0;
+.pv-end__social svg {
+  width: 22px;
+  height: 22px;
 }
-.pv-footer__legal a {
-  font-size: 0.875rem;
-  font-weight: 400;
+.pv-end a:focus-visible {
+  outline: 3px solid var(--accent);
+  outline-offset: 2px;
 }
 
 /* ---- phones and tablets -------------------------------------------------- */

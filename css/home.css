@@ -28,44 +28,138 @@
   color: var(--text);
 }
 
-/* 0. Hello intro ------------------------------------------------------------
-   Pure CSS, after Apple's "hello". Timeline:
-     0.2s - 2.2s  "hello" writes itself as one continuous line (its stroke is
-                  revealed with stroke-dashoffset; pathLength="1" makes the
-                  line one unit long), at an even, unhurried pace
-     2.8s - 3.4s  the screen fades away with "hello" on it, then the name's
-                  letters rise in (--intro on .hero delays it)
-   The overlay is fixed on top of everything and never takes
-   clicks once it has faded. It plays on a fresh visit or a refresh only, not
-   when you return to Home from another page of the site, and is skipped
-   entirely for reduced motion. */
+/* 0. Intro -----------------------------------------------------------------
+   The hero line on torn paper labels, taped down one after another, over a
+   dark screen of faint overlapping circles, with a count to 100 below.
+   Pure CSS. Timeline:
+     0.2s - 1.6s  the three labels slap down in turn, each a little askew,
+                  and their strips of tape stick across them
+     0.2s - 2.4s  the count runs from 0 to 100
+     2.8s - 3.4s  the screen lifts away and the page shows
+   The overlay is fixed on top of everything and never takes clicks once it
+   has gone. It plays on a fresh visit or a refresh only, not when you come
+   back to Home from another page of the site, and is skipped entirely for
+   reduced motion. */
+@property --count {
+  syntax: "<integer>";
+  inherits: false;
+  initial-value: 0;
+}
 .hello {
-  --hello-w: min(560px, 72vw); /* width of the "hello" drawing */
+  --paper-label: #e7dcc0;
+  --tape: rgb(240 190 40 / 0.82);
   position: fixed;
   inset: 0;
   z-index: 100;
   display: grid;
-  place-items: center;
-  background: var(--bg);
+  place-content: center;
+  justify-items: center;
+  gap: clamp(32px, 6vh, 64px);
+  /* faint rings, overlapping like a drawing guide */
+  background:
+    radial-gradient(circle at 30% 30%, transparent calc(30vmax - 1px), rgb(255 255 255 / 0.07) 30vmax, transparent calc(30vmax + 1px)),
+    radial-gradient(circle at 70% 30%, transparent calc(30vmax - 1px), rgb(255 255 255 / 0.07) 30vmax, transparent calc(30vmax + 1px)),
+    radial-gradient(circle at 30% 70%, transparent calc(30vmax - 1px), rgb(255 255 255 / 0.07) 30vmax, transparent calc(30vmax + 1px)),
+    radial-gradient(circle at 70% 70%, transparent calc(30vmax - 1px), rgb(255 255 255 / 0.07) 30vmax, transparent calc(30vmax + 1px)),
+    radial-gradient(circle at 50% 50%, transparent calc(22vmax - 1px), rgb(255 255 255 / 0.07) 22vmax, transparent calc(22vmax + 1px)),
+    #0b0b0c;
   animation: hello-out 0.6s ease 2.8s forwards;
 }
-.hello__word {
-  width: var(--hello-w);
-  overflow: visible;
+.tape {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 0;
+  font-family: "Antonio", "Arial Narrow", Impact, sans-serif;
+  font-size: clamp(2.5rem, 1rem + 6vw, 6rem);
+  font-weight: 700;
+  line-height: 1;
+  color: #0b0b0c;
 }
-.hello__word path {
-  fill: none;
-  stroke: var(--ink);
-  stroke-width: 11;
-  stroke-linecap: round;
-  stroke-linejoin: round;
-  stroke-dasharray: 1;
-  stroke-dashoffset: 1;
-  animation: hello-write 2s cubic-bezier(0.45, 0.05, 0.55, 0.95) 0.2s forwards;
+/* each line: a paper label, its text and its strip of tape share one grid
+   cell, so the tape lies across the words with nothing positioned */
+.tape__line {
+  display: grid;
+  padding: 0.04em 0.16em 0.08em;
+  background: var(--paper-label);
+  clip-path: polygon(0 3%, 4% 0, 30% 2%, 62% 0, 100% 3%, 99% 52%, 100% 97%, 70% 100%, 35% 97%, 2% 100%, 0 60%);
+  opacity: 0;
+  rotate: -1deg;
+  animation: tape-slap 0.35s cubic-bezier(0.2, 1.4, 0.4, 1) forwards;
 }
-@keyframes hello-write {
+.tape__line:nth-child(1) {
+  animation-delay: 0.2s;
+}
+.tape__line:nth-child(2) {
+  margin-top: -0.06em;
+  rotate: 0.8deg;
+  animation-delay: 0.55s;
+}
+.tape__line:nth-child(3) {
+  margin-top: -0.06em;
+  rotate: -0.6deg;
+  animation-delay: 0.9s;
+}
+.tape__line::after {
+  content: "";
+  grid-area: 1 / 1;
+  align-self: center;
+  width: 38%;
+  height: 0.32em;
+  background: var(--tape);
+  clip-path: polygon(0 10%, 4% 0, 96% 6%, 100% 0, 98% 90%, 100% 100%, 3% 94%, 0 100%);
+  rotate: -4deg;
+  transform-origin: 0 50%;
+  scale: 0 1;
+  animation: tape-stick 0.3s ease-out forwards;
+}
+.tape__line:nth-child(1)::after {
+  justify-self: start;
+  margin-left: -6%;
+  animation-delay: 0.5s;
+}
+.tape__line:nth-child(2)::after {
+  justify-self: end;
+  margin-right: 12%;
+  rotate: 3deg;
+  animation-delay: 0.85s;
+}
+.tape__line:nth-child(3)::after {
+  justify-self: center;
+  width: 46%;
+  rotate: -2deg;
+  animation-delay: 1.2s;
+}
+.hello__count {
+  margin: 0;
+  font-family: "JetBrains Mono", ui-monospace, monospace;
+  font-size: 0.8125rem;
+  color: rgb(255 255 255 / 0.6);
+  font-variant-numeric: tabular-nums;
+  counter-reset: count var(--count);
+  animation: hello-count 2.2s cubic-bezier(0.4, 0, 0.2, 1) 0.2s forwards;
+}
+.hello__count::after {
+  content: counter(count);
+}
+@keyframes tape-slap {
+  from {
+    opacity: 0;
+    scale: 1.25;
+  }
   to {
-    stroke-dashoffset: 0;
+    opacity: 1;
+    scale: 1;
+  }
+}
+@keyframes tape-stick {
+  to {
+    scale: 1 1;
+  }
+}
+@keyframes hello-count {
+  to {
+    --count: 100;
   }
 }
 @keyframes hello-out {
@@ -975,7 +1069,6 @@ html:has(.recruiter[open]) {
 
 /* Paper: every section's own background carries the grain (the --paper
    token in site.css), so each one reads as paper, in both themes. */
-.hello,
 .sections > section {
   background: var(--paper) 0 0 / 240px auto, var(--bg);
 }

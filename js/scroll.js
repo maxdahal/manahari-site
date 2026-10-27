@@ -136,6 +136,15 @@
         enter(panel.querySelectorAll(".cv-project__words > *"), panel, { y: 80, stagger: 0.1, duration: 1 }, "top 55%");
       });
 
+      /* skills, then research and recognition: the title, then each row */
+      enter(".cv-skills .cv-heading", ".cv-skills");
+      enter(".cv-skill", ".cv-skills__list", { y: 40, stagger: 0.08 });
+      enter(".cv-recog .cv-heading", ".cv-recog");
+      gsap.utils.toArray(".cv-rows").forEach(function (list) {
+        enter(list.previousElementSibling, list, { y: 20 });
+        enter(list.children, list, { y: 30, stagger: 0.06 });
+      });
+
       /* artwork */
       enter(".cv-art__head", ".artwork");
       gsap.utils.toArray(".artwork__item").forEach(function (item, i) {

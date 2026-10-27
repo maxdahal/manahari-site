@@ -119,8 +119,7 @@
     initRecruiter();
     motionToggle();
 
-    /* In-page links land with the section's top just under the top bar.
-       The footer sits under the page and is revealed at the very bottom. */
+    /* In-page links land with the section's top just under the top bar. */
     var bar = document.querySelector(".cp-bar");
     function goTo(id, smooth) {
       var target = document.getElementById(id);
@@ -167,8 +166,6 @@
       var best = -Infinity;
       outlineTargets.forEach(function (target, i) {
         if (!target) return;
-        /* the footer waits under the page, so it is "reached" only where
-           the page above it ends */
         /* the section whose top passed the middle most recently, whatever
            order the links are in */
         var top = target.getBoundingClientRect().top;

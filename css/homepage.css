@@ -14,7 +14,7 @@
 body:has(.cv-hero) {
   --cv-font: "Helvetica Neue", Helvetica, Arial, sans-serif;
 }
-.pv-main:not(.pv-about-page) .sections > section:is(.cv-hero, .cv-statement, .cv-work) {
+.pv-main:not(.pv-about-page) .sections > section:is(.cv-hero, .cv-statement, .cv-work, .cv-skills, .cv-recog) {
   width: 100%;
   max-width: none;
   padding-inline: max(var(--gx), (100% - 1240px) / 2);
@@ -565,4 +565,226 @@ body:has(.cv-hero) {
   50% {
     opacity: 0;
   }
+}
+
+/* ---- About me as a band in the other theme's colours, its top and bottom
+   edges stepped like pixels (a mask: a row of blocks, the solid middle, a
+   row of blocks) ------------------------------------------------------- */
+/* (no child combinator: GSAP holds this section in a spacer) */
+.pv-main:not(.pv-about-page) .sections section.cv-statement {
+  --edge: clamp(40px, 6vw, 96px);
+  padding-block: calc(var(--edge) + clamp(64px, 10vh, 120px));
+  -webkit-mask:
+    url("data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 1600 96%22 preserveAspectRatio=%22none%22><rect x=%220%22 y=%2224%22 width=%2251%22 height=%2272%22/><rect x=%2250%22 y=%2224%22 width=%2251%22 height=%2272%22/><rect x=%22100%22 y=%2248%22 width=%2251%22 height=%2248%22/><rect x=%22150%22 y=%2272%22 width=%2251%22 height=%2224%22/><rect x=%22200%22 y=%220%22 width=%2251%22 height=%2296%22/><rect x=%22250%22 y=%220%22 width=%2251%22 height=%2296%22/><rect x=%22300%22 y=%2248%22 width=%2251%22 height=%2248%22/><rect x=%22325%22 y=%2224%22 width=%2225%22 height=%2224%22/><rect x=%22350%22 y=%220%22 width=%2251%22 height=%2296%22/><rect x=%22400%22 y=%2224%22 width=%2251%22 height=%2272%22/><rect x=%22450%22 y=%2248%22 width=%2251%22 height=%2248%22/><rect x=%22500%22 y=%220%22 width=%2251%22 height=%2296%22/><rect x=%22550%22 y=%2248%22 width=%2251%22 height=%2248%22/><rect x=%22575%22 y=%2224%22 width=%2225%22 height=%2224%22/><rect x=%22600%22 y=%2224%22 width=%2251%22 height=%2272%22/><rect x=%22650%22 y=%220%22 width=%2251%22 height=%2296%22/><rect x=%22700%22 y=%220%22 width=%2251%22 height=%2296%22/><rect x=%22750%22 y=%2248%22 width=%2251%22 height=%2248%22/><rect x=%22775%22 y=%2224%22 width=%2225%22 height=%2224%22/><rect x=%22800%22 y=%2248%22 width=%2251%22 height=%2248%22/><rect x=%22825%22 y=%2224%22 width=%2225%22 height=%2224%22/><rect x=%22850%22 y=%220%22 width=%2251%22 height=%2296%22/><rect x=%22900%22 y=%2224%22 width=%2251%22 height=%2272%22/><rect x=%22950%22 y=%220%22 width=%2251%22 height=%2296%22/><rect x=%221000%22 y=%2248%22 width=%2251%22 height=%2248%22/><rect x=%221025%22 y=%2224%22 width=%2225%22 height=%2224%22/><rect x=%221050%22 y=%2248%22 width=%2251%22 height=%2248%22/><rect x=%221100%22 y=%220%22 width=%2251%22 height=%2296%22/><rect x=%221150%22 y=%2248%22 width=%2251%22 height=%2248%22/><rect x=%221175%22 y=%2224%22 width=%2225%22 height=%2224%22/><rect x=%221200%22 y=%220%22 width=%2251%22 height=%2296%22/><rect x=%221250%22 y=%2224%22 width=%2251%22 height=%2272%22/><rect x=%221300%22 y=%2272%22 width=%2251%22 height=%2224%22/><rect x=%221350%22 y=%2272%22 width=%2251%22 height=%2224%22/><rect x=%221400%22 y=%2248%22 width=%2251%22 height=%2248%22/><rect x=%221450%22 y=%220%22 width=%2251%22 height=%2296%22/><rect x=%221500%22 y=%2248%22 width=%2251%22 height=%2248%22/><rect x=%221550%22 y=%2248%22 width=%2251%22 height=%2248%22/><rect x=%221575%22 y=%2224%22 width=%2225%22 height=%2224%22/></svg>") top / 100% var(--edge) no-repeat,
+    linear-gradient(#000 0 0) center / 100% calc(100% - 2 * var(--edge) + 2px) no-repeat,
+    url("data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 1600 96%22 preserveAspectRatio=%22none%22><g transform=%22translate%280 96%29 scale%281 -1%29%22><rect x=%220%22 y=%220%22 width=%2251%22 height=%2296%22/><rect x=%2250%22 y=%2248%22 width=%2251%22 height=%2248%22/><rect x=%22100%22 y=%2224%22 width=%2251%22 height=%2272%22/><rect x=%22150%22 y=%2248%22 width=%2251%22 height=%2248%22/><rect x=%22175%22 y=%2224%22 width=%2225%22 height=%2224%22/><rect x=%22200%22 y=%2272%22 width=%2251%22 height=%2224%22/><rect x=%22250%22 y=%2248%22 width=%2251%22 height=%2248%22/><rect x=%22275%22 y=%2224%22 width=%2225%22 height=%2224%22/><rect x=%22300%22 y=%2248%22 width=%2251%22 height=%2248%22/><rect x=%22350%22 y=%2224%22 width=%2251%22 height=%2272%22/><rect x=%22400%22 y=%2248%22 width=%2251%22 height=%2248%22/><rect x=%22450%22 y=%2248%22 width=%2251%22 height=%2248%22/><rect x=%22500%22 y=%2248%22 width=%2251%22 height=%2248%22/><rect x=%22550%22 y=%2224%22 width=%2251%22 height=%2272%22/><rect x=%22600%22 y=%2224%22 width=%2251%22 height=%2272%22/><rect x=%22650%22 y=%2224%22 width=%2251%22 height=%2272%22/><rect x=%22700%22 y=%2224%22 width=%2251%22 height=%2272%22/><rect x=%22750%22 y=%2272%22 width=%2251%22 height=%2224%22/><rect x=%22775%22 y=%2248%22 width=%2225%22 height=%2224%22/><rect x=%22800%22 y=%2224%22 width=%2251%22 height=%2272%22/><rect x=%22850%22 y=%220%22 width=%2251%22 height=%2296%22/><rect x=%22900%22 y=%2248%22 width=%2251%22 height=%2248%22/><rect x=%22950%22 y=%2224%22 width=%2251%22 height=%2272%22/><rect x=%221000%22 y=%2248%22 width=%2251%22 height=%2248%22/><rect x=%221050%22 y=%2248%22 width=%2251%22 height=%2248%22/><rect x=%221100%22 y=%2224%22 width=%2251%22 height=%2272%22/><rect x=%221150%22 y=%2272%22 width=%2251%22 height=%2224%22/><rect x=%221200%22 y=%2248%22 width=%2251%22 height=%2248%22/><rect x=%221250%22 y=%2224%22 width=%2251%22 height=%2272%22/><rect x=%221300%22 y=%2248%22 width=%2251%22 height=%2248%22/><rect x=%221350%22 y=%220%22 width=%2251%22 height=%2296%22/><rect x=%221400%22 y=%220%22 width=%2251%22 height=%2296%22/><rect x=%221450%22 y=%2248%22 width=%2251%22 height=%2248%22/><rect x=%221500%22 y=%2248%22 width=%2251%22 height=%2248%22/><rect x=%221550%22 y=%2224%22 width=%2251%22 height=%2272%22/></g></svg>") bottom / 100% var(--edge) no-repeat;
+  mask:
+    url("data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 1600 96%22 preserveAspectRatio=%22none%22><rect x=%220%22 y=%2224%22 width=%2251%22 height=%2272%22/><rect x=%2250%22 y=%2224%22 width=%2251%22 height=%2272%22/><rect x=%22100%22 y=%2248%22 width=%2251%22 height=%2248%22/><rect x=%22150%22 y=%2272%22 width=%2251%22 height=%2224%22/><rect x=%22200%22 y=%220%22 width=%2251%22 height=%2296%22/><rect x=%22250%22 y=%220%22 width=%2251%22 height=%2296%22/><rect x=%22300%22 y=%2248%22 width=%2251%22 height=%2248%22/><rect x=%22325%22 y=%2224%22 width=%2225%22 height=%2224%22/><rect x=%22350%22 y=%220%22 width=%2251%22 height=%2296%22/><rect x=%22400%22 y=%2224%22 width=%2251%22 height=%2272%22/><rect x=%22450%22 y=%2248%22 width=%2251%22 height=%2248%22/><rect x=%22500%22 y=%220%22 width=%2251%22 height=%2296%22/><rect x=%22550%22 y=%2248%22 width=%2251%22 height=%2248%22/><rect x=%22575%22 y=%2224%22 width=%2225%22 height=%2224%22/><rect x=%22600%22 y=%2224%22 width=%2251%22 height=%2272%22/><rect x=%22650%22 y=%220%22 width=%2251%22 height=%2296%22/><rect x=%22700%22 y=%220%22 width=%2251%22 height=%2296%22/><rect x=%22750%22 y=%2248%22 width=%2251%22 height=%2248%22/><rect x=%22775%22 y=%2224%22 width=%2225%22 height=%2224%22/><rect x=%22800%22 y=%2248%22 width=%2251%22 height=%2248%22/><rect x=%22825%22 y=%2224%22 width=%2225%22 height=%2224%22/><rect x=%22850%22 y=%220%22 width=%2251%22 height=%2296%22/><rect x=%22900%22 y=%2224%22 width=%2251%22 height=%2272%22/><rect x=%22950%22 y=%220%22 width=%2251%22 height=%2296%22/><rect x=%221000%22 y=%2248%22 width=%2251%22 height=%2248%22/><rect x=%221025%22 y=%2224%22 width=%2225%22 height=%2224%22/><rect x=%221050%22 y=%2248%22 width=%2251%22 height=%2248%22/><rect x=%221100%22 y=%220%22 width=%2251%22 height=%2296%22/><rect x=%221150%22 y=%2248%22 width=%2251%22 height=%2248%22/><rect x=%221175%22 y=%2224%22 width=%2225%22 height=%2224%22/><rect x=%221200%22 y=%220%22 width=%2251%22 height=%2296%22/><rect x=%221250%22 y=%2224%22 width=%2251%22 height=%2272%22/><rect x=%221300%22 y=%2272%22 width=%2251%22 height=%2224%22/><rect x=%221350%22 y=%2272%22 width=%2251%22 height=%2224%22/><rect x=%221400%22 y=%2248%22 width=%2251%22 height=%2248%22/><rect x=%221450%22 y=%220%22 width=%2251%22 height=%2296%22/><rect x=%221500%22 y=%2248%22 width=%2251%22 height=%2248%22/><rect x=%221550%22 y=%2248%22 width=%2251%22 height=%2248%22/><rect x=%221575%22 y=%2224%22 width=%2225%22 height=%2224%22/></svg>") top / 100% var(--edge) no-repeat,
+    linear-gradient(#000 0 0) center / 100% calc(100% - 2 * var(--edge) + 2px) no-repeat,
+    url("data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 1600 96%22 preserveAspectRatio=%22none%22><g transform=%22translate%280 96%29 scale%281 -1%29%22><rect x=%220%22 y=%220%22 width=%2251%22 height=%2296%22/><rect x=%2250%22 y=%2248%22 width=%2251%22 height=%2248%22/><rect x=%22100%22 y=%2224%22 width=%2251%22 height=%2272%22/><rect x=%22150%22 y=%2248%22 width=%2251%22 height=%2248%22/><rect x=%22175%22 y=%2224%22 width=%2225%22 height=%2224%22/><rect x=%22200%22 y=%2272%22 width=%2251%22 height=%2224%22/><rect x=%22250%22 y=%2248%22 width=%2251%22 height=%2248%22/><rect x=%22275%22 y=%2224%22 width=%2225%22 height=%2224%22/><rect x=%22300%22 y=%2248%22 width=%2251%22 height=%2248%22/><rect x=%22350%22 y=%2224%22 width=%2251%22 height=%2272%22/><rect x=%22400%22 y=%2248%22 width=%2251%22 height=%2248%22/><rect x=%22450%22 y=%2248%22 width=%2251%22 height=%2248%22/><rect x=%22500%22 y=%2248%22 width=%2251%22 height=%2248%22/><rect x=%22550%22 y=%2224%22 width=%2251%22 height=%2272%22/><rect x=%22600%22 y=%2224%22 width=%2251%22 height=%2272%22/><rect x=%22650%22 y=%2224%22 width=%2251%22 height=%2272%22/><rect x=%22700%22 y=%2224%22 width=%2251%22 height=%2272%22/><rect x=%22750%22 y=%2272%22 width=%2251%22 height=%2224%22/><rect x=%22775%22 y=%2248%22 width=%2225%22 height=%2224%22/><rect x=%22800%22 y=%2224%22 width=%2251%22 height=%2272%22/><rect x=%22850%22 y=%220%22 width=%2251%22 height=%2296%22/><rect x=%22900%22 y=%2248%22 width=%2251%22 height=%2248%22/><rect x=%22950%22 y=%2224%22 width=%2251%22 height=%2272%22/><rect x=%221000%22 y=%2248%22 width=%2251%22 height=%2248%22/><rect x=%221050%22 y=%2248%22 width=%2251%22 height=%2248%22/><rect x=%221100%22 y=%2224%22 width=%2251%22 height=%2272%22/><rect x=%221150%22 y=%2272%22 width=%2251%22 height=%2224%22/><rect x=%221200%22 y=%2248%22 width=%2251%22 height=%2248%22/><rect x=%221250%22 y=%2224%22 width=%2251%22 height=%2272%22/><rect x=%221300%22 y=%2248%22 width=%2251%22 height=%2248%22/><rect x=%221350%22 y=%220%22 width=%2251%22 height=%2296%22/><rect x=%221400%22 y=%220%22 width=%2251%22 height=%2296%22/><rect x=%221450%22 y=%2248%22 width=%2251%22 height=%2248%22/><rect x=%221500%22 y=%2248%22 width=%2251%22 height=%2248%22/><rect x=%221550%22 y=%2224%22 width=%2251%22 height=%2272%22/></g></svg>") bottom / 100% var(--edge) no-repeat;
+}
+/* the light theme's band is dark ... */
+.cv-statement {
+  /* its own background, since GSAP holds it in a spacer outside .sections */
+  background: var(--paper) 0 0 / 240px auto, var(--bg);
+  --bg: #0f172a;
+  --surface: #1e293b;
+  --ink: #f8fafc;
+  --text: #f8fafc;
+  --text-2: #94a3b8;
+  --muted: #94a3b8;
+  --line: #334155;
+  --accent: #60a5fa;
+  --accent-text: #60a5fa;
+  --on-accent: #0f172a;
+  color: var(--ink);
+}
+/* ... and the dark theme's band is light */
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) .cv-statement {
+    --bg: #f5f7f8;
+    --surface: #ffffff;
+    --ink: #111827;
+    --text: #111827;
+    --text-2: #4b5563;
+    --muted: #4b5563;
+    --line: #e5e7eb;
+    --accent: #2e5b82;
+    --accent-text: #2e5b82;
+    --on-accent: #ffffff;
+  }
+}
+:root[data-theme="dark"] .cv-statement {
+  --bg: #f5f7f8;
+  --surface: #ffffff;
+  --ink: #111827;
+  --text: #111827;
+  --text-2: #4b5563;
+  --muted: #4b5563;
+  --line: #e5e7eb;
+  --accent: #2e5b82;
+  --accent-text: #2e5b82;
+  --on-accent: #ffffff;
+}
+
+/* ---- Skills & expertise: one row per skill on a hairline, the name large,
+   its number and a plus on the right; open, its parts show as pills ------ */
+.pv-main:not(.pv-about-page) .sections > section:is(.cv-skills, .cv-recog) {
+  display: flex;
+  flex-direction: column;
+  gap: clamp(32px, 5vh, 56px);
+  padding-block: clamp(96px, 14vh, 160px) 0;
+}
+.cv-skills__list {
+  border-bottom: 1px solid var(--line);
+}
+.cv-skill {
+  border-top: 1px solid var(--line);
+}
+.cv-skill summary {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr) auto auto;
+  align-items: center;
+  gap: 16px;
+  padding: clamp(14px, 2.2vh, 22px) 0;
+  cursor: pointer;
+  list-style: none;
+}
+.cv-skill summary::-webkit-details-marker {
+  display: none;
+}
+.cv-skill summary::after {
+  content: "+";
+  width: 1em;
+  font-size: 1.5rem;
+  line-height: 1;
+  text-align: center;
+  color: var(--muted);
+  transition: rotate 0.25s ease;
+}
+.cv-skill[open] summary::after {
+  rotate: 45deg;
+}
+.cv-skill summary:focus-visible {
+  outline: 3px solid var(--accent);
+  outline-offset: 4px;
+}
+.cv-skill .cv-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 1px;
+}
+.cv-skill h3 {
+  margin: 0;
+  font-family: var(--cv-font);
+  font-size: clamp(1.5rem, 1rem + 2vw, 2.75rem);
+  font-weight: 600;
+  line-height: 1.05;
+  letter-spacing: -0.035em;
+  color: var(--ink);
+  transition: translate 0.3s ease;
+}
+.cv-skill summary:hover h3 {
+  translate: 8px 0;
+}
+.cv-skill__num {
+  font-size: 0.8125rem;
+  font-variant-numeric: tabular-nums;
+  color: var(--muted);
+}
+.cv-skill ul {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin: 0;
+  padding: 0 0 clamp(18px, 3vh, 28px) 24px;
+  list-style: none;
+}
+.cv-skill li {
+  padding: 6px 14px;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  font-size: 0.9375rem;
+  line-height: 1.4;
+  color: var(--text);
+}
+
+/* ---- Research & recognition: two groups of rows on hairlines: the name, a
+   detail, and when or where it stands, on the right ----------------------- */
+.pv .cv-recog__group {
+  margin-top: 8px;
+  letter-spacing: 0;
+  text-transform: none;
+  font-size: 0.875rem;
+  color: var(--muted);
+}
+.cv-rows {
+  margin: -16px 0 0;
+  padding: 0;
+  list-style: none;
+  border-bottom: 1px solid var(--line);
+}
+.cv-rows li {
+  display: grid;
+  grid-template-columns: minmax(0, 1.4fr) minmax(0, 1fr) minmax(0, 1fr);
+  gap: 8px 24px;
+  align-items: baseline;
+  padding: 18px 0;
+  border-top: 1px solid var(--line);
+  transition: background-color 0.2s ease;
+}
+.cv-rows b {
+  font-size: clamp(1.0625rem, 0.9rem + 0.6vw, 1.375rem);
+  font-weight: 600;
+  letter-spacing: -0.02em;
+  color: var(--ink);
+}
+.cv-rows span {
+  font-size: 0.9375rem;
+  color: var(--muted);
+}
+.cv-rows span:last-child {
+  justify-self: end;
+  text-align: right;
+}
+@media (max-width: 640px) {
+  .cv-rows li {
+    grid-template-columns: minmax(0, 1fr) auto;
+  }
+  .cv-rows span:empty {
+    display: none;
+  }
+  .cv-rows span:not(:last-child):not(:empty) {
+    grid-row: 2;
+  }
+}
+
+/* ---- each case study: its name centred over the picture, the tags above
+   it and the years below, as on the screenshot's project panels ----------- */
+.cv-project__words {
+  align-self: center;
+  align-items: center;
+  text-align: center;
+}
+.cv-project__words .cv-label {
+  justify-content: center;
+}
+
+/* ---- the close: "Let's connect." centred, the email and buttons under it,
+   then the closing row ---------------------------------------------------- */
+.pv-main:not(.pv-about-page) .sections > section.cv-contact {
+  align-items: center;
+  text-align: center;
+}
+.cv-contact__title .cv-line {
+  justify-content: center;
+}
+.cv-contact__foot {
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+.cv-contact .pv-end {
+  align-self: stretch;
+  text-align: left;
 }

@@ -460,3 +460,55 @@ body:has(.cv-hero) {
   letter-spacing: 0;
   text-transform: none;
 }
+
+/* ==========================================================================
+   The two words that say what they mean.
+   "design" sits in a design tool's selection frame: a thin outline in the
+   accent with square handles at its corners (an inset shadow and four
+   background squares, so nothing is positioned and the line keeps its
+   shape). --sel (0 to 1) lets scroll.js draw the frame in.
+   "code." is set in a monospace face; scroll.js types it out letter by
+   letter on load, and a caret blinks after it.
+   ========================================================================== */
+.cv-design {
+  --sel: 1;
+  --sel-c: color-mix(in srgb, var(--accent) calc(var(--sel) * 100%), transparent);
+  --h: 0.13em;
+  padding-inline: 0.08em;
+  box-shadow: inset 0 0 0 0.03em var(--sel-c);
+  background:
+    linear-gradient(var(--sel-c) 0 0) 0 0 / var(--h) var(--h),
+    linear-gradient(var(--sel-c) 0 0) 100% 0 / var(--h) var(--h),
+    linear-gradient(var(--sel-c) 0 0) 0 100% / var(--h) var(--h),
+    linear-gradient(var(--sel-c) 0 0) 100% 100% / var(--h) var(--h);
+  background-repeat: no-repeat;
+}
+.cv-code {
+  font-family: "JetBrains Mono", ui-monospace, "SF Mono", Menlo, monospace;
+  font-size: 0.86em;
+  font-weight: 700;
+  letter-spacing: -0.04em;
+}
+/* the caret, after the last letter */
+.cv-code::after {
+  content: "";
+  display: inline-block;
+  width: 0.09em;
+  height: 0.82em;
+  margin-left: 0.06em;
+  vertical-align: -0.04em;
+  background: currentColor;
+}
+@media (prefers-reduced-motion: no-preference) {
+  .cv-code::after {
+    animation: cv-blink 1.05s steps(1) infinite;
+  }
+}
+:root.motion-paused .cv-code::after {
+  animation: none;
+}
+@keyframes cv-blink {
+  50% {
+    opacity: 0;
+  }
+}

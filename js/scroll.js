@@ -2,7 +2,8 @@
    ScrollTrigger, after catalinvintila.design:
      hero       the words of the headline slide up into place one after
                 another, the pictures in it open out from their middle; the labels and the
-                rest fade in
+                rest fade in; "design" gets a selection frame and "code." is
+                typed out
      statement  held in place while its words light up one by one as you
                 scroll
      work       each case study's picture eases from zoomed in to resting as
@@ -41,6 +42,20 @@
     });
   }
 
+  /* "code." letter by letter, so it can be typed out (the h1's aria-label
+     keeps it one word for screen readers) */
+  var code = document.querySelector(".cv-hero .cv-code");
+  if (code) {
+    var letters = code.textContent.split("");
+    code.textContent = "";
+    letters.forEach(function (letter) {
+      var span = document.createElement("span");
+      span.className = "cv-key";
+      span.textContent = letter;
+      code.appendChild(span);
+    });
+  }
+
   /* in as it comes into view, back out when you scroll up past it */
   function enter(targets, trigger, vars, start) {
     if (!targets || (targets.length !== undefined && !targets.length)) return;
@@ -70,8 +85,12 @@
       /* hero: the headline's words slide up, the pictures open out */
       if (document.querySelector(".cv-hero")) {
         gsap.timeline({ delay: 0.15 })
-          .from(".cv-hero .cv-w", { yPercent: 110, duration: 1, ease: "power4.out", stagger: 0.06 })
+          .from(".cv-hero .cv-w:not(.cv-code)", { yPercent: 110, duration: 1, ease: "power4.out", stagger: 0.06 })
           .from(".cv-hero .cv-pill", { clipPath: "inset(0 50% 0 50% round 999px)", duration: 1, ease: "power3.inOut", stagger: 0.12, clearProps: "clipPath" }, 0.25)
+          /* "design" is selected, as in a design tool: its frame draws in */
+          .from(".cv-hero .cv-design", { "--sel": 0, duration: 0.5, ease: "power2.out" }, 0.8)
+          /* "code." is typed out, one key at a time */
+          .from(".cv-hero .cv-key", { opacity: 0, duration: 0.01, stagger: 0.12 }, 1)
           .from(".cv-hero__labels, .cv-hero__foot", { opacity: 0, y: 20, duration: 0.8, ease: "power2.out" }, 0.6);
       }
 

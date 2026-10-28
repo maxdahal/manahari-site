@@ -1,12 +1,21 @@
 /* ==========================================================================
    Case studies in the homepage's look (body.cs), laid out like a journal
-   page (after catalinvintila.design/journal): Helvetica throughout, sentence
-   case, very large titles with the accent dot as their full stop, a sticky
-   numbered index at the bottom left, and each section set on three columns:
-   a reading column in the middle, margins either side for small labels, and
-   pictures, cards and pull quotes running wider than the text. Loaded after
-   article.css and only changes how things look; the words and the order
-   stay as they are. case-scroll.js adds Lenis and GSAP reveals on top.
+   page (after catalinvintila.design/journal). Loaded after article.css; it
+   only changes how things look, and the words and their order stay as they
+   are. case-scroll.js adds Lenis and GSAP reveals on top.
+     type      Helvetica throughout, sentence case
+     opening   a screen-tall start: the tag at the top, the title low on the
+               left with the accent dot as its full stop; then a meta strip
+               (the facts), a context row between hairlines (the problem and
+               my part), the pictures and the outcome
+     columns   one content column beside the index, the same width as the
+               opening: headings, text, cards and pictures share its edges;
+               text stops at a reading width
+     acts      a small "01 —" over a medium heading
+     pieces    cards, steps and the problem panels are plain rows on
+               hairlines, not boxes; pull quotes are centred and larger
+     index     sticky at the bottom left, in regular weight
+     progress  a thin accent line under the top bar fills as you read
    ========================================================================== */
 
 body.cs {
@@ -29,21 +38,23 @@ body.cs .a-sections__num {
   letter-spacing: 0;
 }
 
-/* ---- the page's widths: text stays readable, pictures get bigger --------- */
+/* ---- widths ---------------------------------------------------------------- */
 body.cs .article {
   --a-col: 1180px;
   --a-read: 680px;
-  /* every picture, and every group of pictures, stops at one width */
-  --cs-pic: 880px;
+  /* the one width every picture and group of pictures stops at: the
+     content column's own */
+  --cs-pic: 1280px;
 }
 @media (min-width: 1101px) {
   body.cs .a-layout {
-    grid-template-columns: 200px minmax(0, 1180px);
-    column-gap: clamp(40px, 4vw, 72px);
+    --cs-gap: clamp(40px, 4vw, 72px);
+    grid-template-columns: 200px minmax(0, 1280px);
+    column-gap: var(--cs-gap);
   }
 }
 
-/* ---- text ---------------------------------------------------------------- */
+/* ---- text ------------------------------------------------------------------ */
 #main :is(p, li, dd) {
   font-size: 1.125rem;
   line-height: 1.6;
@@ -57,22 +68,45 @@ body.cs .article {
   color: var(--muted);
 }
 
-/* ---- the top: tag, a very large title, then the before and after across
-   the whole width, then the outcome and the project card side by side ---- */
+/* ---- the opening ----------------------------------------------------------- */
+body.cs .a-hero2 {
+  grid-template-columns: minmax(0, 1fr) minmax(260px, 320px);
+  grid-template-areas:
+    "tag     tag"
+    "title   title"
+    "facts   facts"
+    "lead    lead"
+    "image   aside"
+    "outcome outcome";
+  gap: 0 clamp(24px, 3vw, 40px);
+}
+body.cs :is(.a-hero2__intro, .a-hero2__meta) {
+  display: contents;
+}
 body.cs .a-tag {
+  grid-area: tag;
+  justify-self: start;
   border-color: color-mix(in srgb, var(--accent) 40%, transparent);
   font-size: 0.875rem;
   font-weight: 500;
 }
 #main .a-title {
+  grid-area: title;
+  display: flex;
+  align-items: flex-end;
+  min-height: calc(100svh - var(--bar-h) - 260px);
+  padding-bottom: clamp(32px, 5vh, 56px);
   font-family: var(--cs-font);
-  font-size: clamp(3.25rem, 0.6rem + 8vw, 10rem);
-  font-weight: 700;
-  line-height: 0.9;
-  letter-spacing: -0.05em;
+  font-size: clamp(3rem, 1rem + 6.5vw, 8rem);
+  font-weight: 500;
+  line-height: 0.95;
+  letter-spacing: -0.045em;
 }
-/* the accent dot as its full stop, like the homepage's headings
-   (case-scroll.js puts it on the last word) */
+#main .a-title .cs-line {
+  display: block;
+}
+/* the accent dot as the page title's full stop, like the homepage's
+   headings (case-scroll.js puts it on the last word) */
 .cs-dot {
   display: inline-block;
   width: 0.15em;
@@ -81,24 +115,34 @@ body.cs .a-tag {
   border-radius: 50%;
   background: var(--accent);
 }
-body.cs .a-hero2 {
-  grid-template-columns: minmax(0, var(--cs-pic)) minmax(260px, 320px);
-  grid-template-areas:
-    "intro intro"
-    "image aside"
-    "meta  meta";
-  row-gap: clamp(32px, 5vw, 64px);
+/* the facts: a meta strip between hairlines, small grey labels over their
+   values */
+#main .a-facts {
+  grid-area: facts;
+  grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+  margin: 0;
+  padding: 20px 0 24px;
+  border-block: 1px solid var(--line);
 }
-body.cs .a-hero2__intro {
-  gap: 24px;
+#main :is(.a-facts, .a-lead) dt {
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: var(--muted);
 }
+#main .a-facts dd {
+  font-size: clamp(1.125rem, 1rem + 0.4vw, 1.375rem);
+  font-weight: 500;
+  letter-spacing: -0.01em;
+}
+/* the problem and my part: a context row between hairlines */
 #main .a-lead {
+  grid-area: lead;
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(min(260px, 100%), 1fr));
   gap: 16px clamp(24px, 4vw, 64px);
-  width: 100%;
-  max-width: 960px;
-  margin: 8px 0 0;
+  margin: clamp(32px, 5vw, 56px) 0;
+  padding: 24px 0;
+  border-block: 1px solid var(--line);
 }
 #main .a-lead div {
   display: flex;
@@ -107,82 +151,74 @@ body.cs .a-hero2__intro {
 }
 #main .a-lead dd {
   margin: 0;
-  font-size: clamp(1.125rem, 1rem + 0.5vw, 1.375rem);
+  font-size: clamp(1.0625rem, 1rem + 0.3vw, 1.25rem);
+  font-weight: 500;
   line-height: 1.45;
   color: var(--ink);
 }
-body.cs .a-hero2__meta {
-  margin-top: 0;
+body.cs .a-hero2__image {
+  grid-area: image;
 }
-/* the facts as a journal's meta row: a hairline, then small grey labels
-   over their values */
-#main .a-hero2__meta .a-facts {
-  padding-top: 24px;
-  border-top: 1px solid var(--line);
+body.cs .a-hero2__aside {
+  grid-area: aside;
 }
-#main :is(.a-facts, .a-lead) dt {
-  font-size: 0.875rem;
-  font-weight: 500;
-  color: var(--muted);
-}
-#main .a-facts dd {
-  font-size: 1.125rem;
+#main .a-outcome {
+  grid-area: outcome;
+  margin-top: clamp(40px, 6vw, 72px);
 }
 @media (max-width: 860px) {
   body.cs .a-hero2 {
     grid-template-columns: minmax(0, 1fr);
     grid-template-areas:
-      "intro"
+      "tag"
+      "title"
+      "facts"
+      "lead"
       "image"
       "aside"
-      "meta";
+      "outcome";
+  }
+  body.cs .a-hero2__aside {
+    margin-top: 24px;
+  }
+  #main .a-title {
+    min-height: 50svh;
   }
 }
 
-/* ---- the columns ---------------------------------------------------------
-   Every act and part sits on the same three columns: a margin, the reading
-   column (--cs-read) and a margin. Text takes the reading column; labels
-   take the left margin; pictures and other wide pieces take all three, up to
-   the one picture width (--cs-pic). Phones have the one column. */
-body.cs .article {
-  --cs-read: 640px;
-  --cs-cols: [full-start] minmax(0, 1fr) [read-start] minmax(0, var(--cs-read)) [read-end] minmax(0, 1fr) [full-end];
-}
-@media (max-width: 760px) {
-  body.cs .article {
-    --cs-cols: [full-start read-start] minmax(0, 1fr) [read-end full-end];
-  }
-}
+/* ---- the columns -------------------------------------------------------------
+   Acts and parts are grids of one column, the content column beside the
+   index, the same width as the opening above them. Headings, text, cards
+   and pictures share its edges; text stops at a reading width (--a-read). */
 #main :is(.a-act, .a-part) {
   display: grid;
-  grid-template-columns: var(--cs-cols);
+  grid-template-columns: minmax(0, 1fr);
   align-content: start;
-  row-gap: 16px;
+  gap: 16px 0;
 }
 #main :is(.a-act, .a-part) > * {
-  grid-column: read;
   min-width: 0;
+  margin-inline-start: 0;
 }
-#main .a-act > .a-part {
-  grid-column: full;
-}
-#main .a-part > :is(figure, .figs, .row, .figset, .cards, .steps, .dids, .contrib, .accs, .roles, .figs-roles, .sandbox-wrap, .a-quote) {
-  grid-column: full;
-  justify-self: center;
+#main .a-part > :is(figure, .figs, .row, .figset, .cards, .steps, .dids, .contrib, .accs, .roles, .figs-roles, .sandbox-wrap) {
   width: 100%;
   max-width: var(--cs-pic);
 }
+#main .a-part > .a-quote {
+  justify-self: center;
+}
+/* phones: the swipeable rows run out to the screen's edges */
+@media (max-width: 760px) {
+  #main .a-part > :is(.figs:not(.figs--three), .cards:has(> :nth-child(3))) {
+    width: auto;
+    max-width: none;
+    margin-inline: calc(-1 * var(--gx));
+  }
+}
 
-/* ---- acts: a rule across the page, the number in the margin, a very large
-   title from the reading column on ---------------------------------------- */
+/* ---- acts: "01 —" over a medium heading ------------------------------------- */
 body.cs .article {
   counter-reset: cs-act;
-}
-body.cs .a-act:not(.a-act--intro) {
-  counter-increment: cs-act;
-  margin-top: clamp(96px, 12vw, 176px);
-  padding-top: 24px;
-  border-top: 1px solid var(--line);
 }
 body.cs .a-act--intro {
   padding-top: clamp(72px, 9vw, 128px);
@@ -190,55 +226,120 @@ body.cs .a-act--intro {
 body.cs .a-act--intro + .a-act--intro {
   padding-top: clamp(40px, 5vw, 72px);
 }
+body.cs .a-act:not(.a-act--intro) {
+  counter-increment: cs-act;
+  margin-top: clamp(80px, 10vw, 140px);
+  padding-top: 20px;
+  border-top: 2px solid var(--ink);
+}
 body.cs .a-act:not(.a-act--intro)::before {
-  content: counter(cs-act, decimal-leading-zero);
-  grid-column: full-start / read-start;
-  grid-row: 1;
-  font-size: 0.875rem;
-  font-weight: 500;
+  content: counter(cs-act, decimal-leading-zero) " \2014";
+  font-size: 0.8125rem;
   font-variant-numeric: tabular-nums;
   color: var(--muted);
 }
 #main .a-act > h2 {
-  grid-column: read-start / full-end;
-  grid-row: 1;
-  max-width: 14ch;
-  margin-top: clamp(40px, 6vw, 80px);
+  display: flex;
+  flex-direction: column;
+  margin-top: 8px;
   font-family: var(--cs-font);
-  font-size: clamp(2.75rem, 1.2rem + 4.4vw, 6rem);
-  font-weight: 700;
-  line-height: 0.95;
-  letter-spacing: -0.045em;
+  font-size: clamp(2rem, 1.4rem + 2vw, 3.25rem);
+  font-weight: 600;
+  line-height: 1.05;
+  letter-spacing: -0.035em;
   color: var(--ink);
 }
-#main .a-act > h2 + .a-part {
-  padding-top: clamp(48px, 6vw, 88px);
+/* the ghost: the act's title again, huge, outlined and faint, cut off at
+   the column's edge, with the title itself overlapping its lower part (from
+   data-ghost, as generated content screen readers skip) */
+#main .a-act > h2[data-ghost]::before {
+  content: attr(data-ghost) / "";
+  overflow: hidden;
+  margin-bottom: -0.45em;
+  font-size: clamp(4rem, 1.5rem + 7vw, 9rem);
+  font-weight: 700;
+  line-height: 0.9;
+  letter-spacing: -0.05em;
+  white-space: nowrap;
+  color: transparent;
+  -webkit-text-stroke: 1px var(--ink);
+  opacity: 0.16;
+  pointer-events: none;
+  user-select: none;
 }
-@media (max-width: 760px) {
-  body.cs .a-act:not(.a-act--intro)::before {
-    grid-column: full;
+@supports not (-webkit-text-stroke: 1px black) {
+  #main .a-act > h2[data-ghost]::before {
+    color: var(--ink);
+    opacity: 0.06;
   }
-  #main .a-act > h2 {
-    grid-column: full;
-    grid-row: 2;
-    margin-top: 24px;
-  }
+}
+/* the accent dot belongs to the page title only */
+#main .a-act > h2 .cs-dot {
+  display: none;
+}
+#main .a-act > h2 + .a-part {
+  padding-top: clamp(32px, 4vw, 56px);
 }
 
-/* ---- parts: a title over the reading column ------------------------------ */
+/* ---- parts and their text ----------------------------------------------- */
 #main .a-part {
-  padding-top: clamp(80px, 9vw, 128px);
+  padding-top: clamp(56px, 7vw, 96px);
 }
 #main .a-part > h3 {
   font-family: var(--cs-font);
-  font-size: clamp(1.625rem, 1.2rem + 1.2vw, 2.25rem);
-  font-weight: 600;
+  font-size: clamp(1.25rem, 1.1rem + 0.5vw, 1.5rem);
+  font-weight: 500;
   line-height: 1.1;
-  letter-spacing: -0.025em;
+  letter-spacing: -0.02em;
   color: var(--ink);
 }
 #main .a-part > h3 + * {
   margin-top: 0;
+}
+/* sub-headings as a break of their own: a softly tinted band across the
+   column with an accent line down its left edge and a small accent square
+   before the words */
+#main .a-act > .a-part + .a-part {
+  padding-top: clamp(64px, 8vw, 112px);
+}
+#main .a-part > h3 {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 14px 18px;
+  border-left: 3px solid var(--accent);
+  border-radius: 0 8px 8px 0;
+  background: color-mix(in srgb, var(--accent) 9%, transparent);
+}
+#main .a-part > h3::before {
+  content: "";
+  flex: none;
+  width: 8px;
+  height: 8px;
+  border-radius: 1px;
+  background: var(--accent);
+}
+#main .a-part > h3 + * {
+  margin-top: 8px;
+}
+#main .a-act--intro > .a-part:not([id]) > h3 {
+  padding: 0;
+  border: 0;
+  background: none;
+}
+#main .a-act--intro > .a-part:not([id]) > h3::before {
+  content: none;
+}
+#main .a-part > :is(p, ul, ol:not(.steps)),
+#main .a-part > :is(p, ul, ol:not(.steps)) li {
+  color: var(--text-2);
+}
+#main .a-part > p {
+  font-size: 1.1875rem;
+  line-height: 1.65;
+}
+#main .a-part > p strong {
+  color: var(--ink);
 }
 /* wide pieces get room around them */
 #main .a-part > :is(figure, .figs, .row, .figset, .cards, .steps, .a-quote) {
@@ -255,31 +356,36 @@ body.cs .a-act:not(.a-act--intro)::before {
   opacity: 0.9;
 }
 
-/* ---- "The story in short": its title as a label in the margin, the story
-   in larger type beside it ------------------------------------------------- */
+/* "The story in short": its title as a small label, the story in larger
+   type under it */
 #main .a-act--intro > .a-part:not([id]) > h3 {
-  grid-column: full-start / read-start;
-  padding-top: 0.55em;
   font-size: 0.875rem;
-  font-weight: 500;
   letter-spacing: 0;
   color: var(--muted);
 }
 #main .a-act--intro > .a-part:not([id]) > p {
-  grid-row: 1;
   font-size: clamp(1.25rem, 1rem + 0.9vw, 1.6875rem);
   font-weight: 500;
   line-height: 1.4;
   letter-spacing: -0.01em;
   color: var(--ink);
 }
-@media (max-width: 760px) {
-  #main .a-act--intro > .a-part:not([id]) > p {
-    grid-row: auto;
-  }
+
+/* the problem panels: plain, like every other part */
+#main :is(.a-part[id^="the-problem"], .a-part[id="annotation-became-a-mode"]) {
+  margin-top: 0;
+  padding: clamp(56px, 7vw, 96px) 0 0;
+  border: 0;
+  border-radius: 0;
+  background: none;
+}
+#main :is(.a-part[id^="the-problem"], .a-part[id="annotation-became-a-mode"]) > h3 {
+  font-size: clamp(1.25rem, 1.1rem + 0.5vw, 1.5rem);
+  font-weight: 500;
+  letter-spacing: -0.02em;
 }
 
-/* ---- pull quotes: centred, larger, with their label above --------------- */
+/* ---- pull quotes: centred, larger, with their label above ----------------- */
 #main .a-quote {
   max-width: 720px;
   padding: 0;
@@ -296,24 +402,65 @@ body.cs .a-act:not(.a-act--intro)::before {
 #main .a-quote .label {
   margin-bottom: 12px;
   font-size: 0.875rem;
-  font-weight: 500;
-  line-height: 1.4;
   letter-spacing: 0;
+  line-height: 1.4;
   color: var(--accent-text);
 }
 
-/* ---- the smaller pieces ------------------------------------------------- */
+/* ---- cards and the contribution list: rows on hairlines ------------------- */
+#main :is(.card-pt, .did, .contrib__team, .acc) {
+  padding: 16px 0 0;
+  border: 0;
+  border-top: 1px solid var(--line);
+  border-radius: 0;
+  background: none;
+  box-shadow: none;
+}
+#main .cards {
+  gap: 28px clamp(20px, 3vw, 40px);
+}
+#main .dids {
+  gap: 0 clamp(20px, 3vw, 40px);
+}
+#main .did {
+  padding-bottom: 14px;
+}
 #main :is(.card-pt, .step) h4,
 #main .points-head {
   font-family: var(--cs-font);
   font-size: 1.1875rem;
-  font-weight: 700;
+  font-weight: 500;
   letter-spacing: -0.01em;
 }
-#main .step__num {
-  font-family: var(--cs-font);
-  font-weight: 700;
+#main :is(.card-pt, .step) p,
+#main .card-pt li {
+  color: var(--text-2);
 }
+
+/* ---- steps: numbered rows on hairlines ------------------------------------ */
+#main .steps {
+  gap: 0;
+  max-width: var(--cs-pic);
+}
+#main .steps--cols {
+  gap: 0 clamp(20px, 3vw, 40px);
+}
+#main .step {
+  grid-template-columns: 72px minmax(0, 1fr);
+  gap: 16px;
+  padding: 16px 0;
+  border-top: 1px solid var(--line);
+}
+#main .step__num {
+  margin: 0;
+  font-family: var(--cs-font);
+  font-size: 0.8125rem;
+  font-weight: 600;
+  line-height: 1.9;
+  color: var(--accent-text);
+}
+
+/* ---- the remaining display pieces, in Helvetica -------------------------- */
 #main .stats b {
   font-family: var(--cs-font);
   letter-spacing: -0.04em;
@@ -325,8 +472,6 @@ body.cs .a-act:not(.a-act--intro)::before {
   font-family: var(--cs-font);
   letter-spacing: -0.02em;
 }
-
-/* ---- buttons, as on the homepage ---------------------------------------- */
 body.cs :is(.button, .pv-btn) {
   font-family: var(--cs-font);
   font-weight: 600;
@@ -334,7 +479,7 @@ body.cs :is(.button, .pv-btn) {
   text-transform: none;
 }
 
-/* ---- the sticky index, at the bottom left, in regular weight -----------
+/* ---- the sticky index, at the bottom left, in regular weight ---------------
    The side column runs the page's full height with the index at its foot;
    sticking to the bottom pulls it up into the screen's lower-left corner,
    where it stays as you read (a longer list grows upward). */
@@ -358,274 +503,13 @@ body.cs .a-side .a-outline :is(a, .a-outline__num, .a-outline__all) {
     margin-bottom: 32px;
   }
 }
-
-/* ---- the section strip on narrow screens -------------------------------- */
+/* the section strip on narrow screens */
 body.cs .a-sections a {
   font-family: var(--cs-font);
   font-size: 0.9375rem;
 }
 
-/* ---- for case-scroll.js: each title word in a mask it slides up out of;
-   pictures that settle keep their corners while they scale ------------- */
-.cs-m {
-  display: inline-block;
-  overflow: hidden;
-  padding-bottom: 0.08em;
-  margin-bottom: -0.08em;
-  vertical-align: top;
-}
-.cs-w {
-  display: inline-block;
-}
-.cs-zoom {
-  overflow: hidden;
-  border-radius: 12px;
-}
-
-/* the text lines up under the part titles (on phones the swipeable rows
-   keep running out to the screen's edges) */
-#main .a-part > :not(h3) {
-  margin-inline-start: 0;
-}
-@media (max-width: 760px) {
-  #main .a-part > :is(.figs:not(.figs--three), .cards:has(> :nth-child(3))) {
-    max-width: none;
-    width: auto;
-    margin-inline: calc(-1 * var(--gx));
-  }
-}
-
-/* ==========================================================================
-   The journal page, more closely (catalinvintila.design/journal):
-     top      a screen-tall opening: the tag at the top, the title low on the
-              left in medium weight; then a meta strip (the facts), a
-              context row between hairlines (the problem and my part), the
-              pictures and the outcome
-     acts     no giant titles: a small "01 —" over a medium heading in the
-              reading column
-     text     grey body text in the reading column, white-ish headings
-     pieces   cards, steps and the problem panels become plain rows on
-              hairlines instead of boxes
-     progress a thin accent line under the top bar fills as you read
-   ========================================================================== */
-
-/* ---- the opening ---------------------------------------------------------- */
-body.cs .a-hero2 {
-  grid-template-columns: minmax(0, 1fr) minmax(260px, 320px);
-  grid-template-areas:
-    "tag     tag"
-    "title   title"
-    "facts   facts"
-    "lead    lead"
-    "image   aside"
-    "outcome outcome";
-  row-gap: 0;
-  column-gap: clamp(24px, 3vw, 40px);
-}
-body.cs :is(.a-hero2__intro, .a-hero2__meta) {
-  display: contents;
-}
-body.cs .a-hero2 .a-tag {
-  grid-area: tag;
-  justify-self: start;
-}
-#main .a-hero2 .a-title {
-  grid-area: title;
-  align-self: end;
-  min-height: calc(100svh - var(--bar-h) - 260px);
-  display: flex;
-  align-items: flex-end;
-  padding-bottom: clamp(32px, 5vh, 56px);
-  font-size: clamp(3rem, 1rem + 6.5vw, 8rem);
-  font-weight: 500;
-  line-height: 0.95;
-  letter-spacing: -0.045em;
-}
-#main .a-hero2 .a-title .cs-line {
-  display: block;
-}
-#main .a-hero2 .a-facts {
-  grid-area: facts;
-  grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
-  margin: 0;
-  padding: 20px 0 24px;
-  border-top: 1px solid var(--line);
-  border-bottom: 1px solid var(--line);
-}
-#main .a-hero2 .a-facts dd {
-  font-size: clamp(1.125rem, 1rem + 0.4vw, 1.375rem);
-  font-weight: 500;
-  letter-spacing: -0.01em;
-}
-#main .a-hero2 .a-lead {
-  grid-area: lead;
-  max-width: none;
-  margin: clamp(32px, 5vw, 56px) 0;
-  padding: 24px 0;
-  border-top: 1px solid var(--line);
-  border-bottom: 1px solid var(--line);
-}
-#main .a-hero2 .a-lead dd {
-  font-size: clamp(1.0625rem, 1rem + 0.3vw, 1.25rem);
-  font-weight: 500;
-}
-body.cs .a-hero2__image {
-  grid-area: image;
-}
-body.cs .a-hero2__aside {
-  grid-area: aside;
-}
-#main .a-hero2 .a-outcome {
-  grid-area: outcome;
-  margin-top: clamp(40px, 6vw, 72px);
-}
-@media (max-width: 860px) {
-  body.cs .a-hero2 {
-    grid-template-columns: minmax(0, 1fr);
-    grid-template-areas:
-      "tag"
-      "title"
-      "facts"
-      "lead"
-      "image"
-      "aside"
-      "outcome";
-    row-gap: 0;
-  }
-  body.cs .a-hero2__aside {
-    margin-top: 24px;
-  }
-  #main .a-hero2 .a-title {
-    min-height: 50svh;
-  }
-}
-
-/* ---- acts: "01 —" over a medium heading, in the reading column ---------- */
-body.cs .a-act:not(.a-act--intro) {
-  margin-top: clamp(80px, 10vw, 140px);
-  padding-top: 0;
-  border-top: 0;
-}
-body.cs .a-act:not(.a-act--intro)::before {
-  content: counter(cs-act, decimal-leading-zero) " \2014";
-  grid-column: read;
-  grid-row: 1;
-  font-size: 0.8125rem;
-  color: var(--muted);
-}
-#main .a-act > h2 {
-  grid-column: read;
-  grid-row: 2;
-  max-width: none;
-  margin-top: 8px;
-  font-size: clamp(1.75rem, 1.3rem + 1.4vw, 2.5rem);
-  font-weight: 500;
-  line-height: 1.1;
-  letter-spacing: -0.03em;
-}
-/* the accent dot belongs to the page title only */
-#main .a-act > h2 .cs-dot {
-  display: none;
-}
-#main .a-act > h2 + .a-part {
-  padding-top: clamp(32px, 4vw, 56px);
-}
-
-/* ---- parts and text ---------------------------------------------------- */
-#main .a-part {
-  padding-top: clamp(56px, 7vw, 96px);
-}
-#main .a-part > h3 {
-  font-size: clamp(1.25rem, 1.1rem + 0.5vw, 1.5rem);
-  font-weight: 500;
-  letter-spacing: -0.02em;
-}
-#main .a-part > :is(p, ul, ol:not(.steps)) ,
-#main .a-part > :is(p, ul, ol:not(.steps)) li {
-  color: var(--text-2);
-}
-#main .a-part > p {
-  font-size: 1.1875rem;
-  line-height: 1.65;
-}
-#main .a-part > p strong {
-  color: var(--ink);
-}
-
-/* ---- the problem panels: plain, like every other part ------------------ */
-#main :is(.a-part[id^="the-problem"], .a-part[id="annotation-became-a-mode"]) {
-  margin-top: 0;
-  padding: clamp(56px, 7vw, 96px) 0 0;
-  border: 0;
-  border-radius: 0;
-  background: none;
-}
-#main :is(.a-part[id^="the-problem"], .a-part[id="annotation-became-a-mode"]) > h3 {
-  font-size: clamp(1.25rem, 1.1rem + 0.5vw, 1.5rem);
-  font-weight: 500;
-  letter-spacing: -0.02em;
-}
-
-/* ---- cards and the contribution list: rows on hairlines, not boxes ------ */
-#main :is(.card-pt, .did, .contrib__team, .acc) {
-  padding: 16px 0 0;
-  border: 0;
-  border-top: 1px solid var(--line);
-  border-radius: 0;
-  background: none;
-  box-shadow: none;
-}
-#main .cards {
-  gap: 28px clamp(20px, 3vw, 40px);
-}
-#main .dids {
-  gap: 0 clamp(20px, 3vw, 40px);
-}
-#main .did {
-  padding-bottom: 14px;
-}
-#main .card-pt h4 {
-  font-weight: 500;
-}
-#main .card-pt :is(p, li) {
-  color: var(--text-2);
-}
-
-/* ---- steps: numbered rows on hairlines ----------------------------------- */
-#main .steps {
-  gap: 0;
-  max-width: var(--cs-pic);
-}
-#main .steps--cols {
-  column-gap: clamp(20px, 3vw, 40px);
-  row-gap: 0;
-}
-#main .step {
-  grid-template-columns: 72px minmax(0, 1fr);
-  gap: 16px;
-  padding: 16px 0;
-  border-top: 1px solid var(--line);
-}
-#main .step__num {
-  margin: 0;
-  font-size: 0.8125rem;
-  font-weight: 600;
-  line-height: 1.9;
-  color: var(--accent-text);
-}
-#main .step h4 {
-  font-weight: 500;
-}
-#main .step p {
-  color: var(--text-2);
-}
-
-/* ---- pull quotes, closer to the journal's ------------------------------- */
-#main .a-quote p {
-  font-weight: 500;
-}
-
-/* ---- reading progress: a thin line under the top bar --------------------- */
+/* ---- reading progress: a thin line under the top bar ----------------------- */
 @supports (animation-timeline: scroll()) {
   body.cs .a-bar::after {
     content: "";
@@ -645,4 +529,21 @@ body.cs .a-act:not(.a-act--intro)::before {
   to {
     transform: scaleX(1);
   }
+}
+
+/* ---- for case-scroll.js: each title word in a mask it slides up out of;
+   pictures that settle keep their corners while they scale ---------------- */
+.cs-m {
+  display: inline-block;
+  overflow: hidden;
+  padding-bottom: 0.08em;
+  margin-bottom: -0.08em;
+  vertical-align: top;
+}
+.cs-w {
+  display: inline-block;
+}
+.cs-zoom {
+  overflow: hidden;
+  border-radius: 12px;
 }

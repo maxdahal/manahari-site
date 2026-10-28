@@ -584,7 +584,7 @@ body:has(.cv-hero) {
     url("data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 1600 96%22 preserveAspectRatio=%22none%22><g transform=%22translate%280 96%29 scale%281 -1%29%22><rect x=%220%22 y=%220%22 width=%2251%22 height=%2296%22/><rect x=%2250%22 y=%2248%22 width=%2251%22 height=%2248%22/><rect x=%22100%22 y=%2224%22 width=%2251%22 height=%2272%22/><rect x=%22150%22 y=%2248%22 width=%2251%22 height=%2248%22/><rect x=%22175%22 y=%2224%22 width=%2225%22 height=%2224%22/><rect x=%22200%22 y=%2272%22 width=%2251%22 height=%2224%22/><rect x=%22250%22 y=%2248%22 width=%2251%22 height=%2248%22/><rect x=%22275%22 y=%2224%22 width=%2225%22 height=%2224%22/><rect x=%22300%22 y=%2248%22 width=%2251%22 height=%2248%22/><rect x=%22350%22 y=%2224%22 width=%2251%22 height=%2272%22/><rect x=%22400%22 y=%2248%22 width=%2251%22 height=%2248%22/><rect x=%22450%22 y=%2248%22 width=%2251%22 height=%2248%22/><rect x=%22500%22 y=%2248%22 width=%2251%22 height=%2248%22/><rect x=%22550%22 y=%2224%22 width=%2251%22 height=%2272%22/><rect x=%22600%22 y=%2224%22 width=%2251%22 height=%2272%22/><rect x=%22650%22 y=%2224%22 width=%2251%22 height=%2272%22/><rect x=%22700%22 y=%2224%22 width=%2251%22 height=%2272%22/><rect x=%22750%22 y=%2272%22 width=%2251%22 height=%2224%22/><rect x=%22775%22 y=%2248%22 width=%2225%22 height=%2224%22/><rect x=%22800%22 y=%2224%22 width=%2251%22 height=%2272%22/><rect x=%22850%22 y=%220%22 width=%2251%22 height=%2296%22/><rect x=%22900%22 y=%2248%22 width=%2251%22 height=%2248%22/><rect x=%22950%22 y=%2224%22 width=%2251%22 height=%2272%22/><rect x=%221000%22 y=%2248%22 width=%2251%22 height=%2248%22/><rect x=%221050%22 y=%2248%22 width=%2251%22 height=%2248%22/><rect x=%221100%22 y=%2224%22 width=%2251%22 height=%2272%22/><rect x=%221150%22 y=%2272%22 width=%2251%22 height=%2224%22/><rect x=%221200%22 y=%2248%22 width=%2251%22 height=%2248%22/><rect x=%221250%22 y=%2224%22 width=%2251%22 height=%2272%22/><rect x=%221300%22 y=%2248%22 width=%2251%22 height=%2248%22/><rect x=%221350%22 y=%220%22 width=%2251%22 height=%2296%22/><rect x=%221400%22 y=%220%22 width=%2251%22 height=%2296%22/><rect x=%221450%22 y=%2248%22 width=%2251%22 height=%2248%22/><rect x=%221500%22 y=%2248%22 width=%2251%22 height=%2248%22/><rect x=%221550%22 y=%2224%22 width=%2251%22 height=%2272%22/></g></svg>") bottom / 100% var(--edge) no-repeat;
 }
 /* the light theme's band is dark ... */
-.cv-statement {
+:is(.cv-statement, .cv-pixels) {
   /* its own background, since GSAP holds it in a spacer outside .sections */
   background: var(--paper) 0 0 / 240px auto, var(--bg);
   --bg: #0f172a;
@@ -601,7 +601,7 @@ body:has(.cv-hero) {
 }
 /* ... and the dark theme's band is light */
 @media (prefers-color-scheme: dark) {
-  :root:not([data-theme="light"]) .cv-statement {
+  :root:not([data-theme="light"]) :is(.cv-statement, .cv-pixels) {
     --bg: #f5f7f8;
     --surface: #ffffff;
     --ink: #111827;
@@ -614,7 +614,7 @@ body:has(.cv-hero) {
     --on-accent: #ffffff;
   }
 }
-:root[data-theme="dark"] .cv-statement {
+:root[data-theme="dark"] :is(.cv-statement, .cv-pixels) {
   --bg: #f5f7f8;
   --surface: #ffffff;
   --ink: #111827;
@@ -787,4 +787,26 @@ body:has(.cv-hero) {
 .cv-contact .pv-end {
   align-self: stretch;
   text-align: left;
+}
+
+/* ---- pixel dividers: with scroll motion on, the band's edges are rows of
+   square pixels that fill in as the band arrives and break up as you leave
+   it (scroll.js builds the squares and scrubs them with the scroll). Without
+   motion they are not needed: the band keeps its fixed stepped edges. ---- */
+.cv-pixels {
+  display: none;
+}
+.has-gsap .cv-pixels {
+  display: grid;
+  grid-template-columns: repeat(var(--px-cols, 24), minmax(0, 1fr));
+  background: none;
+}
+.cv-pixels i {
+  aspect-ratio: 1;
+  background: var(--bg);
+}
+.has-gsap .pv-main:not(.pv-about-page) .sections section.cv-statement {
+  padding-block: clamp(80px, 12vh, 140px);
+  -webkit-mask: none;
+  mask: none;
 }

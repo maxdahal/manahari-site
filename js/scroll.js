@@ -56,6 +56,30 @@
     });
   }
 
+  /* the pixel dividers either side of About me: rows of squares, numbered
+     for the order they fill in, nearest the band first with a little
+     scatter so the edge breaks up like pixels */
+  var PX_ROWS = 4;
+  var pixels = [].slice.call(document.querySelectorAll(".cv-pixels")).map(function (div) {
+    var cols = window.innerWidth < 700 ? 12 : 24;
+    div.style.setProperty("--px-cols", cols);
+    var squares = [];
+    for (var r = 0; r < PX_ROWS; r++) {
+      for (var c = 0; c < cols; c++) {
+        var sq = document.createElement("i");
+        div.appendChild(sq);
+        /* rows away from the band: the "in" divider sits above it, the
+           "out" divider below it */
+        var away = div.classList.contains("cv-pixels--in") ? PX_ROWS - 1 - r : r;
+        squares.push({ el: sq, key: away + Math.random() * 1.6 });
+      }
+    }
+    squares.sort(function (a, b) {
+      return a.key - b.key;
+    });
+    return { div: div, squares: squares.map(function (s) { return s.el; }) };
+  });
+
   /* in as it comes into view, back out when you scroll up past it */
   function enter(targets, trigger, vars, start) {
     if (!targets || (targets.length !== undefined && !targets.length)) return;
@@ -134,6 +158,23 @@
           scrollTrigger: { trigger: panel, start: "top bottom", end: "bottom top", scrub: true }
         });
         enter(panel.querySelectorAll(".cv-project__words > *"), panel, { y: 80, stagger: 0.1, duration: 1 }, "top 55%");
+      });
+
+      /* the band's pixel edges: above it, the squares fill in as it
+         arrives; below it, they break up as you leave, nearest the band
+         last */
+      pixels.forEach(function (p) {
+        var into = p.div.classList.contains("cv-pixels--in");
+        /* (the "out" squares break up from the far edge in) */
+        var order = into ? p.squares : p.squares.slice().reverse();
+        gsap.fromTo(order, { scale: into ? 0 : 1 }, {
+          scale: into ? 1 : 0,
+          ease: "none",
+          stagger: { each: 0.02 },
+          scrollTrigger: into
+            ? { trigger: p.div, start: "top bottom", end: "bottom 55%", scrub: 0.4 }
+            : { trigger: p.div, start: "top 75%", end: "bottom 15%", scrub: 0.4 }
+        });
       });
 
       /* skills, then research and recognition: the title, then each row */

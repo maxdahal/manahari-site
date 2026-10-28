@@ -337,7 +337,7 @@ html.hello-lock {
     display: none;
   }
 }
-:root.motion-paused :is(.hover, .spot__hint, .badge__swing) {
+:root.motion-paused :is(.hover, .spot__hint) {
   animation-play-state: paused !important;
 }
 
@@ -765,22 +765,6 @@ html:has(.recruiter[open]) {
   syntax: "<angle>";
   inherits: true;
   initial-value: 0deg;
-}
-
-/* Plants. They move a little: the snake plant's leaves sway from their
-   base, the succulent breathes, the hanging pothos swings on its cord. */
-
-.plant__sway--2 {
-  animation-duration: 4.8s;
-  animation-delay: -1s;
-}
-.plant__sway--3 {
-  animation-duration: 5.4s;
-  animation-delay: -2s;
-}
-.plant__sway--4 {
-  animation-duration: 4.4s;
-  animation-delay: -0.5s;
 }
 
 /* a block whose body starts at the left edge, with no indent (Artwork) */

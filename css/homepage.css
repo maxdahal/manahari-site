@@ -14,7 +14,8 @@
 body:has(.cv-hero) {
   --cv-font: "Helvetica Neue", Helvetica, Arial, sans-serif;
 }
-.pv-main:not(.pv-about-page) .sections > section:is(.cv-hero, .cv-statement, .cv-work, .cv-skills, .cv-recog) {
+.pv-main:not(.pv-about-page) .sections > section:is(.cv-hero, .cv-work, .cv-skills, .cv-recog),
+.pv-main:not(.pv-about-page) .sections section:is(.cv-statement, .cv-journey) {
   width: 100%;
   max-width: none;
   padding-inline: max(var(--gx), (100% - 1240px) / 2);
@@ -142,20 +143,20 @@ body:has(.cv-hero) {
   color: var(--text);
 }
 
-/* ---- the About statement ------------------------------------------------------ */
-.pv-main:not(.pv-about-page) .sections > section.cv-statement {
+/* (no child combinator: GSAP holds this section in a spacer) */
+.pv-main:not(.pv-about-page) .sections section.cv-statement {
   display: flex;
   flex-direction: column;
   justify-content: center;
-  gap: clamp(28px, 5vh, 48px);
+  gap: clamp(32px, 5vh, 56px);
   min-height: 100svh;
-  padding-block: clamp(80px, 12vh, 140px);
+  padding-block: clamp(96px, 14vh, 160px);
 }
 .pv .cv-statement__text {
-  max-width: 24ch;
+  max-width: 26ch;
   margin: 0;
   font-family: var(--cv-font);
-  font-size: clamp(1.75rem, 0.9rem + 2.8vw, 4rem);
+  font-size: clamp(1.625rem, 0.9rem + 2.2vw, 3.25rem);
   font-weight: 700;
   line-height: 1.02;
   letter-spacing: -0.035em;
@@ -414,11 +415,8 @@ body:has(.cv-hero) {
   letter-spacing: 0;
 }
 
-/* section headings, large, with the accent dot as their full stop */
+/* the dot follows the last word, so it never wraps onto a line alone */
 .cv-heading {
-  display: flex;
-  align-items: baseline;
-  gap: 0.06em;
   margin: 0;
   font-family: var(--cv-font);
   font-size: clamp(2.75rem, 1.2rem + 4.4vw, 6rem);
@@ -430,6 +428,7 @@ body:has(.cv-hero) {
 .cv-heading .cv-dot {
   width: 0.16em;
   height: 0.16em;
+  margin-left: 0.06em;
 }
 .cv-work__head,
 .cv-art__head {
@@ -565,66 +564,6 @@ body:has(.cv-hero) {
   50% {
     opacity: 0;
   }
-}
-
-/* ---- About me as a band in the other theme's colours, its top and bottom
-   edges stepped like pixels (a mask: a row of blocks, the solid middle, a
-   row of blocks) ------------------------------------------------------- */
-/* (no child combinator: GSAP holds this section in a spacer) */
-.pv-main:not(.pv-about-page) .sections section.cv-statement {
-  --edge: clamp(40px, 6vw, 96px);
-  padding-block: calc(var(--edge) + clamp(64px, 10vh, 120px));
-  -webkit-mask:
-    url("data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 1600 96%22 preserveAspectRatio=%22none%22><rect x=%220%22 y=%2224%22 width=%2251%22 height=%2272%22/><rect x=%2250%22 y=%2224%22 width=%2251%22 height=%2272%22/><rect x=%22100%22 y=%2248%22 width=%2251%22 height=%2248%22/><rect x=%22150%22 y=%2272%22 width=%2251%22 height=%2224%22/><rect x=%22200%22 y=%220%22 width=%2251%22 height=%2296%22/><rect x=%22250%22 y=%220%22 width=%2251%22 height=%2296%22/><rect x=%22300%22 y=%2248%22 width=%2251%22 height=%2248%22/><rect x=%22325%22 y=%2224%22 width=%2225%22 height=%2224%22/><rect x=%22350%22 y=%220%22 width=%2251%22 height=%2296%22/><rect x=%22400%22 y=%2224%22 width=%2251%22 height=%2272%22/><rect x=%22450%22 y=%2248%22 width=%2251%22 height=%2248%22/><rect x=%22500%22 y=%220%22 width=%2251%22 height=%2296%22/><rect x=%22550%22 y=%2248%22 width=%2251%22 height=%2248%22/><rect x=%22575%22 y=%2224%22 width=%2225%22 height=%2224%22/><rect x=%22600%22 y=%2224%22 width=%2251%22 height=%2272%22/><rect x=%22650%22 y=%220%22 width=%2251%22 height=%2296%22/><rect x=%22700%22 y=%220%22 width=%2251%22 height=%2296%22/><rect x=%22750%22 y=%2248%22 width=%2251%22 height=%2248%22/><rect x=%22775%22 y=%2224%22 width=%2225%22 height=%2224%22/><rect x=%22800%22 y=%2248%22 width=%2251%22 height=%2248%22/><rect x=%22825%22 y=%2224%22 width=%2225%22 height=%2224%22/><rect x=%22850%22 y=%220%22 width=%2251%22 height=%2296%22/><rect x=%22900%22 y=%2224%22 width=%2251%22 height=%2272%22/><rect x=%22950%22 y=%220%22 width=%2251%22 height=%2296%22/><rect x=%221000%22 y=%2248%22 width=%2251%22 height=%2248%22/><rect x=%221025%22 y=%2224%22 width=%2225%22 height=%2224%22/><rect x=%221050%22 y=%2248%22 width=%2251%22 height=%2248%22/><rect x=%221100%22 y=%220%22 width=%2251%22 height=%2296%22/><rect x=%221150%22 y=%2248%22 width=%2251%22 height=%2248%22/><rect x=%221175%22 y=%2224%22 width=%2225%22 height=%2224%22/><rect x=%221200%22 y=%220%22 width=%2251%22 height=%2296%22/><rect x=%221250%22 y=%2224%22 width=%2251%22 height=%2272%22/><rect x=%221300%22 y=%2272%22 width=%2251%22 height=%2224%22/><rect x=%221350%22 y=%2272%22 width=%2251%22 height=%2224%22/><rect x=%221400%22 y=%2248%22 width=%2251%22 height=%2248%22/><rect x=%221450%22 y=%220%22 width=%2251%22 height=%2296%22/><rect x=%221500%22 y=%2248%22 width=%2251%22 height=%2248%22/><rect x=%221550%22 y=%2248%22 width=%2251%22 height=%2248%22/><rect x=%221575%22 y=%2224%22 width=%2225%22 height=%2224%22/></svg>") top / 100% var(--edge) no-repeat,
-    linear-gradient(#000 0 0) center / 100% calc(100% - 2 * var(--edge) + 2px) no-repeat,
-    url("data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 1600 96%22 preserveAspectRatio=%22none%22><g transform=%22translate%280 96%29 scale%281 -1%29%22><rect x=%220%22 y=%220%22 width=%2251%22 height=%2296%22/><rect x=%2250%22 y=%2248%22 width=%2251%22 height=%2248%22/><rect x=%22100%22 y=%2224%22 width=%2251%22 height=%2272%22/><rect x=%22150%22 y=%2248%22 width=%2251%22 height=%2248%22/><rect x=%22175%22 y=%2224%22 width=%2225%22 height=%2224%22/><rect x=%22200%22 y=%2272%22 width=%2251%22 height=%2224%22/><rect x=%22250%22 y=%2248%22 width=%2251%22 height=%2248%22/><rect x=%22275%22 y=%2224%22 width=%2225%22 height=%2224%22/><rect x=%22300%22 y=%2248%22 width=%2251%22 height=%2248%22/><rect x=%22350%22 y=%2224%22 width=%2251%22 height=%2272%22/><rect x=%22400%22 y=%2248%22 width=%2251%22 height=%2248%22/><rect x=%22450%22 y=%2248%22 width=%2251%22 height=%2248%22/><rect x=%22500%22 y=%2248%22 width=%2251%22 height=%2248%22/><rect x=%22550%22 y=%2224%22 width=%2251%22 height=%2272%22/><rect x=%22600%22 y=%2224%22 width=%2251%22 height=%2272%22/><rect x=%22650%22 y=%2224%22 width=%2251%22 height=%2272%22/><rect x=%22700%22 y=%2224%22 width=%2251%22 height=%2272%22/><rect x=%22750%22 y=%2272%22 width=%2251%22 height=%2224%22/><rect x=%22775%22 y=%2248%22 width=%2225%22 height=%2224%22/><rect x=%22800%22 y=%2224%22 width=%2251%22 height=%2272%22/><rect x=%22850%22 y=%220%22 width=%2251%22 height=%2296%22/><rect x=%22900%22 y=%2248%22 width=%2251%22 height=%2248%22/><rect x=%22950%22 y=%2224%22 width=%2251%22 height=%2272%22/><rect x=%221000%22 y=%2248%22 width=%2251%22 height=%2248%22/><rect x=%221050%22 y=%2248%22 width=%2251%22 height=%2248%22/><rect x=%221100%22 y=%2224%22 width=%2251%22 height=%2272%22/><rect x=%221150%22 y=%2272%22 width=%2251%22 height=%2224%22/><rect x=%221200%22 y=%2248%22 width=%2251%22 height=%2248%22/><rect x=%221250%22 y=%2224%22 width=%2251%22 height=%2272%22/><rect x=%221300%22 y=%2248%22 width=%2251%22 height=%2248%22/><rect x=%221350%22 y=%220%22 width=%2251%22 height=%2296%22/><rect x=%221400%22 y=%220%22 width=%2251%22 height=%2296%22/><rect x=%221450%22 y=%2248%22 width=%2251%22 height=%2248%22/><rect x=%221500%22 y=%2248%22 width=%2251%22 height=%2248%22/><rect x=%221550%22 y=%2224%22 width=%2251%22 height=%2272%22/></g></svg>") bottom / 100% var(--edge) no-repeat;
-  mask:
-    url("data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 1600 96%22 preserveAspectRatio=%22none%22><rect x=%220%22 y=%2224%22 width=%2251%22 height=%2272%22/><rect x=%2250%22 y=%2224%22 width=%2251%22 height=%2272%22/><rect x=%22100%22 y=%2248%22 width=%2251%22 height=%2248%22/><rect x=%22150%22 y=%2272%22 width=%2251%22 height=%2224%22/><rect x=%22200%22 y=%220%22 width=%2251%22 height=%2296%22/><rect x=%22250%22 y=%220%22 width=%2251%22 height=%2296%22/><rect x=%22300%22 y=%2248%22 width=%2251%22 height=%2248%22/><rect x=%22325%22 y=%2224%22 width=%2225%22 height=%2224%22/><rect x=%22350%22 y=%220%22 width=%2251%22 height=%2296%22/><rect x=%22400%22 y=%2224%22 width=%2251%22 height=%2272%22/><rect x=%22450%22 y=%2248%22 width=%2251%22 height=%2248%22/><rect x=%22500%22 y=%220%22 width=%2251%22 height=%2296%22/><rect x=%22550%22 y=%2248%22 width=%2251%22 height=%2248%22/><rect x=%22575%22 y=%2224%22 width=%2225%22 height=%2224%22/><rect x=%22600%22 y=%2224%22 width=%2251%22 height=%2272%22/><rect x=%22650%22 y=%220%22 width=%2251%22 height=%2296%22/><rect x=%22700%22 y=%220%22 width=%2251%22 height=%2296%22/><rect x=%22750%22 y=%2248%22 width=%2251%22 height=%2248%22/><rect x=%22775%22 y=%2224%22 width=%2225%22 height=%2224%22/><rect x=%22800%22 y=%2248%22 width=%2251%22 height=%2248%22/><rect x=%22825%22 y=%2224%22 width=%2225%22 height=%2224%22/><rect x=%22850%22 y=%220%22 width=%2251%22 height=%2296%22/><rect x=%22900%22 y=%2224%22 width=%2251%22 height=%2272%22/><rect x=%22950%22 y=%220%22 width=%2251%22 height=%2296%22/><rect x=%221000%22 y=%2248%22 width=%2251%22 height=%2248%22/><rect x=%221025%22 y=%2224%22 width=%2225%22 height=%2224%22/><rect x=%221050%22 y=%2248%22 width=%2251%22 height=%2248%22/><rect x=%221100%22 y=%220%22 width=%2251%22 height=%2296%22/><rect x=%221150%22 y=%2248%22 width=%2251%22 height=%2248%22/><rect x=%221175%22 y=%2224%22 width=%2225%22 height=%2224%22/><rect x=%221200%22 y=%220%22 width=%2251%22 height=%2296%22/><rect x=%221250%22 y=%2224%22 width=%2251%22 height=%2272%22/><rect x=%221300%22 y=%2272%22 width=%2251%22 height=%2224%22/><rect x=%221350%22 y=%2272%22 width=%2251%22 height=%2224%22/><rect x=%221400%22 y=%2248%22 width=%2251%22 height=%2248%22/><rect x=%221450%22 y=%220%22 width=%2251%22 height=%2296%22/><rect x=%221500%22 y=%2248%22 width=%2251%22 height=%2248%22/><rect x=%221550%22 y=%2248%22 width=%2251%22 height=%2248%22/><rect x=%221575%22 y=%2224%22 width=%2225%22 height=%2224%22/></svg>") top / 100% var(--edge) no-repeat,
-    linear-gradient(#000 0 0) center / 100% calc(100% - 2 * var(--edge) + 2px) no-repeat,
-    url("data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 1600 96%22 preserveAspectRatio=%22none%22><g transform=%22translate%280 96%29 scale%281 -1%29%22><rect x=%220%22 y=%220%22 width=%2251%22 height=%2296%22/><rect x=%2250%22 y=%2248%22 width=%2251%22 height=%2248%22/><rect x=%22100%22 y=%2224%22 width=%2251%22 height=%2272%22/><rect x=%22150%22 y=%2248%22 width=%2251%22 height=%2248%22/><rect x=%22175%22 y=%2224%22 width=%2225%22 height=%2224%22/><rect x=%22200%22 y=%2272%22 width=%2251%22 height=%2224%22/><rect x=%22250%22 y=%2248%22 width=%2251%22 height=%2248%22/><rect x=%22275%22 y=%2224%22 width=%2225%22 height=%2224%22/><rect x=%22300%22 y=%2248%22 width=%2251%22 height=%2248%22/><rect x=%22350%22 y=%2224%22 width=%2251%22 height=%2272%22/><rect x=%22400%22 y=%2248%22 width=%2251%22 height=%2248%22/><rect x=%22450%22 y=%2248%22 width=%2251%22 height=%2248%22/><rect x=%22500%22 y=%2248%22 width=%2251%22 height=%2248%22/><rect x=%22550%22 y=%2224%22 width=%2251%22 height=%2272%22/><rect x=%22600%22 y=%2224%22 width=%2251%22 height=%2272%22/><rect x=%22650%22 y=%2224%22 width=%2251%22 height=%2272%22/><rect x=%22700%22 y=%2224%22 width=%2251%22 height=%2272%22/><rect x=%22750%22 y=%2272%22 width=%2251%22 height=%2224%22/><rect x=%22775%22 y=%2248%22 width=%2225%22 height=%2224%22/><rect x=%22800%22 y=%2224%22 width=%2251%22 height=%2272%22/><rect x=%22850%22 y=%220%22 width=%2251%22 height=%2296%22/><rect x=%22900%22 y=%2248%22 width=%2251%22 height=%2248%22/><rect x=%22950%22 y=%2224%22 width=%2251%22 height=%2272%22/><rect x=%221000%22 y=%2248%22 width=%2251%22 height=%2248%22/><rect x=%221050%22 y=%2248%22 width=%2251%22 height=%2248%22/><rect x=%221100%22 y=%2224%22 width=%2251%22 height=%2272%22/><rect x=%221150%22 y=%2272%22 width=%2251%22 height=%2224%22/><rect x=%221200%22 y=%2248%22 width=%2251%22 height=%2248%22/><rect x=%221250%22 y=%2224%22 width=%2251%22 height=%2272%22/><rect x=%221300%22 y=%2248%22 width=%2251%22 height=%2248%22/><rect x=%221350%22 y=%220%22 width=%2251%22 height=%2296%22/><rect x=%221400%22 y=%220%22 width=%2251%22 height=%2296%22/><rect x=%221450%22 y=%2248%22 width=%2251%22 height=%2248%22/><rect x=%221500%22 y=%2248%22 width=%2251%22 height=%2248%22/><rect x=%221550%22 y=%2224%22 width=%2251%22 height=%2272%22/></g></svg>") bottom / 100% var(--edge) no-repeat;
-}
-/* the light theme's band is dark ... */
-:is(.cv-statement, .cv-pixels) {
-  /* its own background, since GSAP holds it in a spacer outside .sections */
-  background: var(--paper) 0 0 / 240px auto, var(--bg);
-  --bg: #0f172a;
-  --surface: #1e293b;
-  --ink: #f8fafc;
-  --text: #f8fafc;
-  --text-2: #94a3b8;
-  --muted: #94a3b8;
-  --line: #334155;
-  --accent: #60a5fa;
-  --accent-text: #60a5fa;
-  --on-accent: #0f172a;
-  color: var(--ink);
-}
-/* ... and the dark theme's band is light */
-@media (prefers-color-scheme: dark) {
-  :root:not([data-theme="light"]) :is(.cv-statement, .cv-pixels) {
-    --bg: #f5f7f8;
-    --surface: #ffffff;
-    --ink: #111827;
-    --text: #111827;
-    --text-2: #4b5563;
-    --muted: #4b5563;
-    --line: #e5e7eb;
-    --accent: #2e5b82;
-    --accent-text: #2e5b82;
-    --on-accent: #ffffff;
-  }
-}
-:root[data-theme="dark"] :is(.cv-statement, .cv-pixels) {
-  --bg: #f5f7f8;
-  --surface: #ffffff;
-  --ink: #111827;
-  --text: #111827;
-  --text-2: #4b5563;
-  --muted: #4b5563;
-  --line: #e5e7eb;
-  --accent: #2e5b82;
-  --accent-text: #2e5b82;
-  --on-accent: #ffffff;
 }
 
 /* ---- Skills & expertise: one row per skill on a hairline, the name large,
@@ -789,28 +728,6 @@ body:has(.cv-hero) {
   text-align: left;
 }
 
-/* ---- pixel dividers: with scroll motion on, the band's edges are rows of
-   square pixels that fill in as the band arrives and break up as you leave
-   it (scroll.js builds the squares and scrubs them with the scroll). Without
-   motion they are not needed: the band keeps its fixed stepped edges. ---- */
-.cv-pixels {
-  display: none;
-}
-.has-gsap .cv-pixels {
-  display: grid;
-  grid-template-columns: repeat(var(--px-cols, 24), minmax(0, 1fr));
-  background: none;
-}
-.cv-pixels i {
-  aspect-ratio: 1;
-  background: var(--bg);
-}
-.has-gsap .pv-main:not(.pv-about-page) .sections section.cv-statement {
-  padding-block: clamp(80px, 12vh, 140px);
-  -webkit-mask: none;
-  mask: none;
-}
-
 /* ---- the case studies as a held stack (scroll.js): all in one cell, each
    showing through its mask: the top half, anchored right, and the bottom
    half, anchored left, both --q of the width wide. The first starts full;
@@ -951,29 +868,32 @@ body:has(.cv-hero) {
 }
 
 /* What falls (home.js): a layer over the window that never takes clicks,
-   fading away once the hero has gone */
+   hidden once the hero has gone */
 .falling {
   position: fixed;
   inset: 0;
   z-index: 3;
   overflow: hidden;
   pointer-events: none;
-  transition: opacity 0.6s ease;
-  --seed: rgb(120 118 112 / 0.7);
-  --seed-core: rgb(110 104 94 / 0.8);
+  --firefly: #c9a414;
+  --firefly-2: #a8b81c;
 }
-.falling.is-away {
-  opacity: 0;
+.falling[hidden] {
+  display: none;
 }
 @media (prefers-color-scheme: dark) {
   :root:not([data-theme="light"]) .falling {
-    --seed: rgb(190 188 182 / 0.6);
-    --seed-core: rgb(170 165 155 / 0.7);
+    --firefly: #ffe066;
+    --firefly-2: #d9f26b;
   }
 }
 :root[data-theme="dark"] .falling {
-  --seed: rgb(190 188 182 / 0.6);
-  --seed-core: rgb(170 165 155 / 0.7);
+  --firefly: #ffe066;
+  --firefly-2: #d9f26b;
+}
+/* a firefly glows: a soft halo in its own colour */
+.falling__glow {
+  filter: drop-shadow(0 0 3px var(--firefly)) drop-shadow(0 0 10px var(--firefly));
 }
 .falling__piece {
   position: fixed;
@@ -1062,4 +982,274 @@ body:has(.cv-hero) {
     var(--ridges) center bottom / 100% min(30vh, 280px) no-repeat,
     var(--paper) 0 0 / 240px auto,
     var(--bg);
+}
+
+/* ---- the hero: hello written once over the headline, where I am from, and
+   the sentence in grey with "design" and "code." standing out ----------- */
+.cv-hero__main {
+  display: flex;
+  flex-direction: column;
+  gap: clamp(12px, 2.5vh, 24px);
+}
+.cv-hello {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px 20px;
+}
+.cv-hello__word {
+  width: clamp(96px, 9vw, 140px);
+  height: auto;
+  overflow: visible;
+}
+.cv-hello__word path {
+  fill: none;
+  stroke: var(--accent);
+  stroke-width: 12;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  stroke-dasharray: 1;
+  stroke-dashoffset: 1;
+  animation: cv-hello-write 2s cubic-bezier(0.45, 0.05, 0.55, 0.95) 3.6s forwards;
+}
+/* no intro this visit: it writes itself straight away */
+.no-hello .cv-hello__word path {
+  animation-delay: 0.5s;
+}
+@keyframes cv-hello-write {
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+:root.motion-paused .cv-hello__word path {
+  animation: none;
+  stroke-dashoffset: 0;
+}
+@media (prefers-reduced-motion: reduce) {
+  .cv-hello__word path {
+    animation: none;
+    stroke-dashoffset: 0;
+  }
+}
+.pv .cv-from {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  margin: 0;
+  font-family: var(--cv-font);
+  font-size: clamp(0.9375rem, 0.85rem + 0.3vw, 1.125rem);
+  color: var(--text-2);
+}
+.cv-flag {
+  flex: none;
+  width: auto;
+  height: 1.6em;
+}
+.cv-flag--sm {
+  display: inline-block;
+  height: 0.9em;
+  margin-right: 0.35em;
+  vertical-align: -0.05em;
+}
+.pv .cv-hero .cv-title {
+  color: var(--text-2);
+}
+.pv .cv-hero .cv-title .cv-design {
+  color: var(--ink);
+}
+
+/* ---- My journey so far: a route from Nepal to North Carolina, one stop per
+   place, the line drawing itself as you scroll (--route, scroll.js); the
+   last stop, now, is marked in the accent ------------------------------- */
+.pv-main:not(.pv-about-page) .sections section.cv-journey {
+  display: flex;
+  flex-direction: column;
+  gap: clamp(40px, 6vh, 72px);
+  padding-block: clamp(96px, 14vh, 160px) clamp(24px, 4vh, 48px);
+}
+.cv-journey__head {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: flex-end;
+  gap: 12px 32px;
+}
+.cv-route {
+  --route: 1;
+  --pin: 14px;
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  gap: 0 clamp(16px, 2vw, 32px);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  /* the route: a faint dashed line, and over it the solid line drawn so far */
+  background:
+    linear-gradient(var(--accent) 0 0) 0 calc(var(--pin) / 2 - 1px) / calc(var(--route) * 100%) 2px no-repeat,
+    repeating-linear-gradient(90deg, var(--line) 0 8px, transparent 8px 14px) 0 calc(var(--pin) / 2 - 1px) / 100% 2px no-repeat;
+}
+.cv-stop {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  min-width: 0;
+}
+.cv-stop__pin {
+  width: var(--pin);
+  height: var(--pin);
+  margin-bottom: 14px;
+  border: 2px solid var(--accent);
+  border-radius: 50%;
+  background: var(--bg);
+}
+.cv-stop--now .cv-stop__pin {
+  background: var(--accent);
+  box-shadow: 0 0 0 6px color-mix(in srgb, var(--accent) 22%, transparent);
+}
+.pv .cv-stop__when {
+  margin: 0;
+  font-size: 0.8125rem;
+  font-variant-numeric: tabular-nums;
+  color: var(--text-2);
+}
+.cv-stop__place {
+  margin: 0;
+  font-family: var(--cv-font);
+  font-size: clamp(1.25rem, 1rem + 0.8vw, 1.75rem);
+  font-weight: 600;
+  line-height: 1.1;
+  letter-spacing: -0.03em;
+  color: var(--ink);
+}
+
+.pv .cv-stop__text {
+  margin: 0;
+  font-size: 0.9375rem;
+  line-height: 1.5;
+  color: var(--text-2);
+}
+.cv-stop--now .cv-stop__when {
+  color: var(--accent-text);
+}
+/* narrow screens: the route runs down the left instead */
+@media (max-width: 860px) {
+  .cv-route {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 32px;
+    padding-left: calc(var(--pin) + 20px);
+    background:
+      linear-gradient(var(--accent) 0 0) calc(var(--pin) / 2 - 1px) 0 / 2px calc(var(--route) * 100%) no-repeat,
+      repeating-linear-gradient(180deg, var(--line) 0 8px, transparent 8px 14px) calc(var(--pin) / 2 - 1px) 0 / 2px 100% no-repeat;
+  }
+  .cv-stop__pin {
+    margin: 0 0 -6px calc(-1 * (var(--pin) + 20px));
+  }
+}
+
+/* ---- quiet backgrounds for the rest of the page, each its own drawing in
+   the spirit of the hero's mountains: contour lines behind the journey, a
+   band of waves (seigaiha) under Skills & expertise, ripples behind
+   Research & recognition. Backgrounds only; they never move. ------------- */
+:root {
+  --bg-contours: url("data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 900 600%22><path d=%22M681,300 L681,304 L684,309 L685,314 L685,320 L682,325 L679,329 L676,334 L673,340 L668,345 L661,348 L652,349 L644,350 L636,351 L628,353 L620,356 L611,357 L603,355 L596,351 L590,346 L586,340 L581,336 L576,333 L572,329 L569,325 L565,321 L561,318 L553,315 L543,311 L535,306 L531,300 L532,294 L537,288 L543,283 L548,278 L553,274 L558,269 L565,266 L573,264 L580,262 L586,260 L591,256 L597,253 L605,251 L613,252 L620,254 L627,256 L634,256 L642,254 L651,252 L661,252 L669,254 L677,257 L683,261 L690,265 L695,270 L698,277 L695,283 L690,290 L684,295 L681,300 Z%22 fill=%22none%22 stroke=%22%231e293b%22 stroke-width=%221.2%22 stroke-opacity=%220.09%22/><path d=%22M726,300 L736,308 L744,318 L747,328 L745,338 L740,347 L734,356 L727,365 L716,372 L701,375 L683,374 L666,371 L653,368 L641,369 L631,372 L620,377 L608,378 L596,377 L584,375 L573,372 L560,370 L547,368 L535,364 L526,358 L519,350 L512,342 L503,335 L491,328 L481,320 L477,310 L481,300 L492,291 L504,283 L514,277 L521,270 L528,264 L536,259 L545,254 L552,248 L557,241 L561,230 L567,219 L577,210 L591,206 L606,207 L620,210 L633,213 L647,214 L660,216 L672,220 L683,226 L691,234 L699,241 L708,246 L717,252 L725,259 L727,268 L724,277 L721,285 L721,293 L726,300 Z%22 fill=%22none%22 stroke=%22%231e293b%22 stroke-width=%221.2%22 stroke-opacity=%220.09%22/><path d=%22M794,300 L799,313 L799,326 L792,338 L782,349 L772,360 L765,372 L759,385 L749,397 L732,405 L710,406 L687,402 L667,398 L650,396 L635,397 L620,398 L605,399 L589,399 L573,399 L553,402 L530,406 L505,407 L484,403 L471,391 L465,376 L464,361 L462,348 L456,336 L451,324 L450,312 L454,300 L461,289 L466,278 L469,267 L471,255 L478,244 L490,236 L507,231 L522,226 L532,218 L540,206 L549,191 L562,178 L579,169 L599,167 L620,167 L640,169 L660,172 L678,179 L691,191 L700,206 L705,220 L712,231 L724,237 L741,240 L758,246 L772,254 L780,265 L784,276 L788,288 L794,300 Z%22 fill=%22none%22 stroke=%22%231e293b%22 stroke-width=%221.2%22 stroke-opacity=%220.09%22/><path d=%22M813,300 L819,314 L818,329 L812,342 L805,356 L801,371 L797,387 L788,403 L772,415 L751,422 L729,428 L709,436 L691,449 L671,462 L646,471 L620,471 L595,462 L573,449 L555,436 L538,425 L522,415 L509,404 L499,391 L490,380 L475,371 L452,366 L423,360 L395,350 L377,335 L373,318 L378,300 L386,283 L392,267 L398,251 L408,236 L425,223 L445,214 L465,205 L481,195 L495,183 L511,172 L532,166 L557,168 L580,173 L601,177 L620,176 L640,168 L664,160 L689,155 L715,155 L740,159 L765,165 L790,172 L813,182 L827,198 L829,218 L820,239 L808,258 L802,274 L805,287 L813,300 Z%22 fill=%22none%22 stroke=%22%231e293b%22 stroke-width=%221.2%22 stroke-opacity=%220.09%22/><path d=%22M907,300 L886,319 L867,336 L851,351 L836,365 L818,378 L797,387 L779,397 L768,412 L763,433 L755,459 L740,483 L714,498 L683,502 L651,499 L620,495 L590,492 L561,489 L533,481 L510,468 L491,452 L473,438 L452,427 L428,418 L406,406 L395,388 L395,368 L401,348 L403,331 L394,316 L377,300 L359,281 L349,261 L347,240 L352,219 L359,197 L368,176 L385,156 L414,144 L451,142 L490,147 L524,154 L551,155 L573,149 L595,140 L620,134 L646,134 L671,136 L697,139 L725,139 L756,140 L784,146 L806,159 L822,177 L835,194 L854,208 L879,222 L905,237 L921,256 L921,278 L907,300 Z%22 fill=%22none%22 stroke=%22%231e293b%22 stroke-width=%221.2%22 stroke-opacity=%220.09%22/><path d=%22M930,300 L926,322 L911,342 L892,360 L878,378 L867,397 L856,417 L839,434 L816,448 L791,460 L770,476 L750,499 L728,526 L698,548 L660,558 L620,552 L584,536 L552,517 L524,501 L498,486 L476,470 L459,451 L446,431 L430,416 L405,406 L370,398 L333,387 L307,369 L297,347 L299,323 L305,300 L305,277 L300,254 L298,229 L307,205 L326,185 L351,167 L375,150 L398,132 L424,116 L457,108 L496,111 L535,121 L568,132 L594,135 L620,127 L649,113 L682,102 L717,97 L752,98 L788,102 L826,107 L864,116 L895,132 L911,156 L911,186 L904,214 L901,238 L908,258 L921,278 L930,300 Z%22 fill=%22none%22 stroke=%22%231e293b%22 stroke-width=%221.2%22 stroke-opacity=%220.09%22/><path d=%22M995,300 L1008,328 L1019,358 L1014,387 L987,411 L943,427 L895,436 L855,444 L824,454 L799,468 L773,481 L745,491 L716,502 L688,518 L657,541 L620,566 L576,583 L531,584 L492,568 L460,544 L432,521 L403,503 L372,487 L344,469 L326,445 L316,419 L310,394 L299,371 L284,349 L273,325 L275,300 L292,277 L315,256 L329,236 L329,212 L319,182 L312,148 L319,116 L343,90 L376,72 L413,57 L452,44 L494,36 L538,39 L582,54 L620,76 L652,96 L681,105 L714,103 L753,97 L792,97 L826,107 L854,123 L880,141 L908,158 L940,174 L968,195 L984,220 L989,247 L989,274 L995,300 Z%22 fill=%22none%22 stroke=%22%231e293b%22 stroke-width=%221.2%22 stroke-opacity=%220.09%22/><path d=%22M1054,300 L1069,332 L1066,364 L1051,395 L1031,424 L1011,453 L985,480 L946,500 L894,507 L837,503 L787,496 L749,497 L721,510 L693,534 L660,557 L620,572 L577,579 L532,581 L484,584 L434,584 L386,575 L348,554 L324,523 L310,490 L295,461 L270,437 L239,415 L213,390 L205,360 L217,329 L239,300 L258,274 L269,249 L275,224 L286,199 L305,176 L326,155 L341,129 L349,95 L358,55 L379,16 L417,-10 L469,-17 L524,-9 L574,5 L620,18 L662,28 L701,39 L736,57 L766,78 L794,95 L827,106 L870,111 L916,119 L954,135 L976,160 L983,190 L988,219 L1002,245 L1027,271 L1054,300 Z%22 fill=%22none%22 stroke=%22%231e293b%22 stroke-width=%221.2%22 stroke-opacity=%220.09%22/><path d=%22M1061,300 L1071,332 L1060,364 L1027,390 L987,411 L956,432 L939,458 L931,491 L919,526 L896,558 L862,585 L822,608 L779,632 L731,656 L677,669 L620,664 L568,639 L526,601 L494,565 L463,541 L426,528 L385,520 L345,508 L312,489 L283,467 L250,445 L211,424 L171,399 L144,369 L139,334 L151,300 L166,268 L170,235 L162,199 L156,160 L168,122 L203,94 L255,76 L311,66 L361,58 L407,49 L452,43 L498,44 L542,50 L582,54 L620,46 L663,23 L715,-5 L775,-24 L833,-25 L881,-7 L920,20 L954,48 L988,75 L1019,103 L1038,136 L1042,172 L1037,208 L1035,240 L1044,270 L1061,300 Z%22 fill=%22none%22 stroke=%22%231e293b%22 stroke-width=%221.2%22 stroke-opacity=%220.09%22/></svg>");
+  --bg-waves: url("data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 80 40%22 width=%2280%22 height=%2240%22><defs><clipPath id=%22c%22><rect width=%2280%22 height=%2240%22/></clipPath></defs><g clip-path=%22url%28%23c%29%22><circle cx=%2240%22 cy=%2240%22 r=%2238%22 fill=%22none%22 stroke=%22%231e293b%22 stroke-width=%221%22 stroke-opacity=%220.08%22/><circle cx=%2240%22 cy=%2240%22 r=%2228%22 fill=%22none%22 stroke=%22%231e293b%22 stroke-width=%221%22 stroke-opacity=%220.08%22/><circle cx=%2240%22 cy=%2240%22 r=%2218%22 fill=%22none%22 stroke=%22%231e293b%22 stroke-width=%221%22 stroke-opacity=%220.08%22/><circle cx=%2240%22 cy=%2240%22 r=%228%22 fill=%22none%22 stroke=%22%231e293b%22 stroke-width=%221%22 stroke-opacity=%220.08%22/><circle cx=%220%22 cy=%2260%22 r=%2238%22 fill=%22none%22 stroke=%22%231e293b%22 stroke-width=%221%22 stroke-opacity=%220.08%22/><circle cx=%220%22 cy=%2260%22 r=%2228%22 fill=%22none%22 stroke=%22%231e293b%22 stroke-width=%221%22 stroke-opacity=%220.08%22/><circle cx=%220%22 cy=%2260%22 r=%2218%22 fill=%22none%22 stroke=%22%231e293b%22 stroke-width=%221%22 stroke-opacity=%220.08%22/><circle cx=%220%22 cy=%2260%22 r=%228%22 fill=%22none%22 stroke=%22%231e293b%22 stroke-width=%221%22 stroke-opacity=%220.08%22/><circle cx=%2280%22 cy=%2260%22 r=%2238%22 fill=%22none%22 stroke=%22%231e293b%22 stroke-width=%221%22 stroke-opacity=%220.08%22/><circle cx=%2280%22 cy=%2260%22 r=%2228%22 fill=%22none%22 stroke=%22%231e293b%22 stroke-width=%221%22 stroke-opacity=%220.08%22/><circle cx=%2280%22 cy=%2260%22 r=%2218%22 fill=%22none%22 stroke=%22%231e293b%22 stroke-width=%221%22 stroke-opacity=%220.08%22/><circle cx=%2280%22 cy=%2260%22 r=%228%22 fill=%22none%22 stroke=%22%231e293b%22 stroke-width=%221%22 stroke-opacity=%220.08%22/><circle cx=%2240%22 cy=%2280%22 r=%2238%22 fill=%22none%22 stroke=%22%231e293b%22 stroke-width=%221%22 stroke-opacity=%220.08%22/><circle cx=%2240%22 cy=%2280%22 r=%2228%22 fill=%22none%22 stroke=%22%231e293b%22 stroke-width=%221%22 stroke-opacity=%220.08%22/><circle cx=%2240%22 cy=%2280%22 r=%2218%22 fill=%22none%22 stroke=%22%231e293b%22 stroke-width=%221%22 stroke-opacity=%220.08%22/><circle cx=%2240%22 cy=%2280%22 r=%228%22 fill=%22none%22 stroke=%22%231e293b%22 stroke-width=%221%22 stroke-opacity=%220.08%22/><circle cx=%220%22 cy=%2220%22 r=%2238%22 fill=%22none%22 stroke=%22%231e293b%22 stroke-width=%221%22 stroke-opacity=%220.08%22/><circle cx=%220%22 cy=%2220%22 r=%2228%22 fill=%22none%22 stroke=%22%231e293b%22 stroke-width=%221%22 stroke-opacity=%220.08%22/><circle cx=%220%22 cy=%2220%22 r=%2218%22 fill=%22none%22 stroke=%22%231e293b%22 stroke-width=%221%22 stroke-opacity=%220.08%22/><circle cx=%220%22 cy=%2220%22 r=%228%22 fill=%22none%22 stroke=%22%231e293b%22 stroke-width=%221%22 stroke-opacity=%220.08%22/><circle cx=%2280%22 cy=%2220%22 r=%2238%22 fill=%22none%22 stroke=%22%231e293b%22 stroke-width=%221%22 stroke-opacity=%220.08%22/><circle cx=%2280%22 cy=%2220%22 r=%2228%22 fill=%22none%22 stroke=%22%231e293b%22 stroke-width=%221%22 stroke-opacity=%220.08%22/><circle cx=%2280%22 cy=%2220%22 r=%2218%22 fill=%22none%22 stroke=%22%231e293b%22 stroke-width=%221%22 stroke-opacity=%220.08%22/><circle cx=%2280%22 cy=%2220%22 r=%228%22 fill=%22none%22 stroke=%22%231e293b%22 stroke-width=%221%22 stroke-opacity=%220.08%22/></g></svg>");
+  --bg-ripples: url("data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 600 600%22><circle cx=%22300%22 cy=%22300%22 r=%2230%22 fill=%22none%22 stroke=%22%231e293b%22 stroke-width=%221%22 stroke-opacity=%220.095%22/><circle cx=%22300%22 cy=%22300%22 r=%2260%22 fill=%22none%22 stroke=%22%231e293b%22 stroke-width=%221%22 stroke-opacity=%220.090%22/><circle cx=%22300%22 cy=%22300%22 r=%2290%22 fill=%22none%22 stroke=%22%231e293b%22 stroke-width=%221%22 stroke-opacity=%220.085%22/><circle cx=%22300%22 cy=%22300%22 r=%22120%22 fill=%22none%22 stroke=%22%231e293b%22 stroke-width=%221%22 stroke-opacity=%220.080%22/><circle cx=%22300%22 cy=%22300%22 r=%22150%22 fill=%22none%22 stroke=%22%231e293b%22 stroke-width=%221%22 stroke-opacity=%220.075%22/><circle cx=%22300%22 cy=%22300%22 r=%22180%22 fill=%22none%22 stroke=%22%231e293b%22 stroke-width=%221%22 stroke-opacity=%220.070%22/><circle cx=%22300%22 cy=%22300%22 r=%22210%22 fill=%22none%22 stroke=%22%231e293b%22 stroke-width=%221%22 stroke-opacity=%220.065%22/><circle cx=%22300%22 cy=%22300%22 r=%22240%22 fill=%22none%22 stroke=%22%231e293b%22 stroke-width=%221%22 stroke-opacity=%220.060%22/><circle cx=%22300%22 cy=%22300%22 r=%22270%22 fill=%22none%22 stroke=%22%231e293b%22 stroke-width=%221%22 stroke-opacity=%220.055%22/></svg>");
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg-contours: url("data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 900 600%22><path d=%22M696,300 L698,306 L695,311 L691,316 L688,321 L687,326 L685,332 L681,337 L675,341 L667,344 L660,347 L653,350 L645,353 L637,354 L628,352 L620,348 L613,343 L608,340 L602,338 L594,339 L586,340 L578,339 L570,338 L563,335 L554,332 L546,329 L539,325 L536,319 L538,312 L542,306 L546,300 L548,295 L548,290 L549,284 L551,279 L557,275 L563,272 L569,269 L574,266 L579,262 L585,259 L592,257 L599,256 L606,254 L612,251 L620,246 L629,242 L639,240 L648,241 L655,246 L661,252 L666,257 L671,262 L674,267 L676,273 L676,278 L676,283 L679,287 L685,291 L691,295 L696,300 Z%22 fill=%22none%22 stroke=%22%23cbd5e1%22 stroke-width=%221.2%22 stroke-opacity=%220.09%22/><path d=%22M739,300 L744,309 L746,318 L748,328 L749,339 L747,350 L739,359 L725,365 L707,366 L690,365 L676,365 L665,368 L655,372 L644,376 L632,377 L620,377 L608,376 L596,376 L583,377 L570,376 L558,373 L549,367 L540,360 L531,355 L518,351 L502,346 L489,340 L482,331 L482,320 L488,309 L494,300 L501,291 L507,284 L515,277 L525,271 L535,267 L541,261 L543,253 L544,242 L546,231 L553,221 L565,216 L579,214 L593,213 L606,212 L620,210 L634,210 L647,213 L659,218 L670,224 L681,228 L693,232 L704,236 L713,243 L716,253 L714,263 L713,272 L715,279 L722,285 L731,292 L739,300 Z%22 fill=%22none%22 stroke=%22%23cbd5e1%22 stroke-width=%221.2%22 stroke-opacity=%220.09%22/><path d=%22M776,300 L776,311 L782,323 L788,337 L789,351 L784,364 L774,376 L762,387 L749,397 L734,406 L715,412 L692,410 L670,404 L650,396 L634,391 L620,392 L605,398 L588,403 L570,405 L552,403 L535,400 L516,397 L496,394 L478,387 L465,376 L460,363 L459,349 L458,336 L451,324 L442,313 L436,300 L438,287 L449,275 L464,266 L479,257 L490,249 L499,240 L509,232 L521,225 L534,219 L545,211 L554,199 L565,184 L579,169 L599,161 L620,161 L640,168 L659,177 L675,185 L691,192 L705,200 L716,210 L724,222 L731,232 L740,240 L755,247 L770,255 L781,264 L784,276 L780,289 L776,300 Z%22 fill=%22none%22 stroke=%22%23cbd5e1%22 stroke-width=%221.2%22 stroke-opacity=%220.09%22/><path d=%22M849,300 L857,317 L866,335 L866,354 L854,371 L828,382 L796,387 L767,390 L745,394 L728,401 L713,409 L696,416 L678,422 L660,428 L641,438 L620,450 L595,461 L569,464 L544,458 L525,446 L508,432 L489,422 L468,414 L447,406 L430,394 L421,378 L418,361 L416,345 L414,330 L411,315 L414,300 L425,286 L440,274 L453,263 L456,250 L451,234 L444,213 L444,192 L454,174 L472,162 L495,153 L519,146 L544,140 L570,139 L596,144 L620,155 L641,167 L659,175 L679,177 L702,176 L725,176 L745,183 L760,195 L770,208 L782,220 L797,230 L815,241 L830,254 L839,268 L844,284 L849,300 Z%22 fill=%22none%22 stroke=%22%23cbd5e1%22 stroke-width=%221.2%22 stroke-opacity=%220.09%22/><path d=%22M877,300 L887,319 L892,339 L896,361 L898,384 L894,408 L877,427 L847,439 L809,442 L772,442 L742,443 L718,450 L696,460 L672,467 L646,470 L620,467 L595,463 L569,463 L542,463 L514,462 L489,454 L469,441 L450,428 L428,418 L398,410 L363,401 L334,387 L318,367 L320,343 L332,321 L347,300 L360,281 L374,264 L392,250 L414,238 L435,227 L449,215 L453,198 L454,175 L460,150 L477,131 L503,121 L532,117 L562,115 L591,111 L620,106 L650,105 L679,110 L706,121 L730,132 L754,142 L780,150 L805,160 L822,176 L827,198 L822,221 L818,240 L822,255 L838,268 L859,283 L877,300 Z%22 fill=%22none%22 stroke=%22%23cbd5e1%22 stroke-width=%221.2%22 stroke-opacity=%220.09%22/><path d=%22M990,300 L984,326 L957,349 L919,366 L881,379 L854,392 L835,406 L818,421 L798,435 L777,447 L757,461 L739,481 L718,506 L692,529 L657,542 L620,542 L584,531 L552,517 L521,507 L488,502 L454,496 L424,483 L402,465 L387,443 L373,422 L358,403 L343,384 L336,363 L341,340 L354,319 L365,300 L363,282 L346,260 L324,235 L310,206 L313,179 L329,156 L353,137 L380,119 L410,103 L444,93 L484,93 L525,102 L562,113 L592,119 L620,117 L650,108 L682,101 L714,103 L742,114 L766,128 L791,140 L820,149 L851,158 L879,172 L899,190 L914,211 L930,231 L952,252 L976,275 L990,300 Z%22 fill=%22none%22 stroke=%22%23cbd5e1%22 stroke-width=%221.2%22 stroke-opacity=%220.09%22/><path d=%22M1012,300 L1009,328 L1005,356 L999,384 L984,410 L955,431 L918,447 L883,461 L855,477 L831,498 L805,518 L771,530 L730,530 L689,519 L652,508 L620,505 L588,509 L552,516 L515,520 L477,518 L438,514 L395,510 L347,506 L299,496 L263,476 L249,445 L257,410 L276,376 L290,348 L295,323 L292,300 L293,277 L301,254 L315,233 L326,211 L331,187 L335,159 L348,133 L373,113 L408,102 L445,94 L478,83 L507,64 L539,41 L577,22 L620,15 L663,22 L702,37 L737,54 L770,71 L798,90 L819,114 L829,142 L834,169 L846,188 L873,201 L915,211 L960,225 L995,246 L1011,272 L1012,300 Z%22 fill=%22none%22 stroke=%22%23cbd5e1%22 stroke-width=%221.2%22 stroke-opacity=%220.09%22/><path d=%22M1017,300 L1014,328 L1012,357 L1019,388 L1031,424 L1036,463 L1021,498 L981,521 L925,530 L866,531 L815,530 L772,532 L733,536 L694,536 L656,532 L620,530 L584,535 L542,549 L494,565 L442,571 L397,563 L363,541 L337,514 L311,489 L278,469 L242,448 L212,423 L197,393 L196,361 L200,330 L202,300 L204,270 L215,241 L244,217 L287,199 L331,186 L362,172 L375,150 L379,118 L387,82 L408,50 L441,26 L481,9 L524,-6 L571,-19 L620,-25 L669,-16 L712,7 L745,37 L774,65 L804,83 L842,92 L882,102 L917,118 L938,143 L948,171 L957,198 L972,222 L993,246 L1010,272 L1017,300 Z%22 fill=%22none%22 stroke=%22%23cbd5e1%22 stroke-width=%221.2%22 stroke-opacity=%220.09%22/><path d=%22M1099,300 L1083,333 L1073,366 L1071,400 L1064,435 L1040,465 L993,485 L935,493 L880,496 L838,504 L808,521 L780,545 L748,568 L710,586 L667,602 L620,620 L567,640 L509,657 L449,658 L399,638 L364,601 L343,559 L325,523 L301,495 L271,472 L244,448 L228,419 L222,388 L217,358 L206,330 L189,300 L178,268 L183,237 L205,208 L233,183 L252,155 L257,121 L259,79 L271,37 L303,4 L353,-14 L410,-20 L467,-20 L520,-19 L572,-13 L620,1 L663,25 L698,51 L730,69 L769,73 L819,65 L878,58 L934,63 L977,81 L1007,109 L1032,138 L1059,167 L1087,197 L1108,230 L1111,265 L1099,300 Z%22 fill=%22none%22 stroke=%22%23cbd5e1%22 stroke-width=%221.2%22 stroke-opacity=%220.09%22/></svg>");
+    --bg-waves: url("data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 80 40%22 width=%2280%22 height=%2240%22><defs><clipPath id=%22c%22><rect width=%2280%22 height=%2240%22/></clipPath></defs><g clip-path=%22url%28%23c%29%22><circle cx=%2240%22 cy=%2240%22 r=%2238%22 fill=%22none%22 stroke=%22%23cbd5e1%22 stroke-width=%221%22 stroke-opacity=%220.08%22/><circle cx=%2240%22 cy=%2240%22 r=%2228%22 fill=%22none%22 stroke=%22%23cbd5e1%22 stroke-width=%221%22 stroke-opacity=%220.08%22/><circle cx=%2240%22 cy=%2240%22 r=%2218%22 fill=%22none%22 stroke=%22%23cbd5e1%22 stroke-width=%221%22 stroke-opacity=%220.08%22/><circle cx=%2240%22 cy=%2240%22 r=%228%22 fill=%22none%22 stroke=%22%23cbd5e1%22 stroke-width=%221%22 stroke-opacity=%220.08%22/><circle cx=%220%22 cy=%2260%22 r=%2238%22 fill=%22none%22 stroke=%22%23cbd5e1%22 stroke-width=%221%22 stroke-opacity=%220.08%22/><circle cx=%220%22 cy=%2260%22 r=%2228%22 fill=%22none%22 stroke=%22%23cbd5e1%22 stroke-width=%221%22 stroke-opacity=%220.08%22/><circle cx=%220%22 cy=%2260%22 r=%2218%22 fill=%22none%22 stroke=%22%23cbd5e1%22 stroke-width=%221%22 stroke-opacity=%220.08%22/><circle cx=%220%22 cy=%2260%22 r=%228%22 fill=%22none%22 stroke=%22%23cbd5e1%22 stroke-width=%221%22 stroke-opacity=%220.08%22/><circle cx=%2280%22 cy=%2260%22 r=%2238%22 fill=%22none%22 stroke=%22%23cbd5e1%22 stroke-width=%221%22 stroke-opacity=%220.08%22/><circle cx=%2280%22 cy=%2260%22 r=%2228%22 fill=%22none%22 stroke=%22%23cbd5e1%22 stroke-width=%221%22 stroke-opacity=%220.08%22/><circle cx=%2280%22 cy=%2260%22 r=%2218%22 fill=%22none%22 stroke=%22%23cbd5e1%22 stroke-width=%221%22 stroke-opacity=%220.08%22/><circle cx=%2280%22 cy=%2260%22 r=%228%22 fill=%22none%22 stroke=%22%23cbd5e1%22 stroke-width=%221%22 stroke-opacity=%220.08%22/><circle cx=%2240%22 cy=%2280%22 r=%2238%22 fill=%22none%22 stroke=%22%23cbd5e1%22 stroke-width=%221%22 stroke-opacity=%220.08%22/><circle cx=%2240%22 cy=%2280%22 r=%2228%22 fill=%22none%22 stroke=%22%23cbd5e1%22 stroke-width=%221%22 stroke-opacity=%220.08%22/><circle cx=%2240%22 cy=%2280%22 r=%2218%22 fill=%22none%22 stroke=%22%23cbd5e1%22 stroke-width=%221%22 stroke-opacity=%220.08%22/><circle cx=%2240%22 cy=%2280%22 r=%228%22 fill=%22none%22 stroke=%22%23cbd5e1%22 stroke-width=%221%22 stroke-opacity=%220.08%22/><circle cx=%220%22 cy=%2220%22 r=%2238%22 fill=%22none%22 stroke=%22%23cbd5e1%22 stroke-width=%221%22 stroke-opacity=%220.08%22/><circle cx=%220%22 cy=%2220%22 r=%2228%22 fill=%22none%22 stroke=%22%23cbd5e1%22 stroke-width=%221%22 stroke-opacity=%220.08%22/><circle cx=%220%22 cy=%2220%22 r=%2218%22 fill=%22none%22 stroke=%22%23cbd5e1%22 stroke-width=%221%22 stroke-opacity=%220.08%22/><circle cx=%220%22 cy=%2220%22 r=%228%22 fill=%22none%22 stroke=%22%23cbd5e1%22 stroke-width=%221%22 stroke-opacity=%220.08%22/><circle cx=%2280%22 cy=%2220%22 r=%2238%22 fill=%22none%22 stroke=%22%23cbd5e1%22 stroke-width=%221%22 stroke-opacity=%220.08%22/><circle cx=%2280%22 cy=%2220%22 r=%2228%22 fill=%22none%22 stroke=%22%23cbd5e1%22 stroke-width=%221%22 stroke-opacity=%220.08%22/><circle cx=%2280%22 cy=%2220%22 r=%2218%22 fill=%22none%22 stroke=%22%23cbd5e1%22 stroke-width=%221%22 stroke-opacity=%220.08%22/><circle cx=%2280%22 cy=%2220%22 r=%228%22 fill=%22none%22 stroke=%22%23cbd5e1%22 stroke-width=%221%22 stroke-opacity=%220.08%22/></g></svg>");
+    --bg-ripples: url("data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 600 600%22><circle cx=%22300%22 cy=%22300%22 r=%2230%22 fill=%22none%22 stroke=%22%23cbd5e1%22 stroke-width=%221%22 stroke-opacity=%220.095%22/><circle cx=%22300%22 cy=%22300%22 r=%2260%22 fill=%22none%22 stroke=%22%23cbd5e1%22 stroke-width=%221%22 stroke-opacity=%220.090%22/><circle cx=%22300%22 cy=%22300%22 r=%2290%22 fill=%22none%22 stroke=%22%23cbd5e1%22 stroke-width=%221%22 stroke-opacity=%220.085%22/><circle cx=%22300%22 cy=%22300%22 r=%22120%22 fill=%22none%22 stroke=%22%23cbd5e1%22 stroke-width=%221%22 stroke-opacity=%220.080%22/><circle cx=%22300%22 cy=%22300%22 r=%22150%22 fill=%22none%22 stroke=%22%23cbd5e1%22 stroke-width=%221%22 stroke-opacity=%220.075%22/><circle cx=%22300%22 cy=%22300%22 r=%22180%22 fill=%22none%22 stroke=%22%23cbd5e1%22 stroke-width=%221%22 stroke-opacity=%220.070%22/><circle cx=%22300%22 cy=%22300%22 r=%22210%22 fill=%22none%22 stroke=%22%23cbd5e1%22 stroke-width=%221%22 stroke-opacity=%220.065%22/><circle cx=%22300%22 cy=%22300%22 r=%22240%22 fill=%22none%22 stroke=%22%23cbd5e1%22 stroke-width=%221%22 stroke-opacity=%220.060%22/><circle cx=%22300%22 cy=%22300%22 r=%22270%22 fill=%22none%22 stroke=%22%23cbd5e1%22 stroke-width=%221%22 stroke-opacity=%220.055%22/></svg>");
+  }
+}
+:root[data-theme="dark"] {
+  --bg-contours: url("data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 900 600%22><path d=%22M701,300 L697,305 L694,311 L691,316 L686,320 L680,323 L674,327 L669,330 L666,335 L662,340 L657,344 L650,346 L642,346 L634,346 L627,347 L620,349 L612,353 L603,355 L594,355 L585,353 L578,350 L570,347 L563,343 L559,338 L557,331 L559,324 L562,317 L564,312 L562,308 L556,305 L551,300 L548,295 L547,289 L548,284 L549,278 L550,272 L553,267 L558,262 L566,259 L574,257 L582,256 L589,253 L596,249 L603,246 L612,245 L620,247 L628,251 L634,255 L640,258 L646,260 L653,261 L658,264 L664,267 L670,269 L679,271 L689,273 L699,276 L707,281 L708,287 L706,294 L701,300 Z%22 fill=%22none%22 stroke=%22%23cbd5e1%22 stroke-width=%221.2%22 stroke-opacity=%220.09%22/><path d=%22M747,300 L758,310 L763,321 L759,331 L750,339 L738,347 L728,353 L716,359 L703,363 L689,364 L674,364 L662,364 L652,368 L643,374 L632,380 L620,383 L607,382 L596,378 L584,374 L573,372 L559,372 L545,370 L532,366 L522,360 L513,353 L504,346 L494,338 L486,330 L484,320 L490,309 L502,300 L515,292 L523,286 L526,279 L526,271 L526,263 L529,255 L534,248 L539,239 L545,230 L552,220 L562,212 L577,209 L592,211 L607,214 L620,216 L633,216 L646,215 L660,216 L672,220 L682,227 L689,235 L696,242 L704,249 L711,255 L716,262 L717,271 L719,278 L723,285 L734,292 L747,300 Z%22 fill=%22none%22 stroke=%22%23cbd5e1%22 stroke-width=%221.2%22 stroke-opacity=%220.09%22/><path d=%22M761,300 L770,311 L777,323 L778,335 L775,347 L772,360 L768,373 L761,386 L749,397 L730,403 L709,405 L690,407 L673,410 L656,417 L639,423 L620,425 L601,420 L585,411 L572,401 L559,394 L545,388 L532,382 L520,375 L510,367 L499,360 L483,354 L461,348 L438,340 L421,329 L415,315 L421,300 L432,287 L444,275 L454,263 L464,253 L477,244 L493,237 L509,232 L521,225 L531,216 L539,205 L552,195 L568,190 L586,191 L603,193 L620,194 L637,190 L656,185 L677,181 L697,182 L715,188 L732,195 L748,203 L763,212 L774,224 L778,238 L772,254 L761,269 L753,281 L753,290 L761,300 Z%22 fill=%22none%22 stroke=%22%23cbd5e1%22 stroke-width=%221.2%22 stroke-opacity=%220.09%22/><path d=%22M819,300 L810,314 L807,327 L809,342 L811,358 L807,374 L799,388 L788,403 L778,419 L767,437 L751,454 L727,464 L698,463 L668,453 L642,441 L620,432 L600,427 L581,426 L561,423 L543,418 L524,413 L504,408 L480,406 L454,402 L430,394 L416,380 L411,363 L410,346 L406,331 L396,316 L384,300 L378,283 L382,266 L395,250 L413,237 L431,226 L447,214 L465,205 L487,200 L511,198 L533,198 L550,193 L563,182 L578,164 L596,147 L620,136 L646,133 L671,136 L696,142 L719,148 L742,156 L760,169 L771,186 L777,204 L782,220 L792,232 L808,243 L824,255 L832,269 L829,285 L819,300 Z%22 fill=%22none%22 stroke=%22%23cbd5e1%22 stroke-width=%221.2%22 stroke-opacity=%220.09%22/><path d=%22M902,300 L918,321 L918,343 L907,363 L892,382 L877,401 L858,418 L833,430 L802,437 L769,439 L740,442 L718,449 L697,461 L674,473 L647,478 L620,474 L595,464 L571,456 L547,452 L520,452 L491,452 L462,447 L437,438 L412,427 L385,416 L355,404 L330,388 L318,367 L324,343 L346,320 L372,300 L391,284 L399,268 L403,252 L408,236 L418,221 L429,206 L439,189 L447,169 L457,148 L475,130 L502,120 L533,118 L564,120 L592,119 L620,113 L650,106 L682,103 L711,109 L736,123 L756,140 L774,156 L791,170 L806,186 L814,204 L814,224 L814,241 L822,255 L843,268 L873,282 L902,300 Z%22 fill=%22none%22 stroke=%22%23cbd5e1%22 stroke-width=%221.2%22 stroke-opacity=%220.09%22/><path d=%22M930,300 L946,323 L958,349 L957,375 L939,397 L909,413 L878,427 L854,443 L836,463 L816,484 L790,500 L755,507 L718,505 L682,499 L650,495 L620,493 L591,490 L563,483 L538,472 L513,463 L484,461 L444,465 L397,469 L351,465 L317,449 L300,426 L295,399 L294,372 L293,347 L295,323 L305,300 L325,279 L347,261 L363,243 L368,224 L368,201 L372,178 L389,159 L417,147 L449,140 L477,132 L501,118 L525,100 L552,83 L585,72 L620,68 L656,68 L693,67 L731,68 L768,75 L796,93 L811,121 L815,153 L816,180 L823,200 L841,213 L866,226 L888,241 L904,259 L916,279 L930,300 Z%22 fill=%22none%22 stroke=%22%23cbd5e1%22 stroke-width=%221.2%22 stroke-opacity=%220.09%22/><path d=%22M964,300 L977,326 L984,353 L991,382 L996,414 L989,445 L965,470 L923,485 L873,491 L827,494 L791,501 L761,515 L730,529 L694,538 L657,536 L620,529 L586,522 L552,518 L516,517 L482,511 L451,499 L425,482 L398,468 L362,458 L315,451 L264,440 L224,420 L206,391 L210,359 L226,328 L244,300 L261,274 L280,251 L306,231 L338,215 L366,200 L382,183 L388,158 L391,127 L404,98 L431,77 L468,67 L507,64 L545,59 L581,49 L620,39 L661,35 L701,39 L739,51 L775,64 L811,75 L848,86 L880,104 L897,130 L897,163 L888,195 L882,221 L891,240 L915,257 L942,277 L964,300 Z%22 fill=%22none%22 stroke=%22%23cbd5e1%22 stroke-width=%221.2%22 stroke-opacity=%220.09%22/><path d=%22M1046,300 L1028,329 L1013,357 L995,383 L967,405 L936,424 L909,443 L890,466 L876,493 L856,521 L824,540 L782,547 L738,547 L698,549 L660,561 L620,580 L574,598 L525,605 L477,600 L433,586 L392,569 L352,551 L318,528 L299,497 L298,459 L311,421 L322,390 L318,367 L293,347 L259,326 L231,300 L217,271 L216,242 L220,212 L223,180 L230,147 L249,117 L285,95 L331,82 L377,72 L416,60 L450,41 L486,20 L529,7 L575,10 L620,26 L659,47 L694,63 L729,73 L764,79 L799,89 L831,102 L864,116 L904,126 L957,133 L1016,144 L1067,165 L1093,196 L1091,232 L1070,268 L1046,300 Z%22 fill=%22none%22 stroke=%22%23cbd5e1%22 stroke-width=%221.2%22 stroke-opacity=%220.09%22/><path d=%22M1060,300 L1084,333 L1111,371 L1122,411 L1107,447 L1070,477 L1024,500 L978,519 L933,537 L885,548 L831,549 L778,541 L731,533 L694,536 L659,555 L620,584 L572,610 L520,621 L469,617 L422,603 L376,587 L329,572 L284,554 L248,528 L228,494 L218,458 L208,425 L188,395 L163,366 L145,334 L150,300 L179,269 L221,242 L256,220 L275,196 L282,167 L288,136 L302,105 L324,77 L350,47 L376,13 L408,-24 L450,-56 L505,-69 L564,-61 L620,-35 L667,-6 L709,16 L750,28 L792,38 L831,52 L864,72 L893,94 L924,114 L964,130 L1006,149 L1039,173 L1054,204 L1053,237 L1050,269 L1060,300 Z%22 fill=%22none%22 stroke=%22%23cbd5e1%22 stroke-width=%221.2%22 stroke-opacity=%220.09%22/></svg>");
+  --bg-waves: url("data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 80 40%22 width=%2280%22 height=%2240%22><defs><clipPath id=%22c%22><rect width=%2280%22 height=%2240%22/></clipPath></defs><g clip-path=%22url%28%23c%29%22><circle cx=%2240%22 cy=%2240%22 r=%2238%22 fill=%22none%22 stroke=%22%23cbd5e1%22 stroke-width=%221%22 stroke-opacity=%220.08%22/><circle cx=%2240%22 cy=%2240%22 r=%2228%22 fill=%22none%22 stroke=%22%23cbd5e1%22 stroke-width=%221%22 stroke-opacity=%220.08%22/><circle cx=%2240%22 cy=%2240%22 r=%2218%22 fill=%22none%22 stroke=%22%23cbd5e1%22 stroke-width=%221%22 stroke-opacity=%220.08%22/><circle cx=%2240%22 cy=%2240%22 r=%228%22 fill=%22none%22 stroke=%22%23cbd5e1%22 stroke-width=%221%22 stroke-opacity=%220.08%22/><circle cx=%220%22 cy=%2260%22 r=%2238%22 fill=%22none%22 stroke=%22%23cbd5e1%22 stroke-width=%221%22 stroke-opacity=%220.08%22/><circle cx=%220%22 cy=%2260%22 r=%2228%22 fill=%22none%22 stroke=%22%23cbd5e1%22 stroke-width=%221%22 stroke-opacity=%220.08%22/><circle cx=%220%22 cy=%2260%22 r=%2218%22 fill=%22none%22 stroke=%22%23cbd5e1%22 stroke-width=%221%22 stroke-opacity=%220.08%22/><circle cx=%220%22 cy=%2260%22 r=%228%22 fill=%22none%22 stroke=%22%23cbd5e1%22 stroke-width=%221%22 stroke-opacity=%220.08%22/><circle cx=%2280%22 cy=%2260%22 r=%2238%22 fill=%22none%22 stroke=%22%23cbd5e1%22 stroke-width=%221%22 stroke-opacity=%220.08%22/><circle cx=%2280%22 cy=%2260%22 r=%2228%22 fill=%22none%22 stroke=%22%23cbd5e1%22 stroke-width=%221%22 stroke-opacity=%220.08%22/><circle cx=%2280%22 cy=%2260%22 r=%2218%22 fill=%22none%22 stroke=%22%23cbd5e1%22 stroke-width=%221%22 stroke-opacity=%220.08%22/><circle cx=%2280%22 cy=%2260%22 r=%228%22 fill=%22none%22 stroke=%22%23cbd5e1%22 stroke-width=%221%22 stroke-opacity=%220.08%22/><circle cx=%2240%22 cy=%2280%22 r=%2238%22 fill=%22none%22 stroke=%22%23cbd5e1%22 stroke-width=%221%22 stroke-opacity=%220.08%22/><circle cx=%2240%22 cy=%2280%22 r=%2228%22 fill=%22none%22 stroke=%22%23cbd5e1%22 stroke-width=%221%22 stroke-opacity=%220.08%22/><circle cx=%2240%22 cy=%2280%22 r=%2218%22 fill=%22none%22 stroke=%22%23cbd5e1%22 stroke-width=%221%22 stroke-opacity=%220.08%22/><circle cx=%2240%22 cy=%2280%22 r=%228%22 fill=%22none%22 stroke=%22%23cbd5e1%22 stroke-width=%221%22 stroke-opacity=%220.08%22/><circle cx=%220%22 cy=%2220%22 r=%2238%22 fill=%22none%22 stroke=%22%23cbd5e1%22 stroke-width=%221%22 stroke-opacity=%220.08%22/><circle cx=%220%22 cy=%2220%22 r=%2228%22 fill=%22none%22 stroke=%22%23cbd5e1%22 stroke-width=%221%22 stroke-opacity=%220.08%22/><circle cx=%220%22 cy=%2220%22 r=%2218%22 fill=%22none%22 stroke=%22%23cbd5e1%22 stroke-width=%221%22 stroke-opacity=%220.08%22/><circle cx=%220%22 cy=%2220%22 r=%228%22 fill=%22none%22 stroke=%22%23cbd5e1%22 stroke-width=%221%22 stroke-opacity=%220.08%22/><circle cx=%2280%22 cy=%2220%22 r=%2238%22 fill=%22none%22 stroke=%22%23cbd5e1%22 stroke-width=%221%22 stroke-opacity=%220.08%22/><circle cx=%2280%22 cy=%2220%22 r=%2228%22 fill=%22none%22 stroke=%22%23cbd5e1%22 stroke-width=%221%22 stroke-opacity=%220.08%22/><circle cx=%2280%22 cy=%2220%22 r=%2218%22 fill=%22none%22 stroke=%22%23cbd5e1%22 stroke-width=%221%22 stroke-opacity=%220.08%22/><circle cx=%2280%22 cy=%2220%22 r=%228%22 fill=%22none%22 stroke=%22%23cbd5e1%22 stroke-width=%221%22 stroke-opacity=%220.08%22/></g></svg>");
+  --bg-ripples: url("data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 600 600%22><circle cx=%22300%22 cy=%22300%22 r=%2230%22 fill=%22none%22 stroke=%22%23cbd5e1%22 stroke-width=%221%22 stroke-opacity=%220.095%22/><circle cx=%22300%22 cy=%22300%22 r=%2260%22 fill=%22none%22 stroke=%22%23cbd5e1%22 stroke-width=%221%22 stroke-opacity=%220.090%22/><circle cx=%22300%22 cy=%22300%22 r=%2290%22 fill=%22none%22 stroke=%22%23cbd5e1%22 stroke-width=%221%22 stroke-opacity=%220.085%22/><circle cx=%22300%22 cy=%22300%22 r=%22120%22 fill=%22none%22 stroke=%22%23cbd5e1%22 stroke-width=%221%22 stroke-opacity=%220.080%22/><circle cx=%22300%22 cy=%22300%22 r=%22150%22 fill=%22none%22 stroke=%22%23cbd5e1%22 stroke-width=%221%22 stroke-opacity=%220.075%22/><circle cx=%22300%22 cy=%22300%22 r=%22180%22 fill=%22none%22 stroke=%22%23cbd5e1%22 stroke-width=%221%22 stroke-opacity=%220.070%22/><circle cx=%22300%22 cy=%22300%22 r=%22210%22 fill=%22none%22 stroke=%22%23cbd5e1%22 stroke-width=%221%22 stroke-opacity=%220.065%22/><circle cx=%22300%22 cy=%22300%22 r=%22240%22 fill=%22none%22 stroke=%22%23cbd5e1%22 stroke-width=%221%22 stroke-opacity=%220.060%22/><circle cx=%22300%22 cy=%22300%22 r=%22270%22 fill=%22none%22 stroke=%22%23cbd5e1%22 stroke-width=%221%22 stroke-opacity=%220.055%22/></svg>");
+}
+.pv-main:not(.pv-about-page) .sections section.cv-journey {
+  background:
+    var(--bg-contours) right -6% top 20% / min(900px, 80vw) auto no-repeat,
+    var(--paper) 0 0 / 240px auto,
+    var(--bg);
+}
+.pv-main:not(.pv-about-page) .sections > section.cv-skills {
+  background:
+    var(--bg-waves) left bottom / 80px 40px repeat-x,
+    var(--paper) 0 0 / 240px auto,
+    var(--bg);
+  padding-bottom: clamp(80px, 12vh, 140px);
+}
+.pv-main:not(.pv-about-page) .sections > section.cv-recog {
+  background:
+    var(--bg-ripples) right -160px top 40px / 600px 600px no-repeat,
+    var(--paper) 0 0 / 240px auto,
+    var(--bg);
+}
+
+/* ---- the journey in full: each stop lists its degrees and jobs ----------- */
+.cv-jobs {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  margin: 12px 0 0;
+  padding: 14px 0 0;
+  border-top: 1px solid var(--line);
+  list-style: none;
+}
+.cv-job {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+.pv .cv-job__when {
+  margin: 0;
+  font-size: 0.75rem;
+  font-variant-numeric: tabular-nums;
+  color: var(--text-2);
+}
+.cv-job__role {
+  margin: 0;
+  font-family: var(--cv-font);
+  font-size: 0.9375rem;
+  font-weight: 600;
+  line-height: 1.35;
+  color: var(--ink);
+}
+.pv .cv-job__org {
+  margin: 0;
+  font-size: 0.875rem;
+  color: var(--accent-text);
+}
+.pv .cv-job__desc {
+  margin: 4px 0 0;
+  font-size: 0.875rem;
+  line-height: 1.5;
+  color: var(--text-2);
+}
+.pv .cv-job__desc a {
+  color: var(--ink);
+  text-decoration-color: var(--accent);
+  text-underline-offset: 3px;
+}
+/* five stops with their jobs: one row on wide screens, scrolling sideways
+   if the window is too narrow for five; on phones the route runs down the
+   side (homepage.css) */
+@media (min-width: 861px) {
+  .cv-route--detail {
+    grid-template-columns: repeat(5, minmax(180px, 1fr));
+    overflow-x: auto;
+    padding-bottom: 8px;
+    scrollbar-width: thin;
+  }
+}
+
+/* while the route draws itself (scroll.js), the stops it has not reached
+   are greyed out; without motion every stop shows in full */
+.cv-stop {
+  transition: opacity 0.4s ease, filter 0.4s ease;
+}
+.has-gsap .cv-stop:not(.is-reached) {
+  opacity: 0.3;
+  filter: grayscale(1);
 }

@@ -1,12 +1,9 @@
-/* Case study and About motion, with Lenis (the smooth, weighted scroll) and
+/* Case study motion, with Lenis (the smooth, weighted scroll) and
    GSAP with ScrollTrigger, in step with the homepage (scroll.js):
      top     the title's words slide up into place, the rest fades in, the
-             before and after opens out from its middle (About: the ID badge
-             fades in)
-     acts    each act's (or About section's) title slides up out of its line
-             as it comes in
-     parts   each part's title and what follows rise in, one after another;
-             on About, each block, card, chapter and plaque
+             hero picture opens out from its middle
+     acts    each act's title slides up out of its line as it comes in
+     parts   each part's title and what follows rise in, one after another
      images  pictures ease from zoomed in to resting as they pass
    Links to sections on the page glide there with Lenis. Nothing runs for
    reduced motion or while motion is paused (the pause button): Lenis stops
@@ -56,7 +53,7 @@
     });
     el.appendChild(line);
   }
-  document.querySelectorAll("#main :is(.a-title, .a-act > h2, .pv-h1, .pv-h2)").forEach(wrapWords);
+  document.querySelectorAll("#main :is(.a-title, .a-act > h2)").forEach(wrapWords);
 
   /* in as it comes into view, back out when you scroll up past it */
   function enter(targets, trigger, vars, start) {
@@ -101,19 +98,15 @@
     ctx = gsap.context(function () {
       /* the top */
       var top = gsap.timeline({ delay: 0.1 })
-        .from("#main :is(.a-title, .pv-h1) .cs-w", { yPercent: 110, duration: 1, ease: "power4.out", stagger: 0.08 })
-        .from("#main :is(.a-hero2__intro > :not(.a-title), .pv-about__text > :not(.pv-h1))", { opacity: 0, y: 24, duration: 0.8, ease: "power2.out", stagger: 0.1 }, 0.35);
+        .from("#main .a-title .cs-w", { yPercent: 110, duration: 1, ease: "power4.out", stagger: 0.08 })
+        .from("#main :is(.a-hero2__intro > :not(.a-title))", { opacity: 0, y: 24, duration: 0.8, ease: "power2.out", stagger: 0.1 }, 0.1);
       if (document.querySelector("#main .a-hero2__image")) {
         top.from("#main .a-hero2__image", { clipPath: "inset(0 50% 0 50% round 16px)", duration: 1.2, ease: "power3.inOut", clearProps: "clipPath" }, 0.4);
         enter("#main .a-hero2__meta, #main .a-hero2__aside", "#main .a-hero2__meta", { stagger: 0.12 }, "top 90%");
       }
-      if (document.querySelector("#main .pv-about__badge")) {
-        top.from("#main .pv-about__badge", { opacity: 0, y: 40, duration: 1, ease: "power3.out" }, 0.4);
-        enter("#main .pv-bento > li", "#main .pv-bento", { stagger: 0.08 }, "top 90%");
-      }
 
       /* acts: the title slides up out of its line */
-      gsap.utils.toArray("#main :is(.a-act > h2, .pv-h2)").forEach(function (h) {
+      gsap.utils.toArray("#main .a-act > h2").forEach(function (h) {
         gsap.from(h.querySelectorAll(".cs-w"), {
           yPercent: 110,
           duration: 1,
@@ -142,11 +135,6 @@
           ease: "none",
           scrollTrigger: { trigger: box, start: "top bottom", end: "bottom top", scrub: true }
         });
-      });
-
-      /* About: each block, card, chapter and plaque */
-      gsap.utils.toArray("#main :is(.pv-block > :not(.pv-h2, .pv-chapters, .pv-papers, .pv-plaques, .pv-accs), .pv-acc, .pv-chapter, .pv-paper, .pv-plaque, .pv-contact__photo, .pv-contact__text > :not(.pv-h2))").forEach(function (el) {
-        enter(el, el, { duration: 0.8 }, "top 90%");
       });
 
       /* more projects */

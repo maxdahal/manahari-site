@@ -3,6 +3,11 @@
   "trailingSlash": false,
   "redirects": [
     {
+      "source": "/about",
+      "destination": "/#about-me",
+      "permanent": false
+    },
+    {
       "source": "/luna",
       "destination": "/work/surgical-console",
       "permanent": true

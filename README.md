@@ -5,19 +5,18 @@ Plain HTML, CSS and JavaScript, with no framework, library or build step. Open a
 ## What's in the folder
 
 ```
-index.html        Home: hero, case studies, About me, artwork, contact
-about.html        The full About page (from "More about me")
+index.html        Home: hero, case studies, About me, journey, skills,
+                  recognition, artwork, contact
 work/surgical-console.html   Case study: Surgical Console (arm panel sandbox)
 work/ku-brand.html   Case study: KU Brand (color sandbox, wireframe video)
 work/asians.html     Case study: Asian's
 css/
   site.css        Every page: color tokens, paper grain, top bar, menu,
                   buttons, motion button, cursor, theme fade
-  portavia.css    The top bar, Home and About layouts, footer, ID badge
+  portavia.css    The top bar, Home layout and the closing row
   home.css        Home: recruiter summary, motion tip, artwork, lightbox
   homepage.css    Home: the hero sentence, case study panels, statement,
                   artwork and contact headings
-  about.css       About in the homepage's look
   article.css     The case studies: outline, sections, cards, figures,
                   picture viewer, role buttons
   case.css        The case studies in the homepage's look
@@ -29,7 +28,7 @@ js/
   home.js         Home: recruiter summary, motion tip, nav jumps and
                   highlight, artwork spotlight and lightbox
   scroll.js       Home: Lenis smooth scroll and GSAP scroll motion
-  case-scroll.js  Case studies and About: Lenis and GSAP scroll motion
+  case-scroll.js  Case studies: Lenis and GSAP scroll motion
   toc.js          Case studies: marks the current section in the outline
                   and the phone tab strip; Show all
   viewer.js       Case studies: every picture and drawing opens full screen
@@ -59,11 +58,11 @@ Every interface color is a token at the top of `css/site.css`, light values firs
 
 `--paper` holds the paper grain (faint slate specks in light mode, light specks in dark mode); it is baked into the page, section and footer backgrounds. Colors that belong to the work shown, not the site, are tokens in that page's CSS: the console's arm and status colors, and KU's brand colors.
 
-Home, About and the case studies use Helvetica; "code." in the home hero and the sandboxes use JetBrains Mono, and the handwritten notes Kalam. Body text is 18px (16px on small screens).
+Home and the case studies use Helvetica; "code." in the home hero and the sandboxes use JetBrains Mono, and the handwritten notes Kalam. Body text is 18px (16px on small screens).
 
 ## Behaviour
 
-- **Navigation**: a full-width top bar on Home and About (a menu below 860px). Case studies have a breadcrumb bar; from 1101px an outline on the left lists every section, showing only the current section's parts (Show all opens the rest); below that, a tab strip under the breadcrumb.
+- **Navigation**: a full-width top bar on Home (a menu below 860px). Case studies have a breadcrumb bar; from 1101px an outline on the left lists every section, showing only the current section's parts (Show all opens the rest); below that, a tab strip under the breadcrumb.
 - **Scroll motion**: Lenis smooth scroll with GSAP ScrollTrigger reveals on every page (`scroll.js`, `case-scroll.js`). If GSAP does not load, CSS scroll-driven animations ease the text in instead.
 - **Pictures**: on the case studies every picture opens full screen, with previous and next, arrow keys and swipe.
 - **Page changes** cross-fade (cross-document view transitions) where the browser supports it.

@@ -18,7 +18,6 @@
 :root {
   color-scheme: light;
 
-  /* color */
   /* A calm, crisp palette in both themes: a soft slate mist page, white
      cards, ink-slate text, charcoal grey for secondary text and a steel blue
      accent. Contrast on the page / on cards: primary 16.5 / 17.7:1,
@@ -533,30 +532,30 @@ body,
     main {
       overflow-x: clip;
     }
-    :root:not(.motion-paused):not(.has-gsap) main :is(h2, h3, h4, p, li, blockquote, dt, dd):not(:is(.sandbox-wrap, .badge, .spot, .console, .accs, nav, figure, table, [role="tablist"], .motion, .lightbox, li) *):not(.hero *) {
+    :root:not(.motion-paused):not(.has-gsap) main :is(h2, h3, h4, p, li, blockquote, dt, dd):not(:is(.sandbox-wrap, .spot, .console, .accs, nav, figure, table, [role="tablist"], .motion, .lightbox, li) *):not(.hero *) {
       animation: var(--st-in, st-up) linear both, st-out linear both;
       animation-timeline: view(), view();
       animation-range: entry 0px entry 220px, exit -48px exit 70%;
     }
-    :root:not(.motion-paused):not(.has-gsap) main :is(h2):not(:is(.sandbox-wrap, .badge) *) {
+    :root:not(.motion-paused):not(.has-gsap) main :is(h2):not(:is(.sandbox-wrap) *) {
       --st-in: st-rise;
     }
-    :root:not(.motion-paused):not(.has-gsap) main :is(.label):not(:is(.sandbox-wrap, .badge) *) {
+    :root:not(.motion-paused):not(.has-gsap) main :is(.label):not(:is(.sandbox-wrap) *) {
       animation: st-wipe linear both, st-out linear both;
       animation-timeline: view(), view();
       animation-range: entry 0px entry 200px, exit -48px exit 70%;
     }
-    :root:not(.motion-paused):not(.has-gsap) main :is(h3, h4):not(:is(.sandbox-wrap, .badge, .spot, .console, figure, table, nav, li) *) {
+    :root:not(.motion-paused):not(.has-gsap) main :is(h3, h4):not(:is(.sandbox-wrap, .spot, .console, figure, table, nav, li) *) {
       --st-in: st-slide;
     }
     
-    :root:not(.motion-paused):not(.has-gsap) main :is(blockquote, [class*="quote"]):not(:is(.sandbox-wrap, .badge) *) {
+    :root:not(.motion-paused):not(.has-gsap) main :is(blockquote, [class*="quote"]):not(:is(.sandbox-wrap) *) {
       --st-in: st-zoom;
     }
-    :root:not(.motion-paused):not(.has-gsap) main li:not(:is(.sandbox-wrap, .badge, .spot, .console, .accs, nav, figure, table) *):nth-child(odd) {
+    :root:not(.motion-paused):not(.has-gsap) main li:not(:is(.sandbox-wrap, .spot, .console, .accs, nav, figure, table) *):nth-child(odd) {
       --st-in: st-tilt-l;
     }
-    :root:not(.motion-paused):not(.has-gsap) main li:not(:is(.sandbox-wrap, .badge, .spot, .console, .accs, nav, figure, table) *):nth-child(even) {
+    :root:not(.motion-paused):not(.has-gsap) main li:not(:is(.sandbox-wrap, .spot, .console, .accs, nav, figure, table) *):nth-child(even) {
       --st-in: st-tilt-r;
     }
   }
@@ -743,183 +742,10 @@ html:has(dialog[open]) .cursor-ring {
    status, the back has the details and links. Both faces share the card's
    single grid cell; the card turns in 3D, so nothing on it may set opacity,
    filter or overflow (that would flatten it). Grid and flex only. */
-.badge {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 20px;
-}
-.badge__swing {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  perspective: 1400px;
-  transform-origin: 50% 0;
-  animation: badge-sway 3.6s ease-in-out infinite alternate;
-  transition: rotate 0.5s ease;
-}
-.badge__strap {
-  width: 18px;
-  height: clamp(60px, 8vw, 120px);
-  border-radius: 0 0 4px 4px;
-  background:
-    repeating-linear-gradient(180deg, transparent 0 10px, rgb(255 255 255 / 0.18) 10px 12px),
-    var(--accent);
-}
-.badge__clip {
-  width: 36px;
-  height: 20px;
-  margin-top: -4px;
-  border: 2px solid var(--line);
-  border-radius: 6px;
-  background: var(--surface-2);
-}
-.badge__card {
-  display: grid;
-  width: clamp(250px, 22vw, 300px);
-  margin-top: -6px;
-  transform-style: preserve-3d;
-  transition: transform 0.8s cubic-bezier(0.65, 0, 0.35, 1);
-}
-.badge__face {
-  grid-area: 1 / 1;
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-  padding: 16px 16px 20px;
-  border: 1px solid var(--line);
-  border-radius: var(--r-lg);
-  background: var(--surface);
-  box-shadow: var(--shadow);
-  -webkit-backface-visibility: hidden;
-  backface-visibility: hidden;
-}
-.badge__front {
-  align-items: center;
-  text-align: center;
-}
-.badge__back {
-  justify-content: center;
-  transform: rotateY(180deg);
-}
-/* the slot the clip goes through */
-.badge__slot {
-  width: 44px;
-  height: 9px;
-  border-radius: 99px;
-  background: var(--bg);
-  box-shadow: inset 0 1px 2px rgb(0 0 0 / 0.25);
-}
-.badge__photo {
-  width: 100%;
-  aspect-ratio: 4 / 4.4;
-  object-fit: cover;
-  border-radius: var(--r-md);
-  background: #fbfcfe;
-}
-.badge__name {
-  margin-top: 4px;
-  font-size: 1.75rem;
-  line-height: 1.05;
-}
-.badge__role {
-  margin-top: -6px;
-  color: var(--text);
-}
-.badge__status {
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  padding: 6px 12px;
-  border-radius: 99px;
-  background: color-mix(in srgb, var(--accent) 14%, transparent);
-  color: var(--accent-text);
-  font-size: var(--fs-small);
-  font-weight: 600;
-}
-.badge__about {
-  color: var(--ink);
-}
-.badge__facts {
-  display: flex;
-  flex-direction: column;
-  gap: 6px;
-  padding-top: 12px;
-  border-top: 1px dashed var(--line);
-  font-weight: 500;
-}
-.badge__facts div {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 4px 6px;
-}
-.badge__facts dt {
-  color: var(--text);
-  font-weight: 400;
-}
-.badge__links {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 8px;
-  padding-top: 6px;
-}
-.badge__icon {
-  display: grid;
-  place-items: center;
-  width: 44px;
-  height: 44px;
-  border-radius: 50%;
-  background: var(--ink);
-  color: var(--bg);
-}
-.badge__icon svg {
-  width: 20px;
-  height: 20px;
-}
-.badge__more {
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  min-height: 44px;
-  padding: 0 14px;
-  border-radius: var(--r);
-  background: var(--ink);
-  color: var(--bg);
-  font-weight: 500;
-  text-decoration: none;
-}
-.badge__more svg {
-  width: 16px;
-  height: 16px;
-}
-.badge__flip {
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  min-height: 44px;
-  padding: 0 16px;
-  border: 1px solid var(--line);
-  border-radius: 99px;
-  background: none;
-  color: var(--ink);
-  font-weight: 500;
-  cursor: pointer;
-}
-.badge__flip:hover {
-  border-color: var(--accent);
-  background: color-mix(in srgb, var(--accent) 12%, transparent);
-}
+
 /* straighten and turn over: on hover/button (.is-open) or when a link on the
    back has keyboard focus */
-.peek.is-open .badge__swing,
-.peek:has(.badge__back :focus-visible) .badge__swing {
-  animation: none;
-  rotate: 0deg;
-}
-.peek.is-open .badge__card,
-.peek:has(.badge__back :focus-visible) .badge__card {
-  transform: rotateY(180deg);
-}
+
 @keyframes badge-sway {
   from {
     rotate: -3deg;
@@ -928,17 +754,6 @@ html:has(dialog[open]) .cursor-ring {
     rotate: 3deg;
   }
 }
-@media (prefers-reduced-motion: reduce) {
-  .badge__swing {
-    animation: none;
-  }
-}
-@media (max-width: 860px) {
-  .badge__card {
-    width: min(300px, 80vw);
-  }
-}
-
 /* Top bar, shared by Home and About (the case study pages have their own
    copy in compact.css): the breadcrumb on the left; a few links and the
    switches on the right. It sticks to the top and the page scrolls under

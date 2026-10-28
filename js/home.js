@@ -117,8 +117,8 @@
 
   /* Seasons, as on kigo.studio: four buttons at the top right of the hero
      (they stay there, sticky, until the case studies arrive) change what
-     falls across it: petals in spring, dandelion seeds drifting on a breeze
-     in summer, leaves in autumn, snow in winter. Each pick replays the fall
+     falls across it: petals in spring, fireflies rising in summer, leaves in
+     autumn, snow in winter. Each pick replays the fall
      and is remembered; the first visit starts from today's date. Nothing
      falls for reduced motion, and the pause button holds the pieces. */
   var SEASONS = {
@@ -127,13 +127,12 @@
       colors: ["#f4b6c8", "#f9cfdc", "#eaa0b8", "#f7c4d4"],
       shape: '<path d="M12 2 C16 6 17 12 14 18 C13 20 12.5 21 12 22 C11.5 21 11 20 10 18 C7 12 8 6 12 2 Z"/>'
     },
-    /* dandelion seeds: greyed, with hair-thin threads, carried across on a
-       breeze (kind.breeze) instead of falling; their colour comes from the
-       CSS (--seed), so they suit light and dark paper */
+    /* fireflies: small warm lights that rise from the foot of the hero,
+       wandering and blinking as they go */
     summer: {
-      count: 22, breeze: true, size: [18, 28], speed: [10, 16], flutter: ["hover"],
-      colors: ["var(--seed)"],
-      shape: '<path d="M12 9.5 L12 20 M12 9.5 L3.0 9.5 M12 9.5 L3.1 7.9 M12 9.5 L3.5 6.4 M12 9.5 L4.2 5.0 M12 9.5 L5.1 3.7 M12 9.5 L6.2 2.6 M12 9.5 L7.5 1.7 M12 9.5 L8.9 1.0 M12 9.5 L10.4 0.6 M12 9.5 L12.0 0.5 M12 9.5 L13.6 0.6 M12 9.5 L15.1 1.0 M12 9.5 L16.5 1.7 M12 9.5 L17.8 2.6 M12 9.5 L18.9 3.7 M12 9.5 L19.8 5.0 M12 9.5 L20.5 6.4 M12 9.5 L20.9 7.9 M12 9.5 L21.0 9.5" fill="none" stroke="var(--seed)" stroke-width="0.35" stroke-linecap="round"/><ellipse cx="12" cy="21" rx="0.9" ry="1.8" fill="var(--seed-core)"/>'
+      count: 26, rise: true, size: [6, 11], speed: [7, 12], flutter: ["hover"],
+      colors: ["var(--firefly)", "var(--firefly-2)"],
+      shape: '<circle cx="12" cy="12" r="7"/>'
     },
     autumn: {
       count: 22, size: [16, 30], speed: [4.5, 7.5], flutter: ["flutter", "flutter flutter--r"],
@@ -181,7 +180,8 @@
       var inner = document.createElement("span");
       inner.className = kind.flutter[Math.floor(Math.random() * kind.flutter.length)];
       inner.style.animationDuration = (1.2 + Math.random() * 1.2).toFixed(2) + "s";
-      inner.innerHTML = '<svg viewBox="0 0 24 24" fill="' + color + '">' + look.shape + "</svg>";
+      inner.innerHTML = '<svg viewBox="0 0 24 24" fill="' + color + '"' +
+        (kind.rise ? ' class="falling__glow"' : "") + ">" + look.shape + "</svg>";
       el.appendChild(inner);
       layer.appendChild(el);
       return el;
@@ -203,21 +203,20 @@
         var from = -40;
         var to = h + 20;
         var frames;
-        if (kind.breeze) {
-          /* drifts across with the wind, bobbing, sinking only a little */
-          var y0 = h * (0.05 + Math.random() * 0.6);
-          var x0 = windDir > 0 ? -40 - Math.random() * 60 : w + 40 + Math.random() * 60;
-          var span = windDir * w * (0.7 + Math.random() * 0.5);
-          var sink = h * (0.08 + Math.random() * 0.18);
-          var tilt = windDir * (12 + Math.random() * 14);
-          var bob = 14 + Math.random() * 18;
+        if (kind.rise) {
+          /* rises from the foot of the window, wandering side to side and
+             blinking on and off */
+          var x1 = 20 + Math.random() * (w - 40);
+          var y1 = h * (0.6 + Math.random() * 0.4);
+          var climb = h * (0.35 + Math.random() * 0.4);
+          var sway = 30 + Math.random() * 50;
           frames = [];
-          for (var k = 0; k <= 6; k++) {
-            var f = k / 6;
+          for (var n = 0; n <= 8; n++) {
+            var t = n / 8;
             frames.push({
-              offset: f,
-              transform: "translate(" + (x0 + span * f).toFixed(0) + "px," + (y0 + sink * f + Math.sin(f * Math.PI * 3) * bob).toFixed(0) + "px) rotate(" + (tilt + Math.sin(f * Math.PI * 4) * 8).toFixed(1) + "deg)",
-              opacity: k === 0 || k === 6 ? 0 : 1
+              offset: t,
+              transform: "translate(" + (x1 + Math.sin(t * Math.PI * 2.5 + i) * sway).toFixed(0) + "px," + (y1 - climb * t).toFixed(0) + "px)",
+              opacity: n === 0 || n === 8 ? 0 : n % 2 ? 1 : 0.25
             });
           }
         } else if (Math.random() < (kind.wind || 0)) {
@@ -280,10 +279,13 @@
     set(season, false);
     setTimeout(play, document.documentElement.classList.contains("hello-lock") ? 3400 : 400);
 
-    /* the fall belongs to the hero: it fades away below it */
+    /* the fall belongs to the hero: below it, the layer hides and its
+       pieces rest */
     if ("IntersectionObserver" in window) {
       new IntersectionObserver(function (entries) {
-        layer.classList.toggle("is-away", !entries[0].isIntersecting);
+        var away = !entries[0].isIntersecting;
+        layer.hidden = away;
+        if (!document.documentElement.classList.contains("motion-paused")) hold(away);
       }).observe(hero);
     }
   }

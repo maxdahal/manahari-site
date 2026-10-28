@@ -1253,3 +1253,147 @@ body:has(.cv-hero) {
   opacity: 0.3;
   filter: grayscale(1);
 }
+
+/* ---- the flag waves in the wind: it swings from its left edge, the side a
+   pole would hold, with a soft ripple; still for reduced motion or pause */
+.cv-flag {
+  transform-origin: 0 50%;
+}
+@media (prefers-reduced-motion: no-preference) {
+  :root:not(.motion-paused) .cv-flag {
+    animation: cv-wave 2.6s ease-in-out infinite;
+  }
+}
+@keyframes cv-wave {
+  0%, 100% {
+    transform: perspective(60px) rotateY(0deg) skewY(0deg);
+  }
+  25% {
+    transform: perspective(60px) rotateY(-14deg) skewY(-4deg) scaleX(0.95);
+  }
+  50% {
+    transform: perspective(60px) rotateY(4deg) skewY(2deg);
+  }
+  75% {
+    transform: perspective(60px) rotateY(-9deg) skewY(-2deg) scaleX(0.97);
+  }
+}
+
+/* the line beside the flag is a button: it opens the fun facts */
+.pv .cv-from {
+  padding: 4px 0;
+  border: 0;
+  background: none;
+  cursor: pointer;
+}
+.cv-from__text {
+  text-decoration: underline dotted;
+  text-decoration-color: color-mix(in srgb, var(--text-2) 60%, transparent);
+  text-underline-offset: 4px;
+  transition: color 0.2s ease;
+}
+.cv-from:hover .cv-from__text {
+  color: var(--ink);
+}
+.cv-from:focus-visible {
+  outline: 3px solid var(--accent);
+  outline-offset: 4px;
+  border-radius: 4px;
+}
+
+/* ---- the Nepal fun facts dialog --------------------------------------- */
+.nepal {
+  width: min(520px, calc(100vw - 32px));
+  padding: 0;
+  border: 1px solid var(--line);
+  border-radius: 16px;
+  background: var(--surface);
+  color: var(--ink);
+  font-family: var(--cv-font);
+  box-shadow: var(--shadow);
+}
+.nepal::backdrop {
+  background: rgb(0 0 0 / 0.5);
+  -webkit-backdrop-filter: blur(4px);
+  backdrop-filter: blur(4px);
+}
+.nepal[open] {
+  animation: nepal-in 0.3s cubic-bezier(0.2, 0.9, 0.3, 1.2);
+}
+@keyframes nepal-in {
+  from {
+    opacity: 0;
+    transform: translateY(16px) scale(0.97);
+  }
+}
+.nepal__inner {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  padding: 24px;
+}
+.nepal__head {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+.nepal__flag {
+  height: 40px;
+}
+.nepal__title {
+  flex: 1;
+  margin: 0;
+  font-family: var(--cv-font);
+  text-transform: none;
+  font-size: 1.375rem;
+  font-weight: 600;
+  letter-spacing: -0.02em;
+}
+.nepal__close {
+  display: grid;
+  place-items: center;
+  width: 44px;
+  height: 44px;
+  border: 1px solid var(--line);
+  border-radius: 50%;
+  background: none;
+  color: var(--ink);
+  cursor: pointer;
+}
+.nepal__close svg {
+  width: 20px;
+  height: 20px;
+}
+.nepal__close:hover {
+  background: color-mix(in srgb, var(--ink) 8%, transparent);
+}
+.nepal__close:focus-visible {
+  outline: 3px solid var(--accent);
+  outline-offset: 2px;
+}
+.nepal__facts {
+  display: flex;
+  flex-direction: column;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  counter-reset: fact;
+}
+.nepal__facts li {
+  display: grid;
+  grid-template-columns: 32px minmax(0, 1fr);
+  gap: 12px;
+  padding: 14px 0;
+  border-top: 1px solid var(--line);
+  font-size: 1rem;
+  line-height: 1.5;
+  color: var(--text);
+  counter-increment: fact;
+}
+.nepal__facts li::before {
+  content: counter(fact, decimal-leading-zero);
+  font-size: 0.8125rem;
+  font-variant-numeric: tabular-nums;
+  line-height: 1.85;
+  color: var(--accent-text);
+}

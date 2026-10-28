@@ -1,5 +1,5 @@
 /* Home page behaviour: the recruiter summary, the motion tip, the season
-   buttons, nav jumps and highlight, the artwork spotlight and lightbox. */
+   buttons, the Nepal fun facts, nav jumps and highlight, the artwork spotlight and lightbox. */
 (function () {
   "use strict";
 
@@ -290,10 +290,31 @@
     }
   }
 
+  /* Fun facts about Nepal: the line beside the flag in the hero opens them;
+     Close, Escape or a click outside shut it, and focus goes back */
+  function initNepal() {
+    var dialog = document.querySelector(".nepal");
+    var button = document.querySelector("[data-nepal]");
+    if (!dialog || !button || !dialog.showModal) return;
+    button.addEventListener("click", function () {
+      dialog.showModal();
+    });
+    dialog.querySelector("[data-close]").addEventListener("click", function () {
+      dialog.close();
+    });
+    dialog.addEventListener("click", function (event) {
+      if (event.target === dialog) dialog.close();
+    });
+    dialog.addEventListener("close", function () {
+      button.focus();
+    });
+  }
+
   function start() {
     initRecruiter();
     motionToggle();
     initSeasons();
+    initNepal();
 
     /* In-page links land with the section's top just under the top bar. */
     var bar = document.querySelector(".cp-bar");

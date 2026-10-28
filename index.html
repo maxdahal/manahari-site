@@ -137,7 +137,7 @@
         <div class="cv-hero__main">
           <div class="cv-hello">
             <svg class="cv-hello__word" viewBox="0 0 460 190" aria-hidden="true" focusable="false"><path pathLength="1" d="M30 150 C60 140 100 90 110 50 C118 20 95 10 85 40 C75 70 70 120 68 150 C75 120 95 95 115 100 C135 105 128 140 135 150 C145 160 165 140 175 125 C200 120 215 100 200 92 C185 85 165 110 175 135 C185 155 215 155 235 135 C255 110 275 60 272 35 C270 15 250 20 252 50 C254 90 250 130 260 148 C268 158 285 150 295 130 C310 105 330 60 327 35 C325 15 305 20 307 50 C309 90 305 130 315 148 C323 158 340 150 352 128 C360 105 390 95 400 110 C412 130 395 158 375 152 C355 145 358 110 385 105 C400 102 415 108 430 100"/></svg>
-            <p class="cv-from"><svg class="cv-flag" viewBox="0 0 100 122" aria-hidden="true" focusable="false"><path d="M4 4 L90 56 L36 56 L90 118 L4 118 Z" fill="#dc143c" stroke="#003893" stroke-width="7" stroke-linejoin="miter"/><circle cx="28" cy="40" r="10" fill="#fff"/><circle cx="28" cy="35" r="10" fill="#dc143c"/><path d="M28 78 l3.2 7.6 7.8-3.6-3.6 7.8 7.6 3.2-7.6 3.2 3.6 7.8-7.8-3.6-3.2 7.6-3.2-7.6-7.8 3.6 3.6-7.8-7.6-3.2 7.6-3.2-3.6-7.8 7.8 3.6z" fill="#fff"/></svg>I am originally from Nepal</p>
+            <button class="cv-from" type="button" data-nepal aria-haspopup="dialog" data-cursor="Fun facts"><svg class="cv-flag" viewBox="0 0 100 122" aria-hidden="true" focusable="false"><path d="M4 4 L90 56 L36 56 L90 118 L4 118 Z" fill="#dc143c" stroke="#003893" stroke-width="7" stroke-linejoin="miter"/><circle cx="28" cy="40" r="10" fill="#fff"/><circle cx="28" cy="35" r="10" fill="#dc143c"/><path d="M28 78 l3.2 7.6 7.8-3.6-3.6 7.8 7.6 3.2-7.6 3.2 3.6 7.8-7.8-3.6-3.2 7.6-3.2-7.6-7.8 3.6 3.6-7.8-7.6-3.2 7.6-3.2-3.6-7.8 7.8 3.6z" fill="#fff"/></svg><span class="cv-from__text">I am originally from Nepal</span></button>
           </div>
         <h1 class="cv-title" id="cv-title" aria-label="I design products and build them in code.">
           <span class="cv-line"><span class="cv-w">I</span> <span class="cv-w cv-design">design</span> <span class="cv-w">products</span></span>
@@ -333,6 +333,22 @@
         <span class="lightbox__count" aria-live="polite"></span>
         <button class="icon-button" type="button" data-step="1" aria-label="Next artwork"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m9 18 6-6-6-6"/></svg></button>
         <button class="icon-button" type="button" data-close aria-label="Close"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg></button>
+      </div>
+    </dialog>
+    <!-- fun facts about Nepal, from the line beside the flag in the hero -->
+    <dialog class="nepal" aria-labelledby="nepal-h">
+      <div class="nepal__inner">
+        <header class="nepal__head">
+          <svg class="cv-flag nepal__flag" viewBox="0 0 100 122" aria-hidden="true" focusable="false"><path d="M4 4 L90 56 L36 56 L90 118 L4 118 Z" fill="#dc143c" stroke="#003893" stroke-width="7" stroke-linejoin="miter"/><circle cx="28" cy="40" r="10" fill="#fff"/><circle cx="28" cy="35" r="10" fill="#dc143c"/><path d="M28 78 l3.2 7.6 7.8-3.6-3.6 7.8 7.6 3.2-7.6 3.2 3.6 7.8-7.8-3.6-3.2 7.6-3.2-7.6-7.8 3.6 3.6-7.8-7.6-3.2 7.6-3.2-3.6-7.8 7.8 3.6z" fill="#fff"/></svg>
+          <h2 class="nepal__title" id="nepal-h">Fun facts about Nepal</h2>
+          <button class="nepal__close" type="button" data-close aria-label="Close"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M18 6 6 18M6 6l12 12"/></svg></button>
+        </header>
+        <ol class="nepal__facts">
+          <li>Mount Everest, the world’s highest peak, is on Nepal’s border with China.</li>
+          <li>Nepal’s flag is the only national flag that isn’t a rectangle.</li>
+          <li>Lumbini, in Nepal, is the birthplace of the Buddha.</li>
+          <li>Eight of the world’s ten highest mountains are in Nepal.</li>
+        </ol>
       </div>
     </dialog>
     <dialog class="recruiter" aria-labelledby="recruiter-h">

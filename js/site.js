@@ -1,5 +1,5 @@
 /* Shared behaviour for every page: the motion button, theme,
-   phone menu and the cursor ring. Each feature looks for its
+   phone menu, the ID badge and the cursor ring. Each feature looks for its
    own markup and does nothing when that markup is not on the page. */
 (function () {
   "use strict";
@@ -93,6 +93,36 @@
       if (event.key === "Escape" && menu.classList.contains("is-open")) {
         setOpen(false);
         button.focus();
+      }
+    });
+  }
+
+  /* ID badge (About me on Home): hovering the badge turns it over, the "Flip
+     my ID" button toggles it (tap, click or keyboard), Escape turns it back */
+  function initBadge() {
+    var peek = document.querySelector(".peek");
+    if (!peek) return;
+    var tab = peek.querySelector(".peek__tab");
+    var card = peek.querySelector(".badge__swing") || peek;
+    var setOpen = function (open) {
+      peek.classList.toggle("is-open", open);
+      tab.setAttribute("aria-expanded", String(open));
+    };
+    tab.addEventListener("click", function () {
+      setOpen(!peek.classList.contains("is-open"));
+    });
+    if (window.matchMedia("(hover: hover)").matches) {
+      card.addEventListener("mouseenter", function () {
+        setOpen(true);
+      });
+      card.addEventListener("mouseleave", function () {
+        setOpen(false);
+      });
+    }
+    peek.addEventListener("keydown", function (event) {
+      if (event.key === "Escape") {
+        setOpen(false);
+        tab.focus();
       }
     });
   }
@@ -196,6 +226,7 @@
     initMotion();
     initTheme();
     initMenu();
+    initBadge();
     initCursor();
   }
 

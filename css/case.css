@@ -4,8 +4,7 @@
    only changes how things look, and the words and their order stay as they
    are. case-scroll.js adds Lenis and GSAP reveals on top.
      type      Helvetica throughout, sentence case
-     opening   a screen-tall start: the tag at the top, the title low on the
-               left with the accent dot as its full stop; then a meta strip
+     opening   the tag, then the title with the accent dot as its full stop; then a meta strip
                (the facts), a context row between hairlines (the problem and
                my part), the pictures and the outcome
      columns   one content column beside the index, the same width as the
@@ -92,9 +91,7 @@ body.cs .a-tag {
 }
 #main .a-title {
   grid-area: title;
-  display: flex;
-  align-items: flex-end;
-  min-height: calc(100svh - var(--bar-h) - 260px);
+  margin-top: clamp(20px, 3vw, 36px);
   padding-bottom: clamp(32px, 5vh, 56px);
   font-family: var(--cs-font);
   font-size: clamp(3rem, 1rem + 6.5vw, 8rem);
@@ -180,9 +177,6 @@ body.cs .a-hero2__aside {
   }
   body.cs .a-hero2__aside {
     margin-top: 24px;
-  }
-  #main .a-title {
-    min-height: 50svh;
   }
 }
 

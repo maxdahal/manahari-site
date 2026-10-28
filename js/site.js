@@ -127,26 +127,20 @@
     });
   }
 
-  /* Cursor ring (pointer devices only) -------------------------------------- */
-  /* Cursor: a small muted-orange dot on the pointer and a thin ring that
-     trails softly behind it. Over anything with a data-cursor label (case
-     studies, artwork, the recruiter button…) the ring grows into a round
-     badge showing that label, like "View project", and the dot hides; over
-     other links and buttons the ring grows a little. The real pointer stays
-     underneath, so clicking is as precise as ever. Only for a mouse or
-     trackpad, and off for reduced motion. */
+  /* Cursor (pointer devices only) ------------------------------------------- */
+  /* Cursor: an orange circle in place of the system pointer (hidden in
+     site.css). Over links and buttons it becomes an outline ring; over anything with a data-cursor label (case studies,
+     artwork, the recruiter button…) a bigger outlined badge showing that
+     label, like "View project". Only for a mouse or trackpad, and off for
+     reduced motion, where the system pointer stays as it is. */
   function initCursor() {
     if (reduceMotion || !window.matchMedia("(hover: hover) and (pointer: fine)").matches) return;
-    var dot = document.createElement("div");
-    dot.className = "cursor-dot";
-    dot.setAttribute("aria-hidden", "true");
     var ring = document.createElement("div");
     ring.className = "cursor-ring";
     ring.setAttribute("aria-hidden", "true");
     var label = document.createElement("span");
     ring.appendChild(label);
     document.body.appendChild(ring);
-    document.body.appendChild(dot);
     var x = 0,
       y = 0,
       cx = 0,
@@ -168,9 +162,6 @@
     document.addEventListener("mousemove", function (event) {
       x = event.clientX;
       y = event.clientY;
-      /* position through the translate property, so the press shrink
-         (scale) happens in place and never pulls the dot toward the corner */
-      dot.style.translate = x + "px " + y + "px";
       document.documentElement.classList.add("has-cursor");
       aim(event.target);
     });
@@ -195,8 +186,10 @@
       document.documentElement.classList.remove("cursor-down");
     });
     (function loop() {
-      cx += (x - cx) * 0.18;
-      cy += (y - cy) * 0.18;
+      /* right on the pointer, since it stands in for it; moved through
+         translate, so the press shrink (scale) happens in place */
+      cx = x;
+      cy = y;
       ring.style.translate = cx.toFixed(1) + "px " + cy.toFixed(1) + "px";
       requestAnimationFrame(loop);
     })();

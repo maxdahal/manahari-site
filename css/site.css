@@ -620,88 +620,78 @@ body,
   }
 }
 
-/* The cursor: a dot on the pointer and a ring trailing behind it, both in
-   a muted orange. Each is fixed at the top left and moved by transform
-   (site.js); a negative margin centres it on the pointer so it grows from
-   its centre. Label text: white on the light-mode orange (4.9:1), dark on
-   the dark-mode one (6.2:1). */
+/* The cursor: an orange circle in place of the system pointer, which is
+   hidden everywhere once the mouse moves (site.js moves the circle with
+   translate, right on the pointer). Over links and buttons it grows into an
+   outline ring that marks the spot; over anything with a data-cursor label (a case study, a painting)
+   it grows further into an outlined badge with the label in regular
+   weight on a frosted fill, so it reads over pictures too. */
 :root {
-  /* light paper: a warm burnt orange so it shows, with white label text (4.8:1) */
-  --cursor: var(--accent);
-  --cursor-glow: 0;
-  --cursor-text: #ffffff;
-  /* the dot trails below and to the right of the system pointer */
-  --cursor-dx: 18px;
-  --cursor-dy: 28px;
+  --cursor: #e8590c;
 }
 @media (prefers-color-scheme: dark) {
   :root:not([data-theme="light"]) {
-    --cursor: var(--accent);
-    --cursor-text: var(--on-accent);
-    --cursor-glow: 1;
+    --cursor: #ff7a2f;
   }
 }
 :root[data-theme="dark"] {
-  --cursor: var(--accent);
-  --cursor-text: var(--on-accent);
-  --cursor-glow: 1;
+  --cursor: #ff7a2f;
 }
-.cursor-dot,
 .cursor-ring {
   position: fixed;
   top: 0;
   left: 0;
   z-index: 90;
-  border-radius: 50%;
-  pointer-events: none;
-  opacity: 0;
-  transition: opacity 0.2s ease;
-}
-.has-cursor :is(.cursor-dot, .cursor-ring) {
-  opacity: 1;
-}
-.cursor-dot {
-  display: none;
-}
-.cursor-ring {
   display: grid;
   place-items: center;
-  width: 12px;
-  height: 12px;
-  margin: calc(var(--cursor-dy) - 6px) 0 0 calc(var(--cursor-dx) - 6px);
+  width: 20px;
+  height: 20px;
+  margin: -10px 0 0 -10px;
+  border: 2px solid var(--cursor);
+  border-radius: 50%;
   background: var(--cursor);
-  color: var(--cursor-text);
+  color: var(--ink);
+  pointer-events: none;
+  opacity: 0;
   transition:
     width 0.35s cubic-bezier(0.2, 0.9, 0.3, 1.2),
     height 0.35s cubic-bezier(0.2, 0.9, 0.3, 1.2),
     margin 0.35s cubic-bezier(0.2, 0.9, 0.3, 1.2),
     background-color 0.25s ease,
-    border-color 0.25s ease,
     opacity 0.2s ease,
     scale 0.15s ease;
 }
-/* over plain links and buttons: the ring grows a little and fills faintly */
+.has-cursor .cursor-ring {
+  opacity: 1;
+}
+/* no system pointer while the circle is showing (text fields keep their
+   I-beam, so you can see where you type; an open dialog gets the system
+   pointer back, below) */
+.has-cursor:not(:has(dialog[open])),
+.has-cursor:not(:has(dialog[open])) *:not(input, textarea, [contenteditable]) {
+  cursor: none !important;
+}
+/* over links and buttons: an outline ring */
 .cursor-link .cursor-ring {
-  width: 18px;
-  height: 18px;
-  margin: calc(var(--cursor-dy) - 9px) 0 0 calc(var(--cursor-dx) - 9px);
+  width: 56px;
+  height: 56px;
+  margin: -28px 0 0 -28px;
+  background: transparent;
 }
-/* over something with a label: a filled badge with the label; the dot hides */
+/* over something with a label: a bigger outlined badge with the label */
 .cursor-label .cursor-ring {
-  width: 92px;
-  height: 92px;
-  margin: -46px 0 0 -46px;
-  border-color: var(--cursor);
-  background: var(--cursor);
-}
-.cursor-label .cursor-dot {
-  opacity: 0;
+  width: 120px;
+  height: 120px;
+  margin: -60px 0 0 -60px;
+  background: color-mix(in srgb, var(--bg) 72%, transparent);
+  -webkit-backdrop-filter: blur(6px);
+  backdrop-filter: blur(6px);
 }
 .cursor-ring span {
-  padding: 0 10px;
-  font-size: 0.8125rem;
-  font-weight: 600;
-  line-height: 1.15;
+  padding: 0 12px;
+  font-size: 0.875rem;
+  font-weight: 400;
+  line-height: 1.2;
   text-align: center;
   opacity: 0;
   transition: opacity 0.2s ease;
@@ -713,31 +703,6 @@ body,
 .cursor-down .cursor-ring {
   scale: 0.85;
 }
-/* the soft spotlight: a warm glow around the ring, tightening over links
-   and fading out under a label badge */
-.cursor-ring::before {
-  --glow: 200px;
-  content: "";
-  grid-area: 1 / 1;
-  width: var(--glow);
-  height: var(--glow);
-  /* bigger than the ring, so centred on it by hand (the ring is square) */
-  margin: calc(50% - var(--glow) / 2);
-  border-radius: 50%;
-  background: radial-gradient(circle, color-mix(in srgb, var(--cursor) 16%, transparent), transparent 68%);
-  /* the glow only on dark paper; on light paper it reads as a shadow */
-  opacity: var(--cursor-glow, 1);
-  transition: width 0.35s ease, height 0.35s ease, margin 0.35s ease, opacity 0.25s ease;
-}
-.cursor-ring span {
-  grid-area: 1 / 1;
-}
-.cursor-link .cursor-ring::before {
-  --glow: 130px;
-}
-.cursor-label .cursor-ring::before {
-  opacity: 0;
-}
 /* a dialog sits above everything, so inside one the system pointer comes
    back and the dot and ring step aside */
 html:has(dialog[open]),
@@ -747,11 +712,10 @@ html:has(dialog[open]) * {
 html:has(dialog[open]) :is(a, button, [role="tab"], summary, label) {
   cursor: pointer !important;
 }
-html:has(dialog[open]) :is(.cursor-dot, .cursor-ring) {
+html:has(dialog[open]) .cursor-ring {
   opacity: 0 !important;
 }
 @media (hover: none) {
-  .cursor-dot,
   .cursor-ring {
     display: none;
   }
@@ -766,7 +730,6 @@ html:has(dialog[open]) :is(.cursor-dot, .cursor-ring) {
     scroll-behavior: auto !important;
   }
   
-  .cursor-dot,
   .cursor-ring {
     display: none;
   }

@@ -6,8 +6,8 @@
                 in CSS)
      statement  held in place while its words light up one by one as you
                 scroll
-     work       each case study's picture eases from zoomed in to resting as
-                it passes; its name rises in
+     work       the case studies hold still, stacked; each next one wipes in
+                as two halves from opposite sides, its picture settling
      artwork    the title rises; the paintings pop in, at different depths
      contact    the closing statement echoes the hero: the words slide up,
                 the portrait opens out, the email and buttons follow
@@ -130,35 +130,56 @@
 
       /* work: each picture eases from zoomed in to resting; the name rises */
       enter(".cv-work__head", ".cv-work");
-      /* the held counter shows over the panels and follows them */
+      /* the case studies hold still, stacked, while you scroll: each next
+         one wipes in over the last as two halves from opposite sides (top
+         from the right, bottom from the left, through --q in its mask),
+         its picture settling from zoomed in; the counter follows */
+      var items = gsap.utils.toArray(".cv-project");
       var counter = document.querySelector(".cv-counter");
       var now = counter && counter.querySelector(".cv-counter__now");
-      if (counter) {
-        ScrollTrigger.create({
-          trigger: ".cv-projects",
-          start: "top 60%",
-          end: "bottom 80%",
-          toggleClass: { targets: counter, className: "is-on" }
-        });
-        gsap.utils.toArray(".cv-project").forEach(function (item, i) {
-          ScrollTrigger.create({
-            trigger: item,
-            start: "top center",
-            end: "bottom center",
-            onToggle: function (self) {
-              if (self.isActive && now) now.textContent = ("0" + (i + 1)).slice(-2);
-            }
+      if (items.length) {
+        var shown = -1;
+        var show = function (index) {
+          if (index === shown) return;
+          shown = index;
+          items.forEach(function (item, i) {
+            item.classList.toggle("is-current", i === index);
           });
+          if (now) now.textContent = ("0" + (index + 1)).slice(-2);
+        };
+        gsap.set(items.slice(1), { "--q": 0 });
+        var reel = gsap.timeline({
+          scrollTrigger: {
+            trigger: ".cv-projects",
+            start: "top top",
+            end: "+=" + (items.length - 1) * 110 + "%",
+            pin: true,
+            scrub: 0.6,
+            onUpdate: function (self) {
+              show(Math.min(items.length - 1, Math.round(self.progress * (items.length - 1))));
+            }
+          }
         });
+        items.forEach(function (item, i) {
+          if (!i) return;
+          var at = i - 1;
+          reel
+            .to(item, { "--q": 1, duration: 1, ease: "power2.inOut" }, at)
+            .fromTo(item.querySelector("img"), { scale: 1.3 }, { scale: 1, duration: 1, ease: "power2.out" }, at)
+            .to(items[i - 1].querySelector("img"), { scale: 1.12, duration: 1, ease: "power2.in" }, at)
+            .fromTo(item.querySelectorAll(".cv-project__words > *"), { yPercent: 60, opacity: 0 }, { yPercent: 0, opacity: 1, duration: 0.5, stagger: 0.08, ease: "power3.out" }, at + 0.45);
+        });
+        show(0);
+        enter(items[0].querySelectorAll(".cv-project__words > *"), items[0], { y: 80, stagger: 0.1, duration: 1 }, "top 55%");
+        if (counter) {
+          ScrollTrigger.create({
+            trigger: ".cv-work",
+            start: "top 40%",
+            end: "bottom 80%",
+            toggleClass: { targets: counter, className: "is-on" }
+          });
+        }
       }
-      gsap.utils.toArray(".cv-project__link").forEach(function (panel) {
-        gsap.fromTo(panel.querySelector("img"), { scale: 1.25 }, {
-          scale: 1,
-          ease: "none",
-          scrollTrigger: { trigger: panel, start: "top bottom", end: "bottom top", scrub: true }
-        });
-        enter(panel.querySelectorAll(".cv-project__words > *"), panel, { y: 80, stagger: 0.1, duration: 1 }, "top 55%");
-      });
 
       /* the band's pixel edges: above it, the squares fill in as it
          arrives; below it, they break up as you leave, nearest the band
@@ -207,6 +228,10 @@
           .from(".cv-contact__foot > *", { opacity: 0, y: 30, duration: 0.8, ease: "power2.out", stagger: 0.1 }, 0.5);
       }
     });
+    /* the held sections were set up out of page order: measure them again
+       top to bottom, so each pin counts the space the ones above it add */
+    ScrollTrigger.sort();
+    ScrollTrigger.refresh();
   }
 
   function teardown() {

@@ -63,7 +63,7 @@ body:has(.cv-hero) {
   flex-direction: column;
   margin: 0;
   font-family: var(--cv-font);
-  font-size: clamp(2.75rem, 0.8rem + 7.2vw, 8.5rem);
+  font-size: clamp(2.5rem, 0.6rem + 5.4vw, 6.5rem);
   font-weight: 700;
   line-height: 0.95;
   letter-spacing: -0.04em;
@@ -809,4 +809,47 @@ body:has(.cv-hero) {
   padding-block: clamp(80px, 12vh, 140px);
   -webkit-mask: none;
   mask: none;
+}
+
+/* ---- the case studies as a held stack (scroll.js): all in one cell, each
+   showing through its mask: the top half, anchored right, and the bottom
+   half, anchored left, both --q of the width wide. The first starts full;
+   the rest wipe in as you scroll. Only the one in front takes clicks. ---- */
+.has-gsap .cv-projects {
+  display: grid;
+  gap: 0;
+}
+.has-gsap .cv-project {
+  --q: 1;
+  grid-area: 1 / 1;
+  pointer-events: none;
+  -webkit-mask:
+    linear-gradient(#000 0 0) right top / calc(var(--q) * 100%) 50.5% no-repeat,
+    linear-gradient(#000 0 0) left bottom / calc(var(--q) * 100%) 50% no-repeat;
+  mask:
+    linear-gradient(#000 0 0) right top / calc(var(--q) * 100%) 50.5% no-repeat,
+    linear-gradient(#000 0 0) left bottom / calc(var(--q) * 100%) 50% no-repeat;
+}
+.has-gsap .cv-project.is-current {
+  pointer-events: auto;
+}
+
+/* the hero sentence a touch quieter: semibold, and slightly softer than
+   the pure text colour (still far above AAA contrast) */
+.pv .cv-hero .cv-title {
+  font-weight: 600;
+  color: color-mix(in srgb, var(--ink) 88%, var(--bg));
+}
+
+/* the case studies run edge to edge: the section has no side padding, its
+   heading and the counter take it instead, so the list needs no negative
+   margins (GSAP drops those when it holds the list in place) */
+.pv-main:not(.pv-about-page) .sections > section.cv-work {
+  padding-inline: 0;
+}
+.cv-work :is(.cv-work__head, .cv-counter) {
+  padding-inline: max(var(--gx), (100% - 1240px) / 2);
+}
+.cv-projects {
+  margin-inline: 0;
 }

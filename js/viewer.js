@@ -7,7 +7,7 @@
   "use strict";
   var imgs = [].slice.call(document.querySelectorAll("main figure img, main figure svg[role='img']")).filter(function (img) {
     /* (the room diagram is its own interactive piece) */
-    return !img.closest("a, button, .hero-loop, .roles, .sandbox-wrap");
+    return !img.closest("a, button, .roles, .sandbox-wrap");
   });
   if (!imgs.length) return;
 

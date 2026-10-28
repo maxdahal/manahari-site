@@ -24,7 +24,7 @@ css/
   sandbox.css     The sandbox frame both case-study sandboxes share
   arm-sandbox.css, ku-sandbox.css   Each sandbox's own pieces
 js/
-  site.js         Every page: motion button, hero videos, theme (with its
+  site.js         Every page: motion button, theme (with its
                   fade), menu, ID badge, cursor ring
   home.js         Home: recruiter summary, motion tip, nav jumps and
                   highlight, artwork spotlight and lightbox

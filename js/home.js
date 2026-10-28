@@ -1,5 +1,5 @@
-/* Home page behaviour: the recruiter summary, the motion tip, nav jumps
-   and highlight, the artwork spotlight and lightbox. */
+/* Home page behaviour: the recruiter summary, the motion tip, the season
+   buttons, nav jumps and highlight, the artwork spotlight and lightbox. */
 (function () {
   "use strict";
 
@@ -115,9 +115,183 @@
     });
   }
 
+  /* Seasons, as on kigo.studio: four buttons at the top right of the hero
+     (they stay there, sticky, until the case studies arrive) change what
+     falls across it: petals in spring, dandelion seeds drifting on a breeze
+     in summer, leaves in autumn, snow in winter. Each pick replays the fall
+     and is remembered; the first visit starts from today's date. Nothing
+     falls for reduced motion, and the pause button holds the pieces. */
+  var SEASONS = {
+    spring: {
+      count: 26, wind: 0.4, size: [12, 20], speed: [6, 9], flutter: ["flutter", "flutter flutter--r"],
+      colors: ["#f4b6c8", "#f9cfdc", "#eaa0b8", "#f7c4d4"],
+      shape: '<path d="M12 2 C16 6 17 12 14 18 C13 20 12.5 21 12 22 C11.5 21 11 20 10 18 C7 12 8 6 12 2 Z"/>'
+    },
+    /* dandelion seeds: greyed, with hair-thin threads, carried across on a
+       breeze (kind.breeze) instead of falling; their colour comes from the
+       CSS (--seed), so they suit light and dark paper */
+    summer: {
+      count: 22, breeze: true, size: [18, 28], speed: [10, 16], flutter: ["hover"],
+      colors: ["var(--seed)"],
+      shape: '<path d="M12 9.5 L12 20 M12 9.5 L3.0 9.5 M12 9.5 L3.1 7.9 M12 9.5 L3.5 6.4 M12 9.5 L4.2 5.0 M12 9.5 L5.1 3.7 M12 9.5 L6.2 2.6 M12 9.5 L7.5 1.7 M12 9.5 L8.9 1.0 M12 9.5 L10.4 0.6 M12 9.5 L12.0 0.5 M12 9.5 L13.6 0.6 M12 9.5 L15.1 1.0 M12 9.5 L16.5 1.7 M12 9.5 L17.8 2.6 M12 9.5 L18.9 3.7 M12 9.5 L19.8 5.0 M12 9.5 L20.5 6.4 M12 9.5 L20.9 7.9 M12 9.5 L21.0 9.5" fill="none" stroke="var(--seed)" stroke-width="0.35" stroke-linecap="round"/><ellipse cx="12" cy="21" rx="0.9" ry="1.8" fill="var(--seed-core)"/>'
+    },
+    autumn: {
+      count: 22, size: [16, 30], speed: [4.5, 7.5], flutter: ["flutter", "flutter flutter--r"],
+      colors: ["#d9682b", "#e8a33d", "#b8442a", "#c97b2a", "#9c3b1e", "#e0b04a"],
+      wind: 0.35,
+      /* a few small maple leaves among the others */
+      extra: { share: 0.3, scale: 0.7, colors: ["#c8402a", "#d9552c", "#b8342a", "#e0782f"],
+        shape: '<path d="M12 1 L13.6 5.6 L16.8 4 L16 8.4 L20.8 7.6 L18.8 11.2 L22.4 12.4 L17.6 15.2 L18.4 17.6 L13.2 16.4 L12.8 22.4 L11.2 22.4 L10.8 16.4 L5.6 17.6 L6.4 15.2 L1.6 12.4 L5.2 11.2 L3.2 7.6 L8 8.4 L7.2 4 L10.4 5.6 Z"/><path d="M12 6 L12 22 M12 13 L17 9.5 M12 13 L7 9.5" fill="none" stroke="rgb(70 20 10 / 0.4)" stroke-width="0.8" stroke-linecap="round"/>' },
+      shape: '<path d="M12 1 C17 5 22 10 19 16 C17 20 14 22 12 23 C10 22 7 20 5 16 C2 10 7 5 12 1 Z"/>' +
+        '<path d="M12 4 L12 23 M12 11 L16 8 M12 15 L8 12" fill="none" stroke="rgb(80 30 10 / 0.45)" stroke-width="1" stroke-linecap="round"/>'
+    },
+    winter: {
+      count: 40, size: [5, 11], speed: [6, 10], flutter: ["drift"],
+      colors: ["#b9cde4", "#cfdcec", "#a9c0dc", "#ffffff"],
+      shape: '<circle cx="12" cy="12" r="8"/>'
+    }
+  };
+
+  function seasonFromDate() {
+    var m = new Date().getMonth();
+    return m < 2 || m === 11 ? "winter" : m < 5 ? "spring" : m < 8 ? "summer" : "autumn";
+  }
+
+  function initSeasons() {
+    var buttons = [].slice.call(document.querySelectorAll(".cv-season"));
+    var layer = document.querySelector(".falling");
+    var hero = document.querySelector(".cv-hero");
+    if (!buttons.length || !layer || !hero) return;
+    var season = seasonFromDate();
+    try {
+      var saved = localStorage.getItem("season");
+      if (SEASONS[saved]) season = saved;
+    } catch (e) {}
+
+    function between(range) {
+      return range[0] + Math.random() * (range[1] - range[0]);
+    }
+    function piece(kind, size) {
+      var el = document.createElement("span");
+      el.className = "falling__piece";
+      var look = kind.extra && Math.random() < kind.extra.share ? kind.extra : kind;
+      if (look !== kind) size = Math.round(size * look.scale);
+      el.style.width = el.style.height = size + "px";
+      var color = look.colors[Math.floor(Math.random() * look.colors.length)];
+      var inner = document.createElement("span");
+      inner.className = kind.flutter[Math.floor(Math.random() * kind.flutter.length)];
+      inner.style.animationDuration = (1.2 + Math.random() * 1.2).toFixed(2) + "s";
+      inner.innerHTML = '<svg viewBox="0 0 24 24" fill="' + color + '">' + look.shape + "</svg>";
+      el.appendChild(inner);
+      layer.appendChild(el);
+      return el;
+    }
+
+    /* the pieces fall across the window; on each play the wind blows one
+       way, and some pieces (kind.wind of them) are caught by a gust partway
+       down and swept sideways */
+    function play() {
+      layer.textContent = "";
+      if (reduceMotion || !layer.animate) return;
+      var kind = SEASONS[season];
+      var w = window.innerWidth;
+      var h = window.innerHeight;
+      var windDir = Math.random() < 0.5 ? 1 : -1;
+      for (var i = 0; i < kind.count; i++) {
+        var el = piece(kind, Math.round(between(kind.size)));
+        var left = 20 + Math.random() * (w - 40);
+        var from = -40;
+        var to = h + 20;
+        var frames;
+        if (kind.breeze) {
+          /* drifts across with the wind, bobbing, sinking only a little */
+          var y0 = h * (0.05 + Math.random() * 0.6);
+          var x0 = windDir > 0 ? -40 - Math.random() * 60 : w + 40 + Math.random() * 60;
+          var span = windDir * w * (0.7 + Math.random() * 0.5);
+          var sink = h * (0.08 + Math.random() * 0.18);
+          var tilt = windDir * (12 + Math.random() * 14);
+          var bob = 14 + Math.random() * 18;
+          frames = [];
+          for (var k = 0; k <= 6; k++) {
+            var f = k / 6;
+            frames.push({
+              offset: f,
+              transform: "translate(" + (x0 + span * f).toFixed(0) + "px," + (y0 + sink * f + Math.sin(f * Math.PI * 3) * bob).toFixed(0) + "px) rotate(" + (tilt + Math.sin(f * Math.PI * 4) * 8).toFixed(1) + "deg)",
+              opacity: k === 0 || k === 6 ? 0 : 1
+            });
+          }
+        } else if (Math.random() < (kind.wind || 0)) {
+          /* starts upwind, so the gust carries it across */
+          var gx = windDir > 0 ? 20 + Math.random() * w * 0.55 : w * 0.45 + Math.random() * (w * 0.55 - 20);
+          var dx = windDir * w * (0.22 + Math.random() * 0.28);
+          var gust = 0.3 + Math.random() * 0.2;
+          var at = function (x, f) {
+            return "translate(" + x.toFixed(0) + "px," + (from + (to - from) * f).toFixed(0) + "px)";
+          };
+          frames = [
+            { transform: at(gx, 0), opacity: 0 },
+            { opacity: 1, offset: 0.08 },
+            { transform: at(gx + dx * 0.05, gust), offset: gust, easing: "cubic-bezier(0.5, 0, 0.3, 1)" },
+            { transform: at(gx + dx, gust + 0.06), offset: gust + 0.22, easing: "ease-in" },
+            { opacity: 1, offset: 0.88 },
+            { transform: at(gx + dx * 1.15, 1), opacity: 0 }
+          ];
+        } else {
+          frames = [
+            { transform: "translate(" + left + "px," + from + "px)", opacity: 0 },
+            { opacity: 1, offset: 0.08 },
+            { opacity: 1, offset: 0.85 },
+            { transform: "translate(" + left + "px," + to + "px)", opacity: 0 }
+          ];
+        }
+        el.animate(frames, { duration: between(kind.speed) * 1000, delay: Math.random() * 2400, fill: "both" });
+      }
+      if (document.documentElement.classList.contains("motion-paused")) hold(true);
+    }
+
+    /* the pause button holds the pieces where they are */
+    function hold(paused) {
+      layer.getAnimations({ subtree: true }).forEach(function (a) {
+        if (paused) a.pause();
+        else a.play();
+      });
+    }
+    document.addEventListener("motionchange", function (event) {
+      hold(event.detail.paused);
+    });
+
+    function set(next, replay) {
+      season = next;
+      document.documentElement.dataset.season = season;
+      buttons.forEach(function (b) {
+        b.setAttribute("aria-pressed", String(b.dataset.season === season));
+      });
+      if (replay) play();
+    }
+    buttons.forEach(function (b) {
+      b.addEventListener("click", function () {
+        try {
+          localStorage.setItem("season", b.dataset.season);
+        } catch (e) {}
+        set(b.dataset.season, true);
+      });
+    });
+    /* the first fall plays once the intro has lifted */
+    set(season, false);
+    setTimeout(play, document.documentElement.classList.contains("hello-lock") ? 3400 : 400);
+
+    /* the fall belongs to the hero: it fades away below it */
+    if ("IntersectionObserver" in window) {
+      new IntersectionObserver(function (entries) {
+        layer.classList.toggle("is-away", !entries[0].isIntersecting);
+      }).observe(hero);
+    }
+  }
+
   function start() {
     initRecruiter();
     motionToggle();
+    initSeasons();
 
     /* In-page links land with the section's top just under the top bar. */
     var bar = document.querySelector(".cp-bar");

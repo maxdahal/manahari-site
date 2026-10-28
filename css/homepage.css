@@ -853,3 +853,213 @@ body:has(.cv-hero) {
 .cv-projects {
   margin-inline: 0;
 }
+
+/* ---- the seasons, after kigo.studio: square outlined buttons, each with a
+   red seal of its season's character beside the name; the chosen one is
+   filled with ink. They sit at the top right of the hero and stay there as
+   you scroll (sticky), until the hero ends where the case studies begin. -- */
+.cv-seasons {
+  position: sticky;
+  top: calc(var(--bar-h) + 20px);
+  z-index: 4;
+  align-self: flex-end;
+  display: flex;
+  margin-top: calc(-1 * clamp(16px, 4vh, 40px));
+  border: 1px solid var(--ink);
+  background: color-mix(in srgb, var(--bg) 82%, transparent);
+  -webkit-backdrop-filter: blur(6px);
+  backdrop-filter: blur(6px);
+  font-family: var(--cv-font);
+}
+.cv-season {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  min-height: 44px;
+  padding: 0 14px 0 8px;
+  border: 0;
+  background: none;
+  font: inherit;
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: var(--ink);
+  cursor: pointer;
+  transition: background-color 0.2s ease, color 0.2s ease;
+}
+.cv-season + .cv-season {
+  border-left: 1px solid var(--ink);
+}
+.cv-season__seal {
+  display: grid;
+  place-items: center;
+  width: 26px;
+  height: 26px;
+  border: 1.5px solid var(--seal);
+  border-radius: 3px;
+  font-family: "Hiragino Mincho ProN", "Yu Mincho", "Noto Serif JP", "Songti SC", serif;
+  font-size: 1rem;
+  font-weight: 600;
+  line-height: 1;
+  color: var(--seal);
+  rotate: -4deg;
+  transition: rotate 0.25s ease, background-color 0.2s ease, color 0.2s ease;
+}
+.cv-season:hover {
+  background: color-mix(in srgb, var(--ink) 8%, transparent);
+}
+.cv-season:hover .cv-season__seal {
+  rotate: 0deg;
+}
+.cv-season[aria-pressed="true"] {
+  background: var(--ink);
+  color: var(--bg);
+}
+.cv-season[aria-pressed="true"] .cv-season__seal {
+  border-color: var(--seal);
+  background: var(--seal);
+  color: #ffffff;
+  rotate: 0deg;
+}
+.cv-season:focus-visible {
+  outline: 3px solid var(--accent);
+  outline-offset: -3px;
+}
+:root {
+  --seal: #c8323c;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --seal: #ff5a5f;
+  }
+}
+:root[data-theme="dark"] {
+  --seal: #ff5a5f;
+}
+/* phones: just the seals, the names kept for screen readers */
+@media (max-width: 600px) {
+  .cv-season {
+    padding: 0 9px;
+  }
+  .cv-season__name {
+    clip-path: inset(50%);
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    white-space: nowrap;
+    margin: -1px;
+  }
+}
+
+/* What falls (home.js): a layer over the window that never takes clicks,
+   fading away once the hero has gone */
+.falling {
+  position: fixed;
+  inset: 0;
+  z-index: 3;
+  overflow: hidden;
+  pointer-events: none;
+  transition: opacity 0.6s ease;
+  --seed: rgb(120 118 112 / 0.7);
+  --seed-core: rgb(110 104 94 / 0.8);
+}
+.falling.is-away {
+  opacity: 0;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) .falling {
+    --seed: rgb(190 188 182 / 0.6);
+    --seed-core: rgb(170 165 155 / 0.7);
+  }
+}
+:root[data-theme="dark"] .falling {
+  --seed: rgb(190 188 182 / 0.6);
+  --seed-core: rgb(170 165 155 / 0.7);
+}
+.falling__piece {
+  position: fixed;
+  top: 0;
+  left: 0;
+  will-change: transform, opacity;
+}
+.falling__piece > span {
+  display: block;
+}
+.falling__piece svg {
+  display: block;
+  width: 100%;
+  height: 100%;
+  overflow: visible;
+}
+.flutter {
+  animation: flutter 1.6s ease-in-out infinite alternate;
+}
+.flutter--r {
+  animation-name: flutter-r;
+}
+.drift {
+  animation: drift 2.4s ease-in-out infinite alternate;
+}
+.hover {
+  animation: hover 3s ease-in-out infinite alternate;
+}
+:root.motion-paused :is(.flutter, .drift, .hover) {
+  animation-play-state: paused;
+}
+@keyframes flutter {
+  from { transform: translateX(-26px) rotate(-35deg); }
+  to { transform: translateX(26px) rotate(40deg); }
+}
+@keyframes flutter-r {
+  from { transform: translateX(24px) rotate(30deg); }
+  to { transform: translateX(-24px) rotate(-45deg); }
+}
+@keyframes drift {
+  from { transform: translateX(-10px); }
+  to { transform: translateX(10px); }
+}
+@keyframes hover {
+  from { transform: translate(-18px, 6px); }
+  to { transform: translate(18px, -6px); }
+}
+
+/* ---- quiet backgrounds, after kigo.studio: faint ink-wash mountains along
+   the foot of the hero (three ridges, lighter as they recede, fading into
+   mist at the top) and a soft sun in the season's colour behind the
+   headline. Only backgrounds: nothing moves, nothing takes clicks, and the
+   text keeps its contrast. Let's connect closes the page with the same
+   ridges, quieter. ------------------------------------------------------ */
+:root {
+  --ridges: url("data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 1600 420%22 preserveAspectRatio=%22none%22><path d=%22M0,420 L0,50 L20,65 L40,75 L60,83 L80,91 L100,101 L120,106 L140,102 L160,91 L180,82 L200,79 L220,83 L240,88 L260,91 L280,92 L300,97 L320,107 L340,116 L360,119 L380,115 L400,112 L420,116 L440,128 L460,143 L480,157 L500,170 L520,186 L540,207 L560,227 L580,238 L600,237 L620,231 L640,225 L660,222 L680,218 L700,211 L720,199 L740,191 L760,188 L780,187 L800,181 L820,165 L840,144 L860,125 L880,111 L900,100 L920,88 L940,76 L960,70 L980,73 L1000,84 L1020,94 L1040,98 L1060,95 L1080,92 L1100,91 L1120,91 L1140,86 L1160,76 L1180,68 L1200,66 L1220,72 L1240,79 L1260,79 L1280,72 L1300,64 L1320,59 L1340,55 L1360,47 L1380,36 L1400,26 L1420,25 L1440,35 L1460,52 L1480,68 L1500,81 L1520,94 L1540,111 L1560,130 L1580,144 L1600,150 L1600,420 Z%22 fill=%22%231e293b%22 fill-opacity=%220.025%22/><path d=%22M0,420 L0,139 L20,140 L40,147 L60,149 L80,148 L100,161 L120,187 L140,212 L160,231 L180,252 L200,268 L220,268 L240,261 L260,262 L280,267 L300,265 L320,263 L340,265 L360,261 L380,245 L400,229 L420,227 L440,230 L460,231 L480,239 L500,253 L520,255 L540,242 L560,231 L580,224 L600,212 L620,199 L640,194 L660,191 L680,174 L700,151 L720,134 L740,123 L760,111 L780,110 L800,126 L820,145 L840,154 L860,163 L880,176 L900,185 L920,188 L940,200 L960,221 L980,236 L1000,238 L1020,239 L1040,238 L1060,227 L1080,215 L1100,218 L1120,231 L1140,240 L1160,246 L1180,258 L1200,266 L1220,262 L1240,259 L1260,267 L1280,277 L1300,278 L1320,278 L1340,276 L1360,261 L1380,232 L1400,206 L1420,191 L1440,177 L1460,162 L1480,158 L1500,159 L1520,149 L1540,135 L1560,133 L1580,139 L1600,144 L1600,420 Z%22 fill=%22%231e293b%22 fill-opacity=%220.04%22/><path d=%22M0,420 L0,276 L20,285 L40,312 L60,334 L80,344 L100,352 L120,346 L140,341 L160,346 L180,341 L200,334 L220,326 L240,309 L260,307 L280,313 L300,316 L320,322 L340,315 L360,300 L380,295 L400,287 L420,280 L440,274 L460,254 L480,241 L500,240 L520,243 L540,262 L560,279 L580,284 L600,296 L620,305 L640,315 L660,333 L680,334 L700,327 L720,323 L740,314 L760,319 L780,331 L800,333 L820,337 L840,336 L860,332 L880,341 L900,343 L920,334 L940,322 L960,296 L980,275 L1000,269 L1020,260 L1040,258 L1060,256 L1080,247 L1100,254 L1120,268 L1140,280 L1160,296 L1180,297 L1200,289 L1220,291 L1240,291 L1260,297 L1280,308 L1300,304 L1320,306 L1340,316 L1360,326 L1380,348 L1400,362 L1420,359 L1440,356 L1460,346 L1480,335 L1500,333 L1520,319 L1540,300 L1560,285 L1580,268 L1600,267 L1600,420 Z%22 fill=%22%231e293b%22 fill-opacity=%220.055%22/></svg>");
+  --sun: #f2a7b8;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --ridges: url("data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 1600 420%22 preserveAspectRatio=%22none%22><path d=%22M0,420 L0,50 L20,65 L40,75 L60,83 L80,91 L100,101 L120,106 L140,102 L160,91 L180,82 L200,79 L220,83 L240,88 L260,91 L280,92 L300,97 L320,107 L340,116 L360,119 L380,115 L400,112 L420,116 L440,128 L460,143 L480,157 L500,170 L520,186 L540,207 L560,227 L580,238 L600,237 L620,231 L640,225 L660,222 L680,218 L700,211 L720,199 L740,191 L760,188 L780,187 L800,181 L820,165 L840,144 L860,125 L880,111 L900,100 L920,88 L940,76 L960,70 L980,73 L1000,84 L1020,94 L1040,98 L1060,95 L1080,92 L1100,91 L1120,91 L1140,86 L1160,76 L1180,68 L1200,66 L1220,72 L1240,79 L1260,79 L1280,72 L1300,64 L1320,59 L1340,55 L1360,47 L1380,36 L1400,26 L1420,25 L1440,35 L1460,52 L1480,68 L1500,81 L1520,94 L1540,111 L1560,130 L1580,144 L1600,150 L1600,420 Z%22 fill=%22%23cbd5e1%22 fill-opacity=%220.025%22/><path d=%22M0,420 L0,139 L20,140 L40,147 L60,149 L80,148 L100,161 L120,187 L140,212 L160,231 L180,252 L200,268 L220,268 L240,261 L260,262 L280,267 L300,265 L320,263 L340,265 L360,261 L380,245 L400,229 L420,227 L440,230 L460,231 L480,239 L500,253 L520,255 L540,242 L560,231 L580,224 L600,212 L620,199 L640,194 L660,191 L680,174 L700,151 L720,134 L740,123 L760,111 L780,110 L800,126 L820,145 L840,154 L860,163 L880,176 L900,185 L920,188 L940,200 L960,221 L980,236 L1000,238 L1020,239 L1040,238 L1060,227 L1080,215 L1100,218 L1120,231 L1140,240 L1160,246 L1180,258 L1200,266 L1220,262 L1240,259 L1260,267 L1280,277 L1300,278 L1320,278 L1340,276 L1360,261 L1380,232 L1400,206 L1420,191 L1440,177 L1460,162 L1480,158 L1500,159 L1520,149 L1540,135 L1560,133 L1580,139 L1600,144 L1600,420 Z%22 fill=%22%23cbd5e1%22 fill-opacity=%220.04%22/><path d=%22M0,420 L0,276 L20,285 L40,312 L60,334 L80,344 L100,352 L120,346 L140,341 L160,346 L180,341 L200,334 L220,326 L240,309 L260,307 L280,313 L300,316 L320,322 L340,315 L360,300 L380,295 L400,287 L420,280 L440,274 L460,254 L480,241 L500,240 L520,243 L540,262 L560,279 L580,284 L600,296 L620,305 L640,315 L660,333 L680,334 L700,327 L720,323 L740,314 L760,319 L780,331 L800,333 L820,337 L840,336 L860,332 L880,341 L900,343 L920,334 L940,322 L960,296 L980,275 L1000,269 L1020,260 L1040,258 L1060,256 L1080,247 L1100,254 L1120,268 L1140,280 L1160,296 L1180,297 L1200,289 L1220,291 L1240,291 L1260,297 L1280,308 L1300,304 L1320,306 L1340,316 L1360,326 L1380,348 L1400,362 L1420,359 L1440,356 L1460,346 L1480,335 L1500,333 L1520,319 L1540,300 L1560,285 L1580,268 L1600,267 L1600,420 Z%22 fill=%22%23cbd5e1%22 fill-opacity=%220.055%22/></svg>");
+  }
+}
+:root[data-theme="dark"] {
+  --ridges: url("data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 1600 420%22 preserveAspectRatio=%22none%22><path d=%22M0,420 L0,50 L20,65 L40,75 L60,83 L80,91 L100,101 L120,106 L140,102 L160,91 L180,82 L200,79 L220,83 L240,88 L260,91 L280,92 L300,97 L320,107 L340,116 L360,119 L380,115 L400,112 L420,116 L440,128 L460,143 L480,157 L500,170 L520,186 L540,207 L560,227 L580,238 L600,237 L620,231 L640,225 L660,222 L680,218 L700,211 L720,199 L740,191 L760,188 L780,187 L800,181 L820,165 L840,144 L860,125 L880,111 L900,100 L920,88 L940,76 L960,70 L980,73 L1000,84 L1020,94 L1040,98 L1060,95 L1080,92 L1100,91 L1120,91 L1140,86 L1160,76 L1180,68 L1200,66 L1220,72 L1240,79 L1260,79 L1280,72 L1300,64 L1320,59 L1340,55 L1360,47 L1380,36 L1400,26 L1420,25 L1440,35 L1460,52 L1480,68 L1500,81 L1520,94 L1540,111 L1560,130 L1580,144 L1600,150 L1600,420 Z%22 fill=%22%23cbd5e1%22 fill-opacity=%220.025%22/><path d=%22M0,420 L0,139 L20,140 L40,147 L60,149 L80,148 L100,161 L120,187 L140,212 L160,231 L180,252 L200,268 L220,268 L240,261 L260,262 L280,267 L300,265 L320,263 L340,265 L360,261 L380,245 L400,229 L420,227 L440,230 L460,231 L480,239 L500,253 L520,255 L540,242 L560,231 L580,224 L600,212 L620,199 L640,194 L660,191 L680,174 L700,151 L720,134 L740,123 L760,111 L780,110 L800,126 L820,145 L840,154 L860,163 L880,176 L900,185 L920,188 L940,200 L960,221 L980,236 L1000,238 L1020,239 L1040,238 L1060,227 L1080,215 L1100,218 L1120,231 L1140,240 L1160,246 L1180,258 L1200,266 L1220,262 L1240,259 L1260,267 L1280,277 L1300,278 L1320,278 L1340,276 L1360,261 L1380,232 L1400,206 L1420,191 L1440,177 L1460,162 L1480,158 L1500,159 L1520,149 L1540,135 L1560,133 L1580,139 L1600,144 L1600,420 Z%22 fill=%22%23cbd5e1%22 fill-opacity=%220.04%22/><path d=%22M0,420 L0,276 L20,285 L40,312 L60,334 L80,344 L100,352 L120,346 L140,341 L160,346 L180,341 L200,334 L220,326 L240,309 L260,307 L280,313 L300,316 L320,322 L340,315 L360,300 L380,295 L400,287 L420,280 L440,274 L460,254 L480,241 L500,240 L520,243 L540,262 L560,279 L580,284 L600,296 L620,305 L640,315 L660,333 L680,334 L700,327 L720,323 L740,314 L760,319 L780,331 L800,333 L820,337 L840,336 L860,332 L880,341 L900,343 L920,334 L940,322 L960,296 L980,275 L1000,269 L1020,260 L1040,258 L1060,256 L1080,247 L1100,254 L1120,268 L1140,280 L1160,296 L1180,297 L1200,289 L1220,291 L1240,291 L1260,297 L1280,308 L1300,304 L1320,306 L1340,316 L1360,326 L1380,348 L1400,362 L1420,359 L1440,356 L1460,346 L1480,335 L1500,333 L1520,319 L1540,300 L1560,285 L1580,268 L1600,267 L1600,420 Z%22 fill=%22%23cbd5e1%22 fill-opacity=%220.055%22/></svg>");
+}
+:root[data-season="summer"] {
+  --sun: #f2c94c;
+}
+:root[data-season="autumn"] {
+  --sun: #e8743b;
+}
+:root[data-season="winter"] {
+  --sun: #9cc0e6;
+}
+.pv-main:not(.pv-about-page) .sections > section.cv-hero {
+  background:
+    var(--ridges) center bottom / 100% min(34vh, 320px) no-repeat,
+    radial-gradient(circle at 74% 40%, color-mix(in srgb, var(--sun) 16%, transparent) 0, color-mix(in srgb, var(--sun) 7%, transparent) min(14vw, 180px), transparent min(24vw, 300px)),
+    var(--paper) 0 0 / 240px auto,
+    var(--bg);
+  transition: background 0.6s ease;
+}
+.pv-main:not(.pv-about-page) .sections > section.cv-contact {
+  background:
+    var(--ridges) center bottom / 100% min(30vh, 280px) no-repeat,
+    var(--paper) 0 0 / 240px auto,
+    var(--bg);
+}

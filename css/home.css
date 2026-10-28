@@ -783,21 +783,6 @@ html:has(.recruiter[open]) {
   animation-delay: -0.5s;
 }
 
-/* dandelion seeds: greyed out in both themes, soft and faint */
-
-.hover {
-  animation: hover 3s ease-in-out infinite alternate;
-}
-
-@keyframes drift {
-  from { transform: translateX(-10px); }
-  to { transform: translateX(10px); }
-}
-@keyframes hover {
-  from { transform: translate(-18px, 6px); }
-  to { transform: translate(18px, -6px); }
-}
-
 /* a block whose body starts at the left edge, with no indent (Artwork) */
 .block--wide .block__body {
   --indent: 0px;

@@ -359,7 +359,8 @@
     function markOutline() {
       outlineTick = false;
       var line = window.innerHeight / 2;
-      var current = 0;
+      /* nothing is marked over the hero, which has no link of its own */
+      var current = -1;
       var best = -Infinity;
       outlineTargets.forEach(function (target, i) {
         if (!target) return;
@@ -372,7 +373,7 @@
         }
       });
       outlineLinks.forEach(function (link, i) {
-        if (i === current) link.setAttribute("aria-current", i === 0 ? "page" : "location");
+        if (i === current) link.setAttribute("aria-current", "location");
         else link.removeAttribute("aria-current");
       });
     }

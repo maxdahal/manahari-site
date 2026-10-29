@@ -5,8 +5,9 @@ Plain HTML, CSS and JavaScript, with no framework, library or build step. Open a
 ## What's in the folder
 
 ```
-index.html        Home: hero, case studies, About me, journey, skills,
-                  recognition, artwork, contact
+index.html        Home: hero, case studies, artwork, contact
+about.html        About: About me with the ID card, journey, skills,
+                  recognition, contact
 work/surgical-console.html   Case study: Surgical Console (arm panel sandbox)
 work/ku-brand.html   Case study: KU Brand (color sandbox, wireframe video)
 work/asians.html     Case study: Asian's
@@ -62,7 +63,7 @@ Home and the case studies use Helvetica; "code." in the home hero and the sandbo
 
 ## Behaviour
 
-- **Navigation**: a full-width top bar on Home (a menu below 860px). Case studies have a breadcrumb bar; from 1101px an outline on the left lists every section, showing only the current section's parts (Show all opens the rest); below that, a tab strip under the breadcrumb.
+- **Navigation**: a full-width top bar on Home and About with Work, About and Artwork (a menu below 860px). Case studies have a breadcrumb bar; from 1101px an outline on the left lists every section, showing only the current section's parts (Show all opens the rest); below that, a tab strip under the breadcrumb.
 - **Scroll motion**: Lenis smooth scroll with GSAP ScrollTrigger reveals on every page (`scroll.js`, `case-scroll.js`). If GSAP does not load, CSS scroll-driven animations ease the text in instead.
 - **Pictures**: on the case studies every picture opens full screen, with previous and next, arrow keys and swipe.
 - **Page changes** cross-fade (cross-document view transitions) where the browser supports it.

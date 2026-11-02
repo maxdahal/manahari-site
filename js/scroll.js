@@ -2,7 +2,7 @@
    ScrollTrigger, after catalinvintila.design:
      hero       the words of the headline slide up into place one after
                 another, "design" lands on its label; the buttons fade in. Scrolling
-                away, it holds while the words lift off and the sun sets
+                away, it holds while the words lift off and "design" scatters
      statement  held in place while its words light up one by one as you
                 scroll
      work       the case studies hold still, stacked; each next one wipes in
@@ -75,21 +75,18 @@
           .from(".cv-hero .cv-kigo__mark", { scale: 0.6, rotate: 8, duration: 0.7, ease: "back.out(2.4)" }, 0.35)
           .from(".cv-hero__foot", { opacity: 0, y: 20, duration: 0.8, ease: "power2.out", stagger: 0.08 }, 0.6);
 
-        /* scrolling down, the sun sets: the hero holds while the sun
-           sinks behind the mountains, warming to orange and fading as it
-           goes, and the horizon glows; the words leave first, hello and the
-           buttons fading, the letters of "design" scattering, the rest of
-           the line lifting away; scrolling back brings the day back */
+        /* scrolling down, the hero holds while its words leave: hello and
+           the buttons fade, the letters of "design" scatter, the rest of
+           the line lifts away, and the mountains rise a little; scrolling
+           back brings it all together again */
         var hero = document.querySelector(".cv-hero");
         var build = hero.querySelector(".cv-build");
         if (build) {
           var built = function () {
             build.classList.add("is-built");
           };
-          var last = build.querySelector(".cv-build__g");
-          if (last && last.getAnimations && last.getAnimations().length) {
-            Promise.all(last.getAnimations().map(function (a) { return a.finished; })).then(built, built);
-          } else built();
+          /* the crane and the filling take about 4.6s on load (homepage.css) */
+          setTimeout(built, 4700);
         }
         gsap.timeline({
           defaults: { ease: "none" },
@@ -111,9 +108,9 @@
             ease: "power2.in",
             stagger: { each: 0.03, from: "center" }
           }, 0.08)
-          .to(".cv-build__crane, .cv-build__scaffold", { opacity: 0, y: -40, duration: 0.3 }, 0.08)
+          .to(".cv-build__crane", { opacity: 0, y: -40, duration: 0.3 }, 0.08)
           .to(".cv-kigo .cv-w:not(.cv-build)", { opacity: 0, y: -50, duration: 0.4, ease: "power1.in", stagger: 0.02 }, 0.12)
-          .fromTo(hero, { "--sink": 0, "--dusk": 0, "--rise": "0px" }, { "--sink": 74, "--dusk": 1, "--rise": "-30px", duration: 1, ease: "power2.in" }, 0);
+          .fromTo(hero, { "--rise": "0px" }, { "--rise": "-30px", duration: 1, ease: "power2.in" }, 0);
       }
 
       /* statement: held while its words light up */

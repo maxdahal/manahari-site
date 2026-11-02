@@ -1666,7 +1666,7 @@ body:has(.cv-hero) {
 .cv-hero .cv-hero__main {
   align-items: center;
   /* room for the crane above "design" */
-  gap: clamp(36px, 6vh, 56px);
+  gap: clamp(48px, 8vh, 80px);
 }
 .cv-hero .cv-hello {
   justify-content: center;
@@ -1707,7 +1707,7 @@ body:has(.cv-hero) {
    so they need not stick) */
 .pv-main:not(.pv-about-page) .sections section.cv-hero {
   justify-content: flex-start;
-  gap: clamp(24px, 4vh, 48px);
+  gap: clamp(40px, 7vh, 80px);
   padding-bottom: clamp(96px, 16vh, 180px);
 }
 .cv-hero .cv-seasons {
@@ -1723,7 +1723,7 @@ body:has(.cv-hero) {
 }
 .cv-hero .cv-hero__foot {
   flex-direction: column-reverse;
-  gap: 12px;
+  gap: 18px;
 }
 .cv-hero .cv-hero__lede {
   font-size: 0.9375rem;
@@ -1807,4 +1807,9 @@ body:has(.cv-hero) {
 }
 .cv-kigo__mark.cv-build {
   margin-left: 0.32em;
+}
+
+/* the hero's line a touch looser, so the words breathe */
+.pv .cv-hero .cv-title.cv-kigo {
+  line-height: 1.08;
 }

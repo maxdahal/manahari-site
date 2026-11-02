@@ -1,9 +1,8 @@
 /* Home page motion, with Lenis (the smooth, weighted scroll) and GSAP with
    ScrollTrigger, after catalinvintila.design:
      hero       the words of the headline slide up into place one after
-                another, the pictures in it open out from their middle; the labels and the
-                rest fade in; "code." is typed out ("design" builds itself
-                in CSS)
+                another, "design" lands on its label; the buttons fade in. Scrolling
+                away, it holds while the words lift off and the sun sets
      statement  held in place while its words light up one by one as you
                 scroll
      work       the case studies hold still, stacked; each next one wipes in
@@ -42,20 +41,6 @@
     });
   }
 
-  /* "code." letter by letter, so it can be typed out (the h1's aria-label
-     keeps it one word for screen readers) */
-  var code = document.querySelector(".cv-hero .cv-code");
-  if (code) {
-    var letters = code.textContent.split("");
-    code.textContent = "";
-    letters.forEach(function (letter) {
-      var span = document.createElement("span");
-      span.className = "cv-key";
-      span.textContent = letter;
-      code.appendChild(span);
-    });
-  }
-
   /* in as it comes into view, back out when you scroll up past it */
   function enter(targets, trigger, vars, start) {
     if (!targets || (targets.length !== undefined && !targets.length)) return;
@@ -82,14 +67,27 @@
       gsap.ticker.lagSmoothing(0);
     }
     ctx = gsap.context(function () {
-      /* hero: the headline's words slide up, the pictures open out */
+      /* hero: the headline's words slide up, "design" lands on its label
+         with a little bounce, then the rest fades in */
       if (document.querySelector(".cv-hero")) {
         gsap.timeline({ delay: 0.15 })
-          .from(".cv-hero .cv-w:not(.cv-code)", { yPercent: 110, duration: 1, ease: "power4.out", stagger: 0.06 })
-          .from(".cv-hero .cv-pill", { clipPath: "inset(0 50% 0 50% round 999px)", duration: 1, ease: "power3.inOut", stagger: 0.12, clearProps: "clipPath" }, 0.25)
-          /* "code." is typed out, one key at a time */
-          .from(".cv-hero .cv-key", { display: "none", duration: 0.01, stagger: 0.12 }, 1)
-          .from(".cv-hero__labels, .cv-hero__foot", { opacity: 0, y: 20, duration: 0.8, ease: "power2.out" }, 0.6);
+          .from(".cv-hero .cv-w", { yPercent: 110, duration: 1, ease: "power4.out", stagger: 0.06 })
+          .from(".cv-hero .cv-kigo__mark", { scale: 0.6, rotate: 8, duration: 0.7, ease: "back.out(2.4)" }, 0.35)
+          .from(".cv-hero__foot", { opacity: 0, y: 20, duration: 0.8, ease: "power2.out", stagger: 0.08 }, 0.6);
+
+        /* scrolling down, the sun sets: the hero holds while the sun
+           sinks behind the mountains, warming to orange, and the horizon
+           glows; the words lift away first, hello and the buttons fading,
+           the line rising after them; scrolling back brings the day back */
+        var hero = document.querySelector(".cv-hero");
+        gsap.timeline({
+          defaults: { ease: "none" },
+          scrollTrigger: { trigger: hero, start: "top top", end: "+=110%", pin: true, scrub: 0.8 }
+        })
+          .to(".cv-hero .cv-seasons", { opacity: 0, y: -20, duration: 0.25 }, 0)
+          .to(".cv-hero .cv-hello, .cv-hero__foot", { opacity: 0, y: -30, duration: 0.35 }, 0.05)
+          .to(".cv-kigo", { opacity: 0, y: -70, duration: 0.4, ease: "power1.in" }, 0.1)
+          .fromTo(hero, { "--sink": 0, "--dusk": 0, "--rise": "0px" }, { "--sink": 74, "--dusk": 1, "--rise": "-30px", duration: 1, ease: "power2.in" }, 0);
       }
 
       /* statement: held while its words light up */

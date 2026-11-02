@@ -14,7 +14,8 @@
 body:has(.cv-hero) {
   --cv-font: "Helvetica Neue", Helvetica, Arial, sans-serif;
 }
-.pv-main:not(.pv-about-page) .sections > section:is(.cv-hero, .cv-work, .cv-skills, .cv-recog),
+.pv-main:not(.pv-about-page) .sections > section:is(.cv-work, .cv-skills, .cv-recog),
+.pv-main:not(.pv-about-page) .sections section.cv-hero,
 .pv-main:not(.pv-about-page) .sections section:is(.cv-statement, .cv-journey) {
   width: 100%;
   max-width: none;
@@ -44,7 +45,7 @@ body:has(.cv-hero) {
 }
 
 /* ---- the hero: a sentence with pictures in it ----------------------------- */
-.pv-main:not(.pv-about-page) .sections > section.cv-hero {
+.pv-main:not(.pv-about-page) .sections section.cv-hero {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -452,7 +453,7 @@ body:has(.cv-hero) {
 }
 
 /* the home page's buttons, in the same plain face */
-.pv-main .sections > section:is(.cv-hero, .cv-contact) .pv-btn {
+.pv-main .sections section:is(.cv-hero, .cv-contact) .pv-btn {
   font-family: var(--cv-font);
   font-size: 1rem;
   font-weight: 600;
@@ -969,13 +970,31 @@ body:has(.cv-hero) {
 :root[data-season="winter"] {
   --sun: #9cc0e6;
 }
-.pv-main:not(.pv-about-page) .sections > section.cv-hero {
+/* the hero's backdrop: one big red sun, like a woodblock print's, over the
+   ink-wash mountains. Scrolling down it sets (scroll.js): --sink lowers it
+   behind the land (the solid band under the ridges hides it), --dusk warms
+   it towards orange and lights a glow along the horizon. */
+@property --sink {
+  syntax: "<number>";
+  inherits: true;
+  initial-value: 0;
+}
+@property --dusk {
+  syntax: "<number>";
+  inherits: true;
+  initial-value: 0;
+}
+.pv-main:not(.pv-about-page) .sections section.cv-hero {
+  --sun-r: min(13vw, 170px);
+  --land: calc(min(34vh, 320px) * 0.42);
+  --sun-c: color-mix(in srgb, var(--seal), #ff7a2f calc(var(--dusk) * 55%));
   background:
-    var(--ridges) center bottom / 100% min(34vh, 320px) no-repeat,
-    radial-gradient(circle at 74% 40%, color-mix(in srgb, var(--sun) 16%, transparent) 0, color-mix(in srgb, var(--sun) 7%, transparent) min(14vw, 180px), transparent min(24vw, 300px)),
+    var(--ridges) center calc(100% + var(--rise, 0px)) / 100% min(34vh, 320px) no-repeat,
     var(--paper) 0 0 / 240px auto,
+    linear-gradient(var(--bg) 0 0) center bottom / 100% var(--land) no-repeat,
+    radial-gradient(circle at 80% calc(30% + var(--sink) * 1%), var(--sun-c) 0 var(--sun-r), transparent calc(var(--sun-r) + 1px)),
+    radial-gradient(ellipse 80% 45% at 70% 100%, color-mix(in srgb, #ff7a2f calc(var(--dusk) * 28%), transparent), transparent 70%),
     var(--bg);
-  transition: background 0.6s ease;
 }
 .pv-main:not(.pv-about-page) .sections > section.cv-contact {
   background:
@@ -1631,4 +1650,161 @@ body:has(.cv-hero) {
     grid-template-columns: minmax(0, 1fr);
     row-gap: 56px;
   }
+}
+
+/* ---- the hero after kigo.studio: everything centred; hello and where I am
+   from, one heavy line in Kanit with "design" picked out on an accent
+   label, and the buttons ---------------------------------------------- */
+.pv-main:not(.pv-about-page) .sections section.cv-hero {
+  align-items: center;
+  text-align: center;
+  padding-bottom: 0;
+}
+.cv-hero .cv-hero__labels {
+  align-self: stretch;
+}
+.cv-hero .cv-hero__main {
+  align-items: center;
+  /* room for the crane above "design" */
+  gap: clamp(36px, 6vh, 56px);
+}
+.cv-hero .cv-hello {
+  justify-content: center;
+}
+.pv .cv-hero .cv-title.cv-kigo {
+  align-items: center;
+  font-family: "Kanit", var(--cv-font);
+  font-size: clamp(2.5rem, 1rem + 4.4vw, 5.75rem);
+  font-weight: 800;
+  line-height: 0.98;
+  letter-spacing: -0.035em;
+  color: var(--ink);
+}
+.cv-kigo .cv-line {
+  justify-content: center;
+  column-gap: 0.24em;
+  padding-block: 0.06em;
+}
+.cv-kigo__mark {
+  padding: 0 0.14em 0.04em;
+  border-radius: 0.14em;
+  background: var(--accent);
+  color: var(--on-accent);
+  rotate: -2deg;
+}
+.cv-hero .cv-hero__foot {
+  align-items: center;
+  gap: 16px;
+}
+.cv-hero .pv-btn {
+  font-family: "Kanit", var(--cv-font);
+  font-weight: 500;
+}
+
+/* a calmer hero: the line and the buttons centred together in the window
+   above the mountains, the note under the buttons quiet and small; the
+   seasons sit at the top right (the hero holds still as you scroll away,
+   so they need not stick) */
+.pv-main:not(.pv-about-page) .sections section.cv-hero {
+  justify-content: flex-start;
+  gap: clamp(24px, 4vh, 48px);
+  padding-bottom: clamp(96px, 16vh, 180px);
+}
+.cv-hero .cv-seasons {
+  position: static;
+  /* clear of the pause button's tip, which opens just under the top bar */
+  margin-top: clamp(88px, 11vh, 104px);
+}
+.cv-hero .cv-hero__main {
+  margin-top: auto;
+}
+.cv-hero .cv-hero__foot {
+  margin-bottom: auto;
+}
+.cv-hero .cv-hero__foot {
+  flex-direction: column-reverse;
+  gap: 12px;
+}
+.cv-hero .cv-hero__lede {
+  font-size: 0.9375rem;
+  color: var(--text-2);
+}
+
+/* ---- "design" under construction, after the onefold sketch: a crane
+   lowers the "g" into place on a hook, scaffolding stands by the "d";
+   hand-drawn lines in the seal red. The word, the scaffold and the crane
+   share one grid cell (nothing positioned), the drawings hanging outside
+   it. Without motion the "g" simply sits in place. ------------------------ */
+.cv-kigo__mark.cv-build {
+  display: inline-grid;
+  padding: 0;
+  border-radius: 0;
+  background: none;
+  color: var(--ink);
+  rotate: none;
+}
+.cv-build > * {
+  grid-area: 1 / 1;
+}
+.cv-build__word {
+  position: relative;
+  z-index: 1;
+}
+.cv-build__g {
+  display: inline-block;
+}
+.cv-build__crane,
+.cv-build__scaffold {
+  color: var(--seal);
+  overflow: visible;
+  pointer-events: none;
+}
+.cv-build__crane {
+  justify-self: end;
+  align-self: end;
+  width: 1.25em;
+  height: 1.56em;
+  /* hangs above the word without making its line taller */
+  margin-top: -0.7em;
+  translate: 0.2em 0.06em;
+}
+.cv-build__scaffold {
+  justify-self: start;
+  align-self: end;
+  width: 0.34em;
+  height: 0.62em;
+  translate: -0.42em 0.04em;
+}
+@media (prefers-reduced-motion: no-preference) {
+  :root:not(.motion-paused) .cv-build__g {
+    animation: cv-lower 2.2s cubic-bezier(0.45, 0, 0.2, 1) 1.2s both;
+  }
+  :root:not(.motion-paused) .cv-build__cable {
+    animation: cv-cable 2.2s cubic-bezier(0.45, 0, 0.2, 1) 1.2s both;
+  }
+  :root:not(.motion-paused) .cv-build__hook {
+    animation: cv-hook 2.2s cubic-bezier(0.45, 0, 0.2, 1) 1.2s both;
+  }
+}
+@keyframes cv-lower {
+  0% { translate: 0 -0.85em; rotate: -6deg; }
+  70% { translate: 0 0.05em; rotate: 2deg; }
+  100% { translate: 0 0; rotate: 0deg; }
+}
+@keyframes cv-cable {
+  0% { d: path("M18 32 L18 36"); }
+  70%, 100% { d: path("M18 32 L18 66"); }
+}
+@keyframes cv-hook {
+  0% { translate: 0 -30px; }
+  70%, 100% { translate: 0 0; }
+}
+/* room above the first line for the crane, and beside "design" for the
+   scaffold (the line clips its words while they slide up) */
+.cv-kigo .cv-line:first-child {
+  padding-top: 0.8em;
+  margin-top: -0.8em;
+}
+.cv-kigo__mark.cv-build {
+  margin-left: 0.32em;
 }

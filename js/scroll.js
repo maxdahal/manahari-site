@@ -76,17 +76,43 @@
           .from(".cv-hero__foot", { opacity: 0, y: 20, duration: 0.8, ease: "power2.out", stagger: 0.08 }, 0.6);
 
         /* scrolling down, the sun sets: the hero holds while the sun
-           sinks behind the mountains, warming to orange, and the horizon
-           glows; the words lift away first, hello and the buttons fading,
-           the line rising after them; scrolling back brings the day back */
+           sinks behind the mountains, warming to orange and fading as it
+           goes, and the horizon glows; the words leave first, hello and the
+           buttons fading, the letters of "design" scattering, the rest of
+           the line lifting away; scrolling back brings the day back */
         var hero = document.querySelector(".cv-hero");
+        var build = hero.querySelector(".cv-build");
+        if (build) {
+          var built = function () {
+            build.classList.add("is-built");
+          };
+          var last = build.querySelector(".cv-build__g");
+          if (last && last.getAnimations && last.getAnimations().length) {
+            Promise.all(last.getAnimations().map(function (a) { return a.finished; })).then(built, built);
+          } else built();
+        }
         gsap.timeline({
           defaults: { ease: "none" },
           scrollTrigger: { trigger: hero, start: "top top", end: "+=110%", pin: true, scrub: 0.8 }
         })
           .to(".cv-hero .cv-seasons", { opacity: 0, y: -20, duration: 0.25 }, 0)
           .to(".cv-hero .cv-hello, .cv-hero__foot", { opacity: 0, y: -30, duration: 0.35 }, 0.05)
-          .to(".cv-kigo", { opacity: 0, y: -70, duration: 0.4, ease: "power1.in" }, 0.1)
+          /* "design" comes apart: its letters scatter across the sky,
+             spinning away, while the rest of the line lifts and fades */
+          /* (from a fixed start: when this is set up the letters may still
+             be mid-build, invisible) */
+          .fromTo(".cv-build__l", { x: 0, y: 0, rotate: 0, scale: 1, opacity: 1 }, {
+            x: function () { return gsap.utils.random(-320, 320); },
+            y: function () { return gsap.utils.random(-260, -60); },
+            rotate: function () { return gsap.utils.random(-120, 120); },
+            scale: function () { return gsap.utils.random(0.5, 1.4); },
+            opacity: 0,
+            duration: 0.55,
+            ease: "power2.in",
+            stagger: { each: 0.03, from: "center" }
+          }, 0.08)
+          .to(".cv-build__crane, .cv-build__scaffold", { opacity: 0, y: -40, duration: 0.3 }, 0.08)
+          .to(".cv-kigo .cv-w:not(.cv-build)", { opacity: 0, y: -50, duration: 0.4, ease: "power1.in", stagger: 0.02 }, 0.12)
           .fromTo(hero, { "--sink": 0, "--dusk": 0, "--rise": "0px" }, { "--sink": 74, "--dusk": 1, "--rise": "-30px", duration: 1, ease: "power2.in" }, 0);
       }
 

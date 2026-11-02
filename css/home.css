@@ -70,7 +70,7 @@
   flex-direction: column;
   align-items: center;
   margin: 0;
-  font-family: "Antonio", "Arial Narrow", Impact, sans-serif;
+  font-family: var(--heading-font);
   font-size: clamp(2.5rem, 1rem + 6vw, 6rem);
   font-weight: 700;
   line-height: 1;
@@ -132,7 +132,7 @@
 }
 .hello__count {
   margin: 0;
-  font-family: "JetBrains Mono", ui-monospace, monospace;
+  font-family: var(--body-font);
   font-size: 0.8125rem;
   color: rgb(255 255 255 / 0.6);
   font-variant-numeric: tabular-nums;

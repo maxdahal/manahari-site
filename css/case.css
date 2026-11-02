@@ -18,7 +18,7 @@
    ========================================================================== */
 
 body.cs {
-  --cs-font: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  --cs-font: "Geist", "Helvetica Neue", Helvetica, Arial, sans-serif;
   --heading-font: var(--cs-font);
   --body-font: var(--cs-font);
   font-family: var(--cs-font);
@@ -540,4 +540,15 @@ body.cs .a-sections a {
 .cs-zoom {
   overflow: hidden;
   border-radius: 12px;
+}
+
+/* larger screens: everything under a part's title sits in from it, so the
+   title stands out at the edge and the hierarchy reads at a glance */
+@media (min-width: 1101px) {
+  #main .a-part > :not(h3) {
+    margin-inline-start: clamp(24px, 3vw, 48px);
+  }
+  #main .a-part > :is(figure, .figs, .row, .figset, .cards, .steps, .dids, .contrib, .accs, .roles, .figs-roles, .sandbox-wrap) {
+    width: auto;
+  }
 }

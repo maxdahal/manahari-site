@@ -42,8 +42,9 @@
   --warn: #9a6a00;
 
   /* type */
-  --heading-font: "Antonio", "Arial Narrow", Impact, sans-serif;
-  --body-font: "Inter", system-ui, -apple-system, "Segoe UI", sans-serif;
+  /* one typeface for every word on the site */
+  --heading-font: "Geist", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  --body-font: "Geist", "Helvetica Neue", Helvetica, Arial, sans-serif;
   /* Type scale, largest to smallest, so the size of a heading always matches
      its level: h1 page title > h2 stage title > section title > subhead >
      card title > body. Sizes are in rem so they follow the reader's own font

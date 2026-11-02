@@ -12,7 +12,7 @@
    Loaded after portavia.css, only on the home page.
    ========================================================================== */
 body:has(.cv-hero) {
-  --cv-font: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  --cv-font: "Geist", "Helvetica Neue", Helvetica, Arial, sans-serif;
 }
 .pv-main:not(.pv-about-page) .sections > section:is(.cv-work, .cv-skills, .cv-recog),
 .pv-main:not(.pv-about-page) .sections section.cv-hero,
@@ -538,7 +538,7 @@ body:has(.cv-hero) {
   }
 }
 .cv-code {
-  font-family: "JetBrains Mono", ui-monospace, "SF Mono", Menlo, monospace;
+  font-family: var(--cv-font);
   font-size: 0.86em;
   font-weight: 700;
   letter-spacing: -0.04em;
@@ -987,7 +987,8 @@ body:has(.cv-hero) {
 .pv-main:not(.pv-about-page) .sections section.cv-hero {
   --sun-r: min(13vw, 170px);
   --land: calc(min(34vh, 320px) * 0.42);
-  --sun-c: color-mix(in srgb, var(--seal), #ff7a2f calc(var(--dusk) * 55%));
+  /* it fades as it sets: --dusk also takes it towards transparent */
+  --sun-c: color-mix(in srgb, color-mix(in srgb, var(--seal), #ff7a2f calc(var(--dusk) * 55%)) calc(100% - var(--dusk) * 100%), transparent);
   background:
     var(--ridges) center calc(100% + var(--rise, 0px)) / 100% min(34vh, 320px) no-repeat,
     var(--paper) 0 0 / 240px auto,
@@ -1653,7 +1654,7 @@ body:has(.cv-hero) {
 }
 
 /* ---- the hero after kigo.studio: everything centred; hello and where I am
-   from, one heavy line in Kanit with "design" picked out on an accent
+   from, one heavy line with "design" picked out on an accent
    label, and the buttons ---------------------------------------------- */
 .pv-main:not(.pv-about-page) .sections section.cv-hero {
   align-items: center;
@@ -1673,7 +1674,7 @@ body:has(.cv-hero) {
 }
 .pv .cv-hero .cv-title.cv-kigo {
   align-items: center;
-  font-family: "Kanit", var(--cv-font);
+  font-family: var(--cv-font);
   font-size: clamp(2.5rem, 1rem + 4.4vw, 5.75rem);
   font-weight: 800;
   line-height: 0.98;
@@ -1697,7 +1698,7 @@ body:has(.cv-hero) {
   gap: 16px;
 }
 .cv-hero .pv-btn {
-  font-family: "Kanit", var(--cv-font);
+  font-family: var(--cv-font);
   font-weight: 500;
 }
 
@@ -1812,4 +1813,242 @@ body:has(.cv-hero) {
 /* the hero's line a touch looser, so the words breathe */
 .pv .cv-hero .cv-title.cv-kigo {
   line-height: 1.08;
+}
+
+/* the line in one colour and one light weight; "design" stands out as an
+   outline only, "code." as code */
+.pv .cv-hero .cv-title.cv-kigo {
+  font-weight: 300;
+  color: var(--ink);
+}
+
+/* "design": outline only, being built. Each letter is drawn as a red
+   blueprint outline that drops into place, then settles into the ink
+   outline it keeps; the crane lowers the "g" last. Without motion the word
+   simply stands, outlined. */
+.cv-kigo .cv-build__word {
+  font-weight: 600;
+  color: transparent;
+  -webkit-text-stroke: 1.6px var(--ink);
+  paint-order: stroke;
+}
+.cv-build__l {
+  display: inline-block;
+}
+@supports not (-webkit-text-stroke: 1px black) {
+  .cv-kigo .cv-build__word {
+    color: var(--ink);
+  }
+}
+@media (prefers-reduced-motion: no-preference) {
+  :root:not(.motion-paused) .cv-build__l:not(.cv-build__g) {
+    animation: cv-place 0.6s cubic-bezier(0.3, 1.4, 0.5, 1) calc(1s + var(--i) * 0.16s) backwards;
+  }
+  :root:not(.motion-paused) .cv-build__g {
+    animation:
+      cv-lower 2.2s cubic-bezier(0.45, 0, 0.2, 1) 1.2s both,
+      cv-blueprint 0.5s ease 3.2s backwards;
+  }
+}
+@keyframes cv-place {
+  0% {
+    translate: 0 -0.35em;
+    opacity: 0;
+  }
+  0%,
+  60% {
+    -webkit-text-stroke-color: var(--seal);
+  }
+  20% {
+    opacity: 1;
+  }
+}
+@keyframes cv-blueprint {
+  from {
+    -webkit-text-stroke-color: var(--seal);
+  }
+}
+
+/* "code.": a terminal. A dark console line in green monospace, with a
+   prompt before it and a block cursor blinking after it, in both themes */
+.cv-kigo .cv-kigo__code {
+  font-family: "Geist Mono", ui-monospace, "SF Mono", Menlo, monospace !important;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.18em;
+  padding: 0.06em 0.22em 0.1em;
+  border-radius: 0.14em;
+  background: #0d1117;
+  box-shadow: inset 0 0 0 1px #30363d;
+  font-family: var(--cv-font);
+  font-size: 0.78em;
+  font-weight: 700;
+  letter-spacing: -0.04em;
+  color: #3fb950;
+  text-shadow: 0 0 0.4em color-mix(in srgb, #3fb950 45%, transparent);
+}
+.cv-kigo .cv-kigo__code::before {
+  content: "~$" / "";
+  font-size: 0.5em;
+  font-weight: 400;
+  letter-spacing: 0;
+  color: #8b949e;
+  text-shadow: none;
+}
+.cv-kigo__caret {
+  display: inline-block;
+  width: 0.5em;
+  height: 0.9em;
+  background: #3fb950;
+}
+@media (prefers-reduced-motion: no-preference) {
+  :root:not(.motion-paused) .cv-kigo__caret {
+    animation: cv-blink 1.05s steps(1) infinite;
+  }
+}
+
+/* the plain words smaller, so "design" and "code." carry the line */
+.cv-kigo .cv-line {
+  align-items: baseline;
+}
+.cv-kigo .cv-w:not(.cv-build):not(.cv-kigo__code) {
+  font-size: 0.6em;
+}
+
+/* the rest of the hero in the same quiet ink: hello and the Nepal line */
+.cv-hero .cv-hello__word path {
+  stroke: var(--ink);
+}
+.pv .cv-hero .cv-from {
+  color: var(--ink);
+}
+
+/* once "design" is built (scroll.js marks it), its intro animations are done
+   with, so holding the hero in place never replays them */
+.cv-build.is-built :is(.cv-build__l, .cv-build__cable, .cv-build__hook) {
+  animation: none !important;
+}
+/* built, its line no longer needs to clip (that was for the words sliding
+   up), so the letters can scatter across the sky */
+.cv-kigo .cv-line:has(.cv-build.is-built) {
+  overflow: visible;
+}
+
+/* the seasons stand in a column at the left of the hero, centred down its
+   height; the hero becomes a three-column grid so the line and buttons stay
+   centred in the window. Phones keep them in a row at the top. */
+@media (min-width: 861px) {
+  .pv-main:not(.pv-about-page) .sections section.cv-hero {
+    display: grid;
+    grid-template-columns: minmax(130px, 1fr) minmax(0, 1000px) minmax(130px, 1fr);
+    grid-template-rows: 1fr auto auto 1fr;
+    align-items: center;
+    row-gap: clamp(40px, 7vh, 80px);
+  }
+  .cv-hero .cv-seasons {
+    grid-column: 1;
+    grid-row: 1 / -1;
+    justify-self: start;
+    align-self: center;
+    flex-direction: column;
+    margin: 0;
+  }
+  .cv-hero .cv-season + .cv-season {
+    border-left: 0;
+    border-top: 1px solid var(--ink);
+  }
+  .cv-hero .cv-season {
+    justify-content: flex-start;
+  }
+  .cv-hero .cv-hero__main {
+    grid-column: 2;
+    grid-row: 2;
+    margin: 0;
+  }
+  .cv-hero .cv-hero__foot {
+    grid-column: 2;
+    grid-row: 3;
+    justify-self: center;
+    margin: 0;
+  }
+}
+
+/* the seasons, redesigned: four round hanko seals strung on a fine thread,
+   no box around them. The chosen season's seal is pressed in red with its
+   name in ink; the others are outlined, their names quiet. They line up
+   with the headline and buttons, not the whole hero. */
+.cv-hero .cv-seasons {
+  gap: 14px;
+  padding: 0;
+  border: 0;
+  background: none;
+  -webkit-backdrop-filter: none;
+  backdrop-filter: none;
+}
+@media (min-width: 861px) {
+  .cv-hero .cv-seasons {
+    grid-row: 2 / 4;
+    /* the thread through the seals */
+    background: linear-gradient(color-mix(in srgb, var(--seal) 45%, transparent) 0 0) 22px 22px / 1px calc(100% - 44px) no-repeat;
+  }
+}
+.cv-hero .cv-season,
+.cv-hero .cv-season + .cv-season {
+  min-height: 44px;
+  padding: 0;
+  gap: 12px;
+  border: 0;
+  background: none;
+  color: var(--text-2);
+}
+.cv-hero .cv-season__seal {
+  width: 44px;
+  height: 44px;
+  border: 1.5px solid var(--seal);
+  border-radius: 50%;
+  background: var(--bg);
+  font-size: 1.125rem;
+  rotate: 0deg;
+  transition: transform 0.25s ease, background-color 0.2s ease, color 0.2s ease, box-shadow 0.2s ease;
+}
+.cv-hero .cv-season:hover {
+  background: none;
+  color: var(--ink);
+}
+.cv-hero .cv-season:hover .cv-season__seal {
+  transform: scale(1.08) rotate(-6deg);
+}
+.cv-hero .cv-season[aria-pressed="true"] {
+  background: none;
+  color: var(--ink);
+}
+.cv-hero .cv-season[aria-pressed="true"] .cv-season__seal {
+  background: var(--seal);
+  color: #fff;
+  box-shadow: 0 0 0 4px color-mix(in srgb, var(--seal) 22%, transparent);
+  transform: rotate(-6deg);
+}
+.cv-hero .cv-season__name {
+  font-size: 0.875rem;
+  font-weight: 500;
+}
+.cv-hero .cv-season:focus-visible {
+  outline: 3px solid var(--accent);
+  outline-offset: 4px;
+  border-radius: 999px;
+}
+
+/* laptop screens: the hero's content centred in the space under the top
+   bar (no extra room held at the foot), and the words given more air */
+@media (min-width: 861px) {
+  .pv-main:not(.pv-about-page) .sections section.cv-hero {
+    padding-block: calc(var(--bar-h) + clamp(24px, 4vh, 48px)) clamp(32px, 6vh, 64px);
+    row-gap: clamp(48px, 8vh, 88px);
+  }
+}
+.pv .cv-hero .cv-title.cv-kigo {
+  line-height: 1.3;
+}
+.cv-kigo .cv-line + .cv-line {
+  margin-top: 0.08em;
 }

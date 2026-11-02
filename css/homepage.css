@@ -237,9 +237,9 @@ body:has(.cv-hero) {
   display: grid;
   min-height: 100svh;
   overflow: hidden;
-  color: #f8fafc;
+  color: var(--on-dark);
   text-decoration: none;
-  background: #0c0c0e;
+  background: var(--dark-bg);
 }
 .cv-project__link > * {
   grid-area: 1 / 1;
@@ -289,7 +289,7 @@ body:has(.cv-hero) {
   z-index: 3;
   height: 0;
   overflow: visible;
-  color: #f8fafc;
+  color: var(--on-dark);
   opacity: 0;
   transition: opacity 0.3s ease;
   font-variant-numeric: tabular-nums;
@@ -835,7 +835,7 @@ body:has(.cv-hero) {
 .cv-season[aria-pressed="true"] .cv-season__seal {
   border-color: var(--seal);
   background: var(--seal);
-  color: #f8fafc;
+  color: var(--on-dark);
   rotate: 0deg;
 }
 .cv-season:focus-visible {
@@ -2024,7 +2024,7 @@ body:has(.cv-hero) {
 }
 .cv-hero .cv-season[aria-pressed="true"] .cv-season__seal {
   background: var(--seal);
-  color: #f8fafc;
+  color: var(--on-dark);
   box-shadow: 0 0 0 4px color-mix(in srgb, var(--seal) 22%, transparent);
   transform: rotate(-6deg);
 }
@@ -2051,4 +2051,11 @@ body:has(.cv-hero) {
 }
 .cv-kigo .cv-line + .cv-line {
   margin-top: 0.08em;
+}
+
+/* text over the case study pictures sits on a soft dark scrim, so it stays
+   readable whatever the picture behind it */
+.cv-project__words {
+  background: radial-gradient(ellipse 60% 55% at 50% 50%, color-mix(in srgb, var(--dark-bg) 72%, transparent), transparent 100%);
+  text-shadow: 0 1px 12px color-mix(in srgb, var(--dark-bg) 60%, transparent);
 }

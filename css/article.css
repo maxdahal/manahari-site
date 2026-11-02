@@ -387,20 +387,11 @@
   }
 }
 
-/* status colors for the review list */
+/* status colors for the review list: the theme's success and warning
+   (each status also carries its word, "Fixed" or "Still open") */
 :root {
-  --ok-text: #0d5228;
-  --warn-text: #5e3f00;
-}
-@media (prefers-color-scheme: dark) {
-  :root:not([data-theme="light"]) {
-    --ok-text: #5dd68a;
-    --warn-text: #e0a93b;
-  }
-}
-:root[data-theme="dark"] {
-  --ok-text: #5dd68a;
-  --warn-text: #e0a93b;
+  --ok-text: var(--ok);
+  --warn-text: var(--warn);
 }
 /* the opening part (my contribution) sits closer to the picture */
 .a-act--intro {
@@ -1201,8 +1192,8 @@
   margin: 0;
   padding: clamp(12px, 3vw, 24px);
   border: 0;
-  background: #08080a;
-  color: #f2f2ee;
+  background: var(--dark-bg);
+  color: var(--on-dark);
 }
 .viewer[open] {
   display: grid;
@@ -1257,12 +1248,12 @@
   height: 22px;
 }
 .viewer__btn:hover {
-  border-color: #818cf8;
-  background: #818cf8;
-  color: #0f172a;
+  border-color: var(--accent-on-dark);
+  background: var(--accent-on-dark);
+  color: var(--dark-bg);
 }
 .viewer__btn:focus-visible {
-  outline: 3px solid #818cf8;
+  outline: 3px solid var(--accent-on-dark);
   outline-offset: 3px;
 }
 .viewer__caption {
@@ -1515,8 +1506,8 @@
     --outline-dim: var(--text-2);
   }
   :root:not([data-theme="dark"]) .article :is(.card-pt, .acc, .contrib__team, .did) {
-    border: 1px solid rgb(26 26 30 / 0.12);
-    background: #fff;
+    border: 1px solid var(--line);
+    background: var(--surface);
     box-shadow: 0 1px 2px rgb(26 26 30 / 0.05);
   }
 }
@@ -1525,18 +1516,18 @@
   --outline-dim: var(--text-2);
 }
 :root[data-theme="light"] .article :is(.card-pt, .acc, .contrib__team, .did) {
-  border: 1px solid rgb(26 26 30 / 0.12);
-  background: #fff;
+  border: 1px solid var(--line);
+  background: var(--surface);
   box-shadow: 0 1px 2px rgb(26 26 30 / 0.05);
 }
 /* the outline sits outside .article, so it gets the darker dim too */
 @media (prefers-color-scheme: light) {
   :root:not([data-theme="dark"]) .a-outline {
-    --outline-dim: #5c5c5b;
+    --outline-dim: var(--text-2);
   }
 }
 :root[data-theme="light"] .a-outline {
-  --outline-dim: #5c5c5b;
+  --outline-dim: var(--text-2);
 }
 
 /* ==========================================================================
@@ -1635,10 +1626,10 @@
   letter-spacing: 0.06em;
 }
 .article .acc__label.is-ok {
-  background: color-mix(in srgb, var(--ok-text) 16%, transparent);
+  background: color-mix(in srgb, var(--ok-text) 7%, transparent);
 }
 .article .acc__label.is-open {
-  background: color-mix(in srgb, var(--warn-text) 16%, transparent);
+  background: color-mix(in srgb, var(--warn-text) 7%, transparent);
 }
 /* in three columns, an odd last item stays in its own column */
 @media (min-width: 1101px) {

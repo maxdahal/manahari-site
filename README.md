@@ -50,12 +50,19 @@ Every interface color is a token at the top of `css/site.css`, light values firs
 
 | Token | Light | Dark |
 |---|---|---|
-| `--bg` | #F5F7F8 | #0F172A |
-| `--surface` | #FFFFFF | #1E293B |
-| `--ink`, `--text` | #111827 | #F8FAFC |
-| `--text-2` (secondary) | #4B5563 | #94A3B8 |
-| `--accent`, `--accent-text` | #2E5B82 | #60A5FA |
-| `--line` | #E5E7EB | #334155 |
+| `--bg` (page) | #F7F8FA | #0F141C |
+| `--surface` | #FFFFFF | #171E29 |
+| `--surface-2` (elevated) | #FFFFFF | #202A38 |
+| `--ink`, `--text` (primary) | #172033 | #F3F6FA |
+| `--text-2` (secondary) | #526071 | #B5C0D0 |
+| `--text-subtle` | #616E80 | #8E9BAD |
+| `--line` (border) | #D7DEE8 | #334155 |
+| `--accent` | #1D4ED8 | #9DB3FF |
+| `--accent-hover` | #1E40AF | #B8C7FF |
+| `--accent-soft` | #E8F0FF | #1C2A4A |
+| `--ok` / `--warn` / `--error` | #147A52 / #8A5700 / #B42318 | #69D3A5 / #F2C66D / #FF8A80 |
+
+`--dark-bg`, `--on-dark` and `--accent-on-dark` are for the parts that stay dark in both themes (picture viewers, text over case study pictures, the KU sandbox). The hero's red sun and seals (`--seal`), the Nepal flag and the terminal "code." chip keep their own colours on purpose.
 
 `--paper` holds the paper grain (faint slate specks in light mode, light specks in dark mode); it is baked into the page, section and footer backgrounds. Colors that belong to the work shown, not the site, are tokens in that page's CSS: the console's arm and status colors, and KU's brand colors.
 

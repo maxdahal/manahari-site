@@ -133,20 +133,32 @@
   text-decoration: none;
   cursor: pointer;
 }
+/* outline buttons fill with the soft accent on hover; the filled one
+   deepens to the hover accent */
 .pv-btn:hover {
-  background: var(--accent);
-  border-color: var(--accent);
-  color: var(--on-accent);
+  background: var(--accent-soft);
+  border-color: var(--accent-hover);
+  color: var(--accent-hover);
 }
 .pv-btn--fill {
   background: var(--accent);
   border-color: var(--accent);
   color: var(--on-accent);
 }
-
-.pv-btn:focus-visible {
-  outline: 2px solid var(--ink);
-  outline-offset: 3px;
+.pv-btn--fill:hover {
+  background: var(--accent-hover);
+  border-color: var(--accent-hover);
+  color: var(--on-accent);
+}
+.pv-btn:active {
+  translate: 0 1px;
+}
+.pv-btn:disabled,
+.pv-btn[aria-disabled="true"] {
+  border-color: var(--line);
+  background: none;
+  color: var(--text-subtle);
+  cursor: not-allowed;
 }
 
 /* ---- the page's end: the last row of "Let's connect" on Home and About,
@@ -379,7 +391,7 @@
   border: 1px solid rgb(255 255 255 / 0.25);
   border-radius: 999px;
   background: rgb(255 255 255 / 0.06);
-  color: #f2f2ee;
+  color: var(--on-dark);
   transition: background-color 0.2s ease, color 0.2s ease, border-color 0.2s ease;
 }
 .pv .lightbox .icon-button svg {
@@ -387,12 +399,12 @@
   height: 22px;
 }
 .pv .lightbox .icon-button:hover {
-  border-color: #818cf8;
-  background: #818cf8;
-  color: #0f172a;
+  border-color: var(--accent-on-dark);
+  background: var(--accent-on-dark);
+  color: var(--dark-bg);
 }
 .pv .lightbox .icon-button:focus-visible {
-  outline: 3px solid #818cf8;
+  outline: 3px solid var(--accent-on-dark);
   outline-offset: 3px;
 }
 @media (max-width: 640px) {

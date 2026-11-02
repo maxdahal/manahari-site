@@ -18,13 +18,13 @@
 :root {
   color-scheme: light;
 
-  /* Colour system: neutral slate surfaces, deep-blue accent used sparingly,
+  /* Colour system: neutral slate surfaces, a teal accent used sparingly,
      so the work stays the focus. Every token has a light value here and a
      dark value below (system setting, or the toggle's data-theme).
      Light contrast on the page / on white surfaces: primary 15.3 / 16.3:1,
      secondary 6.0 / 6.4:1, subtle 4.9 / 5.2:1 (a shade darker than #68778A,
-     which is 4.3:1 on the page), accent 6.3 / 6.7:1, white on the accent
-     6.7:1, success 5.0:1, warning 5.7:1, error 6.2:1. */
+     which is 4.3:1 on the page), accent (teal 700) 5.2 / 5.5:1, white on
+     the accent 5.5:1, success 5.0:1, warning 5.7:1, error 6.2:1. */
   --bg: #f7f8fa;
   --surface: #ffffff;
   --surface-2: #ffffff;
@@ -34,10 +34,10 @@
   --text-subtle: #616e80;
   --outline-dim: #526071;
   --line: #d7dee8;
-  --accent: #1d4ed8;
-  --accent-text: #1d4ed8;
-  --accent-hover: #1e40af;
-  --accent-soft: #e8f0ff;
+  --accent: #0f766e;
+  --accent-text: #0f766e;
+  --accent-hover: #115e59;
+  --accent-soft: #e6f6f4;
   --on-accent: #ffffff;
   /* see-through, so the paper grain shows through the tinted band */
   --band: color-mix(in srgb, var(--accent) 9%, transparent);
@@ -53,7 +53,7 @@
   --dark-surface-2: #202a38;
   --on-dark: #f3f6fa;
   --on-dark-2: #b5c0d0;
-  --accent-on-dark: #9db3ff;
+  --accent-on-dark: #2dd4bf;
 
   /* type */
   /* one typeface for every word on the site */
@@ -84,10 +84,10 @@
 }
 
 /* Dark theme: a deep blue-grey page (never pure black), lifted surfaces,
-   soft off-white text (never pure white) and a lighter, calmer blue accent.
+   soft off-white text (never pure white) and a lighter teal accent.
    Contrast on the page / on the elevated surface: primary 17.0 / 13.4:1,
-   secondary 10.0 / 7.9:1, subtle 6.5 / 5.1:1, accent 9.1 / 7.1:1, page
-   colour on the accent 9.1:1, success 10.1:1, warning 11.5:1, error 8.1:1. */
+   secondary 10.0 / 7.9:1, subtle 6.5 / 5.1:1, accent (teal 400) 9.9 / 7.8:1,
+   page colour on the accent 9.9:1, success 10.1:1, warning 11.5:1, error 8.1:1. */
 @media (prefers-color-scheme: dark) {
   :root:not([data-theme="light"]) {
     color-scheme: dark;
@@ -100,10 +100,10 @@
     --text-subtle: #8e9bad;
     --outline-dim: #b5c0d0;
     --line: #334155;
-    --accent: #9db3ff;
-    --accent-text: #9db3ff;
-    --accent-hover: #b8c7ff;
-    --accent-soft: #1c2a4a;
+    --accent: #2dd4bf;
+    --accent-text: #2dd4bf;
+    --accent-hover: #5eead4;
+    --accent-soft: #123533;
     --on-accent: #0f141c;
     --header-line: #334155;
     --shadow: 0 10px 30px rgba(0, 0, 0, 0.55);
@@ -123,10 +123,10 @@
   --text-subtle: #8e9bad;
   --outline-dim: #b5c0d0;
   --line: #334155;
-  --accent: #9db3ff;
-  --accent-text: #9db3ff;
-  --accent-hover: #b8c7ff;
-  --accent-soft: #1c2a4a;
+  --accent: #2dd4bf;
+  --accent-text: #2dd4bf;
+  --accent-hover: #5eead4;
+  --accent-soft: #123533;
   --on-accent: #0f141c;
   --header-line: #334155;
   --shadow: 0 10px 30px rgba(0, 0, 0, 0.55);

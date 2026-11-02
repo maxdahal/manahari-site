@@ -57,9 +57,9 @@ Every interface color is a token at the top of `css/site.css`, light values firs
 | `--text-2` (secondary) | #526071 | #B5C0D0 |
 | `--text-subtle` | #616E80 | #8E9BAD |
 | `--line` (border) | #D7DEE8 | #334155 |
-| `--accent` | #1D4ED8 | #9DB3FF |
-| `--accent-hover` | #1E40AF | #B8C7FF |
-| `--accent-soft` | #E8F0FF | #1C2A4A |
+| `--accent` | #0F766E | #2DD4BF |
+| `--accent-hover` | #115E59 | #5EEAD4 |
+| `--accent-soft` | #E6F6F4 | #123533 |
 | `--ok` / `--warn` / `--error` | #147A52 / #8A5700 / #B42318 | #69D3A5 / #F2C66D / #FF8A80 |
 
 `--dark-bg`, `--on-dark` and `--accent-on-dark` are for the parts that stay dark in both themes (picture viewers, text over case study pictures, the KU sandbox). The hero's red sun and seals (`--seal`), the Nepal flag and the terminal "code." chip keep their own colours on purpose.

@@ -2059,3 +2059,44 @@ body:has(.cv-hero) {
   background: radial-gradient(ellipse 60% 55% at 50% 50%, color-mix(in srgb, var(--dark-bg) 72%, transparent), transparent 100%);
   text-shadow: 0 1px 12px color-mix(in srgb, var(--dark-bg) 60%, transparent);
 }
+
+/* the seasons, quieter: smaller seals; the chosen one in the teal accent,
+   the others dimmed back (their names stay readable, in the subtle grey)
+   until you point at them. The thread is teal too. Each still has its full
+   44px to click. */
+.cv-hero .cv-season__seal {
+  width: 34px;
+  height: 34px;
+  font-size: 0.9375rem;
+  border-color: var(--accent);
+  color: var(--accent-text);
+  opacity: 0.45;
+  transition: opacity 0.2s ease, transform 0.25s ease, background-color 0.2s ease, color 0.2s ease, box-shadow 0.2s ease;
+}
+.cv-hero .cv-season {
+  gap: 10px;
+  color: var(--text-subtle);
+}
+.cv-hero .cv-season__name {
+  font-size: 0.8125rem;
+}
+.cv-hero .cv-season:hover .cv-season__seal,
+.cv-hero .cv-season:focus-visible .cv-season__seal {
+  opacity: 1;
+}
+.cv-hero .cv-season[aria-pressed="true"] .cv-season__seal {
+  opacity: 1;
+  border-color: var(--accent);
+  background: var(--accent);
+  color: var(--on-accent);
+  box-shadow: 0 0 0 4px color-mix(in srgb, var(--accent) 22%, transparent);
+}
+@media (min-width: 861px) {
+  .cv-hero .cv-seasons {
+    gap: 10px;
+    background: linear-gradient(color-mix(in srgb, var(--accent) 35%, transparent) 0 0) 22px 22px / 1px calc(100% - 44px) no-repeat;
+  }
+  .cv-hero .cv-season__seal {
+    margin-inline: 5px;
+  }
+}

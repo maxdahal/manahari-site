@@ -18,25 +18,27 @@
 :root {
   color-scheme: light;
 
-  /* A calm, crisp palette in both themes: a soft slate mist page, white
-     cards, ink-slate text, charcoal grey for secondary text and a steel blue
-     accent. Contrast on the page / on cards: primary 16.5 / 17.7:1,
-     secondary 7.0 / 7.6:1, accent 6.7 / 7.2:1, white on the accent 7.2:1.
-     The dark theme is below. */
-  --bg: #f5f7f8;
-  --surface: #ffffff;
+  /* Slate neutrals with an indigo accent and a teal second accent; never
+     pure white or pure black. Light: an off-white page (slate 50), slate 100
+     cards, slate 900 text, slate 600 secondary, indigo 600, teal 700.
+     Contrast on the page / on cards: primary 17.1 / 16.3:1, secondary
+     7.2 / 6.9:1, indigo 6.0 / 5.7:1, teal 5.2 / 5.0:1, white on indigo 6.3:1.
+     Dark (below) shifts the accents lighter: indigo 400 and teal 400. */
+  --bg: #f8fafc;
+  --surface: #f1f5f9;
   --surface-2: color-mix(in srgb, var(--surface) 94%, var(--ink));
-  --ink: #111827;
-  --text: #111827;
-  --text-2: #4b5563;
-  --outline-dim: #4b5563;
-  --line: #e5e7eb;
-  --accent: #2e5b82;
-  --accent-text: #2e5b82;
-  --on-accent: #ffffff;
+  --ink: #0f172a;
+  --text: #0f172a;
+  --text-2: #475569;
+  --outline-dim: #475569;
+  --line: #e2e8f0;
+  --accent: #4f46e5;
+  --accent-text: #4f46e5;
+  --accent-2: #0f766e;
+  --on-accent: #f8fafc;
   /* see-through, so the paper grain shows through the tinted band */
   --band: color-mix(in srgb, var(--accent) 9%, transparent);
-  --header-line: #e5e7eb;
+  --header-line: #e2e8f0;
   --shadow: 0 10px 30px rgba(0, 0, 0, 0.22);
   --ok: #1a8a42;
   --warn: #9a6a00;
@@ -69,10 +71,10 @@
   --header-top: 14px;
 }
 
-/* Dark theme: deep slate page, a lighter slate surface for cards, crisp
-   off-white text, cool grey for secondary text and a sky blue accent.
-   Contrast on the page / on cards: primary 17.1 / 14.0:1, secondary
-   7.0 / 5.7:1, accent 7.0 / 5.8:1, dark text on the accent 7.0:1. */
+/* Dark theme: slate 900 page, slate 800 cards, slate 50 text, slate 400
+   secondary, indigo 400 and teal 400 accents. Contrast on the page / on
+   cards: primary 17.1 / 14.0:1, secondary 7.0 / 5.7:1, indigo 6.0 / 4.9:1,
+   teal 9.6 / 7.9:1, dark text on indigo 6.0:1. */
 @media (prefers-color-scheme: dark) {
   :root:not([data-theme="light"]) {
     color-scheme: dark;
@@ -84,8 +86,9 @@
     --text-2: #94a3b8;
     --outline-dim: #94a3b8;
     --line: #334155;
-    --accent: #60a5fa;
-    --accent-text: #60a5fa;
+    --accent: #818cf8;
+    --accent-text: #818cf8;
+    --accent-2: #2dd4bf;
     --on-accent: #0f172a;
     --header-line: #334155;
     --shadow: 0 10px 30px rgba(0, 0, 0, 0.55);
@@ -103,8 +106,9 @@
   --text-2: #94a3b8;
   --outline-dim: #94a3b8;
   --line: #334155;
-  --accent: #60a5fa;
-  --accent-text: #60a5fa;
+  --accent: #818cf8;
+  --accent-text: #818cf8;
+  --accent-2: #2dd4bf;
   --on-accent: #0f172a;
   --header-line: #334155;
   --shadow: 0 10px 30px rgba(0, 0, 0, 0.55);

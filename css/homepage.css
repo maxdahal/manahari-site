@@ -2054,3 +2054,72 @@ body:has(.cv-hero) {
     rotate: 2deg;
   }
 }
+
+/* ---- "design" as a building site, after the onefold sketch: hand-drawn
+   orange line drawings (a slightly wobbly "sketch" filter on clean lines):
+   a worker by the "d" pointing up, the crane over the "g" with its
+   operator in the cab, a forklift bringing a block in under the word. All
+   decoration: screen readers skip it, nothing takes clicks. ---------------------------------------------- */
+:root {
+  --sketch: #e2572d;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --sketch: #ff7a50;
+  }
+}
+:root[data-theme="dark"] {
+  --sketch: #ff7a50;
+}
+.cv-build__crane,
+.cv-build__worker,
+.cv-build__forklift {
+  color: var(--sketch);
+  filter: url(#sketch);
+  overflow: visible;
+  pointer-events: none;
+}
+.cv-build__crane {
+  width: 1.5em;
+  height: 1.9em;
+  margin-top: -1em;
+  translate: 0.36em calc(0.06em + var(--lift, 0px));
+}
+.cv-build__worker {
+  justify-self: start;
+  align-self: end;
+  width: 0.42em;
+  height: 0.74em;
+  translate: -0.5em calc(-0.02em + var(--lift, 0px));
+}
+.cv-build__forklift {
+  justify-self: center;
+  align-self: end;
+  width: 0.68em;
+  height: 0.48em;
+  translate: -0.85em calc(0.32em + var(--lift, 0px));
+}
+@media (prefers-reduced-motion: no-preference) {
+  :root:not(.motion-paused) .cv-build:not(.is-built) .cv-build__forklift {
+    animation: cv-drive-in 1.6s cubic-bezier(0.3, 0.8, 0.3, 1) 0.6s both;
+  }
+}
+@keyframes cv-drive-in {
+  from {
+    opacity: 0;
+    translate: -2.4em 0.36em;
+  }
+}
+/* the line needs room above it for the taller crane, and
+   below for the forklift; without GSAP nothing slides up, so no line clips */
+.cv-kigo .cv-line:first-child {
+  padding-block: 1.1em 0.45em;
+  margin-block: -1.1em -0.45em;
+}
+:root:not(.has-gsap) .cv-kigo .cv-line {
+  overflow: visible;
+}
+.cv-kigo__mark.cv-build {
+  margin-left: 0.5em;
+  margin-right: 0.3em;
+}

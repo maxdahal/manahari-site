@@ -108,7 +108,7 @@
             ease: "power2.in",
             stagger: { each: 0.03, from: "center" }
           }, 0.08)
-          .to(".cv-build__crane", { opacity: 0, y: -40, duration: 0.3 }, 0.08)
+          .fromTo(".cv-build__crane, .cv-build__worker, .cv-build__forklift", { opacity: 1, "--lift": "0px" }, { opacity: 0, "--lift": "-40px", duration: 0.3, stagger: 0.03 }, 0.08)
           .to(".cv-kigo .cv-w:not(.cv-build)", { opacity: 0, y: -50, duration: 0.4, ease: "power1.in", stagger: 0.02 }, 0.12)
           .fromTo(hero, { "--rise": "0px" }, { "--rise": "-30px", duration: 1, ease: "power2.in" }, 0);
       }

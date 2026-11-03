@@ -1222,15 +1222,48 @@ body:has(.cv-hero) {
   text-decoration-color: var(--accent);
   text-underline-offset: 3px;
 }
-/* five stops with their jobs: one row on wide screens, scrolling sideways
-   if the window is too narrow for five; on phones the route runs down the
-   side (homepage.css) */
+/* the stops with their jobs down a line in the middle, taking turns on
+   either side of it (Nepal on the left, Louisiana on the right, and so on);
+   on phones the route runs down the side (above) */
 @media (min-width: 861px) {
   .cv-route--detail {
-    grid-template-columns: repeat(5, minmax(180px, 1fr));
-    overflow-x: auto;
-    padding-bottom: 8px;
-    scrollbar-width: thin;
+    grid-template-columns: minmax(0, 1fr) var(--pin) minmax(0, 1fr);
+    column-gap: clamp(24px, 4vw, 56px);
+    row-gap: clamp(32px, 5vh, 56px);
+    max-width: 1040px;
+    margin-inline: auto;
+    background:
+      linear-gradient(var(--accent) 0 0) center top / 2px calc(var(--route) * 100%) no-repeat,
+      repeating-linear-gradient(180deg, var(--line) 0 8px, transparent 8px 14px) center top / 2px 100% no-repeat;
+  }
+  .cv-route--detail .cv-stop {
+    display: grid;
+    grid-column: 1 / -1;
+    grid-template-columns: subgrid;
+    gap: 8px normal;
+  }
+  /* each stop starts beside the end of the one before, so the two sides
+     interleave instead of leaving a gap opposite every stop */
+  .cv-route--detail .cv-stop + .cv-stop {
+    margin-top: calc(-1 * clamp(40px, 6vh, 72px));
+  }
+  .cv-route--detail .cv-stop > * {
+    grid-column: 1;
+  }
+  .cv-route--detail .cv-stop:nth-child(odd) {
+    text-align: end;
+  }
+  .cv-route--detail .cv-stop:nth-child(even) > * {
+    grid-column: 3;
+  }
+  .cv-route--detail .cv-stop > .cv-stop__pin {
+    grid-column: 2;
+    grid-row: 1;
+    align-self: center;
+    margin: 0;
+  }
+  .cv-route--detail .cv-stop:nth-child(odd) .cv-job {
+    align-items: flex-end;
   }
 }
 

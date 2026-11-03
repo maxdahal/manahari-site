@@ -181,13 +181,14 @@
       /* the journey: the route draws itself from Nepal to North Carolina as
          you scroll; the stops it has not reached yet stay greyed out, and
          each lights up as the line passes its pin (all of them by the end).
-         The route runs across the page above 860px, as in homepage.css */
+         The route runs across the page above 860px, as in homepage.css,
+         except About's, which runs down the middle */
       var route = document.querySelector(".cv-route");
       if (route) {
         enter(".cv-journey__head", ".cv-journey");
         var stops = gsap.utils.toArray(".cv-stop");
         var across = function () {
-          return window.matchMedia("(min-width: 861px)").matches;
+          return window.matchMedia("(min-width: 861px)").matches && !route.classList.contains("cv-route--detail");
         };
         var light = function (progress) {
           var box = route.getBoundingClientRect();
@@ -200,7 +201,7 @@
         };
         /* across the page the section holds still (the page stops
            scrolling) while the line runs from Nepal to North Carolina, then
-           lets go; on phones, where the route runs down the list, the line
+           lets go; where the route runs down the list, the line
            simply follows the scroll */
         var journey = document.querySelector(".cv-journey");
         var draw = function (self) {

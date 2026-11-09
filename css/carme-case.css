@@ -221,3 +221,9 @@ body.cs .a-outline a {
   padding: 0;
   background: none;
 }
+
+/* the content right under a sub-heading sits close to it (the grid's row gap
+   already gives a little room) */
+#main .a-act .a-part > h3 + * {
+  margin-top: -12px;
+}

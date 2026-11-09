@@ -74,23 +74,14 @@
     });
   }
 
-  /* Home: the line under the hero draws down into its ring as you scroll */
-  var guide = document.querySelector(".cm-guide");
-  if (guide) {
-    var trace = function () {
-      if (still()) return guide.style.setProperty("--draw", "1");
-      var box = guide.getBoundingClientRect();
-      var vh = window.innerHeight;
-      /* starts as the guide's top reaches the lower part of the screen, ends
-         with its ring just above the middle, whatever the screen's height */
-      var progress = (vh * 0.85 - box.top) / (vh * 0.3 + box.height);
-      guide.style.setProperty("--draw", Math.min(Math.max(progress, 0), 1).toFixed(3));
+  /* the scroll cue in the hero fades once you have started scrolling */
+  var cue = document.querySelector(".cm-scroll");
+  if (cue) {
+    var fade = function () {
+      cue.classList.toggle("is-gone", window.scrollY > 40);
     };
-    window.addEventListener("scroll", trace, { passive: true });
-    window.addEventListener("resize", trace);
-    document.addEventListener("motionchange", trace);
-    reduce.addEventListener("change", trace);
-    trace();
+    window.addEventListener("scroll", fade, { passive: true });
+    fade();
   }
 
   /* Home and About: the opening statement is held in place while its words

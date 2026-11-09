@@ -199,39 +199,6 @@
 }
 
 /* ---- hero: one centred line between two guide lines ------------------ */
-.cm-guide {
-  display: flex;
-  justify-content: center;
-  height: clamp(240px, 44svh, 400px);
-  margin-top: calc(-1 * clamp(28px, 5vh, 52px));
-  color: var(--ink);
-  --draw: 1;
-}
-.cm-guide svg {
-  height: 100%;
-  width: auto;
-  overflow: visible;
-}
-.cm-guide__track,
-.cm-guide__line,
-.cm-guide__ring {
-  fill: none;
-  stroke: currentColor;
-  stroke-width: 1.5;
-}
-.cm-guide__track {
-  opacity: 0.16;
-}
-.cm-guide__line,
-.cm-guide__ring {
-  stroke-dasharray: 1;
-}
-.cm-guide__line {
-  stroke-dashoffset: calc(1 - var(--draw));
-}
-.cm-guide__ring {
-  stroke-dashoffset: calc(1 - clamp(0, (var(--draw) - 0.8) / 0.2, 1));
-}
 .cm-about__text b {
   font-weight: 700;
 }
@@ -867,41 +834,6 @@
   border-color: transparent;
   background: none;
 }
-.cm-header .theme-toggle {
-  display: flex;
-  align-items: center;
-  width: 40px;
-  height: 24px;
-  padding: 3px;
-  border: 0;
-  border-radius: 999px;
-  background: var(--line);
-}
-.cm-header .theme-toggle svg {
-  display: none;
-}
-.cm-header .theme-toggle::before {
-  content: "";
-  flex: none;
-  width: 18px;
-  height: 18px;
-  border-radius: 50%;
-  background: var(--ink);
-  transition: translate 0.25s ease;
-}
-:root[data-theme="dark"] .cm-header .theme-toggle::before {
-  translate: 16px 0;
-}
-@media (prefers-color-scheme: dark) {
-  :root:not([data-theme="light"]) .cm-header .theme-toggle::before {
-    translate: 16px 0;
-  }
-}
-@media (prefers-reduced-motion: reduce) {
-  .cm-header .theme-toggle::before {
-    transition: none;
-  }
-}
 @media (max-width: 809px) {
   .cm-header .pv-nav__links {
     display: none;
@@ -915,4 +847,50 @@
    so the site-wide fade-as-you-read on text (site.css) is switched off here */
 :root .cm:not(.cs) main :is(h2, h3, h4, p, li, blockquote, dt, dd, .label) {
   animation: none !important;
+}
+
+/* ---- the hero's scroll cue: a ring with an arrow that drifts down ----- */
+.cm-hero .cm-about__stage {
+  display: grid;
+  grid-template-rows: minmax(0, 1fr) auto;
+}
+.cm-hero__copy {
+  align-self: center;
+}
+.cm-scroll {
+  justify-self: start;
+  display: inline-flex;
+  align-items: center;
+  gap: 16px;
+  padding-bottom: clamp(24px, 5vh, 48px);
+  color: var(--ink);
+  font-size: 0.9375rem;
+  text-decoration: none;
+  transition: opacity 0.4s ease;
+}
+.cm-scroll i {
+  display: grid;
+  place-items: center;
+  width: 52px;
+  height: 52px;
+  overflow: hidden;
+  border: 1px solid currentColor;
+  border-radius: 50%;
+}
+.cm-scroll svg {
+  width: 22px;
+  height: 22px;
+}
+.cm-scroll.is-gone {
+  opacity: 0;
+  pointer-events: none;
+}
+@media (prefers-reduced-motion: no-preference) {
+  :root:not(.motion-paused) .cm-scroll svg {
+    animation: cm-drift 1.8s cubic-bezier(0.6, 0, 0.2, 1) infinite;
+  }
+}
+@keyframes cm-drift {
+  0% { translate: 0 -150%; }
+  60%, 100% { translate: 0 150%; }
 }

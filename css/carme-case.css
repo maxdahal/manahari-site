@@ -199,3 +199,25 @@ body.cs .a-outline a {
 #main .dids {
   gap: clamp(40px, 6vh, 72px) clamp(24px, 3vw, 48px);
 }
+
+/* headings with a gradient: each section title has a bar under it that
+   fades from the accent out to nothing, and each sub-heading sits on a soft
+   band that fades out to the right, with the accent dot at its start */
+#main .a-act > h2::after {
+  content: "";
+  display: block;
+  width: min(100%, 360px);
+  height: 4px;
+  margin-top: 20px;
+  border-radius: 4px;
+  background: linear-gradient(90deg, var(--accent), transparent);
+}
+#main .a-part > h3 {
+  padding: 14px 24px 14px 18px;
+  border-radius: 10px;
+  background: linear-gradient(90deg, color-mix(in srgb, var(--accent) 18%, transparent), color-mix(in srgb, var(--accent) 4%, transparent) 70%, transparent);
+}
+#main .a-act--intro > .a-part:not([id]) > h3 {
+  padding: 0;
+  background: none;
+}

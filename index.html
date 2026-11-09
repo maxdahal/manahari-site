@@ -23,6 +23,36 @@
       if (sessionStorage.getItem("motion") === "paused") document.documentElement.classList.add("motion-paused");
     } catch (e) {}
   </script>
+  <script>
+    /* The "hello" intro plays once per visit (browser tab session): not again on
+       a refresh, a link back to Home or Back. Runs before the page paints, so the
+       intro never flashes. While it plays the page is locked at the top; the lock
+       lifts when the intro has faded (2.8s + 0.6s, as in carme.css). */
+    (function () {
+      var root = document.documentElement;
+      try {
+        if (sessionStorage.getItem("hello") === "seen") root.classList.add("no-hello");
+        else sessionStorage.setItem("hello", "seen");
+      } catch (e) {
+        if (document.referrer && new URL(document.referrer).origin === location.origin) root.classList.add("no-hello");
+      }
+      var plays = !root.classList.contains("no-hello") &&
+        !window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+      if (plays) {
+        if ("scrollRestoration" in history) history.scrollRestoration = "manual";
+        var toTop = function () {
+          window.scrollTo(0, 0);
+        };
+        root.classList.add("hello-lock");
+        toTop();
+        window.addEventListener("DOMContentLoaded", toTop);
+        window.addEventListener("load", toTop);
+        setTimeout(function () {
+          root.classList.remove("hello-lock");
+        }, 3400);
+      }
+    })();
+  </script>
   <script src="js/site.js"></script>
   <script src="js/home.js" defer></script>
   <script src="js/carme.js" defer></script>
@@ -31,6 +61,14 @@
   <script defer src="/_vercel/insights/script.js"></script>
 </head>
 <body class="pv cm">
+  <div class="hello" aria-hidden="true">
+    <p class="tape">
+      <span class="tape__line">I design products</span>
+      <span class="tape__line">and build them</span>
+      <span class="tape__line">in code.</span>
+    </p>
+    <p class="hello__count"></p>
+  </div>
   <a class="skip-link" href="#main">Skip to content</a>
   <header class="cp-bar pv-nav cm-header">
     <div class="cm-wrap cm-header__row">

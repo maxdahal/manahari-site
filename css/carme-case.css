@@ -9,6 +9,7 @@ body.cs.cm {
   --body-font: var(--cs-font);
   font-family: var(--cs-font);
   --bar-h: 84px;
+  background: var(--cm-grain) 0 0 / 240px auto, var(--bg);
 }
 
 /* the way back, as a plain link above the title */

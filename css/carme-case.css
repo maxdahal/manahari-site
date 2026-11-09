@@ -69,8 +69,14 @@ body.cs .a-act:not(.a-act--intro) {
   padding-top: 0;
   border-top: 0;
 }
+/* each section opens with its number in the accent, small, above the title */
 body.cs .a-act:not(.a-act--intro)::before {
-  content: none;
+  content: counter(cs-act, decimal-leading-zero);
+  margin-bottom: 20px;
+  font-size: 0.9375rem;
+  font-weight: 500;
+  font-variant-numeric: tabular-nums;
+  color: var(--accent-text);
 }
 #main .a-act > h2 {
   margin-top: 0;
@@ -94,7 +100,16 @@ body.cs .a-act:not(.a-act--intro)::before {
   font-weight: 500;
   letter-spacing: -0.03em;
 }
+/* sub-headings: a small accent dot before the words, nothing else */
 #main .a-part > h3::before {
+  content: "";
+  flex: none;
+  width: 0.4em;
+  height: 0.4em;
+  border-radius: 50%;
+  background: var(--accent);
+}
+#main .a-act--intro > .a-part:not([id]) > h3::before {
   content: none;
 }
 #main .a-part > h3 + * {

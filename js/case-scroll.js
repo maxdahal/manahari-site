@@ -79,7 +79,7 @@
     var target = document.getElementById(a.getAttribute("href").slice(1));
     if (!target) return;
     event.preventDefault();
-    var bar = document.querySelector(".a-bar");
+    var bar = document.querySelector(".cm-header, .a-bar");
     var offset = -((bar ? bar.offsetHeight : 0) + 24);
     lenis.scrollTo(target === document.getElementById("main") ? 0 : target, { offset: offset });
     history.pushState(null, "", a.getAttribute("href"));

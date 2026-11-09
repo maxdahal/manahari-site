@@ -415,7 +415,7 @@
     /* Lightbox */
     var dialog = document.querySelector(".lightbox");
     if (dialog && track) {
-      var buttons = [].slice.call(track.querySelectorAll(".artwork__item"));
+      var buttons = [].slice.call(track.querySelectorAll(".artwork__item, .cm-art__item"));
       var big = dialog.querySelector("img");
       var count = dialog.querySelector(".lightbox__count");
       var current = 0;

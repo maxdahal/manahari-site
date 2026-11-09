@@ -1,0 +1,177 @@
+/* ---- Case studies in the Carme style: the same header, background and
+   footer as Home and About, a quieter opening, headings with space around
+   them instead of bands, rules and outlined echoes, and a pair of cards at
+   the end. Loaded after case.css; it changes the look only, never the words
+   or their order. ------------------------------------------------------ */
+body.cs.cm {
+  --cs-font: "Inter", system-ui, sans-serif;
+  --heading-font: var(--cs-font);
+  --body-font: var(--cs-font);
+  font-family: var(--cs-font);
+  --bar-h: 84px;
+  background: var(--cm-grain) 0 0 / 240px auto, var(--bg);
+}
+
+/* the way back, as a plain link above the title */
+.cm .a-crumbs {
+  margin-bottom: clamp(24px, 4vh, 40px);
+  font-size: 0.9375rem;
+  color: var(--text-2);
+}
+
+/* reading progress: a thin line along the bottom of the header */
+@supports (animation-timeline: scroll()) {
+  .cm-header::after {
+    content: "";
+    display: block;
+    height: 2px;
+    background: var(--accent);
+    transform-origin: 0 50%;
+    animation: cs-progress linear both;
+    animation-timeline: scroll(root);
+  }
+}
+
+/* ---- the opening ----------------------------------------------------- */
+body.cs .a-tag {
+  padding: 0;
+  border: 0;
+  border-radius: 0;
+  background: none;
+  font-size: 1rem;
+  font-weight: 400;
+  color: var(--text-2);
+}
+#main .a-title {
+  font-size: clamp(2.25rem, 1.3rem + 3.4vw, 4.25rem);
+  font-weight: 500;
+  line-height: 1.05;
+  letter-spacing: -0.045em;
+  padding-bottom: clamp(32px, 6vh, 64px);
+}
+.cs-dot {
+  display: none;
+}
+#main .a-facts {
+  padding: 0 0 clamp(8px, 2vh, 24px);
+  border: 0;
+  gap: 24px clamp(24px, 4vw, 64px);
+}
+#main .a-lead {
+  padding: 0;
+  border: 0;
+  margin-block: clamp(40px, 7vh, 72px);
+}
+
+/* ---- space instead of rules, bands and echoes ------------------------ */
+body.cs .a-act:not(.a-act--intro) {
+  margin-top: clamp(112px, 18vh, 220px);
+  padding-top: 0;
+  border-top: 0;
+}
+body.cs .a-act:not(.a-act--intro)::before {
+  content: none;
+}
+#main .a-act > h2 {
+  margin-top: 0;
+  font-size: clamp(1.75rem, 1.2rem + 1.8vw, 2.75rem);
+  font-weight: 500;
+  line-height: 1.1;
+  letter-spacing: -0.04em;
+}
+#main .a-part {
+  padding-top: clamp(64px, 11vh, 128px);
+}
+#main .a-act > .a-part + .a-part {
+  padding-top: clamp(64px, 11vh, 128px);
+}
+#main .a-part > h3 {
+  padding: 0;
+  border: 0;
+  border-radius: 0;
+  background: none;
+  font-size: clamp(1.375rem, 1.1rem + 0.8vw, 1.75rem);
+  font-weight: 500;
+  letter-spacing: -0.03em;
+}
+#main .a-part > h3::before {
+  content: none;
+}
+#main .a-part > h3 + * {
+  margin-top: 16px;
+}
+#main :is(.card-pt, .did, .contrib__team, .acc, .step) {
+  border-top: 0;
+}
+#main .a-part > p {
+  font-size: 1.25rem;
+  line-height: 1.65;
+}
+#main .a-part > :is(figure, .figs, .row, .figset, .cards, .steps, .a-quote) {
+  margin-block: clamp(32px, 5vh, 64px);
+}
+
+/* ---- the index on the left, quieter ---------------------------------- */
+body.cs .a-outline li,
+body.cs .a-outline a {
+  background: none;
+  box-shadow: none;
+}
+
+/* ---- more projects: two cards, as on Home ----------------------------- */
+#main .a-more {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: clamp(14px, 1.6vw, 24px);
+}
+#main .a-more a {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  padding: 0 0 20px;
+  overflow: hidden;
+  border: 0;
+  border-radius: 14px;
+  background: var(--surface-2);
+  color: var(--ink);
+  text-decoration: none;
+}
+#main .a-more img {
+  width: 100%;
+  height: auto;
+  aspect-ratio: 8 / 5;
+  object-fit: cover;
+  margin-bottom: 12px;
+  border-radius: 0;
+}
+#main .a-more b,
+#main .a-more span {
+  padding-inline: 20px;
+}
+@media (max-width: 640px) {
+  #main .a-more {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+.cm .a-crumbs a {
+  text-decoration: none;
+}
+
+/* the contents index sticks at the top of its column, under the header,
+   instead of the bottom */
+@media (min-width: 1101px) {
+  body.cs .a-side {
+    justify-content: flex-start;
+  }
+  body.cs .a-outline {
+    top: calc(var(--bar-h) + 24px);
+    bottom: auto;
+    margin-top: clamp(24px, 5vh, 48px);
+    margin-bottom: 0;
+  }
+}
+
+/* the outlined echo of each section title, a little stronger on the grain */
+#main .a-act > h2[data-ghost]::before {
+  opacity: 0.24;
+}

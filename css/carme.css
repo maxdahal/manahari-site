@@ -1,0 +1,969 @@
+/* ---- The Carme-style pages (Home and About): a quiet header, one centred
+   line of introduction, image-led work, a plain artwork grid and a big name
+   in the footer. Loaded after the older page styles, so it wins where they
+   overlap. Colours come from the tokens in site.css. ------------------- */
+.cm {
+  --cv-font: "Inter", system-ui, sans-serif;
+  --heading-font: var(--cv-font);
+  --body-font: var(--cv-font);
+  --cs-font: var(--cv-font);
+  --cm-gutter: clamp(20px, 4vw, 56px);
+  --cm-max: 1520px;
+  --cm-head: 84px;
+  /* softer than white and black, with a fine grain over the colour */
+  --bg: #eceff3;
+  --surface: #f1f3f6;
+  --surface-2: #f3f5f8;
+  --text-subtle: #566376;
+  --line: #cbd2dd;
+  --cm-grain: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n' color-interpolation-filters='sRGB'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 0.12 0 0 0 0 0.15 0 0 0 0 0.19 -0.1 0 0 0 0.09'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  background: var(--cm-grain) 0 0 / 240px auto, var(--bg);
+  color: var(--ink);
+  font-family: "Inter", system-ui, sans-serif;
+}
+:root[data-theme="dark"] .cm {
+  --bg: #1b222d;
+  --surface: #232c39;
+  --surface-2: #28323f;
+  --text-subtle: #9aa7b9;
+  --line: #3a4658;
+  --cm-grain: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n' color-interpolation-filters='sRGB'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 1 0 0 0 0 1 0 0 0 0 1 0.2 0 0 0 -0.06'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) .cm {
+    --bg: #1b222d;
+    --surface: #232c39;
+    --surface-2: #28323f;
+    --text-subtle: #9aa7b9;
+    --line: #3a4658;
+    --cm-grain: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n' color-interpolation-filters='sRGB'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 1 0 0 0 0 1 0 0 0 0 1 0.2 0 0 0 -0.06'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  }
+}
+.cm::before,
+.cm::after,
+.cm .pv-main::before,
+.cm .pv-main::after {
+  content: none;
+}
+.cm-wrap {
+  width: min(100% - 2 * var(--cm-gutter), var(--cm-max));
+  margin-inline: auto;
+}
+
+/* ---- header: brand on the left, links and controls on the right ------ */
+.pv.cm .pv-nav.cm-header {
+  position: sticky;
+  top: 0;
+  left: auto;
+  z-index: 50;
+  display: block;
+  width: 100%;
+  min-height: 0;
+  padding: 0;
+  border: 0;
+  background: color-mix(in srgb, var(--bg) 92%, transparent);
+  backdrop-filter: blur(10px);
+  translate: 0 0;
+  transition: translate 0.24s ease;
+}
+.pv.cm .cm-header.is-hidden {
+  translate: 0 -100%;
+}
+.cm-header__row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+  min-height: var(--cm-head);
+}
+.cm-brand {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  color: var(--ink);
+  font-size: 1rem;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  text-decoration: none;
+  white-space: nowrap;
+}
+.cm-brand b {
+  font-weight: 700;
+  letter-spacing: 0.02em;
+}
+.cm-brand > span {
+  padding-left: 18px;
+  border-left: 1px solid var(--line);
+  min-width: 11.5em;
+  font-size: 0.6875rem;
+  font-weight: 400;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--text-2);
+}
+.cm-brand__role {
+  display: block;
+  height: 1.4em;
+  overflow: hidden;
+  line-height: 1.4;
+}
+/* the title rolls up and the next rises from beneath, as the links do on
+   hover */
+.cm-role {
+  display: grid;
+}
+.cm-role > span {
+  white-space: nowrap;
+}
+.cm-role.is-rolling {
+  translate: 0 -1.4em;
+  transition: translate 0.4s cubic-bezier(0.6, 0, 0.2, 1);
+}
+
+.cm-header .pv-nav__links {
+  gap: 0;
+  padding: 0;
+}
+.cm-header .pv-nav__links a {
+  padding: 10px 16px;
+  border-radius: 0;
+  font-size: 1rem;
+  font-weight: 400;
+  color: var(--ink);
+}
+.cm-header .pv-nav__links a:hover,
+.cm-header .pv-nav__links a[aria-current] {
+  background: none;
+  color: var(--ink);
+}
+.cm-header .pv-nav__links a[aria-current] {
+  box-shadow: inset 0 -2px 0 var(--accent);
+}
+.cm-header__end {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+@media (max-width: 809px) {
+  .cm-brand span {
+    display: none;
+  }
+}
+
+/* ---- sections -------------------------------------------------------- */
+.cm .pv-main .sections {
+  max-width: none;
+  padding: 0;
+}
+.cm .pv-main .sections > section {
+  padding-block: 0;
+  background: none;
+}
+.cm-label {
+  margin: 0;
+  font-size: 1.25rem;
+  font-weight: 500;
+  line-height: 1.4;
+  letter-spacing: -0.02em;
+  color: var(--ink);
+}
+.cm-sub {
+  margin: 0;
+  font-size: 1rem;
+  line-height: 1.5;
+  color: var(--text-2);
+}
+
+/* eased in once as they arrive (carme.js) */
+.cm-js [data-reveal] {
+  opacity: 0;
+  translate: 0 28px;
+  transition: opacity 0.7s ease, translate 0.7s cubic-bezier(0.2, 0.7, 0.2, 1);
+}
+.cm-js [data-reveal].is-in {
+  opacity: 1;
+  translate: 0 0;
+}
+@media (prefers-reduced-motion: reduce) {
+  .cm-js [data-reveal] {
+    opacity: 1;
+    translate: none;
+    transition: none;
+  }
+}
+.motion-paused .cm-js [data-reveal],
+.cm-js.motion-paused [data-reveal] {
+  opacity: 1;
+  translate: none;
+  transition: none;
+}
+
+/* ---- hero: one centred line between two guide lines ------------------ */
+.cm-guide {
+  display: flex;
+  justify-content: center;
+  height: clamp(240px, 44svh, 400px);
+  margin-top: calc(-1 * clamp(28px, 5vh, 52px));
+  color: var(--ink);
+  --draw: 1;
+}
+.cm-guide svg {
+  height: 100%;
+  width: auto;
+  overflow: visible;
+}
+.cm-guide__track,
+.cm-guide__line,
+.cm-guide__ring {
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.5;
+}
+.cm-guide__track {
+  opacity: 0.16;
+}
+.cm-guide__line,
+.cm-guide__ring {
+  stroke-dasharray: 1;
+}
+.cm-guide__line {
+  stroke-dashoffset: calc(1 - var(--draw));
+}
+.cm-guide__ring {
+  stroke-dashoffset: calc(1 - clamp(0, (var(--draw) - 0.8) / 0.2, 1));
+}
+.cm-hero {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: clamp(28px, 5vh, 52px);
+  min-height: calc(100svh - var(--cm-head));
+  padding: clamp(24px, 5vh, 56px) 0;
+  text-align: center;
+}
+.cm-hero__line {
+  flex: none;
+  width: 1px;
+  height: clamp(56px, 11vh, 120px);
+  background: var(--ink);
+  transform-origin: top;
+}
+.cm-hero__title {
+  max-width: 26em;
+  margin: 0;
+  font-size: clamp(1.75rem, 1.15rem + 2.4vw, 3.25rem);
+  font-weight: 300;
+  line-height: 1.35;
+  letter-spacing: -0.04em;
+  text-wrap: balance;
+  color: var(--ink);
+}
+.cm-hero__title b {
+  font-weight: 700;
+}
+.cm-actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  margin: 0;
+}
+.cm-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 18px;
+  min-height: 52px;
+  padding: 0 28px;
+  border: 1px solid transparent;
+  border-radius: 999px;
+  background: var(--surface-2);
+  color: var(--ink);
+  font: 500 1rem/1 "Inter", system-ui, sans-serif;
+  text-decoration: none;
+  cursor: pointer;
+  transition: background 0.2s ease, color 0.2s ease, border-color 0.2s ease;
+}
+.cm-pill:hover {
+  background: var(--accent);
+  color: var(--on-accent);
+}
+.cm-pill--line {
+  border-color: var(--line);
+  background: none;
+}
+.cm-pill--line:hover {
+  border-color: var(--accent);
+}
+.cm-round {
+  display: inline-grid;
+  place-items: center;
+  width: 52px;
+  height: 52px;
+  border-radius: 50%;
+  background: var(--surface-2);
+  color: var(--ink);
+  font-size: 1.25rem;
+  text-decoration: none;
+  transition: background 0.2s ease, color 0.2s ease;
+}
+.cm-round:hover {
+  background: var(--accent);
+  color: var(--on-accent);
+}
+@media (max-width: 480px) {
+  .cm-pill {
+    gap: 12px;
+    padding: 0 20px;
+  }
+}
+@media (prefers-reduced-motion: no-preference) {
+  :root:not(.motion-paused) .cm-hero__title {
+    animation: cm-rise 0.9s cubic-bezier(0.2, 0.7, 0.2, 1) 0.2s both;
+  }
+  :root:not(.motion-paused) .cm-hero__line {
+    animation: cm-draw 1s ease 0.1s both;
+  }
+  :root:not(.motion-paused) .cm-actions {
+    animation: cm-rise 0.9s cubic-bezier(0.2, 0.7, 0.2, 1) 0.5s both;
+  }
+}
+@keyframes cm-rise {
+  from {
+    opacity: 0;
+    translate: 0 24px;
+  }
+}
+@keyframes cm-draw {
+  from {
+    scale: 1 0;
+  }
+}
+
+/* ---- work: the case studies one after another, each a full dark panel
+   with its picture filling it and its name very large. With motion they are
+   held in place while you scroll, each next one wiping in over the last as
+   two halves from opposite sides (carme.js sets --q); without motion they
+   are an ordinary list. ----------------------------------------------- */
+.cm .pv-main {
+  overflow-x: clip;
+}
+.cm-work {
+  padding-block: clamp(32px, 6vh, 64px) 0 !important;
+}
+.cm-head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 8px 32px;
+  margin-bottom: clamp(20px, 3vh, 32px);
+}
+.cm-reel {
+  margin-inline: calc(50% - 50vw);
+}
+.cm-reel__stage {
+  display: flex;
+  flex-direction: column;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.cm-panel__link {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  grid-template-rows: minmax(0, 1fr) auto;
+  min-height: 78svh;
+  height: 100%;
+  overflow: hidden;
+  background: var(--dark-bg);
+  color: var(--on-dark);
+  text-decoration: none;
+}
+.cm-panel__link > * {
+  min-width: 0;
+}
+/* the picture fills the whole panel, dimmed so the name reads */
+.cm-panel__pic {
+  grid-area: 1 / 1 / -1 / -1;
+  margin: 0;
+  overflow: hidden;
+}
+.cm-panel__pic img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 0.62;
+  transition: opacity 0.4s ease;
+}
+.cm-panel__link:hover .cm-panel__pic img {
+  opacity: 0.78;
+}
+.cm-panel__link::after {
+  content: "";
+  grid-area: 1 / 1 / -1 / -1;
+  background: linear-gradient(to top, rgb(5 8 12 / 0.78), transparent 60%);
+  pointer-events: none;
+}
+.cm-panel__words {
+  grid-area: 2 / 1;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding: clamp(24px, 4vw, 64px);
+  padding-right: 0;
+}
+.cm-panel__words small {
+  font-size: clamp(1rem, 0.9rem + 0.4vw, 1.25rem);
+  color: rgb(243 246 250 / 0.85);
+}
+.cm-panel__words b {
+  font-size: clamp(3.5rem, 0.5rem + 11vw, 12rem);
+  font-weight: 500;
+  line-height: 0.88;
+  letter-spacing: -0.06em;
+}
+.cm-panel__go {
+  grid-area: 2 / 2;
+  z-index: 1;
+  align-self: end;
+  display: grid;
+  place-items: center;
+  width: clamp(56px, 5vw, 76px);
+  height: clamp(56px, 5vw, 76px);
+  margin: clamp(24px, 4vw, 64px);
+  border-radius: 50%;
+  background: var(--on-dark);
+  color: var(--dark-bg);
+  font-size: 1.5rem;
+  transition: background 0.2s ease, color 0.2s ease, scale 0.3s ease;
+}
+.cm-panel__link:hover .cm-panel__go,
+.cm-panel__link:focus-visible .cm-panel__go {
+  background: var(--accent-on-dark);
+  scale: 1.08;
+}
+.cm-reel__count {
+  display: none;
+}
+
+/* held */
+.is-reel .cm-reel {
+  height: calc(100svh + (var(--n) - 1) * 110svh);
+}
+.is-reel .cm-reel__stage {
+  position: sticky;
+  top: 0;
+  display: grid;
+  height: 100svh;
+}
+.is-reel .cm-panel__link {
+  min-height: 0;
+}
+.is-reel .cm-panel {
+  --q: 1;
+  grid-area: 1 / 1;
+  pointer-events: none;
+  -webkit-mask:
+    linear-gradient(#000 0 0) right top / calc(var(--q) * 100%) 50.5% no-repeat,
+    linear-gradient(#000 0 0) left bottom / calc(var(--q) * 100%) 50% no-repeat;
+  mask:
+    linear-gradient(#000 0 0) right top / calc(var(--q) * 100%) 50.5% no-repeat,
+    linear-gradient(#000 0 0) left bottom / calc(var(--q) * 100%) 50% no-repeat;
+}
+.is-reel .cm-panel.is-current {
+  pointer-events: auto;
+}
+.is-reel .cm-reel__count {
+  position: sticky;
+  top: calc(100svh - 24px);
+  z-index: 2;
+  display: block;
+  height: 0;
+  margin: 0;
+  padding-right: clamp(24px, 4vw, 64px);
+  overflow: visible;
+  text-align: right;
+  font-size: 1rem;
+  font-variant-numeric: tabular-nums;
+  color: rgb(243 246 250 / 0.85);
+  translate: 0 -150px;
+  pointer-events: none;
+}
+@media (max-width: 640px) {
+  .cm-panel__words b {
+    font-size: clamp(3rem, 18vw, 5rem);
+  }
+  .cm-panel__go {
+    width: 48px;
+    height: 48px;
+    margin: 20px;
+  }
+}
+
+/* ---- artwork: all ten in a plain grid; a click opens one large ------- */
+.cm-art {
+  padding-block: clamp(72px, 12vh, 140px) clamp(56px, 9vh, 96px) !important;
+}
+.cm-art__grid {
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  gap: clamp(10px, 1.4vw, 20px);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.cm-art__grid li {
+  min-width: 0;
+}
+.cm-art__item {
+  display: block;
+  width: 100%;
+  aspect-ratio: 1;
+  padding: 0;
+  overflow: hidden;
+  border: 0;
+  border-radius: 10px;
+  background: var(--surface-2);
+  cursor: pointer;
+}
+.cm-art__item img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: scale 0.5s cubic-bezier(0.2, 0.7, 0.2, 1);
+}
+.cm-art__item:hover img {
+  scale: 1.05;
+}
+@media (max-width: 1100px) {
+  .cm-art__grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+@media (max-width: 640px) {
+  .cm-art__grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+/* ---- footer: contact, then the name large and faint ------------------ */
+.cm-footer {
+  padding-top: clamp(40px, 8vh, 96px);
+  overflow: hidden;
+}
+.cm-footer__top {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: end;
+  justify-content: space-between;
+  gap: 20px 40px;
+  padding-bottom: clamp(24px, 4vh, 48px);
+}
+.cm-footer__email {
+  color: var(--ink);
+  font-size: clamp(1.5rem, 1rem + 2vw, 2.75rem);
+  font-weight: 500;
+  letter-spacing: -0.04em;
+  text-decoration-color: var(--accent);
+  text-decoration-thickness: 2px;
+  text-underline-offset: 8px;
+}
+.cm-footer__name {
+  --pan: 0%;
+  margin: 0;
+  font-size: clamp(4rem, 13.5vw, 13rem);
+  font-weight: 700;
+  line-height: 0.9;
+  letter-spacing: -0.06em;
+  white-space: nowrap;
+  color: color-mix(in srgb, var(--ink) 9%, var(--bg));
+  translate: var(--pan) 0;
+  user-select: none;
+}
+.cm-footer__name + .cm-footer__name {
+  color: color-mix(in srgb, var(--ink) 4%, var(--bg));
+  translate: calc(var(--pan) * -1) 0;
+}
+.cm-footer__base {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px 32px;
+  padding-block: 28px 36px;
+  font-size: 0.9375rem;
+  color: var(--text-2);
+}
+.cm-footer__base p {
+  margin: 0;
+}
+.cm-footer__base nav {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px 24px;
+}
+.cm-footer__base a {
+  color: var(--ink);
+  text-decoration-color: var(--accent);
+  text-underline-offset: 4px;
+}
+
+/* ---- About: one large statement that lights up word by word as you
+   scroll (carme.js holds it in place meanwhile), then a portrait with a few
+   facts. Lots of space, no rules. ----------------------------------- */
+.cm-about {
+  min-height: 0;
+}
+.cm-about__stage {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  min-height: 70svh;
+  padding-block: clamp(64px, 12vh, 140px);
+}
+.cm-about.is-held {
+  height: 260svh;
+  padding: 0;
+}
+.cm-about.is-held .cm-about__stage {
+  position: sticky;
+  top: 0;
+  min-height: 100svh;
+  padding-block: var(--cm-head) 0;
+}
+.cm-about h1 {
+  margin: 0 0 clamp(24px, 4vh, 40px);
+  font-size: 0.9375rem;
+  font-weight: 400;
+  color: var(--text-2);
+}
+.cm-about__text {
+  max-width: 24em;
+  margin: 0;
+  font-size: clamp(1.75rem, 1rem + 2.6vw, 3.25rem);
+  font-weight: 500;
+  line-height: 1.15;
+  letter-spacing: -0.05em;
+  text-wrap: pretty;
+  color: var(--ink);
+}
+.cm-about.is-held .cm-sw {
+  opacity: 0.16;
+}
+.cm-about__more {
+  align-self: flex-start;
+  margin-top: clamp(32px, 5vh, 56px);
+  color: var(--ink);
+  font-size: 1rem;
+  text-decoration: underline;
+  text-decoration-color: var(--accent);
+  text-decoration-thickness: 2px;
+  text-underline-offset: 8px;
+}
+.cm-intro {
+  display: grid;
+  grid-template-columns: minmax(0, 5fr) minmax(0, 6fr);
+  gap: clamp(40px, 8vw, 128px);
+  align-items: center;
+  padding-block: clamp(48px, 10vh, 120px) clamp(72px, 14vh, 180px);
+}
+.cm-intro .badge {
+  justify-self: center;
+}
+.cm-intro__side {
+  display: flex;
+  flex-direction: column;
+  gap: clamp(48px, 9vh, 96px);
+}
+.cm-facts {
+  display: flex;
+  flex-direction: column;
+  gap: 28px;
+  margin: 0;
+}
+.cm-facts div {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+.cm-facts dt {
+  font-size: 0.875rem;
+  color: var(--text-2);
+}
+.cm-facts dd {
+  margin: 0;
+  font-size: clamp(1.25rem, 1rem + 0.8vw, 1.625rem);
+  line-height: 1.35;
+  letter-spacing: -0.02em;
+  color: var(--ink);
+}
+.cm-stats {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 40px clamp(20px, 3vw, 48px);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.cm-stats li {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.cm-stats b {
+  font-size: clamp(2.75rem, 2rem + 3vw, 4.5rem);
+  font-weight: 500;
+  line-height: 1;
+  letter-spacing: -0.06em;
+  font-variant-numeric: tabular-nums;
+}
+.cm-stats span {
+  font-size: 0.9375rem;
+  line-height: 1.5;
+  color: var(--text-2);
+}
+@media (max-width: 480px) {
+  .cm-stats {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+@media (max-width: 809px) {
+  .cm-intro {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+}
+
+.cm-block {
+  padding-block: clamp(80px, 16vh, 200px) !important;
+}
+.cm-title {
+  margin: 0 0 clamp(40px, 8vh, 88px);
+  font-size: clamp(1.75rem, 1.2rem + 2vw, 3rem);
+  font-weight: 500;
+  line-height: 1.15;
+  letter-spacing: -0.05em;
+}
+.cm-title i {
+  display: inline-block;
+  width: 0.13em;
+  height: 0.13em;
+  margin-left: 0.08em;
+  border-radius: 50%;
+  background: var(--accent);
+}
+
+/* the journey: the line draws down the middle as you scroll and each stop
+   lights as the line reaches it (carme.js); the job lists lose their rules */
+.cm-journey .cv-route {
+  --route: 1;
+  row-gap: clamp(56px, 10vh, 112px);
+}
+.cm-journey .cv-jobs {
+  gap: 20px;
+  margin-top: 20px;
+  padding-top: 0;
+  border-top: 0;
+}
+.cm-journey__head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 8px 32px;
+}
+.cm-journey__head .cm-title {
+  margin-bottom: clamp(40px, 8vh, 88px);
+}
+.cm-draw .cv-stop {
+  transition: opacity 0.5s ease, filter 0.5s ease;
+}
+.cm-draw .cv-stop:not(.is-reached) {
+  opacity: 0.25;
+  filter: grayscale(1);
+}
+
+/* skills: four cards, each with an icon, its name and its list, so the
+   whole set can be taken in at a glance */
+.cm-skills {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: clamp(14px, 1.6vw, 24px);
+}
+.cm-skill {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  padding: clamp(24px, 3vw, 40px);
+  border-radius: 14px;
+  background: var(--surface-2);
+}
+.cm-skill__icon {
+  display: grid;
+  place-items: center;
+  width: 52px;
+  height: 52px;
+  border-radius: 50%;
+  background: var(--accent-soft);
+  color: var(--accent-text);
+}
+.cm-skill__icon svg {
+  width: 24px;
+  height: 24px;
+}
+.cm-skill h3 {
+  margin: 0 0 4px;
+  font-size: clamp(1.5rem, 1.1rem + 1.2vw, 2rem);
+  font-weight: 500;
+  line-height: 1.15;
+  letter-spacing: -0.04em;
+}
+.cm-skill ul {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  font-size: 1.0625rem;
+  line-height: 1.5;
+  color: var(--text-2);
+}
+.cm-skill ul:not(.cm-chips) li {
+  display: grid;
+  grid-template-columns: 8px minmax(0, 1fr);
+  gap: 12px;
+  align-items: baseline;
+}
+.cm-skill ul:not(.cm-chips) li::before {
+  content: "";
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--accent);
+}
+.cm-chips {
+  flex-direction: row !important;
+  flex-wrap: wrap;
+  gap: 10px !important;
+}
+.cm-chips li {
+  padding: 10px 18px;
+  border-radius: 999px;
+  background: var(--bg);
+  color: var(--ink);
+}
+@media (max-width: 809px) {
+  .cm-skills {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+
+/* research and recognition: a label, then its rows, no lines */
+.cm-recog {
+  display: flex;
+  flex-direction: column;
+  gap: clamp(48px, 9vh, 96px);
+}
+.cm-recog__group {
+  display: grid;
+  grid-template-columns: minmax(0, 0.7fr) minmax(0, 1.3fr);
+  gap: 16px clamp(20px, 4vw, 56px);
+}
+.cm-recog__group h3 {
+  margin: 0;
+  font-size: 1.125rem;
+  font-weight: 500;
+}
+.cm-recog__group .cv-rows {
+  border-bottom: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.cm-recog__group .cv-rows li {
+  padding: 0;
+  border: 0;
+}
+@media (max-width: 809px) {
+  .cm-recog__group {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+
+/* ---- header, as on Carme: brand and caption on the left; the links, then
+   a small switch for the theme, on the right ---------------------------- */
+.cm-header__right {
+  display: flex;
+  align-items: center;
+  gap: clamp(16px, 2.4vw, 32px);
+}
+.cm-header .pv-nav__links a {
+  padding: 8px 0;
+  margin-inline: clamp(8px, 1.2vw, 18px);
+}
+.cm-header .pv-nav__links {
+  margin-inline: calc(-1 * clamp(8px, 1.2vw, 18px));
+}
+.cm-header .icon-button {
+  width: 36px;
+  height: 36px;
+  border-color: transparent;
+  background: none;
+}
+.cm-header .theme-toggle {
+  display: flex;
+  align-items: center;
+  width: 40px;
+  height: 24px;
+  padding: 3px;
+  border: 0;
+  border-radius: 999px;
+  background: var(--line);
+}
+.cm-header .theme-toggle svg {
+  display: none;
+}
+.cm-header .theme-toggle::before {
+  content: "";
+  flex: none;
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  background: var(--ink);
+  transition: translate 0.25s ease;
+}
+:root[data-theme="dark"] .cm-header .theme-toggle::before {
+  translate: 16px 0;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) .cm-header .theme-toggle::before {
+    translate: 16px 0;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .cm-header .theme-toggle::before {
+    transition: none;
+  }
+}
+@media (max-width: 809px) {
+  .cm-header .pv-nav__links {
+    display: none;
+  }
+  .cm-header__right {
+    gap: 8px;
+  }
+}
+
+/* these pages choreograph their own motion (carme.js and the rules above),
+   so the site-wide fade-as-you-read on text (site.css) is switched off here */
+:root .cm:not(.cs) main :is(h2, h3, h4, p, li, blockquote, dt, dd, .label):not(.cm-actions) {
+  animation: none !important;
+}

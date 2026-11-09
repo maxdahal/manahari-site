@@ -1050,3 +1050,58 @@ html:has(.cm-rdialog[open]) {
   line-height: 1.6;
   color: var(--text-2);
 }
+
+/* tags for the journey: the years are outlined pills, the university or
+   company is a soft accent pill, and the role stays plain and bold between
+   them, so each entry reads as when, what, where */
+.cm-journey .cv-stop > :is(.cv-stop__when, .cv-stop__place, .cv-stop__text),
+.cm-journey .cv-job > * {
+  justify-self: start;
+}
+.cm-journey .cv-job {
+  align-items: flex-start !important;
+  gap: 8px;
+}
+.cm-journey .cv-stop__when,
+.cm-journey .cv-job__when {
+  display: inline-block;
+  width: fit-content;
+  padding: 4px 12px;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  font-size: 0.8125rem;
+  font-weight: 500;
+  letter-spacing: 0.01em;
+  color: var(--text-2);
+}
+.cm-journey .cv-stop--now .cv-stop__when {
+  border-color: var(--accent);
+  background: var(--accent-soft);
+  color: var(--accent-text);
+}
+.cm-journey .cv-stop__when {
+  margin-bottom: 4px;
+}
+.cm-journey .cv-job__role {
+  font-size: 1.1875rem;
+  font-weight: 600;
+  letter-spacing: -0.02em;
+}
+.cm-journey .cv-job__org {
+  display: inline-block;
+  width: fit-content;
+  padding: 4px 12px;
+  border-radius: 999px;
+  background: var(--accent-soft);
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: var(--accent-text);
+}
+.cm-journey .cv-jobs {
+  gap: 32px;
+  margin-top: 28px;
+}
+.cm-journey .cv-route--detail .cv-stop:nth-child(odd) > .cv-stop__when {
+  justify-self: start;
+  width: fit-content;
+}

@@ -490,18 +490,20 @@
 }
 .cm-footer__name {
   --pan: 0%;
+  font-family: "Geist", "Inter", system-ui, sans-serif;
   margin: 0;
   font-size: clamp(4rem, 13.5vw, 13rem);
   font-weight: 700;
   line-height: 0.9;
   letter-spacing: -0.06em;
   white-space: nowrap;
-  color: color-mix(in srgb, var(--ink) 16%, var(--bg));
+  color: transparent;
+  -webkit-text-stroke: 1.5px color-mix(in srgb, var(--ink) 55%, var(--bg));
   translate: var(--pan) 0;
   user-select: none;
 }
 .cm-footer__name + .cm-footer__name {
-  color: color-mix(in srgb, var(--ink) 10%, var(--bg));
+  -webkit-text-stroke-color: color-mix(in srgb, var(--ink) 35%, var(--bg));
   translate: calc(var(--pan) * -1) 0;
 }
 .cm-footer__base {

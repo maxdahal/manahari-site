@@ -74,6 +74,36 @@
     });
   }
 
+  /* the resume opens in a dialog (the PDF is loaded the first time it opens);
+     the links inside it, and a middle-click or ctrl-click, still go to the file */
+  var rdialog = document.querySelector(".cm-rdialog");
+  if (rdialog && rdialog.showModal) {
+    var pdfFrame = rdialog.querySelector(".cm-rdialog__frame");
+    var rOpener = null;
+    document.addEventListener("click", function (event) {
+      var link = event.target.closest && event.target.closest('a[href="/resume.pdf"]');
+      if (!link || rdialog.contains(link) || event.metaKey || event.ctrlKey || event.shiftKey || event.button) return;
+      event.preventDefault();
+      rOpener = link;
+      var menu = document.getElementById("menu");
+      if (menu && menu.classList.contains("is-open")) {
+        var toggle = document.querySelector(".menu-button");
+        if (toggle) toggle.click();
+      }
+      if (!pdfFrame.getAttribute("src")) pdfFrame.setAttribute("src", pdfFrame.getAttribute("data-src"));
+      rdialog.showModal();
+    });
+    rdialog.querySelector("[data-close]").addEventListener("click", function () {
+      rdialog.close();
+    });
+    rdialog.addEventListener("click", function (event) {
+      if (event.target === rdialog) rdialog.close();
+    });
+    rdialog.addEventListener("close", function () {
+      if (rOpener && rOpener.offsetParent) rOpener.focus();
+    });
+  }
+
   /* the scroll cue in the hero fades once you have started scrolling */
   var cue = document.querySelector(".cm-scroll");
   if (cue) {

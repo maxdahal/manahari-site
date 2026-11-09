@@ -203,6 +203,17 @@
       </footer>
     </div>
   </main>
+  <dialog class="cm-rdialog" aria-labelledby="resume-h">
+    <div class="cm-rdialog__inner">
+      <header class="cm-rdialog__head">
+        <h2 id="resume-h">Resume</h2>
+        <a class="cm-pill cm-pill--line" href="/resume.pdf" download>Download</a>
+        <a class="cm-pill cm-pill--line" href="/resume.pdf" target="_blank" rel="noopener" data-resume-tab>Open in a new tab</a>
+        <button class="icon-button cm-rdialog__close" type="button" data-close aria-label="Close"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg></button>
+      </header>
+      <iframe class="cm-rdialog__frame" title="Resume, PDF" data-src="/resume.pdf#view=FitH"></iframe>
+    </div>
+  </dialog>
   <dialog class="recruiter" aria-labelledby="recruiter-h">
       <div class="recruiter__inner">
         <header class="recruiter__head">

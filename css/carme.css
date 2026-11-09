@@ -506,7 +506,7 @@
 
 /* ---- artwork: all ten in a plain grid; a click opens one large ------- */
 .cm-art {
-  padding-block: clamp(72px, 12vh, 140px) clamp(56px, 9vh, 96px) !important;
+  padding-block: clamp(120px, 20vh, 240px) clamp(72px, 12vh, 140px) !important;
 }
 .cm-art__grid {
   display: grid;
@@ -552,7 +552,7 @@
 
 /* ---- footer: contact, then the name large and faint ------------------ */
 .cm-footer {
-  padding-top: clamp(40px, 8vh, 96px);
+  padding-top: clamp(72px, 14vh, 160px);
   overflow: hidden;
 }
 .cm-footer__top {
@@ -669,7 +669,7 @@
   grid-template-columns: minmax(0, 5fr) minmax(0, 6fr);
   gap: clamp(40px, 8vw, 128px);
   align-items: center;
-  padding-block: clamp(48px, 10vh, 120px) clamp(72px, 14vh, 180px);
+  padding-block: clamp(72px, 14vh, 180px) clamp(96px, 20vh, 260px);
 }
 .cm-intro .badge {
   justify-self: center;
@@ -677,7 +677,7 @@
 .cm-intro__side {
   display: flex;
   flex-direction: column;
-  gap: clamp(48px, 9vh, 96px);
+  gap: clamp(64px, 12vh, 128px);
 }
 .cm-facts {
   display: flex;
@@ -739,7 +739,7 @@
 }
 
 .cm-block {
-  padding-block: clamp(80px, 16vh, 200px) !important;
+  padding-block: clamp(120px, 24vh, 300px) !important;
 }
 .cm-title {
   margin: 0 0 clamp(40px, 8vh, 88px);
@@ -761,7 +761,7 @@
    lights as the line reaches it (carme.js); the job lists lose their rules */
 .cm-journey .cv-route {
   --route: 1;
-  row-gap: clamp(56px, 10vh, 112px);
+  row-gap: clamp(72px, 13vh, 144px);
 }
 .cm-journey .cv-jobs {
   gap: 20px;
@@ -867,7 +867,7 @@
 .cm-recog {
   display: flex;
   flex-direction: column;
-  gap: clamp(48px, 9vh, 96px);
+  gap: clamp(64px, 12vh, 128px);
 }
 .cm-recog__group {
   display: grid;

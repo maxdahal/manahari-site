@@ -65,7 +65,7 @@ body.cs .a-tag {
 
 /* ---- space instead of rules, bands and echoes ------------------------ */
 body.cs .a-act:not(.a-act--intro) {
-  margin-top: clamp(112px, 18vh, 220px);
+  margin-top: clamp(168px, 28vh, 340px);
   padding-top: 0;
   border-top: 0;
 }
@@ -80,10 +80,10 @@ body.cs .a-act:not(.a-act--intro)::before {
   letter-spacing: -0.04em;
 }
 #main .a-part {
-  padding-top: clamp(64px, 11vh, 128px);
+  padding-top: clamp(104px, 17vh, 208px);
 }
 #main .a-act > .a-part + .a-part {
-  padding-top: clamp(64px, 11vh, 128px);
+  padding-top: clamp(104px, 17vh, 208px);
 }
 #main .a-part > h3 {
   padding: 0;
@@ -98,7 +98,7 @@ body.cs .a-act:not(.a-act--intro)::before {
   content: none;
 }
 #main .a-part > h3 + * {
-  margin-top: 16px;
+  margin-top: 28px;
 }
 #main :is(.card-pt, .did, .contrib__team, .acc, .step) {
   border-top: 0;
@@ -108,7 +108,7 @@ body.cs .a-act:not(.a-act--intro)::before {
   line-height: 1.65;
 }
 #main .a-part > :is(figure, .figs, .row, .figset, .cards, .steps, .a-quote) {
-  margin-block: clamp(32px, 5vh, 64px);
+  margin-block: clamp(56px, 9vh, 112px);
 }
 
 /* ---- the index on the left, quieter ---------------------------------- */
@@ -174,4 +174,13 @@ body.cs .a-outline a {
 /* the outlined echo of each section title, a little stronger on the grain */
 #main .a-act > h2[data-ghost]::before {
   opacity: 0.24;
+}
+
+/* more room between the pieces inside each part, too */
+#main :is(.a-act, .a-part) {
+  gap: 28px 0;
+}
+#main .cards,
+#main .dids {
+  gap: clamp(40px, 6vh, 72px) clamp(24px, 3vw, 48px);
 }

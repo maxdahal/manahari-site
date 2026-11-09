@@ -253,8 +253,7 @@
 
 /* on narrow screens the canvas and the preview shrink with the panel, and
    the headline wraps instead of pushing them wider */
-.sandbox__canvas,
-.play__preview {
+.sandbox__canvas, .play__preview {
   min-width: 0;
   max-width: 100%;
 }

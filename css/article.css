@@ -32,9 +32,7 @@
 }
 
 /* ---- text ---------------------------------------------------------------- */
-.article p,
-.article li,
-.article dd {
+.article p, .article li, .article dd {
   margin: 0;
   font-family: var(--body-font);
   font-size: 1.0625rem;
@@ -45,13 +43,6 @@
 .article strong {
   font-weight: 600;
   color: var(--ink);
-}
-.article a:not(.button, .a-back, .a-more a) {
-  color: var(--ink);
-  text-decoration: underline;
-  text-decoration-color: var(--accent);
-  text-decoration-thickness: 2px;
-  text-underline-offset: 4px;
 }
 .article ul {
   display: flex;
@@ -64,8 +55,7 @@
 .article li::marker {
   color: var(--accent);
 }
-.article .small,
-.article figcaption {
+.article .small, .article figcaption {
   font-size: 0.875rem;
   line-height: 1.5;
   color: var(--muted);
@@ -369,8 +359,7 @@
     --a-5: 128px;
     padding-top: 32px;
   }
-  .row,
-  .a-more {
+  .row, .a-more {
     grid-template-columns: minmax(0, 1fr);
   }
   .row--flip > :first-child {
@@ -509,8 +498,7 @@
   gap: 8px;
   padding: 0 18px 16px;
 }
-.article .acc__body p,
-.article .acc__body li {
+.article .acc__body p, .article .acc__body li {
   font-size: 1rem;
 }
 @media (max-width: 760px) {
@@ -981,13 +969,6 @@
   font-weight: 600;
   color: var(--ink);
 }
-.a-bar__end {
-  grid-area: end;
-  display: flex;
-  justify-content: flex-end;
-  align-items: center;
-  gap: 8px;
-}
 /* The section strip (below 1101px, where the outline is hidden): its own
    row under the breadcrumb, set apart from the page as an accent-tinted
    band with an accent edge and a soft shadow. Each section is a pill in the
@@ -1044,14 +1025,6 @@
   text-decoration: none;
   transition: background-color 0.2s ease, color 0.2s ease, border-color 0.2s ease;
 }
-.a-sections__num {
-  font-family: var(--body-font);
-  font-size: 0.75rem;
-  font-weight: 600;
-  letter-spacing: 0.06em;
-  font-variant-numeric: tabular-nums;
-  color: var(--accent-text);
-}
 .a-sections a:hover {
   border-color: var(--accent);
 }
@@ -1059,9 +1032,6 @@
   border-color: var(--accent);
   background: var(--accent);
   color: var(--on-accent);
-}
-.a-sections a[aria-current] .a-sections__num {
-  color: inherit;
 }
 .a-sections a:focus-visible {
   outline: 3px solid var(--accent);
@@ -1322,15 +1292,13 @@
    you are reading is marked as in the earlier outline: an accent bar, a soft
    accent wash fading out to the right, and accent text in bold.
    ========================================================================== */
-.a-outline > ol > li > a,
-.a-outline .a-outline__sub a {
+.a-outline > ol > li > a, .a-outline .a-outline__sub a {
   color: var(--text);
 }
 .a-outline > ol:has(a[aria-current]) > li:not(:has(a[aria-current])) a {
   color: var(--outline-dim);
 }
-.a-outline a:hover,
-.a-outline > ol:has(a[aria-current]) > li:not(:has(a[aria-current])) a:hover {
+.a-outline a:hover, .a-outline > ol:has(a[aria-current]) > li:not(:has(a[aria-current])) a:hover {
   color: var(--ink);
 }
 .a-outline a[aria-current] {
@@ -1592,10 +1560,7 @@
   fill: color-mix(in srgb, var(--ink) 35%, transparent);
   transition: fill 0.3s ease, r 0.3s ease;
 }
-.article .room[data-selected="0"] .person[data-role="0"],
-.article .room[data-selected="1"] .person[data-role="1"],
-.article .room[data-selected="2"] .person[data-role="2"],
-.article .room[data-selected="3"] .person[data-role="3"] {
+.article .room[data-selected="0"] .person[data-role="0"], .article .room[data-selected="1"] .person[data-role="1"], .article .room[data-selected="2"] .person[data-role="2"], .article .room[data-selected="3"] .person[data-role="3"] {
   fill: var(--accent);
   r: 12px;
   stroke: color-mix(in srgb, var(--accent) 35%, transparent);
@@ -1744,9 +1709,7 @@
   opacity: 0.7;
   transition: rotate 0.2s ease;
 }
-.a-outline > ol > li:has(> .a-outline__sub a[aria-current]) > a::after,
-.a-outline > ol > li:has(> a[aria-current]) > a::after,
-.a-outline.is-all > ol > li > a::after {
+.a-outline > ol > li:has(> .a-outline__sub a[aria-current]) > a::after, .a-outline > ol > li:has(> a[aria-current]) > a::after, .a-outline.is-all > ol > li > a::after {
   rotate: 45deg;
 }
 @media (prefers-reduced-motion: reduce) {

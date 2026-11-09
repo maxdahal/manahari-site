@@ -215,14 +215,12 @@
   color: #fff;
 }
 
-.console[data-design="b"] .carm__dot,
-.console[data-design="b"] .carm__lines {
+.console[data-design="b"] .carm__dot, .console[data-design="b"] .carm__lines {
   display: none;
 }
 /* before and A: no arm colors, the arm is only a number */
 
-.console[data-design="before"] .carm__state,
-.console[data-design="a"] .carm__state {
+.console[data-design="before"] .carm__state, .console[data-design="a"] .carm__state {
   display: none;
 }
 .console__list {
@@ -266,8 +264,7 @@
   justify-content: center;
   gap: 8px;
 }
-.console__pick,
-.console__again {
+.console__pick, .console__again {
   min-height: 44px;
   padding: 0 18px;
   border: 1px solid rgb(255 255 255 / 0.3);
@@ -278,12 +275,10 @@
   font-weight: 600;
   cursor: pointer;
 }
-.console__pick:hover,
-.console__again:hover {
+.console__pick:hover, .console__again:hover {
   border-color: #fff;
 }
-.console__pick:focus-visible,
-.console__again:focus-visible {
+.console__pick:focus-visible, .console__again:focus-visible {
   outline: 3px solid var(--ink);
   outline-offset: 2px;
 }
@@ -360,8 +355,7 @@
   outline: 3px solid var(--ink);
   outline-offset: 2px;
 }
-.glance__intro,
-.arm-notes__text {
+.glance__intro, .arm-notes__text {
   font-size: 0.875rem;
   line-height: 1.55;
   color: var(--text);

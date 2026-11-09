@@ -60,9 +60,7 @@
 .sandbox__btn:hover {
   border-color: var(--ink);
 }
-.sandbox__btn:focus-visible,
-.sandbox__tabs [role="tab"]:focus-visible,
-.play__preset:focus-visible {
+.sandbox__btn:focus-visible, .sandbox__tabs [role="tab"]:focus-visible, .play__preset:focus-visible {
   outline: 3px solid var(--ink);
   outline-offset: 2px;
 }
@@ -327,8 +325,7 @@
   }
 }
 @media (prefers-reduced-motion: reduce) {
-  .sandbox__switch span,
-  .sandbox__switch span::after {
+  .sandbox__switch span, .sandbox__switch span::after {
     transition: none;
   }
 }
@@ -447,8 +444,7 @@
   100% { box-shadow: 0 30px 60px -32px var(--sb-shadow), 0 0 0 0 transparent; }
 }
 @media (prefers-reduced-motion: reduce) {
-  .sandbox-wrap.js-reveal,
-  .sandbox-wrap.js-reveal .sandbox-wrap__strip i {
+  .sandbox-wrap.js-reveal, .sandbox-wrap.js-reveal .sandbox-wrap__strip i {
     opacity: 1;
     translate: none;
     scale: none;
@@ -465,13 +461,11 @@
 .sandbox-wrap {
   --mono: "JetBrains Mono", ui-monospace, "SFMono-Regular", Menlo, Consolas, monospace;
 }
-:is(.article) .sandbox-wrap,
-:is(.article) .sandbox-wrap :is(p, h4, button, span, b, small, li, label, code, pre) {
+:is(.article) .sandbox-wrap, :is(.article) .sandbox-wrap :is(p, h4, button, span, b, small, li, label, code, pre) {
   font-family: var(--mono);
   letter-spacing: -0.01em;
 }
-:is(.article) .sandbox-wrap [data-real],
-:is(.article) .sandbox-wrap [data-real] * {
+:is(.article) .sandbox-wrap [data-real], :is(.article) .sandbox-wrap [data-real] * {
   font-family: var(--body-font);
   letter-spacing: normal;
 }
@@ -547,9 +541,7 @@
 .sandbox__main {
   grid-template-columns: minmax(0, 1fr);
 }
-.sandbox__main > *,
-.sandbox__panel,
-.sandbox__pane {
+.sandbox__main > *, .sandbox__panel, .sandbox__pane {
   min-width: 0;
 }
 .sandbox__tabs {

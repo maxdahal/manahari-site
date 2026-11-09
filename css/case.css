@@ -26,14 +26,10 @@ body.cs {
 
 /* sentence case everywhere (the id keeps this above article.css's labels);
    the small labels lose the wide tracking capitals needed */
-#main *:not(svg, svg *),
-body.cs .a-bar *,
-body.cs .a-side * {
+#main *:not(svg, svg *), body.cs .a-bar *, body.cs .a-side * {
   text-transform: none;
 }
-#main :is(.label, .a-facts dt, .a-card__title, .contrib__bg-label, .contrib__facts dt, .acc__label, .step__num),
-body.cs .a-sections a,
-body.cs .a-sections__num {
+#main :is(.label, .a-facts dt, .a-card__title, .contrib__bg-label, .contrib__facts dt, .acc__label, .step__num), body.cs .a-sections a {
   letter-spacing: 0;
 }
 
@@ -324,8 +320,7 @@ body.cs .a-act:not(.a-act--intro)::before {
 #main .a-act--intro > .a-part:not([id]) > h3::before {
   content: none;
 }
-#main .a-part > :is(p, ul, ol:not(.steps)),
-#main .a-part > :is(p, ul, ol:not(.steps)) li {
+#main .a-part > :is(p, ul, ol:not(.steps)), #main .a-part > :is(p, ul, ol:not(.steps)) li {
   color: var(--text-2);
 }
 #main .a-part > p {
@@ -419,15 +414,13 @@ body.cs .a-act:not(.a-act--intro)::before {
 #main .did {
   padding-bottom: 14px;
 }
-#main :is(.card-pt, .step) h4,
-#main .points-head {
+#main :is(.card-pt, .step) h4, #main .points-head {
   font-family: var(--cs-font);
   font-size: 1.1875rem;
   font-weight: 500;
   letter-spacing: -0.01em;
 }
-#main :is(.card-pt, .step) p,
-#main .card-pt li {
+#main :is(.card-pt, .step) p, #main .card-pt li {
   color: var(--text-2);
 }
 
@@ -465,12 +458,6 @@ body.cs .a-act:not(.a-act--intro)::before {
 #main .a-more b {
   font-family: var(--cs-font);
   letter-spacing: -0.02em;
-}
-body.cs :is(.button, .pv-btn) {
-  font-family: var(--cs-font);
-  font-weight: 600;
-  letter-spacing: 0;
-  text-transform: none;
 }
 
 /* ---- the sticky index, at the bottom left, in regular weight ---------------

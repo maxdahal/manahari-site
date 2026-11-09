@@ -93,27 +93,38 @@
     trace();
   }
 
-  /* About: the statement is held in place while its words light up one by
-     one as you scroll (the section is made tall and the text sticks);
-     without motion it simply reads in full */
-  var about = document.querySelector(".cm-about");
-  var statement = about && about.querySelector(".cm-about__text");
-  if (statement) {
-    var words = statement.textContent.trim().split(/\s+/);
-    statement.textContent = "";
-    words.forEach(function (word, i) {
-      var span = document.createElement("span");
-      span.className = "cm-sw";
-      span.textContent = word;
-      statement.appendChild(span);
-      if (i < words.length - 1) statement.appendChild(document.createTextNode(" "));
+  /* Home and About: the opening statement is held in place while its words
+     light up one by one as you scroll (the section is made tall and the
+     text sticks); without motion it simply reads in full */
+  function wrapWords(node, out) {
+    [].slice.call(node.childNodes).forEach(function (child) {
+      if (child.nodeType === 3) {
+        var parts = child.textContent.split(/(\s+)/);
+        var frag = document.createDocumentFragment();
+        parts.forEach(function (part) {
+          if (!part) return;
+          if (/^\s+$/.test(part)) return frag.appendChild(document.createTextNode(" "));
+          var span = document.createElement("span");
+          span.className = "cm-sw";
+          span.textContent = part;
+          out.push(span);
+          frag.appendChild(span);
+        });
+        node.replaceChild(frag, child);
+      } else if (child.nodeType === 1) wrapWords(child, out);
     });
-    var spans = [].slice.call(statement.children);
+  }
+  [].slice.call(document.querySelectorAll(".cm-about")).forEach(function (about) {
+    var statement = about.querySelector(".cm-about__text");
+    if (!statement) return;
+    var spans = [];
+    wrapWords(statement, spans);
     var light = function () {
       if (!about.classList.contains("is-held")) return;
       var box = about.getBoundingClientRect();
-      var travel = box.height - window.innerHeight;
-      var progress = travel > 0 ? Math.min(Math.max(-box.top / travel, 0), 1) : 1;
+      var head = 84;
+      var travel = box.height - (window.innerHeight - head);
+      var progress = travel > 0 ? Math.min(Math.max((head - box.top) / travel, 0), 1) : 1;
       var at = progress * (spans.length + 3) - 1.5;
       spans.forEach(function (span, i) {
         span.style.opacity = (0.16 + 0.84 * Math.min(Math.max(at - i + 1, 0), 1)).toFixed(2);
@@ -132,7 +143,7 @@
     document.addEventListener("motionchange", hold);
     reduce.addEventListener("change", hold);
     hold();
-  }
+  });
 
   /* My journey: the line draws down the middle as you scroll, and each stop
      lights as the line reaches its pin (all of them again without motion) */

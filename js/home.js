@@ -1,5 +1,5 @@
-/* Home page behaviour: the recruiter summary, the motion tip, the season
-   buttons, the Nepal fun facts, nav jumps and highlight, the artwork spotlight and lightbox. */
+/* Home and About behaviour: the recruiter summary, the motion tip, in-page
+   links and the nav highlight, and the artwork lightbox. */
 (function () {
   "use strict";
 
@@ -115,222 +115,20 @@
     });
   }
 
-  /* Seasons, as on kigo.studio: four buttons at the top right of the hero
-     (they stay there, sticky, until the case studies arrive) change what
-     falls across it: petals in spring, fireflies rising in summer, leaves in
-     autumn, snow in winter. Each pick replays the fall
-     and is remembered; the first visit starts from today's date. Nothing
-     falls for reduced motion, and the pause button holds the pieces. */
-  var SEASONS = {
-    spring: {
-      count: 26, wind: 0.4, size: [12, 20], speed: [6, 9], flutter: ["flutter", "flutter flutter--r"],
-      colors: ["#f4b6c8", "#f9cfdc", "#eaa0b8", "#f7c4d4"],
-      shape: '<path d="M12 2 C16 6 17 12 14 18 C13 20 12.5 21 12 22 C11.5 21 11 20 10 18 C7 12 8 6 12 2 Z"/>'
-    },
-    /* fireflies: small warm lights that rise from the foot of the hero,
-       wandering and blinking as they go */
-    summer: {
-      count: 26, rise: true, size: [6, 11], speed: [7, 12], flutter: ["hover"],
-      colors: ["var(--firefly)", "var(--firefly-2)"],
-      shape: '<circle cx="12" cy="12" r="7"/>'
-    },
-    autumn: {
-      count: 22, size: [16, 30], speed: [4.5, 7.5], flutter: ["flutter", "flutter flutter--r"],
-      colors: ["#d9682b", "#e8a33d", "#b8442a", "#c97b2a", "#9c3b1e", "#e0b04a"],
-      wind: 0.35,
-      /* a few small maple leaves among the others */
-      extra: { share: 0.3, scale: 0.7, colors: ["#c8402a", "#d9552c", "#b8342a", "#e0782f"],
-        shape: '<path d="M12 1 L13.6 5.6 L16.8 4 L16 8.4 L20.8 7.6 L18.8 11.2 L22.4 12.4 L17.6 15.2 L18.4 17.6 L13.2 16.4 L12.8 22.4 L11.2 22.4 L10.8 16.4 L5.6 17.6 L6.4 15.2 L1.6 12.4 L5.2 11.2 L3.2 7.6 L8 8.4 L7.2 4 L10.4 5.6 Z"/><path d="M12 6 L12 22 M12 13 L17 9.5 M12 13 L7 9.5" fill="none" stroke="rgb(70 20 10 / 0.4)" stroke-width="0.8" stroke-linecap="round"/>' },
-      shape: '<path d="M12 1 C17 5 22 10 19 16 C17 20 14 22 12 23 C10 22 7 20 5 16 C2 10 7 5 12 1 Z"/>' +
-        '<path d="M12 4 L12 23 M12 11 L16 8 M12 15 L8 12" fill="none" stroke="rgb(80 30 10 / 0.45)" stroke-width="1" stroke-linecap="round"/>'
-    },
-    winter: {
-      count: 40, size: [5, 11], speed: [6, 10], flutter: ["drift"],
-      colors: ["#b9cde4", "#cfdcec", "#a9c0dc", "#ffffff"],
-      shape: '<circle cx="12" cy="12" r="8"/>'
-    }
-  };
-
-  function seasonFromDate() {
-    var m = new Date().getMonth();
-    return m < 2 || m === 11 ? "winter" : m < 5 ? "spring" : m < 8 ? "summer" : "autumn";
-  }
-
-  function initSeasons() {
-    var buttons = [].slice.call(document.querySelectorAll(".cv-season"));
-    var layer = document.querySelector(".falling");
-    var hero = document.querySelector(".cv-hero");
-    if (!buttons.length || !layer || !hero) return;
-    var season = seasonFromDate();
-    try {
-      var saved = localStorage.getItem("season");
-      if (SEASONS[saved]) season = saved;
-    } catch (e) {}
-
-    function between(range) {
-      return range[0] + Math.random() * (range[1] - range[0]);
-    }
-    function piece(kind, size) {
-      var el = document.createElement("span");
-      el.className = "falling__piece";
-      var look = kind.extra && Math.random() < kind.extra.share ? kind.extra : kind;
-      if (look !== kind) size = Math.round(size * look.scale);
-      el.style.width = el.style.height = size + "px";
-      var color = look.colors[Math.floor(Math.random() * look.colors.length)];
-      var inner = document.createElement("span");
-      inner.className = kind.flutter[Math.floor(Math.random() * kind.flutter.length)];
-      inner.style.animationDuration = (1.2 + Math.random() * 1.2).toFixed(2) + "s";
-      inner.innerHTML = '<svg viewBox="0 0 24 24" fill="' + color + '"' +
-        (kind.rise ? ' class="falling__glow"' : "") + ">" + look.shape + "</svg>";
-      el.appendChild(inner);
-      layer.appendChild(el);
-      return el;
-    }
-
-    /* the pieces fall across the window; on each play the wind blows one
-       way, and some pieces (kind.wind of them) are caught by a gust partway
-       down and swept sideways */
-    function play() {
-      layer.textContent = "";
-      if (reduceMotion || !layer.animate) return;
-      var kind = SEASONS[season];
-      var w = window.innerWidth;
-      var h = window.innerHeight;
-      var windDir = Math.random() < 0.5 ? 1 : -1;
-      for (var i = 0; i < kind.count; i++) {
-        var el = piece(kind, Math.round(between(kind.size)));
-        var left = 20 + Math.random() * (w - 40);
-        var from = -40;
-        var to = h + 20;
-        var frames;
-        if (kind.rise) {
-          /* rises from the foot of the window, wandering side to side and
-             blinking on and off */
-          var x1 = 20 + Math.random() * (w - 40);
-          var y1 = h * (0.6 + Math.random() * 0.4);
-          var climb = h * (0.35 + Math.random() * 0.4);
-          var sway = 30 + Math.random() * 50;
-          frames = [];
-          for (var n = 0; n <= 8; n++) {
-            var t = n / 8;
-            frames.push({
-              offset: t,
-              transform: "translate(" + (x1 + Math.sin(t * Math.PI * 2.5 + i) * sway).toFixed(0) + "px," + (y1 - climb * t).toFixed(0) + "px)",
-              opacity: n === 0 || n === 8 ? 0 : n % 2 ? 1 : 0.25
-            });
-          }
-        } else if (Math.random() < (kind.wind || 0)) {
-          /* starts upwind, so the gust carries it across */
-          var gx = windDir > 0 ? 20 + Math.random() * w * 0.55 : w * 0.45 + Math.random() * (w * 0.55 - 20);
-          var dx = windDir * w * (0.22 + Math.random() * 0.28);
-          var gust = 0.3 + Math.random() * 0.2;
-          var at = function (x, f) {
-            return "translate(" + x.toFixed(0) + "px," + (from + (to - from) * f).toFixed(0) + "px)";
-          };
-          frames = [
-            { transform: at(gx, 0), opacity: 0 },
-            { opacity: 1, offset: 0.08 },
-            { transform: at(gx + dx * 0.05, gust), offset: gust, easing: "cubic-bezier(0.5, 0, 0.3, 1)" },
-            { transform: at(gx + dx, gust + 0.06), offset: gust + 0.22, easing: "ease-in" },
-            { opacity: 1, offset: 0.88 },
-            { transform: at(gx + dx * 1.15, 1), opacity: 0 }
-          ];
-        } else {
-          frames = [
-            { transform: "translate(" + left + "px," + from + "px)", opacity: 0 },
-            { opacity: 1, offset: 0.08 },
-            { opacity: 1, offset: 0.85 },
-            { transform: "translate(" + left + "px," + to + "px)", opacity: 0 }
-          ];
-        }
-        el.animate(frames, { duration: between(kind.speed) * 1000, delay: Math.random() * 2400, fill: "both" });
-      }
-      if (document.documentElement.classList.contains("motion-paused")) hold(true);
-    }
-
-    /* the pause button holds the pieces where they are */
-    function hold(paused) {
-      layer.getAnimations({ subtree: true }).forEach(function (a) {
-        if (paused) a.pause();
-        else a.play();
-      });
-    }
-    document.addEventListener("motionchange", function (event) {
-      hold(event.detail.paused);
-    });
-
-    function set(next, replay) {
-      season = next;
-      document.documentElement.dataset.season = season;
-      buttons.forEach(function (b) {
-        b.setAttribute("aria-pressed", String(b.dataset.season === season));
-      });
-      if (replay) play();
-    }
-    buttons.forEach(function (b) {
-      b.addEventListener("click", function () {
-        try {
-          localStorage.setItem("season", b.dataset.season);
-        } catch (e) {}
-        set(b.dataset.season, true);
-      });
-    });
-    /* the first fall plays once the intro has lifted */
-    set(season, false);
-    setTimeout(play, document.documentElement.classList.contains("hello-lock") ? 3400 : 400);
-
-    /* the fall belongs to the hero: below it, the layer hides and its
-       pieces rest */
-    if ("IntersectionObserver" in window) {
-      new IntersectionObserver(function (entries) {
-        var away = !entries[0].isIntersecting;
-        layer.hidden = away;
-        if (!document.documentElement.classList.contains("motion-paused")) hold(away);
-      }).observe(hero);
-    }
-  }
-
-  /* Fun facts about Nepal: the line beside the flag in the hero opens them;
-     Close, Escape or a click outside shut it, and focus goes back */
-  function initNepal() {
-    var dialog = document.querySelector(".nepal");
-    var button = document.querySelector("[data-nepal]");
-    if (!dialog || !button || !dialog.showModal) return;
-    button.addEventListener("click", function () {
-      dialog.showModal();
-    });
-    dialog.querySelector("[data-close]").addEventListener("click", function () {
-      dialog.close();
-    });
-    dialog.addEventListener("click", function (event) {
-      if (event.target === dialog) dialog.close();
-    });
-    dialog.addEventListener("close", function () {
-      button.focus();
-    });
-  }
-
   function start() {
     initRecruiter();
     motionToggle();
-    initSeasons();
-    initNepal();
 
     /* In-page links land with the section's top just under the top bar. */
     var bar = document.querySelector(".cp-bar");
     function goTo(id, smooth) {
       var target = document.getElementById(id);
       if (!target) return false;
-      var section = target.closest(".sections > section, .sections > .pin-spacer > section");
-      /* a section GSAP holds in place sits in a spacer: its top is the
-         spacer's (the section's own top stays put while it is held) */
-      if (section && section.parentElement.classList.contains("pin-spacer")) section = section.parentElement;
+      var section = target.closest(".sections > section, .sections > footer");
       var top = section
         ? section.getBoundingClientRect().top + window.scrollY - (bar ? bar.offsetHeight : 0)
         : document.documentElement.scrollHeight;
-      /* with Lenis running (scroll.js), it does the glide */
-      if (window.lenis) window.lenis.scrollTo(Math.max(0, top), { immediate: !smooth });
-      else window.scrollTo({ top: Math.max(0, top), behavior: smooth && !reduceMotion ? "smooth" : "auto" });
+      window.scrollTo({ top: Math.max(0, top), behavior: smooth && !reduceMotion ? "smooth" : "auto" });
       return true;
     }
     document.addEventListener("click", function (event) {
@@ -392,25 +190,7 @@
       markOutline();
     }
 
-    /* Artwork spotlight: pass the cursor position to CSS (--mx, --my); the
-       light itself is a CSS gradient. Keyboard focus moves it onto a piece. */
     var track = document.querySelector(".artwork__track");
-    var spot = document.querySelector(".spot");
-    if (spot) {
-      var aim = function (x, y) {
-        var r = spot.getBoundingClientRect();
-        spot.style.setProperty("--mx", (x - r.left).toFixed(0) + "px");
-        spot.style.setProperty("--my", (y - r.top).toFixed(0) + "px");
-        spot.classList.add("is-lit");
-      };
-      spot.addEventListener("pointermove", function (event) {
-        aim(event.clientX, event.clientY);
-      });
-      spot.addEventListener("focusin", function (event) {
-        var r = event.target.getBoundingClientRect();
-        aim(r.left + r.width / 2, r.top + r.height / 2);
-      });
-    }
 
     /* Lightbox */
     var dialog = document.querySelector(".lightbox");

@@ -65,103 +65,8 @@
     #0b0b0c;
   animation: hello-out 0.6s ease 2.8s forwards;
 }
-.tape {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  margin: 0;
-  font-family: var(--heading-font);
-  font-size: clamp(2.5rem, 1rem + 6vw, 6rem);
-  font-weight: 700;
-  line-height: 1;
-  color: #0b0b0c;
-}
 /* each line: a paper label, its text and its strip of tape share one grid
    cell, so the tape lies across the words with nothing positioned */
-.tape__line {
-  display: grid;
-  padding: 0.04em 0.16em 0.08em;
-  background: var(--paper-label);
-  clip-path: polygon(0 3%, 4% 0, 30% 2%, 62% 0, 100% 3%, 99% 52%, 100% 97%, 70% 100%, 35% 97%, 2% 100%, 0 60%);
-  opacity: 0;
-  rotate: -1deg;
-  animation: tape-slap 0.35s cubic-bezier(0.2, 1.4, 0.4, 1) forwards;
-}
-.tape__line:nth-child(1) {
-  animation-delay: 0.2s;
-}
-.tape__line:nth-child(2) {
-  margin-top: -0.06em;
-  rotate: 0.8deg;
-  animation-delay: 0.55s;
-}
-.tape__line:nth-child(3) {
-  margin-top: -0.06em;
-  rotate: -0.6deg;
-  animation-delay: 0.9s;
-}
-.tape__line::after {
-  content: "";
-  grid-area: 1 / 1;
-  align-self: center;
-  width: 38%;
-  height: 0.32em;
-  background: var(--tape);
-  clip-path: polygon(0 10%, 4% 0, 96% 6%, 100% 0, 98% 90%, 100% 100%, 3% 94%, 0 100%);
-  rotate: -4deg;
-  transform-origin: 0 50%;
-  scale: 0 1;
-  animation: tape-stick 0.3s ease-out forwards;
-}
-.tape__line:nth-child(1)::after {
-  justify-self: start;
-  margin-left: -6%;
-  animation-delay: 0.5s;
-}
-.tape__line:nth-child(2)::after {
-  justify-self: end;
-  margin-right: 12%;
-  rotate: 3deg;
-  animation-delay: 0.85s;
-}
-.tape__line:nth-child(3)::after {
-  justify-self: center;
-  width: 46%;
-  rotate: -2deg;
-  animation-delay: 1.2s;
-}
-.hello__count {
-  margin: 0;
-  font-family: var(--body-font);
-  font-size: 0.8125rem;
-  color: rgb(255 255 255 / 0.6);
-  font-variant-numeric: tabular-nums;
-  counter-reset: count var(--count);
-  animation: hello-count 2.2s cubic-bezier(0.4, 0, 0.2, 1) 0.2s forwards;
-}
-.hello__count::after {
-  content: counter(count);
-}
-@keyframes tape-slap {
-  from {
-    opacity: 0;
-    scale: 1.25;
-  }
-  to {
-    opacity: 1;
-    scale: 1;
-  }
-}
-@keyframes tape-stick {
-  to {
-    scale: 1 1;
-  }
-}
-@keyframes hello-count {
-  to {
-    --count: 100;
-  }
-}
 @keyframes hello-out {
   to {
     opacity: 0;
@@ -171,8 +76,7 @@
 
 /* while the intro plays (see the script in index.html) the page cannot
    scroll; the scrollbar's space is kept so nothing shifts when it unlocks */
-html.hello-lock,
-html.hello-lock body {
+html.hello-lock, html.hello-lock body {
   overflow: hidden;
 }
 html.hello-lock {
@@ -180,9 +84,6 @@ html.hello-lock {
 }
 /* coming back from another page of the site (see the script in index.html),
    or reduced motion: no intro, the name appears straight away */
-.no-hello .hello {
-  display: none;
-}
 
 @media (prefers-reduced-motion: reduce) {
   .hello {
@@ -320,8 +221,7 @@ html.hello-lock {
 .motion-toggle {
   color: var(--ink);
 }
-.motion-toggle .icon-play,
-.motion-paused .motion-toggle .icon-pause {
+.motion-toggle .icon-play, .motion-paused .motion-toggle .icon-pause {
   display: none;
 }
 .motion-paused .motion-toggle .icon-play {
@@ -336,9 +236,6 @@ html.hello-lock {
   .motion-toggle {
     display: none;
   }
-}
-:root.motion-paused :is(.hover, .spot__hint) {
-  animation-play-state: paused !important;
 }
 
 /* the note and the button, a small block under the outline. Kept quiet
@@ -640,8 +537,7 @@ html:has(.recruiter[open]) {
     gap: 16px;
     padding-block: 22px;
   }
-  .recruiter__head,
-  .recruiter__foot {
+  .recruiter__head, .recruiter__foot {
     padding-block: 0 16px;
   }
   .recruiter__foot {
@@ -668,8 +564,7 @@ html:has(.recruiter[open]) {
   .recruiter__head {
     padding-bottom: 12px;
   }
-  .recruiter__foot,
-  .recruiter__skills-block {
+  .recruiter__foot, .recruiter__skills-block {
     padding-top: 12px;
   }
   .recruiter__block {
@@ -768,9 +663,6 @@ html:has(.recruiter[open]) {
 }
 
 /* a block whose body starts at the left edge, with no indent (Artwork) */
-.block--wide .block__body {
-  --indent: 0px;
-}
 
 /* 5. Artwork and lightbox ---------------------------------------------------- */
 .artwork {
@@ -779,12 +671,6 @@ html:has(.recruiter[open]) {
 .artwork .block {
   padding-top: 0;
 }
-
-.artwork__body {
-  margin-top: 0;
-  padding-top: 24px;
-  border-image: none;
-}
 /* Dark gallery wall with a spotlight. The art sits in a staggered grid on a
    dark wall; a dark layer (.spot__dark) shares the wall's grid cell on top of
    it, with a soft transparent circle at the cursor (--mx, --my, set by
@@ -792,128 +678,12 @@ html:has(.recruiter[open]) {
    the light onto the focused piece. Where there is no hovering pointer (touch
    screens), or for reduced motion, the lights are simply on. Grid only,
    nothing positioned. */
-.spot {
-  --mx: 50%;
-  --my: 40%;
-  --r: clamp(140px, 16vw, 230px);
-  display: grid;
-  margin-top: 24px;
-  border-radius: var(--r-xl);
-  background: #0b0b0d;
-  overflow: hidden;
-}
 /* the art hangs in columns, each piece at its own shape (masonry, pure CSS
    columns), so nothing is cropped; the columns narrow to two on phones */
-.spot__wall {
-  columns: 4 200px;
-  column-gap: clamp(12px, 1.4vw, 20px);
-  padding: clamp(16px, 2.4vw, 40px);
-}
-.spot__wall li {
-  break-inside: avoid;
-  margin-bottom: clamp(12px, 1.4vw, 20px);
-}
-.spot__wall .artwork__item {
-  display: block;
-  width: 100%;
-  padding: 0;
-  border: 0;
-  border-radius: 10px;
-  overflow: hidden;
-  background: #16161a;
-  cursor: zoom-in;
-}
-.spot__wall .artwork__item img {
-  display: block;
-  width: 100%;
-  height: auto;
-  transition: scale 0.5s ease;
-}
-.spot__wall .artwork__item:hover img {
-  scale: 1.05;
-}
-.spot__wall .artwork__item:focus-visible {
-  outline: 3px solid var(--ink);
-  outline-offset: 3px;
-}
-.spot__dark {
-  z-index: 1;
-  background: radial-gradient(
-    circle var(--r) at var(--mx) var(--my),
-    transparent 0,
-    rgb(11 11 13 / 0.35) 55%,
-    rgb(11 11 13 / 0.94) 100%
-  );
-  pointer-events: none;
-  transition: opacity 0.4s ease;
-}
 /* before the cursor arrives, a dim glow in the middle invites you in */
-.spot:not(.is-lit) .spot__dark {
-  --r: clamp(180px, 22vw, 320px);
-}
 /* The hint sits in the middle of the dark wall (same grid cell, on top) as a
    glowing pill with a light-bulb icon, gently pulsing, until the cursor
    arrives; then it fades away. Only where a hovering pointer exists. */
-.spot__wall,
-.spot__dark,
-.spot__hint {
-  grid-area: 1 / 1;
-}
-.spot__hint {
-  z-index: 2;
-  place-self: center;
-  display: none;
-  align-items: center;
-  gap: 10px;
-  max-width: calc(100% - 32px);
-  margin: 0;
-  padding: 12px 20px;
-  border: 1px solid rgb(255 255 255 / 0.25);
-  border-radius: 24px;
-  background: rgb(20 20 24 / 0.75);
-  -webkit-backdrop-filter: blur(6px);
-  backdrop-filter: blur(6px);
-  box-shadow: 0 0 40px 6px color-mix(in srgb, var(--accent) 35%, transparent);
-  color: #f4f4f0;
-  font-size: var(--fs-body);
-  font-weight: 600;
-  line-height: 1.35;
-  text-wrap: balance;
-  pointer-events: none;
-  animation: hint-glow 2.4s ease-in-out infinite;
-  transition: opacity 0.4s ease, scale 0.4s ease;
-}
-.spot__hint svg {
-  flex: none;
-  width: 22px;
-  height: 22px;
-  color: var(--accent);
-}
-.spot.is-lit .spot__hint {
-  opacity: 0;
-  scale: 0.9;
-}
-@keyframes hint-glow {
-  50% {
-    box-shadow: 0 0 60px 14px color-mix(in srgb, var(--accent) 50%, transparent);
-  }
-}
-@media (hover: hover) and (prefers-reduced-motion: no-preference) {
-  .spot__hint {
-    display: inline-flex;
-  }
-}
-@media (hover: none), (prefers-reduced-motion: reduce) {
-  .spot__dark {
-    display: none;
-  }
-}
-@media (max-width: 640px) {
-  .spot__wall {
-    columns: 2;
-  }
-}
-
 /* Touch screens: no cursor, so scrolling is the flashlight. As the wall
    passes through the screen the light sweeps down it in a slow zigzag,
    staying near the middle of the screen, so each piece lights up as you
@@ -930,70 +700,15 @@ html:has(.recruiter[open]) {
   inherits: true;
   initial-value: 40%;
 }
-.spot__say-touch {
-  display: none;
-}
 @media (hover: none) and (prefers-reduced-motion: no-preference) {
   @supports (animation-timeline: view()) {
     /* the wall clips its corners (overflow: hidden), which makes it a
        scroll box of its own, so the light inside follows the wall's
        timeline in the page instead of its own */
-    .spot {
-      view-timeline: --wall block;
-    }
-    .spot__dark {
-      display: block;
-      --r: clamp(150px, 44vw, 260px);
-      animation: spot-sweep linear both;
-      animation-timeline: --wall;
-    }
-    .spot__hint {
-      display: inline-flex;
-      place-self: start center;
-      margin-top: clamp(40px, 12vh, 120px);
-      animation: spot-hint-out linear both;
-      animation-timeline: --wall;
-      animation-range: entry 60% cover 40%;
-    }
-    .spot__say-mouse {
-      display: none;
-    }
-    .spot__say-touch {
-      display: inline;
-    }
   }
 }
 /* the middle of the screen runs from above the wall to below it over the
    wall's cover range; the light follows it, swinging side to side */
-@keyframes spot-sweep {
-  0% {
-    --mx: 50%;
-    --my: -15%;
-  }
-  25% {
-    --mx: 25%;
-    --my: 22%;
-  }
-  50% {
-    --mx: 72%;
-    --my: 50%;
-  }
-  75% {
-    --mx: 28%;
-    --my: 78%;
-  }
-  100% {
-    --mx: 50%;
-    --my: 115%;
-  }
-}
-@keyframes spot-hint-out {
-  to {
-    opacity: 0;
-    scale: 0.9;
-  }
-}
-
 .lightbox {
   position: fixed;
   width: 100vw;

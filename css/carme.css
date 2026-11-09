@@ -903,3 +903,30 @@
   80% { translate: 0 24px; opacity: 1; }
   100% { translate: 0 24px; opacity: 0; }
 }
+
+/* the resume, as a small outlined pill beside the theme icon */
+.cm-resume {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  min-height: 40px;
+  padding: 0 18px;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  color: var(--ink);
+  font-size: 0.9375rem;
+  font-weight: 500;
+  text-decoration: none;
+  transition: background 0.2s ease, color 0.2s ease, border-color 0.2s ease;
+}
+.cm-resume:hover,
+.cm-resume:focus-visible {
+  border-color: var(--accent);
+  background: var(--accent);
+  color: var(--on-accent);
+}
+@media (max-width: 809px) {
+  .cm-resume {
+    display: none;
+  }
+}

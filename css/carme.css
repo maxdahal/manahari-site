@@ -1005,3 +1005,48 @@ html:has(.cm-rdialog[open]) {
   overflow: hidden;
   scrollbar-gutter: stable;
 }
+
+/* the journey, easier to read: every stop's text starts at the left edge of
+   its column (right-aligned lines are hard to follow), with larger type and
+   a stronger grey */
+.cm-journey .cv-route--detail .cv-stop:nth-child(odd) {
+  text-align: start;
+}
+.cm-journey .cv-route--detail .cv-stop:nth-child(odd) .cv-job {
+  align-items: flex-start;
+}
+.cm-journey .cv-route--detail .cv-stop:nth-child(odd) > :not(.cv-stop__pin) {
+  justify-self: end;
+  width: min(100%, 30em);
+}
+.cm-journey .cv-stop__when {
+  font-size: 0.9375rem;
+  color: var(--text-2);
+}
+.cm-journey .cv-stop__place {
+  font-size: clamp(1.75rem, 1.3rem + 1.4vw, 2.5rem);
+}
+.cm-journey .cv-stop__text {
+  font-size: 1.125rem;
+  line-height: 1.6;
+  color: var(--ink);
+}
+.cm-journey .cv-job {
+  gap: 4px;
+}
+.cm-journey .cv-job__when {
+  font-size: 0.875rem;
+  color: var(--text-2);
+}
+.cm-journey .cv-job__role {
+  font-size: 1.125rem;
+  line-height: 1.4;
+}
+.cm-journey .cv-job__org {
+  font-size: 1rem;
+}
+.cm-journey .cv-job__desc {
+  font-size: 1rem;
+  line-height: 1.6;
+  color: var(--text-2);
+}

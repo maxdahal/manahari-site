@@ -1109,17 +1109,10 @@ html:has(.cm-rdialog[open]) {
   width: fit-content;
 }
 
-/* ---- the "hello" intro, as before: the line on taped paper labels over a
-   dark drawing-guide background and a 0 to 100 count; once per visit, never
-   for reduced motion (index.html's script decides whether it plays) ------ */
-@property --count {
-  syntax: "<integer>";
-  inherits: false;
-  initial-value: 0;
-}
+/* ---- the "hello" intro: the word written by hand over a dark drawing-guide
+   background; once per visit, never for reduced motion (index.html's script
+   decides whether it plays) ------------------------------------------- */
 .hello {
-  --paper-label: #e7dcc0;
-  --tape: rgb(240 190 40 / 0.82);
   position: fixed;
   inset: 0;
   z-index: 100;
@@ -1137,101 +1130,24 @@ html:has(.cm-rdialog[open]) {
     #0b0b0c;
   animation: hello-out 0.6s ease 2.8s forwards;
 }
-.tape {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  margin: 0;
-  font-family: var(--heading-font);
-  font-size: clamp(2.5rem, 1rem + 6vw, 6rem);
-  font-weight: 700;
-  line-height: 1;
-  color: #0b0b0c;
+.hello__word {
+  width: clamp(160px, 22vw, 300px);
+  height: auto;
+  overflow: visible;
 }
-/* each line: a paper label, its text and its strip of tape share one grid
-   cell, so the tape lies across the words with nothing positioned */
-.tape__line {
-  display: grid;
-  padding: 0.04em 0.16em 0.08em;
-  background: var(--paper-label);
-  clip-path: polygon(0 3%, 4% 0, 30% 2%, 62% 0, 100% 3%, 99% 52%, 100% 97%, 70% 100%, 35% 97%, 2% 100%, 0 60%);
-  opacity: 0;
-  rotate: -1deg;
-  animation: tape-slap 0.35s cubic-bezier(0.2, 1.4, 0.4, 1) forwards;
+.hello__word path {
+  fill: none;
+  stroke: #f3f6fa;
+  stroke-width: 10;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  stroke-dasharray: 1;
+  stroke-dashoffset: 1;
+  animation: hello-write 1.9s cubic-bezier(0.45, 0.05, 0.55, 0.95) 0.4s forwards;
 }
-.tape__line:nth-child(1) {
-  animation-delay: 0.2s;
-}
-.tape__line:nth-child(2) {
-  margin-top: -0.06em;
-  rotate: 0.8deg;
-  animation-delay: 0.55s;
-}
-.tape__line:nth-child(3) {
-  margin-top: -0.06em;
-  rotate: -0.6deg;
-  animation-delay: 0.9s;
-}
-.tape__line::after {
-  content: "";
-  grid-area: 1 / 1;
-  align-self: center;
-  width: 38%;
-  height: 0.32em;
-  background: var(--tape);
-  clip-path: polygon(0 10%, 4% 0, 96% 6%, 100% 0, 98% 90%, 100% 100%, 3% 94%, 0 100%);
-  rotate: -4deg;
-  transform-origin: 0 50%;
-  scale: 0 1;
-  animation: tape-stick 0.3s ease-out forwards;
-}
-.tape__line:nth-child(1)::after {
-  justify-self: start;
-  margin-left: -6%;
-  animation-delay: 0.5s;
-}
-.tape__line:nth-child(2)::after {
-  justify-self: end;
-  margin-right: 12%;
-  rotate: 3deg;
-  animation-delay: 0.85s;
-}
-.tape__line:nth-child(3)::after {
-  justify-self: center;
-  width: 46%;
-  rotate: -2deg;
-  animation-delay: 1.2s;
-}
-.hello__count {
-  margin: 0;
-  font-family: var(--body-font);
-  font-size: 0.8125rem;
-  color: rgb(255 255 255 / 0.6);
-  font-variant-numeric: tabular-nums;
-  counter-reset: count var(--count);
-  animation: hello-count 2.2s cubic-bezier(0.4, 0, 0.2, 1) 0.2s forwards;
-}
-.hello__count::after {
-  content: counter(count);
-}
-@keyframes tape-slap {
-  from {
-    opacity: 0;
-    scale: 1.25;
-  }
+@keyframes hello-write {
   to {
-    opacity: 1;
-    scale: 1;
-  }
-}
-@keyframes tape-stick {
-  to {
-    scale: 1 1;
-  }
-}
-@keyframes hello-count {
-  to {
-    --count: 100;
+    stroke-dashoffset: 0;
   }
 }
 @keyframes hello-out {

@@ -998,3 +998,10 @@
     margin-left: auto;
   }
 }
+
+/* while the resume is open the page behind does not scroll; the scrollbar's
+   space is kept, so nothing shifts sideways */
+html:has(.cm-rdialog[open]) {
+  overflow: hidden;
+  scrollbar-gutter: stable;
+}

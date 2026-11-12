@@ -1178,3 +1178,19 @@ html.hello-lock {
   }
   
 }
+
+/* the Esri panel shows its diagram whole, not as a dimmed backdrop */
+.cm-panel--diagram .cm-panel__pic {
+  display: grid;
+  place-items: center;
+  padding: clamp(24px, 6vh, 72px) clamp(24px, 4vw, 64px) clamp(160px, 30vh, 280px);
+}
+.cm-panel--diagram .cm-panel__pic img {
+  width: auto;
+  max-width: min(100%, 720px);
+  height: auto;
+  max-height: 100%;
+  object-fit: contain;
+  border-radius: 14px;
+  opacity: 1;
+}

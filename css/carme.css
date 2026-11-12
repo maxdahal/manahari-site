@@ -1202,6 +1202,9 @@ html.hello-lock {
   line-height: 1.2;
   letter-spacing: -0.045em;
 }
+.cm-hero .cm-about__text {
+  font-weight: 500;
+}
 .cm-hero .cm-about__text b {
   font-weight: 600;
 }

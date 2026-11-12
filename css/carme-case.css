@@ -1739,3 +1739,35 @@ body.cs #main .a-part > .a-quote {
     font-size: 0.75rem;
   }
 }
+
+/* From 1440px the index and the article sit side by side as one group, centred
+   on the page, so the space on the far left and the far right is equal and the
+   index never crowds the text. */
+@media (min-width: 1440px) {
+  body.cs .a-layout {
+    display: grid;
+    grid-template-columns: 170px minmax(0, 900px);
+    column-gap: 88px;
+    justify-content: center;
+    padding-inline: var(--gx);
+  }
+  body.cs .a-layout > .article {
+    max-width: none;
+    margin: 0;
+    padding-inline: 0;
+  }
+  body.cs .a-side {
+    position: static;
+    left: auto;
+    top: auto;
+    z-index: auto;
+    width: auto;
+    translate: none;
+    display: block;
+  }
+  body.cs .a-outline {
+    position: sticky;
+    top: calc(var(--bar-h) + 40px);
+    margin-top: clamp(64px, 9vh, 96px);
+  }
+}

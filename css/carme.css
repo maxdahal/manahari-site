@@ -1193,3 +1193,18 @@ html.hello-lock {
   border-radius: 14px;
   opacity: 1;
 }
+
+/* the hero line: smaller and looser so it breathes, the two key phrases
+   semibold rather than bold, and the buttons set further below */
+.cm-hero .cm-about__text {
+  max-width: 17em;
+  font-size: clamp(2.25rem, 1.3rem + 3.6vw, 4.5rem);
+  line-height: 1.2;
+  letter-spacing: -0.045em;
+}
+.cm-hero .cm-about__text b {
+  font-weight: 600;
+}
+.cm-hero .cm-actions {
+  margin-top: clamp(40px, 7vh, 72px);
+}

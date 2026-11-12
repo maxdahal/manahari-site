@@ -140,6 +140,15 @@
     if (!statement) return;
     var spans = [];
     wrapWords(statement, spans);
+    /* the home hero starts with its first sentence (the name) already lit;
+       the rest fills in as you scroll */
+    var litTo = -1;
+    if (about.classList.contains("cm-hero")) {
+      spans.some(function (span, i) {
+        litTo = i;
+        return /[.!?]$/.test(span.textContent);
+      });
+    }
     var light = function () {
       if (!about.classList.contains("is-held")) return;
       var box = about.getBoundingClientRect();
@@ -148,7 +157,7 @@
       var progress = travel > 0 ? Math.min(Math.max((head - box.top) / travel, 0), 1) : 1;
       var at = progress * (spans.length + 3) - 1.5;
       spans.forEach(function (span, i) {
-        span.style.opacity = (0.16 + 0.84 * Math.min(Math.max(at - i + 1, 0), 1)).toFixed(2);
+        span.style.opacity = i <= litTo ? "1" : (0.16 + 0.84 * Math.min(Math.max(at - i + 1, 0), 1)).toFixed(2);
       });
     };
     var hold = function () {

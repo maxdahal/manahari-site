@@ -1602,7 +1602,6 @@ body.cs .article [id] {
   content: "";
   height: 2px;
   background: var(--line);
-  transition: background 0.3s ease;
 }
 .cm-step:first-child a::before,
 .cm-step:last-child a::after {
@@ -1628,15 +1627,14 @@ body.cs .article [id] {
 .cm-step a:hover {
   color: var(--ink);
 }
-.cm-step.is-done a::before,
-.cm-step.is-done a::after,
-.cm-step.is-now a::before {
-  background: var(--accent);
+/* the line between two dots fills as you scroll from one section to the
+   next: steps.js sets --b (the piece before the dot) and --a (the piece
+   after it) from 0 to 1 */
+.cm-step a::before {
+  background: linear-gradient(var(--accent) 0 0) 0 0 / calc(var(--b, 0) * 100%) 100% no-repeat, var(--line);
 }
-.cm-step:first-child.is-done a::before,
-.cm-step:first-child.is-now a::before,
-.cm-step:last-child.is-done a::after {
-  background: transparent;
+.cm-step a::after {
+  background: linear-gradient(var(--accent) 0 0) 0 0 / calc(var(--a, 0) * 100%) 100% no-repeat, var(--line);
 }
 .cm-step.is-done .cm-step__dot {
   border-color: var(--accent);
@@ -1673,8 +1671,6 @@ body.cs .article [id] {
 }
 @media (prefers-reduced-motion: reduce) {
   .cm-steps,
-  .cm-step a::before,
-  .cm-step a::after,
   .cm-step__dot {
     transition: none;
   }

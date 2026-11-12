@@ -58,7 +58,15 @@
     items.forEach(function (item, i) {
       if (i && item.target.getBoundingClientRect().top <= line) current = i;
     });
+    /* how far you are between this section and the next, 0 to 1 */
+    var next = items[current + 1];
+    var span = next ? next.target.getBoundingClientRect().top - items[current].target.getBoundingClientRect().top : 0;
+    var between = next && span > 0 ? Math.min(Math.max((line - items[current].target.getBoundingClientRect().top) / span, 0), 1) : 0;
     links.forEach(function (li, i) {
+      var after = i < current ? 1 : i === current ? Math.min(between * 2, 1) : 0;
+      var before = i <= current ? 1 : i === current + 1 ? Math.max(between * 2 - 1, 0) : 0;
+      li.style.setProperty("--a", after.toFixed(3));
+      li.style.setProperty("--b", before.toFixed(3));
       li.classList.toggle("is-done", i < current);
       li.classList.toggle("is-now", i === current);
       if (i === current) li.firstChild.setAttribute("aria-current", "step");

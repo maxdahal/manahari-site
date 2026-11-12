@@ -1659,16 +1659,16 @@ body.cs #main .a-part > .a-quote {
 /* ==========================================================================
    Wide screens: the index shows the section names, small and dim, so you
    always know where you are; the current one is darker with a teal dash. The
-   parts inside the current section open on hover or focus. Below 1360px
+   parts inside the current section open on hover or focus. Below 1440px
    there is not room for words, so the slim rail above stays.
    ========================================================================== */
-@media (min-width: 1360px) {
+@media (min-width: 1440px) {
   body.cs .a-side {
-    left: max(20px, calc((100vw - 900px) / 2 - 220px));
-    width: 180px;
+    left: max(24px, calc((100vw - 900px) / 2 - 290px));
+    width: 170px;
   }
   body.cs .a-outline {
-    width: 180px;
+    width: 170px;
     padding: 0;
     border-color: transparent;
     background: none;
@@ -1713,7 +1713,7 @@ body.cs #main .a-part > .a-quote {
   }
   /* hovering the index opens the parts of the current section */
   body.cs .a-side:is(:hover, :focus-within) .a-outline {
-    width: 180px;
+    width: 170px;
     padding: 0;
     border-color: transparent;
     background: none;

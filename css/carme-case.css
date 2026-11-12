@@ -1756,24 +1756,3 @@ body.cs .article [id] {
     grid-row: auto;
   }
 }
-
-/* the reading progress now runs along the bottom of the step bar itself
-   (it used to sit on the header above it) */
-@supports (animation-timeline: scroll()) {
-  .cm-steps::after {
-    content: "";
-    display: block;
-    height: 2px;
-    margin-bottom: -1px;
-    background: var(--accent);
-    transform-origin: 0 50%;
-    animation: cs-progress linear both;
-    animation-timeline: scroll(root);
-  }
-}
-@media (prefers-reduced-motion: reduce) {
-  .cm-steps::after {
-    animation: none;
-    transform: scaleX(0);
-  }
-}

@@ -1271,3 +1271,248 @@ body.cs .a-outline a {
   color: var(--ink);
   font-weight: 600;
 }
+
+/* ---- Surgical Console diagrams ------------------------------------------ */
+.v__tile {
+  display: flex;
+  flex: 1;
+  max-width: 200px;
+  flex-direction: column;
+  align-items: center;
+  gap: 14px;
+  padding: 22px 14px 18px;
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  background: var(--bg);
+  font-size: 0.875rem;
+  text-align: center;
+}
+.v--three .v__tile:nth-child(1) {
+  border-color: var(--accent);
+}
+.v__arms,
+.v__gal,
+.v__lib {
+  display: grid;
+  gap: 5px;
+}
+.v__arms {
+  grid-template-columns: repeat(4, 12px);
+}
+.v__arms i {
+  height: 46px;
+  border-radius: 3px;
+  background: var(--line);
+}
+.v__arms i:nth-child(1) { background: var(--ok); }
+.v__arms i:nth-child(2) { background: #e0a526; }
+.v__arms i:nth-child(3) { background: var(--error); }
+.v__gal,
+.v__lib {
+  grid-template-columns: repeat(2, 26px);
+}
+.v__gal i,
+.v__lib i {
+  display: block;
+  height: 20px;
+  border-radius: 4px;
+  background: var(--line);
+}
+.v__gal .v__play {
+  position: relative;
+  background: var(--accent);
+}
+.v__gal .v__play::after {
+  content: "";
+  position: absolute;
+  left: 9px;
+  top: 5px;
+  border-left: 8px solid var(--on-accent);
+  border-top: 5px solid transparent;
+  border-bottom: 5px solid transparent;
+}
+.v__tab,
+.v__scr {
+  display: inline-block;
+  border: 1.5px solid color-mix(in srgb, var(--ink) 40%, transparent);
+  border-radius: 4px;
+}
+.v__tab {
+  width: 20px;
+  height: 28px;
+}
+.v__tab i {
+  display: block;
+  width: 8px;
+  height: 2px;
+  margin: 10px auto;
+  background: var(--accent);
+}
+.v__to {
+  width: 14px;
+  height: 2px;
+  background: var(--accent);
+}
+.v__scr {
+  width: 38px;
+  height: 26px;
+  background: linear-gradient(var(--accent) 0 0) 8px 12px / 20px 3px no-repeat;
+}
+.v--three .v__tile:nth-child(3) {
+  flex-flow: row wrap;
+  justify-content: center;
+  align-items: center;
+  gap: 8px 6px;
+}
+.v--three .v__tile:nth-child(3) b {
+  flex-basis: 100%;
+}
+
+/* one second */
+.v__ring {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 124px;
+  height: 124px;
+  border: 4px solid var(--accent);
+  border-radius: 50%;
+  background: var(--bg);
+}
+.v__ring b {
+  font-size: 3rem;
+  line-height: 1;
+  letter-spacing: -0.04em;
+  color: var(--accent-text);
+}
+.v__ring span {
+  font-size: 0.8125rem;
+  color: var(--text-2);
+}
+
+/* six principles around one goal */
+.v--hubs {
+  flex-direction: column;
+  gap: 18px;
+}
+.v__six {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 8px;
+}
+.v__six span {
+  padding: 6px 14px;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  background: var(--bg);
+  font-size: 0.8125rem;
+  color: var(--text-2);
+}
+
+/* ten dots */
+.v--dots {
+  flex-direction: column;
+  gap: 16px;
+}
+.v__ten {
+  display: flex;
+  gap: 10px;
+}
+.v__ten i {
+  width: 22px;
+  height: 22px;
+  border: 2px solid var(--error);
+  border-radius: 50%;
+}
+.v__ten i.is-ok {
+  border-color: var(--ok);
+  background: var(--ok);
+}
+.v--dots p {
+  margin: 0;
+  font-size: 1rem;
+  color: var(--text-2);
+}
+.v--dots p b {
+  font-size: 1.5rem;
+  color: var(--ink);
+}
+
+/* before, during, after */
+.v--flow {
+  flex-wrap: wrap;
+  gap: 12px;
+}
+.v__stage {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  min-width: 120px;
+  padding: 14px 18px;
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  background: var(--bg);
+  font-size: 0.875rem;
+}
+.v__stage em {
+  font-style: normal;
+  font-size: 0.75rem;
+  color: var(--text-2);
+}
+.v__stage--two {
+  border-color: var(--accent);
+  background: var(--accent-soft);
+}
+.v--flow .v__arrow {
+  width: 36px;
+}
+
+/* what I handed over */
+.v__screen {
+  width: 54px;
+  height: 38px;
+  border: 1.5px solid color-mix(in srgb, var(--ink) 40%, transparent);
+  border-radius: 5px;
+  background: linear-gradient(var(--accent) 0 0) 8px 10px / 24px 4px no-repeat;
+}
+.v__lib {
+  grid-template-columns: repeat(2, 22px);
+}
+.v__lib i:first-child {
+  background: var(--accent);
+}
+.v__list {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  width: 54px;
+}
+.v__list i {
+  display: block;
+  height: 7px;
+  border-radius: 4px;
+  background: var(--line);
+}
+.v__list i:first-child {
+  background: var(--ok);
+}
+@media (max-width: 560px) {
+  .v--three,
+  .v--kit {
+    flex-direction: column;
+  }
+  .v--three .v__tile,
+  .v--kit .v__tile {
+    width: 100%;
+    max-width: none;
+  }
+}
+.v--hubs {
+  flex-direction: column !important;
+}
+.v--dots {
+  flex-direction: column !important;
+}

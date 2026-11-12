@@ -1524,7 +1524,7 @@ body.cs .a-outline a {
    ========================================================================== */
 body.cs .article {
   --a-read: 680px;
-  --cs-pic: 900px;
+  --cs-pic: 1040px;
 }
 body.cs #main .a-part > *,
 body.cs #main .a-act > * {
@@ -1552,222 +1552,221 @@ body.cs #main .a-part > .a-quote {
 }
 
 /* ==========================================================================
-   The index, quieter: a slim rail of small dashes at the left edge (the
-   current section's is longer and teal). Hover or focus it and the full
-   index opens as a card; it never sits over the text otherwise.
+   Sections as steps: a bar that stays under the header with one dot per
+   section, joined by a line. The sections you have passed are teal, the one
+   you are in is ringed and named. It replaces the old left index. (steps.js
+   builds it.)
    ========================================================================== */
-@media (min-width: 1101px) {
-  body.cs .a-layout {
+body.cs .a-side,
+body.cs .a-sections {
+  display: none !important;
+}
+body.cs .a-layout {
+  display: block;
+  padding-inline: 0;
+}
+body.cs .a-layout > .article {
+  max-width: calc(1040px + 2 * var(--gx));
+  margin: 0 auto;
+  padding-inline: var(--gx);
+}
+body.cs .article [id] {
+  scroll-margin-top: 160px;
+}
+.cm-steps {
+  position: sticky;
+  top: var(--cm-head);
+  z-index: 40;
+  border-bottom: 1px solid var(--line);
+  background: color-mix(in srgb, var(--bg) 92%, transparent);
+  -webkit-backdrop-filter: blur(10px);
+  backdrop-filter: blur(10px);
+  transition: top 0.24s ease;
+}
+.cm-header.is-hidden + .cm-steps {
+  top: 0;
+}
+.cm-steps ol {
+  display: flex;
+  width: min(100% - 2 * var(--cm-gutter), 1040px);
+  margin: 0 auto;
+  padding: 12px 0 10px;
+  list-style: none;
+}
+.cm-step {
+  flex: 1;
+  min-width: 0;
+}
+.cm-step a {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr);
+  align-items: center;
+  row-gap: 8px;
+  color: var(--text-subtle);
+  font-size: 0.75rem;
+  line-height: 1.25;
+  text-decoration: none;
+}
+.cm-step a::before,
+.cm-step a::after {
+  content: "";
+  height: 2px;
+  background: var(--line);
+  transition: background 0.3s ease;
+}
+.cm-step:first-child a::before,
+.cm-step:last-child a::after {
+  background: transparent;
+}
+.cm-step__dot {
+  width: 14px;
+  height: 14px;
+  margin-inline: 6px;
+  border: 2px solid var(--text-subtle);
+  border-radius: 50%;
+  background: var(--bg);
+  transition: background 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+}
+.cm-step__label {
+  grid-column: 1 / -1;
+  overflow: hidden;
+  padding-inline: 6px;
+  text-align: center;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.cm-step a:hover {
+  color: var(--ink);
+}
+.cm-step.is-done a::before,
+.cm-step.is-done a::after,
+.cm-step.is-now a::before {
+  background: var(--accent);
+}
+.cm-step:first-child.is-done a::before,
+.cm-step:first-child.is-now a::before,
+.cm-step:last-child.is-done a::after {
+  background: transparent;
+}
+.cm-step.is-done .cm-step__dot {
+  border-color: var(--accent);
+  background: var(--accent);
+}
+.cm-step.is-now .cm-step__dot {
+  border-color: var(--accent);
+  background: var(--bg);
+  box-shadow: 0 0 0 4px var(--accent-soft);
+}
+.cm-step.is-now a {
+  color: var(--ink);
+  font-weight: 600;
+}
+.cm-steps__now {
+  display: none;
+  margin: 0;
+  padding: 0 var(--cm-gutter) 10px;
+  text-align: center;
+  font-size: 0.8125rem;
+  font-weight: 600;
+  color: var(--ink);
+}
+@media (max-width: 760px) {
+  .cm-step__label {
+    display: none;
+  }
+  .cm-steps ol {
+    padding-bottom: 8px;
+  }
+  .cm-steps__now {
     display: block;
-    padding-inline: 0;
-  }
-  body.cs .a-layout > .article {
-    max-width: calc(900px + 2 * var(--gx));
-    margin: 0 auto;
-    padding-inline: var(--gx);
-  }
-  body.cs .a-side {
-    position: fixed;
-    left: clamp(8px, 1.4vw, 24px);
-    top: 50%;
-    z-index: 30;
-    display: block;
-    translate: 0 -50%;
-  }
-  body.cs .a-outline {
-    position: static;
-    width: auto;
-    max-height: none;
-    margin: 0;
-    padding: 14px 10px;
-    overflow: visible;
-    border: 1px solid transparent;
-    border-radius: 14px;
-    background: transparent;
-    transition: background 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
-  }
-  body.cs .a-outline > ol {
-    gap: 12px;
-  }
-  body.cs .a-outline > ol > li > a {
-    gap: 0;
-    padding: 0;
-    border: 0;
-    font-size: 0;
-  }
-  body.cs .a-outline__num {
-    font-size: 0;
-  }
-  body.cs .a-outline > ol > li > a::before {
-    content: "";
-    display: block;
-    width: 14px;
-    height: 2px;
-    border-radius: 2px;
-    background: color-mix(in srgb, var(--ink) 28%, transparent);
-    transition: width 0.2s ease, background 0.2s ease;
-  }
-  body.cs .a-outline > ol > li > a::after,
-  body.cs .a-outline__sub,
-  body.cs .a-outline__all {
-    display: none !important;
-  }
-  body.cs .a-outline > ol > li:has([aria-current]) > a::before {
-    width: 26px;
-    background: var(--accent);
-  }
-
-  /* opened */
-  body.cs .a-side:is(:hover, :focus-within) .a-outline {
-    width: 270px;
-    padding: 14px 16px;
-    border-color: var(--line);
-    background: var(--surface-2);
-    box-shadow: 0 18px 40px -16px rgb(0 0 0 / 0.3);
-  }
-  body.cs .a-side:is(:hover, :focus-within) .a-outline > ol {
-    gap: 2px;
-  }
-  body.cs .a-side:is(:hover, :focus-within) .a-outline > ol > li > a {
-    gap: 10px;
-    padding: 8px 6px;
-    border-radius: 8px;
-    font-size: 0.9375rem;
-  }
-  body.cs .a-side:is(:hover, :focus-within) .a-outline__num {
-    font-size: 0.8125rem;
-  }
-  body.cs .a-side:is(:hover, :focus-within) .a-outline > ol > li > a::before {
-    content: none;
-  }
-  body.cs .a-side:is(:hover, :focus-within) .a-outline > ol > li:has([aria-current]) > a {
-    color: var(--accent-text);
-    font-weight: 600;
-  }
-  body.cs .a-side:is(:hover, :focus-within) .a-outline > ol > li:has([aria-current]) > .a-outline__sub {
-    display: flex !important;
-    margin: 2px 0 6px 22px;
   }
 }
 @media (prefers-reduced-motion: reduce) {
-  body.cs .a-outline,
-  body.cs .a-outline > ol > li > a::before {
+  .cm-steps,
+  .cm-step a::before,
+  .cm-step a::after,
+  .cm-step__dot {
     transition: none;
   }
 }
 
 /* ==========================================================================
-   Wide screens: the index shows the section names, small and dim, so you
-   always know where you are; the current one is darker with a teal dash. The
-   parts inside the current section open on hover or focus. Below 1440px
-   there is not room for words, so the slim rail above stays.
+   Pictures and words take turns. A part that has a picture or diagram puts
+   its words beside it, then the next part turns the other way round, so
+   every step of the story has something to look at next to what it says.
+   Cards, playgrounds and strips of pictures keep the full width.
    ========================================================================== */
-@media (min-width: 1440px) {
-  body.cs .a-side {
-    left: max(24px, calc((100vw - 900px) / 2 - 290px));
-    width: 170px;
+@media (min-width: 861px) {
+  body.cs #main .a-act > .a-part:has(> :is(figure, .v)) {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    grid-auto-flow: row dense;
+    align-items: center;
+    column-gap: clamp(32px, 5vw, 72px);
+    row-gap: 0;
   }
-  body.cs .a-outline {
-    width: 170px;
-    padding: 0;
-    border-color: transparent;
-    background: none;
-    box-shadow: none;
+  body.cs #main .a-act > .a-part:has(> :is(figure, .v)) > h3 {
+    grid-column: 1 / -1;
+    margin-bottom: 20px;
   }
-  body.cs .a-outline > ol {
-    gap: 2px;
+  body.cs #main .a-act > .a-part:has(> :is(figure, .v)) > :is(p, dl, .small, .a-quote, ul:not(.cards, .dids, .stats, .accs), ol.steps:not(.steps--cols)) {
+    grid-column: 1;
+    width: 100%;
+    max-width: none;
+    margin-block: 0 18px;
   }
-  body.cs .a-outline > ol > li > a {
-    gap: 8px;
-    padding: 7px 0;
-    border-radius: 0;
-    font-size: 0.8125rem;
-    line-height: 1.3;
-    color: var(--text-subtle);
+  body.cs #main .a-act > .a-part:has(> :is(figure, .v)) > :is(figure, .v) {
+    grid-column: 2;
+    grid-row: 2 / span 4;
+    margin: 0;
   }
-  body.cs .a-outline > ol > li > a:hover {
-    color: var(--ink);
+  body.cs #main .a-act > .a-part:has(> :is(figure, .v)) > :is(.cards, .dids, .stats, .accs, .sb, .row, .figs, .figset, .steps--cols, .contrib, .sandbox-wrap, .roles, .figs-roles, .a-more) {
+    grid-column: 1 / -1;
+    margin-block: 20px;
   }
-  body.cs .a-outline__num {
-    min-width: 1.2em;
-    font-size: 0.75rem;
-    font-variant-numeric: tabular-nums;
+  /* turned the other way round */
+  body.cs #main .a-act > .a-part:nth-of-type(even):has(> :is(figure, .v)) > :is(p, dl, .small, .a-quote, ul:not(.cards, .dids, .stats, .accs), ol.steps:not(.steps--cols)) {
+    grid-column: 2;
   }
-  body.cs .a-outline > ol > li > a::before {
-    content: "";
-    flex: none;
-    width: 2px;
-    height: 14px;
-    margin-block: auto;
-    border-radius: 2px;
-    background: transparent;
-    transition: background 0.2s ease;
-  }
-  body.cs .a-outline > ol > li:has([aria-current]) > a {
-    color: var(--ink);
-    font-weight: 500;
-  }
-  body.cs .a-outline > ol > li:has([aria-current]) > a::before {
-    width: 2px;
-    background: var(--accent);
-  }
-  /* hovering the index opens the parts of the current section */
-  body.cs .a-side:is(:hover, :focus-within) .a-outline {
-    width: 170px;
-    padding: 0;
-    border-color: transparent;
-    background: none;
-    box-shadow: none;
-  }
-  body.cs .a-side:is(:hover, :focus-within) .a-outline > ol > li > a {
-    padding: 7px 0;
-    border-radius: 0;
-    font-size: 0.8125rem;
-  }
-  body.cs .a-side:is(:hover, :focus-within) .a-outline > ol > li > a::before {
-    content: "";
-  }
-  body.cs .a-side:is(:hover, :focus-within) .a-outline > ol > li:has([aria-current]) > a {
-    color: var(--ink);
-  }
-  body.cs .a-side:is(:hover, :focus-within) .a-outline > ol > li:has([aria-current]) > .a-outline__sub {
-    margin: 0 0 6px 28px;
-    gap: 0;
-  }
-  body.cs .a-outline__sub a {
-    padding: 4px 0 4px 10px;
-    font-size: 0.75rem;
+  body.cs #main .a-act > .a-part:nth-of-type(even):has(> :is(figure, .v)) > :is(figure, .v) {
+    grid-column: 1;
   }
 }
 
-/* From 1440px the index and the article sit side by side as one group, centred
-   on the page, so the space on the far left and the far right is equal and the
-   index never crowds the text. */
-@media (min-width: 1440px) {
-  body.cs .a-layout {
-    display: grid;
-    grid-template-columns: 170px minmax(0, 900px);
-    column-gap: 88px;
-    justify-content: center;
-    padding-inline: var(--gx);
+/* step bar: the two line pieces and the dot share the first row, the label the second */
+.cm-step a::before {
+  grid-column: 1;
+  grid-row: 1;
+}
+.cm-step__dot {
+  grid-column: 2;
+  grid-row: 1;
+}
+.cm-step a::after {
+  grid-column: 3;
+  grid-row: 1;
+}
+.cm-step__label {
+  grid-row: 2;
+}
+
+/* a quote beside a picture reads as a quote, left aligned and smaller */
+@media (min-width: 861px) {
+  body.cs #main .a-act > .a-part:has(> :is(figure, .v)) > .a-quote {
+    text-align: start;
+    padding-left: 18px;
+    border-left: 3px solid var(--accent);
   }
-  body.cs .a-layout > .article {
-    max-width: none;
-    margin: 0;
-    padding-inline: 0;
+  body.cs #main .a-act > .a-part:has(> :is(figure, .v)) > .a-quote p:not(.label) {
+    font-size: 1.25rem;
+    line-height: 1.45;
   }
-  body.cs .a-side {
-    position: static;
-    left: auto;
-    top: auto;
-    z-index: auto;
-    width: auto;
-    translate: none;
-    display: block;
-  }
-  body.cs .a-outline {
-    position: sticky;
-    top: calc(var(--bar-h) + 40px);
-    margin-top: clamp(64px, 9vh, 96px);
+}
+
+/* a picture or diagram with no words of its own beside it runs the full width */
+@media (min-width: 861px) {
+  body.cs #main .a-act > .a-part:has(> :is(figure, .v)):not(:has(> :is(p, .a-quote, dl, ul:not(.cards, .dids, .stats, .accs), ol.steps:not(.steps--cols)))) > :is(figure, .v) {
+    grid-column: 1 / -1 !important;
+    grid-row: auto;
   }
 }

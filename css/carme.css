@@ -22,20 +22,24 @@
   font-family: "Inter", system-ui, sans-serif;
 }
 :root[data-theme="dark"] .cm {
-  --bg: #1b222d;
-  --surface: #232c39;
-  --surface-2: #28323f;
-  --text-subtle: #9aa7b9;
-  --line: #3a4658;
+  --bg: #0e0e10;
+  --surface: #151517;
+  --surface-2: #1a1a1d;
+  --text-2: #b8bbc2;
+  --text-subtle: #8f949c;
+  --line: #2c2c30;
+  --dark-bg: #09090a;
   --cm-grain: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n' color-interpolation-filters='sRGB'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 1 0 0 0 0 1 0 0 0 0 1 0.2 0 0 0 -0.06'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
 }
 @media (prefers-color-scheme: dark) {
   :root:not([data-theme="light"]) .cm {
-    --bg: #1b222d;
-    --surface: #232c39;
-    --surface-2: #28323f;
-    --text-subtle: #9aa7b9;
-    --line: #3a4658;
+    --bg: #0e0e10;
+    --surface: #151517;
+    --surface-2: #1a1a1d;
+    --text-2: #b8bbc2;
+    --text-subtle: #8f949c;
+    --line: #2c2c30;
+    --dark-bg: #09090a;
     --cm-grain: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n' color-interpolation-filters='sRGB'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 1 0 0 0 0 1 0 0 0 0 1 0.2 0 0 0 -0.06'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
   }
 }

@@ -140,15 +140,9 @@
     if (!statement) return;
     var spans = [];
     wrapWords(statement, spans);
-    /* the home hero starts with its first sentence (the name) already lit;
+    /* the home hero starts with just its first word ("I’m") already lit;
        the rest fills in as you scroll */
-    var litTo = -1;
-    if (about.classList.contains("cm-hero")) {
-      spans.some(function (span, i) {
-        litTo = i;
-        return /[.!?]$/.test(span.textContent);
-      });
-    }
+    var litTo = about.classList.contains("cm-hero") ? 0 : -1;
     var light = function () {
       if (!about.classList.contains("is-held")) return;
       var box = about.getBoundingClientRect();

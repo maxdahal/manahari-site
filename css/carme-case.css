@@ -1516,3 +1516,142 @@ body.cs .a-outline a {
 .v--dots {
   flex-direction: column !important;
 }
+
+/* ==========================================================================
+   Letter-style reading: text sits in one narrow, centred column (about 65
+   characters wide) and only pictures, diagrams, cards and the playgrounds go
+   wider, so the page has a rhythm of text, then something to look at.
+   ========================================================================== */
+body.cs .article {
+  --a-read: 680px;
+  --cs-pic: 900px;
+}
+body.cs #main .a-part > *,
+body.cs #main .a-act > * {
+  margin-inline: 0;
+}
+/* headings, pictures, cards and playgrounds fill the column; running text
+   stops at a comfortable line length, on the same left edge */
+body.cs #main .a-act > :is(p, ol.steps:not(.steps--cols)),
+body.cs #main .a-part > :is(p, dl, ul:not(.cards, .dids, .stats, .accs), ol.steps:not(.steps--cols)) {
+  width: min(100%, var(--a-read));
+  max-width: var(--a-read);
+}
+body.cs #main .a-part > .a-quote {
+  width: min(100%, var(--a-read));
+  max-width: var(--a-read);
+}
+body.cs #main .a-part > p,
+body.cs #main .a-act > p {
+  font-size: 1.1875rem;
+  line-height: 1.75;
+}
+/* the quote and the facts, centred in the same column */
+body.cs #main .a-part > .a-quote {
+  justify-self: center;
+}
+
+/* ==========================================================================
+   The index, quieter: a slim rail of small dashes at the left edge (the
+   current section's is longer and teal). Hover or focus it and the full
+   index opens as a card; it never sits over the text otherwise.
+   ========================================================================== */
+@media (min-width: 1101px) {
+  body.cs .a-layout {
+    display: block;
+    padding-inline: 0;
+  }
+  body.cs .a-layout > .article {
+    max-width: calc(900px + 2 * var(--gx));
+    margin: 0 auto;
+    padding-inline: var(--gx);
+  }
+  body.cs .a-side {
+    position: fixed;
+    left: clamp(8px, 1.4vw, 24px);
+    top: 50%;
+    z-index: 30;
+    display: block;
+    translate: 0 -50%;
+  }
+  body.cs .a-outline {
+    position: static;
+    width: auto;
+    max-height: none;
+    margin: 0;
+    padding: 14px 10px;
+    overflow: visible;
+    border: 1px solid transparent;
+    border-radius: 14px;
+    background: transparent;
+    transition: background 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
+  }
+  body.cs .a-outline > ol {
+    gap: 12px;
+  }
+  body.cs .a-outline > ol > li > a {
+    gap: 0;
+    padding: 0;
+    border: 0;
+    font-size: 0;
+  }
+  body.cs .a-outline__num {
+    font-size: 0;
+  }
+  body.cs .a-outline > ol > li > a::before {
+    content: "";
+    display: block;
+    width: 14px;
+    height: 2px;
+    border-radius: 2px;
+    background: color-mix(in srgb, var(--ink) 28%, transparent);
+    transition: width 0.2s ease, background 0.2s ease;
+  }
+  body.cs .a-outline > ol > li > a::after,
+  body.cs .a-outline__sub,
+  body.cs .a-outline__all {
+    display: none !important;
+  }
+  body.cs .a-outline > ol > li:has([aria-current]) > a::before {
+    width: 26px;
+    background: var(--accent);
+  }
+
+  /* opened */
+  body.cs .a-side:is(:hover, :focus-within) .a-outline {
+    width: 270px;
+    padding: 14px 16px;
+    border-color: var(--line);
+    background: var(--surface-2);
+    box-shadow: 0 18px 40px -16px rgb(0 0 0 / 0.3);
+  }
+  body.cs .a-side:is(:hover, :focus-within) .a-outline > ol {
+    gap: 2px;
+  }
+  body.cs .a-side:is(:hover, :focus-within) .a-outline > ol > li > a {
+    gap: 10px;
+    padding: 8px 6px;
+    border-radius: 8px;
+    font-size: 0.9375rem;
+  }
+  body.cs .a-side:is(:hover, :focus-within) .a-outline__num {
+    font-size: 0.8125rem;
+  }
+  body.cs .a-side:is(:hover, :focus-within) .a-outline > ol > li > a::before {
+    content: none;
+  }
+  body.cs .a-side:is(:hover, :focus-within) .a-outline > ol > li:has([aria-current]) > a {
+    color: var(--accent-text);
+    font-weight: 600;
+  }
+  body.cs .a-side:is(:hover, :focus-within) .a-outline > ol > li:has([aria-current]) > .a-outline__sub {
+    display: flex !important;
+    margin: 2px 0 6px 22px;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  body.cs .a-outline,
+  body.cs .a-outline > ol > li > a::before {
+    transition: none;
+  }
+}

@@ -385,3 +385,206 @@ body.cs .a-outline a {
   font-size: 1.0625rem;
   line-height: 1.4;
 }
+
+/* ---- simplified wireframes: boxes and bars, no real content ------------- */
+.wf {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  width: 100%;
+  margin: 0;
+}
+.wf > div:not(figcaption) {
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  background: var(--surface-2);
+}
+.wf figcaption {
+  font-size: 0.8125rem;
+  color: var(--text-2);
+}
+.wf__tabs {
+  display: flex;
+  gap: 4px;
+  padding: 10px 12px 0 !important;
+  border-bottom-left-radius: 0 !important;
+  border-bottom-right-radius: 0 !important;
+  border-bottom: 0 !important;
+}
+.wf__tabs b {
+  padding: 6px 14px;
+  border-radius: 8px 8px 0 0;
+  font-size: 0.8125rem;
+  font-weight: 500;
+  color: var(--text-2);
+}
+.wf__tabs b.is-on {
+  background: var(--bg);
+  color: var(--ink);
+  box-shadow: inset 0 2px 0 var(--accent);
+}
+.wf__two {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 10px;
+  padding: 12px;
+}
+.wf__tabs + .wf__two {
+  border-top-left-radius: 0 !important;
+}
+.wf__pane,
+.wf__card {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding: 12px;
+  border-radius: 8px;
+  background: var(--bg);
+}
+.wf__pane--code {
+  background: var(--dark-bg);
+}
+.wf__cap {
+  margin: 0;
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: var(--text-2);
+}
+.wf__pane--code .wf__cap {
+  color: rgb(243 246 250 / 0.7);
+}
+.wf__tiles {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 6px;
+}
+.wf__tiles i {
+  height: 30px;
+  border-radius: 6px;
+  background: var(--accent-soft);
+  border: 1px solid color-mix(in srgb, var(--accent) 35%, transparent);
+}
+.wf__bar,
+.wf__row {
+  display: block;
+  height: 7px;
+  border-radius: 4px;
+  background: var(--line);
+}
+.wf__bar--s {
+  width: 60%;
+}
+.wf__row {
+  height: 9px;
+  background: rgb(243 246 250 / 0.18);
+}
+.wf__code {
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+}
+.wf__code i {
+  display: block;
+  height: 6px;
+  border-radius: 3px;
+  background: rgb(243 246 250 / 0.28);
+}
+.wf__code i:nth-child(2) {
+  width: 78%;
+}
+.wf__code i:nth-child(3) {
+  width: 52%;
+}
+.wf__code i:nth-child(4) {
+  width: 66%;
+}
+.wf__pane--code .wf__code {
+  margin-top: 4px;
+}
+.wf__flag {
+  align-self: flex-start;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: var(--ink);
+}
+.wf__flag::before {
+  content: "";
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--ok);
+}
+.wf__flag--dont::before {
+  background: var(--error);
+}
+.wf__shot {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding: 12px;
+  border-radius: 6px;
+  border: 1px solid var(--ok);
+  background: var(--surface-2);
+}
+.wf__shot--off {
+  border-color: var(--error);
+}
+.wf__shot i {
+  display: block;
+  height: 14px;
+  border-radius: 4px;
+  background: var(--line);
+}
+.wf__shot--off i:first-child {
+  height: 24px;
+  margin-left: 14px;
+  background: color-mix(in srgb, var(--error) 22%, var(--line));
+}
+.wf__shot i:last-child {
+  width: 55%;
+}
+.wf__preview {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  min-height: 90px;
+  padding: 16px;
+}
+.wf__btn {
+  display: block;
+  width: 84px;
+  height: 30px;
+  border-radius: 6px;
+  background: var(--accent);
+}
+.wf__btn--line {
+  background: none;
+  border: 1.5px solid var(--accent);
+}
+.wf__codeblock {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: 14px 14px 16px !important;
+  border: 0 !important;
+  background: var(--dark-bg) !important;
+}
+.wf__copy {
+  align-self: flex-end;
+  padding: 3px 10px;
+  border: 1px solid rgb(243 246 250 / 0.35);
+  border-radius: 6px;
+  font-size: 0.6875rem;
+  font-weight: 500;
+  color: rgb(243 246 250 / 0.85);
+}
+@media (max-width: 560px) {
+  .wf__two {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}

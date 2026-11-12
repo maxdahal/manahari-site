@@ -610,7 +610,7 @@
   flex-direction: column;
   gap: 4px;
 }
-.article .step h4 {
+.article .step :is(h3, h4) {
   margin: 0;
   font-size: 1.0625rem;
   font-weight: 600;

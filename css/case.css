@@ -414,7 +414,7 @@ body.cs .a-act:not(.a-act--intro)::before {
 #main .did {
   padding-bottom: 14px;
 }
-#main :is(.card-pt, .step) h4, #main .points-head {
+#main :is(.card-pt h4, .step :is(h3, h4)), #main .points-head {
   font-family: var(--cs-font);
   font-size: 1.1875rem;
   font-weight: 500;

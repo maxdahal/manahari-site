@@ -5,37 +5,34 @@ Plain HTML, CSS and JavaScript, with no framework, library or build step. Open a
 ## What's in the folder
 
 ```
-index.html        Home: hero, case studies, artwork, contact
-about.html        About: About me with the ID card, journey, skills,
-                  recognition, contact
+index.html        Home: hello intro, opening statement, case study reel,
+                  artwork, footer
+about.html        About: statement, ID badge, journey, skills, recognition
 work/surgical-console.html   Case study: Surgical Console (arm panel sandbox)
-work/ku-brand.html   Case study: KU Brand (color sandbox, wireframe video)
-work/asians.html     Case study: Asian's
+work/ku-brand.html           Case study: KU Brand (color sandbox, video)
+work/asians.html             Case study: Asian's
+work/esri.html               Case study: Esri Calcite documentation
+vercel.json       Redirects and security headers (CSP, nosniff, referrer,
+                  frame and permissions policies)
 css/
-  site.css        Every page: color tokens, paper grain, top bar, menu,
-                  buttons, motion button, cursor, theme fade
-  portavia.css    The top bar, Home layout and the closing row
-  home.css        Home: recruiter summary, motion tip, artwork, lightbox
-  homepage.css    Home: the hero sentence, case study panels, statement,
-                  artwork and contact headings
-  article.css     The case studies: outline, sections, cards, figures,
-                  picture viewer, role buttons
-  case.css        The case studies in the homepage's look
-  sandbox.css     The sandbox frame both case-study sandboxes share
-  arm-sandbox.css, ku-sandbox.css   Each sandbox's own pieces
+  site.css        Every page: color tokens, paper grain, buttons, theme fade
+  portavia.css, home.css, homepage.css   Older shared layers Home and About
+                  still use (top bar pieces, recruiter summary, lightbox,
+                  journey)
+  carme.css       The current look: header, footer, hero, reel, About
+  carme-case.css  The case studies in the current look: step bar,
+                  image and text rows, diagrams, component previews
+  article.css, case.css   The case study building blocks
+  sandbox.css, arm-sandbox.css, ku-sandbox.css   The sandboxes
 js/
-  site.js         Every page: motion button, theme (with its
-                  fade), menu, ID badge, cursor ring
-  home.js         Home: recruiter summary, motion tip, nav jumps and
-                  highlight, artwork spotlight and lightbox
-  scroll.js       Home: Lenis smooth scroll and GSAP scroll motion
-  case-scroll.js  Case studies: Lenis and GSAP scroll motion
-  toc.js          Case studies: marks the current section in the outline
-                  and the phone tab strip; Show all
-  viewer.js       Case studies: every picture and drawing opens full screen
-  roles.js        Surgical Console: the role buttons over the room diagram
-  sandbox.js      Shared sandbox behaviour: tabs, entrance demo, Try it pulse
-  arm-sandbox.js, ku.js   Each sandbox's own behaviour
+  site.js         Every page: theme (with its fade), menu, ID badge, cursor
+  home.js         Recruiter summary, in-page links, nav highlight, lightbox
+  carme.js        Header hide and show, word-by-word statements, case study
+                  reel, journey line, resume dialog, footer motion
+  steps.js        Case studies: the sticky step bar
+  case-scroll.js, toc.js, viewer.js   Case studies: scroll motion, outline
+                  state, full-screen pictures
+  roles.js, sandbox.js, arm-sandbox.js, ku.js   The sandboxes
 assets/
   images/         Images the pages use
   video/          The KU wireframe video (mp4 and webm)
@@ -66,12 +63,12 @@ Every interface color is a token at the top of `css/site.css`, light values firs
 
 `--paper` holds the paper grain (faint slate specks in light mode, light specks in dark mode); it is baked into the page, section and footer backgrounds. Colors that belong to the work shown, not the site, are tokens in that page's CSS: the console's arm and status colors, and KU's brand colors.
 
-Home and the case studies use Helvetica; "code." in the home hero and the sandboxes use JetBrains Mono, and the handwritten notes Kalam. Body text is 18px (16px on small screens).
+The site uses Inter (the big footer line uses Geist); "code." in the home hero and the sandboxes use JetBrains Mono, and the handwritten notes Kalam. Body text is 18px (16px on small screens).
 
 ## Behaviour
 
-- **Navigation**: a full-width top bar on Home and About with Work, About and Artwork (a menu below 860px). Case studies have a breadcrumb bar; from 1101px an outline on the left lists every section, showing only the current section's parts (Show all opens the rest); below that, a tab strip under the breadcrumb.
-- **Scroll motion**: Lenis smooth scroll with GSAP ScrollTrigger reveals on every page (`scroll.js`, `case-scroll.js`). If GSAP does not load, CSS scroll-driven animations ease the text in instead.
+- **Navigation**: a header on every page with About, Work and Artwork, the resume and the theme switch; it hides while you read down and returns on the way up. Case studies add a sticky step bar under it, one circle per section, with the line between circles filling as you scroll.
+- **Scroll motion**: Home and About use plain scroll handlers (`carme.js`); the case studies add Lenis and GSAP ScrollTrigger (`case-scroll.js`), loaded from a CDN with integrity hashes.
 - **Pictures**: on the case studies every picture opens full screen, with previous and next, arrow keys and swipe.
 - **Page changes** cross-fade (cross-document view transitions) where the browser supports it.
 - **Intro**: the "hello" plays once per visit (session storage).

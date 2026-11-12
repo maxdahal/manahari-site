@@ -134,23 +134,6 @@ html.hello-lock {
 /* the arrow: its own small square, turned 45deg, half above the note's top
    edge; it is the note's first item and its margin moves it under the
    button */
-.motion-tip__arrow {
-  align-self: flex-start;
-  width: 16px;
-  height: 16px;
-  margin: -23px 0 -3px calc(var(--arrow-x, 24px) - 24px);
-  border-radius: 2px;
-  background: var(--ink);
-  rotate: 45deg;
-  animation: tip-nudge 0.9s 0.5s ease-in-out 2;
-}
-.motion-tip__text {
-  margin: 0;
-  font-size: 0.9375rem;
-}
-.motion-tip__text b {
-  font-weight: 600;
-}
 .motion-tip__ok {
   align-self: flex-end;
   min-height: 32px;
@@ -206,12 +189,6 @@ html.hello-lock {
     translate: 0 -4px;
   }
 }
-@keyframes tip-nudge {
-  50% {
-    translate: 0 -4px;
-  }
-}
-
 /* Pause motion: the button in the top bar stops everything that moves by
    itself (WCAG 2.2.2): the skill rings, the letter wave, the falling leaves
    (home.js pauses those), the plants, the badge's sway and the blinking
@@ -220,12 +197,6 @@ html.hello-lock {
    tells screen readers which. */
 .motion-toggle {
   color: var(--ink);
-}
-.motion-toggle .icon-play, .motion-paused .motion-toggle .icon-pause {
-  display: none;
-}
-.motion-paused .motion-toggle .icon-play {
-  display: block;
 }
 .motion-toggle:focus-visible {
   outline: 3px solid var(--ink);

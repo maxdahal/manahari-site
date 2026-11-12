@@ -117,12 +117,6 @@
 .motion-toggle {
   color: var(--ink);
 }
-.motion-toggle .icon-play, .motion-paused .motion-toggle .icon-pause {
-  display: none;
-}
-.motion-paused .motion-toggle .icon-play {
-  display: block;
-}
 @media (prefers-reduced-motion: reduce) {
   .motion-toggle {
     display: none;

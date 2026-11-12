@@ -938,3 +938,229 @@ body.cs .a-outline a {
   font-weight: 600;
   color: var(--ink);
 }
+
+/* ---- simple diagrams: one shape to look at in each ---------------------- */
+.v {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: clamp(14px, 3vw, 32px);
+  width: 100%;
+  min-height: 190px;
+  margin: 0;
+  padding: clamp(20px, 3vw, 36px);
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  background:
+    radial-gradient(circle, color-mix(in srgb, var(--ink) 10%, transparent) 1px, transparent 1.2px) 0 0 / 14px 14px,
+    var(--surface-2);
+  color: var(--ink);
+}
+.v b {
+  font-weight: 600;
+}
+
+/* many sources become one site */
+.v__src {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.v__src span {
+  padding: 8px 16px;
+  border: 1px dashed color-mix(in srgb, var(--ink) 35%, transparent);
+  border-radius: 8px;
+  background: var(--bg);
+  font-size: 0.875rem;
+  color: var(--text-2);
+}
+.v__arrow {
+  position: relative;
+  flex: none;
+  width: clamp(36px, 8vw, 90px);
+  height: 2px;
+  background: var(--accent);
+}
+.v__arrow::after {
+  content: "";
+  position: absolute;
+  right: -1px;
+  top: -4px;
+  width: 9px;
+  height: 9px;
+  border-top: 2px solid var(--accent);
+  border-right: 2px solid var(--accent);
+  rotate: 45deg;
+}
+.v__focus {
+  padding: 22px 28px;
+  border-radius: 12px;
+  background: var(--accent);
+  color: var(--on-accent);
+  font-size: clamp(1rem, 0.9rem + 0.5vw, 1.25rem);
+  font-weight: 600;
+  letter-spacing: -0.02em;
+}
+
+/* three steps, rising */
+.v--steps {
+  align-items: flex-end;
+  gap: 10px;
+  padding-bottom: 0;
+}
+.v__step {
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  flex: 1;
+  max-width: 180px;
+  padding: 0 0 14px;
+  border-radius: 10px 10px 0 0;
+  background: var(--bg);
+  border: 1px solid var(--line);
+  border-bottom: 0;
+}
+.v__step--1 { height: 70px; }
+.v__step--2 { height: 110px; }
+.v__step--3 {
+  height: 150px;
+  border-color: var(--accent);
+  background: var(--accent);
+  color: var(--on-accent);
+}
+
+/* design and code, one to switch between */
+.v--toggle {
+  flex-direction: column;
+  gap: 14px;
+}
+.v__seg {
+  display: inline-flex;
+  padding: 4px;
+  border-radius: 999px;
+  background: var(--bg);
+  border: 1px solid var(--line);
+}
+.v__seg b {
+  padding: 7px 22px;
+  border-radius: 999px;
+  font-size: 0.875rem;
+  color: var(--text-2);
+}
+.v__seg b.is-on {
+  background: var(--accent);
+  color: var(--on-accent);
+}
+.v__panel {
+  display: flex;
+  gap: 8px;
+  width: min(100%, 260px);
+}
+.v__panel i {
+  flex: 1;
+  height: 46px;
+  border-radius: 8px;
+  background: var(--line);
+}
+
+/* do and don't */
+.v--dd {
+  gap: 14px;
+}
+.v__half {
+  display: flex;
+  flex: 1;
+  max-width: 190px;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  padding: 22px 12px;
+  border: 2px solid var(--ok);
+  border-radius: 12px;
+  background: var(--bg);
+}
+.v__half span {
+  font-size: 2rem;
+  line-height: 1;
+  color: var(--ok);
+}
+.v__half--dont {
+  border-color: var(--error);
+}
+.v__half--dont span {
+  color: var(--error);
+}
+
+/* a snippet with its copy button */
+.v__snip {
+  display: flex;
+  flex-direction: column;
+  gap: 9px;
+  width: min(100%, 300px);
+  padding: 18px 18px 22px;
+  border-radius: 12px;
+  background: var(--dark-bg);
+}
+.v__line {
+  display: block;
+  height: 7px;
+  border-radius: 4px;
+  background: rgb(243 246 250 / 0.28);
+}
+.v__line--s { width: 55%; }
+.v__line--m { width: 75%; }
+.v__copy {
+  align-self: flex-end;
+  order: -1;
+  padding: 4px 12px;
+  border-radius: 6px;
+  background: var(--accent-on-dark);
+  color: var(--dark-bg);
+  font-size: 0.75rem;
+}
+
+/* the one big number */
+.v--num {
+  flex-direction: column;
+  gap: 6px;
+}
+.v--num b {
+  font-size: clamp(3.5rem, 2rem + 6vw, 6.5rem);
+  line-height: 1;
+  letter-spacing: -0.06em;
+  color: var(--accent-text);
+}
+.v--num span {
+  font-size: 1rem;
+  color: var(--text-2);
+}
+@media (max-width: 560px) {
+  .v--hub {
+    flex-direction: column;
+  }
+  .v__arrow {
+    width: 2px;
+    height: 36px;
+  }
+  .v__arrow::after {
+    right: -4px;
+    top: auto;
+    bottom: -1px;
+    rotate: 135deg;
+  }
+}
+
+/* figures are blocks in the case study grid; keep the diagrams as rows */
+#main .v {
+  display: flex;
+  flex-direction: row;
+}
+#main .v--toggle,
+#main .v--num {
+  flex-direction: column;
+}
+@media (max-width: 560px) {
+  #main .v--hub {
+    flex-direction: column;
+  }
+}

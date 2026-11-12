@@ -93,6 +93,8 @@
       <section class="a-part" id="the-challenge"><h3>The challenge</h3>
         <p>During my internship at Esri, the Calcite Design System was evolving rapidly on GitHub and Figma. However, internal designers and developers lacked a clear, unified documentation website to reference component behavior, usage rules, and code snippets.</p>
         <p>Without a centralized hub, team members spent extra time clarifying component specs, leading to inconsistent implementations across web and mobile products.</p>
+        
+        <figure class="v v--hub" role="img" aria-label="Diagram: separate sources on GitHub and Figma become one documentation site"><div class="v__src"><span>GitHub</span><span>Figma</span><span>Component specs</span></div><span class="v__arrow" aria-hidden="true"></span><div class="v__focus">Documentation site</div></figure>
         <div class="a-quote"><p class="label">I reframed the core problem</p><p>How might I build a clear, searchable internal documentation portal so 20+ designers and developers can quickly find component usage rules, accessibility guidance, and code snippets without breaking their workflow?</p></div>
       </section>
       <section class="a-part" id="audience"><h3>Target audience &amp; team dynamics</h3>
@@ -108,6 +110,7 @@
     <section class="a-act" id="strategy"><h2 data-ghost="Goals &amp; Phased Execution Strategy">Goals &amp; Phased Execution Strategy</h2>
       <section class="a-part" id="crawl-walk-run"><h3>Crawl, Walk, Run</h3>
         <p>To deliver a scalable documentation portal within my 3-month internship, I used a 3-step process:</p>
+        <figure class="v v--steps" role="img" aria-label="Diagram: three steps rising from Crawl to Walk to Run"><span class="v__step v__step--1"><b>Crawl</b></span><span class="v__step v__step--2"><b>Walk</b></span><span class="v__step v__step--3"><b>Run</b></span></figure>
         <ol class="steps"><li class="step"><span class="step__num" aria-hidden="true">01</span><div><h4>Crawl (Audit &amp; Structure)</h4><p>Audited existing Calcite components on GitHub and Figma to identify documentation gaps, usage inconsistencies, and missing guidelines across 20+ components.</p></div></li><li class="step"><span class="step__num" aria-hidden="true">02</span><div><h4>Walk (Layout &amp; Component Mechanics)</h4><p>Designed structured documentation page layouts in Figma, establishing a clear visual hierarchy that separated visual guidance from technical code specs.</p></div></li><li class="step"><span class="step__num" aria-hidden="true">03</span><div><h4>Run (Build &amp; Launch)</h4><p>Developed the responsive frontend using HTML, CSS, and JavaScript, delivering a live documentation portal and hand-off guide for the design team.</p></div></li></ol>
       </section>
     </section>
@@ -144,30 +147,6 @@
               <footer><code>href</code><code>underline</code></footer>
             </article>
 
-            <article class="sb__card">
-              <header><h4>Chip</h4><span class="sb__tag">component</span></header>
-              <div class="sb__canvas sb__canvas--row"><span class="sb__chip">Default</span><span class="sb__chip sb__chip--on">Selected</span><span class="sb__chip sb__chip--ok">Success</span><span class="sb__chip sb__chip--bad">Error</span></div>
-              <footer><code>kind</code><code>selected</code></footer>
-            </article>
-
-            <article class="sb__card">
-              <header><h4>Input</h4><span class="sb__tag">component</span></header>
-              <div class="sb__canvas"><span class="sb__lab">Label</span><span class="sb__field">Placeholder</span><span class="sb__lab sb__lab--err">Message under the field</span></div>
-              <footer><code>status</code><code>value</code><code>disabled</code></footer>
-            </article>
-
-            <article class="sb__card">
-              <header><h4>Switch</h4><span class="sb__tag">component</span></header>
-              <div class="sb__canvas sb__canvas--row"><span class="sb__sw"><i></i></span><span class="sb__sw is-on"><i></i></span><span class="sb__sw is-off"><i></i></span></div>
-              <footer><code>checked</code><code>disabled</code></footer>
-            </article>
-
-            <article class="sb__card">
-              <header><h4>Notice</h4><span class="sb__tag">component</span></header>
-              <div class="sb__canvas"><div class="sb__note"><i aria-hidden="true"></i><span><b>Title</b>One short line of message text.</span></div></div>
-              <footer><code>kind</code><code>open</code></footer>
-            </article>
-
           </div>
         </div>
       </section>
@@ -175,13 +154,35 @@
 
     <section class="a-act" id="decisions"><h2 data-ghost="Key Design Decisions &amp; Technical Execution">Key Design Decisions &amp; Technical Execution</h2>
       <section class="a-part" id="decision-1"><h3>Decision 1: Separating Design Guidance from Code Specs</h3>
-        <div class="row"><div><ul class="leads"><li><strong>What I Did:</strong> I created two distinct views within each component page. Designers could quickly scan visual rules and variant states, while developers could toggle directly to technical specs and code snippets.</li><li><strong>What It Replaced:</strong> A single long text document where code blocks and visual guidelines were mixed together, forcing users to scroll past irrelevant information.</li></ul></div><figure class="wf" role="img" aria-label="Wireframe: one component page with a Design view and a Code view"><div class="wf__tabs"><b class="is-on">Design</b><b>Code</b></div><div class="wf__two"><div class="wf__pane"><p class="wf__cap">Design view</p><div class="wf__tiles"><i></i><i></i><i></i></div><span class="wf__bar"></span><span class="wf__bar wf__bar--s"></span></div><div class="wf__pane wf__pane--code"><p class="wf__cap">Code view</p><span class="wf__row"></span><span class="wf__row"></span><span class="wf__row"></span><span class="wf__code"><i></i><i></i><i></i></span></div></div><figcaption>Simplified wireframe. Internal content left out.</figcaption></figure></div>
+        <div class="row"><div><ul class="leads"><li><strong>What I Did:</strong> I created two distinct views within each component page. Designers could quickly scan visual rules and variant states, while developers could toggle directly to technical specs and code snippets.</li><li><strong>What It Replaced:</strong> A single long text document where code blocks and visual guidelines were mixed together, forcing users to scroll past irrelevant information.</li></ul></div><figure class="v v--toggle" role="img" aria-label="Diagram: one component page with a Design view and a Code view to switch between"><div class="v__seg"><b class="is-on">Design</b><b>Code</b></div><div class="v__panel"><i></i><i></i><i></i></div></figure></div>
       </section>
       <section class="a-part" id="decision-2"><h3>Decision 2: Clear Visual Hierarchy for Guidelines</h3>
-        <div class="row row--flip"><div><ul class="leads"><li><strong>What I Did:</strong> I introduced side-by-side visual cards for “Do” (green indicator) and “Don’t” (red indicator) examples, keeping descriptions brief and focused on specific interaction rules.</li><li><strong>What It Replaced:</strong> Text-heavy guidelines that described visual mistakes in paragraphs instead of showing them visually.</li></ul></div><figure class="wf" role="img" aria-label="Wireframe: a Do card and a Don't card side by side"><div class="wf__two"><div class="wf__card"><b class="wf__flag wf__flag--do">Do</b><div class="wf__shot"><i></i><i></i></div><span class="wf__bar wf__bar--s"></span></div><div class="wf__card"><b class="wf__flag wf__flag--dont">Don’t</b><div class="wf__shot wf__shot--off"><i></i><i></i></div><span class="wf__bar wf__bar--s"></span></div></div><figcaption>Simplified wireframe. Internal content left out.</figcaption></figure></div>
+        <div class="row row--flip"><div><ul class="leads"><li><strong>What I Did:</strong> I introduced side-by-side visual cards for “Do” (green indicator) and “Don’t” (red indicator) examples, keeping descriptions brief and focused on specific interaction rules.</li><li><strong>What It Replaced:</strong> Text-heavy guidelines that described visual mistakes in paragraphs instead of showing them visually.</li></ul></div><figure class="v v--dd" role="img" aria-label="Diagram: a Do card with a green check and a Don't card with a red cross"><div class="v__half v__half--do"><b>Do</b><span aria-hidden="true">✓</span></div><div class="v__half v__half--dont"><b>Don’t</b><span aria-hidden="true">✕</span></div></figure></div>
       </section>
       <section class="a-part" id="decision-3"><h3>Decision 3: Live Component Behavior &amp; Copyable Code Blocks</h3>
-        <div class="row"><div><ul class="leads"><li><strong>What I Did:</strong> I built clean, interactive component previews alongside one-click copy buttons for code snippets.</li><li><strong>What It Replaced:</strong> Static screenshots of code that required developers to manually type out component syntax.</li></ul></div><figure class="wf" role="img" aria-label="Wireframe: a live component preview above a code block with a copy button"><div class="wf__preview"><span class="wf__btn"></span><span class="wf__btn wf__btn--line"></span></div><div class="wf__codeblock"><b class="wf__copy">Copy</b><span class="wf__code"><i></i><i></i><i></i><i></i></span></div><figcaption>Simplified wireframe. Internal content left out.</figcaption></figure></div>
+        <div class="row"><div><ul class="leads"><li><strong>What I Did:</strong> I built clean, interactive component previews alongside one-click copy buttons for code snippets.</li><li><strong>What It Replaced:</strong> Static screenshots of code that required developers to manually type out component syntax.</li></ul></div><figure class="v v--code" role="img" aria-label="Diagram: a code snippet with a Copy button"><div class="v__snip"><span class="v__line"></span><span class="v__line v__line--s"></span><span class="v__line v__line--m"></span><b class="v__copy">Copy</b></div></figure></div>
+        <div class="sb" role="group" aria-label="More component previews, in the style of Storybook"><div class="sb__bar" aria-hidden="true"><span class="sb__dots"><i></i><i></i><i></i></span><span class="sb__tab is-on">Canvas</span><span class="sb__tab">Docs</span><span class="sb__tab">Code</span></div><div class="sb__grid">
+            <article class="sb__card">
+              <header><h4>Chip</h4><span class="sb__tag">component</span></header>
+              <div class="sb__canvas sb__canvas--row"><span class="sb__chip">Default</span><span class="sb__chip sb__chip--on">Selected</span><span class="sb__chip sb__chip--ok">Success</span><span class="sb__chip sb__chip--bad">Error</span></div>
+              <footer><code>kind</code><code>selected</code></footer>
+            </article>
+            <article class="sb__card">
+              <header><h4>Input</h4><span class="sb__tag">component</span></header>
+              <div class="sb__canvas"><span class="sb__lab">Label</span><span class="sb__field">Placeholder</span><span class="sb__lab sb__lab--err">Message under the field</span></div>
+              <footer><code>status</code><code>value</code><code>disabled</code></footer>
+            </article>
+            <article class="sb__card">
+              <header><h4>Switch</h4><span class="sb__tag">component</span></header>
+              <div class="sb__canvas sb__canvas--row"><span class="sb__sw"><i></i></span><span class="sb__sw is-on"><i></i></span><span class="sb__sw is-off"><i></i></span></div>
+              <footer><code>checked</code><code>disabled</code></footer>
+            </article>
+            <article class="sb__card">
+              <header><h4>Notice</h4><span class="sb__tag">component</span></header>
+              <div class="sb__canvas"><div class="sb__note"><i aria-hidden="true"></i><span><b>Title</b>One short line of message text.</span></div></div>
+              <footer><code>kind</code><code>open</code></footer>
+            </article>
+        </div></div>
       </section>
     </section>
 
@@ -191,6 +192,7 @@
         <p>By testing different information arrangements, I identified where developers experienced friction when looking for property definitions.</p>
       </section>
       <section class="a-part" id="measured-impact"><h3>Measured impact</h3>
+        <figure class="v v--num" role="img" aria-label="50 percent or more improvement in content discoverability"><b>50%+</b><span>Content discoverability</span></figure>
         <ul class="leads"><li><strong>50%+ Improvement in Content Discoverability:</strong> Reorganizing component pages and visual hierarchy reduced search friction, allowing team members to locate component specs and code snippets significantly faster.</li><li><strong>Strong Team Alignment:</strong> Supported 20+ designers and developers in maintaining consistent component usage across Esri’s digital products.</li></ul>
       </section>
     </section>

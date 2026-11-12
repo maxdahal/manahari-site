@@ -227,3 +227,161 @@ body.cs .a-outline a {
 #main .a-act .a-part > h3 + * {
   margin-top: -12px;
 }
+
+/* ---- Esri case study: the page anatomy, bold lead-ins and placeholders -- */
+/* four stacked regions drawn with the page's own words; bars stand in for text */
+.anat {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: clamp(16px, 2.4vw, 28px);
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  background: var(--surface-2);
+}
+.anat__row {
+  display: grid;
+  grid-template-columns: 28px minmax(0, 1fr) minmax(0, 0.9fr);
+  align-items: center;
+  gap: 8px 14px;
+  padding: 14px 16px;
+  border-radius: 10px;
+  background: var(--bg);
+}
+.anat__row--two {
+  grid-template-columns: 28px minmax(0, 1fr) 64px 64px;
+}
+.anat__n {
+  display: grid;
+  place-items: center;
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  background: var(--accent-soft);
+  color: var(--accent-text);
+  font-size: 0.8125rem;
+  font-weight: 600;
+}
+.anat__name {
+  font-size: clamp(0.8125rem, 0.75rem + 0.3vw, 1rem);
+  font-weight: 500;
+  line-height: 1.3;
+  color: var(--ink);
+}
+.anat__bars,
+.anat__table {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+.anat__bars i,
+.anat__table i {
+  display: block;
+  height: 6px;
+  border-radius: 3px;
+  background: var(--line);
+}
+.anat__bars i:nth-child(2) {
+  width: 70%;
+}
+.anat__bars i:nth-child(3) {
+  width: 50%;
+}
+.anat__table i {
+  height: 8px;
+  background: color-mix(in srgb, var(--line) 80%, transparent);
+}
+.anat__row--code {
+  background: var(--dark-bg);
+}
+.anat__row--code .anat__name {
+  color: var(--on-dark);
+}
+.anat__row--code .anat__bars i {
+  background: rgb(243 246 250 / 0.28);
+}
+.anat__tile {
+  display: grid;
+  place-items: center;
+  min-height: 34px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: var(--surface-2);
+}
+.anat__tile b {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: var(--ink);
+}
+.anat__tile b::before {
+  content: "";
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--ok);
+}
+.anat__tile .anat__dont::before {
+  background: var(--error);
+}
+@media (max-width: 560px) {
+  .anat__row {
+    grid-template-columns: 28px minmax(0, 1fr);
+  }
+  .anat__bars,
+  .anat__table {
+    display: none;
+  }
+  .anat__row--two {
+    grid-template-columns: 28px minmax(0, 1fr) 56px 56px;
+  }
+}
+
+/* bullets that open with a bold lead-in */
+#main .leads {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  margin-block: 0;
+  padding-left: 1.2em;
+}
+#main .leads li {
+  font-size: 1.125rem;
+  line-height: 1.6;
+  color: var(--text-2);
+}
+#main .leads li::marker {
+  color: var(--accent);
+}
+#main .leads strong {
+  color: var(--ink);
+  font-weight: 600;
+}
+
+/* where a screenshot or wireframe goes: a calm empty frame */
+.a-ph {
+  display: grid;
+  place-items: center;
+  width: 100%;
+  min-height: 220px;
+  aspect-ratio: 16 / 10;
+  margin: 0;
+  border: 1px dashed var(--line);
+  border-radius: 12px;
+  background: var(--surface-2);
+  color: var(--text-2);
+  font-size: 0.9375rem;
+}
+#main .a-ph {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-color: color-mix(in srgb, var(--ink) 28%, transparent);
+}
+/* the Esri facts stay compact: five short columns, smaller values */
+#main .a-hero2 .a-facts dd {
+  font-size: 1.0625rem;
+  line-height: 1.4;
+}

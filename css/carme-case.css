@@ -1655,3 +1655,87 @@ body.cs #main .a-part > .a-quote {
     transition: none;
   }
 }
+
+/* ==========================================================================
+   Wide screens: the index shows the section names, small and dim, so you
+   always know where you are; the current one is darker with a teal dash. The
+   parts inside the current section open on hover or focus. Below 1360px
+   there is not room for words, so the slim rail above stays.
+   ========================================================================== */
+@media (min-width: 1360px) {
+  body.cs .a-side {
+    left: max(20px, calc((100vw - 900px) / 2 - 220px));
+    width: 180px;
+  }
+  body.cs .a-outline {
+    width: 180px;
+    padding: 0;
+    border-color: transparent;
+    background: none;
+    box-shadow: none;
+  }
+  body.cs .a-outline > ol {
+    gap: 2px;
+  }
+  body.cs .a-outline > ol > li > a {
+    gap: 8px;
+    padding: 7px 0;
+    border-radius: 0;
+    font-size: 0.8125rem;
+    line-height: 1.3;
+    color: var(--text-subtle);
+  }
+  body.cs .a-outline > ol > li > a:hover {
+    color: var(--ink);
+  }
+  body.cs .a-outline__num {
+    min-width: 1.2em;
+    font-size: 0.75rem;
+    font-variant-numeric: tabular-nums;
+  }
+  body.cs .a-outline > ol > li > a::before {
+    content: "";
+    flex: none;
+    width: 2px;
+    height: 14px;
+    margin-block: auto;
+    border-radius: 2px;
+    background: transparent;
+    transition: background 0.2s ease;
+  }
+  body.cs .a-outline > ol > li:has([aria-current]) > a {
+    color: var(--ink);
+    font-weight: 500;
+  }
+  body.cs .a-outline > ol > li:has([aria-current]) > a::before {
+    width: 2px;
+    background: var(--accent);
+  }
+  /* hovering the index opens the parts of the current section */
+  body.cs .a-side:is(:hover, :focus-within) .a-outline {
+    width: 180px;
+    padding: 0;
+    border-color: transparent;
+    background: none;
+    box-shadow: none;
+  }
+  body.cs .a-side:is(:hover, :focus-within) .a-outline > ol > li > a {
+    padding: 7px 0;
+    border-radius: 0;
+    font-size: 0.8125rem;
+  }
+  body.cs .a-side:is(:hover, :focus-within) .a-outline > ol > li > a::before {
+    content: "";
+  }
+  body.cs .a-side:is(:hover, :focus-within) .a-outline > ol > li:has([aria-current]) > a {
+    color: var(--ink);
+  }
+  body.cs .a-side:is(:hover, :focus-within) .a-outline > ol > li:has([aria-current]) > .a-outline__sub {
+    margin: 0 0 6px 28px;
+    gap: 0;
+  }
+  body.cs .a-outline__sub a {
+    padding: 4px 0 4px 10px;
+    font-size: 0.75rem;
+  }
+}

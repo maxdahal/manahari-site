@@ -588,3 +588,353 @@ body.cs .a-outline a {
     grid-template-columns: minmax(0, 1fr);
   }
 }
+
+/* ---- component previews in the style of Storybook: a frame with tabs, and
+   a card per component with a canvas, live elements and its props ------- */
+.sb {
+  overflow: hidden;
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  background: var(--surface-2);
+}
+.sb__bar {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  padding: 10px 14px 0;
+  border-bottom: 1px solid var(--line);
+  background: var(--bg);
+}
+.sb__dots {
+  display: flex;
+  gap: 6px;
+  margin-right: 14px;
+  padding-bottom: 10px;
+}
+.sb__dots i {
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+  background: var(--line);
+}
+.sb__tab {
+  padding: 8px 14px;
+  border-radius: 8px 8px 0 0;
+  font-size: 0.8125rem;
+  font-weight: 500;
+  color: var(--text-2);
+}
+.sb__tab.is-on {
+  background: var(--surface-2);
+  color: var(--ink);
+  box-shadow: inset 0 2px 0 var(--accent);
+}
+.sb__grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 14px;
+  padding: 14px;
+}
+.sb__card {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  overflow: hidden;
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  background: var(--bg);
+}
+.sb__card--wide {
+  grid-column: 1 / -1;
+}
+.sb__card header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 12px 16px;
+  border-bottom: 1px solid var(--line);
+}
+#main .sb__card h4 {
+  margin: 0;
+  font-size: 0.9375rem;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+}
+.sb__tag {
+  padding: 2px 10px;
+  border-radius: 999px;
+  background: var(--accent-soft);
+  font-size: 0.6875rem;
+  font-weight: 500;
+  color: var(--accent-text);
+}
+.sb__canvas {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  justify-content: center;
+  gap: 10px;
+  min-height: 150px;
+  padding: 22px 18px;
+  background:
+    radial-gradient(circle, color-mix(in srgb, var(--ink) 12%, transparent) 1px, transparent 1.2px) 0 0 / 14px 14px,
+    var(--surface-2);
+}
+.sb__canvas--row {
+  flex-direction: row;
+  flex-wrap: wrap;
+  align-items: center;
+  align-content: center;
+}
+.sb__card footer {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  padding: 10px 16px;
+  border-top: 1px solid var(--line);
+}
+.sb__card code {
+  padding: 2px 8px;
+  border-radius: 6px;
+  background: var(--surface-2);
+  border: 1px solid var(--line);
+  font-family: "Geist Mono", ui-monospace, monospace;
+  font-size: 0.75rem;
+  color: var(--text-2);
+}
+
+/* button, with a scale control that really works (radio buttons) */
+.sb__r {
+  position: fixed;
+  opacity: 0;
+  pointer-events: none;
+}
+.sb__stage {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 12px;
+  --pad: 10px 20px;
+  --fs: 0.9375rem;
+}
+.sb__canvas--btn:has(#sb-s:checked) .sb__stage {
+  --pad: 6px 14px;
+  --fs: 0.8125rem;
+}
+.sb__canvas--btn:has(#sb-l:checked) .sb__stage {
+  --pad: 14px 28px;
+  --fs: 1.0625rem;
+}
+.sb__btn {
+  padding: var(--pad);
+  border: 1.5px solid var(--accent);
+  border-radius: 6px;
+  background: var(--accent);
+  color: var(--on-accent);
+  font-size: var(--fs);
+  font-weight: 500;
+  line-height: 1.2;
+  transition: padding 0.2s ease, font-size 0.2s ease;
+}
+.sb__btn--line {
+  background: none;
+  color: var(--accent-text);
+}
+.sb__btn--soft {
+  border-color: transparent;
+  background: var(--accent-soft);
+  color: var(--accent-text);
+}
+.sb__btn--off {
+  border-color: var(--line);
+  background: var(--line);
+  color: var(--text-2);
+  opacity: 0.7;
+}
+.sb__ctl {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin-top: 6px;
+  font-size: 0.75rem;
+  color: var(--text-2);
+}
+.sb__ctl span {
+  margin-right: 6px;
+  font-family: "Geist Mono", ui-monospace, monospace;
+}
+.sb__ctl label {
+  padding: 3px 12px;
+  border: 1px solid var(--line);
+  border-radius: 6px;
+  background: var(--bg);
+  color: var(--ink);
+  cursor: pointer;
+}
+.sb__canvas--btn:has(#sb-s:checked) label[for="sb-s"],
+.sb__canvas--btn:has(#sb-m:checked) label[for="sb-m"],
+.sb__canvas--btn:has(#sb-l:checked) label[for="sb-l"] {
+  border-color: var(--accent);
+  background: var(--accent-soft);
+  color: var(--accent-text);
+}
+.sb__canvas--btn:has(.sb__r:focus-visible) .sb__ctl {
+  outline: 2px solid var(--accent);
+  outline-offset: 4px;
+}
+
+/* typography */
+.sb__canvas--type {
+  gap: 4px;
+}
+.sb__canvas--type p {
+  margin: 0 !important;
+  color: var(--ink) !important;
+}
+.sb__t1 {
+  font-size: 3.25rem !important;
+  font-weight: 600;
+  line-height: 1;
+  letter-spacing: -0.04em;
+}
+.sb__t2 {
+  font-size: 1.5rem !important;
+  font-weight: 600;
+  letter-spacing: -0.02em;
+}
+.sb__t3 {
+  font-size: 1rem !important;
+  line-height: 1.5 !important;
+  max-width: 22em;
+}
+.sb__t4 {
+  font-size: 0.8125rem !important;
+  color: var(--text-2) !important;
+}
+
+/* text and link */
+#main .sb__p {
+  margin: 0;
+  font-size: 1rem;
+  line-height: 1.5;
+  color: var(--ink);
+}
+#main .sb__p--muted {
+  font-size: 0.875rem;
+  color: var(--text-2);
+}
+#main .sb__a {
+  color: var(--accent-text);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+/* chips */
+.sb__chip {
+  padding: 5px 12px;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  background: var(--bg);
+  font-size: 0.8125rem;
+  color: var(--ink);
+}
+.sb__chip--on {
+  border-color: var(--accent);
+  background: var(--accent-soft);
+  color: var(--accent-text);
+}
+.sb__chip--ok {
+  border-color: color-mix(in srgb, var(--ok) 45%, transparent);
+  color: var(--ok);
+}
+.sb__chip--bad {
+  border-color: color-mix(in srgb, var(--error) 45%, transparent);
+  color: var(--error);
+}
+
+/* input */
+.sb__lab {
+  font-size: 0.8125rem;
+  font-weight: 500;
+  color: var(--ink);
+}
+.sb__lab--err {
+  font-weight: 400;
+  color: var(--error);
+}
+.sb__field {
+  padding: 9px 12px;
+  border: 1.5px solid var(--error);
+  border-radius: 6px;
+  background: var(--bg);
+  font-size: 0.9375rem;
+  color: var(--text-2);
+}
+
+/* switch */
+.sb__sw {
+  display: inline-flex;
+  align-items: center;
+  width: 42px;
+  height: 24px;
+  padding: 3px;
+  border-radius: 999px;
+  background: var(--line);
+}
+.sb__sw i {
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  background: var(--bg);
+}
+.sb__sw.is-on {
+  justify-content: flex-end;
+  background: var(--accent);
+}
+.sb__sw.is-on i {
+  background: var(--on-accent);
+}
+.sb__sw.is-off {
+  opacity: 0.45;
+}
+@media (max-width: 700px) {
+  .sb__grid {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .sb__btn {
+    transition: none;
+  }
+}
+.sb__note {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  padding: 12px 14px;
+  border: 1px solid var(--line);
+  border-left: 4px solid var(--accent);
+  border-radius: 6px;
+  background: var(--bg);
+  font-size: 0.875rem;
+  line-height: 1.4;
+  color: var(--text-2);
+}
+.sb__note i {
+  flex: none;
+  width: 16px;
+  height: 16px;
+  margin-top: 2px;
+  border-radius: 50%;
+  background: var(--accent);
+}
+.sb__note span {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+.sb__note b {
+  font-weight: 600;
+  color: var(--ink);
+}

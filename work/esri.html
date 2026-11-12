@@ -58,7 +58,7 @@
   </div>
   
   <div class="a-layout">
-  <aside class="a-side"><nav class="a-outline" aria-label="On this page"><ol id="a-outline-list"><li><a href="#main"><span class="a-outline__num" aria-hidden="true">1.</span>Overview</a></li><li><a href="#problem"><span class="a-outline__num" aria-hidden="true">2.</span>Problem &amp; Context</a><ol class="a-outline__sub"><li><a href="#the-challenge">The challenge</a></li><li><a href="#audience">Target audience &amp; team dynamics</a></li><li><a href="#core-constraint">The core constraint</a></li></ol></li><li><a href="#strategy"><span class="a-outline__num" aria-hidden="true">3.</span>Goals &amp; Phased Execution Strategy</a><ol class="a-outline__sub"><li><a href="#crawl-walk-run">Crawl, Walk, Run</a></li></ol></li><li><a href="#architecture"><span class="a-outline__num" aria-hidden="true">4.</span>System Architecture &amp; Information Layout</a><ol class="a-outline__sub"><li><a href="#four-regions">Four clear regions</a></li></ol></li><li><a href="#decisions"><span class="a-outline__num" aria-hidden="true">5.</span>Key Design Decisions &amp; Technical Execution</a><ol class="a-outline__sub"><li><a href="#decision-1">Decision 1</a></li><li><a href="#decision-2">Decision 2</a></li><li><a href="#decision-3">Decision 3</a></li></ol></li><li><a href="#results"><span class="a-outline__num" aria-hidden="true">6.</span>Testing, Discoverability &amp; Results</a><ol class="a-outline__sub"><li><a href="#usability-testing">Usability testing &amp; iterative feedback</a></li><li><a href="#measured-impact">Measured impact</a></li></ol></li><li><a href="#learned"><span class="a-outline__num" aria-hidden="true">7.</span>What I Learned From This Project</a></li></ol><button type="button" class="a-outline__all" aria-expanded="false" aria-controls="a-outline-list">Show all</button></nav></aside>
+  <aside class="a-side"><nav class="a-outline" aria-label="On this page"><ol id="a-outline-list"><li><a href="#main"><span class="a-outline__num" aria-hidden="true">1.</span>Overview</a></li><li><a href="#problem"><span class="a-outline__num" aria-hidden="true">2.</span>Problem &amp; Context</a><ol class="a-outline__sub"><li><a href="#the-challenge">The challenge</a></li><li><a href="#audience">Target audience &amp; team dynamics</a></li><li><a href="#core-constraint">The core constraint</a></li></ol></li><li><a href="#strategy"><span class="a-outline__num" aria-hidden="true">3.</span>Goals &amp; Phased Execution Strategy</a><ol class="a-outline__sub"><li><a href="#crawl-walk-run">Crawl, Walk, Run</a></li></ol></li><li><a href="#architecture"><span class="a-outline__num" aria-hidden="true">4.</span>System Architecture &amp; Information Layout</a><ol class="a-outline__sub"><li><a href="#four-regions">Four clear regions</a></li><li><a href="#components">Components</a></li></ol></li><li><a href="#decisions"><span class="a-outline__num" aria-hidden="true">5.</span>Key Design Decisions &amp; Technical Execution</a><ol class="a-outline__sub"><li><a href="#decision-1">Decision 1</a></li><li><a href="#decision-2">Decision 2</a></li><li><a href="#decision-3">Decision 3</a></li></ol></li><li><a href="#results"><span class="a-outline__num" aria-hidden="true">6.</span>Testing, Discoverability &amp; Results</a><ol class="a-outline__sub"><li><a href="#usability-testing">Usability testing &amp; iterative feedback</a></li><li><a href="#measured-impact">Measured impact</a></li></ol></li><li><a href="#learned"><span class="a-outline__num" aria-hidden="true">7.</span>What I Learned From This Project</a></li></ol><button type="button" class="a-outline__all" aria-expanded="false" aria-controls="a-outline-list">Show all</button></nav></aside>
   <main class="article" id="main">
     <nav class="a-crumbs" aria-label="Breadcrumbs"><a href="/#work"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m12 19-7-7 7-7M19 12H5"/></svg>Projects</a><span class="a-crumbs__sep" aria-hidden="true">/</span><span aria-current="page">Esri Calcite Documentation</span></nav>
 
@@ -116,6 +116,60 @@
       <section class="a-part" id="four-regions"><h3>Four clear regions</h3>
         <p>To make component pages scannable and easy to navigate, I structured each component documentation page into four clear regions:</p>
         <ul class="cards"><li class="card-pt"><p class="label">1</p><h4>Header &amp; Interactive Preview</h4><p>Component title, description, live interactive preview, and quick status tags.</p></li><li class="card-pt"><p class="label">2</p><h4>Usage Guidelines (Do’s &amp; Don’ts)</h4><p>Visual examples showing correct and incorrect layout, spacing, and color applications.</p></li><li class="card-pt"><p class="label">3</p><h4>Component API &amp; Properties</h4><p>Structured tables listing props, slots, events, and default values for developers.</p></li><li class="card-pt"><p class="label">4</p><h4>Code Snippets &amp; Examples</h4><p>Copyable HTML and JavaScript code blocks for fast implementation.</p></li></ul>
+      </section>
+      <section class="a-part" id="components"><h3>Components</h3>
+        <div class="sb" role="group" aria-label="Component previews, in the style of Storybook">
+          <div class="sb__bar" aria-hidden="true"><span class="sb__dots"><i></i><i></i><i></i></span><span class="sb__tab is-on">Canvas</span><span class="sb__tab">Docs</span><span class="sb__tab">Code</span></div>
+          <div class="sb__grid">
+
+            <article class="sb__card sb__card--wide">
+              <header><h4>Button</h4><span class="sb__tag">component</span></header>
+              <div class="sb__canvas sb__canvas--btn">
+                <input type="radio" name="sb-scale" id="sb-s" class="sb__r"><input type="radio" name="sb-scale" id="sb-m" class="sb__r" checked><input type="radio" name="sb-scale" id="sb-l" class="sb__r">
+                <div class="sb__stage"><span class="sb__btn">Solid</span><span class="sb__btn sb__btn--line">Outline</span><span class="sb__btn sb__btn--soft">Transparent</span><span class="sb__btn sb__btn--off">Disabled</span></div>
+                <div class="sb__ctl"><span>scale</span><label for="sb-s">s</label><label for="sb-m">m</label><label for="sb-l">l</label></div>
+              </div>
+              <footer><code>appearance</code><code>kind</code><code>scale</code><code>loading</code><code>disabled</code></footer>
+            </article>
+
+            <article class="sb__card">
+              <header><h4>Typography</h4><span class="sb__tag">foundation</span></header>
+              <div class="sb__canvas sb__canvas--type"><p class="sb__t1">Aa</p><p class="sb__t2">Heading</p><p class="sb__t3">Body text sits at a readable size and weight.</p><p class="sb__t4">Caption</p></div>
+              <footer><code>size</code><code>weight</code><code>line height</code></footer>
+            </article>
+
+            <article class="sb__card">
+              <header><h4>Text and Link</h4><span class="sb__tag">component</span></header>
+              <div class="sb__canvas"><p class="sb__p">A short line of text with a <a class="sb__a" href="#components" tabindex="-1">link inside it</a>.</p><p class="sb__p sb__p--muted">Helper text in a quieter tone.</p></div>
+              <footer><code>href</code><code>underline</code></footer>
+            </article>
+
+            <article class="sb__card">
+              <header><h4>Chip</h4><span class="sb__tag">component</span></header>
+              <div class="sb__canvas sb__canvas--row"><span class="sb__chip">Default</span><span class="sb__chip sb__chip--on">Selected</span><span class="sb__chip sb__chip--ok">Success</span><span class="sb__chip sb__chip--bad">Error</span></div>
+              <footer><code>kind</code><code>selected</code></footer>
+            </article>
+
+            <article class="sb__card">
+              <header><h4>Input</h4><span class="sb__tag">component</span></header>
+              <div class="sb__canvas"><span class="sb__lab">Label</span><span class="sb__field">Placeholder</span><span class="sb__lab sb__lab--err">Message under the field</span></div>
+              <footer><code>status</code><code>value</code><code>disabled</code></footer>
+            </article>
+
+            <article class="sb__card">
+              <header><h4>Switch</h4><span class="sb__tag">component</span></header>
+              <div class="sb__canvas sb__canvas--row"><span class="sb__sw"><i></i></span><span class="sb__sw is-on"><i></i></span><span class="sb__sw is-off"><i></i></span></div>
+              <footer><code>checked</code><code>disabled</code></footer>
+            </article>
+
+            <article class="sb__card">
+              <header><h4>Notice</h4><span class="sb__tag">component</span></header>
+              <div class="sb__canvas"><div class="sb__note"><i aria-hidden="true"></i><span><b>Title</b>One short line of message text.</span></div></div>
+              <footer><code>kind</code><code>open</code></footer>
+            </article>
+
+          </div>
+        </div>
       </section>
     </section>
 

@@ -216,25 +216,28 @@
 .cm-pill {
   display: inline-flex;
   align-items: center;
-  gap: 18px;
+  gap: 12px;
   min-height: 52px;
   padding: 0 28px;
-  border: 1px solid transparent;
+  border: 1.5px solid var(--ink);
   border-radius: 999px;
-  background: var(--surface-2);
-  color: var(--ink);
+  background: var(--ink);
+  color: var(--bg);
   font: 500 1rem/1 "Inter", system-ui, sans-serif;
   text-decoration: none;
   cursor: pointer;
   transition: background 0.2s ease, color 0.2s ease, border-color 0.2s ease;
 }
-.cm-pill:hover {
+.cm-pill:hover,
+.cm-pill:focus-visible {
+  border-color: var(--accent);
   background: var(--accent);
   color: var(--on-accent);
 }
 .cm-pill--line {
-  border-color: var(--line);
-  background: none;
+  border-color: color-mix(in srgb, var(--ink) 55%, transparent);
+  background: transparent;
+  color: var(--ink);
 }
 .cm-pill--line:hover {
   border-color: var(--accent);

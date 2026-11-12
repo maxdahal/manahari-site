@@ -10,6 +10,8 @@
   --cm-gutter: clamp(20px, 4vw, 56px);
   --cm-max: 1520px;
   --cm-head: 84px;
+  /* where sticky things sit: under the header, or at the very top while it is hidden */
+  --cm-top: var(--cm-head);
   /* softer than white and black, with a fine grain over the colour */
   --bg: #eceff3;
   --surface: #f1f3f6;
@@ -552,9 +554,18 @@
 }
 .cm-about.is-held .cm-about__stage {
   position: sticky;
-  top: var(--cm-head);
-  min-height: calc(100svh - var(--cm-head));
+  top: var(--cm-top);
+  min-height: calc(100svh - var(--cm-top));
   padding-block: 0;
+  transition: top 0.24s ease, min-height 0.24s ease;
+}
+.cm.cm-nav-hidden {
+  --cm-top: 0px;
+}
+@media (prefers-reduced-motion: reduce) {
+  .cm-about.is-held .cm-about__stage {
+    transition: none;
+  }
 }
 .cm-about h1:not(.cm-about__text) {
   margin: 0 0 clamp(24px, 4vh, 40px);

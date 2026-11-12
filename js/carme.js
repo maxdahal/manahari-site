@@ -35,26 +35,47 @@
     }, 2800);
   }
 
-  /* header: hides after a little downward scroll, returns after a little up */
+  /* header: hides after a little downward scroll, returns after a little up.
+     The page also learns whether it is hidden (a class on the body), so the
+     sticky step bar and the held opening statement can slide up into the
+     space it leaves instead of staying 84px down. */
   var header = document.querySelector(".cm-header");
   if (header) {
     var last = window.scrollY;
     var travelled = 0;
+    var hidden = false;
+    var setHidden = function (on) {
+      if (on === hidden) return;
+      hidden = on;
+      header.classList.toggle("is-hidden", on);
+      document.body.classList.toggle("cm-nav-hidden", on);
+    };
+    /* only keyboard focus keeps the header up; a mouse click on the theme
+       button would otherwise pin it open for good */
+    var keyboardInside = function () {
+      var el = document.activeElement;
+      return !!(el && header.contains(el) && el.matches(":focus-visible"));
+    };
+    var menuOpen = function () {
+      var menu = document.getElementById("menu");
+      return !!(menu && menu.classList.contains("is-open"));
+    };
     window.addEventListener("scroll", function () {
       var y = window.scrollY;
       var delta = y - last;
       last = y;
-      if (y < 24 || header.contains(document.activeElement) || document.getElementById("menu").classList.contains("is-open")) {
-        header.classList.remove("is-hidden");
+      if (!delta) return;
+      if (y < 24 || keyboardInside() || menuOpen()) {
+        setHidden(false);
         travelled = 0;
         return;
       }
       travelled = Math.sign(delta) === Math.sign(travelled) ? travelled + delta : delta;
-      if (travelled > 20) header.classList.add("is-hidden");
-      else if (travelled < -6) header.classList.remove("is-hidden");
+      if (travelled > 20) setHidden(true);
+      else if (travelled < -6) setHidden(false);
     }, { passive: true });
     header.addEventListener("focusin", function () {
-      header.classList.remove("is-hidden");
+      if (keyboardInside()) setHidden(false);
     });
   }
 

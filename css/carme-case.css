@@ -1565,7 +1565,7 @@ body.cs .article [id] {
 }
 .cm-steps {
   position: sticky;
-  top: var(--cm-head);
+  top: var(--cm-top);
   z-index: 40;
   border-bottom: 1px solid var(--line);
   background: color-mix(in srgb, var(--bg) 92%, transparent);
@@ -1573,9 +1573,7 @@ body.cs .article [id] {
   backdrop-filter: blur(10px);
   transition: top 0.24s ease;
 }
-.cm-header.is-hidden + .cm-steps {
-  top: 0;
-}
+
 .cm-steps ol {
   display: flex;
   width: min(100% - 2 * var(--cm-gutter), 1040px);

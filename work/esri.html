@@ -91,19 +91,23 @@
 
     <section class="a-act" id="problem"><h2 data-ghost="Problem &amp; Context">Problem &amp; Context</h2>
       <section class="a-part" id="the-challenge"><h3>The challenge</h3>
-        <p>During my internship at Esri, the Calcite Design System was evolving rapidly on GitHub and Figma. However, internal designers and developers lacked a clear, unified documentation website to reference component behavior, usage rules, and code snippets.</p>
-        <p>Without a centralized hub, team members spent extra time clarifying component specs, leading to inconsistent implementations across web and mobile products.</p>
+        <p>During my internship at Esri, the Calcite Design System was <strong>evolving rapidly</strong> on GitHub and Figma.</p>
+        <p>However, internal designers and developers <strong>lacked a clear, unified documentation website</strong> to reference component behavior, usage rules, and code snippets.</p>
+        <p>Without a centralized hub, team members <strong>spent extra time clarifying component specs</strong>, leading to <strong>inconsistent implementations</strong> across web and mobile products.</p>
         
         <figure class="v v--hub" role="img" aria-label="Diagram: separate sources on GitHub and Figma become one documentation site"><div class="v__src"><span>GitHub</span><span>Figma</span><span>Component specs</span></div><span class="v__arrow" aria-hidden="true"></span><div class="v__focus">Documentation site</div></figure>
         <div class="a-quote"><p class="label">I reframed the core problem</p><p>How might I build a clear, searchable internal documentation portal so 20+ designers and developers can quickly find component usage rules, accessibility guidance, and code snippets without breaking their workflow?</p></div>
       </section>
       <section class="a-part" id="audience"><h3>Target audience &amp; team dynamics</h3>
         <p>Designing internal documentation requires catering to two distinct user groups with different goals:</p>
+        <figure class="v v--two" role="img" aria-label="Diagram: two readers, UI/UX designers who want visuals and front-end engineers who want code"><div class="v__who"><span class="v__ico v__ico--tiles" aria-hidden="true"><i></i><i></i><i></i><i></i></span><b>UI/UX Designers</b></div><div class="v__who"><span class="v__ico v__ico--code" aria-hidden="true">&lt;/&gt;</span><b>Front-End Engineers</b></div></figure>
         <ul class="cards"><li class="card-pt"><h4>UI/UX Designers</h4><p>Need visual examples, variant states, layout rules, clear do’s and don’ts, and accessibility standards to maintain visual consistency across products.</p></li><li class="card-pt"><h4>Front-End Engineers</h4><p>Need fast property tables, exact HTML/CSS/JS code snippets, component API details, and clean code examples with zero extra clutter.</p></li></ul>
       </section>
       <section class="a-part" id="core-constraint"><h3>The core constraint</h3>
         <div class="a-quote"><p class="label">The core constraint</p><p>Documentation must serve both designers and engineers without forcing either group to wade through irrelevant details.</p></div>
-        <p>Designers need quick visual context, while developers need clean, copyable code. The site had to balance both needs cleanly while staying easy to maintain as the design system expanded.</p>
+        <figure class="v v--one" role="img" aria-label="Diagram: designers and developers both read one documentation page"><div class="v__who v__who--sm"><b>Designers</b></div><div class="v__who v__who--sm"><b>Developers</b></div><span class="v__arrow" aria-hidden="true"></span><div class="v__focus">One page</div></figure>
+        <p>Designers need <strong>quick visual context</strong>, while developers need <strong>clean, copyable code</strong>.</p>
+        <p>The site had to balance both needs cleanly while staying <strong>easy to maintain</strong> as the design system expanded.</p>
       </section>
     </section>
 
@@ -117,7 +121,7 @@
 
     <section class="a-act" id="architecture"><h2 data-ghost="System Architecture &amp; Information Layout">System Architecture &amp; Information Layout</h2>
       <section class="a-part" id="four-regions"><h3>Four clear regions</h3>
-        <p>To make component pages scannable and easy to navigate, I structured each component documentation page into four clear regions:</p>
+        <p>To make component pages <strong>scannable and easy to navigate</strong>, I structured each component documentation page into <strong>four clear regions</strong>:</p>
         <ul class="cards"><li class="card-pt"><p class="label">1</p><h4>Header &amp; Interactive Preview</h4><p>Component title, description, live interactive preview, and quick status tags.</p></li><li class="card-pt"><p class="label">2</p><h4>Usage Guidelines (Do’s &amp; Don’ts)</h4><p>Visual examples showing correct and incorrect layout, spacing, and color applications.</p></li><li class="card-pt"><p class="label">3</p><h4>Component API &amp; Properties</h4><p>Structured tables listing props, slots, events, and default values for developers.</p></li><li class="card-pt"><p class="label">4</p><h4>Code Snippets &amp; Examples</h4><p>Copyable HTML and JavaScript code blocks for fast implementation.</p></li></ul>
       </section>
       <section class="a-part" id="components"><h3>Components</h3>
@@ -188,8 +192,9 @@
 
     <section class="a-act" id="results"><h2 data-ghost="Testing, Discoverability &amp; Results">Testing, Discoverability &amp; Results</h2>
       <section class="a-part" id="usability-testing"><h3>Usability testing &amp; iterative feedback</h3>
-        <p>I conducted iterative mockup reviews and A/B tests with internal designers and developers to refine the navigation and page layouts.</p>
-        <p>By testing different information arrangements, I identified where developers experienced friction when looking for property definitions.</p>
+        <p>I conducted <strong>iterative mockup reviews and A/B tests</strong> with internal designers and developers to refine the navigation and page layouts.</p>
+        <figure class="v v--ab" role="img" aria-label="Diagram: two page layouts, A and B, compared"><div class="v__lay"><i class="v__lay-a"></i><b>A</b></div><span class="v__vs" aria-hidden="true">vs</span><div class="v__lay v__lay--b"><i class="v__lay-b"></i><b>B</b></div></figure>
+        <p>By testing different information arrangements, I identified <strong>where developers experienced friction</strong> when looking for property definitions.</p>
       </section>
       <section class="a-part" id="measured-impact"><h3>Measured impact</h3>
         <figure class="v v--num" role="img" aria-label="50 percent or more improvement in content discoverability"><b>50%+</b><span>Content discoverability</span></figure>

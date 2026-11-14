@@ -1,0 +1,12 @@
+/* The case studies. Same layering as entry-site.css. */
+@layer theme, base, legacy, components, utilities;
+@import "../app/globals.css";
+@import "./site.css" layer(legacy);
+@import "./portavia.css" layer(legacy);
+@import "./article.css" layer(legacy);
+@import "./sandbox.css" layer(legacy);
+@import "./arm-sandbox.css" layer(legacy);
+@import "./ku-sandbox.css" layer(legacy);
+@import "./case.css" layer(legacy);
+@import "./carme.css" layer(legacy);
+@import "./carme-case.css" layer(legacy);

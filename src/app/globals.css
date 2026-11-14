@@ -1,0 +1,88 @@
+@import "tailwindcss";
+@import "tw-animate-css";
+@import "shadcn/tailwind.css";
+
+/* Dark mode is html[data-theme="dark"], set by next-themes (see
+   components/site/theme-provider.tsx); the site's own CSS reads the same
+   attribute. */
+@custom-variant dark (&:where([data-theme="dark"], [data-theme="dark"] *));
+
+/* Design tokens. The colours live once, in the site's own stylesheets
+   (styles/site.css and styles/carme.css: soft sage in light mode, deep
+   teal in dark mode). Tailwind utilities and the shadcn/ui components read
+   them from here, so bg-background, text-foreground, border-border and
+   bg-brand all follow the theme. */
+@theme inline {
+  --color-background: var(--bg);
+  --color-foreground: var(--ink);
+  --color-card: var(--surface);
+  --color-card-foreground: var(--ink);
+  --color-popover: var(--surface);
+  --color-popover-foreground: var(--ink);
+  --color-primary: var(--ink);
+  --color-primary-foreground: var(--bg);
+  --color-secondary: var(--surface-2);
+  --color-secondary-foreground: var(--ink);
+  --color-muted: var(--surface-2);
+  --color-muted-foreground: var(--text-subtle);
+  --color-accent: var(--accent-soft);
+  --color-accent-foreground: var(--ink);
+  --color-brand: var(--accent);
+  --color-brand-foreground: var(--on-accent);
+  --color-destructive: var(--error);
+  --color-border: var(--line);
+  --color-input: var(--line);
+  --color-ring: var(--accent);
+  --font-serif: "Newsreader", "Lyon Text", "Iowan Old Style", Georgia, serif;
+  --font-sans: var(--font-serif);
+  --font-heading: var(--font-serif);
+  --font-mono: "Geist Mono", ui-monospace, monospace;
+  --radius-sm: 6px;
+  --radius-md: 8px;
+  --radius-lg: 10px;
+  --radius-xl: 14px;
+  --radius-2xl: 18px;
+  --radius-3xl: 24px;
+  --radius-4xl: 999px;
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+}
+
+/* ---- dialogs (shadcn/ui Dialog, styled as the old <dialog>s) ------------ */
+/* the dimmed page behind an open dialog */
+.site-backdrop {
+  z-index: 55;
+  background: rgb(10 10 12 / 0.55);
+  -webkit-backdrop-filter: blur(3px);
+  backdrop-filter: blur(3px);
+}
+/* the dialog itself sits in the middle of the screen, over the backdrop;
+   its size, border and colours come from .cm-rdialog and .recruiter */
+.cm-rdialog[data-slot="dialog-content"],
+.recruiter[data-slot="dialog-content"] {
+  position: fixed;
+  inset: 0;
+  z-index: 60;
+  margin: auto;
+  outline: none;
+}
+.recruiter[data-slot="dialog-content"] {
+  height: fit-content;
+}
+.cm-rdialog[data-open] {
+  display: block;
+  animation: cm-dialog-in 0.25s cubic-bezier(0.2, 0.7, 0.2, 1);
+}
+.recruiter[data-open] {
+  animation: recruiter-in 0.25s cubic-bezier(0.2, 0.7, 0.2, 1);
+}
+@media (prefers-reduced-motion: reduce) {
+  .cm-rdialog[data-open],
+  .recruiter[data-open] {
+    animation: none;
+  }
+}

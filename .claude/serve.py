@@ -1,9 +1,11 @@
 """Local preview with clean URLs, like the live site on Vercel
 (vercel.json: cleanUrls). /about serves about.html, and /about.html
-redirects to /about. Run: python3 .claude/serve.py [port]"""
+redirects to /about. Serves the static build in out/ (run `npm run build`
+first). Run: python3 .claude/serve.py [port] [folder]"""
 import http.server, os, sys
 
-ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+REPO = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+ROOT = os.path.abspath(sys.argv[2]) if len(sys.argv) > 2 else os.path.join(REPO, "out")
 
 
 class Handler(http.server.SimpleHTTPRequestHandler):

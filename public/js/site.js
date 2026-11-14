@@ -1,4 +1,4 @@
-/* Shared behaviour for every page: the motion button, theme,
+/* Shared behaviour for every page: the motion button,
    phone menu, the ID badge and the cursor ring. Each feature looks for its
    own markup and does nothing when that markup is not on the page. */
 (function () {
@@ -6,66 +6,6 @@
 
   var root = document.documentElement;
   var reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-  var THEME_KEY = "mt-theme";
-
-  /* Theme ------------------------------------------------------------------ */
-  function storedTheme() {
-    try {
-      var value = localStorage.getItem(THEME_KEY);
-      return value === "light" || value === "dark" ? value : null;
-    } catch (e) {
-      return null;
-    }
-  }
-  function currentTheme() {
-    return (
-      root.getAttribute("data-theme") ||
-      (window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light")
-    );
-  }
-  function labelThemeButtons() {
-    var next = currentTheme() === "dark" ? "light" : "dark";
-    document.querySelectorAll(".theme-toggle").forEach(function (button) {
-      button.setAttribute("aria-label", "Switch to " + next + " mode");
-    });
-  }
-  var saved = storedTheme();
-  if (saved) root.setAttribute("data-theme", saved);
-
-  function setTheme(next) {
-    root.setAttribute("data-theme", next);
-    try {
-      localStorage.setItem(THEME_KEY, next);
-    } catch (e) {}
-    labelThemeButtons();
-  }
-  /* Switching eases from one theme to the other instead of flashing: a
-     cross-fade of the whole page where the browser has view transitions,
-     otherwise the colours themselves fade (.theme-fade in site.css). It is
-     instant for reduced motion or while motion is paused. */
-  function switchTheme(next) {
-    if (reduceMotion || root.classList.contains("motion-paused")) return setTheme(next);
-    if (document.startViewTransition) {
-      document.startViewTransition(function () {
-        setTheme(next);
-      });
-      return;
-    }
-    root.classList.add("theme-fade");
-    setTheme(next);
-    setTimeout(function () {
-      root.classList.remove("theme-fade");
-    }, 500);
-  }
-  function initTheme() {
-    labelThemeButtons();
-    document.querySelectorAll(".theme-toggle").forEach(function (button) {
-      button.addEventListener("click", function () {
-        switchTheme(currentTheme() === "dark" ? "light" : "dark");
-      });
-    });
-  }
-
   /* Phone menu -------------------------------------------------------------- */
   function initMenu() {
     var button = document.querySelector(".menu-button");
@@ -224,7 +164,6 @@
 
   function start() {
     initMotion();
-    initTheme();
     initMenu();
     initBadge();
     initCursor();

@@ -1,0 +1,10 @@
+/* Home and About. The site's own stylesheets sit in the "legacy" layer:
+   above Tailwind's reset (base), below its utilities, so a utility class on
+   a shadcn/ui component always wins over the older page styles. */
+@layer theme, base, legacy, components, utilities;
+@import "../app/globals.css";
+@import "./site.css" layer(legacy);
+@import "./home.css" layer(legacy);
+@import "./portavia.css" layer(legacy);
+@import "./homepage.css" layer(legacy);
+@import "./carme.css" layer(legacy);

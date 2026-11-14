@@ -3,7 +3,7 @@
    in the footer. Loaded after the older page styles, so it wins where they
    overlap. Colours come from the tokens in site.css. ------------------- */
 .cm {
-  --cv-font: "Inter", system-ui, sans-serif;
+  --cv-font: "Newsreader", "Lyon Text", "Iowan Old Style", Georgia, serif;
   --heading-font: var(--cv-font);
   --body-font: var(--cv-font);
   --cs-font: var(--cv-font);
@@ -13,35 +13,51 @@
   /* where sticky things sit: under the header, or at the very top while it is hidden */
   --cm-top: var(--cm-head);
   /* softer than white and black, with a fine grain over the colour */
-  --bg: #eceff3;
-  --surface: #f1f3f6;
-  --surface-2: #f3f5f8;
-  --text-subtle: #566376;
-  --line: #cbd2dd;
+  --bg: #e3eae2;
+  --ink: #14241f;
+  --text-2: #3f524b;
+  --accent: #0f6a63;
+  --accent-text: #0f6a63;
+  --accent-hover: #0b524d;
+  --accent-soft: #d3e6df;
+  --surface: #ebf0ea;
+  --surface-2: #eef2ed;
+  --text-subtle: #4f6159;
+  --line: #c3cfc3;
   --cm-grain: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n' color-interpolation-filters='sRGB'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 0.12 0 0 0 0 0.15 0 0 0 0 0.19 -0.1 0 0 0 0.09'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
   background: var(--cm-grain) 0 0 / 240px auto, var(--bg);
   color: var(--ink);
-  font-family: "Inter", system-ui, sans-serif;
+  font-family: var(--cv-font);
 }
 :root[data-theme="dark"] .cm {
-  --bg: #0e0e10;
-  --surface: #151517;
-  --surface-2: #1a1a1d;
-  --text-2: #b8bbc2;
-  --text-subtle: #8f949c;
-  --line: #2c2c30;
-  --dark-bg: #09090a;
+  --bg: #0a2b2d;
+  --ink: #eaf5f3;
+  --accent: #4fd1c0;
+  --accent-text: #4fd1c0;
+  --accent-hover: #7ee6d6;
+  --accent-soft: #14444a;
+  --surface: #0f3538;
+  --surface-2: #143f42;
+  --text-2: #b2cdc9;
+  --text-subtle: #8fb2ad;
+  --line: #25565a;
+  --dark-bg: #061f21;
   --cm-grain: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n' color-interpolation-filters='sRGB'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 1 0 0 0 0 1 0 0 0 0 1 0.2 0 0 0 -0.06'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
 }
 @media (prefers-color-scheme: dark) {
   :root:not([data-theme="light"]) .cm {
-    --bg: #0e0e10;
-    --surface: #151517;
-    --surface-2: #1a1a1d;
-    --text-2: #b8bbc2;
-    --text-subtle: #8f949c;
-    --line: #2c2c30;
-    --dark-bg: #09090a;
+    --bg: #0a2b2d;
+  --ink: #eaf5f3;
+  --accent: #4fd1c0;
+  --accent-text: #4fd1c0;
+  --accent-hover: #7ee6d6;
+  --accent-soft: #14444a;
+    --surface: #0f3538;
+    --surface-2: #143f42;
+    --text-2: #b2cdc9;
+    --text-subtle: #8fb2ad;
+    --line: #25565a;
+    --dark-bg: #061f21;
     --cm-grain: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n' color-interpolation-filters='sRGB'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 1 0 0 0 0 1 0 0 0 0 1 0.2 0 0 0 -0.06'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
   }
 }
@@ -89,7 +105,7 @@
   color: var(--ink);
   font-size: 1rem;
   font-weight: 700;
-  letter-spacing: -0.02em;
+  letter-spacing: -0.01em;
   text-decoration: none;
   white-space: nowrap;
 }
@@ -133,7 +149,7 @@
 .cm-header .pv-nav__links a {
   padding: 10px 16px;
   border-radius: 0;
-  font-size: 1rem;
+  font-size: 0.9375rem;
   font-weight: 400;
   color: var(--ink);
 }
@@ -167,15 +183,15 @@
 }
 .cm-label {
   margin: 0;
-  font-size: 1.25rem;
+  font-size: clamp(2rem, 1.3rem + 2.6vw, 3.5rem); /* 32-56 */
   font-weight: 500;
-  line-height: 1.4;
+  line-height: 1.05;
   letter-spacing: -0.02em;
   color: var(--ink);
 }
 .cm-sub {
   margin: 0;
-  font-size: 1rem;
+  font-size: 1.125rem;
   line-height: 1.5;
   color: var(--text-2);
 }
@@ -225,7 +241,7 @@
   border-radius: 999px;
   background: var(--ink);
   color: var(--bg);
-  font: 500 1rem/1 "Inter", system-ui, sans-serif;
+  font: 500 1rem/1 var(--cv-font);
   text-decoration: none;
   cursor: pointer;
   transition: background 0.2s ease, color 0.2s ease, border-color 0.2s ease;
@@ -283,7 +299,7 @@
   align-items: baseline;
   justify-content: space-between;
   gap: 8px 32px;
-  margin-bottom: clamp(20px, 3vh, 32px);
+  margin-bottom: clamp(28px, 4vh, 48px);
 }
 .cm-reel {
   margin-inline: calc(50% - 50vw);
@@ -349,7 +365,7 @@
   font-size: clamp(3.5rem, 0.5rem + 11vw, 12rem);
   font-weight: 500;
   line-height: 0.88;
-  letter-spacing: -0.06em;
+  letter-spacing: -0.03em;
 }
 .cm-panel__go {
   grid-area: 2 / 2;
@@ -492,7 +508,7 @@
   color: var(--ink);
   font-size: clamp(1.5rem, 1rem + 2vw, 2.75rem);
   font-weight: 500;
-  letter-spacing: -0.04em;
+  letter-spacing: -0.02em;
   text-decoration-color: var(--accent);
   text-decoration-thickness: 2px;
   text-underline-offset: 8px;
@@ -500,11 +516,11 @@
 .cm-footer__name {
   --pan: 0%;
   margin: 0;
-  font-family: "Geist", "Inter", system-ui, sans-serif;
+  font-family: var(--cv-font);
   font-size: clamp(4rem, 13.5vw, 13rem);
-  font-weight: 700;
+  font-weight: 500;
   line-height: 0.9;
-  letter-spacing: -0.06em;
+  letter-spacing: -0.03em;
   white-space: nowrap;
   color: transparent;
   -webkit-text-stroke: 1.5px color-mix(in srgb, var(--ink) 35%, var(--bg));
@@ -574,12 +590,12 @@
   color: var(--text-2);
 }
 .cm-about__text {
-  max-width: 24em;
+  max-width: 22em;
   margin: 0;
-  font-size: clamp(1.75rem, 1rem + 2.6vw, 3.25rem);
+  font-size: clamp(2rem, 1.2rem + 3vw, 3.75rem); /* 32-60 */
   font-weight: 500;
-  line-height: 1.15;
-  letter-spacing: -0.05em;
+  line-height: 1.1;
+  letter-spacing: -0.025em;
   text-wrap: pretty;
   color: var(--ink);
 }
@@ -630,7 +646,7 @@
   margin: 0;
   font-size: clamp(1.25rem, 1rem + 0.8vw, 1.625rem);
   line-height: 1.35;
-  letter-spacing: -0.02em;
+  letter-spacing: -0.01em;
   color: var(--ink);
 }
 .cm-stats {
@@ -650,7 +666,7 @@
   font-size: clamp(2.75rem, 2rem + 3vw, 4.5rem);
   font-weight: 500;
   line-height: 1;
-  letter-spacing: -0.06em;
+  letter-spacing: -0.03em;
   font-variant-numeric: tabular-nums;
 }
 .cm-stats span {
@@ -678,7 +694,7 @@
   font-size: clamp(1.75rem, 1.2rem + 2vw, 3rem);
   font-weight: 500;
   line-height: 1.15;
-  letter-spacing: -0.05em;
+  letter-spacing: -0.025em;
 }
 .cm-title i {
   display: inline-block;
@@ -752,7 +768,7 @@
   font-size: clamp(1.5rem, 1.1rem + 1.2vw, 2rem);
   font-weight: 500;
   line-height: 1.15;
-  letter-spacing: -0.04em;
+  letter-spacing: -0.02em;
 }
 .cm-skill ul {
   display: flex;
@@ -991,7 +1007,7 @@
   margin: 0 auto 0 0;
   font-size: 1.5rem;
   font-weight: 500;
-  letter-spacing: -0.03em;
+  letter-spacing: -0.015em;
 }
 .cm-rdialog__head .cm-pill {
   min-height: 40px;
@@ -1101,7 +1117,7 @@ html:has(.cm-rdialog[open]) {
 .cm-journey .cv-job__role {
   font-size: 1.1875rem;
   font-weight: 600;
-  letter-spacing: -0.02em;
+  letter-spacing: -0.01em;
 }
 .cm-journey .cv-job__org {
   display: inline-block;
@@ -1214,7 +1230,7 @@ html.hello-lock {
   max-width: 17em;
   font-size: clamp(2.25rem, 1.3rem + 3.6vw, 4.5rem);
   line-height: 1.2;
-  letter-spacing: -0.045em;
+  letter-spacing: -0.022em;
 }
 .cm-hero .cm-about__text {
   font-weight: 500;

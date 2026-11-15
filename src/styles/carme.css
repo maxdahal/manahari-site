@@ -42,38 +42,38 @@
 }
 :root[data-theme="dark"] .cm {
   /* dark mode: deep Wimbledon green */
-  --bg: #0c2f22;
+  --bg: #082419;
   --ink: #eef4ee;
   --accent: #7ee8a2; /* bright green on the deep green page */
   --accent-text: #7ee8a2;
   --accent-hover: #a6f0bf;
-  --accent-soft: #164a31;
-  --on-accent: #0c2f22;
-  --surface: #113a2b;
-  --surface-2: #164433;
+  --accent-soft: #103d28;
+  --on-accent: #082419;
+  --surface: #0d2e21;
+  --surface-2: #11382a;
   --text-2: #b7cdbf;
   --text-subtle: #92ad9e;
-  --line: #285a45;
-  --dark-bg: #072016;
+  --line: #214d3b;
+  --dark-bg: #04170f;
   --ok: #7ee8a2;
   --cm-grain: none; /* grain off for now; the noise is kept below */
   --cm-grain-noise: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n' color-interpolation-filters='sRGB'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 1 0 0 0 0 1 0 0 0 0 1 0.2 0 0 0 -0.06'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
 }
 @media (prefers-color-scheme: dark) {
   :root:not([data-theme="light"]) .cm {
-    --bg: #0c2f22;
+    --bg: #082419;
   --ink: #eef4ee;
   --accent: #7ee8a2; /* bright green on the deep green page */
   --accent-text: #7ee8a2;
   --accent-hover: #a6f0bf;
-  --accent-soft: #164a31;
-  --on-accent: #0c2f22;
-    --surface: #113a2b;
-    --surface-2: #164433;
+  --accent-soft: #103d28;
+  --on-accent: #082419;
+    --surface: #0d2e21;
+    --surface-2: #11382a;
     --text-2: #b7cdbf;
     --text-subtle: #92ad9e;
-    --line: #285a45;
-    --dark-bg: #072016;
+    --line: #214d3b;
+    --dark-bg: #04170f;
     --ok: #7ee8a2;
     --cm-grain: none; /* grain off for now; the noise is kept below */
     --cm-grain-noise: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n' color-interpolation-filters='sRGB'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 1 0 0 0 0 1 0 0 0 0 1 0.2 0 0 0 -0.06'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");

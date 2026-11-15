@@ -75,15 +75,15 @@ Light mode is soft sage, dark mode deep Wimbledon green, with green accents in b
 
 | Tailwind / shadcn | Site token | Light | Dark |
 |---|---|---|---|
-| `background` | `--bg` | #E3EAE2 | #0C2F22 |
-| `card`, `popover` | `--surface` | #EBF0EA | #113A2B |
-| `muted`, `secondary` | `--surface-2` | #EEF2ED | #164433 |
+| `background` | `--bg` | #E3EAE2 | #082419 |
+| `card`, `popover` | `--surface` | #EBF0EA | #0D2E21 |
+| `muted`, `secondary` | `--surface-2` | #EEF2ED | #11382A |
 | `foreground`, `primary` | `--ink` | #14241F | #EEF4EE |
 | (text) | `--text-2` | #3F524B | #B7CDBF |
 | `muted-foreground` | `--text-subtle` | #4F6159 | #92AD9E |
-| `border`, `input` | `--line` | #C3CFC3 | #285A45 |
+| `border`, `input` | `--line` | #C3CFC3 | #214D3B |
 | `brand`, `ring` | `--accent` | #006633 (Wimbledon green) | #7EE8A2 |
-| `accent` | `--accent-soft` | #D3E8DA | #164A31 |
+| `accent` | `--accent-soft` | #D3E8DA | #103D28 |
 
 In the Home hero, "design" and "code." are Wimbledon green in light mode and sage (#C9D8C7) in dark mode. The paper grain is switched off for now (`--cm-grain` and `--paper` are `none`; the noise is kept as `--cm-grain-noise` and `--paper-noise`).
 

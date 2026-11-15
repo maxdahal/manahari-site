@@ -22,6 +22,7 @@ src/app/
   (case)/work/         Case studies: KU Brand, Asian's, Esri Calcite
   (case-ref)/work/     Surgical Console (case study layout plus the reading
                        hierarchy, .cs-ref)
+  global-not-found.tsx The 404 page, for any address the site does not have
 src/components/
   ui/                  shadcn/ui: button, dialog, tabs
   site/
@@ -93,4 +94,7 @@ The type is Newsreader (a free serif close to Lyon Text). Diagrams and sandboxes
 - **Navigation**: a header on every page with About, Work and Artwork, the resume and the theme switch; it hides while you read down and returns on the way up. Case studies add a sticky step bar, one circle per section.
 - **Theme**: next-themes. Follows the device until someone uses the toggle; the choice is kept in `localStorage` under `mt-theme`. Switching cross-fades (instant with reduced motion or while motion is paused).
 - **Intro**: the "hello" plays once per visit (session storage).
-- **Motion**: everything respects `prefers-reduced-motion`, and every page has a pause button for anything that moves on its own.
+- **Motion**: everything respects `prefers-reduced-motion`. Nothing moves on its own for more than five seconds (the role beside the name rolls through its titles once, then stays), so there is no pause button. The sandboxes' opening demos stop as soon as the visitor touches them.
+- **404**: `src/app/global-not-found.tsx` (with `experimental.globalNotFound`), one page for the whole site with the same header, menu, footer and theme.
+- **Craft details** (end of `src/styles/carme.css`): buttons give a little when pressed; pictures and the resume show a soft placeholder until they load (`site.js` marks pictures with `data-loading`); dates and stats use tabular numbers; paragraphs avoid a lone last word; touch targets are at least 44px; in dark mode photos are dimmed slightly and raised cards get a faint light edge instead of a shadow.
+- **Type and icons**: headings are plain (no gradient bars, bands or outlined echoes). Monospace is only for data (code, hex values, ratios, scores). Icons are Lucide line icons at stroke 2, including the arrows.

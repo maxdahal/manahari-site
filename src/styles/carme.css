@@ -24,6 +24,16 @@
   --surface-2: #eef2ed;
   --text-subtle: #4f6159;
   --line: #c3cfc3;
+  /* the older tokens the case studies still read, brought into the green
+     palette (body text was the old navy, success the old green, accents on
+     dark grounds the old teal) */
+  --text: var(--ink);
+  --outline-dim: var(--text-2);
+  --header-line: var(--line);
+  --ok: #006633;
+  --ok-text: var(--ok);
+  --bad-text: var(--error);
+  --accent-on-dark: #7ee8a2;
   --cm-grain: none; /* grain off for now; the noise is kept below */
   --cm-grain-noise: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n' color-interpolation-filters='sRGB'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 0.12 0 0 0 0 0.15 0 0 0 0 0.19 -0.1 0 0 0 0.09'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
   background: var(--cm-grain) 0 0 / 240px auto, var(--bg);
@@ -45,6 +55,7 @@
   --text-subtle: #92ad9e;
   --line: #285a45;
   --dark-bg: #072016;
+  --ok: #7ee8a2;
   --cm-grain: none; /* grain off for now; the noise is kept below */
   --cm-grain-noise: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n' color-interpolation-filters='sRGB'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 1 0 0 0 0 1 0 0 0 0 1 0.2 0 0 0 -0.06'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
 }
@@ -63,6 +74,7 @@
     --text-subtle: #92ad9e;
     --line: #285a45;
     --dark-bg: #072016;
+    --ok: #7ee8a2;
     --cm-grain: none; /* grain off for now; the noise is kept below */
     --cm-grain-noise: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n' color-interpolation-filters='sRGB'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 1 0 0 0 0 1 0 0 0 0 1 0.2 0 0 0 -0.06'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
   }
@@ -123,10 +135,8 @@
   padding-left: 18px;
   border-left: 1px solid var(--line);
   min-width: 11.5em;
-  font-size: 0.6875rem;
+  font-size: 0.875rem;
   font-weight: 400;
-  letter-spacing: 0.16em;
-  text-transform: uppercase;
   color: var(--text-2);
 }
 .cm-brand__role {
@@ -1246,4 +1256,122 @@ html.hello-lock {
 }
 .cm-hero .cm-actions {
   margin-top: clamp(40px, 7vh, 72px);
+}
+
+/* ---- craft details, for every page ------------------------------------ */
+
+/* numbers that sit in rows or columns (years, dates, stats, ratios) keep
+   equal widths so they line up */
+.cm :is(.a-facts dd, .a-lead dd, .contrib__facts dd, .badge__facts dd, .cm-facts dd, .a-tag, .stats, .cm-stats, .cm-panel__words small, .cv-rows span, .cv-job__when, .cv-stop__when, .cm-footer__base, .sandbox__badge, .play__picked) {
+  font-variant-numeric: tabular-nums;
+}
+
+/* paragraphs avoid a lone last word (headings already balance) */
+.cm :is(p, li, dd, figcaption, blockquote) {
+  text-wrap-style: pretty;
+}
+
+/* useful feedback: a control gives a little under the finger or pointer
+   when pressed (not with reduced motion or while motion is paused) */
+@media (prefers-reduced-motion: no-preference) {
+  .cm :is(.cm-resume, .theme-toggle, .menu-button, .button, .sandbox__btn, .play__preset, .badge__flip, .badge__more, .badge__icon, .recruiter__more) {
+    transition-property: background-color, color, border-color, transform, scale;
+    transition-duration: 0.2s, 0.2s, 0.2s, 0.2s, 0.12s;
+    transition-timing-function: ease;
+  }
+  :root:not(.motion-paused) .cm :is(.cm-resume, .theme-toggle, .menu-button, .button, .sandbox__btn, .play__preset, .badge__flip, .badge__more, .badge__icon, .recruiter__more, [data-slot="button"]):active:not(:disabled) {
+    scale: 0.96;
+  }
+}
+
+/* loading states: a picture that has not arrived yet (site.js marks it) and
+   the resume while its PDF loads show a soft placeholder in their space */
+.cm img[data-loading],
+.cm-rdialog__frame[data-loading] {
+  background-color: var(--surface-2);
+}
+@media (prefers-reduced-motion: no-preference) {
+  :root:not(.motion-paused) .cm :is(img[data-loading], .cm-rdialog__frame[data-loading]) {
+    animation: cm-loading 1.4s ease-in-out infinite;
+  }
+}
+@keyframes cm-loading {
+  50% { background-color: color-mix(in srgb, var(--surface-2), var(--ink) 6%); }
+}
+
+/* dark mode: photos and screenshots are dimmed a little so they do not glare
+   on the deep green, and raised cards are set apart by a faint light edge
+   rather than a shadow (shadows vanish on a dark ground) */
+:root[data-theme="dark"] .cm main img:not([src$=".svg"]) {
+  filter: brightness(0.88);
+}
+:root[data-theme="dark"] .cm :is(.badge__face, .console) {
+  box-shadow: 0 0 0 1px rgb(255 255 255 / 0.07);
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) .cm main img:not([src$=".svg"]) {
+    filter: brightness(0.88);
+  }
+  :root:not([data-theme="light"]) .cm :is(.badge__face, .console) {
+    box-shadow: 0 0 0 1px rgb(255 255 255 / 0.07);
+  }
+}
+
+/* touch targets: at least 44px. Where the look stays smaller, the extra is
+   padding taken back with a negative margin, so nothing moves on screen */
+.cm .cm-brand {
+  padding: 10px 3px;
+  margin: -10px -3px;
+}
+.cm :is(.cm-footer__base a, .cm-footer .cm-wrap > a:not(.cm-footer__email), .menu__foot a) {
+  padding-block: 10px;
+  margin-block: -10px;
+}
+.cm .cm-footer__email {
+  padding-block: 3px;
+  margin-block: -3px;
+}
+.cm .cm-about__more {
+  padding-block: 10px;
+  margin-top: calc(clamp(32px, 5vh, 56px) - 10px);
+  margin-bottom: -10px;
+}
+.cm .cm-step a {
+  padding-block: 15px;
+  margin-block: -15px;
+}
+@media (max-width: 809px), (pointer: coarse) {
+  .cm .cm-header .icon-button {
+    width: 44px;
+    height: 44px;
+  }
+}
+
+/* the 404: the number and the line under it, in the space a hero would take */
+.cm-missing {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  padding-block: clamp(140px, 24vh, 260px) clamp(96px, 16vh, 180px);
+}
+.cm-missing h1 {
+  font-size: clamp(4rem, 2rem + 8vw, 9rem);
+}
+.cm-missing p {
+  margin: 0;
+  color: var(--text-2);
+  font-size: clamp(1.125rem, 1rem + 0.5vw, 1.5rem);
+}
+
+/* the supporting paragraph under a big statement (Home hero, About), and the
+   status line above the Home hero (the ID badge's status style) */
+:is(.cm-hero__lede, .cm-about__lede) {
+  max-width: 36em;
+  margin: clamp(20px, 3vh, 32px) 0 0;
+  color: var(--text-2);
+  font-size: clamp(1.125rem, 1rem + 0.45vw, 1.375rem);
+  line-height: 1.55;
+}
+.cm-hero__status {
+  margin: 0 0 clamp(20px, 3vh, 28px);
 }

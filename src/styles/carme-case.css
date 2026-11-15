@@ -174,11 +174,6 @@ body.cs .a-outline li, body.cs .a-outline a {
   }
 }
 
-/* the outlined echo of each section title, a little stronger on the grain */
-#main .a-act > h2[data-ghost]::before {
-  opacity: 0.24;
-}
-
 /* more room between the pieces inside each part, too */
 #main :is(.a-act, .a-part) {
   gap: 28px 0;
@@ -187,22 +182,18 @@ body.cs .a-outline li, body.cs .a-outline a {
   gap: clamp(40px, 6vh, 72px) clamp(24px, 3vw, 48px);
 }
 
-/* headings with a gradient: each section title has a bar under it that
-   fades from the accent out to nothing, and each sub-heading sits on a soft
-   band that fades out to the right, with the accent dot at its start */
+/* plain headings: no bar under the section titles, no band or dot behind
+   the sub-headings; the space around them does the grouping */
 #main .a-act > h2::after {
-  content: "";
-  display: block;
-  width: min(100%, 360px);
-  height: 4px;
-  margin-top: 20px;
-  border-radius: 4px;
-  background: linear-gradient(90deg, var(--accent), transparent);
+  content: none;
 }
 #main .a-part > h3 {
-  padding: 14px 24px 14px 18px;
-  border-radius: 10px;
-  background: linear-gradient(90deg, color-mix(in srgb, var(--accent) 18%, transparent), color-mix(in srgb, var(--accent) 4%, transparent) 70%, transparent);
+  padding: 0;
+  border-radius: 0;
+  background: none;
+}
+#main .a-part > h3::before {
+  content: none;
 }
 #main .a-act--intro > .a-part:not([id]) > h3 {
   padding: 0;
@@ -1461,7 +1452,7 @@ body.cs .article [id] {
     grid-row: 2 / span 4;
     margin: 0;
   }
-  body.cs #main .a-act > .a-part:has(> :is(figure, .v)) > :is(.cards, .dids, .stats, .accs, .sb, .row, .figs, .figset, .steps--cols, .contrib, .sandbox-wrap, .roles, .figs-roles, .a-more) {
+  body.cs #main .a-act > .a-part:has(> :is(figure, .v)) > :is(.cards, .dids, .stats, .accs, .sb, .row, .figs, .figset, .steps--cols, .contrib, .sandbox-wrap, .roles, .figs-roles, .a-more, .a-later) {
     grid-column: 1 / -1;
     margin-block: 20px;
   }
@@ -1541,7 +1532,7 @@ body.cs-ref #main :is(.a-part > p, .a-act > p) {
   font-size: 1.0625rem;
   line-height: 1.8;
 }
-body.cs-ref #main :is(p, li) :is(strong, b) {
+body.cs-ref #main :is(p, li):not(.sandbox *) :is(strong, b) {
   color: var(--ink);
   font-weight: 600;
 }
@@ -1575,7 +1566,7 @@ body.cs-ref #main :is(.cards, .dids, .steps--cols, .accs) {
   padding: 0;
   list-style: none;
 }
-body.cs-ref #main :is(.card-pt, .did, .acc) {
+body.cs-ref #main :is(.card-pt, .did) {
   display: grid;
   grid-template-columns: 6px minmax(0, 1fr);
   column-gap: 16px;
@@ -1583,7 +1574,7 @@ body.cs-ref #main :is(.card-pt, .did, .acc) {
   padding: 0;
   border: 0;
 }
-body.cs-ref #main :is(.card-pt, .did, .acc)::before {
+body.cs-ref #main :is(.card-pt, .did)::before {
   content: "";
   grid-column: 1;
   grid-row: 1;
@@ -1593,7 +1584,7 @@ body.cs-ref #main :is(.card-pt, .did, .acc)::before {
   border-radius: 50%;
   background: var(--accent);
 }
-body.cs-ref #main :is(.card-pt, .did, .acc) > * {
+body.cs-ref #main :is(.card-pt, .did) > * {
   grid-column: 2;
 }
 body.cs-ref #main :is(.card-pt h4, .step :is(h3, h4)) {
@@ -1665,5 +1656,66 @@ body.cs-ref #my-contribution .contrib__facts dd {
     gap: 36px clamp(32px, 6vw, 96px);
     max-width: none;
     align-items: start;
+  }
+}
+
+/* drawings made for a dark screen (light lines and words) sit on the same
+   near-black panel as the ones that carry their own, in both themes */
+#main svg.on-dark {
+  background: #101213;
+}
+
+/* a quote with more than one paragraph keeps them apart */
+#main .a-quote p:not(.label) + p {
+  margin-top: 0.75em;
+}
+
+/* a short list that follows a section's steps, across the full width */
+#main .a-later {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  max-width: 48em;
+}
+#main .a-later > * {
+  margin: 0;
+}
+
+/* ---- layout fixes ------------------------------------------------------ */
+
+/* Surgical Console on a phone: the article turns a list of three or more
+   cards into a sideways swipe (each card flex: 0 0 80%). Here the cards are
+   a column of bullets, so that 80% would become a fixed height and the text
+   would spill over whatever follows. Each item takes its own height. */
+body.cs-ref #main :is(.cards, .dids, .steps--cols, .accs) > * {
+  flex: none;
+  scroll-snap-align: none;
+}
+body.cs-ref #main :is(.cards, .dids, .steps--cols, .accs) {
+  overflow: visible;
+  scroll-snap-type: none;
+}
+
+/* a part with more than one picture (a set of sketches, two screens) shows
+   them one under another across the full width, not stacked in one cell */
+@media (min-width: 861px) {
+  body.cs #main .a-act > .a-part:has(> :is(figure, .v) ~ :is(figure, .v)) > :is(figure, .v) {
+    grid-column: 1 / -1;
+    grid-row: auto;
+    margin-block: 20px;
+  }
+}
+
+/* four "what I did" items sit two by two, not three and one */
+@media (min-width: 1101px) {
+  #main .dids:has(> .did:nth-child(4):last-child) {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+/* six facts under the title sit three by two, not five and one */
+@media (min-width: 861px) {
+  #main .a-facts:has(> div:nth-child(6):last-child) {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
   }
 }

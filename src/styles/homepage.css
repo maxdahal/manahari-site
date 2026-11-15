@@ -504,7 +504,8 @@
   width: 100%;
   aspect-ratio: 4 / 4.4;
   object-fit: cover;
-  border-radius: var(--r-md);
+  /* concentric with the card: its radius minus the card's 16px padding */
+  border-radius: calc(var(--r-lg) - 16px);
   background: #fbfcfe;
 }
 .badge__name {

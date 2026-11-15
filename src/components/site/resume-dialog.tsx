@@ -11,6 +11,7 @@ import { closeMenu } from "./close-menu"
 export function ResumeDialog() {
   const [open, setOpen] = useState(false)
   const [loaded, setLoaded] = useState(false)
+  const [ready, setReady] = useState(false)
   const opener = useRef<HTMLElement | null>(null)
 
   useEffect(() => {
@@ -41,7 +42,18 @@ export function ResumeDialog() {
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d="M18 6 6 18" /><path d="m6 6 12 12" /></svg>
             </DialogClose>
           </header>
-          <iframe className="cm-rdialog__frame" title="Resume, PDF" src={loaded ? "/resume.pdf#view=FitH" : undefined} />
+          {/* until the PDF has loaded, the frame shows a soft pulsing
+              placeholder (aria-busy tells screen readers it is loading) */}
+          <iframe
+            className="cm-rdialog__frame"
+            title="Resume, PDF"
+            src={loaded ? "/resume.pdf#view=FitH" : undefined}
+            aria-busy={!ready}
+            data-loading={ready ? undefined : ""}
+            onLoad={(event) => {
+              if (event.currentTarget.getAttribute("src")) setReady(true)
+            }}
+          />
         </div>
       </DialogPopup>
     </Dialog>

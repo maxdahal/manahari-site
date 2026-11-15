@@ -1,3 +1,4 @@
+import { ArrowUpRight } from "lucide-react"
 import { ThemeToggle } from "./theme-toggle"
 
 type Current = "about" | "work" | "home"
@@ -47,7 +48,7 @@ export function Header({ current }: { current?: Current }) {
             ))}
           </nav>{" "}
           <a className="cm-resume" href="/resume.pdf" target="_blank" rel="noopener" data-cursor="Open resume">
-            Resume <span aria-hidden="true">↗</span>
+            Resume <ArrowUpRight aria-hidden="true" className="size-[1em]" />
           </a>{" "}
           <div className="cm-header__end cp-bar__end">
             {" "}

@@ -12,16 +12,20 @@
   }
 
   /* the caption beside the name rolls up to the next title, the same
-     movement as the links on hover; it stays on the first when motion is off */
+     movement as the links on hover. It goes round once, back to the first
+     title, and then stays still: under five seconds of movement, so it
+     needs no pause button (WCAG 2.2.2). It stays on the first when motion
+     is off. */
   var role = document.querySelector(".cm-brand__role");
   if (role) {
     var titles = role.getAttribute("data-words").split("|");
     var track = role.querySelector(".cm-role");
     var rows = track.children;
     var shown = 0;
-    setInterval(function () {
+    var roll = setInterval(function () {
       if (still() || document.hidden) return;
       shown = (shown + 1) % titles.length;
+      if (shown === 0) clearInterval(roll);
       rows[1].textContent = titles[shown];
       track.classList.add("is-rolling");
       setTimeout(function () {
@@ -32,7 +36,7 @@
         void track.offsetWidth;
         track.style.transition = "";
       }, 440);
-    }, 2800);
+    }, 1600);
   }
 
   /* header: hides after a little downward scroll, returns after a little up.
@@ -131,7 +135,11 @@
     if (!statement) return;
     var spans = [];
     wrapWords(statement, spans);
-    /* the home hero starts with just its first word ("I’m") already lit;
+    /* the paragraph under the statement lights after it, in the same
+       sequence, so the statement always reads first */
+    var lede = about.querySelector(".cm-hero__lede, .cm-about__lede");
+    if (lede) wrapWords(lede, spans);
+    /* the home hero starts with just its first word ("Hi,") already lit;
        the rest fills in as you scroll */
     var litTo = about.classList.contains("cm-hero") ? 0 : -1;
     var light = function () {

@@ -239,30 +239,6 @@ body.cs .a-act:not(.a-act--intro)::before {
   letter-spacing: -0.035em;
   color: var(--ink);
 }
-/* the ghost: the act's title again, huge, outlined and faint, cut off at
-   the column's edge, with the title itself overlapping its lower part (from
-   data-ghost, as generated content screen readers skip) */
-#main .a-act > h2[data-ghost]::before {
-  content: attr(data-ghost) / "";
-  overflow: hidden;
-  margin-bottom: -0.45em;
-  font-size: clamp(4rem, 1.5rem + 7vw, 9rem);
-  font-weight: 700;
-  line-height: 0.9;
-  letter-spacing: -0.05em;
-  white-space: nowrap;
-  color: transparent;
-  -webkit-text-stroke: 1px var(--ink);
-  opacity: 0.16;
-  pointer-events: none;
-  user-select: none;
-}
-@supports not (-webkit-text-stroke: 1px black) {
-  #main .a-act > h2[data-ghost]::before {
-    color: var(--ink);
-    opacity: 0.06;
-  }
-}
 /* the accent dot belongs to the page title only */
 #main .a-act > h2 .cs-dot {
   display: none;

@@ -4,10 +4,10 @@ import { useState } from "react"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 
 const roles = [
-  { name: "Surgeon", note: "At the console. Eyes in the 3D viewer, hands on the controls." },
-  { name: "Scrub nurse", note: "Sterile, by the patient. Watches the wall monitor from 6 feet." },
-  { name: "Circulating nurse", note: "Walks the room. Answers alerts and runs recording." },
-  { name: "Biomed engineer", note: "At the machine, before or after surgery. Finds hardware faults." },
+  { name: "Surgeon", note: "At the console. Eyes in the 3D viewer, hands on the controls. Needs to mark, measure, and capture anatomy in seconds without breaking focus." },
+  { name: "Scrub nurse", note: "Sterile, by the patient. Watches the wall monitor from 6 feet. Needs to instantly see what the surgeon points to without reading small labels." },
+  { name: "Circulating nurse", note: "Walks the room. Unsterile. Handles equipment alerts, recording states, patient privacy, and case records." },
+  { name: "Biomed engineer", note: "At the machine, before or after surgery. Reviews system logs and module states. The only role in the room with time to read dense text tables." },
 ]
 
 /* Role buttons over a drawing (Surgical Console, users and environment):

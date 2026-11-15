@@ -162,11 +162,27 @@
     });
   }
 
+  /* Loading states: a picture that has not arrived yet shows a soft
+     placeholder in its reserved space (img[data-loading], styled in
+     carme.css) until it loads or fails. */
+  function initImages() {
+    [].forEach.call(document.querySelectorAll("main img"), function (img) {
+      if (img.complete && img.naturalWidth) return;
+      var done = function () {
+        img.removeAttribute("data-loading");
+      };
+      img.setAttribute("data-loading", "");
+      img.addEventListener("load", done, { once: true });
+      img.addEventListener("error", done, { once: true });
+    });
+  }
+
   function start() {
     initMotion();
     initMenu();
     initBadge();
     initCursor();
+    initImages();
   }
 
   if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", start);

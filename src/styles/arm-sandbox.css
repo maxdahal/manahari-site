@@ -23,15 +23,6 @@
    state controls, the one-second glance
    test and the "across the room" view. The console is always dark, like the
    real one. */
-.sandbox-wrap--console {
-  --sb-ring: #b9a4ff, #e3c48f, #1f5f4a, #f49ac9, #b9a4ff;
-  --sb-wash:
-    radial-gradient(circle at 0% 0%, rgb(255 107 26 / 0.18), transparent 40%),
-    radial-gradient(circle at 100% 0%, rgb(124 196 242 / 0.24), transparent 40%),
-    radial-gradient(circle at 100% 100%, rgb(214 50 158 / 0.14), transparent 42%);
-  --sb-shadow: rgb(43 76 155 / 0.4);
-  --sb-glow: #e3c48f;
-}
 .sandbox__btn--go {
   border-color: var(--accent);
   background: color-mix(in srgb, var(--accent) 12%, var(--bg));
@@ -81,11 +72,13 @@
 }
 .arm-tag--dropped {
   background: color-mix(in srgb, var(--bad-text, #a1121c) 12%, transparent);
-  color: var(--bad-text, #a1121c);
+  /* a touch of the text color keeps it readable on a tinted button, darker
+     in light mode and lighter in dark */
+  color: color-mix(in srgb, var(--bad-text, #a1121c) 75%, var(--ink));
 }
 .arm-tag--shipped {
   background: color-mix(in srgb, var(--ok-text, #0d5228) 14%, transparent);
-  color: var(--ok-text, #0d5228);
+  color: color-mix(in srgb, var(--ok-text, #0d5228) 70%, var(--ink));
 }
 
 /* the console */
@@ -153,7 +146,8 @@
 .console:is([data-design="a"], [data-design="final"]) .console__flag.is-on {
   display: block;
 }
-.console__arms {
+/* .console raises it above the article's own list rule (.article ul) */
+.console .console__arms {
   display: grid;
   grid-template-columns: repeat(4, minmax(0, 1fr));
   gap: 8px;
@@ -168,6 +162,11 @@
   border-radius: 6px;
   background: var(--console);
   font-size: 0.8125rem;
+}
+/* the console is dark in both themes: its panels keep the console's light
+   text, not the page's paragraph color */
+.console li.carm {
+  color: var(--console-ink);
 }
 .carm__name {
   font-size: 0.875rem;
@@ -393,7 +392,7 @@
   flex: none;
 }
 @media (max-width: 860px) {
-  .console__arms {
+  .console .console__arms {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 }

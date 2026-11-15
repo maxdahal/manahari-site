@@ -18,9 +18,9 @@ const buttonVariants = cva(
           "bg-destructive/10 text-destructive hover:bg-destructive/20 focus-visible:border-destructive/40 focus-visible:ring-destructive/20 dark:bg-destructive/20 dark:hover:bg-destructive/30 dark:focus-visible:ring-destructive/40",
         link: "text-primary underline-offset-4 hover:underline",
         /* the site's round buttons: filled ink, and outlined */
-        pill: "rounded-full border-[1.5px] border-foreground bg-foreground font-serif text-base leading-none font-medium text-background transition-colors hover:border-brand hover:bg-brand hover:text-brand-foreground focus-visible:border-brand focus-visible:bg-brand focus-visible:text-brand-foreground focus-visible:ring-0",
+        pill: "rounded-full border-[1.5px] no-underline border-foreground bg-foreground font-serif text-base leading-none font-medium text-background transition-colors hover:border-brand hover:bg-brand hover:text-brand-foreground focus-visible:border-brand focus-visible:bg-brand focus-visible:text-brand-foreground focus-visible:ring-0",
         "pill-line":
-          "rounded-full border-[1.5px] border-[color-mix(in_srgb,var(--ink)_55%,transparent)] bg-transparent font-serif text-base leading-none font-medium text-foreground transition-colors hover:border-brand hover:bg-brand hover:text-brand-foreground focus-visible:border-brand focus-visible:bg-brand focus-visible:text-brand-foreground focus-visible:ring-0",
+          "rounded-full border-[1.5px] no-underline border-[color-mix(in_srgb,var(--ink)_55%,transparent)] bg-transparent font-serif text-base leading-none font-medium text-foreground transition-colors hover:border-brand hover:bg-brand hover:text-brand-foreground focus-visible:border-brand focus-visible:bg-brand focus-visible:text-brand-foreground focus-visible:ring-0",
       },
       size: {
         default:

@@ -46,9 +46,23 @@
   --radius-4xl: 999px;
 }
 
+/* The two key words in the Home hero ("design" and "code.") take the other
+   theme's colour: Wimbledon green in light mode, sage in dark mode. 5.8:1
+   and 9.8:1 on their pages. */
+@theme {
+  --color-wimbledon: #006633;
+  --color-sage: #c9d8c7;
+}
+
 @layer base {
   * {
     @apply border-border;
+  }
+  /* Tailwind's reset takes the underline off links; the site's own styles
+     were written expecting the browser's default, so put it back (a class
+     can still remove it, e.g. no-underline on the pill buttons) */
+  a {
+    text-decoration-line: underline;
   }
 }
 

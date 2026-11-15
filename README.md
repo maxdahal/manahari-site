@@ -70,19 +70,21 @@ Theme, the resume dialog, the quick summary and the Surgical Console roles are R
 
 ## Colours and type
 
-Light mode is soft sage, dark mode deep teal. The values live in `src/styles/carme.css` (the `.cm` blocks) on top of the base tokens in `src/styles/site.css`, and `globals.css` maps them to Tailwind and shadcn/ui names:
+Light mode is soft sage, dark mode deep Wimbledon green, with green accents in both. The values live in `src/styles/carme.css` (the `.cm` blocks) on top of the base tokens in `src/styles/site.css`, and `globals.css` maps them to Tailwind and shadcn/ui names:
 
 | Tailwind / shadcn | Site token | Light | Dark |
 |---|---|---|---|
-| `background` | `--bg` | #E3EAE2 | #0A2B2D |
-| `card`, `popover` | `--surface` | #EBF0EA | #0F3538 |
-| `muted`, `secondary` | `--surface-2` | #EEF2ED | #143F42 |
-| `foreground`, `primary` | `--ink` | #14241F | #EAF5F3 |
-| (text) | `--text-2` | #3F524B | #B2CDC9 |
-| `muted-foreground` | `--text-subtle` | #4F6159 | #8FB2AD |
-| `border`, `input` | `--line` | #C3CFC3 | #25565A |
-| `brand`, `ring` | `--accent` | #0F6A63 | #4FD1C0 |
-| `accent` | `--accent-soft` | #D3E6DF | #14444A |
+| `background` | `--bg` | #E3EAE2 | #0C2F22 |
+| `card`, `popover` | `--surface` | #EBF0EA | #113A2B |
+| `muted`, `secondary` | `--surface-2` | #EEF2ED | #164433 |
+| `foreground`, `primary` | `--ink` | #14241F | #EEF4EE |
+| (text) | `--text-2` | #3F524B | #B7CDBF |
+| `muted-foreground` | `--text-subtle` | #4F6159 | #92AD9E |
+| `border`, `input` | `--line` | #C3CFC3 | #285A45 |
+| `brand`, `ring` | `--accent` | #006633 (Wimbledon green) | #7EE8A2 |
+| `accent` | `--accent-soft` | #D3E8DA | #164A31 |
+
+In the Home hero, "design" and "code." are Wimbledon green in light mode and sage (#C9D8C7) in dark mode. The paper grain is switched off for now (`--cm-grain` and `--paper` are `none`; the noise is kept as `--cm-grain-noise` and `--paper-noise`).
 
 The type is Newsreader (a free serif close to Lyon Text). Diagrams and sandboxes use Inter, Geist Mono and JetBrains Mono, and the handwritten notes Kalam.
 

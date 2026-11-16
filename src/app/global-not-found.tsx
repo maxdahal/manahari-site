@@ -26,9 +26,9 @@ export default function GlobalNotFound() {
       <Header />
       <div className="menu" id="menu">
         <nav className="menu__links" aria-label="Menu">
-          <a href="/#work">Work<small>01</small></a>
-          <a href="/about">About<small>02</small></a>
-          <a href="/#artwork">Artwork<small>03</small></a>
+          <a href="/#work">Work</a>
+          <a href="/about">About</a>
+          <a href="/#artwork">Artwork</a>
         </nav>
         <div className="menu__foot">
           <button className="recruiter-button recruiter-button--menu" type="button" data-recruiter="" aria-haspopup="dialog">

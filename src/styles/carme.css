@@ -3,7 +3,7 @@
    in the footer. Loaded after the older page styles, so it wins where they
    overlap. Colours come from the tokens in site.css. ------------------- */
 .cm {
-  --cv-font: "Newsreader", "Lyon Text", "Iowan Old Style", Georgia, serif;
+  --cv-font: var(--font-newsreader), "Lyon Text", "Iowan Old Style", Georgia, serif;
   --heading-font: var(--cv-font);
   --body-font: var(--cv-font);
   --cs-font: var(--cv-font);
@@ -246,57 +246,6 @@
   align-items: center;
   gap: 10px;
   margin: clamp(32px, 5vh, 56px) 0 0;
-}
-.cm-pill {
-  display: inline-flex;
-  align-items: center;
-  gap: 12px;
-  min-height: 52px;
-  padding: 0 28px;
-  border: 1.5px solid var(--ink);
-  border-radius: 999px;
-  background: var(--ink);
-  color: var(--bg);
-  font: 500 1rem/1 var(--cv-font);
-  text-decoration: none;
-  cursor: pointer;
-  transition: background 0.2s ease, color 0.2s ease, border-color 0.2s ease;
-}
-.cm-pill:hover,
-.cm-pill:focus-visible {
-  border-color: var(--accent);
-  background: var(--accent);
-  color: var(--on-accent);
-}
-.cm-pill--line {
-  border-color: color-mix(in srgb, var(--ink) 55%, transparent);
-  background: transparent;
-  color: var(--ink);
-}
-.cm-pill--line:hover {
-  border-color: var(--accent);
-}
-.cm-round {
-  display: inline-grid;
-  place-items: center;
-  width: 52px;
-  height: 52px;
-  border-radius: 50%;
-  background: var(--surface-2);
-  color: var(--ink);
-  font-size: 1.25rem;
-  text-decoration: none;
-  transition: background 0.2s ease, color 0.2s ease;
-}
-.cm-round:hover {
-  background: var(--accent);
-  color: var(--on-accent);
-}
-@media (max-width: 480px) {
-  .cm-pill {
-    gap: 12px;
-    padding: 0 20px;
-  }
 }
 /* ---- work: the case studies one after another, each a full dark panel
    with its picture filling it and its name very large. With motion they are
@@ -591,6 +540,15 @@
   padding-block: 0;
   transition: top 0.24s ease, min-height 0.24s ease;
 }
+/* the stage takes its held size from the first paint whenever carme.js is
+   going to hold it (motion allowed and not paused, the same test it uses),
+   so the statement does not jump to re-centre when the hold starts */
+@media (prefers-reduced-motion: no-preference) {
+  :root:not(.motion-paused) .cm-about:not(.is-held) .cm-about__stage {
+    min-height: calc(100svh - var(--cm-top));
+    padding-block: 0;
+  }
+}
 .cm.cm-nav-hidden {
   --cm-top: 0px;
 }
@@ -615,8 +573,36 @@
   text-wrap: pretty;
   color: var(--ink);
 }
+/* words not yet lit stay readable (large text 3:1, the paragraph 4.5:1, in
+   both themes): scrolling brightens what you can already read rather than
+   uncovering it. carme.js reads these floors, so they live here only. */
+.cm-about {
+  --sw-floor: 0.55;
+  --sw-floor-key: 0.75; /* the green key words: Wimbledon green fades faster */
+  --sw-floor-lede: 0.85;
+}
+:root[data-theme="dark"] .cm-about {
+  --sw-floor: 0.45;
+  --sw-floor-key: 0.6; /* sage keeps its lead over the plain words */
+  --sw-floor-lede: 0.7;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) .cm-about {
+    --sw-floor: 0.45;
+    --sw-floor-key: 0.6; /* sage keeps its lead over the plain words */
+    --sw-floor-lede: 0.7;
+  }
+}
 .cm-about.is-held .cm-sw {
-  opacity: 0.16;
+  opacity: var(--sw-floor);
+}
+.cm-about.is-held .cm-about__text b .cm-sw {
+  opacity: var(--sw-floor-key);
+}
+.cm-about.is-held :is(.cm-hero__lede, .cm-about__lede) .cm-sw {
+  opacity: var(--sw-floor-lede);
+  /* carme.js sets --lit from 0 to 1 as each word lights */
+  color: color-mix(in oklab, var(--ink) calc(var(--lit, 0) * 100%), var(--text-2));
 }
 .cm-about__more {
   align-self: flex-start;
@@ -746,8 +732,22 @@
 .cm-draw .cv-stop {
   transition: opacity 0.5s ease, filter 0.5s ease;
 }
+/* stops not reached yet stay readable (their faintest text, --text-2, keeps
+   4.5:1 in both themes): grey and a little dim says "not yet", the line
+   reaching the pin brings the colour back */
+.cm-journey {
+  --stop-floor: 0.85;
+}
+:root[data-theme="dark"] .cm-journey {
+  --stop-floor: 0.75;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) .cm-journey {
+    --stop-floor: 0.75;
+  }
+}
 .cm-draw .cv-stop:not(.is-reached) {
-  opacity: 0.25;
+  opacity: var(--stop-floor);
   filter: grayscale(1);
 }
 
@@ -1025,11 +1025,6 @@
   font-weight: 500;
   letter-spacing: -0.015em;
 }
-.cm-rdialog__head .cm-pill {
-  min-height: 40px;
-  padding: 0 18px;
-  font-size: 0.9375rem;
-}
 .cm-rdialog__frame {
   flex: 1;
   width: 100%;
@@ -1211,6 +1206,23 @@ html.hello-lock body {
 html.hello-lock {
   scrollbar-gutter: stable;
 }
+/* skipped (any click, key, wheel or touch): out in a quarter second, faster
+   than it came in, and it stops catching the pointer straight away */
+html.hello-skip .hello {
+  pointer-events: none;
+  /* its own keyframes: reusing hello-out would only retime the running
+     animation, which is already past 0.25s, and cut straight to hidden */
+  animation: hello-skip 0.25s cubic-bezier(0.4, 0, 1, 1) forwards;
+}
+@keyframes hello-skip {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
+    visibility: hidden;
+  }
+}
 /* coming back from another page of the site (see the script in index.html),
    or reduced motion: no intro, the name appears straight away */
 .no-hello .hello {
@@ -1262,7 +1274,7 @@ html.hello-lock {
 
 /* numbers that sit in rows or columns (years, dates, stats, ratios) keep
    equal widths so they line up */
-.cm :is(.a-facts dd, .a-lead dd, .contrib__facts dd, .badge__facts dd, .cm-facts dd, .a-tag, .stats, .cm-stats, .cm-panel__words small, .cv-rows span, .cv-job__when, .cv-stop__when, .cm-footer__base, .sandbox__badge, .play__picked) {
+.cm :is(.a-facts dd, .a-lead dd, .contrib__facts dd, .badge__facts dd, .cm-facts dd, .stats, .cm-stats, .cm-panel__words small, .cv-rows span, .cv-job__when, .cv-stop__when, .cm-footer__base, .sandbox__badge, .play__picked) {
   font-variant-numeric: tabular-nums;
 }
 
@@ -1366,7 +1378,7 @@ html.hello-lock {
 /* the supporting paragraph under a big statement (Home hero, About), and the
    status line above the Home hero (the ID badge's status style) */
 :is(.cm-hero__lede, .cm-about__lede) {
-  max-width: 36em;
+  max-width: 31em; /* about 75 characters of Newsreader */
   margin: clamp(20px, 3vh, 32px) 0 0;
   color: var(--text-2);
   font-size: clamp(1.125rem, 1rem + 0.45vw, 1.375rem);

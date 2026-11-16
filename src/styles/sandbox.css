@@ -383,7 +383,7 @@
   color: var(--ink);
 }
 :is(.article) .sandbox-wrap .sandbox-wrap__text {
-  max-width: 40em;
+  max-width: 30em; /* about 75 characters */
   color: var(--text);
 }
 /* all 17 brand colors in one strip */

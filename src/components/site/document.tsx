@@ -1,8 +1,22 @@
 import { Analytics } from "@vercel/analytics/next"
+import { Newsreader } from "next/font/google"
 import { ThemeProvider } from "./theme-provider"
 
+/* the site's typeface, self-hosted and preloaded by next/font, with a
+   fallback sized to match it, so text does not re-wrap when it arrives
+   (it moved the Home and About statements on load). The stylesheets reach
+   it through --font-newsreader. */
+const newsreader = Newsreader({
+  subsets: ["latin"],
+  style: ["normal", "italic"],
+  axes: ["opsz"],
+  variable: "--font-newsreader",
+  display: "swap",
+})
+
+/* the faces only the case-study sandboxes and code samples use */
 const FONTS =
-  "https://fonts.googleapis.com/css2?family=Newsreader:opsz,wght@6..72,300..700&family=Newsreader:ital,opsz,wght@1,6..72,400..600&family=Inter:wght@300;400;500;600;700&family=Geist:wght@700&family=Geist+Mono:wght@400;700&display=swap"
+  "https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Geist+Mono:wght@400;700&display=swap"
 const CASE_FONTS =
   "https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=Kalam:wght@400&display=swap"
 
@@ -23,7 +37,7 @@ export function SiteDocument({
   children: React.ReactNode
 }) {
   return (
-    <html lang="en" suppressHydrationWarning>
+    <html lang="en" className={newsreader.variable} suppressHydrationWarning>
       <head>
         <script dangerouslySetInnerHTML={{ __html: motionScript }} />
         <link rel="icon" href="/assets/icons/favicon.svg" type="image/svg+xml" />

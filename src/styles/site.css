@@ -744,12 +744,6 @@ html {
 .menu__links a:hover, .menu__links a[aria-current] {
   color: var(--accent-text);
 }
-.menu__links small {
-  font-family: var(--body-font);
-  font-size: var(--fs-small);
-  font-weight: 500;
-  color: var(--accent-text);
-}
 .menu__foot, .menu__foot span {
   display: flex;
   flex-wrap: wrap;

@@ -1,0 +1,543 @@
+{
+  "schemaVersion": 2,
+  "generatedAt": "2026-11-16T01:05:26+00:00",
+  "title": "Design System: mdahal.",
+  "extensions": {
+    "colorMeta": {
+      "wimbledon-green": {
+        "role": "primary",
+        "displayName": "Wimbledon Green",
+        "canonical": "#006633",
+        "tonalRamp": [
+          "#001003",
+          "#022a12",
+          "#114927",
+          "#236b3e",
+          "#3f8d5a",
+          "#72af84",
+          "#a4d1af",
+          "#d9f8e1"
+        ]
+      },
+      "wimbledon-green-deep": {
+        "role": "primary",
+        "displayName": "Wimbledon Green Deep",
+        "canonical": "#004d26",
+        "tonalRamp": [
+          "#010f05",
+          "#0a2816",
+          "#1d472c",
+          "#316844",
+          "#4d8a61",
+          "#7bac89",
+          "#aacfb4",
+          "#ddf6e3"
+        ]
+      },
+      "court-mint": {
+        "role": "primary",
+        "displayName": "Court Mint",
+        "canonical": "#7ee8a2",
+        "tonalRamp": [
+          "#001102",
+          "#002b0f",
+          "#004b23",
+          "#006e38",
+          "#259053",
+          "#66b27f",
+          "#9bd4ac",
+          "#d4fade"
+        ]
+      },
+      "court-mint-light": {
+        "role": "primary",
+        "displayName": "Court Mint Light",
+        "canonical": "#a6f0bf",
+        "tonalRamp": [
+          "#001005",
+          "#072916",
+          "#18482c",
+          "#2c6945",
+          "#478b61",
+          "#78ad8a",
+          "#a7d0b4",
+          "#dbf7e3"
+        ]
+      },
+      "sage-paper": {
+        "role": "neutral",
+        "displayName": "Sage Paper",
+        "canonical": "#e3eae2",
+        "tonalRamp": [
+          "#0a0c0a",
+          "#20221f",
+          "#3a3e3a",
+          "#575c57",
+          "#767c75",
+          "#9ba09a",
+          "#c1c5c1",
+          "#edefec"
+        ]
+      },
+      "sage-surface": {
+        "role": "neutral",
+        "displayName": "Sage Surface",
+        "canonical": "#ebf0ea",
+        "tonalRamp": [
+          "#0a0c0a",
+          "#202220",
+          "#3b3e3b",
+          "#585c58",
+          "#777c77",
+          "#9ca09b",
+          "#c2c5c2",
+          "#edefed"
+        ]
+      },
+      "sage-tint": {
+        "role": "neutral",
+        "displayName": "Sage Tint",
+        "canonical": "#d3e8da",
+        "tonalRamp": [
+          "#080d09",
+          "#1c241f",
+          "#354139",
+          "#505f55",
+          "#6d8074",
+          "#94a399",
+          "#bcc8c0",
+          "#e9f1eb"
+        ]
+      },
+      "ink-green": {
+        "role": "neutral",
+        "displayName": "Ink Green",
+        "canonical": "#14241f",
+        "tonalRamp": [
+          "#070c0b",
+          "#1c2421",
+          "#34403c",
+          "#4f5f5a",
+          "#6d7f79",
+          "#94a29d",
+          "#bcc7c3",
+          "#e9f1ee"
+        ]
+      },
+      "moss-text": {
+        "role": "neutral",
+        "displayName": "Moss Text",
+        "canonical": "#3f524b",
+        "tonalRamp": [
+          "#070d0a",
+          "#1b2421",
+          "#34403c",
+          "#4e5f59",
+          "#6c7f78",
+          "#93a39c",
+          "#bbc7c3",
+          "#e8f1ed"
+        ]
+      },
+      "lichen-text": {
+        "role": "neutral",
+        "displayName": "Lichen Text",
+        "canonical": "#4f6159",
+        "tonalRamp": [
+          "#070c0a",
+          "#1c2420",
+          "#34403b",
+          "#4f5f58",
+          "#6d7f77",
+          "#94a29c",
+          "#bcc7c2",
+          "#e9f1ed"
+        ]
+      },
+      "sage-rule": {
+        "role": "neutral",
+        "displayName": "Sage Rule",
+        "canonical": "#c3cfc3",
+        "tonalRamp": [
+          "#090c09",
+          "#1e231e",
+          "#383f38",
+          "#555e55",
+          "#737e73",
+          "#98a198",
+          "#bfc6bf",
+          "#ebf0eb"
+        ]
+      },
+      "night-lawn": {
+        "role": "neutral",
+        "displayName": "Night Lawn",
+        "canonical": "#082419",
+        "tonalRamp": [
+          "#060d09",
+          "#18251f",
+          "#2f4239",
+          "#496156",
+          "#668274",
+          "#8ea599",
+          "#b7c9c0",
+          "#e6f2ec"
+        ]
+      },
+      "night-surface": {
+        "role": "neutral",
+        "displayName": "Night Surface",
+        "canonical": "#0d2e21",
+        "tonalRamp": [
+          "#050e09",
+          "#16251e",
+          "#2d4339",
+          "#466255",
+          "#638373",
+          "#8ba699",
+          "#b5cac0",
+          "#e4f2eb"
+        ]
+      },
+      "night-surface-raised": {
+        "role": "neutral",
+        "displayName": "Night Surface Raised",
+        "canonical": "#11382a",
+        "tonalRamp": [
+          "#040e09",
+          "#14261f",
+          "#2a4339",
+          "#426355",
+          "#5f8474",
+          "#88a799",
+          "#b3cbc0",
+          "#e3f3eb"
+        ]
+      },
+      "night-tint": {
+        "role": "neutral",
+        "displayName": "Night Tint",
+        "canonical": "#103d28",
+        "tonalRamp": [
+          "#030e08",
+          "#13271c",
+          "#284435",
+          "#3f6450",
+          "#5b856e",
+          "#86a894",
+          "#b1ccbc",
+          "#e2f4e9"
+        ]
+      },
+      "chalk": {
+        "role": "neutral",
+        "displayName": "Chalk",
+        "canonical": "#eef4ee",
+        "tonalRamp": [
+          "#0a0c0a",
+          "#202220",
+          "#3b3e3b",
+          "#585c58",
+          "#777c77",
+          "#9ba09b",
+          "#c2c5c2",
+          "#edefed"
+        ]
+      },
+      "sage-mist-text": {
+        "role": "neutral",
+        "displayName": "Sage Mist",
+        "canonical": "#b7cdbf",
+        "tonalRamp": [
+          "#070d09",
+          "#1b241f",
+          "#344139",
+          "#4f6055",
+          "#6c8074",
+          "#93a399",
+          "#bbc8c0",
+          "#e8f1eb"
+        ]
+      },
+      "fern-text": {
+        "role": "neutral",
+        "displayName": "Fern",
+        "canonical": "#92ad9e",
+        "tonalRamp": [
+          "#060d09",
+          "#19251f",
+          "#314239",
+          "#4b6155",
+          "#698174",
+          "#90a499",
+          "#b9c9c0",
+          "#e7f2eb"
+        ]
+      },
+      "night-rule": {
+        "role": "neutral",
+        "displayName": "Night Rule",
+        "canonical": "#214d3b",
+        "tonalRamp": [
+          "#030e09",
+          "#12261e",
+          "#284437",
+          "#3f6453",
+          "#5b8572",
+          "#85a897",
+          "#b1cbbe",
+          "#e2f4eb"
+        ]
+      },
+      "sage-key": {
+        "role": "neutral",
+        "displayName": "Sage Key",
+        "canonical": "#c9d8c7",
+        "tonalRamp": [
+          "#090c08",
+          "#1e241d",
+          "#374036",
+          "#535f52",
+          "#727f70",
+          "#97a296",
+          "#bec7bd",
+          "#ebf0ea"
+        ]
+      },
+      "warn": {
+        "role": "status",
+        "displayName": "Warning Amber",
+        "canonical": "#8a5700",
+        "tonalRamp": [
+          "#160700",
+          "#331c00",
+          "#563502",
+          "#7c500f",
+          "#a16f2c",
+          "#c09664",
+          "#dfbe98",
+          "#ffead1"
+        ]
+      },
+      "error": {
+        "role": "status",
+        "displayName": "Error Red",
+        "canonical": "#b42318",
+        "tonalRamp": [
+          "#210000",
+          "#460301",
+          "#72140d",
+          "#a1281d",
+          "#cd4637",
+          "#e87a6a",
+          "#ffaa9c",
+          "#ffded4"
+        ]
+      }
+    },
+    "typographyMeta": {
+      "display": {
+        "displayName": "Display",
+        "purpose": "Home and About opening statements; one per page."
+      },
+      "headline": {
+        "displayName": "Headline",
+        "purpose": "Case-study act titles and Home section titles."
+      },
+      "title": {
+        "displayName": "Title",
+        "purpose": "Parts within an act."
+      },
+      "lede": {
+        "displayName": "Lede",
+        "purpose": "Paragraph under an opening statement, max 31em."
+      },
+      "body": {
+        "displayName": "Body",
+        "purpose": "Case-study prose in the 32em reading column."
+      },
+      "label": {
+        "displayName": "Label",
+        "purpose": "Labels, metadata, outline links, chips."
+      },
+      "stat": {
+        "displayName": "Stat",
+        "purpose": "Outcome numbers on case studies."
+      },
+      "code": {
+        "displayName": "Code",
+        "purpose": "Code and data inside sandboxes only."
+      }
+    },
+    "shadows": [],
+    "motion": [
+      {
+        "name": "press",
+        "value": "scale 0.96 while :active",
+        "purpose": "Tactile acknowledgement on every button; off when motion is paused or reduced."
+      },
+      {
+        "name": "header-slide",
+        "value": "translate 0.24s ease",
+        "purpose": "Header hides on scroll down, returns on scroll up."
+      },
+      {
+        "name": "case-enter",
+        "value": "0.9s power3.out, y 48px + opacity, GSAP ScrollTrigger",
+        "purpose": "Case-study parts rise in as they enter; reversed on scroll up."
+      },
+      {
+        "name": "scroll-lit",
+        "value": "per-word opacity from --sw-floor to 1 across the hold",
+        "purpose": "Home/About statement reading order; floors keep text at AA."
+      },
+      {
+        "name": "hello-skip",
+        "value": "0.25s cubic-bezier(0.4, 0, 1, 1)",
+        "purpose": "First-visit intro exits fast on any input."
+      }
+    ],
+    "breakpoints": [
+      {
+        "name": "xs",
+        "value": "480px"
+      },
+      {
+        "name": "sm",
+        "value": "640px"
+      },
+      {
+        "name": "md",
+        "value": "760px"
+      },
+      {
+        "name": "md-plus",
+        "value": "809px"
+      },
+      {
+        "name": "lg",
+        "value": "861px"
+      },
+      {
+        "name": "xl",
+        "value": "1100px"
+      }
+    ]
+  },
+  "components": [
+    {
+      "name": "Primary Button",
+      "kind": "button",
+      "refersTo": "button-primary",
+      "description": "The main call to action in the hero: a full pill that presses down on tap.",
+      "html": "<a class=\"ds-btn-primary\" href=\"#\">About me <svg width=\"14\" height=\"14\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><path d=\"M7 17 17 7M7 7h10v10\"/></svg></a>",
+      "css": ".ds-btn-primary { display:inline-flex; align-items:center; gap:10px; height:52px; padding:0 28px; border:1px solid #14241f; border-radius:999px; background:#14241f; color:#e3eae2; font:500 16px/1 \"Newsreader\", \"Lyon Text\", \"Iowan Old Style\", Georgia, serif; text-decoration:none; transition:background .2s ease, scale .15s ease; } .ds-btn-primary:hover { background:#004d26; border-color:#004d26; } .ds-btn-primary:focus-visible { outline:2px solid #006633; outline-offset:3px; } .ds-btn-primary:active { scale:.96; }"
+    },
+    {
+      "name": "Secondary Button",
+      "kind": "button",
+      "refersTo": "button-secondary",
+      "description": "Quiet companion to the primary: outline pill.",
+      "html": "<button class=\"ds-btn-secondary\" type=\"button\">Quick summary</button>",
+      "css": ".ds-btn-secondary { height:52px; padding:0 28px; border:1px solid #c3cfc3; border-radius:999px; background:transparent; color:#14241f; font:500 16px/1 \"Newsreader\", \"Lyon Text\", \"Iowan Old Style\", Georgia, serif; cursor:pointer; transition:border-color .2s ease, scale .15s ease; } .ds-btn-secondary:hover { border-color:#14241f; } .ds-btn-secondary:focus-visible { outline:2px solid #006633; outline-offset:3px; } .ds-btn-secondary:active { scale:.96; }"
+    },
+    {
+      "name": "Resume Pill",
+      "kind": "button",
+      "refersTo": "button-resume",
+      "description": "Header link to the resume; fills with Wimbledon Green on hover and focus.",
+      "html": "<a class=\"ds-resume\" href=\"#\">Resume</a>",
+      "css": ".ds-resume { display:inline-flex; align-items:center; height:40px; padding:0 18px; border:1px solid #c3cfc3; border-radius:999px; color:#14241f; font:500 15px/1 \"Newsreader\", \"Lyon Text\", \"Iowan Old Style\", Georgia, serif; text-decoration:none; transition:background .2s ease, color .2s ease, border-color .2s ease, scale .15s ease; } .ds-resume:hover, .ds-resume:focus-visible { background:#006633; border-color:#006633; color:#e3eae2; outline:none; } .ds-resume:active { scale:.96; }"
+    },
+    {
+      "name": "Chip",
+      "kind": "chip",
+      "refersTo": "chip",
+      "description": "Scope, focus and background tags in case studies.",
+      "html": "<span class=\"ds-chip\">Arm identity</span> <span class=\"ds-chip\">Live annotation</span>",
+      "css": ".ds-chip { display:inline-block; padding:4px 10px; border-radius:999px; background:rgba(0,102,51,.16); color:#006633; font:500 13px/1.6 \"Newsreader\", \"Lyon Text\", \"Iowan Old Style\", Georgia, serif; }"
+    },
+    {
+      "name": "Status Pill",
+      "kind": "chip",
+      "refersTo": "status-pill",
+      "description": "Availability line above the Home statement.",
+      "html": "<p class=\"ds-status\"><i></i>Available for UX Design &amp; UX Engineer roles</p>",
+      "css": ".ds-status { display:inline-flex; align-items:center; gap:8px; margin:0; padding:6px 12px; border-radius:99px; background:rgba(0,102,51,.14); color:#006633; font:600 16px/1.6 \"Newsreader\", \"Lyon Text\", \"Iowan Old Style\", Georgia, serif; } .ds-status i { width:7px; height:7px; border-radius:50%; background:currentColor; }"
+    },
+    {
+      "name": "Summary Card",
+      "kind": "card",
+      "refersTo": "card",
+      "description": "Project summary card beside a case-study hero: flat, hairline, 16px corners.",
+      "html": "<div class=\"ds-card\"><p class=\"ds-card__title\">Scope</p><p class=\"ds-card__body\">Internal documentation website, component usage rules.</p></div>",
+      "css": ".ds-card { max-width:320px; padding:22px; border:1px solid #c3cfc3; border-radius:16px; background:rgba(20,36,31,.04); color:#14241f; font-family:\"Newsreader\", \"Lyon Text\", \"Iowan Old Style\", Georgia, serif; } .ds-card__title { margin:0 0 8px; font:500 14px/1.6 \"Newsreader\", \"Lyon Text\", \"Iowan Old Style\", Georgia, serif; color:#3f524b; } .ds-card__body { margin:0; font:400 16px/1.6 \"Newsreader\", \"Lyon Text\", \"Iowan Old Style\", Georgia, serif; }"
+    },
+    {
+      "name": "Step Bar",
+      "kind": "nav",
+      "refersTo": "",
+      "description": "Sticky case-study progress: dots on a line that fills green as you read.",
+      "html": "<ol class=\"ds-steps\"><li class=\"is-done\"><span></span>Overview</li><li class=\"is-now\"><span></span>The setup</li><li><span></span>Trade-offs</li><li><span></span>Impact</li></ol>",
+      "css": ".ds-steps { display:flex; gap:0; margin:0; padding:12px 0 10px; list-style:none; font:400 12px/1.25 \"Newsreader\", \"Lyon Text\", \"Iowan Old Style\", Georgia, serif; color:#4f6159; } .ds-steps li { flex:1; display:grid; justify-items:center; gap:8px; position:relative; } .ds-steps li::before { content:''; position:absolute; top:6px; left:-50%; right:50%; height:2px; background:#c3cfc3; } .ds-steps li:first-child::before { display:none; } .ds-steps li.is-done::before, .ds-steps li.is-now::before { background:#006633; } .ds-steps span { position:relative; width:14px; height:14px; border:2px solid #4f6159; border-radius:50%; background:#e3eae2; box-sizing:border-box; } .ds-steps .is-done span { border-color:#006633; background:#006633; } .ds-steps .is-now span { border-color:#006633; box-shadow:0 0 0 4px #d3e8da; } .ds-steps .is-now { color:#14241f; font-weight:600; }"
+    }
+  ],
+  "narrative": {
+    "northStar": "The Field Notebook",
+    "overview": "This is a designer-engineer's working notebook kept on sage paper. One serif, Newsreader, does all the talking, from the 60px opening statement down to 13px chips, the way a notebook keeps one hand throughout. The work is shown rather than described: real screens, interactive sandboxes to try, numbered wireframes and honest notes on what was left unfinished. Colour is almost absent. Wimbledon Green appears only where it means something: a reached step, a key phrase, a pressed control.\n\nThe pages are calm and generous. A big statement, a lot of air, then evidence. Case studies read like letters: one narrow column of text with pictures, cards and playgrounds stepping wider around it. Dark mode is not inverted chrome but a night lawn, deep green with chalk-white type and a bright Court Mint accent. Motion is scroll-linked and explains the reading order: words light up as you reach them, a journey line draws down to each stop. All of it steps aside for reduced motion and the pause button.",
+    "keyCharacteristics": [
+      "One serif family for every role. Mono appears only for code and data inside sandboxes.",
+      "Two themes, both green: Sage Paper by day, Night Lawn by dark.",
+      "Flat surfaces. Depth comes from tone and rules, never shadows.",
+      "Pills and soft 16px cards that press down slightly when tapped.",
+      "Scroll-linked motion that brightens text you can already read and never hides it."
+    ],
+    "rules": [
+      {
+        "name": "The One Green Rule",
+        "body": "Green is the only hue. It marks meaning (a link, a key phrase, a reached state, focus) and never decorates. Status colours (warn #8a5700, error #b42318) exist for sandboxes and forms only.",
+        "section": "colors"
+      },
+      {
+        "name": "The Both Lawns Rule",
+        "body": "Every colour change is made in both themes, and the dark values are defined once for `[data-theme=\"dark\"]` and once for the system preference. Edit both or neither.",
+        "section": "colors"
+      },
+      {
+        "name": "The Readable Floor Rule",
+        "body": "Text is never dimmed below AA. Scroll effects rest at 3:1 for large text and 4.5:1 for body text in both themes (see `--sw-floor*` and `--stop-floor` in `carme.css`).",
+        "section": "colors"
+      },
+      {
+        "name": "The One Hand Rule",
+        "body": "Newsreader sets every role. A second family appears only when the content itself is code, or is a faithful reproduction of another product's interface.",
+        "section": "typography"
+      },
+      {
+        "name": "The Measure-in-Em Rule",
+        "body": "Reading widths are set in em, never px, so a line holds about 75 characters at whatever size the text renders.",
+        "section": "typography"
+      },
+      {
+        "name": "The Flat Paper Rule",
+        "body": "Surfaces never float. If something needs separating, give it a tone step or a hairline, not a shadow.",
+        "section": "elevation"
+      }
+    ],
+    "dos": [
+      "**Do** set every new piece of text in Newsreader, using the hierarchy above.",
+      "**Do** make every colour change in both themes, in both dark blocks.",
+      "**Do** keep reading text at 32em (case studies) or 31em (ledes).",
+      "**Do** use the pill (999px) for anything you can press and 16px for anything that contains.",
+      "**Do** give every scroll effect a reduced-motion path that shows the final state, and keep dimmed text at AA.",
+      "**Do** reserve space for anything a script inserts after load."
+    ],
+    "donts": [
+      "**Don't** add box shadows; use a tone step or a hairline.",
+      "**Don't** introduce a second accent hue or use green decoratively.",
+      "**Don't** dim text below 3:1 (large) or 4.5:1 (body) at rest, in either theme.",
+      "**Don't** add a new font family for site chrome.",
+      "**Don't** set reading widths in px."
+    ]
+  }
+}

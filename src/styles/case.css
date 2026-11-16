@@ -67,7 +67,6 @@ body.cs .article {
 body.cs .a-hero2 {
   grid-template-columns: minmax(0, 1fr) minmax(260px, 320px);
   grid-template-areas:
-    "tag     tag"
     "title   title"
     "facts   facts"
     "lead    lead"
@@ -78,16 +77,9 @@ body.cs .a-hero2 {
 body.cs :is(.a-hero2__intro, .a-hero2__meta) {
   display: contents;
 }
-body.cs .a-tag {
-  grid-area: tag;
-  justify-self: start;
-  border-color: color-mix(in srgb, var(--accent) 40%, transparent);
-  font-size: 0.875rem;
-  font-weight: 500;
-}
 #main .a-title {
   grid-area: title;
-  margin-top: clamp(20px, 3vw, 36px);
+  margin-top: 0;
   padding-bottom: clamp(32px, 5vh, 56px);
   font-family: var(--cs-font);
   font-size: clamp(3rem, 1rem + 6.5vw, 8rem);
@@ -163,7 +155,6 @@ body.cs .a-hero2__aside {
   body.cs .a-hero2 {
     grid-template-columns: minmax(0, 1fr);
     grid-template-areas:
-      "tag"
       "title"
       "facts"
       "lead"

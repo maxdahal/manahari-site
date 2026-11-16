@@ -137,21 +137,70 @@
     wrapWords(statement, spans);
     /* the paragraph under the statement lights after it, in the same
        sequence, so the statement always reads first */
+    var ledeFrom = spans.length;
     var lede = about.querySelector(".cm-hero__lede, .cm-about__lede");
     if (lede) wrapWords(lede, spans);
     /* the home hero starts with just its first word ("Hi,") already lit;
        the rest fills in as you scroll */
     var litTo = about.classList.contains("cm-hero") ? 0 : -1;
-    var light = function () {
+    /* each word's floor: the paragraph, a green key word, or plain */
+    var kinds = spans.map(function (span, i) {
+      if (i >= ledeFrom) return "lede";
+      var b = span.closest("b");
+      return b && statement.contains(b) ? "key" : "word";
+    });
+    /* when each word lights, as a share of the hold: the statement takes
+       most of it, the paragraph a short overlapping tail, since it only
+       has a little brightening left to do from its higher floor */
+    var nStatement = ledeFrom;
+    var nLede = spans.length - ledeFrom;
+    var WINDOW = 0.08; /* how much of the hold one word takes to light */
+    var starts = spans.map(function (span, i) {
+      if (i < nStatement) return 0.02 + 0.62 * (i / Math.max(nStatement - 1, 1));
+      return 0.6 + 0.3 * ((i - ledeFrom) / Math.max(nLede - 1, 1));
+    });
+    /* unlit words rest at a readable floor set per theme in carme.css;
+       read again only when the theme changes */
+    var floors;
+    var readFloors = function () {
+      var css = getComputedStyle(about);
+      var get = function (name, fallback) {
+        var v = parseFloat(css.getPropertyValue(name));
+        return isNaN(v) ? fallback : v;
+      };
+      floors = {
+        word: get("--sw-floor", 0.55),
+        key: get("--sw-floor-key", 0.75),
+        lede: get("--sw-floor-lede", 0.85)
+      };
+    };
+    readFloors();
+    var paint = function () {
+      queued = false;
       if (!about.classList.contains("is-held")) return;
       var box = about.getBoundingClientRect();
       var head = 84;
       var travel = box.height - (window.innerHeight - head);
       var progress = travel > 0 ? Math.min(Math.max((head - box.top) / travel, 0), 1) : 1;
-      var at = progress * (spans.length + 3) - 1.5;
       spans.forEach(function (span, i) {
-        span.style.opacity = i <= litTo ? "1" : (0.16 + 0.84 * Math.min(Math.max(at - i + 1, 0), 1)).toFixed(2);
+        var f = floors[kinds[i]];
+        var t = Math.min(Math.max((progress - starts[i]) / WINDOW, 0), 1);
+        var o = i <= litTo ? "1" : (f + (1 - f) * t).toFixed(2);
+        if (span.style.opacity !== o) span.style.opacity = o;
+        /* the paragraph also deepens from its muted grey to full ink, since
+           opacity alone has too little room left above its floor to show */
+        if (kinds[i] === "lede") {
+          var lit = t.toFixed(2);
+          if (span.style.getPropertyValue("--lit") !== lit) span.style.setProperty("--lit", lit);
+        }
       });
+    };
+    /* at most once a frame, however fast the scroll events come */
+    var queued = false;
+    var light = function () {
+      if (queued) return;
+      queued = true;
+      requestAnimationFrame(paint);
     };
     var hold = function () {
       var on = !still();
@@ -159,10 +208,18 @@
       if (on) light();
       else spans.forEach(function (span) {
         span.style.opacity = "";
+        span.style.removeProperty("--lit");
       });
     };
     window.addEventListener("scroll", light, { passive: true });
     window.addEventListener("resize", light);
+    /* the floors differ by theme: repaint when it changes */
+    var retheme = function () {
+      readFloors();
+      light();
+    };
+    new MutationObserver(retheme).observe(root, { attributes: true, attributeFilter: ["data-theme"] });
+    window.matchMedia("(prefers-color-scheme: dark)").addEventListener("change", retheme);
     document.addEventListener("motionchange", hold);
     reduce.addEventListener("change", hold);
     hold();

@@ -4,7 +4,7 @@
    the end. Loaded after case.css; it changes the look only, never the words
    or their order. ------------------------------------------------------ */
 body.cs.cm {
-  --cs-font: "Newsreader", "Lyon Text", "Iowan Old Style", Georgia, serif;
+  --cs-font: var(--font-newsreader), "Lyon Text", "Iowan Old Style", Georgia, serif;
   --heading-font: var(--cs-font);
   --body-font: var(--cs-font);
   font-family: var(--cs-font);
@@ -19,19 +19,12 @@ body.cs.cm {
   color: var(--text-2);
 }
 
-/* reading progress: a thin line along the bottom of the header */
-
+/* the NDA notice sits between the way back and the title, spaced like both */
+.cm .a-note {
+  margin-bottom: clamp(40px, 6vh, 56px);
+}
 
 /* ---- the opening ----------------------------------------------------- */
-body.cs .a-tag {
-  padding: 0;
-  border: 0;
-  border-radius: 0;
-  background: none;
-  font-size: 1rem;
-  font-weight: 400;
-  color: var(--text-2);
-}
 #main .a-title {
   font-size: clamp(2.25rem, 1.3rem + 3.4vw, 4.25rem);
   font-weight: 500;
@@ -335,14 +328,11 @@ body.cs .a-outline li, body.cs .a-outline a {
   font-weight: 600;
 }
 
-/* where a screenshot or wireframe goes: a calm empty frame */
 /* the Esri facts stay compact: five short columns, smaller values */
 #main .a-hero2 .a-facts dd {
   font-size: 1.0625rem;
   line-height: 1.4;
 }
-
-/* ---- simplified wireframes: boxes and bars, no real content ------------- */
 
 /* ---- component previews in the style of Storybook: a frame with tabs, and
    a card per component with a canvas, live elements and its props ------- */
@@ -1268,7 +1258,9 @@ body.cs .a-outline li, body.cs .a-outline a {
    wider, so the page has a rhythm of text, then something to look at.
    ========================================================================== */
 body.cs .article {
-  --a-read: 680px;
+  /* in em, so it stays about 75 characters whatever the text size (a fixed
+     680px held 90-99 characters at the 17px case-study size) */
+  --a-read: 32em;
   --cs-pic: 1040px;
 }
 body.cs #main .a-part > *, body.cs #main .a-act > * {
@@ -1314,7 +1306,23 @@ body.cs .a-layout > .article {
 body.cs .article [id] {
   scroll-margin-top: 160px;
 }
+/* steps.js builds the bar after load; until it arrives its space is held
+   under the header, so the article does not drop by its height (the bar's
+   height is pinned to the same value so the two always agree) */
+body.cs {
+  --cm-steps-h: 60px;
+}
+@media (max-width: 760px) {
+  body.cs {
+    --cm-steps-h: 66px;
+  }
+}
+body.cs:not(:has(.cm-steps)) .cm-header {
+  margin-bottom: var(--cm-steps-h);
+}
 .cm-steps {
+  box-sizing: border-box;
+  height: var(--cm-steps-h);
   position: sticky;
   top: var(--cm-top);
   z-index: 40;
@@ -1612,25 +1620,7 @@ body.cs-ref #main .card-pt:has(> ul)::before {
   content: none;
 }
 
-/* my contribution: what I did on the left, the team, methods and background
-   on the right, so the row is not half empty */
-@media (min-width: 861px) {
-  body.cs-ref #my-contribution {
-    display: grid;
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    column-gap: clamp(32px, 6vw, 96px);
-    align-items: start;
-  }
-  body.cs-ref #my-contribution > h3 {
-    grid-column: 1 / -1;
-  }
-  body.cs-ref #my-contribution > .contrib {
-    grid-column: 1;
-  }
-  body.cs-ref #my-contribution > .contrib__side {
-    grid-column: 2;
-  }
-}
+/* team, methods and background (what I did is the STAR summary's Action) */
 body.cs-ref #my-contribution .contrib__side {
   display: flex;
   flex-direction: column;
@@ -1695,6 +1685,15 @@ body.cs-ref #main :is(.cards, .dids, .steps--cols, .accs) {
   overflow: visible;
   scroll-snap-type: none;
 }
+/* and with no swipe there is nothing to run out to the screen's edges: the
+   list keeps the page's side margin (case.css bleeds three-card rows out) */
+@media (max-width: 760px) {
+  body.cs-ref #main .a-part > .cards:has(> :nth-child(3)) {
+    width: 100%;
+    margin-inline: 0;
+    padding: 0;
+  }
+}
 
 /* a part with more than one picture (a set of sketches, two screens) shows
    them one under another across the full width, not stacked in one cell */
@@ -1718,4 +1717,20 @@ body.cs-ref #main :is(.cards, .dids, .steps--cols, .accs) {
   #main .a-facts:has(> div:nth-child(6):last-child) {
     grid-template-columns: repeat(3, minmax(0, 1fr));
   }
+}
+
+/* ---- Surgical Console: the STAR summary ---------------------------------
+   Situation, Task, Action and Result read as one summary, not four chapters:
+   the beats sit close together, and paragraphs and the Action list share one
+   reading size (the case's large lead size is for a single short paragraph). */
+body.cs-ref #star > .a-part + .a-part {
+  padding-top: clamp(32px, 5vh, 48px);
+}
+body.cs-ref #star > .a-part :is(p, .did span) {
+  max-width: 34em;
+  font-size: 1.25rem;
+  line-height: 1.55;
+}
+body.cs-ref #star .dids {
+  margin-top: 0;
 }

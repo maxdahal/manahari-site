@@ -98,8 +98,12 @@
     ctx = gsap.context(function () {
       /* the top */
       var top = gsap.timeline({ delay: 0.1 })
-        .from("#main .a-title .cs-w", { yPercent: 110, duration: 1, ease: "power4.out", stagger: 0.08 })
-        .from("#main :is(.a-hero2__intro > :not(.a-title))", { opacity: 0, y: 24, duration: 0.8, ease: "power2.out", stagger: 0.1 }, 0.1);
+        .from("#main .a-title .cs-w", { yPercent: 110, duration: 1, ease: "power4.out", stagger: 0.08 });
+      /* what sits beside the title in the intro (only some cases have any) */
+      var introRest = document.querySelectorAll("#main .a-hero2__intro > :not(.a-title)");
+      if (introRest.length) {
+        top.from(introRest, { opacity: 0, y: 24, duration: 0.8, ease: "power2.out", stagger: 0.1 }, 0.1);
+      }
       if (document.querySelector("#main .a-hero2__image")) {
         top.from("#main .a-hero2__image", { clipPath: "inset(0 50% 0 50% round 16px)", duration: 1.2, ease: "power3.inOut", clearProps: "clipPath" }, 0.4);
         enter("#main .a-hero2__meta, #main .a-hero2__aside", "#main .a-hero2__meta", { stagger: 0.12 }, "top 90%");

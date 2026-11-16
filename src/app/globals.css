@@ -33,7 +33,7 @@
   --color-border: var(--line);
   --color-input: var(--line);
   --color-ring: var(--accent);
-  --font-serif: "Newsreader", "Lyon Text", "Iowan Old Style", Georgia, serif;
+  --font-serif: var(--font-newsreader), "Lyon Text", "Iowan Old Style", Georgia, serif;
   --font-sans: var(--font-serif);
   --font-heading: var(--font-serif);
   --font-mono: "Geist Mono", ui-monospace, monospace;

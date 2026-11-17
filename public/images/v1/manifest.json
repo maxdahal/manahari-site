@@ -1,0 +1,331 @@
+[
+ {
+  "slug": "surgical-console",
+  "file": "surgical-console-01.webp",
+  "w": 672,
+  "h": 221,
+  "cls": "",
+  "alt": "Wireframe of the old alerts list: every message looks the same and names an arm by number. The arms stand beside it, and a dashed line asks which one is arm 2.",
+  "cap": "Project 1 · Every message looked the same."
+ },
+ {
+  "slug": "surgical-console",
+  "file": "surgical-console-02.webp",
+  "w": 672,
+  "h": 378,
+  "cls": "",
+  "alt": "Wireframe of the old gallery: a grid of six still images with filter chips along the top.",
+  "cap": "Project 2 · Still images with filter chips on top."
+ },
+ {
+  "slug": "surgical-console",
+  "file": "surgical-console-03.webp",
+  "w": 672,
+  "h": 378,
+  "cls": "",
+  "alt": "Wireframe of the old image editor: a still image on the left, a tools and segments panel on the right, and action buttons along the top.",
+  "cap": "Project 2 · An editor with still images only."
+ },
+ {
+  "slug": "surgical-console",
+  "file": "surgical-console-04.webp",
+  "w": 2080,
+  "h": 397,
+  "cls": "v v--three",
+  "alt": "Diagram: the three projects as three tiles, an arm color bar, a gallery with a play button, and a tablet sending marks to a screen",
+  "cap": ""
+ },
+ {
+  "slug": "surgical-console",
+  "file": "surgical-console-05.webp",
+  "w": 968,
+  "h": 396,
+  "cls": "v v--sec",
+  "alt": "Diagram: a surgeon looks at the screen for one second",
+  "cap": ""
+ },
+ {
+  "slug": "surgical-console",
+  "file": "surgical-console-06.webp",
+  "w": 2080,
+  "h": 802,
+  "cls": "",
+  "alt": "Top view of the system: a patient on the table with robotic arms around them, each arm with its own screen, and one central unit with the main controls.",
+  "cap": "The system around the patient, drawn as an illustration. Robotic arms surround the patient and each has its own screen. One central unit holds the main controls."
+ },
+ {
+  "slug": "surgical-console",
+  "file": "surgical-console-07.webp",
+  "w": 2080,
+  "h": 773,
+  "cls": "",
+  "alt": "Wireframe of the console: a primary display with the anatomy view, a secondary touch display, two handles with arm color LEDs, and a wall monitor that shows the live video and marks only.",
+  "cap": "The console, redrawn as a wireframe. The wall monitor showed only the live video and the marks."
+ },
+ {
+  "slug": "surgical-console",
+  "file": "surgical-console-08.webp",
+  "w": 1210,
+  "h": 789,
+  "cls": "room",
+  "alt": "Room diagram: the wall monitor at the top, the console at the lower left, the patient table in the middle and the machine on the right, with a dot for each role.",
+  "cap": ""
+ },
+ {
+  "slug": "surgical-console",
+  "file": "surgical-console-09.webp",
+  "w": 968,
+  "h": 380,
+  "cls": "v v--steps",
+  "alt": "Diagram: three steps rising from Crawl to Walk to Run",
+  "cap": ""
+ },
+ {
+  "slug": "surgical-console",
+  "file": "surgical-console-10.webp",
+  "w": 968,
+  "h": 557,
+  "cls": "v v--hubs",
+  "alt": "Diagram: six principles around the goal, designing for confidence",
+  "cap": ""
+ },
+ {
+  "slug": "surgical-console",
+  "file": "surgical-console-11.webp",
+  "w": 672,
+  "h": 420,
+  "cls": "",
+  "alt": "Sketch A: a warning label with L and force limit sits next to the instrument on the video.",
+  "cap": "A · Warning on the picture. A label with L or R sat next to the instrument. Kept."
+ },
+ {
+  "slug": "surgical-console",
+  "file": "surgical-console-12.webp",
+  "w": 672,
+  "h": 420,
+  "cls": "",
+  "alt": "Sketch B: the whole arm panel is filled with the arm color, and the error dot is red.",
+  "cap": "B · Arm color as a fill. The whole panel took the arm color. Dropped, because it hid the state."
+ },
+ {
+  "slug": "surgical-console",
+  "file": "surgical-console-13.webp",
+  "w": 672,
+  "h": 420,
+  "cls": "",
+  "alt": "Sketch C: the arm color is a bar along the top edge of the panel. The state shows as a dot and a word.",
+  "cap": "C · Color bar, dot and word. Color showed identity. The dot and the word showed state. Kept."
+ },
+ {
+  "slug": "surgical-console",
+  "file": "surgical-console-14.webp",
+  "w": 1024,
+  "h": 582,
+  "cls": "",
+  "alt": "Wireframe of the new gallery: procedures on the left, one filter track with All, Images and Videos, and a grid of cards named by procedure step.",
+  "cap": "Gallery. Cards named by procedure step, with one filter track."
+ },
+ {
+  "slug": "surgical-console",
+  "file": "surgical-console-15.webp",
+  "w": 1024,
+  "h": 582,
+  "cls": "",
+  "alt": "Wireframe of the new video editor: live video with a recording badge and timer, a timeline with recorded stretches in red and pins in cyan, a tool bar, and a navigation sidebar.",
+  "cap": "Video editor. A timeline under the video, and one labeled bar of tools."
+ },
+ {
+  "slug": "surgical-console",
+  "file": "surgical-console-16.webp",
+  "w": 1008,
+  "h": 405,
+  "cls": "",
+  "alt": "Wireframe of two screens. A tablet shows the live video with controls and a dashed Edit button that is still to design. A dashed rectangle marks the part that shows on the main screen, which gets the video and the marks only.",
+  "cap": "The tablet kept the tools and menus. The main screen showed only the video and marks."
+ },
+ {
+  "slug": "surgical-console",
+  "file": "surgical-console-17.webp",
+  "w": 968,
+  "h": 380,
+  "cls": "v v--dots",
+  "alt": "Diagram: ten dots, six filled for fixed and four open",
+  "cap": ""
+ },
+ {
+  "slug": "surgical-console",
+  "file": "surgical-console-18.webp",
+  "w": 968,
+  "h": 531,
+  "cls": "v v--flow",
+  "alt": "Diagram: arm identity before, the video editor and live annotation during, the gallery after",
+  "cap": ""
+ },
+ {
+  "slug": "surgical-console",
+  "file": "surgical-console-19.webp",
+  "w": 2080,
+  "h": 395,
+  "cls": "v v--kit",
+  "alt": "Diagram: a prototype, a component library and a test plan",
+  "cap": ""
+ },
+ {
+  "slug": "ku-brand",
+  "file": "ku-brand-01.webp",
+  "w": 968,
+  "h": 312,
+  "cls": "",
+  "alt": "Abstract graphic in KU blue, crimson and yellow, with a tower, a grid and simple shapes",
+  "cap": "This graphic shows the core elements in the brand colors."
+ },
+ {
+  "slug": "ku-brand",
+  "video": "http://localhost:3001/assets/video/ku-brand-wireframes.webm",
+  "cap": "The home page coming together, from boxes to the final design."
+ },
+ {
+  "slug": "ku-brand",
+  "file": "ku-brand-02.webp",
+  "w": 1008,
+  "h": 1008,
+  "cls": "",
+  "alt": "Boxes-only sketch of the Brand Center home page",
+  "cap": "Step 1. Structure only."
+ },
+ {
+  "slug": "ku-brand",
+  "file": "ku-brand-03.webp",
+  "w": 1008,
+  "h": 1103,
+  "cls": "",
+  "alt": "Wireframe of the Brand Center home page",
+  "cap": "Step 2. Real content, still grey."
+ },
+ {
+  "slug": "ku-brand",
+  "file": "ku-brand-04.webp",
+  "w": 1008,
+  "h": 1103,
+  "cls": "",
+  "alt": "Wireframe of the Brand Center home page",
+  "cap": "Step 3. The red box and blue dots mark the holding box and pinpoints."
+ },
+ {
+  "slug": "ku-brand",
+  "file": "ku-brand-05.webp",
+  "w": 1008,
+  "h": 1103,
+  "cls": "",
+  "alt": "High-fidelity version of the Brand Center home page",
+  "cap": "Step 4. Photos and color."
+ },
+ {
+  "slug": "ku-brand",
+  "file": "ku-brand-06.webp",
+  "w": 1024,
+  "h": 1056,
+  "cls": "",
+  "alt": "Wireframe of a guideline page for color palettes",
+  "cap": "Guideline page. A side menu keeps people oriented. Swatches come first, then pairings to use and avoid."
+ },
+ {
+  "slug": "ku-brand",
+  "file": "ku-brand-07.webp",
+  "w": 1024,
+  "h": 1056,
+  "cls": "",
+  "alt": "Wireframe of the downloads page",
+  "cap": "Downloads page. Filters on top, one card per file, and a path to request an official mark."
+ },
+ {
+  "slug": "esri",
+  "file": "esri-01.webp",
+  "w": 1360,
+  "h": 717,
+  "cls": "a-hero2__image",
+  "alt": "",
+  "cap": "The four regions of each component page."
+ },
+ {
+  "slug": "esri",
+  "file": "esri-02.webp",
+  "w": 968,
+  "h": 467,
+  "cls": "v v--hub",
+  "alt": "Diagram: separate sources on GitHub and Figma become one documentation site",
+  "cap": ""
+ },
+ {
+  "slug": "esri",
+  "file": "esri-03.webp",
+  "w": 968,
+  "h": 424,
+  "cls": "v v--two",
+  "alt": "Diagram: two readers, UI/UX designers who want visuals and front-end engineers who want code",
+  "cap": ""
+ },
+ {
+  "slug": "esri",
+  "file": "esri-04.webp",
+  "w": 968,
+  "h": 416,
+  "cls": "v v--one",
+  "alt": "Diagram: designers and developers both read one documentation page",
+  "cap": ""
+ },
+ {
+  "slug": "esri",
+  "file": "esri-05.webp",
+  "w": 968,
+  "h": 380,
+  "cls": "v v--steps",
+  "alt": "Diagram: three steps rising from Crawl to Walk to Run",
+  "cap": ""
+ },
+ {
+  "slug": "esri",
+  "file": "esri-06.webp",
+  "w": 1008,
+  "h": 380,
+  "cls": "v v--toggle",
+  "alt": "Diagram: one component page with a Design view and a Code view to switch between",
+  "cap": ""
+ },
+ {
+  "slug": "esri",
+  "file": "esri-07.webp",
+  "w": 1008,
+  "h": 380,
+  "cls": "v v--dd",
+  "alt": "Diagram: a Do card with a green check and a Don't card with a red cross",
+  "cap": ""
+ },
+ {
+  "slug": "esri",
+  "file": "esri-08.webp",
+  "w": 1008,
+  "h": 380,
+  "cls": "v v--code",
+  "alt": "Diagram: a code snippet with a Copy button",
+  "cap": ""
+ },
+ {
+  "slug": "esri",
+  "file": "esri-09.webp",
+  "w": 968,
+  "h": 381,
+  "cls": "v v--ab",
+  "alt": "Diagram: two page layouts, A and B, compared",
+  "cap": ""
+ },
+ {
+  "slug": "esri",
+  "file": "esri-10.webp",
+  "w": 968,
+  "h": 423,
+  "cls": "v v--num",
+  "alt": "50 percent or more improvement in content discoverability",
+  "cap": ""
+ }
+]

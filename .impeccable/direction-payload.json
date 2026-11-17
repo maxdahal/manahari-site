@@ -1,0 +1,91 @@
+{
+  "title": "Choose the visual world",
+  "question": "The roll assigned Wayfinding System. Keep it, take an alternate, or re-roll.",
+  "options": [
+    {
+      "id": "assigned",
+      "kind": "assigned",
+      "label": "Wayfinding System",
+      "kicker": "THE ROLL",
+      "lineage": "Transit and hospital wayfinding signage: line colors, station panels, platform maps",
+      "thesis": "Your career as a transit map. Each case study is a line with its own color, and the arm-identity panel is the first sign you read, legible in one second like a platform sign.",
+      "palette": ["#15171E", "#F6F7F8", "#2135AB", "#B9A4FF", "#E3C48F", "#F49AC9"],
+      "materials": ["enamel sign panels (ink with white type)", "line-color bullets and route strips", "a platform map with stations"],
+      "viewport": "Left: a large ink sign panel with the headline set like station signage and a cobalt route strip. Right: the live arm panel from the Surgical Console, four arms in their line colors, which visitors can switch between states. Below the fold, a line map threads the four case studies as stations.",
+      "risk": "Reads as a theme if the map is decorative. Every line, color and stop has to mean something real (projects, years, roles).",
+      "raised": [
+        {"from": "challenger-raku", "raise": "Asymmetry as law: the hero splits 7/5 with the sign panel bleeding off the left edge, never centered."},
+        {"from": "challenger-quote-grammar", "raise": "Wayfinding is reading: every section sign uses its plain literal name (Case studies, Experience, Contact)."},
+        {"from": "challenger-op-art", "raise": "No decorative grey: sign panels are pure ink and white. Color only ever means a line or a state."},
+        {"from": "challenger-pc98", "raise": "Fixed regions: on case studies the line map stays docked as a progress rail while the content changes."},
+        {"from": "challenger-bbs", "raise": "Complete keyboard operation: the arm panel takes keys 1 to 4 and arrows, and the line map is tabbable stop by stop."},
+        {"from": "challenger-oscilloscope", "raise": "Measured grid: everything sits on an 8px grid, and metrics read as signboard readouts aligned to it."}
+      ]
+    },
+    {
+      "id": "model-pick",
+      "kind": "pick",
+      "label": "Design Handoff Spec",
+      "kicker": "IMPECCABLE’S PICK",
+      "lineage": "Design-to-engineering handoff sheets: redlines, specs, annotated frames",
+      "thesis": "The portfolio as a handoff document. Every page shows the work with its measurements and decisions annotated.",
+      "palette": ["#F6F7F8", "#15171E", "#2135AB", "#D1006F"],
+      "materials": ["redline annotations", "selection frames", "spec tables"],
+      "viewport": "The headline selected as a frame with live measurements, an inspector panel beside it, and the arm panel as the selected component.",
+      "risk": "Familiar: this is where most UX portfolios that try to be clever land, and v2's first hero already did it."
+    },
+    {
+      "id": "challenger-raku", "kind": "challenger", "catalogId": "clay-ceramics-fracture-raku-smoke-flash",
+      "label": "Raku Smoke Flash", "verdict": "declined", "lineage": "raku firing",
+      "palette": ["#1A1716", "#D9D6CF", "#E2661F"], "materials": ["carbonized clay", "crackle glaze"],
+      "case": "Fuses poorly: hiring managers don't read their work through a kiln.", "kept": "Asymmetry accepted as the compositional law.",
+      "hero": "https://impeccable.style/worlds/cards/clay-ceramics-fracture-raku-smoke-flash-hero.webp"
+    },
+    {
+      "id": "challenger-quote-grammar", "kind": "challenger", "catalogId": "textiles-weave-drape-fashion-industrial-quote-grammar",
+      "label": "Industrial Quote Grammar", "verdict": "declined", "lineage": "industrial streetwear",
+      "palette": ["#FFFFFF", "#111111", "#FF6A13"], "materials": ["cotton", "zip-tie tags", "hazard stripes"],
+      "case": "Fuses poorly: irony fights the honest, crisp voice.", "kept": "Every zone labeled with its literal name.",
+      "hero": "https://impeccable.style/worlds/cards/textiles-weave-drape-fashion-industrial-quote-grammar-hero.webp"
+    },
+    {
+      "id": "challenger-op-art", "kind": "challenger", "catalogId": "design-canon-op-art-textile-repeat",
+      "label": "Op-Art Repeat", "verdict": "declined", "lineage": "op-art textiles",
+      "palette": ["#000000", "#FFFFFF"], "materials": ["matte cloth", "wave geometry"],
+      "case": "Fuses poorly: optical flex hurts reading case studies.", "kept": "No grey whatsoever: geometry and contrast carry everything.",
+      "hero": "https://impeccable.style/worlds/cards/design-canon-op-art-textile-repeat-hero.webp"
+    },
+    {
+      "id": "challenger-pc98", "kind": "challenger", "catalogId": "digital-design-canon-pc98-sixteen-color-field",
+      "label": "PC-98 Sixteen Color", "verdict": "declined", "lineage": "Japanese 16-color PCs",
+      "palette": ["#000000", "#5555FF", "#FF55FF", "#FFFFFF"], "materials": ["dithered pixels", "bitmap type"],
+      "case": "Fuses poorly: retro novelty undercuts a modern product-design pitch.", "kept": "Fixed regions that never move; navigation swaps contents.",
+      "hero": "https://impeccable.style/worlds/cards/digital-design-canon-pc98-sixteen-color-field-hero.webp"
+    },
+    {
+      "id": "challenger-bbs", "kind": "challenger", "catalogId": "medium-native-ansi-bbs-nightboard",
+      "label": "ANSI BBS Nightboard", "verdict": "declined", "lineage": "dial-up BBS",
+      "palette": ["#000000", "#00AAAA", "#AA00AA", "#FFFFFF"], "materials": ["CP437 blocks", "terminal black"],
+      "case": "Fuses poorly: a terminal costume for a designer reads as engineer-only.", "kept": "Complete keyboard operation.",
+      "hero": "https://impeccable.style/worlds/cards/medium-native-ansi-bbs-nightboard-hero.webp"
+    },
+    {
+      "id": "challenger-oscilloscope", "kind": "challenger", "catalogId": "scientific-notation-oscilloscope-signal-bench",
+      "label": "Oscilloscope Bench", "verdict": "declined", "lineage": "CRT signal bench",
+      "palette": ["#0B0F0B", "#39FF6A", "#FFB000"], "materials": ["phosphor", "etched graticule"],
+      "case": "Fuses poorly: an instrument costume, and too close to the surgical subject's own tools.", "kept": "Everything measured against one grid.",
+      "hero": "https://impeccable.style/worlds/cards/scientific-notation-oscilloscope-signal-bench-hero.webp"
+    }
+  ],
+  "reroll": {"registers": ["safer", "bolder"]},
+  "canon": true,
+  "canonCard": {
+    "kind": "canon",
+    "label": "The category standard",
+    "thesis": "A clean product-designer portfolio: name and role, a grid of case-study cards, about and contact.",
+    "palette": ["#FFFFFF", "#15171E", "#2135AB"],
+    "materials": ["clean grid", "product screenshots"],
+    "viewport": "Big name and one-line role, then a two-column grid of project cards.",
+    "risk": "Indistinguishable from thousands of portfolios."
+  }
+}

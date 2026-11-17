@@ -1,0 +1,7 @@
+// Steps from the color-palette skill: hex -> HSL, 11-shade scale, contrast.
+export function hexToHSL(hex){hex=hex.replace(/^#/,'');const r=parseInt(hex.slice(0,2),16)/255,g=parseInt(hex.slice(2,4),16)/255,b=parseInt(hex.slice(4,6),16)/255;const max=Math.max(r,g,b),min=Math.min(r,g,b),d=max-min;let l=(max+min)/2,s=0,h=0;if(d){s=l>.5?d/(2-max-min):d/(max+min);if(max===r)h=((g-b)/d+(g<b?6:0))/6;else if(max===g)h=((b-r)/d+2)/6;else h=((r-g)/d+4)/6;}return{h:Math.round(h*360),s:Math.round(s*100),l:Math.round(l*100)};}
+export function hslToHex(h,s,l){s/=100;l/=100;const c=(1-Math.abs(2*l-1))*s,x=c*(1-Math.abs((h/60)%2-1)),m=l-c/2;let r=0,g=0,b=0;if(h<60){r=c;g=x}else if(h<120){r=x;g=c}else if(h<180){g=c;b=x}else if(h<240){g=x;b=c}else if(h<300){r=x;b=c}else{r=c;b=x}const t=v=>Math.round((v+m)*255).toString(16).padStart(2,'0');return('#'+t(r)+t(g)+t(b)).toUpperCase();}
+const SH={50:[97,.8],100:[94,.8],200:[87,.85],300:[75,.9],400:[62,.95],500:[48,1],600:[40,1],700:[33,1],800:[27,1],900:[20,1],950:[10,1]};
+export function scale(hex){const{h,s}=hexToHSL(hex);return Object.fromEntries(Object.entries(SH).map(([k,[l,m]])=>[k,hslToHex(h,Math.round(s*m),l)]));}
+function lum(hex){hex=hex.replace(/^#/,'');return[0,2,4].map(i=>{const v=parseInt(hex.slice(i,i+2),16)/255;return v<=.03928?v/12.92:Math.pow((v+.055)/1.055,2.4)}).reduce((a,v,i)=>a+v*[.2126,.7152,.0722][i],0);}
+export function contrast(a,b){const x=lum(a),y=lum(b);return(Math.max(x,y)+.05)/(Math.min(x,y)+.05);}

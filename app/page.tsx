@@ -1,0 +1,73 @@
+import Link from "next/link";
+import { Header, Footer } from "@/components/Shell";
+import { HeroStage } from "@/components/HeroStage";
+import { WorkIndex } from "@/components/WorkIndex";
+import { Timeline } from "@/components/Timeline";
+import { ArtGallery } from "@/components/ArtGallery";
+import { cases } from "@/content/cases";
+import { artwork, profile } from "@/content/profile";
+
+/* Card lines and outcomes from the published site, word for word. A
+   non-breaking space before each "·" keeps it from dangling at a line end. */
+const CARD: Record<string, { meta: string; value: string; label: string }> = {
+  "surgical-console": { meta: "UX design internship\u00a0·\u00a02026", value: ">50%", label: "Less task-completion time in exploratory usability testing" },
+  "ku-brand": { meta: "Branding, UX design and research\u00a0·\u00a02022\u00a0to\u00a02025", value: "+30%", label: "Traffic across ku.edu after launch (a team result)" },
+  asians: { meta: "UX research and design\u00a0·\u00a02021\u00a0to\u00a02022", value: "~50", label: "People surveyed" },
+  esri: { meta: "UI/UX design and front-end internship\u00a0·\u00a02021", value: "50%+", label: "Improvement in content discoverability" },
+};
+
+/* the hero's drifting cards: artwork, with a few work pictures mixed in */
+const T = (f: string) => `/images/thumbs/${f}.jpg`;
+const HERO_PICS = [
+  { src: T("index-03-f2827196b8"), w: 640, h: 545 },
+  { src: T("hero-ku-brand-02-b29a48186b"), w: 520, h: 371 },
+  { src: T("index-05-7eab617767"), w: 512, h: 640 },
+  { src: T("index-09-17d8af1698"), w: 640, h: 480 },
+  { src: T("hero-asians-07-c40b497de9"), w: 520, h: 219 },
+  { src: T("index-06-bdfabfe408"), w: 490, h: 640 },
+  { src: T("index-02-bf139d0c00"), w: 640, h: 640 },
+  { src: T("index-07-8517c6c4d5"), w: 490, h: 640 },
+  { src: T("hero-card-console"), w: 520, h: 292 },
+  { src: T("index-04-e40c5c0484"), w: 640, h: 452 },
+  { src: T("index-08-ca15fe9d96"), w: 512, h: 640 },
+  { src: T("index-11-424bf2862f"), w: 588, h: 640 },
+];
+
+export default function Home() {
+  return (
+    <>
+      <Header />
+      <main id="main">
+        <HeroStage
+          status={profile.status}
+          resume={profile.resume}
+          pics={HERO_PICS}
+        />
+
+        <WorkIndex
+          items={cases.map((c) => {
+            const pic = c.cover;
+            const card = CARD[c.slug];
+            return { slug: c.slug, title: c.title, meta: card.meta, outcome: { value: card.value, label: card.label }, pic: { src: pic.src, w: pic.w, h: pic.h } };
+          })}
+        />
+
+        <section className="wrap section" aria-labelledby="art-h">
+          <div className="section__head">
+            <h2 className="h2" id="art-h">Artwork</h2>
+            <p><Link prefetch={false} href="/artwork">Art I make for fun</Link></p>
+          </div>
+          <ArtGallery items={artwork.slice(0, 6).map((a) => ({ ...a, thumb: a.src.replace("/images/", "/images/thumbs/").replace(".webp", ".jpg") }))} layout="strip" />
+        </section>
+
+        <section className="wrap section" aria-labelledby="career-h">
+          <div className="section__head">
+            <h2 className="h2" id="career-h">Experience</h2>
+          </div>
+          <Timeline />
+        </section>
+      </main>
+      <Footer />
+    </>
+  );
+}

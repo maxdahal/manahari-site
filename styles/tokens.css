@@ -1,0 +1,138 @@
+/* Generated with the color-palette skill; strategy from impeccable colorize.
+   Both hues come from Nepal. Action: Himalayan blue #003893 (buttons, links, focus, selection,
+   highlight tints). Redline: rhododendron crimson #DC143C, annotations only (frames, pins).
+   Neutral: ink #191C24 (surfaces, text, borders, muted text).
+   Every pair is checked by scripts/check-contrast.mjs (WCAG AA, light and dark). */
+@import "tailwindcss";
+/* v1's source lives in v1/ on the repo for safekeeping; keep its classes out of this build */
+@source not "../v1";
+@source not "../_static-draft";
+
+@custom-variant dark (&:where(.dark, .dark *));
+
+@theme {
+  /* primary scale */
+  --color-primary-50: #F1F6FD;
+  --color-primary-100: #E3EDFC;
+  --color-primary-200: #C2D7FA;
+  --color-primary-300: #86B2F9;
+  --color-primary-400: #4289FA;
+  --color-primary-500: #005EF5;
+  --color-primary-600: #004ECC;
+  --color-primary-700: #0041A8;
+  --color-primary-800: #00358A;
+  --color-primary-900: #002766;
+  --color-primary-950: #001433;
+
+  /* neutral scale */
+  --color-neutral-50: #F6F7F8;
+  --color-neutral-100: #EEEFF2;
+  --color-neutral-200: #D9DCE3;
+  --color-neutral-300: #B5BAC9;
+  --color-neutral-400: #8E96AF;
+  --color-neutral-500: #647090;
+  --color-neutral-600: #545D78;
+  --color-neutral-700: #454D63;
+  --color-neutral-800: #383F51;
+  --color-neutral-900: #2A2F3C;
+  --color-neutral-950: #15171E;
+
+  /* redline scale */
+  --color-redline-50: #FCF2F4;
+  --color-redline-100: #FAE6EA;
+  --color-redline-200: #F5C6D0;
+  --color-redline-300: #EF8FA3;
+  --color-redline-400: #EB5270;
+  --color-redline-500: #E0153D;
+  --color-redline-600: #BB1133;
+  --color-redline-700: #9A0E2A;
+  --color-redline-800: #7E0C23;
+  --color-redline-900: #5D091A;
+  --color-redline-950: #2F040D;
+
+  /* Light mode semantic tokens */
+  --color-background: var(--color-neutral-50);
+  --color-foreground: var(--color-neutral-950);
+  --color-card: #FFFFFF;
+  --color-card-foreground: var(--color-neutral-950);
+  --color-popover: #FFFFFF;
+  --color-popover-foreground: var(--color-neutral-950);
+  --color-primary: #003893;
+  --color-primary-foreground: #FFFFFF;
+  --color-primary-hover: var(--color-primary-900);
+  --color-secondary: var(--color-primary-100);
+  --color-secondary-foreground: var(--color-primary-900);
+  --color-muted: var(--color-neutral-100);
+  --color-muted-foreground: var(--color-neutral-600);
+  --color-accent: var(--color-primary-100);
+  --color-accent-foreground: var(--color-primary-900);
+  --color-destructive: #DC2626;
+  --color-destructive-foreground: #FFFFFF;
+  --color-border: var(--color-neutral-200);
+  --color-input: var(--color-neutral-500);
+  --color-ring: #003893;
+  --color-link: #003893;
+  --color-error: #B91C1C;
+  --color-redline: var(--color-redline-500);
+  --color-redline-foreground: #FFFFFF;
+  --color-redline-text: var(--color-redline-500);
+  --radius: 0.5rem;
+}
+
+/* Dark mode overrides */
+.dark {
+  --color-background: var(--color-neutral-950);
+  --color-foreground: var(--color-neutral-50);
+  --color-card: var(--color-neutral-900);
+  --color-card-foreground: var(--color-neutral-50);
+  --color-popover: var(--color-neutral-900);
+  --color-popover-foreground: var(--color-neutral-50);
+  --color-primary: var(--color-primary-400);
+  --color-primary-foreground: var(--color-neutral-950);
+  --color-primary-hover: var(--color-primary-300);
+  --color-secondary: var(--color-primary-950);
+  --color-secondary-foreground: var(--color-primary-100);
+  --color-muted: var(--color-neutral-900);
+  --color-muted-foreground: var(--color-neutral-300);
+  --color-accent: var(--color-primary-950);
+  --color-accent-foreground: var(--color-primary-100);
+  --color-destructive: #DC2626;
+  --color-destructive-foreground: #FFFFFF;
+  --color-border: var(--color-neutral-800);
+  --color-input: var(--color-neutral-500);
+  --color-ring: var(--color-primary-400);
+  --color-link: var(--color-primary-300);
+  --color-error: #F87171;
+  --color-redline: var(--color-redline-400);
+  --color-redline-foreground: var(--color-neutral-950);
+  --color-redline-text: var(--color-redline-300);
+}
+@media (prefers-color-scheme: dark) {
+  :root:not(.light) {
+    --color-background: var(--color-neutral-950);
+    --color-foreground: var(--color-neutral-50);
+    --color-card: var(--color-neutral-900);
+    --color-card-foreground: var(--color-neutral-50);
+    --color-popover: var(--color-neutral-900);
+    --color-popover-foreground: var(--color-neutral-50);
+    --color-primary: var(--color-primary-400);
+    --color-primary-foreground: var(--color-neutral-950);
+    --color-primary-hover: var(--color-primary-300);
+    --color-secondary: var(--color-primary-950);
+    --color-secondary-foreground: var(--color-primary-100);
+    --color-muted: var(--color-neutral-900);
+    --color-muted-foreground: var(--color-neutral-300);
+    --color-accent: var(--color-primary-950);
+    --color-accent-foreground: var(--color-primary-100);
+    --color-destructive: #DC2626;
+    --color-destructive-foreground: #FFFFFF;
+    --color-border: var(--color-neutral-800);
+    --color-input: var(--color-neutral-500);
+    --color-ring: var(--color-primary-400);
+    --color-link: var(--color-primary-300);
+    --color-error: #F87171;
+    --color-redline: var(--color-redline-400);
+    --color-redline-foreground: var(--color-neutral-950);
+    --color-redline-text: var(--color-redline-300);
+  }
+}

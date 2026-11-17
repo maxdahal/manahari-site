@@ -11,9 +11,11 @@ import { profile } from "@/content/profile";
    Word for word from the published site's For recruiters panel; the research
    assistant row was added by Manahari for this version. */
 
-const DEGREES = [
-  { badge: "M.S.", full: "Master of Science", field: "Information Science (HCI)", school: "UNC Chapel Hill", meta: "May 2027 (expected) · Health Informatics cert." },
-  { badge: "B.S.", full: "Bachelor of Science", field: "Computer Science", school: "BYU-Idaho", meta: "April 2022 · GPA 3.9" },
+/* GPA as a tag: green for a grade; grey "No GPA" for the M.S., since UNC
+   Chapel Hill's graduate school doesn't use GPAs (owner-supplied fact). */
+const DEGREES: { badge: string; full: string; field: string; school: string; meta: string; gpa?: string; gpaNote?: string }[] = [
+  { badge: "M.S.", full: "Master of Science", field: "Information Science (HCI)", school: "UNC Chapel Hill", meta: "May 2027 (expected) · Health Informatics cert.", gpaNote: "UNC Chapel Hill’s graduate school doesn’t use GPAs" },
+  { badge: "B.S.", full: "Bachelor of Science", field: "Computer Science", school: "BYU-Idaho", meta: "April 2022", gpa: "GPA 3.9" },
 ];
 /* from / to are [year, month 1-12]; to: null is "Present" */
 type Ym = [number, number];
@@ -105,7 +107,11 @@ export function RecruiterDialog() {
                 {DEGREES.map((d) => (
                   <li key={d.badge}>
                     <span><b><span className="sr-only">{d.full}, </span><span aria-hidden="true">{d.badge} </span>{d.field}</b><br /><span className="muted">{d.school}</span></span>
-                    <time>{d.meta}</time>
+                    <span className="rdlg__when">
+                      <time>{d.meta}</time>
+                      {d.gpa ? <span className="tenure">{d.gpa}</span> : null}
+                      {d.gpaNote ? <span className="gpa-none"><span className="tenure tenure--plain">No GPA</span><span className="gpa-none__why">{d.gpaNote}</span></span> : null}
+                    </span>
                   </li>
                 ))}
               </ul>

@@ -7,7 +7,7 @@ The portfolio is a handoff document: daylight spec paper, ink type, Himalayan bl
 - Annotation is the only ornament. If a mark doesn't point at a decision, it doesn't ship.
 
 ## Colors (generated: `scripts/tokens.mjs` → `styles/tokens.css`)
-- Strategy (impeccable colorize): cool-neutral temperature; paper and ink carry the page; colour is low-dose and every colour has one job. Both hues come from the owner's own story (she is originally from Nepal), chosen by the owner over surgical green, blueprint blue and graphite. Built with the color-palette skill, one 11-shade scale per role. A footer colophon on every page names the source: "Colors from home: Himalayan blue and rhododendron, Nepal’s national flower." with a dot of each source hue; the same dots (`NepalDots` in `components/Shell.tsx`) follow "Nepal" on the About page journey.
+- Strategy (impeccable colorize): cool-neutral temperature; paper and ink carry the page; colour is low-dose and every colour has one job. Both hues come from the owner's own story (Manahari is originally from Nepal), chosen by the owner over surgical green, blueprint blue and graphite. Built with the color-palette skill, one 11-shade scale per role. A footer colophon on every page names the source: "Colors from home: Himalayan blue and rhododendron, Nepal’s national flower." with a dot of each source hue; the same dots (`NepalDots` in `components/Shell.tsx`) follow "Nepal" in the About section's journey.
 - Himalayan blue #003893 (the blue of Nepal's flag): buttons, links, focus, text selection, the rail tint. Light: the seed with white text 10.6:1, hover #002766, tints #E3EDFC. Dark: blue-400 #4289FA with ink text 5.3:1, hover #86B2F9, links #86B2F9 (8.3:1), tints #001433.
 - Rhododendron #DC143C (crimson, Nepal's national flower): the redline, annotation only. #E0153D light (white text 4.8:1), #EB5270 dark.
 - Uses colours, never the flag's shape or emblems.
@@ -49,7 +49,7 @@ The portfolio is a handoff document: daylight spec paper, ink type, Himalayan bl
 - Header (`components/Shell.tsx`): a full-width sticky bar on the 1280 page grid: "md." left; Work, About, Artwork, the "For recruiters" pill and a round theme toggle right. Clear at the top of the page; frosted with a hairline once scrolled (`data-scrolled`). The current page gets ink text and a short ink rule under it. Under 640px: wordmark, recruiter pill, theme and v1's "Open menu" button; the links open as 48px rows in a panel under the bar.
 
 ## Copy
-- Every visible word on every page comes from the published v1 site, word for word: homepage, header, footer, case studies, About, Recruiter, Artwork, 404, metadata. Do not invent copy. The one addition is the Graduate Research Assistant row, which Manahari supplied. The arm panel and KU sandbox labels also use v1's own sandbox wording (`public/js/arm-sandbox.js`, `ku.js`). The only non-v1 text: image alt text, the owner's own facts, and the footer colour colophon the owner asked for. Check with the word audit (every visible segment vs. manaharidahal.me plus the v1 source) before shipping.
+- Every visible word on every page comes from the published v1 site, word for word: homepage (with its About, Experience and Artwork sections), header, footer, the For recruiters dialog, case studies, 404, metadata. Do not invent copy. The one addition is the Graduate Research Assistant row, which Manahari supplied. The arm panel and KU sandbox labels also use v1's own sandbox wording (`public/js/arm-sandbox.js`, `ku.js`). The only non-v1 text: image alt text, the owner's own facts, and the footer colour colophon the owner asked for. Check with the word audit (every visible segment vs. manaharidahal.me plus the v1 source) before shipping.
 
 ## Depth
 - One glow on the page: blue light pooling under the hero console (`--glow-a`). Shadows elsewhere are neutral.
@@ -96,3 +96,10 @@ The portfolio is a handoff document: daylight spec paper, ink type, Himalayan bl
 
 ## Dev setup
 - Tailwind runs as a PostCSS plugin (`postcss.config.mjs`), so CSS edits reach `npm run dev` live. Dev writes to `.next-dev`, builds to `.next`, so a build never clobbers a running dev server.
+
+## Site structure
+- One homepage carries everything except the case studies: hero, Case studies, About, Experience, Artwork. `/about`, `/artwork` and `/recruiter` redirect to `/#about`, `/#artwork` and `/#recruiter` (vercel.json).
+- About (`components/AboutSection.tsx`): portrait and the three numbers beside four ARIA tabs named with v1's section titles (About me, My journey so far, Skills & expertise, Research & recognition). The journey is an exclusive accordion (`<details name="journey">`), newest place open. Phones: tabs become a 2 × 2 grid.
+- Experience (`components/Timeline.tsx`): a key (Work, Research, Education) with the same colour as a dot on each label; shaded year bands with each year label centred over its band; pointing at a row dims the others; a Now line. Below 860px it becomes a vertical rail of coloured dots.
+- Artwork: all ten pieces in a masonry grid, each opening in the lightbox.
+- For recruiters (`components/RecruiterDialog.tsx`): a native modal `<dialog>` from the header button on every page; also opens from `#recruiter`. A bottom sheet on phones.

@@ -2,8 +2,11 @@ import Link from "next/link";
 
 /* Career on a horizontal year axis, one row per role so labels never collide.
    Each row: organisation, title and dates on the left; its bar on the right.
-   Bar colour says the kind: cobalt for work, redline for research, grey for
-   education. A dashed tail marks time still to come; the Now line crosses all. */
+   A key names the three kinds (blue work, crimson research, grey education) and
+   the same colour marks each label, so a bar and its row read as one. Years are
+   shaded bands with the label centred over its own year. Pointing at a row dims
+   the others. A dashed tail marks time still to come; the Now line crosses all.
+   On phones the chart becomes a vertical rail of coloured dots. */
 
 const FROM = 2021;
 const SPAN = 6.5; // Jan 2021 to Jun 2027
@@ -26,13 +29,22 @@ const ENTRIES: Entry[] = [
 ];
 
 const YEARS = Array.from({ length: 7 }, (_, i) => FROM + i);
+const KINDS: { kind: Kind; label: string }[] = [
+  { kind: "work", label: "Work" },
+  { kind: "research", label: "Research" },
+  { kind: "education", label: "Education" },
+];
 
 export function Timeline() {
   return (
     <div className="gt" style={{ "--n": (NOW / SPAN).toFixed(4) } as React.CSSProperties}>
+      <ul className="gt__key" aria-label="Key">
+        {KINDS.map((k) => <li key={k.kind} className={`gt__key--${k.kind}`}>{k.label}</li>)}
+      </ul>
+      <div className="gt__chart">
       <div className="gt__axis" aria-hidden="true">
         {YEARS.map((y) => (
-          <span key={y} style={{ left: pct(y - FROM) }}>{y}</span>
+          <span key={y} style={{ left: pct(Math.min(y - FROM + 0.5, SPAN - 0.25)) }}>{y}</span>
         ))}
         <span className="gt__now" style={{ left: pct(NOW) }}>Now</span>
       </div>
@@ -47,7 +59,7 @@ export function Timeline() {
           return (
             <li key={e.org + e.title} className={`gt__row gt__row--${e.kind}${point ? " is-point" : ""}`}>
               <div className="gt__label">
-                <h3 className="gt__org">{e.href ? <Link prefetch={false} href={e.href}>{e.org}</Link> : e.org}</h3>
+                <h3 className="gt__org"><span className="sr-only">{KINDS.find((k) => k.kind === e.kind)!.label}: </span>{e.href ? <Link prefetch={false} href={e.href}>{e.org}</Link> : e.org}</h3>
                 <p className="gt__title">{e.title}</p>
                 <p className="gt__dates"><time>{e.dates}</time></p>
               </div>
@@ -59,6 +71,7 @@ export function Timeline() {
         })}
       </ol>
       <span className="gt__nowline" aria-hidden="true" />
+      </div>
     </div>
   );
 }

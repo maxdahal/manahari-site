@@ -23,6 +23,21 @@
       "source": "/asians",
       "destination": "/work/asians",
       "permanent": true
+    },
+    {
+      "source": "/about",
+      "destination": "/#about",
+      "permanent": true
+    },
+    {
+      "source": "/artwork",
+      "destination": "/#artwork",
+      "permanent": true
+    },
+    {
+      "source": "/recruiter",
+      "destination": "/#recruiter",
+      "permanent": true
     }
   ],
   "headers": [

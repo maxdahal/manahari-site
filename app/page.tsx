@@ -1,9 +1,10 @@
-import Link from "next/link";
 import { Header, Footer } from "@/components/Shell";
 import { HeroStage } from "@/components/HeroStage";
 import { WorkIndex } from "@/components/WorkIndex";
 import { Timeline } from "@/components/Timeline";
 import { ArtGallery } from "@/components/ArtGallery";
+import { AboutSection } from "@/components/AboutSection";
+import { AvailabilityRail } from "@/components/AvailabilityRail";
 import { cases } from "@/content/cases";
 import { artwork, profile } from "@/content/profile";
 
@@ -52,21 +53,25 @@ export default function Home() {
           })}
         />
 
-        <section className="wrap section" aria-labelledby="art-h">
-          <div className="section__head">
-            <h2 className="h2" id="art-h">Artwork</h2>
-            <p><Link prefetch={false} href="/artwork">Art I make for fun</Link></p>
-          </div>
-          <ArtGallery items={artwork.slice(0, 6).map((a) => ({ ...a, thumb: a.src.replace("/images/", "/images/thumbs/").replace(".webp", ".jpg") }))} layout="strip" />
-        </section>
+        <AboutSection />
 
-        <section className="wrap section" aria-labelledby="career-h">
+        <section className="wrap section" id="experience" aria-labelledby="career-h">
           <div className="section__head">
             <h2 className="h2" id="career-h">Experience</h2>
           </div>
           <Timeline />
         </section>
+
+        <section className="wrap section" id="artwork" aria-labelledby="art-h">
+          <div className="section__head">
+            <h2 className="h2" id="art-h">Artwork</h2>
+            <p>Art I make for fun</p>
+          </div>
+          {/* every piece; raster art uses its smaller jpg thumbnail, the svg is already light */}
+          <ArtGallery items={artwork.map((a) => ({ ...a, thumb: a.src.endsWith(".webp") ? a.src.replace("/images/", "/images/thumbs/").replace(".webp", ".jpg") : undefined }))} />
+        </section>
       </main>
+      <AvailabilityRail status={profile.status} />
       <Footer />
     </>
   );

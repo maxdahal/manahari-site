@@ -2,11 +2,12 @@ import Link from "next/link";
 import { profile } from "@/content/profile";
 import { ThemeToggle } from "./ThemeToggle";
 import { MenuButton } from "./MenuButton";
+import { RecruiterDialog } from "./RecruiterDialog";
 
 const NAV = [
   { href: "/#work", label: "Work" },
-  { href: "/about", label: "About" },
-  { href: "/artwork", label: "Artwork" },
+  { href: "/#about", label: "About" },
+  { href: "/#artwork", label: "Artwork" },
 ];
 
 /* Full-width bar: wordmark left; links, the recruiter pill and the theme
@@ -27,9 +28,7 @@ export function Header({ current }: { current?: string }) {
             </Link>
           ))}
         </nav>
-        <Link prefetch={false} className="nav__cta" href="/recruiter" aria-current={current === "Recruiter" ? "page" : undefined}>
-          For recruiters
-        </Link>
+        <RecruiterDialog />
         <ThemeToggle />
         <MenuButton />
         </span>
@@ -39,7 +38,7 @@ export function Header({ current }: { current?: string }) {
 }
 
 /* the two source colours, Himalayan blue and rhododendron crimson: shown in the footer
-   colophon and at the Nepal stop on the About page. Decorative; the footer line names them. */
+   colophon and at the Nepal stop in the About section. Decorative; the footer line names them. */
 export function NepalDots() {
   return <span className="nepal-dots" aria-hidden="true"><i style={{ background: "#003893" }} /><i style={{ background: "#DC143C" }} /></span>;
 }

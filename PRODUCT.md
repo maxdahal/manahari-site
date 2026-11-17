@@ -24,7 +24,7 @@ Manahari both designs and builds. The portfolio itself is evidence: real, workin
 - Design leads may share a case-study link with their team.
 
 ## Capabilities and Constraints
-- Pages: home, four case studies (Surgical Console, KU Brand, Asian's, Esri Calcite), About, Artwork, Recruiter summary.
+- Pages: home (with About, Experience and Artwork sections) and four case studies (Surgical Console, KU Brand, Asian's, Esri Calcite). The recruiter summary is a dialog available from every page.
 - Static export only: no server, forms or analytics backend.
 - Surgical Console is under NDA: keep v1's masking. Company and product names are masked in the study, screens are redrawn, and clinical data is hidden. The prototype can't be shown; offer a walkthrough on a call.
 

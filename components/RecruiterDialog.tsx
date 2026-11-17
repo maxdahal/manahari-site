@@ -18,9 +18,9 @@ const DEGREES = [
 const JOBS = [
   { title: "UI/UX Design Intern", org: "Karl Storz (Asensus Surgical)", when: "May to Aug 2026" },
   { title: "Graduate Research Assistant", org: "UNC Chapel Hill", when: "Feb 2026 to Present" },
-  { title: "UX Designer", org: "AppTeamCarolina", when: "Sep 2025 to May 2026" },
+  { title: "UX Designer", org: "App Team Carolina", when: "Sep 2025 to May 2026" },
   { title: "UX Designer / Front-End Developer", org: "University of Kansas", when: "Jun 2022 to Apr 2025" },
-  { title: "UI/UX Design and Front-End Intern", org: "ESRI", when: "Jun to Aug 2021" },
+  { title: "UI/UX Design and Front-End Intern", org: "Esri", when: "Jun to Aug 2021" },
 ];
 const SKILLS = ["Figma", "AI-assisted design and development", "Prototyping", "Wireframing", "User research", "Usability testing", "Interaction design", "Design systems", "Accessibility (WCAG)", "HTML and CSS", "React", "User flows", "Visual design", "Typography", "Layout", "Heuristic analysis", "Component libraries", "Adobe Creative Suite", "JavaScript (TypeScript)", "Tailwind CSS", "Next.js", "Drupal", "Git", "Design documentation", "Design critiques", "Agile", "Miro", "Jira", "Trello"];
 

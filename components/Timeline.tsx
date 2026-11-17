@@ -21,11 +21,11 @@ type Entry = { title: string; org: string; dates: string; start: number; end: nu
 const ENTRIES: Entry[] = [
   { title: "UI/UX Design Intern", org: "Karl Storz (Asensus Surgical)", dates: "May to Aug 2026", start: 5.33, end: 5.58, kind: "work", href: "/work/surgical-console" },
   { title: "Graduate Research Assistant", org: "UNC Chapel Hill", dates: "Feb 2026 to Present", start: 5.08, end: NOW, kind: "research" },
-  { title: "UX Designer", org: "AppTeamCarolina", dates: "Sep 2025 to May 2026", start: 4.67, end: 5.33, kind: "work" },
+  { title: "UX Designer", org: "App Team Carolina", dates: "Sep 2025 to May 2026", start: 4.67, end: 5.33, kind: "work" },
   { title: "Information Science (HCI)", org: "UNC Chapel Hill", dates: "May 2027 (expected) · Health Informatics cert.", start: 4.58, end: 6.33, kind: "education" },
   { title: "UX Designer / Front-End Developer", org: "University of Kansas", dates: "Jun 2022 to Apr 2025", start: 1.42, end: 4.25, kind: "work", href: "/work/ku-brand" },
   { title: "Computer Science", org: "BYU-Idaho", dates: "April 2022 · GPA 3.9", start: 1.25, end: 1.25, kind: "education" },
-  { title: "UI/UX Design and Front-End Intern", org: "ESRI", dates: "Jun to Aug 2021", start: 0.42, end: 0.67, kind: "work", href: "/work/esri" },
+  { title: "UI/UX Design and Front-End Intern", org: "Esri", dates: "Jun to Aug 2021", start: 0.42, end: 0.67, kind: "work", href: "/work/esri" },
 ];
 
 const YEARS = Array.from({ length: 7 }, (_, i) => FROM + i);

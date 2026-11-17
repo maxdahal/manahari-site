@@ -1,11 +1,20 @@
 "use client";
 
-import { useRef, useState } from "react";
+import { useRef, useState, useSyncExternalStore } from "react";
+import { DollyStage } from "./DollyStage";
 
 type Art = { src: string; alt: string; w: number; h: number; thumb?: string };
 
-/* Masonry (or a strip) of artwork; any piece opens larger in a dialog. */
-export function ArtGallery({ items, layout = "grid" }: { items: Art[]; layout?: "grid" | "strip" }) {
+/* Masonry (or a strip) of artwork; any piece opens larger in a dialog.
+   "dolly" flies the camera through the pieces as the page scrolls (see
+   DollyStage), with its own heading; it falls back to the masonry grid with
+   reduced motion and on the server render. */
+const REDUCE = "(prefers-reduced-motion: reduce)";
+const subscribeMotion = (cb: () => void) => { const m = matchMedia(REDUCE); m.addEventListener("change", cb); return () => m.removeEventListener("change", cb); };
+
+export function ArtGallery({ items, layout = "grid", title, sub }: { items: Art[]; layout?: "grid" | "strip" | "dolly"; title?: string; sub?: string }) {
+  const motionOk = useSyncExternalStore(subscribeMotion, () => !matchMedia(REDUCE).matches, () => false);
+  const dolly = layout === "dolly" && motionOk;
   const dialog = useRef<HTMLDialogElement>(null);
   const [index, setIndex] = useState(0);
   const show = (i: number) => setIndex((i + items.length) % items.length);
@@ -13,7 +22,14 @@ export function ArtGallery({ items, layout = "grid" }: { items: Art[]; layout?: 
 
   return (
     <>
-      <ul className={layout === "grid" ? "art-grid" : "art-strip"}>
+      {dolly ? (
+        <DollyStage items={items} title={title ?? ""} sub={sub ?? ""} onOpen={(i) => { show(i); dialog.current?.showModal(); }} />
+      ) : (
+      <div className={layout === "dolly" ? "wrap" : undefined}>
+      {layout === "dolly" ? (
+        <div className="section__head"><h2 className="h2" id="art-h">{title}</h2><p>{sub}</p></div>
+      ) : null}
+      <ul className={layout === "strip" ? "art-strip" : "art-grid"}>
         {items.map((a, i) => (
           <li key={a.src}>
             <button type="button" className="art-item" onClick={() => { show(i); dialog.current?.showModal(); }}>
@@ -24,6 +40,8 @@ export function ArtGallery({ items, layout = "grid" }: { items: Art[]; layout?: 
           </li>
         ))}
       </ul>
+      </div>
+      )}
       <dialog
         ref={dialog}
         className="lightbox"

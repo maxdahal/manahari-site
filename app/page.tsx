@@ -62,13 +62,9 @@ export default function Home() {
           <Timeline />
         </section>
 
-        <section className="wrap section" id="artwork" aria-labelledby="art-h">
-          <div className="section__head">
-            <h2 className="h2" id="art-h">Artwork</h2>
-            <p>Art I make for fun</p>
-          </div>
-          {/* every piece; raster art uses its smaller jpg thumbnail, the svg is already light */}
-          <ArtGallery items={artwork.map((a) => ({ ...a, thumb: a.src.endsWith(".webp") ? a.src.replace("/images/", "/images/thumbs/").replace(".webp", ".jpg") : undefined }))} />
+        <section className="section section--art" id="artwork" aria-labelledby="art-h">
+          {/* every piece, flown through on scroll; full-size files, since each one comes up large */}
+          <ArtGallery layout="dolly" title="Artwork" sub="Art I make for fun" items={artwork} />
         </section>
       </main>
       <AvailabilityRail status={profile.status} />

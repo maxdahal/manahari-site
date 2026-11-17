@@ -1150,3 +1150,28 @@ button.nav__cta:focus-visible { outline: 2px solid var(--color-ring); outline-of
   .avail__dot { animation: avail-pulse 2.4s ease-in-out infinite; }
 }
 @keyframes avail-pulse { 50% { box-shadow: 0 0 0 7px color-mix(in srgb, #2e9e5b 0%, transparent); } }
+
+/* =================================================================
+   Artwork: dolly through the pieces as the page scrolls
+   ================================================================= */
+.section--art { padding-bottom: 0; }
+.dolly { position: relative; }
+.dolly__stage { position: sticky; top: 0; height: 100svh; overflow: hidden; display: grid; grid-template-rows: auto minmax(0, 1fr) auto; perspective: 900px; perspective-origin: 50% 45%; }
+.dolly__head { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: end; gap: 8px 32px; padding-top: calc(var(--head-h, 72px) + 24px); position: relative; z-index: 2000; pointer-events: none; }
+.dolly__head p { color: var(--color-muted-foreground); }
+.dolly__space { position: relative; transform-style: preserve-3d; pointer-events: none; }
+.dolly__card { --card-w: min(34vw, 440px); --card-h: 60svh; position: absolute; left: 50%; top: 50%; opacity: 0; visibility: hidden; will-change: transform, opacity; }
+.dolly__card .art-item { display: block; width: 100%; height: 100%; padding: 0; border: 0; background: none; cursor: zoom-in; border-radius: 10px; }
+.dolly__card img { width: 100%; height: 100%; object-fit: cover; border-radius: 10px; box-shadow: 0 30px 60px -20px rgb(21 23 30 / 0.45); }
+.dolly__card .art-item:focus-visible { outline: 3px solid var(--color-ring); outline-offset: 4px; }
+.dolly__foot { display: grid; grid-template-columns: minmax(0, 1fr) auto; align-items: center; gap: 10px 24px; padding-bottom: 28px; position: relative; z-index: 2000; }
+.dolly__hint { display: inline-flex; align-items: center; gap: 10px; font-size: var(--t-small); font-weight: 600; color: var(--color-muted-foreground); transition: opacity 300ms ease; }
+.dolly__hint svg { width: 16px; height: 16px; }
+.dolly__hint.is-done { opacity: 0; }
+.dolly__count { font-size: var(--t-small); color: var(--color-muted-foreground); font-variant-numeric: tabular-nums; }
+.dolly__count b { color: var(--color-foreground); }
+.dolly__bar { grid-column: 1 / -1; height: 2px; border-radius: 1px; background: var(--color-border); overflow: hidden; }
+.dolly__bar i { display: block; height: 100%; background: var(--color-foreground); transform-origin: 0 50%; transition: transform 200ms ease; }
+@media (prefers-reduced-motion: no-preference) { .dolly__hint svg { animation: dolly-nudge 1.8s ease-in-out infinite; } }
+@keyframes dolly-nudge { 50% { transform: translateY(4px); } }
+@media (max-width: 760px) { .dolly__card { --card-w: 62vw; --card-h: 50svh; } }

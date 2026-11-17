@@ -1,3 +1,4 @@
-# v1's source is kept in the repo for safekeeping, not deployed
-v1
-_static-draft
+# v1's source is kept in the repo for safekeeping, not deployed.
+# Anchored to the root: a bare "v1" would also drop public/images/v1.
+/v1
+/_static-draft

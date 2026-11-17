@@ -677,7 +677,7 @@ main { overflow-x: clip; }
 .gt__bar::after { content: ""; position: absolute; inset: 0; border-radius: inherit; border: 2px dashed var(--c); opacity: 0.8; clip-path: inset(0 0 0 var(--done)); }
 .gt__row.is-point .gt__bar { width: 20px; margin-left: -10px; }
 .gt__chart { position: relative; padding-top: 22px; }
-.gt__nowline { position: absolute; top: 54px; bottom: 0; left: calc(var(--lab) + var(--gap) + (100% - var(--lab) - var(--gap)) * var(--n)); width: 0; border-left: 2px solid var(--color-redline); pointer-events: none; }
+.gt__nowline { position: absolute; top: 54px; bottom: 0; left: calc(var(--lab) + var(--gap) + (100% - var(--lab) - var(--gap)) * var(--n)); width: 2px; margin-left: -1px; background: var(--color-redline); pointer-events: none; }
 
 .site-foot__site { color: var(--color-muted-foreground); }
 .site-foot__row nav .btn { min-height: 44px; color: var(--color-primary-foreground); padding-inline: 20px; }

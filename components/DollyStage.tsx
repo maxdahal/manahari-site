@@ -77,6 +77,11 @@ export function DollyStage({ items, title, sub, onOpen }: { items: Art[]; title:
           <h2 className="h2" id="art-h">{title}</h2>
           <p>{sub}</p>
         </div>
+        {/* over the pieces, under the heading: a frosted pill with a scroll-wheel cue; gone at the last piece */}
+        <p className={`dolly__hint${done ? " is-done" : ""}`} aria-hidden="true">
+          <span className="dolly__mouse"><i /></span>
+          Keep scrolling to see all the artwork
+        </p>
         <ul className="dolly__space">
           {items.map((a, i) => (
             <li key={a.src} ref={(el) => { cards.current[i] = el; }} className="dolly__card" style={{ aspectRatio: `${a.w} / ${a.h}`, width: `min(var(--card-w), calc(var(--card-h) * ${(a.w / a.h).toFixed(3)}))` }}>
@@ -88,10 +93,6 @@ export function DollyStage({ items, title, sub, onOpen }: { items: Art[]; title:
           ))}
         </ul>
         <div className="dolly__foot wrap" aria-hidden="true">
-          <p className={`dolly__hint${done ? " is-done" : ""}`}>
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M12 5v14M6 13l6 6 6-6" /></svg>
-            Keep scrolling to see all the artwork
-          </p>
           <p className="dolly__count num"><b>{String(at + 1).padStart(2, "0")}</b> / {String(n).padStart(2, "0")}</p>
           <span className="dolly__bar"><i style={{ transform: `scaleX(${n > 1 ? at / (n - 1) : 1})` }} /></span>
         </div>

@@ -8,7 +8,9 @@
   },
   "detector": {
     "ignoreRules": [],
-    "ignoreFiles": [],
+    "ignoreFiles": [
+      "v1/**"
+    ],
     "ignoreValues": [
       {
         "rule": "border-accent-on-rounded",
@@ -18,6 +20,15 @@
         ],
         "createdAt": "2026-11-17T04:50:01.525Z",
         "reason": "agent judgment: .carm reproduces the Surgical Console arm panel, whose arm color is shown as a thick top bar (the case study's Project 1 decision)"
+      },
+      {
+        "rule": "low-contrast",
+        "value": "*",
+        "files": [
+          "components/KuSandbox.tsx"
+        ],
+        "createdAt": "2026-11-17T20:33:37.577Z",
+        "reason": "The KU contrast sandbox demonstrates failing colour pairs on purpose; that is what it teaches."
       }
     ]
   }

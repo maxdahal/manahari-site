@@ -37,6 +37,8 @@ body {
 html { scrollbar-color: color-mix(in srgb, var(--color-muted-foreground) 55%, transparent) transparent; accent-color: var(--color-primary); }
 img, svg, video { display: block; max-width: 100%; height: auto; }
 h1, h2, h3, h4, p, figure, blockquote, dl, dd { margin: 0; }
+/* headings and list terms break into even lines (body text is set to pretty further down) */
+h1, h2, h3, h4, dt { text-wrap: balance; }
 ul, ol { margin: 0; padding: 0; list-style: none; }
 button { font: inherit; color: inherit; }
 a { color: var(--color-link); text-decoration-thickness: 1px; text-underline-offset: 0.2em; }

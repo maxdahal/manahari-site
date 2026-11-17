@@ -1,7 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
-import { flushSync } from "react-dom";
+import { useSyncExternalStore } from "react";
 
 /* Follows the system until the visitor picks; the pick is remembered.
    Switching pours the new theme out of the button: a View Transition whose
@@ -39,20 +38,30 @@ function blobFrames(cx: number, cy: number, w: number, h: number) {
   return frames;
 }
 
-export function ThemeToggle() {
-  const [dark, setDark] = useState<boolean | null>(null);
+/* The theme lives on <html> (set before paint by the script in app/layout.tsx), so the toggle
+   reads it as an external store: it follows the class and the system setting, and stays null
+   on the server so the first client render matches the static HTML. */
+const SYSTEM_DARK = "(prefers-color-scheme: dark)";
+function isDark() {
+  const root = document.documentElement;
+  return root.classList.contains("dark") || (!root.classList.contains("light") && matchMedia(SYSTEM_DARK).matches);
+}
+function subscribe(onChange: () => void) {
+  const mo = new MutationObserver(onChange);
+  mo.observe(document.documentElement, { attributes: true, attributeFilter: ["class"] });
+  const mq = matchMedia(SYSTEM_DARK);
+  mq.addEventListener("change", onChange);
+  return () => { mo.disconnect(); mq.removeEventListener("change", onChange); };
+}
 
-  useEffect(() => {
-    const root = document.documentElement;
-    setDark(root.classList.contains("dark") || (!root.classList.contains("light") && matchMedia("(prefers-color-scheme: dark)").matches));
-  }, []);
+export function ThemeToggle() {
+  const dark = useSyncExternalStore(subscribe, isDark, () => null);
 
   function apply(next: boolean) {
     const root = document.documentElement;
     root.classList.toggle("dark", next);
     root.classList.toggle("light", !next);
     try { localStorage.setItem("theme", next ? "dark" : "light"); } catch {}
-    setDark(next);
   }
 
   function toggle(e: React.MouseEvent<HTMLButtonElement>) {
@@ -72,7 +81,7 @@ export function ThemeToggle() {
     const b = e.currentTarget.getBoundingClientRect();
     const cx = b.left + b.width / 2;
     const cy = b.top + b.height / 2;
-    const vt = doc.startViewTransition(() => flushSync(() => apply(next)));
+    const vt = doc.startViewTransition(() => apply(next));
     vt.ready
       .then(() => {
         root.animate(blobFrames(cx, cy, innerWidth, innerHeight), {

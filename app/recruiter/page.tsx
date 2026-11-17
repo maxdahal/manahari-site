@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Link from "next/link";
 import { Header, Footer } from "@/components/Shell";
 import { profile } from "@/content/profile";
 
@@ -32,7 +33,7 @@ export default function Recruiter() {
           <h1 className="about-title" id="r-h">{profile.name}</h1>
           <p className="about-lede">UX / Product Designer who builds in code</p>
           <div className="actions" style={{ marginTop: 32 }}>
-            <a className="btn btn--primary" href="/#work">See case studies</a>
+            <Link prefetch={false} className="btn btn--primary" href="/#work">See case studies</Link>
             <a className="btn btn--line" href={profile.resume} target="_blank" rel="noopener">Resume<span className="sr-only"> (PDF, opens in a new tab)</span></a>
           </div>
           <p className="rec-links"><a href={profile.linkedin} target="_blank" rel="noopener">LinkedIn</a><a href={`mailto:${profile.email}`}>{profile.email}</a></p>

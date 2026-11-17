@@ -58,6 +58,10 @@ const VERDICT_LABEL = { before: "Before", kept: "Kept", dropped: "Dropped", ship
 
 const START: State[] = ["Running", "Warning", "Error", "Inactive"];
 
+/* the glance test's clock; kept outside the component so render stays pure (it only runs on a
+   click or key press) */
+const now = () => performance.now();
+
 export function ArmPanel({ tagline = "Arm panel" }: { tagline?: string }) {
   const [design, setDesign] = useState<DesignId>("final");
   const [arms, setArms] = useState<State[]>(START);
@@ -97,13 +101,13 @@ export function ArmPanel({ tagline = "Arm panel" }: { tagline?: string }) {
     const target = randomFault();
     setGlance({ phase: "look", target });
     timer.current = setTimeout(() => {
-      askedAt.current = performance.now();
+      askedAt.current = now();
       setGlance({ phase: "ask", target });
     }, 1000);
   }
   function pick(n: number) {
     if (!glance || glance.phase !== "ask") return;
-    setGlance({ ...glance, phase: "done", picked: n, ms: performance.now() - askedAt.current });
+    setGlance({ ...glance, phase: "done", picked: n, ms: now() - askedAt.current });
   }
   function onKey(e: KeyboardEvent<HTMLDivElement>) {
     if ((e.target as HTMLElement).tagName === "INPUT") return;

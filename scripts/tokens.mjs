@@ -21,7 +21,7 @@ export const dark={
   muted:N[900], 'muted-foreground':N[300], accent:P[950], 'accent-foreground':P[100],
   destructive:'#DC2626', 'destructive-foreground':W, border:N[800], input:N[500], ring:P[400], link:P[300], error:'#F87171', redline:R[400], 'redline-foreground':N[950], 'redline-text':R[300]};
 // pairs from the skill's verification checklist: [fg, bg, min, label]
-export const pairs=t=>[
+export const pairs=()=>[
  ['foreground','background',4.5,'Body text'],['card-foreground','card',4.5,'Card text'],['popover-foreground','popover',4.5,'Popover text'],
  ['primary-foreground','primary',4.5,'Primary button text'],['primary-foreground','primary-hover',4.5,'Primary button text on hover'],['secondary-foreground','secondary',4.5,'Secondary button text'],
  ['muted-foreground','muted',4.5,'Muted text on muted'],['muted-foreground','background',4.5,'Muted text on page'],

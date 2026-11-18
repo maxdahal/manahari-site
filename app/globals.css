@@ -1213,8 +1213,17 @@ button.nav__cta:focus-visible { outline: 2px solid var(--color-ring); outline-of
    is a cover darkened by a scrim, with the title and years set on it in
    white; hover darkens it a little more. Under 860px: one column. */
 .wg__head { margin-bottom: clamp(32px, 4vw, 56px); }
-.wg { display: grid; grid-template-columns: repeat(6, minmax(0, 1fr)); gap: clamp(24px, 3vw, 48px); }
-.wg__card { grid-column: span 2; }
+.wg { position: relative; z-index: 1; display: grid; grid-template-columns: repeat(6, minmax(0, 1fr)); gap: clamp(64px, 6vw, 96px) clamp(32px, 3.4vw, 56px); margin: 0; padding: 0; list-style: none; }
+.wg__card { position: relative; grid-column: span 2; }
+/* the route: one line through the cards' centres in order, seen only in the gaps */
+.wg-route { position: relative; }
+.wg-route__line { position: absolute; inset: 0; z-index: 0; overflow: visible; pointer-events: none; }
+.wg-route__line path { fill: none; stroke-linecap: round; stroke-linejoin: round; }
+.wg-route__track { stroke: var(--color-border); stroke-width: 2; stroke-dasharray: 2 8; }
+.wg-route__fill { stroke: var(--lake); stroke-width: 2.5; }
+/* step number, top left of each cover */
+.wg__step { position: absolute; z-index: 2; top: clamp(14px, 1.8vw, 22px); left: clamp(14px, 1.8vw, 22px); display: grid; place-items: center; width: 36px; height: 36px; border-radius: 50%; background: #fff; color: #10131A; font-family: var(--font-display); font-size: 0.9375rem; font-weight: 700; font-variant-numeric: tabular-nums; box-shadow: 0 2px 10px rgb(0 0 0 / 0.25); transition: background-color 300ms ease, color 300ms ease; }
+.wg__link:hover .wg__step, .wg__link:focus-visible .wg__step { background: var(--lake); color: #fff; }
 .wg__card.is-lead { grid-column: span 4; }
 .wg__link { position: relative; display: block; overflow: hidden; border-radius: 16px; color: #fff; text-decoration: none; isolation: isolate; }
 .wg__link:focus-visible { outline: 2px solid var(--color-foreground); outline-offset: 4px; }
@@ -1236,11 +1245,11 @@ button.nav__cta:focus-visible { outline: 2px solid var(--color-ring); outline-of
 .wg__card.is-lead .wg__title { font-size: clamp(1.5rem, 1.2rem + 0.9vw, 2rem); }
 .wg__years { flex: none; font-size: 0.9375rem; font-weight: 500; color: rgb(255 255 255 / 0.85); font-variant-numeric: tabular-nums; }
 @media (max-width: 860px) {
-  .wg { grid-template-columns: 1fr; gap: 24px; }
+  .wg { grid-template-columns: 1fr; gap: 48px; }
   .wg__card, .wg__card.is-lead { grid-column: auto; }
   .wg__pic, .wg__card:nth-child(-n + 2) .wg__pic { aspect-ratio: 4 / 3; height: auto; }
 }
-@media (prefers-reduced-motion: reduce) { .wg__pic img, .wg__link::after { transition: none; } .wg__link:hover .wg__pic img { transform: none; } }
+@media (prefers-reduced-motion: reduce) { .wg__pic img, .wg__link::after, .wg__step { transition: none; } .wg__link:hover .wg__pic img { transform: none; } }
 
 /* Case study reading flow (Nov 2026).
    1. Story rows: text on one side, its one picture on the other, swapping

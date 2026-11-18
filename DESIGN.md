@@ -113,4 +113,4 @@ Each line has one job; anything else is separated by space.
 Acts carry the outlined ghost title and parts the blue ribbon, so neither gets a line.
 
 ## Home case list (Nov 2026)
-Number and title only. Inactive items are frosted glass at 62% opacity; the active one is a single ink blob that flows between items (leading edge first, trailing edge catches up; instant with reduced motion), with a rhododendron number. The panel is the cover, the title and one blue "View case study" button. Drawn covers are shown whole (`contain`); Luminary uses a dark-background copy on the home card.
+Number and title only. Inactive items are frosted glass at 62% opacity; choosing one pours ink into it from the left (a wavy leading edge, 700ms; instant with reduced motion). The ink crosses the gap and joins a matching ink frame around the cover, with rounded inside corners, so tab and cover read as one shape. Its number is rhododendron. The panel is the cover, the title and one blue "View case study" button. Drawn covers are shown whole (`contain`); Luminary uses a dark-background copy on the home card.

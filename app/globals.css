@@ -1392,11 +1392,6 @@ button.nav__cta:focus-visible { outline: 2px solid var(--color-ring); outline-of
 .wk__pick[aria-pressed="false"] { opacity: 0.62; }
 .wk__pick[aria-pressed="false"]:hover, .wk__pick[aria-pressed="false"]:focus-visible { opacity: 1; }
 .wk__pick[aria-pressed="true"] { background: transparent; box-shadow: none; transition: color 250ms ease 120ms; }
-.wk__blob { position: absolute; z-index: 0; left: 0; right: 0; border-radius: 14px; background: var(--color-foreground); box-shadow: 0 10px 24px -14px rgb(15 20 40 / 0.55); pointer-events: none; }
-/* moving down: the bottom edge leads, the top follows; moving up, the reverse */
-.wk__blob--down { transition: bottom 380ms cubic-bezier(0.3, 1.4, 0.5, 1), top 560ms cubic-bezier(0.3, 1.25, 0.5, 1) 90ms, border-radius 400ms ease; }
-.wk__blob--up { transition: top 380ms cubic-bezier(0.3, 1.4, 0.5, 1), bottom 560ms cubic-bezier(0.3, 1.25, 0.5, 1) 90ms, border-radius 400ms ease; }
-@media (prefers-reduced-motion: reduce) { .wk__blob { transition: none !important; } .wk__pick[aria-pressed="true"] { transition: none; } }
 .wk__pic.is-contain:has(img[src$="-dark.svg"]) { background: #15171E; }
 :root.dark .wk__pic.is-contain:has(img[src$="-dark.svg"]) { background: var(--color-card); }
 @media (prefers-color-scheme: dark) { :root:not(.light) .wk__pic.is-contain:has(img[src$="-dark.svg"]) { background: var(--color-card); } }
@@ -1412,3 +1407,37 @@ button.nav__cta:focus-visible { outline: 2px solid var(--color-ring); outline-of
 .pairs > div, .takeaways li { position: relative; padding-top: 18px; }
 .pairs > div::before, .takeaways li::before { content: ""; position: absolute; top: 0; left: 0; width: 28px; height: 2px; border-radius: 2px; background: var(--color-foreground); }
 .case-end { padding-top: 32px; border-top: 1px solid var(--color-border); }
+
+/* Liquid fill, connected to the cover: the chosen case fills with ink from the
+   left (a wavy edge leads), the ink crosses the gap and joins the ink frame
+   around the cover, with rounded inside corners where they meet. */
+@property --wk-p { syntax: "<percentage>"; inherits: true; initial-value: 100%; }
+.wk { --wk-gap: clamp(28px, 4vw, 64px); --wk-fill: var(--color-foreground); --wk-r: 14px; column-gap: var(--wk-gap); }
+.wk__list { position: static; top: auto; }
+.wk__list li { position: relative; }
+.wk__pour { position: absolute; z-index: 0; top: 0; bottom: 0; left: 0; right: calc(-1 * var(--wk-gap) - 1px); animation: wkPour 700ms cubic-bezier(0.45, 0, 0.2, 1) both; pointer-events: none; }
+.wk__fill { position: absolute; inset: 0; border-radius: var(--wk-r) 0 0 var(--wk-r); background: var(--wk-fill); clip-path: inset(calc(-1 * var(--wk-r)) calc(100% - var(--wk-p)) calc(-1 * var(--wk-r)) 0); }
+/* rounded inside corners where the ink meets the frame */
+.wk__fill::before, .wk__fill::after { content: ""; position: absolute; right: 0; width: var(--wk-r); height: var(--wk-r); }
+.wk__fill::before { top: calc(-1 * var(--wk-r)); background: radial-gradient(circle at 0 0, transparent calc(var(--wk-r) - 0.5px), var(--wk-fill) var(--wk-r)); }
+.wk__fill::after { bottom: calc(-1 * var(--wk-r)); background: radial-gradient(circle at 0 100%, transparent calc(var(--wk-r) - 0.5px), var(--wk-fill) var(--wk-r)); }
+/* the wavy leading edge rides at the fill line, then fades as the ink lands */
+.wk__wave { position: absolute; top: 0; bottom: 0; left: var(--wk-p); width: 14px; margin-left: -1px; background: var(--wk-fill); -webkit-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 14 40' preserveAspectRatio='none'%3E%3Cpath d='M0 0h4c8 5 8 15 0 20s-8 15 0 20H0z'/%3E%3C/svg%3E") 0 0 / 100% 100%; mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 14 40' preserveAspectRatio='none'%3E%3Cpath d='M0 0h4c8 5 8 15 0 20s-8 15 0 20H0z'/%3E%3C/svg%3E") 0 0 / 100% 100%; animation: wkWave 700ms ease both; }
+@keyframes wkPour { from { --wk-p: 0%; } to { --wk-p: 100%; } }
+@keyframes wkWave { 0%, 80% { opacity: 1; } 100% { opacity: 0; } }
+.wk__list li > .wk__pick { position: relative; z-index: 1; }
+.wk__pick[aria-pressed="true"] { color: var(--color-background); background: transparent; border-color: transparent; box-shadow: none; transition: color 200ms ease 250ms; }
+/* the cover sits in an ink frame the fill flows into */
+@media (min-width: 861px) {
+  .wk__pic { padding: 10px; background: var(--wk-fill); border-radius: calc(var(--wk-r) + 10px); }
+  .wk__pic img { border-radius: var(--wk-r); background: var(--stage); }
+  .wk__pic.is-contain, .wk__pic.is-contain:has(img[src$="-dark.svg"]) { background: var(--wk-fill); }
+  .wk__pic.is-contain img { background: var(--stage); }
+  :root.dark .wk__pic.is-contain img[src$="-dark.svg"] { background: var(--color-card); }
+  :root.dark .wk__pic.is-contain:has(img[src$="-dark.svg"]) { background: var(--wk-fill); }
+}
+@media (min-width: 861px) and (prefers-color-scheme: dark) {
+  :root:not(.light) .wk__pic.is-contain:has(img[src$="-dark.svg"]) { background: var(--wk-fill); }
+  :root:not(.light) .wk__pic.is-contain img[src$="-dark.svg"] { background: var(--color-card); }
+}
+@media (prefers-reduced-motion: reduce) { .wk__pour, .wk__wave { animation: none; } .wk__wave { display: none; } }

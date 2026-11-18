@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { useLayoutEffect, useRef, useState } from "react";
+import { useRef, useState } from "react";
 
 export type IndexCase = {
   slug: string;
@@ -15,7 +15,7 @@ export type IndexCase = {
   contain?: boolean;
 };
 
-/* Case studies: a list on the left (number, title, role line) and the chosen
+/* Case studies: a list on the left (number and title) and the chosen
    study on the right (cover, title, description, outcome, a button into it).
    Every title is readable at once, and choosing one never moves the page.
    Up/Down arrows move through the list. Under 860px the list goes away and
@@ -23,23 +23,6 @@ export type IndexCase = {
 export function WorkIndex({ items }: { items: IndexCase[] }) {
   const [open, setOpen] = useState(0);
   const btns = useRef<(HTMLButtonElement | null)[]>([]);
-  /* one ink blob slides to the chosen case: its leading edge moves first and
-     the trailing edge catches up, so it stretches like a drop, then settles */
-  const [blob, setBlob] = useState<{ top: number; bottom: number; dir: "up" | "down" } | null>(null);
-  const prev = useRef(open);
-  useLayoutEffect(() => {
-    const place = () => {
-      const li = btns.current[open]?.parentElement;
-      const list = li?.parentElement;
-      if (!li || !list) return;
-      const top = li.offsetTop, bottom = list.clientHeight - (li.offsetTop + li.offsetHeight);
-      setBlob({ top, bottom, dir: open >= prev.current ? "down" : "up" });
-      prev.current = open;
-    };
-    place();
-    addEventListener("resize", place);
-    return () => removeEventListener("resize", place);
-  }, [open]);
   const n = (i: number) => `${i + 1}.`;
 
   function onKey(e: React.KeyboardEvent) {
@@ -59,9 +42,10 @@ export function WorkIndex({ items }: { items: IndexCase[] }) {
 
       <div className="wk">
         <ol className="wk__list" aria-label="Choose a case study" onKeyDown={onKey}>
-          {blob ? <span className={`wk__blob wk__blob--${blob.dir}`} style={{ top: blob.top, bottom: blob.bottom }} aria-hidden="true" /> : null}
           {items.map((c, i) => (
-            <li key={c.slug}>
+            <li key={c.slug} className={i === open ? "is-on" : undefined}>
+              {/* the ink that pours into the chosen case and on into its cover frame */}
+              {i === open ? <span key={`fill-${open}`} className="wk__pour" aria-hidden="true"><span className="wk__fill" /><span className="wk__wave" /></span> : null}
               <button
                 ref={(el) => { btns.current[i] = el; }}
                 type="button"

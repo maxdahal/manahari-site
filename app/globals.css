@@ -1213,12 +1213,11 @@ button.nav__cta:focus-visible { outline: 2px solid var(--color-ring); outline-of
    reading flow. One row per study; cover 7 parts, text 5, sides swapping
    every other row. The title link stretches over the whole row. */
 .wa__head { margin-bottom: clamp(32px, 4vw, 56px); }
-.wa { display: grid; gap: clamp(20px, 2.5vw, 32px); margin: 0; padding: 0; list-style: none; }
-.wa__row { position: relative; display: grid; grid-template-columns: 7fr 5fr; gap: clamp(28px, 4.5vw, 72px); align-items: center; padding: clamp(18px, 2.6vw, 36px); border-radius: 24px; background: color-mix(in srgb, var(--accent) 9%, var(--color-background)); transition: background-color 300ms ease; }
-.wa__row:hover { background: color-mix(in srgb, var(--accent) 14%, var(--color-background)); }
-:root.dark .wa__row { background: color-mix(in srgb, var(--accent) 13%, var(--color-background)); }
-:root.dark .wa__row:hover { background: color-mix(in srgb, var(--accent) 19%, var(--color-background)); }
-@media (prefers-color-scheme: dark) { :root:not(.light) .wa__row { background: color-mix(in srgb, var(--accent) 13%, var(--color-background)); } :root:not(.light) .wa__row:hover { background: color-mix(in srgb, var(--accent) 19%, var(--color-background)); } }
+.wa { --wa-bg: color-mix(in srgb, var(--color-foreground) 4%, transparent); --wa-bg-hover: color-mix(in srgb, var(--color-foreground) 6.5%, transparent); --wa-line: color-mix(in srgb, var(--color-foreground) 7%, transparent); display: grid; gap: clamp(20px, 2.5vw, 32px); margin: 0; padding: 0; list-style: none; }
+:root.dark .wa { --wa-bg: color-mix(in srgb, var(--color-foreground) 4.5%, transparent); --wa-bg-hover: color-mix(in srgb, var(--color-foreground) 7%, transparent); --wa-line: color-mix(in srgb, var(--color-foreground) 8%, transparent); }
+@media (prefers-color-scheme: dark) { :root:not(.light) .wa { --wa-bg: color-mix(in srgb, var(--color-foreground) 4.5%, transparent); --wa-bg-hover: color-mix(in srgb, var(--color-foreground) 7%, transparent); --wa-line: color-mix(in srgb, var(--color-foreground) 8%, transparent); } }
+.wa__row { position: relative; display: grid; grid-template-columns: 7fr 5fr; gap: clamp(28px, 4.5vw, 72px); align-items: center; padding: clamp(18px, 2.6vw, 36px); border-radius: 24px; background: var(--wa-bg); box-shadow: inset 0 0 0 1px var(--wa-line); transition: background-color 300ms ease; }
+.wa__row:hover { background: var(--wa-bg-hover); }
 .wa__row--flip { grid-template-columns: 5fr 7fr; }
 .wa__row--flip .wa__pic { order: 2; }
 .wa__pic { display: block; overflow: hidden; aspect-ratio: 3 / 2; border-radius: 14px; background: var(--stage); box-shadow: 0 1px 2px rgb(21 23 30 / 0.06), 0 18px 40px -22px rgb(21 23 30 / 0.4); }

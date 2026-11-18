@@ -1310,3 +1310,42 @@ button.nav__cta:focus-visible { outline: 2px solid var(--color-ring); outline-of
 @media (forced-colors: active) { .case-act__ghost { display: none; } }
 .case-act__h { --ghost: clamp(3.5rem, 1.6rem + 5.5vw, 7rem); padding-top: calc(var(--ghost) * 0.62); }
 .case-act__ghost { font-size: var(--ghost); -webkit-mask-image: linear-gradient(to bottom, #000 35%, transparent 78%); mask-image: linear-gradient(to bottom, #000 35%, transparent 78%); }
+
+/* Case studies on the homepage: list on the left, the chosen study on the right */
+.ws__head { display: block; border-bottom: 0; }
+.wk { display: grid; grid-template-columns: minmax(260px, 4fr) minmax(0, 8fr); gap: clamp(28px, 4vw, 64px); align-items: start; }
+.wk__list { position: sticky; top: calc(var(--head-h, 64px) + 24px); display: grid; gap: 4px; padding-left: 14px; border-left: 1.5px solid var(--color-border); }
+.wk__pick { display: grid; grid-template-columns: 30px minmax(0, 1fr) 18px; align-items: center; gap: 10px; width: 100%; min-height: 56px; padding: 10px 12px; border: 0; border-radius: 12px; background: transparent; color: var(--color-muted-foreground); font: inherit; text-align: left; cursor: pointer; transition: background-color 200ms ease, color 200ms ease; }
+.wk__pick:hover { color: var(--color-foreground); background: color-mix(in srgb, var(--color-foreground) 5%, transparent); }
+.wk__pick[aria-pressed="true"] { color: var(--color-foreground); background: linear-gradient(to right, color-mix(in srgb, var(--color-primary) var(--band-a), transparent), color-mix(in srgb, var(--color-primary) var(--band-b), transparent)); box-shadow: inset 4px 0 0 var(--color-primary); }
+.wk__pick:focus-visible { outline: 2px solid var(--color-foreground); outline-offset: 2px; }
+.wk__n { font-size: 0.8125rem; font-weight: 700; font-variant-numeric: tabular-nums; }
+.wk__t { display: grid; gap: 2px; min-width: 0; }
+.wk__t b { font-size: 1.0625rem; font-weight: 700; letter-spacing: -0.01em; line-height: 1.25; }
+.wk__t span { font-size: 0.8125rem; line-height: 1.35; }
+.wk__chev { width: 18px; height: 18px; opacity: 0; transform: translateX(-4px); transition: opacity 200ms ease, transform 200ms ease; }
+.wk__pick[aria-pressed="true"] .wk__chev { opacity: 1; transform: none; }
+.wk__panel { display: none; }
+.wk__panel.is-on { display: block; animation: wkIn 450ms cubic-bezier(0.16, 1, 0.3, 1); }
+@keyframes wkIn { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: none; } }
+.wk__pic { display: block; overflow: hidden; aspect-ratio: 16 / 10; border-radius: clamp(16px, 1.6vw, 24px); background: var(--stage); }
+.wk__pic img { width: 100%; height: 100%; object-fit: cover; transition: transform 1.2s cubic-bezier(0.16, 1, 0.3, 1); }
+.wk__pic img.is-top { object-position: 50% 0; }
+.wk__pic:hover img { transform: scale(1.03); }
+.wk__body { display: flex; flex-wrap: wrap; align-items: flex-end; justify-content: space-between; gap: 20px 32px; margin-top: 24px; }
+.wk__text { flex: 1 1 380px; display: grid; gap: 10px; }
+.wk__meta { font-size: 0.875rem; font-weight: 600; color: var(--color-muted-foreground); }
+.wk__title { font-size: clamp(1.75rem, 1.1rem + 1.6vw, 2.5rem); font-weight: 800; letter-spacing: -0.035em; line-height: 1.05; }
+.wk__desc { max-width: 56ch; font-size: 1.0625rem; line-height: 1.55; }
+.wk__outcome { font-size: 0.9375rem; line-height: 1.45; color: var(--color-muted-foreground); }
+.wk__outcome b { margin-right: 6px; font-size: 1.25rem; font-weight: 800; letter-spacing: -0.02em; color: var(--color-foreground); }
+.wk__go { flex: none; }
+@media (prefers-reduced-motion: reduce) { .wk__panel.is-on { animation: none; } .wk__pic img { transition: none; } }
+@media (max-width: 860px) {
+  .wk { grid-template-columns: 1fr; }
+  .wk__list { display: none; }
+  .wk__panels { display: grid; gap: 56px; }
+  .wk__panel, .wk__panel.is-on { display: block; animation: none; }
+}
+@media (min-width: 861px) { .wk__pic { aspect-ratio: auto; height: clamp(260px, 42vh, 440px); } .wk__body { margin-top: 20px; } }
+.ws__head { padding-bottom: 0; margin-bottom: clamp(28px, 3vw, 44px); }

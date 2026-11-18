@@ -42,7 +42,7 @@ export default function Home() {
         <WorkIndex
           items={HOME_ORDER.map((slug) => cases.find((c) => c.slug === slug)!).map((c) => {
             const pic = c.card ?? c.cover;
-            return { slug: c.slug, title: c.title, years: c.years, short: c.short, pic: { src: pic.src, w: pic.w, h: pic.h }, contain: pic.src.endsWith(".svg") || c.slug === "esri" };
+            return { slug: c.slug, title: c.title, years: c.years, short: c.short, accent: c.accent, pic: { src: pic.src, w: pic.w, h: pic.h }, contain: pic.src.endsWith(".svg") || c.slug === "esri" };
           })}
         />
 

@@ -25,7 +25,7 @@ The portfolio is a handoff document: daylight spec paper, ink type, Himalayan bl
 | redline (rhododendron) | #E0153D | #EB5270 | annotations only: frames, pins, the "Now" marker, bullets, struck "Replaced" text |
 
 - Light is the default scene (an office, daytime review); dark follows the system or the toggle, stored as `theme` in localStorage.
-- Case-study accents (#13B3B9, #0051BA, #FF5200, #007AC2) appear only inside their own imagery.
+- Case-study accents (#13B3B9, #0051BA, #4B9CD3, #FF5200, #007AC2) appear only inside their own imagery, and as the soft glow behind each study's framed cover on the homepage.
 - Console colors live in `.armkit`. They are real product values, not theme tokens: arms #b9a4ff, #e3c48f, #1f5f4a, #f49ac9. Severity: running #2e9e5b, warning #e0a93b, error #d93a2b, inactive #8a8f98.
 - Gate: `npm run build` runs `scripts/check-contrast.mjs` first. Every token pair must pass AA in both modes.
 
@@ -113,7 +113,7 @@ Taken from brand.ku.edu and ku.edu: a line is a signal, not a separator.
 - Hairlines stay only where they hold structure: table rows (spec, decisions, checks), the vertical stat dividers, and one line above each study's last actions.
 
 ## Home case list (Nov 2026)
-Alternating text and image, the same reading flow as the studies themselves. One row per study, in order (Luna, KU Brand, Luminary, Asian's, Esri): a 3:2 cover (7 parts) beside the text (5 parts), the sides swapping on every other row, 64 to 120px between rows. The text: years in muted text, the title in display type (24 to 34px), the study's one-line `short` description in muted body text, and a round arrow chip. The title is the link and stretches over the whole row (`::after`), so the row clicks through and assistive tech hears only the title; hover zooms the cover a touch, underlines the title and fills the arrow, which turns 45 degrees. Drawn covers (Luminary, Esri) are shown whole on a faint card. Under 860px each row stacks, cover first.
+Alternating text and image, the same reading flow as the studies themselves. One row per study, in order (Luna, KU Brand, Luminary, Asian's, Esri): a 3:2 cover (7 parts) beside the text (5 parts), the sides swapping on every other row, 64 to 120px between rows. The text: years in muted text, the title in display type (24 to 34px), the study's one-line `short` description in muted body text, and a round arrow chip. The title is the link and stretches over the whole row (`::after`), so the row clicks through and assistive tech hears only the title; hover zooms the cover a touch, underlines the title and fills the arrow, which turns 45 degrees. Drawn covers (Luminary, Esri) are shown whole on a faint card. Each cover sits in a simple window frame (card surface, hairline border, 14px radius, a 30px bar of three neutral dots, a soft ink shadow) over a blurred radial glow that spreads past the frame's edges, in the study's own accent (Luna #13B3B9, KU #0051BA, Luminary #4B9CD3, Asian's #FF5200, Esri #007AC2; 55% mix, 70% opacity light, 60% dark). This is the only place a study's accent appears outside the study. Hover lifts the frame 4px and brightens the glow. Under 860px each row stacks, cover first.
 
 ## Type scale (Nov 2026)
 One step down from the first build: every section heading uses `--t-h2` (max 36px), the home hero tops out at 52px and case titles at 48px; act headings max 34px, part headings 23px, mini titles 19px.

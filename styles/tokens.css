@@ -2,6 +2,8 @@
    Both hues come from Nepal. Action: Himalayan blue #003893 (buttons, links, focus, selection,
    highlight tints). Redline: rhododendron crimson #DC143C, annotations only (frames, pins).
    Neutral: ink #191C24 (surfaces, text, borders, muted text).
+   No pure white or black: the lightest surface is paper #FBFCFD, text on dark
+   or colour is neutral-50 #F6F7F8, the darkest ink is neutral-950 #15171E.
    Every pair is checked by scripts/check-contrast.mjs (WCAG AA, light and dark). */
 @import "tailwindcss";
 /* v1's source lives in v1/ on the repo for safekeeping; keep its classes out of this build */
@@ -53,12 +55,12 @@
   /* Light mode semantic tokens */
   --color-background: var(--color-neutral-50);
   --color-foreground: var(--color-neutral-950);
-  --color-card: #FFFFFF;
+  --color-card: #FBFCFD;
   --color-card-foreground: var(--color-neutral-950);
-  --color-popover: #FFFFFF;
+  --color-popover: #FBFCFD;
   --color-popover-foreground: var(--color-neutral-950);
   --color-primary: #003893;
-  --color-primary-foreground: #FFFFFF;
+  --color-primary-foreground: var(--color-neutral-50);
   --color-primary-hover: var(--color-primary-900);
   --color-secondary: var(--color-primary-100);
   --color-secondary-foreground: var(--color-primary-900);
@@ -66,15 +68,15 @@
   --color-muted-foreground: var(--color-neutral-600);
   --color-accent: var(--color-primary-100);
   --color-accent-foreground: var(--color-primary-900);
-  --color-destructive: #DC2626;
-  --color-destructive-foreground: #FFFFFF;
+  --color-destructive: #D42222;
+  --color-destructive-foreground: var(--color-neutral-50);
   --color-border: var(--color-neutral-200);
   --color-input: var(--color-neutral-500);
   --color-ring: #003893;
   --color-link: #003893;
   --color-error: #B91C1C;
   --color-redline: var(--color-redline-500);
-  --color-redline-foreground: #FFFFFF;
+  --color-redline-foreground: var(--color-neutral-50);
   --color-redline-text: var(--color-redline-500);
   --radius: 0.5rem;
 }
@@ -87,8 +89,8 @@
   --color-card-foreground: var(--color-neutral-50);
   --color-popover: var(--color-neutral-900);
   --color-popover-foreground: var(--color-neutral-50);
-  --color-primary: #1A6BFF; /* vivid blue: white text 4.6:1, 3.9:1 against the page */
-  --color-primary-foreground: #FFFFFF;
+  --color-primary: #1462EC;
+  --color-primary-foreground: var(--color-neutral-50);
   --color-primary-hover: var(--color-primary-500);
   --color-secondary: var(--color-primary-950);
   --color-secondary-foreground: var(--color-primary-100);
@@ -96,8 +98,8 @@
   --color-muted-foreground: var(--color-neutral-300);
   --color-accent: var(--color-primary-950);
   --color-accent-foreground: var(--color-primary-100);
-  --color-destructive: #DC2626;
-  --color-destructive-foreground: #FFFFFF;
+  --color-destructive: #D42222;
+  --color-destructive-foreground: var(--color-neutral-50);
   --color-border: var(--color-neutral-800);
   --color-input: var(--color-neutral-500);
   --color-ring: var(--color-primary-400);
@@ -115,8 +117,8 @@
     --color-card-foreground: var(--color-neutral-50);
     --color-popover: var(--color-neutral-900);
     --color-popover-foreground: var(--color-neutral-50);
-    --color-primary: #1A6BFF;
-    --color-primary-foreground: #FFFFFF;
+    --color-primary: #1462EC;
+    --color-primary-foreground: var(--color-neutral-50);
     --color-primary-hover: var(--color-primary-500);
     --color-secondary: var(--color-primary-950);
     --color-secondary-foreground: var(--color-primary-100);
@@ -124,8 +126,8 @@
     --color-muted-foreground: var(--color-neutral-300);
     --color-accent: var(--color-primary-950);
     --color-accent-foreground: var(--color-primary-100);
-    --color-destructive: #DC2626;
-    --color-destructive-foreground: #FFFFFF;
+    --color-destructive: #D42222;
+    --color-destructive-foreground: var(--color-neutral-50);
     --color-border: var(--color-neutral-800);
     --color-input: var(--color-neutral-500);
     --color-ring: var(--color-primary-400);

@@ -4,6 +4,8 @@ let o=`/* Generated with the color-palette skill; strategy from impeccable color
    Both hues come from Nepal. Action: Himalayan blue #003893 (buttons, links, focus, selection,
    highlight tints). Redline: rhododendron crimson #DC143C, annotations only (frames, pins).
    Neutral: ink #191C24 (surfaces, text, borders, muted text).
+   No pure white or black: the lightest surface is paper #FBFCFD, text on dark
+   or colour is neutral-50 #F6F7F8, the darkest ink is neutral-950 #15171E.
    Every pair is checked by scripts/check-contrast.mjs (WCAG AA, light and dark). */
 @import "tailwindcss";
 /* v1's source lives in v1/ on the repo for safekeeping; keep its classes out of this build */

@@ -5,21 +5,23 @@ import {scale,contrast} from './palette.mjs';
 //   Himalayan blue #003893 (the blue of Nepal's flag) = action: buttons, links, focus,
 //     selection, the rail tint.
 //   Rhododendron #DC143C (crimson, Nepal's national flower) = the redline, annotation only.
-// Light: the seed blue with white text; dark: blue-400 with ink text (white on it fails).
+// Light: the seed blue with off-white text; dark: a vivid blue with off-white text.
 const SEED='#003893';
 const P=scale(SEED), R=scale('#DC143C');
-const N=scale('#191C24'), W='#FFFFFF';
+// No pure white or black (color-palette skill): the lightest surface is PAPER, a cool
+// off-white; text on dark or colour is ON (neutral-50); the darkest ink is neutral-950.
+const N=scale('#191C24'), PAPER='#FBFCFD', ON=N[50];
 export const scales={primary:P,neutral:N,redline:R};
 export const light={
-  background:N[50], foreground:N[950], card:W, 'card-foreground':N[950], popover:W, 'popover-foreground':N[950],
-  primary:SEED, 'primary-foreground':W, 'primary-hover':P[900], secondary:P[100], 'secondary-foreground':P[900],
+  background:N[50], foreground:N[950], card:PAPER, 'card-foreground':N[950], popover:PAPER, 'popover-foreground':N[950],
+  primary:SEED, 'primary-foreground':ON, 'primary-hover':P[900], secondary:P[100], 'secondary-foreground':P[900],
   muted:N[100], 'muted-foreground':N[600], accent:P[100], 'accent-foreground':P[900],
-  destructive:'#DC2626', 'destructive-foreground':W, border:N[200], input:N[500], ring:SEED, link:SEED, error:'#B91C1C', redline:R[500], 'redline-foreground':W, 'redline-text':R[500]};
+  destructive:'#D42222', 'destructive-foreground':ON, border:N[200], input:N[500], ring:SEED, link:SEED, error:'#B91C1C', redline:R[500], 'redline-foreground':ON, 'redline-text':R[500]};
 export const dark={
   background:N[950], foreground:N[50], card:N[900], 'card-foreground':N[50], popover:N[900], 'popover-foreground':N[50],
-  primary:'#1A6BFF', 'primary-foreground':W, 'primary-hover':P[500], secondary:P[950], 'secondary-foreground':P[100],
+  primary:'#1462EC', 'primary-foreground':ON, 'primary-hover':P[500], secondary:P[950], 'secondary-foreground':P[100],
   muted:N[900], 'muted-foreground':N[300], accent:P[950], 'accent-foreground':P[100],
-  destructive:'#DC2626', 'destructive-foreground':W, border:N[800], input:N[500], ring:P[400], link:P[300], error:'#F87171', redline:R[400], 'redline-foreground':N[950], 'redline-text':R[300]};
+  destructive:'#D42222', 'destructive-foreground':ON, border:N[800], input:N[500], ring:P[400], link:P[300], error:'#F87171', redline:R[400], 'redline-foreground':N[950], 'redline-text':R[300]};
 // pairs from the skill's verification checklist: [fg, bg, min, label]
 export const pairs=()=>[
  ['foreground','background',4.5,'Body text'],['card-foreground','card',4.5,'Card text'],['popover-foreground','popover',4.5,'Popover text'],

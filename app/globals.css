@@ -1290,3 +1290,12 @@ button.nav__cta:focus-visible { outline: 2px solid var(--color-ring); outline-of
    contents nav; subheaders get a short ribbon under them. */
 .case-act__h { padding: 14px 20px 14px 16px; border-radius: 14px; background: linear-gradient(to right, color-mix(in srgb, var(--color-primary) 16%, transparent), color-mix(in srgb, var(--color-primary) 6%, transparent) 55%, transparent); }
 .case-part__h::after { content: ""; display: block; width: 40px; height: 4px; margin-top: 12px; border-radius: 4px; background: var(--color-primary); opacity: 0.85; }
+
+/* Stronger faded band, shared by the active nav item and the section headers,
+   with a solid edge on the left so it reads even where the tint is faint. */
+:root { --band-a: 26%; --band-b: 12%; }
+:root.dark { --band-a: 38%; --band-b: 16%; }
+@media (prefers-color-scheme: dark) { :root:not(.light) { --band-a: 38%; --band-b: 16%; } }
+.toc__acts a[aria-current="true"]::before,
+.case-act__h { background: linear-gradient(to right, color-mix(in srgb, var(--color-primary) var(--band-a), transparent), color-mix(in srgb, var(--color-primary) var(--band-b), transparent) 60%, transparent); box-shadow: inset 4px 0 0 var(--color-primary); }
+.case-act__h { padding-left: 20px; }

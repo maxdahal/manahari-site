@@ -17,7 +17,7 @@ export const light={
   destructive:'#DC2626', 'destructive-foreground':W, border:N[200], input:N[500], ring:SEED, link:SEED, error:'#B91C1C', redline:R[500], 'redline-foreground':W, 'redline-text':R[500]};
 export const dark={
   background:N[950], foreground:N[50], card:N[900], 'card-foreground':N[50], popover:N[900], 'popover-foreground':N[50],
-  primary:P[400], 'primary-foreground':N[950], 'primary-hover':P[300], secondary:P[950], 'secondary-foreground':P[100],
+  primary:'#1A6BFF', 'primary-foreground':W, 'primary-hover':P[500], secondary:P[950], 'secondary-foreground':P[100],
   muted:N[900], 'muted-foreground':N[300], accent:P[950], 'accent-foreground':P[100],
   destructive:'#DC2626', 'destructive-foreground':W, border:N[800], input:N[500], ring:P[400], link:P[300], error:'#F87171', redline:R[400], 'redline-foreground':N[950], 'redline-text':R[300]};
 // pairs from the skill's verification checklist: [fg, bg, min, label]

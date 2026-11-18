@@ -8,7 +8,7 @@ The portfolio is a handoff document: daylight spec paper, ink type, Himalayan bl
 
 ## Colors (generated: `scripts/tokens.mjs` → `styles/tokens.css`)
 - Strategy (impeccable colorize): cool-neutral temperature; paper and ink carry the page; colour is low-dose and every colour has one job. Both hues come from the owner's own story (Manahari is originally from Nepal), chosen by the owner over surgical green, blueprint blue and graphite. Built with the color-palette skill, one 11-shade scale per role. A footer colophon on every page names the source: "Colors from home: Himalayan blue and rhododendron, Nepal’s national flower." with a dot of each source hue; the same dots (`NepalDots` in `components/Shell.tsx`) follow "Nepal" in the About section's journey.
-- Himalayan blue #003893 (the blue of Nepal's flag): buttons, links, focus, text selection, the rail tint. Light: the seed with white text 10.6:1, hover #002766, tints #E3EDFC. Dark: blue-400 #4289FA with ink text 5.3:1, hover #86B2F9, links #86B2F9 (8.3:1), tints #001433.
+- Himalayan blue #003893 (the blue of Nepal's flag): buttons, links, focus, text selection, the rail tint. Light: the seed with white text 10.6:1, hover #002766, tints #E3EDFC. Dark: vivid #1A6BFF with white text 4.6:1 (3.9:1 against the page), hover #005EF5, links #86B2F9 (8.3:1), tints #001433.
 - Rhododendron #DC143C (crimson, Nepal's national flower): the redline, annotation only. #E0153D light (white text 4.8:1), #EB5270 dark.
 - Uses colours, never the flag's shape or emblems.
 - The stage (hero, case cards) is the ink neutral #15171E in both themes. Its action is a paper pill with ink text; blue-300 #86B2F9 shows only in the arrow chip, the focus ring and the Resume underline on hover, so the hero never reads as one bright accent on black.
@@ -18,7 +18,7 @@ The portfolio is a handoff document: daylight spec paper, ink type, Himalayan bl
 | background | #F6F7F8 | #15171E | spec paper |
 | foreground | #15171E | #F6F7F8 | ink |
 | card | #FFFFFF | #2A2F3C | raised surfaces only |
-| primary | Himalayan blue #003893 | blue-400 #4289FA (ink text) | actions and links only |
+| primary | Himalayan blue #003893 | #1A6BFF (white text) | actions and links only |
 | muted-foreground | #545D78 | #B5BAC9 | captions, meta |
 | border | #D9DCE3 | #383F51 | hairlines |
 | redline (rhododendron) | #E0153D | #EB5270 | annotations only: frames, pins, the "Now" marker, bullets, struck "Replaced" text |

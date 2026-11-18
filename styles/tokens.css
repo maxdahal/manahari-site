@@ -87,9 +87,9 @@
   --color-card-foreground: var(--color-neutral-50);
   --color-popover: var(--color-neutral-900);
   --color-popover-foreground: var(--color-neutral-50);
-  --color-primary: var(--color-primary-400);
-  --color-primary-foreground: var(--color-neutral-950);
-  --color-primary-hover: var(--color-primary-300);
+  --color-primary: #1A6BFF; /* vivid blue: white text 4.6:1, 3.9:1 against the page */
+  --color-primary-foreground: #FFFFFF;
+  --color-primary-hover: var(--color-primary-500);
   --color-secondary: var(--color-primary-950);
   --color-secondary-foreground: var(--color-primary-100);
   --color-muted: var(--color-neutral-900);
@@ -115,9 +115,9 @@
     --color-card-foreground: var(--color-neutral-50);
     --color-popover: var(--color-neutral-900);
     --color-popover-foreground: var(--color-neutral-50);
-    --color-primary: var(--color-primary-400);
-    --color-primary-foreground: var(--color-neutral-950);
-    --color-primary-hover: var(--color-primary-300);
+    --color-primary: #1A6BFF;
+    --color-primary-foreground: #FFFFFF;
+    --color-primary-hover: var(--color-primary-500);
     --color-secondary: var(--color-primary-950);
     --color-secondary-foreground: var(--color-primary-100);
     --color-muted: var(--color-neutral-900);

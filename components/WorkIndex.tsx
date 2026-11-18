@@ -16,10 +16,12 @@ export type IndexCase = {
 };
 
 const headH = () => (document.querySelector(".site-head") as HTMLElement | null)?.offsetHeight ?? 64;
+/* where the pinned block rests: centred in the space under the header */
+const restTop = (h: number) => { const head = headH(); return Math.round(head + Math.max(0, (innerHeight - head - h) / 2)); };
 
 /* Case studies: one row of covers that scrolls sideways, the next one peeking
-   in from the right. On wide screens the row is pinned while the page
-   scrolls, and scrolling down moves it sideways, so nobody skips past it;
+   in from the right. On wide screens the row is pinned in the middle of
+   the screen while the page scrolls, and scrolling down moves it sideways, so nobody skips past it;
    once the last study is in view the page carries on. The arrows and the
    segments sit next to the heading and jump to a study. On phones it is a
    plain swipeable row. Each cover and title is a link into the study. */
@@ -40,7 +42,8 @@ export function WorkIndex({ items }: { items: IndexCase[] }) {
       raf = requestAnimationFrame(() => {
         const slides = [...t.children] as HTMLElement[];
         const end = t.scrollLeft + t.clientWidth >= t.scrollWidth - 4;
-        const off = (s: HTMLElement) => Math.abs(s.offsetLeft - t.offsetLeft - t.scrollLeft);
+        const pl = parseFloat(getComputedStyle(t).paddingLeft) || 0;
+        const off = (s: HTMLElement) => Math.abs(s.offsetLeft - t.offsetLeft - pl - t.scrollLeft);
         let best = 0;
         slides.forEach((s, i) => { if (off(s) < off(slides[best])) best = i; });
         setAt(end ? slides.length - 1 : best);
@@ -59,17 +62,19 @@ export function WorkIndex({ items }: { items: IndexCase[] }) {
     const measure = () => {
       // room after the last cover, so every study can come to rest at the left edge
       const first = t.children[0] as HTMLElement | undefined;
-      if (first) t.style.paddingRight = `${Math.max(0, t.clientWidth - first.offsetWidth)}px`;
+      const pl = parseFloat(getComputedStyle(t).paddingLeft) || 0;
+      if (first) t.style.paddingRight = `${Math.max(0, t.clientWidth - pl - first.offsetWidth)}px`;
+      t.style.scrollPaddingInlineStart = `${pl}px`;
       if (!wide.matches) { setPin(null); return; }
       const dist = t.scrollWidth - t.clientWidth;
-      setPin(dist > 0 ? { dist, h: k.offsetHeight, top: headH() } : null);
+      setPin(dist > 0 ? { dist, h: k.offsetHeight, top: restTop(k.offsetHeight) } : null);
     };
     const drive = () => {
       cancelAnimationFrame(raf);
       raf = requestAnimationFrame(() => {
         if (!wide.matches) return;
         const dist = t.scrollWidth - t.clientWidth;
-        const p = Math.min(1, Math.max(0, (headH() - o.getBoundingClientRect().top) / Math.max(1, dist)));
+        const p = Math.min(1, Math.max(0, (restTop(k.offsetHeight) - o.getBoundingClientRect().top) / Math.max(1, dist)));
         t.scrollLeft = p * dist;
       });
     };
@@ -90,10 +95,11 @@ export function WorkIndex({ items }: { items: IndexCase[] }) {
     const s = t?.children[i] as HTMLElement | undefined;
     if (!t || !s) return;
     const behavior = matchMedia("(prefers-reduced-motion: reduce)").matches ? "auto" : "smooth";
-    const left = Math.min(s.offsetLeft - t.offsetLeft, t.scrollWidth - t.clientWidth);
+    const pl = parseFloat(getComputedStyle(t).paddingLeft) || 0;
+    const left = Math.min(s.offsetLeft - t.offsetLeft - pl, t.scrollWidth - t.clientWidth);
     if (pin && outer.current) {
       // pinned: move the page to the point where the row shows this study
-      const top = outer.current.getBoundingClientRect().top + scrollY - headH();
+      const top = outer.current.getBoundingClientRect().top + scrollY - pin.top;
       scrollTo({ top: top + left, behavior });
     } else {
       t.scrollTo({ left, behavior });

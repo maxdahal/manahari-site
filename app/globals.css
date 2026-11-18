@@ -1330,13 +1330,14 @@ button.nav__cta:focus-visible { outline: 2px solid var(--color-ring); outline-of
 
 /* Home case studies: a sideways row of covers, the next one peeking in from
    the page's right edge, with the segments, count and arrows beside the
-   heading. Wide screens pin the block and let the page's scroll move the row
-   (WorkIndex sets the height and the sticky top); phones swipe. */
-.wc { --wc-r: 16px; --wc-w: min(42vw, 600px, calc((100vh - 300px) * 1.6)); }
+   heading. Wide screens pin the block in the middle of the screen and let the
+   page's scroll move the row, cards sliding edge to edge (WorkIndex sets the
+   height and the sticky top); phones swipe. */
+.wc { --wc-r: 16px; --wc-w: min(42vw, 720px, calc((100vh - 300px) * 1.6)); }
 .wc__stick { padding-block: 8px 24px; }
 .wc.is-pinned .wc__stick { position: sticky; }
 .wc__head { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 16px 40px; margin-bottom: clamp(20px, 2.5vw, 32px); }
-.wc__track { display: flex; gap: clamp(16px, 2vw, 24px); margin-right: calc(50% - 50vw); padding-right: clamp(16px, 4vw, 64px); overflow-x: auto; overscroll-behavior-x: contain; scroll-snap-type: x mandatory; scrollbar-width: none; scroll-behavior: smooth; }
+.wc__track { display: flex; gap: clamp(16px, 2vw, 24px); margin-inline: calc(50% - 50vw); padding-inline: calc(50vw - 50%) clamp(16px, 4vw, 64px); overflow-x: auto; overscroll-behavior-x: contain; scroll-snap-type: x mandatory; scrollbar-width: none; scroll-behavior: smooth; }
 .wc__track::-webkit-scrollbar { display: none; }
 /* pinned: the page scroll sets the position, so no snapping or native scroll */
 .wc.is-pinned .wc__track { overflow-x: hidden; scroll-snap-type: none; scroll-behavior: auto; }

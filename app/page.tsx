@@ -18,6 +18,9 @@ const CARD: Record<string, { desc: string; meta: string; value: string; label: s
   esri: { desc: "Built an internal documentation site for Calcite components, so 20+ designers and developers found answers faster.", meta: "UI/UX design and front-end internship\u00a0·\u00a02021", value: "50%+", label: "Improvement in content discoverability" },
 };
 
+/* order of the case studies on the homepage */
+const HOME_ORDER = ["surgical-console", "ku-brand", "luminary", "asians", "esri"];
+
 /* the hero's drifting cards: artwork, with a few work pictures mixed in */
 const T = (f: string) => `/images/thumbs/${f}.jpg`;
 const HERO_PICS = [
@@ -47,7 +50,7 @@ export default function Home() {
         />
 
         <WorkIndex
-          items={cases.map((c) => {
+          items={HOME_ORDER.map((slug) => cases.find((c) => c.slug === slug)!).map((c) => {
             const pic = c.cover;
             const card = CARD[c.slug];
             return { slug: c.slug, title: c.title, meta: card.meta, desc: card.desc, outcome: { value: card.value, label: card.label }, pic: { src: pic.src, w: pic.w, h: pic.h }, contain: pic.src.endsWith(".svg") || c.slug === "esri" };

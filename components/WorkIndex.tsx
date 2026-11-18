@@ -21,7 +21,7 @@ export type IndexCase = {
 export function WorkIndex({ items }: { items: IndexCase[] }) {
   const [open, setOpen] = useState(0);
   const btns = useRef<(HTMLButtonElement | null)[]>([]);
-  const n = (i: number) => String(i + 1).padStart(2, "0");
+  const n = (i: number) => `${i + 1}.`;
 
   function onKey(e: React.KeyboardEvent) {
     const d = e.key === "ArrowDown" ? 1 : e.key === "ArrowUp" ? -1 : 0;
@@ -52,10 +52,7 @@ export function WorkIndex({ items }: { items: IndexCase[] }) {
                 onClick={() => setOpen(i)}
               >
                 <span className="wk__n" aria-hidden="true">{n(i)}</span>
-                <span className="wk__t">
-                  <b>{c.title}</b>
-                  <span>{c.meta}</span>
-                </span>
+                <span className="wk__t">{c.title}</span>
                 <svg className="wk__chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d="M9 6l6 6-6 6" /></svg>
               </button>
             </li>
@@ -71,7 +68,7 @@ export function WorkIndex({ items }: { items: IndexCase[] }) {
               </Link>
               <div className="wk__body">
                 <div className="wk__text">
-                  <p className="wk__meta"><span aria-hidden="true">{n(i)} · </span>{c.meta}</p>
+                  <p className="wk__meta">{c.meta}</p>
                   <h3 className="wk__title" id={`wk-${c.slug}-h`}>{c.title}</h3>
                   <p className="wk__desc">{c.desc}</p>
                   <p className="wk__outcome"><b>{c.outcome.value}</b> {c.outcome.label}</p>

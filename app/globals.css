@@ -1349,3 +1349,15 @@ button.nav__cta:focus-visible { outline: 2px solid var(--color-ring); outline-of
 }
 @media (min-width: 861px) { .wk__pic { aspect-ratio: auto; height: clamp(260px, 42vh, 440px); } .wk__body { margin-top: 20px; } }
 .ws__head { padding-bottom: 0; margin-bottom: clamp(28px, 3vw, 44px); }
+
+/* list: number and title only; the active item is a solid green fade */
+.wk { --wk-a: #1A6B3E; --wk-b: #23834C; --wk-ink: #FFFFFF; }
+:root.dark .wk { --wk-a: #4CC683; --wk-b: #2E9E5B; --wk-ink: #0E1A13; }
+@media (prefers-color-scheme: dark) { :root:not(.light) .wk { --wk-a: #4CC683; --wk-b: #2E9E5B; --wk-ink: #0E1A13; } }
+.wk__pick { grid-template-columns: 26px minmax(0, 1fr) 18px; min-height: 52px; }
+.wk__n { font-size: 1rem; }
+.wk__t { display: block; font-size: 1.0625rem; font-weight: 700; letter-spacing: -0.01em; line-height: 1.25; }
+.wk__pick[aria-pressed="true"] { color: var(--wk-ink); background: linear-gradient(to right, var(--wk-a), var(--wk-b)); box-shadow: 0 6px 18px -10px var(--wk-a); }
+/* drawn covers (the Luminary wireframes) are shown whole, not cropped */
+.wk__pic:has(img[src$=".svg"]) { background: #EEF0F3; }
+.wk__pic img[src$=".svg"] { object-fit: contain; padding: clamp(14px, 2vw, 28px); }

@@ -139,8 +139,12 @@ export function WorkIndex({ items }: { items: IndexCase[] }) {
                     {/* eslint-disable-next-line @next/next/no-img-element */}
                     <img src={c.pic.src} alt="" width={c.pic.w} height={c.pic.h} loading={i < 2 ? "eager" : "lazy"} />
                   </span>
-                  <span className="wc__title">{c.title}</span>
-                  <span className="wc__go">View case study</span>
+                  <span className="wc__row">
+                    <span className="wc__title">{c.title}<span className="sr-only">, case study</span></span>
+                    <span className="wc__go" aria-hidden="true">
+                      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M7 17 17 7M9 7h8v8" /></svg>
+                    </span>
+                  </span>
                 </Link>
               </li>
             ))}

@@ -1365,3 +1365,14 @@ button.nav__cta:focus-visible { outline: 2px solid var(--color-ring); outline-of
 .wk__title { flex: 1 1 auto; }
 @media (min-width: 861px) { .wk__pic { height: clamp(300px, 54vh, 540px); } }
 .wk__pic.is-contain img { object-fit: contain; padding: clamp(18px, 3vw, 44px); }
+
+/* Skills pass (impeccable craft floor, frontend-design, DESIGN.md):
+   no colored side borders, neutral shadows, blue only for actions.
+   The active case is ink; its number takes the rhododendron, the warm
+   "you are here" mark the timeline's Now line also uses. */
+.toc__acts a[aria-current="true"]::before, .case-act__h { box-shadow: none; }
+.wk__pick[aria-pressed="true"] { color: var(--color-background); background: var(--color-foreground); box-shadow: 0 8px 20px -12px rgb(15 20 40 / 0.45); }
+.wk__pick[aria-pressed="true"] .wk__n { color: var(--wk-mark); }
+.wk { --wk-mark: #FF6B85; }
+:root.dark .wk { --wk-mark: #C8102E; }
+@media (prefers-color-scheme: dark) { :root:not(.light) .wk { --wk-mark: #C8102E; } }

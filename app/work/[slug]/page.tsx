@@ -91,7 +91,7 @@ export default async function CasePage({ params }: { params: Promise<{ slug: str
             <div>
               {acts.map((a, n) => (
                 <section key={a.id} id={a.id} className="case-act" aria-labelledby={`${a.id}-h`}>
-                  <h2 className="case-act__h" id={`${a.id}-h`}><span className="pin" aria-hidden="true">{n + 1}</span>{a.title}</h2>
+                  <h2 className="case-act__h" id={`${a.id}-h`}><span className="case-act__ghost" aria-hidden="true">{a.title}</span><span className="pin" aria-hidden="true">{n + 1}</span>{a.title}</h2>
                   {a.parts.map((s) => (
                     <section key={s.id} id={s.id} className={`case-section${isShort(s.blocks) ? " case-section--short" : ""}`} aria-labelledby={`${s.id}-h`}>
                       {s.title !== a.title ? <h3 className="case-part__h" id={`${s.id}-h`}>{s.title}</h3> : <span id={`${s.id}-h`} hidden>{s.title}</span>}
@@ -101,7 +101,7 @@ export default async function CasePage({ params }: { params: Promise<{ slug: str
                 </section>
               ))}
               <section id="takeaways" className="case-act" aria-labelledby="takeaways-h">
-                <h2 className="case-act__h" id="takeaways-h"><span className="pin" aria-hidden="true">{acts.length + 1}</span>Takeaways</h2>
+                <h2 className="case-act__h" id="takeaways-h"><span className="case-act__ghost" aria-hidden="true">Takeaways</span><span className="pin" aria-hidden="true">{acts.length + 1}</span>Takeaways</h2>
                 <ul className="takeaways">
                   {c.takeaways.map((t) => (
                     <li key={t.title}><b>{t.title}</b><span>{t.text}</span></li>

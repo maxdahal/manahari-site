@@ -15,9 +15,10 @@ export type IndexCase = {
   contain?: boolean;
 };
 
-/* Case studies: a list on the left (number and title) and the chosen
-   study on the right (cover, title, description, outcome, a button into it).
-   Every title is readable at once, and choosing one never moves the page.
+/* Case studies: a rail of thumbnails on the left (picture, number, title)
+   previews the chosen study in the big frame on the right, with its title
+   and a button into it. Every title is readable at once, and choosing one
+   never moves the page.
    Up/Down arrows move through the list. Under 860px the list goes away and
    every study is its own card, so nothing hides behind a tap. */
 export function WorkIndex({ items }: { items: IndexCase[] }) {
@@ -43,9 +44,7 @@ export function WorkIndex({ items }: { items: IndexCase[] }) {
       <div className="wk">
         <ol className="wk__list" aria-label="Choose a case study" onKeyDown={onKey}>
           {items.map((c, i) => (
-            <li key={c.slug} className={i === open ? "is-on" : undefined}>
-              {/* the ink that pours into the chosen case and on into its cover frame */}
-              {i === open ? <span key={`fill-${open}`} className="wk__pour" aria-hidden="true"><span className="wk__fill" /><span className="wk__wave" /></span> : null}
+            <li key={c.slug}>
               <button
                 ref={(el) => { btns.current[i] = el; }}
                 type="button"
@@ -54,9 +53,12 @@ export function WorkIndex({ items }: { items: IndexCase[] }) {
                 aria-controls={`wk-${c.slug}`}
                 onClick={() => setOpen(i)}
               >
+                <span className={`wk__thumb${c.contain ? " is-contain" : ""}`} aria-hidden="true">
+                  {/* eslint-disable-next-line @next/next/no-img-element */}
+                  <img src={c.pic.src} alt="" width={c.pic.w} height={c.pic.h} loading="lazy" className={c.top ? "is-top" : undefined} />
+                </span>
                 <span className="wk__n" aria-hidden="true">{n(i)}</span>
                 <span className="wk__t">{c.title}</span>
-                <svg className="wk__chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d="M9 6l6 6-6 6" /></svg>
               </button>
             </li>
           ))}

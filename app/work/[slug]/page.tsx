@@ -15,6 +15,18 @@ const isShort = (blocks: Block[]) =>
   blocks.every((b) => !["figure", "gallery", "split", "stages", "armpanel", "kusandbox", "versions"].includes(b.type)) &&
   JSON.stringify(blocks).length < 900;
 
+/* Story rows: a part with text and exactly one picture reads as text on one
+   side and the picture on the other, swapping sides down the page, so the
+   reading flow alternates between words and images. Parts with several
+   pictures, sandboxes or wide tables stay in one column. */
+const STORY_TEXT = new Set<Block["type"]>(["p", "lead", "h3", "list", "pairs", "decisions", "stats", "link", "quote"]);
+function story(blocks: Block[]) {
+  const media = blocks.filter((b) => b.type === "figure");
+  if (media.length !== 1 || !blocks.every((b) => b.type === "figure" || STORY_TEXT.has(b.type))) return null;
+  const text = blocks.filter((b) => b.type !== "figure");
+  return text.length ? { text, media } : null;
+}
+
 export const dynamicParams = false;
 export function generateStaticParams() {
   return cases.map((c) => ({ slug: c.slug }));
@@ -37,6 +49,7 @@ export default async function CasePage({ params }: { params: Promise<{ slug: str
     if (last && last.title === s.stage) last.parts.push(s);
     else acts.push({ id: `act-${acts.length + 1}`, title: s.stage, parts: [s] });
   }
+  let turn = 0;
   const toc = [...acts.map((a) => ({ id: a.id, title: a.title, parts: a.parts.map((p) => ({ id: p.id, title: p.title, play: p.blocks.some((b) => b.type === "armpanel" || b.type === "kusandbox") })) })), { id: "takeaways", title: "Takeaways", parts: [] }];
 
   return (
@@ -92,12 +105,30 @@ export default async function CasePage({ params }: { params: Promise<{ slug: str
               {acts.map((a, n) => (
                 <section key={a.id} id={a.id} className="case-act" aria-labelledby={`${a.id}-h`}>
                   <h2 className="case-act__h" id={`${a.id}-h`}><span className="case-act__ghost" aria-hidden="true">{a.title}</span><span className="pin" aria-hidden="true">{n + 1}</span>{a.title}</h2>
-                  {a.parts.map((s) => (
-                    <section key={s.id} id={s.id} className={`case-section${isShort(s.blocks) ? " case-section--short" : ""}`} aria-labelledby={`${s.id}-h`}>
-                      {s.title !== a.title ? <h3 className="case-part__h" id={`${s.id}-h`}>{s.title}</h3> : <span id={`${s.id}-h`} hidden>{s.title}</span>}
-                      <Blocks blocks={s.blocks} />
-                    </section>
-                  ))}
+                  {a.parts.map((s) => {
+                    const head = s.title !== a.title ? <h3 className="case-part__h" id={`${s.id}-h`}>{s.title}</h3> : <span id={`${s.id}-h`} hidden>{s.title}</span>;
+                    const row = story(s.blocks);
+                    if (row) {
+                      const side = turn++ % 2 ? " story--flip" : "";
+                      return (
+                        <section key={s.id} id={s.id} className={`case-section story${side}`} aria-labelledby={`${s.id}-h`}>
+                          <div className="story__text">
+                            {head}
+                            <Blocks blocks={row.text} />
+                          </div>
+                          <div className="story__media">
+                            <Blocks blocks={row.media} />
+                          </div>
+                        </section>
+                      );
+                    }
+                    return (
+                      <section key={s.id} id={s.id} className={`case-section${isShort(s.blocks) ? " case-section--short" : ""}`} aria-labelledby={`${s.id}-h`}>
+                        {head}
+                        <Blocks blocks={s.blocks} />
+                      </section>
+                    );
+                  })}
                 </section>
               ))}
               <section id="takeaways" className="case-act" aria-labelledby="takeaways-h">

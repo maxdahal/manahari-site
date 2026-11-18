@@ -113,4 +113,8 @@ Each line has one job; anything else is separated by space.
 Acts carry the outlined ghost title and parts the blue ribbon, so neither gets a line.
 
 ## Home case list (Nov 2026)
-Architecture layout: the chosen cover fills the section, and the list sits in a page-coloured notch cut from its top-left corner, with inside-rounded corners where cover and notch meet. Number and title only. Inactive items are frosted glass at 62% opacity; choosing one pours ink into it from the left (wavy leading edge, 650ms; instant with reduced motion), and its number is rhododendron. Under the cover: the title and one blue "View case study" button. Drawn covers are shown whole (`contain`) to the right of the notch; Luminary uses a dark-background copy. Under 860px every study is its own stacked card.
+A thumbnail rail on the left previews the chosen study in a big frame on the right. Each rail row is a small picture, number and title; the chosen one gets an ink outline ring, full colour and a crimson number, the rest are dimmed and desaturated until hovered. Under the big frame: the title and one blue "View case study" button. Drawn covers are shown whole (`contain`); Luminary uses a dark-background copy. Under 860px every study is its own stacked card.
+
+## Case study reading flow (Nov 2026)
+- Story rows: a part with text and exactly one picture puts text on one side and the picture on the other, swapping sides part by part down the page. The picture stays pinned while its text scrolls. Parts with several pictures, sandboxes, versions or check tables stay in one column. Under 860px rows stack, text first.
+- Term/text sets (pairs, takeaways) read down one column, term on the left and its text on the right, never two or three columns across.

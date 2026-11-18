@@ -1334,63 +1334,83 @@ button.nav__cta:focus-visible { outline: 2px solid var(--color-ring); outline-of
 .pairs > div::before, .takeaways li::before { content: ""; position: absolute; top: 0; left: 0; width: 28px; height: 2px; border-radius: 2px; background: var(--color-foreground); }
 .case-end { padding-top: 32px; border-top: 1px solid var(--color-border); }
 
-/* Home case studies (architecture layout): the cover fills the section and the
-   list sits in a notch cut from its top-left corner, with inside-rounded corners
-   where image and notch meet. The chosen case fills with ink from the left
-   (a wavy edge leads). Under 860px every study is its own card. */
-@property --wk-p { syntax: "<percentage>"; inherits: true; initial-value: 100%; }
-.wk { --wk-r: 28px; --wk-h: clamp(460px, 64vh, 620px); --wk-nw: clamp(290px, 30%, 370px); --wk-mark: #FF6B85; }
-:root.dark .wk { --wk-mark: #C8102E; }
-@media (prefers-color-scheme: dark) { :root:not(.light) .wk { --wk-mark: #C8102E; } }
-.wk__list { display: grid; gap: 8px; }
-.wk__list li { position: relative; }
-.wk__pick { position: relative; z-index: 1; display: grid; grid-template-columns: 26px minmax(0, 1fr) 18px; align-items: center; gap: 10px; width: 100%; min-height: 52px; padding: 10px 14px; border: 1px solid color-mix(in srgb, var(--color-foreground) 8%, transparent); border-radius: 14px; background: color-mix(in srgb, var(--color-card) 55%, transparent); -webkit-backdrop-filter: blur(12px) saturate(1.3); backdrop-filter: blur(12px) saturate(1.3); color: var(--color-muted-foreground); font: inherit; text-align: left; cursor: pointer; opacity: 0.62; transition: opacity 200ms ease, background-color 200ms ease, color 200ms ease 200ms; }
-.wk__pick:hover, .wk__pick:focus-visible { opacity: 1; }
+/* Home case studies: a thumbnail rail on the left previews the chosen study
+   in the big frame on the right. Each rail row is a small picture, number and
+   title; the chosen one gets an ink ring and full colour, the rest sit back
+   (dimmed, desaturated). Under 860px every study is its own card. */
+.wk { --wk-r: 22px; --wk-mark: #C8102E; display: grid; grid-template-columns: minmax(250px, 3.4fr) minmax(0, 8.6fr); gap: clamp(28px, 4vw, 56px); align-items: start; }
+:root.dark .wk { --wk-mark: #FF6B85; }
+@media (prefers-color-scheme: dark) { :root:not(.light) .wk { --wk-mark: #FF6B85; } }
+.wk__list { display: grid; gap: 6px; }
+.wk__pick { display: grid; grid-template-columns: 92px 22px minmax(0, 1fr); align-items: center; gap: 12px; width: 100%; padding: 8px; border: 0; border-radius: 16px; background: transparent; color: var(--color-muted-foreground); font: inherit; text-align: left; cursor: pointer; transition: background-color 200ms ease, color 200ms ease; }
+.wk__pick:hover { background: color-mix(in srgb, var(--color-foreground) 5%, transparent); color: var(--color-foreground); }
 .wk__pick:focus-visible { outline: 2px solid var(--color-foreground); outline-offset: 2px; }
-.wk__pick[aria-pressed="true"] { opacity: 1; color: var(--color-background); background: transparent; border-color: transparent; -webkit-backdrop-filter: none; backdrop-filter: none; }
-.wk__n { font-size: 1rem; font-weight: 700; font-variant-numeric: tabular-nums; }
+.wk__pick[aria-pressed="true"] { color: var(--color-foreground); background: color-mix(in srgb, var(--color-foreground) 6%, transparent); }
+.wk__thumb { display: block; overflow: hidden; aspect-ratio: 4 / 3; border-radius: 10px; background: var(--stage); filter: saturate(0.25); opacity: 0.6; outline: 2px solid transparent; outline-offset: 3px; transition: filter 300ms ease, opacity 300ms ease, outline-color 300ms ease; }
+.wk__thumb img { width: 100%; height: 100%; object-fit: cover; }
+.wk__thumb img.is-top { object-position: 50% 0; }
+.wk__thumb.is-contain { background: #15171E; }
+.wk__thumb.is-contain img { object-fit: contain; padding: 6px; }
+.wk__pick:hover .wk__thumb { filter: none; opacity: 1; }
+.wk__pick[aria-pressed="true"] .wk__thumb { filter: none; opacity: 1; outline-color: var(--color-foreground); }
+.wk__n { font-size: 0.9375rem; font-weight: 700; font-variant-numeric: tabular-nums; }
 .wk__pick[aria-pressed="true"] .wk__n { color: var(--wk-mark); }
 .wk__t { font-size: 1.0625rem; font-weight: 700; letter-spacing: -0.01em; line-height: 1.25; }
-.wk__chev { width: 18px; height: 18px; opacity: 0; transition: opacity 200ms ease 300ms; }
-.wk__pick[aria-pressed="true"] .wk__chev { opacity: 1; }
-/* liquid fill: ink pours in from the left behind the chosen item */
-.wk__pour { position: absolute; z-index: 0; inset: 0; animation: wkPour 650ms cubic-bezier(0.45, 0, 0.2, 1) both; pointer-events: none; }
-.wk__fill { position: absolute; inset: 0; border-radius: 14px; background: var(--color-foreground); clip-path: inset(0 calc(100% - var(--wk-p)) 0 0 round 14px); box-shadow: 0 10px 24px -14px rgb(15 20 40 / 0.5); }
-.wk__wave { position: absolute; top: 0; bottom: 0; left: var(--wk-p); width: 12px; margin-left: -1px; background: var(--color-foreground); -webkit-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 14 40' preserveAspectRatio='none'%3E%3Cpath d='M0 0h4c8 5 8 15 0 20s-8 15 0 20H0z'/%3E%3C/svg%3E") 0 0 / 100% 100%; mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 14 40' preserveAspectRatio='none'%3E%3Cpath d='M0 0h4c8 5 8 15 0 20s-8 15 0 20H0z'/%3E%3C/svg%3E") 0 0 / 100% 100%; animation: wkWave 650ms ease both; }
-@keyframes wkPour { from { --wk-p: 0%; } to { --wk-p: 100%; } }
-@keyframes wkWave { 0%, 85% { opacity: 1; } 100% { opacity: 0; } }
 .wk__panel { display: none; }
-.wk__panel.is-on { display: block; animation: wkIn 500ms ease; }
+.wk__panel.is-on { display: block; animation: wkIn 450ms ease; }
 @keyframes wkIn { from { opacity: 0; } to { opacity: 1; } }
 .wk__pic { display: block; overflow: hidden; border-radius: var(--wk-r); background: var(--stage); }
 .wk__pic img { width: 100%; height: 100%; object-fit: cover; transition: transform 1.2s cubic-bezier(0.16, 1, 0.3, 1); }
 .wk__pic img.is-top { object-position: 50% 0; }
-.wk__pic:hover img { transform: scale(1.03); }
+.wk__pic:hover img { transform: scale(1.02); }
 .wk__pic.is-contain img { object-fit: contain; padding: clamp(18px, 3vw, 44px); }
 .wk__pic.is-contain:has(img[src$="-dark.svg"]) { background: #15171E; }
-:root.dark .wk__pic.is-contain:has(img[src$="-dark.svg"]) { background: var(--color-card); }
-@media (prefers-color-scheme: dark) { :root:not(.light) .wk__pic.is-contain:has(img[src$="-dark.svg"]) { background: var(--color-card); } }
-.wk__body { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 16px 32px; }
+:root.dark .wk__pic.is-contain:has(img[src$="-dark.svg"]), :root.dark .wk__thumb.is-contain { background: var(--color-card); }
+@media (prefers-color-scheme: dark) { :root:not(.light) .wk__pic.is-contain:has(img[src$="-dark.svg"]), :root:not(.light) .wk__thumb.is-contain { background: var(--color-card); } }
+.wk__body { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 16px 32px; margin-top: 24px; }
 .wk__title { font-size: clamp(1.75rem, 1.1rem + 1.6vw, 2.5rem); font-weight: 800; letter-spacing: -0.035em; line-height: 1.05; }
 .wk__go { flex: none; }
-@media (min-width: 861px) {
-  .wk { position: relative; height: calc(var(--wk-h) + 100px); }
-  .wk__panels, .wk__panel.is-on { position: absolute; inset: 0; }
-  .wk__pic { position: absolute; top: 0; left: 0; right: 0; height: var(--wk-h); }
-  /* drawn covers sit to the right of the notch */
-  .wk__pic.is-contain img { padding: 40px 40px 40px calc(var(--wk-nw) + 40px); }
-  .wk__body { position: absolute; left: 0; right: 0; top: calc(var(--wk-h) + 28px); }
-  /* the notch: page-coloured, round on its outer corner, inside-round where it meets the image */
-  .wk__list { position: absolute; z-index: 2; top: 0; left: 0; width: var(--wk-nw); padding: 0 20px 20px 0; background: var(--color-background); border-bottom-right-radius: var(--wk-r); }
-  .wk__list::before, .wk__list::after { content: ""; position: absolute; width: var(--wk-r); height: var(--wk-r); background: radial-gradient(circle at 100% 100%, transparent calc(var(--wk-r) - 0.5px), var(--color-background) var(--wk-r)); pointer-events: none; }
-  .wk__list::before { top: 0; left: 100%; }
-  .wk__list::after { top: 100%; left: 0; }
-}
+@media (min-width: 861px) { .wk__pic { height: clamp(380px, 58vh, 560px); } }
 @media (max-width: 860px) {
+  .wk { grid-template-columns: 1fr; }
   .wk__list { display: none; }
   .wk__panels { display: grid; gap: 56px; }
   .wk__panel, .wk__panel.is-on { display: block; animation: none; }
   .wk__pic { aspect-ratio: 16 / 10; }
   .wk__body { margin-top: 20px; }
 }
-@media (prefers-reduced-motion: reduce) { .wk__pour, .wk__wave, .wk__panel.is-on { animation: none; } .wk__wave { display: none; } .wk__pic img { transition: none; } }
+@media (prefers-reduced-motion: reduce) { .wk__panel.is-on { animation: none; } .wk__pic img, .wk__thumb { transition: none; } }
+
+/* Case study reading flow (Nov 2026).
+   1. Story rows: text on one side, its one picture on the other, swapping
+      sides part by part; the picture stays in view while its text scrolls.
+   2. Term/text sets (pairs, takeaways) read down one column: the term on the
+      left, its text on the right, instead of two or three columns across. */
+.case-body > div { max-width: 860px; }
+.story { display: grid; grid-template-columns: minmax(0, 5fr) minmax(0, 6fr); gap: clamp(32px, 4vw, 56px); align-items: start; }
+.story--flip { grid-template-columns: minmax(0, 6fr) minmax(0, 5fr); }
+.story--flip .story__text { order: 2; }
+.story > * + * { margin-top: 0; }
+.story__text > * + * { margin-top: 24px; }
+.story__text > .case-part__h + * { margin-top: 20px; }
+.story__text > .block-h3 { margin-top: 48px; }
+.story__media { position: sticky; top: calc(var(--head-h, 64px) + 32px); }
+.story__media .figure { margin: 0; }
+.story__media .figure img { border-radius: 14px; }
+.story__text .pairs { grid-template-columns: 1fr; gap: 28px; }
+.story__text .pairs > div { display: block; }
+.story__text .decision { grid-template-columns: 26px minmax(0, 1fr); }
+.story__text .decision p { grid-column: 2; }
+.story__text .prose, .story__text .bullets { max-width: none; }
+/* sets read down: term | text */
+.case-section > .pairs, .takeaways { grid-template-columns: 1fr; gap: 0; }
+.case-section > .pairs > div, .takeaways li { display: grid; grid-template-columns: minmax(0, 2fr) minmax(0, 5fr); gap: 8px 40px; padding-block: 22px; padding-top: 22px; }
+.case-section > .pairs > div::before, .takeaways li::before { top: 0; }
+.case-section > .pairs dd, .takeaways span { margin-top: 0; max-width: 60ch; }
+.case-section > .pairs + .pairs { margin-top: 8px; }
+@media (max-width: 860px) {
+  .story, .story--flip { grid-template-columns: 1fr; gap: 32px; }
+  .story--flip .story__text { order: 0; }
+  .story__media { position: static; }
+  .case-section > .pairs > div, .takeaways li { grid-template-columns: 1fr; }
+}

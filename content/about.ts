@@ -1,7 +1,7 @@
 /* The About page, word for word from the published v1 site. */
 export const about = {
   "intro": [
-    "I am a product designer who builds what I design, with a background in computer science and human-computer interaction, and I am finishing my Master’s degree. I design interfaces that people can trust when they have to decide fast.",
+    "I am a UX and product designer who builds what I design, with a background in computer science and human-computer interaction, and I am finishing my Master’s degree. I design interfaces that people can trust when they have to decide fast.",
     "I like hard problems where mistakes cost a lot: real-time controls for a robotic surgical console, a university-wide brand system, and accessible campus navigation.",
     "I design and I write frontend code, so I know how a layout choice affects performance, frame rates, accessibility and engineering timelines. Good software gets out of the way so people can focus on their work.",
     "Art is my hobby. You can see some of my pieces below."
@@ -17,7 +17,7 @@ export const about = {
     },
     {
       "label": "Available for",
-      "value": "Product design and UX engineering roles"
+      "value": "UX design, product design and UX engineering roles"
     }
   ],
   "journeyTitle": "My journey so far",

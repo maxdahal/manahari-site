@@ -14,7 +14,7 @@ const SITE = process.env.NEXT_PUBLIC_SITE_URL ?? "http://localhost:3000";
 export const metadata: Metadata = {
   metadataBase: new URL(SITE),
   title: { default: "Manahari Dahal", template: "%s · Manahari Dahal" },
-  description: "Manahari Dahal, a product designer in the US. I design products and build them in code. Case studies: Luna Surgical Console, Luminary, KU Brand, Asian's and Esri Calcite.",
+  description: "Manahari Dahal, a UX and product designer in the US. I design products and build them in code. Case studies: Luna Surgical Console, Luminary, KU Brand, Asian's and Esri Calcite.",
   openGraph: { type: "website", siteName: "Manahari Dahal", images: ["/images/card-console.webp"] },
   twitter: { card: "summary_large_image" },
 };
@@ -33,7 +33,7 @@ const person = {
   "@context": "https://schema.org",
   "@type": "Person",
   name: "Manahari Dahal",
-  jobTitle: "Product Designer and UX Engineer",
+  jobTitle: "UX Designer, Product Designer and UX Engineer",
   url: SITE,
   sameAs: ["https://www.linkedin.com/in/manaharidahal/", "https://dribbble.com/manaharidahal"],
   alumniOf: ["University of North Carolina at Chapel Hill", "Brigham Young University-Idaho"],

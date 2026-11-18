@@ -58,7 +58,7 @@ export function HeroStage({ status, resume, pics }: { status: string; resume: st
       <div className="hstage__intro">
         <p className="hstage__status"><i aria-hidden="true" />{status}</p>
         <h1 className="hero__title" id="hero-title">
-          {[["Hi, I’m Manahari.", "hero__hi"], ["I’m a product designer who builds what I design.", "hero__role"]].map(([line, cls]) => (
+          {[["Hi, I’m Manahari.", "hero__hi"], ["I’m a UX and product designer who builds what I design.", "hero__role"]].map(([line, cls]) => (
             <span className={cls} key={cls}>
               {line.split(" ").map((w, i) => (
                 <Fragment key={i}><span className="w"><span>{w}</span></span>{" "}</Fragment>

@@ -12,77 +12,83 @@ type IndexCase = {
   contain?: boolean;
 };
 
-/* A polyline with rounded corners (radius r, shrunk to fit short legs). */
-function rounded(pts: [number, number][], r: number) {
+/* A smooth curve through the points (Catmull-Rom, drawn as cubic Béziers). */
+function smooth(pts: [number, number][]) {
   let d = `M${pts[0][0]},${pts[0][1]}`;
-  for (let i = 1; i < pts.length - 1; i++) {
-    const [px, py] = pts[i - 1], [x, y] = pts[i], [nx, ny] = pts[i + 1];
-    const a = Math.min(r, Math.hypot(x - px, y - py) / 2), b = Math.min(r, Math.hypot(nx - x, ny - y) / 2);
-    const ux = Math.sign(x - px), uy = Math.sign(y - py), vx = Math.sign(nx - x), vy = Math.sign(ny - y);
-    d += ` L${x - ux * a},${y - uy * a} Q${x},${y} ${x + vx * b},${y + vy * b}`;
+  for (let i = 0; i < pts.length - 1; i++) {
+    const p0 = pts[i - 1] ?? pts[i], p1 = pts[i], p2 = pts[i + 1], p3 = pts[i + 2] ?? p2;
+    const c1 = [p1[0] + (p2[0] - p0[0]) / 6, p1[1] + (p2[1] - p0[1]) / 6];
+    const c2 = [p2[0] - (p3[0] - p1[0]) / 6, p2[1] - (p3[1] - p1[1]) / 6];
+    d += ` C${c1[0]},${c1[1]} ${c2[0]},${c2[1]} ${p2[0]},${p2[1]}`;
   }
-  const [lx, ly] = pts[pts.length - 1];
-  return d + ` L${lx},${ly}`;
+  return d;
 }
 
-/* Case studies: a grid read as a route. The first study (Luna) is the lead
-   and runs the full width; the other four follow as steps, one per row,
-   each set a little further right than the one above. A line runs through the cards' centres
-   in order; the cards hide it, so it shows only in the gaps, turning in each
-   gap between rows. It fills in with Lake as the section scrolls past.
+/* Case studies: the lead study (Luna) runs the full width; the other four
+   follow as steps, one per row, each set further right than the one above.
+   A ghost kite flies down the steps as the section scrolls past: it keeps to
+   the open space beside each step card, on an unseen curve, leaning the way
+   it travels, its tail swaying; it passes behind the cards when it changes
+   sides. Decoration only, hidden from assistive tech;
+   hidden under 860px, where the cards take the full width.
    Each card is one link: a darkened cover with its step number, title and
-   years set on it. Under 860px it is one column and the line runs down. */
+   years set on it. */
 export function WorkIndex({ items }: { items: IndexCase[] }) {
   const list = useRef<HTMLOListElement>(null);
-  const fill = useRef<SVGPathElement>(null);
+  const line = useRef<SVGPathElement>(null);
+  const kite = useRef<SVGGElement>(null);
   const [route, setRoute] = useState<{ d: string; w: number; h: number } | null>(null);
 
-  // draw the route from the cards' positions; redraw when the grid resizes
+  // plot the flight from the cards' positions; replot when anything resizes
   useEffect(() => {
     const ol = list.current;
     if (!ol) return;
-    const draw = () => {
+    const plot = () => {
       const o = ol.getBoundingClientRect();
-      const boxes = ([...ol.children] as HTMLElement[]).map((li) => {
-        const r = li.querySelector(".wg__link")!.getBoundingClientRect();
-        return { x: r.left - o.left + r.width / 2, y: r.top - o.top + r.height / 2, top: r.top - o.top, bottom: r.bottom - o.top };
+      const cards = ([...ol.children] as HTMLElement[]).map((li) => li.querySelector(".wg__link")!.getBoundingClientRect());
+      if (cards.length < 3) return;
+      const lead = cards[0];
+      // beside each step card: the middle of its wider open side
+      const pts: [number, number][] = cards.slice(1).map((r) => {
+        const left = r.left - o.left, right = o.right - r.right;
+        const x = right >= left ? r.right - o.left + right / 2 : left / 2;
+        return [x, r.top - o.top + r.height / 2];
       });
-      if (boxes.length < 2) return;
-      const pts: [number, number][] = [[boxes[0].x, boxes[0].y]];
-      for (let i = 1; i < boxes.length; i++) {
-        const a = boxes[i - 1], b = boxes[i];
-        // same row (the cards overlap vertically): stay level with the previous point
-        const sameRow = b.top < a.bottom && a.top < b.bottom;
-        if (sameRow) { pts.push([b.x, pts[pts.length - 1][1]]); continue; }
-        if (Math.abs(a.x - b.x) > 2) {
-          const mid = (a.bottom + b.top) / 2; // the middle of the gap between rows
-          pts.push([a.x, mid], [b.x, mid]);
+      // take off from the gap under the lead, above the first open side
+      const way: [number, number][] = [[pts[0][0], lead.bottom - o.top + 8]];
+      pts.forEach((pt, i) => {
+        const prev = pts[i - 1];
+        // changing sides: cross in the gap between the two rows, behind the cards
+        if (prev && Math.abs(prev[0] - pt[0]) > o.width / 3) {
+          const a = cards[i], b = cards[i + 1];
+          way.push([(prev[0] + pt[0]) / 2, (a.bottom + b.top) / 2 - o.top]);
         }
-        pts.push([b.x, b.y]);
-      }
-      setRoute({ d: rounded(pts, 28), w: o.width, h: o.height });
+        way.push(pt);
+      });
+      setRoute({ d: smooth(way), w: o.width, h: o.height });
     };
-    draw();
-    const ro = new ResizeObserver(draw);
+    plot();
+    const ro = new ResizeObserver(plot);
     ro.observe(ol);
     for (const li of ol.children) ro.observe(li);
-    addEventListener("load", draw);
-    return () => { ro.disconnect(); removeEventListener("load", draw); };
+    addEventListener("load", plot);
+    return () => { ro.disconnect(); removeEventListener("load", plot); };
   }, []);
 
-  // fill the route as the section passes the reading line (60% down the screen)
+  // fly the kite along the curve with the scroll
   useEffect(() => {
-    const p = fill.current, ol = list.current;
-    if (!p || !ol || !route) return;
+    const p = line.current, k = kite.current, ol = list.current;
+    if (!p || !k || !ol || !route) return;
     const len = p.getTotalLength();
-    p.style.strokeDasharray = `${len}`;
-    if (matchMedia("(prefers-reduced-motion: reduce)").matches) { p.style.strokeDashoffset = "0"; return; }
     let raf = 0;
     const tick = () => {
       raf = 0;
       const r = ol.getBoundingClientRect();
-      const t = Math.min(1, Math.max(0, (innerHeight * 0.6 - r.top) / Math.max(1, r.height)));
-      p.style.strokeDashoffset = `${len * (1 - t)}`;
+      const t = Math.min(1, Math.max(0, (innerHeight * 0.55 - r.top - r.height * 0.15) / Math.max(1, r.height * 0.8)));
+      const at = p.getPointAtLength(t * len), ahead = p.getPointAtLength(Math.min(len, t * len + 24));
+      const dx = ahead.x - at.x, dy = ahead.y - at.y, run = Math.hypot(dx, dy) || 1;
+      const lean = Math.max(-28, Math.min(28, (dx / run) * 32));
+      k.setAttribute("transform", `translate(${at.x} ${at.y}) rotate(${lean})`);
     };
     const on = () => { if (!raf) raf = requestAnimationFrame(tick); };
     tick();
@@ -98,9 +104,18 @@ export function WorkIndex({ items }: { items: IndexCase[] }) {
       </header>
       <div className="wg-route">
         {route ? (
-          <svg className="wg-route__line" viewBox={`0 0 ${route.w} ${route.h}`} width={route.w} height={route.h} aria-hidden="true">
-            <path className="wg-route__track" d={route.d} />
-            <path className="wg-route__fill" ref={fill} d={route.d} />
+          <svg className="wg-route__sky" viewBox={`0 0 ${route.w} ${route.h}`} width={route.w} height={route.h} aria-hidden="true">
+            <path ref={line} d={route.d} fill="none" stroke="none" />
+            <g ref={kite}>
+              <g className="wg-kite">
+                {/* tail: a hanging string with three bows */}
+                <path className="wg-kite__tail" d="M0,34 C-8,48 8,60 0,74 C-8,88 6,98 -2,110" />
+                <path className="wg-kite__bow" d="M-6,50 L6,56 M6,50 L-6,56 M-7,78 L5,84 M5,78 L-7,84 M-8,100 L4,106 M4,100 L-8,106" />
+                {/* the kite: a diamond with its two spars */}
+                <path className="wg-kite__sail" d="M0,-34 L24,-4 L0,34 L-24,-4 Z" />
+                <path className="wg-kite__spar" d="M0,-34 L0,34 M-24,-4 L24,-4" />
+              </g>
+            </g>
           </svg>
         ) : null}
         <ol className="wg" ref={list}>

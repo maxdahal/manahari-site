@@ -120,3 +120,6 @@ One step down from the first build: every section heading uses `--t-h2` (max 36p
 ## Case study reading flow (Nov 2026)
 - Story rows: a part with text and exactly one picture puts text on one side and the picture on the other, swapping sides part by part down the page. The picture stays pinned while its text scrolls. Parts with several pictures, sandboxes, versions or check tables stay in one column. Under 860px rows stack, text first.
 - Term/text sets (pairs, takeaways) read down one column, term on the left and its text on the right, never two or three columns across.
+
+## Phone menu (Nov 2026)
+Under 640px the menu button opens a full-screen sheet below the header bar: Work, About and Artwork in large display type, then Resume, LinkedIn and email at the bottom. The page behind it can't scroll. A link, a tap outside, Escape, or growing past the phone layout closes it; in-page links close it before measuring the jump.

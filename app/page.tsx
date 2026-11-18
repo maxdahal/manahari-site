@@ -8,16 +8,6 @@ import { AvailabilityRail } from "@/components/AvailabilityRail";
 import { cases } from "@/content/cases";
 import { artwork, profile } from "@/content/profile";
 
-/* Card lines and outcomes from the published site, word for word. A
-   non-breaking space before each "·" keeps it from dangling at a line end. */
-const CARD: Record<string, { desc: string; meta: string; value: string; label: string }> = {
-  "surgical-console": { desc: "Designed screens a surgical team can read in one second during live surgery.", meta: "UX design\u00a0·\u00a02026", value: ">50%", label: "Less task-completion time in exploratory usability testing" },
-  luminary: { desc: "Designed an accessible campus navigation iOS app for UNC Chapel Hill students, with step-free routing.", meta: "UX design\u00a0·\u00a02025\u00a0to\u00a02026", value: "50+", label: "Student usability testing sessions" },
-  "ku-brand": { desc: "Co-led the design of the University of Kansas brand site, part of a rebrand across websites serving 50,000+ users.", meta: "Branding, UX design and research\u00a0·\u00a02022\u00a0to\u00a02025", value: "+30%", label: "Traffic across ku.edu after launch (a team result)" },
-  asians: { desc: "Designed a mobile ordering app so restaurant guests could order without language barriers.", meta: "UX research and design\u00a0·\u00a02021\u00a0to\u00a02022", value: "~50", label: "People surveyed" },
-  esri: { desc: "Built an internal documentation site for Calcite components, so 20+ designers and developers found answers faster.", meta: "UI/UX design and front-end internship\u00a0·\u00a02021", value: "50%+", label: "Improvement in content discoverability" },
-};
-
 /* order of the case studies on the homepage */
 const HOME_ORDER = ["surgical-console", "ku-brand", "luminary", "asians", "esri"];
 
@@ -52,8 +42,7 @@ export default function Home() {
         <WorkIndex
           items={HOME_ORDER.map((slug) => cases.find((c) => c.slug === slug)!).map((c) => {
             const pic = c.card ?? c.cover;
-            const card = CARD[c.slug];
-            return { slug: c.slug, title: c.title, meta: card.meta, desc: card.desc, outcome: { value: card.value, label: card.label }, pic: { src: pic.src, w: pic.w, h: pic.h }, contain: pic.src.endsWith(".svg") || c.slug === "esri" };
+            return { slug: c.slug, title: c.title, pic: { src: pic.src, w: pic.w, h: pic.h }, contain: pic.src.endsWith(".svg") || c.slug === "esri" };
           })}
         />
 

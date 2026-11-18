@@ -3,14 +3,10 @@
 import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
 
-export type IndexCase = {
+type IndexCase = {
   slug: string;
   title: string;
-  meta: string;
-  desc: string;
-  outcome: { value: string; label: string };
   pic: { src: string; w: number; h: number };
-  top?: boolean;
   /* a drawn cover with its own frame: shown whole, with room around it */
   contain?: boolean;
 };
@@ -141,7 +137,7 @@ export function WorkIndex({ items }: { items: IndexCase[] }) {
                 <Link prefetch={false} href={`/work/${c.slug}`} className="wc__link">
                   <span className={`wc__pic${c.contain ? " is-contain" : ""}`}>
                     {/* eslint-disable-next-line @next/next/no-img-element */}
-                    <img src={c.pic.src} alt="" width={c.pic.w} height={c.pic.h} loading={i < 2 ? "eager" : "lazy"} className={c.top ? "is-top" : undefined} />
+                    <img src={c.pic.src} alt="" width={c.pic.w} height={c.pic.h} loading={i < 2 ? "eager" : "lazy"} />
                   </span>
                   <span className="wc__title">{c.title}</span>
                   <span className="wc__go">View case study</span>

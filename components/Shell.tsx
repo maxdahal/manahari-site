@@ -27,6 +27,12 @@ export function Header({ current }: { current?: string }) {
               {n.label}
             </Link>
           ))}
+          {/* phones: the full-screen menu ends with the ways to reach me */}
+          <span className="nav__more">
+            <a href={profile.resume} target="_blank" rel="noopener">Resume<span className="sr-only"> (PDF, opens in a new tab)</span></a>
+            <a href={profile.linkedin} target="_blank" rel="noopener">LinkedIn</a>
+            <a href={`mailto:${profile.email}`}>{profile.email}</a>
+          </span>
         </nav>
         <RecruiterDialog />
         <ThemeToggle />
@@ -39,7 +45,7 @@ export function Header({ current }: { current?: string }) {
 
 /* the two source colours, Himalayan blue and rhododendron crimson: shown in the footer
    colophon and at the Nepal stop in the About section. Decorative; the footer line names them. */
-export function NepalDots() {
+function NepalDots() {
   return <span className="nepal-dots" aria-hidden="true"><i style={{ background: "#003893" }} /><i style={{ background: "#DC143C" }} /></span>;
 }
 

@@ -2,8 +2,9 @@
 
 import { useEffect, useRef, useState } from "react";
 
-/* Phones only: opens the site links under the header bar. Closes on a
-   link, on Escape, or when the screen grows past the phone layout. */
+/* Phones only: opens the site links as a full-screen sheet under the bar. Closes on a
+   link, a tap outside, Escape, a jump to a section, or when the screen grows
+   past the phone layout. */
 export function MenuButton() {
   const btn = useRef<HTMLButtonElement>(null);
   const [open, setOpen] = useState(false);
@@ -22,17 +23,27 @@ export function MenuButton() {
     const head = btn.current?.closest(".site-head");
     if (!head) return;
     head.toggleAttribute("data-open", open);
+    // the menu fills the screen, so the page behind it stays put
+    document.documentElement.style.overflow = open ? "hidden" : "";
     if (!open) return;
-    const close = () => setOpen(false);
+    // closes at once (not after React's next paint), so an in-page jump
+    // that follows measures the header without the panel
+    const close = () => { head.removeAttribute("data-open"); document.documentElement.style.overflow = ""; setOpen(false); };
     const onKey = (e: KeyboardEvent) => { if (e.key === "Escape") { close(); btn.current?.focus(); } };
-    const links = head.querySelectorAll(".nav a");
-    links.forEach((a) => a.addEventListener("click", close));
+    // any link in the panel, or a tap anywhere outside the header, closes it
+    const onClick = (e: MouseEvent) => {
+      const t = e.target as Element;
+      if (t.closest(".nav a") || !t.closest(".site-head")) close();
+    };
     const mq = matchMedia("(min-width: 641px)");
     mq.addEventListener("change", close);
+    addEventListener("site:jump", close);
+    document.addEventListener("click", onClick);
     document.addEventListener("keydown", onKey);
     return () => {
-      links.forEach((a) => a.removeEventListener("click", close));
       mq.removeEventListener("change", close);
+      removeEventListener("site:jump", close);
+      document.removeEventListener("click", onClick);
       document.removeEventListener("keydown", onKey);
     };
   }, [open]);

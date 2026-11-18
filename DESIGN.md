@@ -30,7 +30,7 @@ The portfolio is a handoff document: daylight spec paper, ink type, Himalayan bl
 - Gate: `npm run build` runs `scripts/check-contrast.mjs` first. Every token pair must pass AA in both modes.
 
 ## Typography
-- Urbanist (headings, wordmark, display numbers; `--font-display`) and Work Sans (body and UI; `--font-sans`), both variable via next/font. Display tracking -0.02em (Urbanist is set tight); hero name 700, role line 500 at 0.45em of the name.
+- Urbanist (headings, wordmark, display numbers; `--font-display`) and Work Sans (body and UI; `--font-sans`), both variable via next/font. Display tracking -0.02em (Urbanist is set tight); hero name 700; the role line is the subheading, 650 at 0.42em of the name (never under 17px), line-height 1.3, one line where it fits.
 - Scale: display `clamp(2.5rem…5.25rem)` /800/−0.04em, h2 `clamp(1.75rem…2.5rem)` /800, h3 1.25rem /700, lead `clamp(1.19…1.375rem)`, body 1.0625rem, small 0.875rem.
 - Numbers in metrics and tables use `tabular-nums`. Text wraps with `balance` on headings. Measure is 68ch.
 
@@ -92,7 +92,7 @@ The portfolio is a handoff document: daylight spec paper, ink type, Himalayan bl
 - Content edits on top of the v1 text live in the converter's edits.py; v1 wording stays word for word except the owner-approved rewordings.
 
 ## Home stage (Nov 2026, replaces the annotated console hero and the work index)
-- Hero (`components/HeroStage.tsx`): on a dark stage (`--stage` #0E1015, fixed in both themes): the availability line, a two-tone headline at medium weight ("Hi, I’m Manahari." 600 in ink, the role line 500 in grey #8A90A2), the first sentence of the v1 lede, and two actions. Behind, right of the text: 12 cards (9 artworks, plus the KU tower, Asian’s and the console cover, as 520–640px JPEG thumbs) drift toward the viewer from a vanishing point (CSS 3D, perspective 900px, 30s loop, staggered), fading in far away and out as they pass; a mask keeps them off the text. Paused off screen; still under reduced motion. Under 900px the field sits above the text.
+- Hero (`components/HeroStage.tsx`): on a dark stage (`--stage` #0E1015, fixed in both themes): the availability line, a two-tone headline ("Hi, I’m Manahari." 700 in ink; the role line 650 in a quieter grey, `--stage-mute` #9AA1B8 at 6.96:1, greyer than the paragraph's #C9CEDB but heavier so it reads as the subheading), the first sentence of the v1 lede, and two actions. Behind, right of the text: 12 cards (9 artworks, plus the KU tower, Asian’s and the console cover, as 520–640px JPEG thumbs) drift toward the viewer from a vanishing point (CSS 3D, perspective 900px, 30s loop, staggered), fading in far away and out as they pass; a mask keeps them off the text. Paused off screen; still under reduced motion. Under 900px the field sits above the text.
 - Case studies (`components/WorkIndex.tsx`): a header row with a hairline under it (v1 heading and subline on the left; a "01 / 04" counter, previous/next arrows and a four-step bar on the right) over a full-width accordion of tall image panels. One panel is open with title, role, outcome and "View project"; the rest are numbered strips with the title running up them. Hover, focus or the arrows open a panel (700ms flex, expo-out); clicking opens the study. Under 960px the panels stack as rows, the open one tall.
 
 ## Dev setup

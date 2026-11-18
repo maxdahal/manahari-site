@@ -1364,3 +1364,4 @@ button.nav__cta:focus-visible { outline: 2px solid var(--color-ring); outline-of
 .wk__body { align-items: center; }
 .wk__title { flex: 1 1 auto; }
 @media (min-width: 861px) { .wk__pic { height: clamp(300px, 54vh, 540px); } }
+.wk__pic.is-contain img { object-fit: contain; padding: clamp(18px, 3vw, 44px); }

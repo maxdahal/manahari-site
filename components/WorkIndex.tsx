@@ -11,6 +11,8 @@ export type IndexCase = {
   outcome: { value: string; label: string };
   pic: { src: string; w: number; h: number };
   top?: boolean;
+  /* a drawn cover with its own frame: shown whole, with room around it */
+  contain?: boolean;
 };
 
 /* Case studies: a list on the left (number, title, role line) and the chosen
@@ -62,7 +64,7 @@ export function WorkIndex({ items }: { items: IndexCase[] }) {
         <div className="wk__panels">
           {items.map((c, i) => (
             <article key={c.slug} id={`wk-${c.slug}`} className={`wk__panel${i === open ? " is-on" : ""}`} aria-labelledby={`wk-${c.slug}-h`}>
-              <Link prefetch={false} href={`/work/${c.slug}`} className="wk__pic" tabIndex={-1} aria-hidden="true">
+              <Link prefetch={false} href={`/work/${c.slug}`} className={`wk__pic${c.contain ? " is-contain" : ""}`} tabIndex={-1} aria-hidden="true">
                 {/* eslint-disable-next-line @next/next/no-img-element */}
                 <img src={c.pic.src} alt="" width={c.pic.w} height={c.pic.h} loading={i < 2 ? "eager" : "lazy"} className={c.top ? "is-top" : undefined} />
               </Link>

@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
 export type IndexCase = {
   slug: string;
@@ -15,24 +15,40 @@ export type IndexCase = {
   contain?: boolean;
 };
 
-/* Case studies: a rail of thumbnails on the left (picture, number, title)
-   previews the chosen study in the big frame on the right, with its title
-   and a button into it. Every title is readable at once, and choosing one
-   never moves the page.
-   Up/Down arrows move through the list. Under 860px the list goes away and
-   every study is its own card, so nothing hides behind a tap. */
+/* Case studies: one row of large covers that scrolls sideways, the next one
+   peeking in from the right. Swipe, scroll, or use the arrows; the segments
+   underneath show where you are and jump to a study. Each cover and title is
+   a link into the study. */
 export function WorkIndex({ items }: { items: IndexCase[] }) {
-  const [open, setOpen] = useState(0);
-  const btns = useRef<(HTMLButtonElement | null)[]>([]);
-  const n = (i: number) => `${i + 1}.`;
+  const track = useRef<HTMLOListElement>(null);
+  const [at, setAt] = useState(0);
 
-  function onKey(e: React.KeyboardEvent) {
-    const d = e.key === "ArrowDown" ? 1 : e.key === "ArrowUp" ? -1 : 0;
-    if (!d) return;
-    e.preventDefault();
-    const i = (open + d + items.length) % items.length;
-    setOpen(i);
-    btns.current[i]?.focus();
+  // the slide nearest the track's left edge is the current one
+  useEffect(() => {
+    const t = track.current;
+    if (!t) return;
+    let raf = 0;
+    const read = () => {
+      cancelAnimationFrame(raf);
+      raf = requestAnimationFrame(() => {
+        const slides = [...t.children] as HTMLElement[];
+        const end = t.scrollLeft + t.clientWidth >= t.scrollWidth - 4;
+        let best = 0;
+        slides.forEach((s, i) => { if (Math.abs(s.offsetLeft - t.offsetLeft - t.scrollLeft) < Math.abs(slides[best].offsetLeft - t.offsetLeft - t.scrollLeft)) best = i; });
+        setAt(end ? slides.length - 1 : best);
+      });
+    };
+    t.addEventListener("scroll", read, { passive: true });
+    return () => { t.removeEventListener("scroll", read); cancelAnimationFrame(raf); };
+  }, []);
+
+  function go(i: number) {
+    const t = track.current;
+    const s = t?.children[i] as HTMLElement | undefined;
+    if (!t || !s) return;
+    const still = matchMedia("(prefers-reduced-motion: reduce)").matches;
+    t.scrollTo({ left: s.offsetLeft - t.offsetLeft, behavior: still ? "auto" : "smooth" });
+    setAt(i);
   }
 
   return (
@@ -41,44 +57,41 @@ export function WorkIndex({ items }: { items: IndexCase[] }) {
         <h2 className="h2" id="work-h">Case studies</h2>
       </header>
 
-      <div className="wk">
-        <ol className="wk__list" aria-label="Choose a case study" onKeyDown={onKey}>
+      <div className="wc">
+        <ol className="wc__track" ref={track} aria-label="Case studies, scrolls sideways">
           {items.map((c, i) => (
-            <li key={c.slug}>
-              <button
-                ref={(el) => { btns.current[i] = el; }}
-                type="button"
-                className="wk__pick"
-                aria-pressed={i === open}
-                aria-controls={`wk-${c.slug}`}
-                onClick={() => setOpen(i)}
-              >
-                <span className={`wk__thumb${c.contain ? " is-contain" : ""}`} aria-hidden="true">
+            <li key={c.slug} className="wc__slide" aria-current={i === at ? "true" : undefined}>
+              <Link prefetch={false} href={`/work/${c.slug}`} className="wc__link">
+                <span className={`wc__pic${c.contain ? " is-contain" : ""}`}>
                   {/* eslint-disable-next-line @next/next/no-img-element */}
-                  <img src={c.pic.src} alt="" width={c.pic.w} height={c.pic.h} loading="lazy" className={c.top ? "is-top" : undefined} />
+                  <img src={c.pic.src} alt="" width={c.pic.w} height={c.pic.h} loading={i < 2 ? "eager" : "lazy"} className={c.top ? "is-top" : undefined} />
                 </span>
-                <span className="wk__n" aria-hidden="true">{n(i)}</span>
-                <span className="wk__t">{c.title}</span>
-              </button>
+                <span className="wc__title">{c.title}</span>
+                <span className="wc__go">View case study</span>
+              </Link>
             </li>
           ))}
         </ol>
 
-        <div className="wk__panels">
-          {items.map((c, i) => (
-            <article key={c.slug} id={`wk-${c.slug}`} className={`wk__panel${i === open ? " is-on" : ""}`} aria-labelledby={`wk-${c.slug}-h`}>
-              <Link prefetch={false} href={`/work/${c.slug}`} className={`wk__pic${c.contain ? " is-contain" : ""}`} tabIndex={-1} aria-hidden="true">
-                {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img src={c.pic.src} alt="" width={c.pic.w} height={c.pic.h} loading={i < 2 ? "eager" : "lazy"} className={c.top ? "is-top" : undefined} />
-              </Link>
-              <div className="wk__body">
-                <h3 className="wk__title" id={`wk-${c.slug}-h`}>{c.title}</h3>
-                <Link prefetch={false} href={`/work/${c.slug}`} className="btn btn--primary wk__go">
-                  View case study<span className="sr-only">: {c.title}</span>
-                </Link>
-              </div>
-            </article>
-          ))}
+        <div className="wc__bar">
+          <div className="wc__segs">
+            {items.map((c, i) => (
+              <button key={c.slug} type="button" className="wc__seg" aria-current={i === at ? "true" : undefined} onClick={() => go(i)}>
+                <span className="sr-only">Show {c.title}</span>
+              </button>
+            ))}
+          </div>
+          <p className="wc__count" aria-live="polite"><b>{at + 1}</b> / {items.length}<span className="sr-only">: {items[at]?.title}</span></p>
+          <div className="wc__arrows">
+            <button type="button" className="wc__arrow" onClick={() => go(Math.max(0, at - 1))} disabled={at === 0}>
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d="M19 12H5M11 6l-6 6 6 6" /></svg>
+              <span className="sr-only">Previous case study</span>
+            </button>
+            <button type="button" className="wc__arrow" onClick={() => go(Math.min(items.length - 1, at + 1))} disabled={at === items.length - 1}>
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6" /></svg>
+              <span className="sr-only">Next case study</span>
+            </button>
+          </div>
         </div>
       </div>
     </section>

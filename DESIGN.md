@@ -104,16 +104,15 @@ The portfolio is a handoff document: daylight spec paper, ink type, Himalayan bl
 - Artwork (`components/DollyStage.tsx`): a dolly shot through all ten pieces. The section is pinned and the page scroll moves the camera down a corridor of pieces (CSS 3D, no WebGL), alternating left and right; "Keep scrolling to see all the artwork" (owner-requested copy) is a frosted pill under the heading, over the pieces, fading at the last one; a counter and progress bar sit underneath. Only the piece in focus takes clicks; any piece opens the lightbox; tabbing to a piece moves the camera to it. Reduced motion gets the masonry grid.
 - For recruiters (`components/RecruiterDialog.tsx`): a native modal `<dialog>` from the header button on every page; also opens from `#recruiter`. A bottom sheet on phones. Education shows GPA as a green tag (B.S. GPA 3.9) and, for the M.S., a grey "No GPA" tag with the reason, since UNC Chapel Hill's graduate school doesn't use GPAs (owner-supplied fact). Experience shows green tags for time in each role and a solid green total (green so they stand out from the blue and ink in both themes) ("2 yrs 11 mos", LinkedIn style, owner-requested): whole months with start and end included; the total counts overlapping months once; "Present" runs to the visitor's current month.
 
-## Rules (lines), used sparingly and methodically (Nov 2026)
-Each line has one job; anything else is separated by space.
-1. A full hairline opens a group inside a part: the mini titles (`.block-h3`), which are also larger and bolder.
-2. A short 28px ink rule tops each item in a set (`.pairs`, `.takeaways`).
-3. Hairlines separate rows inside tables (spec, decisions, checks).
-4. One hairline closes each study above its last actions (`.case-end`).
-Acts carry the outlined ghost title and parts the blue ribbon, so neither gets a line.
+## Section breaks, the KU way (Nov 2026)
+Taken from brand.ku.edu and ku.edu: a line is a signal, not a separator.
+- One chunky Lake-blue bar (64 × 7px, `--lake` #2767FF, #5A8CFF dark) sits above each part heading. That is the only accent line.
+- Mini titles, term/text sets and takeaways are separated by space and type weight, never by rules. Bullets are small Lake dots.
+- A whole section is set apart by a colour band: Takeaways sit on Steam (`--steam` #E7ECF2, #232835 dark).
+- Hairlines stay only where they hold structure: table rows (spec, decisions, checks), the vertical stat dividers, and one line above each study's last actions.
 
 ## Home case list (Nov 2026)
-A thumbnail rail on the left previews the chosen study in a big frame on the right. Each rail row is a small picture, number and title; the chosen one gets an ink outline ring, full colour and a crimson number, the rest are dimmed and desaturated until hovered. Under the big frame: the title and one blue "View case study" button. Drawn covers are shown whole (`contain`); Luminary uses a dark-background copy. Under 860px every study is its own stacked card.
+One sideways row of large covers (16:10, about two thirds of the column), the next one peeking in from the page's right edge; scroll-snap does the moving, so swipe and trackpad work. Under each cover: the title and a blue "View case study" link; covers that aren't current dim their title. Under the row: a segmented bar (one segment per study, the current one thicker and ink), a "1 / 5" count, and round previous/next arrows (hidden under 700px, where swiping takes over). Drawn covers are shown whole (`contain`); Luminary uses a dark-background copy.
 
 ## Case study reading flow (Nov 2026)
 - Story rows: a part with text and exactly one picture puts text on one side and the picture on the other, swapping sides part by part down the page. The picture stays pinned while its text scrolls. Parts with several pictures, sandboxes, versions or check tables stay in one column. Under 860px rows stack, text first.

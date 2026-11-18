@@ -1322,64 +1322,53 @@ button.nav__cta:focus-visible { outline: 2px solid var(--color-ring); outline-of
 
 
 
-/* Rules, used on purpose (one job each):
-   1. a full hairline opens a group inside a part (the mini titles);
-   2. a short ink rule tops each item in a set (pairs, takeaways);
-   3. hairlines separate rows inside tables (spec, decisions, checks);
-   4. one hairline closes the study above its last actions.
-   Acts carry the ghost title and parts the blue ribbon, so neither needs a line. */
 .case-section > .block-h3 { padding-top: 22px; border-top: 1px solid var(--color-border); font-size: clamp(1.1875rem, 1.1rem + 0.3vw, 1.3125rem); font-weight: 750; letter-spacing: -0.015em; color: var(--color-foreground); }
 .case-section > .block-h3:first-child { padding-top: 0; border-top: 0; }
 .pairs > div, .takeaways li { position: relative; padding-top: 18px; }
 .pairs > div::before, .takeaways li::before { content: ""; position: absolute; top: 0; left: 0; width: 28px; height: 2px; border-radius: 2px; background: var(--color-foreground); }
 .case-end { padding-top: 32px; border-top: 1px solid var(--color-border); }
 
-/* Home case studies: a thumbnail rail on the left previews the chosen study
-   in the big frame on the right. Each rail row is a small picture, number and
-   title; the chosen one gets an ink ring and full colour, the rest sit back
-   (dimmed, desaturated). Under 860px every study is its own card. */
-.wk { --wk-r: 22px; --wk-mark: #C8102E; display: grid; grid-template-columns: minmax(250px, 3.4fr) minmax(0, 8.6fr); gap: clamp(28px, 4vw, 56px); align-items: start; }
-:root.dark .wk { --wk-mark: #FF6B85; }
-@media (prefers-color-scheme: dark) { :root:not(.light) .wk { --wk-mark: #FF6B85; } }
-.wk__list { display: grid; gap: 6px; }
-.wk__pick { display: grid; grid-template-columns: 92px 22px minmax(0, 1fr); align-items: center; gap: 12px; width: 100%; padding: 8px; border: 0; border-radius: 16px; background: transparent; color: var(--color-muted-foreground); font: inherit; text-align: left; cursor: pointer; transition: background-color 200ms ease, color 200ms ease; }
-.wk__pick:hover { background: color-mix(in srgb, var(--color-foreground) 5%, transparent); color: var(--color-foreground); }
-.wk__pick:focus-visible { outline: 2px solid var(--color-foreground); outline-offset: 2px; }
-.wk__pick[aria-pressed="true"] { color: var(--color-foreground); background: color-mix(in srgb, var(--color-foreground) 6%, transparent); }
-.wk__thumb { display: block; overflow: hidden; aspect-ratio: 4 / 3; border-radius: 10px; background: var(--stage); filter: saturate(0.25); opacity: 0.6; outline: 2px solid transparent; outline-offset: 3px; transition: filter 300ms ease, opacity 300ms ease, outline-color 300ms ease; }
-.wk__thumb img { width: 100%; height: 100%; object-fit: cover; }
-.wk__thumb img.is-top { object-position: 50% 0; }
-.wk__thumb.is-contain { background: #15171E; }
-.wk__thumb.is-contain img { object-fit: contain; padding: 6px; }
-.wk__pick:hover .wk__thumb { filter: none; opacity: 1; }
-.wk__pick[aria-pressed="true"] .wk__thumb { filter: none; opacity: 1; outline-color: var(--color-foreground); }
-.wk__n { font-size: 0.9375rem; font-weight: 700; font-variant-numeric: tabular-nums; }
-.wk__pick[aria-pressed="true"] .wk__n { color: var(--wk-mark); }
-.wk__t { font-size: 1.0625rem; font-weight: 700; letter-spacing: -0.01em; line-height: 1.25; }
-.wk__panel { display: none; }
-.wk__panel.is-on { display: block; animation: wkIn 450ms ease; }
-@keyframes wkIn { from { opacity: 0; } to { opacity: 1; } }
-.wk__pic { display: block; overflow: hidden; border-radius: var(--wk-r); background: var(--stage); }
-.wk__pic img { width: 100%; height: 100%; object-fit: cover; transition: transform 1.2s cubic-bezier(0.16, 1, 0.3, 1); }
-.wk__pic img.is-top { object-position: 50% 0; }
-.wk__pic:hover img { transform: scale(1.02); }
-.wk__pic.is-contain img { object-fit: contain; padding: clamp(18px, 3vw, 44px); }
-.wk__pic.is-contain:has(img[src$="-dark.svg"]) { background: #15171E; }
-:root.dark .wk__pic.is-contain:has(img[src$="-dark.svg"]), :root.dark .wk__thumb.is-contain { background: var(--color-card); }
-@media (prefers-color-scheme: dark) { :root:not(.light) .wk__pic.is-contain:has(img[src$="-dark.svg"]), :root:not(.light) .wk__thumb.is-contain { background: var(--color-card); } }
-.wk__body { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 16px 32px; margin-top: 24px; }
-.wk__title { font-size: clamp(1.75rem, 1.1rem + 1.6vw, 2.5rem); font-weight: 800; letter-spacing: -0.035em; line-height: 1.05; }
-.wk__go { flex: none; }
-@media (min-width: 861px) { .wk__pic { height: clamp(380px, 58vh, 560px); } }
-@media (max-width: 860px) {
-  .wk { grid-template-columns: 1fr; }
-  .wk__list { display: none; }
-  .wk__panels { display: grid; gap: 56px; }
-  .wk__panel, .wk__panel.is-on { display: block; animation: none; }
-  .wk__pic { aspect-ratio: 16 / 10; }
-  .wk__body { margin-top: 20px; }
+/* Home case studies: a sideways row of large covers, the next one peeking in
+   from the right edge of the page. A segmented bar, a count and two arrows
+   sit underneath. Scroll-snap does the moving, so swipe and trackpad work. */
+.wc { --wc-r: 18px; --wc-w: min(68%, 880px); }
+.wc__track { display: flex; gap: clamp(16px, 2vw, 28px); margin-right: calc(50% - 50vw); padding-right: clamp(16px, 4vw, 64px); overflow-x: auto; overscroll-behavior-x: contain; scroll-snap-type: x mandatory; scrollbar-width: none; scroll-behavior: smooth; }
+.wc__track::-webkit-scrollbar { display: none; }
+.wc__slide { flex: 0 0 var(--wc-w); scroll-snap-align: start; }
+.wc__link { display: grid; gap: 6px; color: inherit; text-decoration: none; }
+.wc__link:focus-visible { outline: 2px solid var(--color-foreground); outline-offset: 4px; border-radius: var(--wc-r); }
+.wc__pic { display: block; overflow: hidden; aspect-ratio: 16 / 10; margin-bottom: 14px; border-radius: var(--wc-r); background: var(--stage); }
+.wc__pic img { width: 100%; height: 100%; object-fit: cover; transition: transform 1.2s cubic-bezier(0.16, 1, 0.3, 1); }
+.wc__pic img.is-top { object-position: 50% 0; }
+.wc__link:hover .wc__pic img { transform: scale(1.025); }
+.wc__pic.is-contain img { object-fit: contain; padding: clamp(16px, 3vw, 44px); }
+.wc__pic.is-contain:has(img[src$="-dark.svg"]) { background: #15171E; }
+:root.dark .wc__pic.is-contain:has(img[src$="-dark.svg"]) { background: var(--color-card); }
+@media (prefers-color-scheme: dark) { :root:not(.light) .wc__pic.is-contain:has(img[src$="-dark.svg"]) { background: var(--color-card); } }
+.wc__title { font-size: clamp(1.25rem, 1.05rem + 0.6vw, 1.625rem); font-weight: 750; letter-spacing: -0.02em; line-height: 1.2; }
+.wc__go { font-size: 0.9375rem; font-weight: 600; color: var(--color-primary); }
+.wc__link:hover .wc__go { text-decoration: underline; text-underline-offset: 3px; }
+.wc__slide:not([aria-current]) .wc__title { color: var(--color-muted-foreground); }
+.wc__bar { display: flex; align-items: center; gap: clamp(16px, 2.5vw, 32px); margin-top: clamp(28px, 3vw, 40px); }
+.wc__segs { flex: 1; display: flex; gap: 6px; }
+.wc__seg { flex: 1; height: 24px; padding: 0; border: 0; background: none; cursor: pointer; position: relative; }
+.wc__seg::before { content: ""; position: absolute; left: 0; right: 0; top: 50%; height: 2px; margin-top: -1px; border-radius: 2px; background: var(--color-border); transition: background-color 250ms ease, height 250ms ease; }
+.wc__seg:hover::before { background: var(--color-muted-foreground); }
+.wc__seg[aria-current]::before { height: 3px; background: var(--color-foreground); }
+.wc__seg:focus-visible { outline: 2px solid var(--color-foreground); outline-offset: 2px; border-radius: 4px; }
+.wc__count { flex: none; font-size: 0.9375rem; color: var(--color-muted-foreground); font-variant-numeric: tabular-nums; }
+.wc__count b { color: var(--color-foreground); font-weight: 700; }
+.wc__arrows { flex: none; display: flex; gap: 8px; }
+.wc__arrow { display: grid; place-items: center; width: 48px; height: 48px; border: 1px solid var(--color-border); border-radius: 50%; background: transparent; color: var(--color-foreground); cursor: pointer; transition: background-color 200ms ease, opacity 200ms ease; }
+.wc__arrow svg { width: 20px; height: 20px; }
+.wc__arrow:hover:not(:disabled) { background: color-mix(in srgb, var(--color-foreground) 7%, transparent); }
+.wc__arrow:disabled { opacity: 0.35; cursor: default; }
+.wc__arrow:focus-visible { outline: 2px solid var(--color-foreground); outline-offset: 2px; }
+@media (max-width: 700px) {
+  .wc { --wc-w: 86%; }
+  .wc__arrows { display: none; }
 }
-@media (prefers-reduced-motion: reduce) { .wk__panel.is-on { animation: none; } .wk__pic img, .wk__thumb { transition: none; } }
+@media (prefers-reduced-motion: reduce) { .wc__track { scroll-behavior: auto; } .wc__pic img, .wc__seg::before { transition: none; } }
 
 /* Case study reading flow (Nov 2026).
    1. Story rows: text on one side, its one picture on the other, swapping
@@ -1414,3 +1403,30 @@ button.nav__cta:focus-visible { outline: 2px solid var(--color-ring); outline-of
   .story__media { position: static; }
   .case-section > .pairs > div, .takeaways li { grid-template-columns: 1fr; }
 }
+
+/* Section breaks, the KU way (brand.ku.edu, ku.edu): a line is a signal, not
+   a separator. One chunky Lake-blue bar sits above each part heading; mini
+   titles, sets and bullets are separated by space and type alone; a whole
+   section is set apart by a colour band (Takeaways), not by rules. Table rows
+   and the stat dividers keep their hairlines. */
+.case { --lake: #2767FF; --steam: #E7ECF2; }
+:root { --lake: #2767FF; --steam: #E7ECF2; }
+:root.dark { --lake: #5A8CFF; --steam: #232835; }
+@media (prefers-color-scheme: dark) { :root:not(.light) { --lake: #5A8CFF; --steam: #232835; } }
+.case-part__h::after { content: none; }
+.case-part__h::before { content: ""; display: block; width: 64px; height: 7px; margin-bottom: 18px; background: var(--lake); }
+/* mini titles: no rule; more air and stronger type do the work */
+.case-section > .block-h3, .story__text > .block-h3 { border-top: 0; padding-top: 0; margin-top: 72px; font-size: clamp(1.25rem, 1.15rem + 0.35vw, 1.4375rem); font-weight: 750; color: var(--color-foreground); }
+.case-section > .block-h3:first-child { margin-top: 0; }
+/* sets: no dash on every item */
+.pairs > div::before, .takeaways li::before { content: none; }
+.case-section > .pairs > div { padding-block: 14px; }
+.case-section > .pairs > div:first-child { padding-top: 0; }
+.pairs dt { color: var(--color-foreground); }
+/* bullets: a small Lake dot instead of a red dash */
+.bullets li::before { top: 0.62em; width: 6px; height: 6px; border-radius: 50%; background: var(--lake); }
+/* Takeaways: a Steam band closes the study */
+.takeaways { margin-inline: calc(-1 * clamp(20px, 3vw, 40px)); padding: clamp(28px, 4vw, 48px) clamp(20px, 3vw, 40px); background: var(--steam); border-radius: 4px; gap: 0; }
+.takeaways li { padding-block: 16px; }
+.takeaways li:first-child { padding-top: 0; }
+.takeaways li:last-child { padding-bottom: 0; }

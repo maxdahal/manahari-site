@@ -26,8 +26,9 @@ function rounded(pts: [number, number][], r: number) {
 }
 
 /* Case studies: a grid read as a route. The first study (Luna) is the lead
-   and runs the full width; the other four follow in two pairs. A line runs through the cards' centres
-   in order; the cards hide it, so it shows only in the gaps, turning in the
+   and runs the full width; the other four follow as steps, one per row,
+   each set a little further right than the one above. A line runs through the cards' centres
+   in order; the cards hide it, so it shows only in the gaps, turning in each
    gap between rows. It fills in with Lake as the section scrolls past.
    Each card is one link: a darkened cover with its step number, title and
    years set on it. Under 860px it is one column and the line runs down. */

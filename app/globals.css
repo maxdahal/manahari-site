@@ -1213,8 +1213,14 @@ button.nav__cta:focus-visible { outline: 2px solid var(--color-ring); outline-of
    is a cover darkened by a scrim, with the title and years set on it in
    white; hover darkens it a little more. Under 860px: one column. */
 .wg__head { margin-bottom: clamp(32px, 4vw, 56px); }
-.wg { position: relative; z-index: 1; display: grid; grid-template-columns: repeat(6, minmax(0, 1fr)); gap: clamp(72px, 7vw, 120px) clamp(40px, 4.5vw, 80px); margin: 0; padding: 0; list-style: none; }
-.wg__card { position: relative; grid-column: span 3; }
+.wg { position: relative; z-index: 1; display: grid; grid-template-columns: repeat(15, minmax(0, 1fr)); gap: clamp(56px, 5.5vw, 96px) 0; margin: 0; padding: 0; list-style: none; }
+/* steps: studies 2 to 5 each take a row of their own, three fifths wide,
+   each starting two fifteenths further right than the one above */
+.wg__card { position: relative; grid-column: span 9; }
+.wg__card:nth-child(2) { grid-column: 1 / span 9; }
+.wg__card:nth-child(3) { grid-column: 3 / span 9; }
+.wg__card:nth-child(4) { grid-column: 5 / span 9; }
+.wg__card:nth-child(5) { grid-column: 7 / span 9; }
 /* the route: one line through the cards' centres in order, seen only in the gaps */
 .wg-route { position: relative; }
 .wg-route__line { position: absolute; inset: 0; z-index: 0; overflow: visible; pointer-events: none; }
@@ -1246,7 +1252,7 @@ button.nav__cta:focus-visible { outline: 2px solid var(--color-ring); outline-of
 .wg__years { flex: none; font-size: 0.9375rem; font-weight: 500; color: rgb(255 255 255 / 0.85); font-variant-numeric: tabular-nums; }
 @media (max-width: 860px) {
   .wg { grid-template-columns: 1fr; gap: 56px; }
-  .wg__card, .wg__card.is-lead { grid-column: auto; }
+  .wg__card, .wg__card.is-lead, .wg__card:nth-child(n) { grid-column: auto; }
   .wg__pic, .wg__card.is-lead .wg__pic { aspect-ratio: 4 / 3; height: auto; }
 }
 @media (prefers-reduced-motion: reduce) { .wg__pic img, .wg__link::after, .wg__step { transition: none; } .wg__link:hover .wg__pic img { transform: none; } }

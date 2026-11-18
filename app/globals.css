@@ -1214,20 +1214,19 @@ button.nav__cta:focus-visible { outline: 2px solid var(--color-ring); outline-of
    white; hover darkens it a little more. Under 860px: one column. */
 .wg__head { margin-bottom: clamp(32px, 4vw, 56px); }
 .wg { position: relative; z-index: 1; display: grid; grid-template-columns: repeat(20, minmax(0, 1fr)); gap: clamp(40px, 4vw, 64px) 0; margin: 0; padding: 0; list-style: none; }
-/* steps: every study takes a row of its own, two fifths wide, each starting
-   three twentieths further right than the one above; Luna is a touch wider */
-.wg__card { position: relative; grid-column: span 8; }
-.wg__card.is-lead { grid-column: 1 / span 9; }
-.wg__card:nth-child(2) { grid-column: 4 / span 8; }
-.wg__card:nth-child(3) { grid-column: 7 / span 8; }
-.wg__card:nth-child(4) { grid-column: 10 / span 8; }
-.wg__card:nth-child(5) { grid-column: 13 / span 8; }
-/* the stair line: out of each card's side, along, then down into the next */
-.wg-route { position: relative; }
-.wg-route__line { position: absolute; inset: 0; z-index: 0; overflow: visible; pointer-events: none; }
-.wg-route__line path { fill: none; stroke-linecap: round; stroke-linejoin: round; }
-.wg-route__track { stroke: var(--color-border); stroke-width: 2; stroke-dasharray: 2 8; }
-.wg-route__fill { stroke: var(--lake); stroke-width: 2.5; }
+/* the scatter: one study per row, in order; each card has its own width,
+   side and shape, and tucks up (--tuck) beside the one above. The tuck is
+   kept under half the shortest card plus the gap, so no two cards touch. */
+.wg { --tuck: clamp(48px, 7vw, 112px); align-items: start; }
+.wg__card { position: relative; }
+.wg__card:not(:first-child) { margin-top: calc(-1 * var(--tuck)); }
+.wg__card:nth-child(1) { grid-row: 1; grid-column: 1 / span 10; }
+.wg__card:nth-child(2) { grid-row: 2; grid-column: 14 / span 6; }
+.wg__card:nth-child(3) { grid-row: 3; grid-column: 3 / span 8; }
+.wg__card:nth-child(4) { grid-row: 4; grid-column: 12 / span 9; }
+.wg__card:nth-child(5) { grid-row: 5; grid-column: 4 / span 7; }
+.wg__card:nth-child(2) .wg__pic { aspect-ratio: 4 / 5; }
+.wg__card:nth-child(4) .wg__pic { aspect-ratio: 16 / 10; }
 /* step number, top left of each cover */
 .wg__step { position: absolute; z-index: 2; top: clamp(14px, 1.8vw, 22px); left: clamp(14px, 1.8vw, 22px); display: grid; place-items: center; width: 36px; height: 36px; border-radius: 50%; background: #fff; color: #10131A; font-family: var(--font-display); font-size: 0.9375rem; font-weight: 700; font-variant-numeric: tabular-nums; box-shadow: 0 2px 10px rgb(0 0 0 / 0.25); transition: background-color 300ms ease, color 300ms ease; }
 .wg__link:hover .wg__step, .wg__link:focus-visible .wg__step { background: var(--lake); color: #fff; }
@@ -1251,8 +1250,8 @@ button.nav__cta:focus-visible { outline: 2px solid var(--color-ring); outline-of
 .wg__years { flex: none; font-size: 0.9375rem; font-weight: 500; color: rgb(255 255 255 / 0.85); font-variant-numeric: tabular-nums; }
 @media (max-width: 860px) {
   .wg { grid-template-columns: 1fr; gap: 56px; }
-  .wg__card, .wg__card.is-lead, .wg__card:nth-child(n) { grid-column: auto; }
-  .wg__pic { aspect-ratio: 4 / 3; }
+  .wg__card, .wg__card.is-lead, .wg__card:nth-child(n) { grid-column: auto; grid-row: auto; margin-top: 0; }
+  .wg__pic, .wg__card:nth-child(n) .wg__pic { aspect-ratio: 4 / 3; }
 }
 @media (prefers-reduced-motion: reduce) { .wg__pic img, .wg__link::after, .wg__step { transition: none; } .wg__link:hover .wg__pic img { transform: none; } }
 

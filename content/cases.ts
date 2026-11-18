@@ -1622,7 +1622,7 @@ const KuBrand: CaseStudy = {
           "items": [
             {
               "term": "Keep the two core colors",
-              "text": "Jayhawk Blue #0051ba and Crimson #e8000d."
+              "text": "Kansas Blue #0051ba and Crimson #e8000d."
             },
             {
               "term": "Name every color",

@@ -12,7 +12,7 @@ type Swatch = { id: string; name: string; hex: string; token?: string };
 const PALETTE: Swatch[] = [
   { id: "white", name: "White", hex: "#ffffff" },
   { id: "text", name: "Text gray", hex: "#333333", token: "--ku-text" },
-  { id: "blue", name: "Jayhawk Blue", hex: "#0051ba", token: "--ku-blue" },
+  { id: "blue", name: "Kansas Blue", hex: "#0051ba", token: "--ku-blue" },
   { id: "crimson", name: "Crimson", hex: "#e8000d", token: "--ku-crimson" },
   { id: "night", name: "Night", hex: "#003459", token: "--ku-night" },
   { id: "lake", name: "Lake", hex: "#2767ff", token: "--ku-lake" },

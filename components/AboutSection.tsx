@@ -64,7 +64,7 @@ export function AboutSection() {
       <div className="about">
         <div className="about__side">
           <figure className="portrait">
-            <img src="/images/portrait-noir.webp" alt="Portrait of Manahari Dahal" width={900} height={900} loading="lazy" />
+            <img src="/images/index-01-5d96ff329c.webp" alt="Portrait of Manahari Dahal" width={900} height={900} loading="lazy" />
           </figure>
         </div>
 

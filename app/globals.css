@@ -1208,58 +1208,37 @@ button.nav__cta:focus-visible { outline: 2px solid var(--color-ring); outline-of
 .pairs > div::before, .takeaways li::before { content: ""; position: absolute; top: 0; left: 0; width: 28px; height: 2px; border-radius: 2px; background: var(--color-foreground); }
 .case-end { padding-top: 32px; border-top: 1px solid var(--color-border); }
 
-/* Home case studies: a sideways row of covers, the next one peeking in from
-   the page's right edge, with the segments, count and arrows beside the
-   heading. Wide screens pin the block in the middle of the screen and let the
-   page's scroll move the row, cards sliding edge to edge (WorkIndex sets the
-   height and the sticky top); phones swipe. */
-.wc { --wc-r: 16px; --wc-w: min(42vw, 720px, calc((100vh - 300px) * 1.6)); }
-.wc__stick { padding-block: 8px 24px; }
-.wc.is-pinned .wc__stick { position: sticky; }
-.wc__head { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 16px 40px; margin-bottom: clamp(20px, 2.5vw, 32px); }
-.wc__track { display: flex; gap: clamp(16px, 2vw, 24px); margin-inline: calc(50% - 50vw); padding-inline: calc(50vw - 50%) clamp(16px, 4vw, 64px); overflow-x: auto; overscroll-behavior-x: contain; scroll-snap-type: x mandatory; scrollbar-width: none; scroll-behavior: smooth; }
-.wc__track::-webkit-scrollbar { display: none; }
-/* pinned: the page scroll sets the position, so no snapping or native scroll */
-.wc.is-pinned .wc__track { overflow-x: hidden; scroll-snap-type: none; scroll-behavior: auto; }
-.wc__slide { flex: 0 0 var(--wc-w); scroll-snap-align: start; }
-/* relative: keeps the screen-reader text inside the card; loose, it sat at the row's far end and widened phone pages */
-.wc__link { position: relative; display: grid; gap: 4px; color: inherit; text-decoration: none; }
-.wc__link:focus-visible { outline: 2px solid var(--color-foreground); outline-offset: 4px; border-radius: var(--wc-r); }
-.wc__pic { display: block; overflow: hidden; aspect-ratio: 16 / 10; margin-bottom: 12px; border-radius: var(--wc-r); background: var(--stage); }
-.wc__pic img { width: 100%; height: 100%; object-fit: cover; transition: transform 1.2s cubic-bezier(0.16, 1, 0.3, 1); }
-.wc__pic img.is-top { object-position: 50% 0; }
-.wc__link:hover .wc__pic img { transform: scale(1.025); }
-.wc__pic.is-contain img { object-fit: contain; padding: clamp(14px, 2.4vw, 36px); }
-.wc__pic.is-contain { background: color-mix(in srgb, var(--color-foreground) 6%, var(--color-background)); }
-.wc__pic.is-contain:has(img[src$="-dark.svg"]) { background: #15171E; }
-:root.dark .wc__pic.is-contain:has(img[src$="-dark.svg"]) { background: var(--color-card); }
-@media (prefers-color-scheme: dark) { :root:not(.light) .wc__pic.is-contain:has(img[src$="-dark.svg"]) { background: var(--color-card); } }
-.wc__row { display: flex; align-items: center; justify-content: space-between; gap: 16px; }
-.wc__title { font-family: var(--font-display); font-size: clamp(1.375rem, 1.15rem + 0.7vw, 1.75rem); font-weight: 700; letter-spacing: -0.02em; line-height: 1.2; }
-/* the way in: a round arrow beside the title, filled with ink on hover */
-.wc__go { flex: none; display: grid; place-items: center; width: 44px; height: 44px; border: 1px solid var(--color-border); border-radius: 50%; color: var(--color-foreground); transition: background-color 200ms ease, color 200ms ease, border-color 200ms ease, transform 200ms ease; }
-.wc__go svg { width: 18px; height: 18px; }
-.wc__link:hover .wc__go { background: var(--color-foreground); border-color: var(--color-foreground); color: var(--color-background); transform: rotate(45deg); }
-@media (prefers-reduced-motion: reduce) { .wc__go { transition: none; } .wc__link:hover .wc__go { transform: none; } }
-.wc__slide:not([aria-current]) .wc__title { color: var(--color-muted-foreground); }
-.wc__bar { flex: 0 1 460px; display: flex; align-items: center; gap: 20px; }
-.wc__segs { flex: 1; display: flex; gap: 6px; min-width: 120px; }
-.wc__seg { flex: 1; height: 24px; padding: 0; border: 0; background: none; cursor: pointer; position: relative; }
-.wc__seg::before { content: ""; position: absolute; left: 0; right: 0; top: 50%; height: 2px; margin-top: -1px; border-radius: 2px; background: var(--color-border); transition: background-color 250ms ease, height 250ms ease; }
-.wc__seg:hover::before { background: var(--color-muted-foreground); }
-.wc__seg[aria-current]::before { height: 3px; background: var(--color-foreground); }
-.wc__seg:focus-visible { outline: 2px solid var(--color-foreground); outline-offset: 2px; border-radius: 4px; }
-.wc__count { flex: none; font-size: 0.875rem; color: var(--color-muted-foreground); font-variant-numeric: tabular-nums; }
-.wc__count b { color: var(--color-foreground); font-weight: 700; }
-.wc__arrows { flex: none; display: flex; gap: 8px; }
-.wc__arrow { display: grid; place-items: center; width: 44px; height: 44px; border: 1px solid var(--color-border); border-radius: 50%; background: transparent; color: var(--color-foreground); cursor: pointer; transition: background-color 200ms ease, opacity 200ms ease; }
-.wc__arrow svg { width: 18px; height: 18px; }
-.wc__arrow:hover:not(:disabled) { background: color-mix(in srgb, var(--color-foreground) 7%, transparent); }
-.wc__arrow:disabled { opacity: 0.35; cursor: default; }
-.wc__arrow:focus-visible { outline: 2px solid var(--color-foreground); outline-offset: 2px; }
-@media (max-width: 860px) { .wc { --wc-w: min(68vw, 520px); } .wc__bar { flex-basis: 100%; } }
-@media (max-width: 600px) { .wc { --wc-w: 80vw; } .wc__arrows { display: none; } }
-@media (prefers-reduced-motion: reduce) { .wc__track { scroll-behavior: auto; } .wc__pic img, .wc__seg::before { transition: none; } }
+/* Home case studies: a grid. Top row: the lead study (Luna) wide, the next
+   beside it (3 : 2). Second row: three equal cards. Each card is a cover,
+   then the title with its years opposite. Under 860px: one column. */
+.wg__head { margin-bottom: clamp(24px, 3vw, 40px); }
+.wg { display: grid; grid-template-columns: repeat(6, minmax(0, 1fr)); gap: clamp(40px, 4vw, 56px) clamp(16px, 2vw, 32px); }
+.wg__card { grid-column: span 2; }
+.wg__card.is-lead { grid-column: span 4; }
+.wg__card:nth-child(2) { grid-column: span 2; }
+.wg__link { display: grid; gap: 14px; color: inherit; text-decoration: none; }
+.wg__link:focus-visible { outline: 2px solid var(--color-foreground); outline-offset: 4px; border-radius: 16px; }
+.wg__pic { display: block; overflow: hidden; aspect-ratio: 8 / 7; border-radius: 16px; background: var(--stage); }
+/* the top row is shorter and shares one height */
+.wg__card:nth-child(-n + 2) .wg__pic { aspect-ratio: auto; height: clamp(260px, 28vw, 420px); }
+.wg__pic img { width: 100%; height: 100%; object-fit: cover; transition: transform 1.2s cubic-bezier(0.16, 1, 0.3, 1); }
+.wg__link:hover .wg__pic img { transform: scale(1.03); }
+.wg__pic.is-contain { background: color-mix(in srgb, var(--color-foreground) 6%, var(--color-background)); }
+.wg__pic.is-contain img { object-fit: contain; padding: clamp(14px, 2.4vw, 36px); }
+.wg__pic.is-contain:has(img[src$="-dark.svg"]) { background: #15171E; }
+:root.dark .wg__pic.is-contain:has(img[src$="-dark.svg"]) { background: var(--color-card); }
+@media (prefers-color-scheme: dark) { :root:not(.light) .wg__pic.is-contain:has(img[src$="-dark.svg"]) { background: var(--color-card); } }
+.wg__row { display: flex; align-items: baseline; justify-content: space-between; gap: 16px; }
+.wg__title { font-family: var(--font-display); font-size: clamp(1.1875rem, 1.05rem + 0.45vw, 1.4375rem); font-weight: 700; letter-spacing: -0.015em; line-height: 1.25; }
+.wg__card.is-lead .wg__title { font-size: clamp(1.375rem, 1.15rem + 0.7vw, 1.75rem); }
+.wg__years { flex: none; font-size: 0.9375rem; color: var(--color-muted-foreground); font-variant-numeric: tabular-nums; }
+.wg__link:hover .wg__title { text-decoration: underline; text-underline-offset: 4px; text-decoration-thickness: 1.5px; }
+@media (max-width: 860px) {
+  .wg { grid-template-columns: 1fr; gap: 40px; }
+  .wg__card, .wg__card.is-lead, .wg__card:nth-child(2) { grid-column: auto; }
+  .wg__pic, .wg__card:nth-child(-n + 2) .wg__pic { aspect-ratio: 16 / 10; height: auto; }
+}
+@media (prefers-reduced-motion: reduce) { .wg__pic img { transition: none; } }
 
 /* Case study reading flow (Nov 2026).
    1. Story rows: text on one side, its one picture on the other, swapping
@@ -1324,7 +1303,7 @@ button.nav__cta:focus-visible { outline: 2px solid var(--color-ring); outline-of
 
 /* Type scale, one step down (Nov 2026): headings were reading too loud. */
 :root { --t-h2: clamp(1.625rem, 1.25rem + 1vw, 2.25rem); --t-display: clamp(2.125rem, 1.2rem + 2.8vw, 3.5rem); --t-lead: clamp(1.0625rem, 1rem + 0.3vw, 1.25rem); --t-h3: 1.125rem; }
-.wc__head .h2, .section__head .h2 { font-size: var(--t-h2); line-height: 1.08; letter-spacing: -0.03em; }
+.wg__head .h2, .section__head .h2 { font-size: var(--t-h2); line-height: 1.08; letter-spacing: -0.03em; }
 .hstage .hero__title { font-size: clamp(2rem, 1.1rem + 2.4vw, 3.25rem); }
 .hero__title { font-size: clamp(2.125rem, 1.1rem + 2.8vw, 3.5rem); }
 .case-title { font-size: clamp(2rem, 1.2rem + 2.2vw, 3rem); line-height: 1.02; }
@@ -1357,10 +1336,3 @@ button.nav__cta:focus-visible { outline: 2px solid var(--color-ring); outline-of
 @keyframes navIn { from { opacity: 0; transform: translateY(-6px); } to { opacity: 1; transform: none; } }
 @media (prefers-reduced-motion: reduce) { .site-head[data-open] .nav { animation: none; } }
 
-/* Carousel focus: only the current study is sharp; the others sit back
-   behind a soft blur, like glass, and come forward on hover. */
-.wc__pic { transition: filter 450ms ease, opacity 450ms ease; }
-.wc__slide:not([aria-current]) .wc__pic { filter: blur(6px) saturate(0.7); opacity: 0.55; }
-.wc__slide:not([aria-current]) .wc__go { opacity: 0.45; }
-.wc__slide:not([aria-current]) .wc__link:hover .wc__pic, .wc__slide:not([aria-current]) .wc__link:focus-visible .wc__pic { filter: none; opacity: 1; }
-@media (prefers-reduced-motion: reduce) { .wc__pic { transition: none; } }

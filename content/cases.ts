@@ -3201,6 +3201,7 @@ const Luminary: CaseStudy = {
   years: "2025 to 2026",
   accent: "#4B9CD3",
   cover: I("luminary-cover.svg", 1080, 694, "Three illustrative wireframes of Luminary: route options, a campus map and a turn card"),
+  card: I("luminary-cover-dark.svg", 1080, 694, "Three illustrative wireframes of Luminary: route options, a campus map and a turn card"),
 };
 
 export const cases: CaseStudy[] = [SurgicalConsole, Luminary, KuBrand, Asians, Esri];

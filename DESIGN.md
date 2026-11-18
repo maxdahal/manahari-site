@@ -103,3 +103,14 @@ The portfolio is a handoff document: daylight spec paper, ink type, Himalayan bl
 - Experience (`components/Timeline.tsx`): a key (Work, Research, Education) with the same colour as a dot on each label; shaded year bands with each year label centred over its band; pointing at a row dims the others; a Now line. Below 860px it becomes a vertical rail of coloured dots.
 - Artwork (`components/DollyStage.tsx`): a dolly shot through all ten pieces. The section is pinned and the page scroll moves the camera down a corridor of pieces (CSS 3D, no WebGL), alternating left and right; "Keep scrolling to see all the artwork" (owner-requested copy) is a frosted pill under the heading, over the pieces, fading at the last one; a counter and progress bar sit underneath. Only the piece in focus takes clicks; any piece opens the lightbox; tabbing to a piece moves the camera to it. Reduced motion gets the masonry grid.
 - For recruiters (`components/RecruiterDialog.tsx`): a native modal `<dialog>` from the header button on every page; also opens from `#recruiter`. A bottom sheet on phones. Education shows GPA as a green tag (B.S. GPA 3.9) and, for the M.S., a grey "No GPA" tag with the reason, since UNC Chapel Hill's graduate school doesn't use GPAs (owner-supplied fact). Experience shows green tags for time in each role and a solid green total (green so they stand out from the blue and ink in both themes) ("2 yrs 11 mos", LinkedIn style, owner-requested): whole months with start and end included; the total counts overlapping months once; "Present" runs to the visitor's current month.
+
+## Rules (lines), used sparingly and methodically (Nov 2026)
+Each line has one job; anything else is separated by space.
+1. A full hairline opens a group inside a part: the mini titles (`.block-h3`), which are also larger and bolder.
+2. A short 28px ink rule tops each item in a set (`.pairs`, `.takeaways`).
+3. Hairlines separate rows inside tables (spec, decisions, checks).
+4. One hairline closes each study above its last actions (`.case-end`).
+Acts carry the outlined ghost title and parts the blue ribbon, so neither gets a line.
+
+## Home case list (Nov 2026)
+Number and title only. Inactive items are frosted glass at 62% opacity; the active one is a single ink blob that flows between items (leading edge first, trailing edge catches up; instant with reduced motion), with a rhododendron number. The panel is the cover, the title and one blue "View case study" button. Drawn covers are shown whole (`contain`); Luminary uses a dark-background copy on the home card.

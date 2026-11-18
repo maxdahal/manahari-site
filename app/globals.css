@@ -1384,3 +1384,31 @@ button.nav__cta:focus-visible { outline: 2px solid var(--color-ring); outline-of
 :root.dark .wk__pick[aria-pressed="false"] { box-shadow: inset 0 1px 0 rgb(255 255 255 / 0.06), 0 4px 14px -10px rgb(0 0 0 / 0.6); border-color: rgb(255 255 255 / 0.07); }
 @media (prefers-color-scheme: dark) { :root:not(.light) .wk__pick[aria-pressed="false"] { box-shadow: inset 0 1px 0 rgb(255 255 255 / 0.06), 0 4px 14px -10px rgb(0 0 0 / 0.6); border-color: rgb(255 255 255 / 0.07); } }
 .wk__pick[aria-pressed="true"] { border: 1px solid transparent; }
+
+/* list v3: no rule on the left; inactive items fade back; the active state is
+   one ink blob that flows between items (the button itself stays clear) */
+.wk__list { padding-left: 0; border-left: 0; }
+.wk__list li { position: relative; z-index: 1; }
+.wk__pick[aria-pressed="false"] { opacity: 0.62; }
+.wk__pick[aria-pressed="false"]:hover, .wk__pick[aria-pressed="false"]:focus-visible { opacity: 1; }
+.wk__pick[aria-pressed="true"] { background: transparent; box-shadow: none; transition: color 250ms ease 120ms; }
+.wk__blob { position: absolute; z-index: 0; left: 0; right: 0; border-radius: 14px; background: var(--color-foreground); box-shadow: 0 10px 24px -14px rgb(15 20 40 / 0.55); pointer-events: none; }
+/* moving down: the bottom edge leads, the top follows; moving up, the reverse */
+.wk__blob--down { transition: bottom 380ms cubic-bezier(0.3, 1.4, 0.5, 1), top 560ms cubic-bezier(0.3, 1.25, 0.5, 1) 90ms, border-radius 400ms ease; }
+.wk__blob--up { transition: top 380ms cubic-bezier(0.3, 1.4, 0.5, 1), bottom 560ms cubic-bezier(0.3, 1.25, 0.5, 1) 90ms, border-radius 400ms ease; }
+@media (prefers-reduced-motion: reduce) { .wk__blob { transition: none !important; } .wk__pick[aria-pressed="true"] { transition: none; } }
+.wk__pic.is-contain:has(img[src$="-dark.svg"]) { background: #15171E; }
+:root.dark .wk__pic.is-contain:has(img[src$="-dark.svg"]) { background: var(--color-card); }
+@media (prefers-color-scheme: dark) { :root:not(.light) .wk__pic.is-contain:has(img[src$="-dark.svg"]) { background: var(--color-card); } }
+
+/* Rules, used on purpose (one job each):
+   1. a full hairline opens a group inside a part (the mini titles);
+   2. a short ink rule tops each item in a set (pairs, takeaways);
+   3. hairlines separate rows inside tables (spec, decisions, checks);
+   4. one hairline closes the study above its last actions.
+   Acts carry the ghost title and parts the blue ribbon, so neither needs a line. */
+.case-section > .block-h3 { padding-top: 22px; border-top: 1px solid var(--color-border); font-size: clamp(1.1875rem, 1.1rem + 0.3vw, 1.3125rem); font-weight: 750; letter-spacing: -0.015em; color: var(--color-foreground); }
+.case-section > .block-h3:first-child { padding-top: 0; border-top: 0; }
+.pairs > div, .takeaways li { position: relative; padding-top: 18px; }
+.pairs > div::before, .takeaways li::before { content: ""; position: absolute; top: 0; left: 0; width: 28px; height: 2px; border-radius: 2px; background: var(--color-foreground); }
+.case-end { padding-top: 32px; border-top: 1px solid var(--color-border); }

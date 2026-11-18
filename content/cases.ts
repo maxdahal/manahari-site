@@ -7,9 +7,9 @@ const I = (src: string, w: number, h: number, alt: string) => ({ src: `/images/$
 
 const SurgicalConsole: CaseStudy = {
   "slug": "surgical-console",
-  "title": "Surgical Console",
-  "heading": "Surgical Console",
-  "short": "UX design internship. Three projects for a robotic surgery console: arm identity, a gallery with a video editor, and live annotation.",
+  "title": "Luna Surgical Console",
+  "heading": "Luna Surgical Console",
+  "short": "UX design internship at Karl Storz. Three projects for Luna, a robotic surgery console: arm identity, a gallery with a video editor, and live annotation.",
   "problem": "A surgery team had one second to understand a screen. Scrub nurses could not see what the surgeon pointed at.",
   "part": "I designed three fixes for a surgical console: arm identity, a gallery with a video editor, and live annotation.",
   "metrics": [
@@ -26,8 +26,16 @@ const SurgicalConsole: CaseStudy = {
       "label": "Figma components refined"
     }
   ],
-  "caveat": "A working prototype built for a surgical robot’s operating system. The >50% comes from exploratory tests of the prototype; the project ended before launch. To follow NDA rules, I redrew the screens and hid clinical data.",
+  "caveat": "A working prototype built for Luna, a surgical robot’s operating system. The >50% comes from exploratory tests of the prototype with five engineers and a fellow intern. To follow NDA and privacy rules, I redrew the screens, changed the arm colors and hid clinical data.",
   "spec": [
+    {
+      "label": "Product",
+      "value": "Luna robotic surgical console software"
+    },
+    {
+      "label": "Organization",
+      "value": "Karl Storz / Asensus Surgical"
+    },
     {
       "label": "Role",
       "value": "UX Design Intern"
@@ -417,6 +425,19 @@ const SurgicalConsole: CaseStudy = {
             }
           ],
           "cols": 3
+        },
+        {
+          "type": "pairs",
+          "items": [
+            {
+              "term": "Direction A · Controls around the feed",
+              "text": "I placed controls around the video. Kept: warnings attached directly to the robotic arms."
+            },
+            {
+              "term": "Direction B · Keep the feed clear",
+              "text": "I kept the video uncluttered. Kept: measurement numbers shown directly on the video."
+            }
+          ]
         }
       ]
     },
@@ -524,7 +545,7 @@ const SurgicalConsole: CaseStudy = {
             },
             {
               "term": "Arms keep their own color",
-              "text": "Shown only as a thin bar on top of the panel."
+              "text": "Shown only as a thin bar on top of the panel. The colors on this page (lavender, sand, pine and pink) are stand-ins: I changed the real arm colors for privacy."
             },
             {
               "term": "Tools versus actions",
@@ -963,6 +984,10 @@ const SurgicalConsole: CaseStudy = {
           "type": "pairs",
           "items": [
             {
+              "term": "Patient information hidden by default",
+              "text": "Patient information always stays hidden and shows only when the team needs it."
+            },
+            {
               "term": "Fail-safe malfunction UI overrides",
               "text": "When a hardware fault or force limit alert occurs, system safety warnings take instant visual priority directly inside the console UI, overriding active drawing overlays."
             },
@@ -1033,7 +1058,7 @@ const SurgicalConsole: CaseStudy = {
         },
         {
           "type": "p",
-          "text": "Testers included my clinical supervisor, other interns, and mechanical, software and hardware engineers."
+          "text": "I tested the prototype with five engineers and a fellow intern."
         },
         {
           "type": "p",
@@ -1048,7 +1073,7 @@ const SurgicalConsole: CaseStudy = {
           "items": [
             {
               "term": "Outcome",
-              "text": "My clinical supervisor said the component system and annotation mode could be the basis for future console software. The project ended before launch."
+              "text": "My clinical supervisor said the component system and annotation mode could be the basis for future console software."
             }
           ]
         }
@@ -1283,7 +1308,7 @@ const KuBrand: CaseStudy = {
   "slug": "ku-brand",
   "title": "KU Brand",
   "heading": "KU Brand",
-  "short": "Research, design and frontend for the University of Kansas brand site, part of a campus-wide rebrand. Traffic across ku.edu grew 30% after launch, a team result.",
+  "short": "Research, design and frontend for the University of Kansas brand site, for 20,000+ campus communicators, part of a campus-wide rebrand. Traffic across ku.edu grew 30% after launch, a team result.",
   "problem": "KU refreshed its identity, and its brand site had to catch up. People struggled to find guidelines and assets on the old site.",
   "metrics": [
     {
@@ -1295,7 +1320,7 @@ const KuBrand: CaseStudy = {
       "label": "Daily visitors across all of ku.edu and its subdomains"
     }
   ],
-  "caveat": "A new brand site for KU Communicators and campus partners, live at brand.ku.edu. The traffic numbers are a team result of the campus-wide rebrand, not mine alone.",
+  "caveat": "A new brand site for 20,000+ campus communicators and partners, live at brand.ku.edu. The traffic numbers are a team result of the campus-wide rebrand, not mine alone.",
   "spec": [
     {
       "label": "Organization",
@@ -1303,7 +1328,7 @@ const KuBrand: CaseStudy = {
     },
     {
       "label": "Role",
-      "value": "Frontend Developer, doing the product design work (the team had no UX or product designer)"
+      "value": "Frontend Developer; I co-led the design of the brand website (the team had no UX or product designer)"
     },
     {
       "label": "Timeline",
@@ -1335,6 +1360,7 @@ const KuBrand: CaseStudy = {
         {
           "type": "list",
           "items": [
+            "Co-led the design of the brand website",
             "Interviewed Kansans, alumni, students and staff",
             "Mapped and grouped the content",
             "Designed and built the pages (HTML, CSS, JavaScript)",
@@ -1408,6 +1434,23 @@ const KuBrand: CaseStudy = {
         {
           "type": "p",
           "text": "I mapped the content people needed most, grouped the guidelines, and turned brand rules into components."
+        },
+        {
+          "type": "pairs",
+          "items": [
+            {
+              "term": "Four core sections",
+              "text": "Brand Strategy, Visual Identity (logos, color and type), Web Components, and Downloads."
+            },
+            {
+              "term": "Download cards",
+              "text": "Each file got a clear card with its formats (SVG, PNG, EPS) and its usage rules."
+            },
+            {
+              "term": "Live color and type",
+              "text": "Interactive color swatch cards and live typography previews, right in the brand site."
+            }
+          ]
         }
       ]
     },
@@ -1572,7 +1615,7 @@ const KuBrand: CaseStudy = {
           "items": [
             {
               "term": "Keep the two core colors",
-              "text": "Kansas Blue #0051ba and Crimson #e8000d."
+              "text": "Jayhawk Blue #0051ba and Crimson #e8000d."
             },
             {
               "term": "Name every color",
@@ -1771,6 +1814,10 @@ const Asians: CaseStudy = {
       "value": "Asian’s (Berkeley, CA)"
     },
     {
+      "label": "Outcome",
+      "value": "Designed a mobile ordering prototype that eliminated order errors caused by language barriers for non-native English speaking guests."
+    },
+    {
       "label": "Role",
       "value": "UX Researcher & Designer, project lead"
     },
@@ -1811,7 +1858,7 @@ const Asians: CaseStudy = {
             "Led the project and the team",
             "Ran the survey and interviews",
             "Built and tested the prototype with 10+ guests",
-            "Streamlined ordering into four steps: menu, cart, confirm order, payment"
+            "Cut checkout to a simple 2-step confirmation with saved payment methods"
           ]
         },
         {
@@ -1901,6 +1948,14 @@ const Asians: CaseStudy = {
       "stage": "The setup",
       "title": "What guests needed",
       "blocks": [
+        {
+          "type": "h3",
+          "text": "Persona: Emma"
+        },
+        {
+          "type": "p",
+          "text": "I created Emma, a 32-year-old non-native English speaker. She loves the restaurant but avoids ordering by phone or in person because of the language barrier."
+        },
         {
           "type": "pairs",
           "items": [
@@ -2419,6 +2474,10 @@ const Asians: CaseStudy = {
             {
               "term": "Address at the top",
               "text": "Testers liked seeing the address at the top of the screen."
+            },
+            {
+              "term": "Payment in 2 taps",
+              "text": "I simplified payment to two taps."
             }
           ]
         }
@@ -2740,6 +2799,10 @@ const Esri: CaseStudy = {
             {
               "term": "What it replaced",
               "text": "Static screenshots of code that required developers to manually type out component syntax."
+            },
+            {
+              "term": "Governance and deprecation",
+              "text": "I added clear callout badges to flag deprecated component props, version updates and WCAG fallback styles."
             }
           ]
         },
@@ -2804,7 +2867,7 @@ const Esri: CaseStudy = {
     },
     {
       "title": "Build for evolution",
-      "text": "Designing a flexible documentation layout ensures that new components can be added seamlessly as the design system grows."
+      "text": "Designing a flexible documentation layout ensures that new components can be added easily as the design system grows."
     }
   ],
   "part": "I maintained the team’s internal documentation: 40+ front-end pages that bring the already-built Calcite components together in one place.",
@@ -2813,5 +2876,220 @@ const Esri: CaseStudy = {
   cover: I("card-esri.png", 1080, 694, "The four regions of a Calcite component documentation page"),
 };
 
-export const cases: CaseStudy[] = [SurgicalConsole, KuBrand, Asians, Esri];
+/* Luminary: still in development and under NDA, so the screens are our own
+   low-fi wireframes (public/images/luminary-*.svg), labelled as illustrations. */
+const Luminary: CaseStudy = {
+  "slug": "luminary",
+  "title": "Luminary",
+  "heading": "Luminary Campus Navigation",
+  "short": "UX design for Luminary, an App Team Carolina iOS app that helps students find accessible routes around the UNC Chapel Hill campus.",
+  "problem": "Commercial map apps miss what students with mobility needs care about on campus: working elevators, steep slopes, accessible entrances and construction detours.",
+  "metrics": [
+    {
+      "value": "50+",
+      "label": "Student usability testing sessions"
+    }
+  ],
+  "caveat": "Luminary is still in development, so I can’t show its screens. The wireframes on this page are my own illustrations of the flows, not the shipped design.",
+  "spec": [
+    {
+      "label": "Product",
+      "value": "Luminary iOS app (App Team Carolina)"
+    },
+    {
+      "label": "Organization",
+      "value": "University of North Carolina at Chapel Hill"
+    },
+    {
+      "label": "Role",
+      "value": "UX Designer"
+    },
+    {
+      "label": "Timeline",
+      "value": "September 2025 to May 2026 (8 months)"
+    },
+    {
+      "label": "Team",
+      "value": "Collaborating with 4 iOS developers and product leads"
+    },
+    {
+      "label": "Scope",
+      "value": "Accessible routing, user research, usability testing, iOS interface design"
+    },
+    {
+      "label": "Tools",
+      "value": "Figma"
+    }
+  ],
+  "sections": [
+    {
+      "id": "problem",
+      "stage": "Overview",
+      "title": "Problem and accessibility scope",
+      "blocks": [
+        {
+          "type": "p",
+          "text": "Getting around a large campus like UNC Chapel Hill is hard for new students, and harder for students with mobility impairments, temporary injuries or visual disabilities."
+        },
+        {
+          "type": "p",
+          "text": "Commercial map apps like Google Maps miss campus details that decide whether a route works: working elevators, steep slopes, accessible building entrances and temporary construction detours."
+        },
+        {
+          "type": "pairs",
+          "items": [
+            {
+              "term": "Problem statement",
+              "text": "How might we give students real-time, accessible campus navigation that accounts for mobility needs, elevator outages and steep slopes?"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "research",
+      "stage": "The setup",
+      "title": "User research and usability testing",
+      "blocks": [
+        {
+          "type": "p",
+          "text": "I ran semi-structured interviews and more than 50 student usability testing sessions at locations across campus."
+        },
+        {
+          "type": "pairs",
+          "items": [
+            {
+              "term": "Unannounced obstacles",
+              "text": "Students using wheelchairs or crutches often ran into stairs nobody warned them about, or building elevators that were out of service."
+            },
+            {
+              "term": "Hidden entrances",
+              "text": "First-year students struggled to find accessible building entrances in the short time between classes."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "phases",
+      "stage": "Trade-offs",
+      "title": "Phased strategy and route architecture",
+      "blocks": [
+        {
+          "type": "pairs",
+          "items": [
+            {
+              "term": "Phase 1 · Route filtering",
+              "text": "Accessible route toggles: Wheelchair Accessible, Avoid Steep Slopes and Indoor Elevator Access."
+            },
+            {
+              "term": "Phase 2 · Map interface",
+              "text": "Map overlays with elevation markers and pins for accessible entrances."
+            },
+            {
+              "term": "Phase 3 · Turn by turn",
+              "text": "Accessible turn-by-turn cards with audio and VoiceOver support."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "decisions",
+      "stage": "Trade-offs",
+      "title": "Key design decisions",
+      "blocks": [
+        {
+          "type": "decisions",
+          "items": [
+            {
+              "title": "Rerouting around obstacles",
+              "text": "When someone reports an elevator outage or a construction barrier, a banner appears and the route recalculates on its own."
+            },
+            {
+              "title": "Slope before you walk",
+              "text": "A route elevation graph flags steep inclines before students set off."
+            },
+            {
+              "title": "High-contrast direction cards",
+              "text": "Large, high-contrast cards that stay readable in bright sunlight and work with one hand."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "wireframes",
+      "stage": "Trade-offs",
+      "title": "Illustrative wireframes",
+      "blocks": [
+        {
+          "type": "p",
+          "text": "Because of the NDA, I drew these low-fidelity wireframes myself to show how the flows work. They are not Luminary’s real screens."
+        },
+        {
+          "type": "gallery",
+          "cols": 4,
+          "items": [
+            {
+              "src": "/images/luminary-routes.svg",
+              "w": 408,
+              "h": 788,
+              "alt": "Wireframe of route options: a destination field and toggles for wheelchair accessible, avoid steep slopes and indoor elevator access",
+              "caption": "Illustrative wireframe. Route options."
+            },
+            {
+              "src": "/images/luminary-map.svg",
+              "w": 408,
+              "h": 788,
+              "alt": "Wireframe of a campus map with a route and pins marking step-free entrances",
+              "caption": "Illustrative wireframe. Map with accessible entrances."
+            },
+            {
+              "src": "/images/luminary-reroute.svg",
+              "w": 408,
+              "h": 788,
+              "alt": "Wireframe of an elevator outage banner over a new route, with a slope graph below",
+              "caption": "Illustrative wireframe. Outage reroute and slope graph."
+            },
+            {
+              "src": "/images/luminary-turn.svg",
+              "w": 408,
+              "h": 788,
+              "alt": "Wireframe of a large, high-contrast turn-by-turn card",
+              "caption": "Illustrative wireframe. Turn-by-turn card."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "testing",
+      "stage": "Resolution and impact",
+      "title": "Testing",
+      "blocks": [
+        {
+          "type": "p",
+          "text": "I measured navigation task completion across 50+ student sessions, looking at how fast students picked a route and whether they avoided detours."
+        }
+      ]
+    }
+  ],
+  "takeaways": [
+    {
+      "title": "Accessibility helps everyone",
+      "text": "Designing for mobility needs made navigation clearer for all students, including those carrying heavy equipment or walking in bad weather."
+    },
+    {
+      "title": "Real-time accuracy builds trust",
+      "text": "A navigation app is only as reliable as its live data. Clear warnings for construction barriers built long-term trust."
+    }
+  ],
+  "part": "I designed accessible routing for a campus navigation app and tested it in 50+ student sessions.",
+  years: "2025 to 2026",
+  accent: "#4B9CD3",
+  cover: I("luminary-cover.svg", 1080, 694, "Three illustrative wireframes of Luminary: route options, a campus map and a turn card"),
+};
+
+export const cases: CaseStudy[] = [SurgicalConsole, Luminary, KuBrand, Asians, Esri];
 export const getCase = (slug: string) => cases.find((c) => c.slug === slug);

@@ -28,7 +28,7 @@ export function WorkIndex({ items }: { items: IndexCase[] }) {
       <header className="ws__head">
         <div>
           <h2 className="h2" id="work-h">Case studies</h2>
-          <p className="ws__sub">A surgical console, a website, a phone app and a documentation site.</p>
+          <p className="ws__sub">A surgical console, a campus navigation app, a website, a phone app and a documentation site.</p>
         </div>
         <div className="ws__ctl">
         <div className="ws__nav">

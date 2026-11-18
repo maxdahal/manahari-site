@@ -26,7 +26,8 @@ Manahari both designs and builds. The portfolio itself is evidence: real, workin
 ## Capabilities and Constraints
 - Pages: home (with About, Experience and Artwork sections) and four case studies (Surgical Console, KU Brand, Asian's, Esri Calcite). The recruiter summary is a dialog available from every page.
 - Static export only: no server, forms or analytics backend.
-- Surgical Console is under NDA: keep v1's masking. Company and product names are masked in the study, screens are redrawn, and clinical data is hidden. The prototype can't be shown; offer a walkthrough on a call.
+- Luna Surgical Console is under NDA. The owner approved naming Luna and Karl Storz; screens stay redrawn, arm colors are stand-ins (lavender, sand, pine, pink), and clinical data is hidden. Don't say how the project ended; talk only about the owner's work.
+- Luminary (App Team Carolina) is in development and under NDA: show only our own low-fi greyscale wireframes (`public/images/luminary-*.svg`, made by a script), always captioned as illustrations. The prototype can't be shown; offer a walkthrough on a call.
 
 ## Brand Commitments
 - Name: Manahari Dahal. Roles: UX engineer, product designer.

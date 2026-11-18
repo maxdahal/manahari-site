@@ -14,7 +14,7 @@ const SITE = process.env.NEXT_PUBLIC_SITE_URL ?? "http://localhost:3000";
 export const metadata: Metadata = {
   metadataBase: new URL(SITE),
   title: { default: "Manahari Dahal", template: "%s · Manahari Dahal" },
-  description: "Manahari Dahal, a UX engineer in the US. I design products and build them in code. Case studies: Surgical Console, KU Brand and Asian's.",
+  description: "Manahari Dahal, a UX engineer in the US. I design products and build them in code. Case studies: Luna Surgical Console, Luminary, KU Brand, Asian's and Esri Calcite.",
   openGraph: { type: "website", siteName: "Manahari Dahal", images: ["/images/card-console.webp"] },
   twitter: { card: "summary_large_image" },
 };

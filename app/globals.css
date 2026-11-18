@@ -776,6 +776,8 @@ main { overflow-x: clip; }
 .rec-skills .skills { grid-template-columns: 1fr; }
 /* phone screens stay side by side on phones: sketch, wireframe, final */
 @media (max-width: 720px) { .gallery.gallery--tall { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 20px 12px; } .gallery--tall figcaption { font-size: 0.75rem; } }
+/* four tall phone screens: two by two on small screens, so none is left alone on a row */
+@media (max-width: 720px) { .gallery.gallery--tall.gallery--c4 { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 24px 16px; } }
 /* wordmark: "md." with the dot in redline */
 /* header: a full-width bar on the page grid; clear at the top, frosted with a hairline once scrolled */
 .site-head {
@@ -973,7 +975,7 @@ main { overflow-x: clip; }
 .ws__arrows button { display: grid; place-items: center; width: 44px; height: 44px; border-radius: 50%; border: 1px solid var(--color-border); background: var(--color-card); color: var(--color-foreground); cursor: pointer; transition: background-color 200ms ease, border-color 200ms ease, color 200ms ease; }
 .ws__arrows button:hover { background: var(--color-foreground); border-color: var(--color-foreground); color: var(--color-background); }
 .ws__arrows svg { width: 20px; height: 20px; }
-.ws__steps { display: grid; grid-template-columns: repeat(4, 1fr); gap: 6px; margin-top: 16px; }
+.ws__steps { display: grid; grid-auto-flow: column; grid-auto-columns: 1fr; gap: 6px; margin-top: 16px; }
 .ws__steps li { height: 3px; border-radius: 3px; background: var(--color-border); transition: background-color 300ms ease; }
 .ws__steps li.is-past { background: color-mix(in srgb, var(--color-foreground) 40%, var(--color-border)); }
 .ws__steps li.is-on { background: var(--color-foreground); }

@@ -12,6 +12,7 @@ import { artwork, profile } from "@/content/profile";
    non-breaking space before each "·" keeps it from dangling at a line end. */
 const CARD: Record<string, { meta: string; value: string; label: string }> = {
   "surgical-console": { meta: "UX design internship\u00a0·\u00a02026", value: ">50%", label: "Less task-completion time in exploratory usability testing" },
+  luminary: { meta: "UX design\u00a0·\u00a02025\u00a0to\u00a02026", value: "50+", label: "Student usability testing sessions" },
   "ku-brand": { meta: "Branding, UX design and research\u00a0·\u00a02022\u00a0to\u00a02025", value: "+30%", label: "Traffic across ku.edu after launch (a team result)" },
   asians: { meta: "UX research and design\u00a0·\u00a02021\u00a0to\u00a02022", value: "~50", label: "People surveyed" },
   esri: { meta: "UI/UX design and front-end internship\u00a0·\u00a02021", value: "50%+", label: "Improvement in content discoverability" },

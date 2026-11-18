@@ -2,7 +2,8 @@
 export const about = {
   "intro": [
     "I focus on solving complex, high-stakes problems, whether that is designing real-time controls for a robotic surgical console, building university-wide brand systems, or crafting accessible campus navigation.",
-    "Because I both design and write frontend code, I understand how layout decisions impact technical performance, frame rates, accessibility compliance, and engineering timelines. I believe the best software gets out of the way and lets people focus on their work."
+    "Because I both design and write frontend code, I understand how layout decisions impact technical performance, frame rates, accessibility compliance, and engineering timelines. I believe the best software gets out of the way and lets people focus on their work.",
+    "Art is my hobby. You can see some of my pieces below."
   ],
   "stats": [
     {
@@ -84,7 +85,7 @@ export const about = {
           "when": "Jun 2022 to Apr 2025",
           "title": "Frontend Developer",
           "org": "University of Kansas · Lawrence, KS",
-          "text": "Research, design and frontend for the University of Kansas brand site. Traffic across ku.edu grew 30% after launch, a team result with 20+ designers, marketers and project managers.",
+          "text": "Over three years I worked on hundreds of pages across ku.edu and its sub-sites, and co-led the design of the brand website. Traffic across ku.edu grew 30% after launch, a team result with 20+ designers, marketers and project managers.",
           "link": {
             "text": "Read the KU Brand case study",
             "href": "/work/ku-brand"
@@ -116,7 +117,12 @@ export const about = {
         {
           "when": "Sep 2025 to May 2026",
           "title": "UX Designer",
-          "org": "App Team Carolina · Chapel Hill, NC"
+          "org": "App Team Carolina · Chapel Hill, NC",
+          "text": "UX design for Luminary, an iOS app for accessible routes around campus, tested in 50+ student sessions.",
+          "link": {
+            "text": "Read the Luminary case study",
+            "href": "/work/luminary"
+          }
         }
       ]
     }

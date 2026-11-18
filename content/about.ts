@@ -170,11 +170,6 @@ export const about = {
         "Fall 2025 and Spring 2026"
       ],
       [
-        "UX Designer / Front-End Developer, University of Kansas",
-        "",
-        "Jun 2022 to Apr 2025"
-      ],
-      [
         "BYU-Idaho Scholarship",
         "",
         "2019 to 2022"

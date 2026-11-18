@@ -26,8 +26,7 @@ function rounded(pts: [number, number][], r: number) {
 }
 
 /* Case studies: a grid read as a route. The first study (Luna) is the lead
-   and takes the wide cell of the top row; the next sits beside it, and the
-   last three share the second row. A line runs through the cards' centres
+   and runs the full width; the other four follow in two pairs. A line runs through the cards' centres
    in order; the cards hide it, so it shows only in the gaps, turning in the
    gap between rows. It fills in with Lake as the section scrolls past.
    Each card is one link: a darkened cover with its step number, title and
@@ -51,7 +50,10 @@ export function WorkIndex({ items }: { items: IndexCase[] }) {
       const pts: [number, number][] = [[boxes[0].x, boxes[0].y]];
       for (let i = 1; i < boxes.length; i++) {
         const a = boxes[i - 1], b = boxes[i];
-        if (Math.abs(a.y - b.y) > 2 && Math.abs(a.x - b.x) > 2) {
+        // same row (the cards overlap vertically): stay level with the previous point
+        const sameRow = b.top < a.bottom && a.top < b.bottom;
+        if (sameRow) { pts.push([b.x, pts[pts.length - 1][1]]); continue; }
+        if (Math.abs(a.x - b.x) > 2) {
           const mid = (a.bottom + b.top) / 2; // the middle of the gap between rows
           pts.push([a.x, mid], [b.x, mid]);
         }
@@ -62,7 +64,9 @@ export function WorkIndex({ items }: { items: IndexCase[] }) {
     draw();
     const ro = new ResizeObserver(draw);
     ro.observe(ol);
-    return () => ro.disconnect();
+    for (const li of ol.children) ro.observe(li);
+    addEventListener("load", draw);
+    return () => { ro.disconnect(); removeEventListener("load", draw); };
   }, []);
 
   // fill the route as the section passes the reading line (60% down the screen)

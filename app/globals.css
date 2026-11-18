@@ -1213,8 +1213,8 @@ button.nav__cta:focus-visible { outline: 2px solid var(--color-ring); outline-of
    is a cover darkened by a scrim, with the title and years set on it in
    white; hover darkens it a little more. Under 860px: one column. */
 .wg__head { margin-bottom: clamp(32px, 4vw, 56px); }
-.wg { position: relative; z-index: 1; display: grid; grid-template-columns: repeat(6, minmax(0, 1fr)); gap: clamp(64px, 6vw, 96px) clamp(32px, 3.4vw, 56px); margin: 0; padding: 0; list-style: none; }
-.wg__card { position: relative; grid-column: span 2; }
+.wg { position: relative; z-index: 1; display: grid; grid-template-columns: repeat(6, minmax(0, 1fr)); gap: clamp(72px, 7vw, 120px) clamp(40px, 4.5vw, 80px); margin: 0; padding: 0; list-style: none; }
+.wg__card { position: relative; grid-column: span 3; }
 /* the route: one line through the cards' centres in order, seen only in the gaps */
 .wg-route { position: relative; }
 .wg-route__line { position: absolute; inset: 0; z-index: 0; overflow: visible; pointer-events: none; }
@@ -1224,12 +1224,12 @@ button.nav__cta:focus-visible { outline: 2px solid var(--color-ring); outline-of
 /* step number, top left of each cover */
 .wg__step { position: absolute; z-index: 2; top: clamp(14px, 1.8vw, 22px); left: clamp(14px, 1.8vw, 22px); display: grid; place-items: center; width: 36px; height: 36px; border-radius: 50%; background: #fff; color: #10131A; font-family: var(--font-display); font-size: 0.9375rem; font-weight: 700; font-variant-numeric: tabular-nums; box-shadow: 0 2px 10px rgb(0 0 0 / 0.25); transition: background-color 300ms ease, color 300ms ease; }
 .wg__link:hover .wg__step, .wg__link:focus-visible .wg__step { background: var(--lake); color: #fff; }
-.wg__card.is-lead { grid-column: span 4; }
+.wg__card.is-lead { grid-column: 1 / -1; }
 .wg__link { position: relative; display: block; overflow: hidden; border-radius: 16px; color: #fff; text-decoration: none; isolation: isolate; }
 .wg__link:focus-visible { outline: 2px solid var(--color-foreground); outline-offset: 4px; }
-.wg__pic { display: block; aspect-ratio: 8 / 7; background: var(--stage); }
-/* the top row is shorter and shares one height */
-.wg__card:nth-child(-n + 2) .wg__pic { aspect-ratio: auto; height: clamp(300px, 30vw, 460px); }
+.wg__pic { display: block; aspect-ratio: 3 / 2; background: var(--stage); }
+/* the lead runs the full width, as a wide band */
+.wg__card.is-lead .wg__pic { aspect-ratio: auto; height: clamp(340px, 38vw, 560px); }
 .wg__pic img { display: block; width: 100%; height: 100%; object-fit: cover; transition: transform 1.2s cubic-bezier(0.16, 1, 0.3, 1); }
 .wg__link:hover .wg__pic img { transform: scale(1.03); }
 .wg__pic.is-contain { background: color-mix(in srgb, var(--color-foreground) 6%, var(--color-background)); }
@@ -1242,12 +1242,12 @@ button.nav__cta:focus-visible { outline: 2px solid var(--color-ring); outline-of
 .wg__link:hover::after, .wg__link:focus-visible::after { background-color: rgb(0 0 0 / 0.2); }
 .wg__row { position: absolute; z-index: 2; left: 0; right: 0; bottom: 0; display: flex; align-items: baseline; justify-content: space-between; gap: 16px; padding: clamp(18px, 2.2vw, 28px); }
 .wg__title { font-family: var(--font-display); font-size: clamp(1.25rem, 1.1rem + 0.5vw, 1.5rem); font-weight: 700; letter-spacing: -0.015em; line-height: 1.2; text-shadow: 0 1px 12px rgb(0 0 0 / 0.35); }
-.wg__card.is-lead .wg__title { font-size: clamp(1.5rem, 1.2rem + 0.9vw, 2rem); }
+.wg__card.is-lead .wg__title { font-size: clamp(1.625rem, 1.25rem + 1.1vw, 2.25rem); }
 .wg__years { flex: none; font-size: 0.9375rem; font-weight: 500; color: rgb(255 255 255 / 0.85); font-variant-numeric: tabular-nums; }
 @media (max-width: 860px) {
-  .wg { grid-template-columns: 1fr; gap: 48px; }
+  .wg { grid-template-columns: 1fr; gap: 56px; }
   .wg__card, .wg__card.is-lead { grid-column: auto; }
-  .wg__pic, .wg__card:nth-child(-n + 2) .wg__pic { aspect-ratio: 4 / 3; height: auto; }
+  .wg__pic, .wg__card.is-lead .wg__pic { aspect-ratio: 4 / 3; height: auto; }
 }
 @media (prefers-reduced-motion: reduce) { .wg__pic img, .wg__link::after, .wg__step { transition: none; } .wg__link:hover .wg__pic img { transform: none; } }
 

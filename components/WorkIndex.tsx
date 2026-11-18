@@ -67,12 +67,7 @@ export function WorkIndex({ items }: { items: IndexCase[] }) {
                 <img src={c.pic.src} alt="" width={c.pic.w} height={c.pic.h} loading={i < 2 ? "eager" : "lazy"} className={c.top ? "is-top" : undefined} />
               </Link>
               <div className="wk__body">
-                <div className="wk__text">
-                  <p className="wk__meta">{c.meta}</p>
-                  <h3 className="wk__title" id={`wk-${c.slug}-h`}>{c.title}</h3>
-                  <p className="wk__desc">{c.desc}</p>
-                  <p className="wk__outcome"><b>{c.outcome.value}</b> {c.outcome.label}</p>
-                </div>
+                <h3 className="wk__title" id={`wk-${c.slug}-h`}>{c.title}</h3>
                 <Link prefetch={false} href={`/work/${c.slug}`} className="btn btn--primary wk__go">
                   View case study<span className="sr-only">: {c.title}</span>
                   <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6" /></svg>

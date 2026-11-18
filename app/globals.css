@@ -1361,3 +1361,6 @@ button.nav__cta:focus-visible { outline: 2px solid var(--color-ring); outline-of
 /* drawn covers (the Luminary wireframes) are shown whole, not cropped */
 .wk__pic:has(img[src$=".svg"]) { background: #EEF0F3; }
 .wk__pic img[src$=".svg"] { object-fit: contain; padding: clamp(14px, 2vw, 28px); }
+.wk__body { align-items: center; }
+.wk__title { flex: 1 1 auto; }
+@media (min-width: 861px) { .wk__pic { height: clamp(300px, 54vh, 540px); } }

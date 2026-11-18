@@ -60,7 +60,7 @@ const SurgicalConsole: CaseStudy = {
   "sections": [
     {
       "id": "action",
-      "stage": "Overview",
+      "stage": "TL;DR",
       "title": "At a glance",
       "blocks": [
         {
@@ -1351,6 +1351,7 @@ const SurgicalConsole: CaseStudy = {
       "text": "Ten minutes with a surgeon beats six versions alone."
     }
   ],
+  actions: [{ label: "Play with the arm panels", href: "#arm-sandbox", play: true }, { label: "View wireframes", href: "#lo-fi-sketches" }],
   years: "2026",
   accent: "#13B3B9",
   cover: I("console-01-7142ae9c81.webp", 1600, 900, "The live video editor in annotation mode, with numbered pins and a 3.27 cm measurement on the feed"),
@@ -1403,7 +1404,7 @@ const KuBrand: CaseStudy = {
   "sections": [
     {
       "id": "my-contribution",
-      "stage": "Overview",
+      "stage": "TL;DR",
       "title": "My contribution",
       "blocks": [
         {
@@ -1835,7 +1836,7 @@ const KuBrand: CaseStudy = {
         },
         {
           "type": "link",
-          "text": "You can see the live site at brand.ku.edu.",
+          "text": "Visit brand.ku.edu",
           "href": "https://brand.ku.edu"
         }
       ]
@@ -1860,6 +1861,7 @@ const KuBrand: CaseStudy = {
     }
   ],
   "part": "I talked with Kansans about what KU meant to them, then helped turn the new identity into a design system and a brand site for campus partners.",
+  actions: [{ label: "Play with KU colors", href: "#color-sandbox", play: true }, { label: "Visit brand.ku.edu", href: "https://brand.ku.edu" }],
   years: "2023 to 2024",
   accent: "#0051BA",
   cover: I("ku-brand-01-ff9ed1298f.webp", 2200, 942, "The KU Brand Center home page hero, with the Campanile against the sky and the brand grid over it"),
@@ -1920,7 +1922,7 @@ const Asians: CaseStudy = {
   "sections": [
     {
       "id": "my-contribution",
-      "stage": "Overview",
+      "stage": "TL;DR",
       "title": "My contribution",
       "blocks": [
         {
@@ -2562,7 +2564,7 @@ const Asians: CaseStudy = {
         },
         {
           "type": "link",
-          "text": "Open the interactive prototype",
+          "text": "Try the prototype",
           "href": "https://xd.adobe.com/view/b17983ec-566c-45c2-9c0c-a748f80b1719-e42a/?fullscreen"
         }
       ]
@@ -2610,6 +2612,7 @@ const Asians: CaseStudy = {
     }
   ],
   "part": "I led a volunteer team to design an ordering app.",
+  actions: [{ label: "Try the prototype", href: "https://xd.adobe.com/view/b17983ec-566c-45c2-9c0c-a748f80b1719-e42a/?fullscreen" }],
   years: "2021 to 2022",
   accent: "#FF5200",
   cover: I("asians-07-c40b497de9.webp", 1600, 675, "Tilted high-fidelity screens of the Asian's app on an orange background"),
@@ -3194,6 +3197,7 @@ const Luminary: CaseStudy = {
     }
   ],
   "part": "I designed accessible routing for a campus navigation app and tested it in 50+ student sessions.",
+  actions: [{ label: "View wireframes", href: "#wireframes" }],
   years: "2025 to 2026",
   accent: "#4B9CD3",
   cover: I("luminary-cover.svg", 1080, 694, "Three illustrative wireframes of Luminary: route options, a campus map and a turn card"),

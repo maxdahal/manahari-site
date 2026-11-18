@@ -90,7 +90,6 @@ export function AboutSection() {
 
           <div className="about__panels">
             <div {...panel(0)}>
-              <h3 className="about-headline">{about.headline}</h3>
               {about.intro.map((t) => <p key={t} className="about-lede">{t}</p>)}
               <dl className="about-facts">
                 {about.facts.map((f) => <div key={f.label}><dt>{f.label}</dt><dd>{f.value}</dd></div>)}

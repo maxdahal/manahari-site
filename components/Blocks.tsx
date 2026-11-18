@@ -163,7 +163,7 @@ export function Blocks({ blocks }: { blocks: Block[] }) {
               </div>
             );
           case "link":
-            return <p key={i} className="prose"><a href={b.href} target="_blank" rel="noopener">{b.text}<span className="sr-only"> (opens in a new tab)</span></a></p>;
+            return <p key={i} className="actions block-cta"><a className="btn btn--line" href={b.href} target="_blank" rel="noopener">{b.text}<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d="M7 17 17 7M9 7h8v8" /></svg><span className="sr-only"> (opens in a new tab)</span></a></p>;
           case "kusandbox":
             return <KuSandbox key={i} />;
           case "armpanel":

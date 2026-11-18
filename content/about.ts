@@ -1,6 +1,5 @@
 /* The About page, word for word from the published v1 site. */
 export const about = {
-  "headline": "Designing for real human constraints, from operating rooms to everyday software.",
   "intro": [
     "I am a UX Engineer with a background in computer science and human-computer interaction, and I am finishing my Master’s degree. I design interfaces that people can trust when they have to decide fast.",
     "I like hard problems where mistakes cost a lot: real-time controls for a robotic surgical console, a university-wide brand system, and accessible campus navigation.",

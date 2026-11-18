@@ -59,4 +59,6 @@ export type CaseStudy = {
   sections: Section[];
   takeaways: { title: string; text: string }[];
   note?: string;
+  /* buttons under the case header: a sandbox or wireframes on the page (#id), or a live site or prototype */
+  actions?: { label: string; href: string; play?: boolean }[];
 };

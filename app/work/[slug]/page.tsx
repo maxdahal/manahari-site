@@ -37,7 +37,7 @@ export default async function CasePage({ params }: { params: Promise<{ slug: str
     if (last && last.title === s.stage) last.parts.push(s);
     else acts.push({ id: `act-${acts.length + 1}`, title: s.stage, parts: [s] });
   }
-  const toc = [...acts.map((a) => ({ id: a.id, title: a.title, parts: a.parts.map((p) => ({ id: p.id, title: p.title })) })), { id: "takeaways", title: "Takeaways", parts: [] }];
+  const toc = [...acts.map((a) => ({ id: a.id, title: a.title, parts: a.parts.map((p) => ({ id: p.id, title: p.title, play: p.blocks.some((b) => b.type === "armpanel" || b.type === "kusandbox") })) })), { id: "takeaways", title: "Takeaways", parts: [] }];
 
   return (
     <>
@@ -51,6 +51,20 @@ export default async function CasePage({ params }: { params: Promise<{ slug: str
               <div>
                 {c.problem ? <p className="case-answer__problem">{c.problem}</p> : null}
                 {c.part ? <p className="case-answer__part">{c.part}</p> : null}
+                {c.actions?.length ? (
+                  <div className="actions case-actions">
+                    {c.actions.map((a, i) => {
+                      const out = a.href.startsWith("http");
+                      return (
+                        <a key={a.href} className={`btn ${i === 0 ? "btn--primary" : "btn--line"}`} href={a.href} {...(out ? { target: "_blank", rel: "noopener" } : {})}>
+                          {a.play ? <svg viewBox="0 0 24 24" aria-hidden="true" fill="currentColor"><path d="M8 5.5v13l11-6.5z" /></svg> : null}
+                          {a.label}
+                          {out ? <><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d="M7 17 17 7M9 7h8v8" /></svg><span className="sr-only"> (opens in a new tab)</span></> : null}
+                        </a>
+                      );
+                    })}
+                  </div>
+                ) : null}
               </div>
               <dl className="spec">
                 {c.spec.map((s) => (

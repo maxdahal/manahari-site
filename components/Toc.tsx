@@ -3,9 +3,10 @@
 import { useCallback, useEffect, useLayoutEffect, useRef, useState } from "react";
 import { headerOffset } from "./HashScroll";
 
-type Part = { id: string; title: string };
+/* play: the part holds a sandbox people can try */
+type Part = { id: string; title: string; play?: boolean };
 type Act = { id: string; title: string; parts: Part[] };
-type Item = { id: string; title: string; level: 0 | 1 };
+type Item = { id: string; title: string; level: 0 | 1; play?: boolean; tryId?: string };
 
 /* The sticky rail. One track runs down the left of the study's acts and the
    parts of the act being read; it steps in and out with an S-bend wherever the
@@ -45,8 +46,9 @@ export function Toc({ acts }: { acts: Act[] }) {
 
   const openAct = acts.find((a) => a.id === active || a.parts.some((p) => p.id === active))?.id;
   const items: Item[] = acts.flatMap((a) => [
-    { id: a.id, title: a.title, level: 0 as const },
-    ...(a.id === openAct && a.parts.length > 1 ? a.parts.map((p) => ({ id: p.id, title: p.title, level: 1 as const })) : []),
+    /* an act with a sandbox carries a "Try it" link to it, so it shows before the act is open */
+    { id: a.id, title: a.title, level: 0 as const, tryId: a.parts.find((p) => p.play)?.id },
+    ...(a.id === openAct && a.parts.length > 1 ? a.parts.map((p) => ({ id: p.id, title: p.title, level: 1 as const, play: p.play })) : []),
   ]);
   const order = ids.indexOf(active);
   const read = (id: string) => ids.indexOf(id) <= order;
@@ -127,7 +129,7 @@ export function Toc({ acts }: { acts: Act[] }) {
         </svg>
         <ol className="toc__acts" ref={listRef}>
           {items.map((it) => (
-            <li key={it.id} className={it.level ? "toc__part" : undefined}>
+            <li key={it.id} className={[it.level ? "toc__part" : "", it.tryId ? "toc__hasplay" : ""].join(" ").trim() || undefined}>
               <a
                 href={`#${it.id}`}
                 data-level={it.level}
@@ -136,7 +138,14 @@ export function Toc({ acts }: { acts: Act[] }) {
                 aria-current={(it.level ? active === it.id : openAct === it.id && active === it.id) ? "true" : undefined}
               >
                 {it.title}
+                {it.play ? <span className="toc__try toc__try--in" aria-hidden="true">Try it</span> : null}
               </a>
+              {it.tryId && openAct !== it.id ? (
+                <a className="toc__try" href={`#${it.tryId}`}>
+                  <svg viewBox="0 0 24 24" aria-hidden="true" fill="currentColor"><path d="M8 5.5v13l11-6.5z" /></svg>
+                  Try it<span className="sr-only">: interactive sandbox in {it.title}</span>
+                </a>
+              ) : null}
             </li>
           ))}
         </ol>

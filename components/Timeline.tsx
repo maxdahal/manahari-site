@@ -19,7 +19,7 @@ type Entry = { title: string; org: string; dates: string; start: number; end: nu
 /* Titles, organisations and dates as the published site lists them. The
    research assistant role was added by Manahari for this version. */
 const ENTRIES: Entry[] = [
-  { title: "UX Design Intern", org: "Karl Storz (Asensus Surgical)", dates: "May to Aug 2026", start: 5.33, end: 5.58, kind: "work", href: "/work/surgical-console" },
+  { title: "UX Designer", org: "Karl Storz (Asensus Surgical)", dates: "May to Aug 2026", start: 5.33, end: 5.58, kind: "work", href: "/work/surgical-console" },
   { title: "Graduate Research Assistant", org: "UNC Chapel Hill", dates: "Feb 2026 to Present", start: 5.08, end: NOW, kind: "research" },
   { title: "UX Designer", org: "AppTeamCarolina", dates: "Sep 2025 to May 2026", start: 4.67, end: 5.33, kind: "work", href: "/work/luminary" },
   { title: "Information Science (HCI)", org: "UNC Chapel Hill", dates: "May 2027 (expected) · Public Health Informatics cert.", start: 4.58, end: 6.33, kind: "education" },

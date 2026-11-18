@@ -11,11 +11,11 @@ import { artwork, profile } from "@/content/profile";
 /* Card lines and outcomes from the published site, word for word. A
    non-breaking space before each "·" keeps it from dangling at a line end. */
 const CARD: Record<string, { desc: string; meta: string; value: string; label: string }> = {
-  "surgical-console": { desc: "Designed a robotic surgery console UI for situational awareness and quick visual checks during live procedures.", meta: "UX design internship\u00a0·\u00a02026", value: ">50%", label: "Less task-completion time in exploratory usability testing" },
+  "surgical-console": { desc: "Designed screens a surgical team can read in one second during live surgery.", meta: "UX design\u00a0·\u00a02026", value: ">50%", label: "Less task-completion time in exploratory usability testing" },
   luminary: { desc: "Designed an accessible campus navigation iOS app for UNC Chapel Hill students, with step-free routing.", meta: "UX design\u00a0·\u00a02025\u00a0to\u00a02026", value: "50+", label: "Student usability testing sessions" },
   "ku-brand": { desc: "Co-led the design of the University of Kansas brand site, part of a rebrand across websites serving 50,000+ users.", meta: "Branding, UX design and research\u00a0·\u00a02022\u00a0to\u00a02025", value: "+30%", label: "Traffic across ku.edu after launch (a team result)" },
   asians: { desc: "Designed a mobile ordering app so restaurant guests could order without language barriers.", meta: "UX research and design\u00a0·\u00a02021\u00a0to\u00a02022", value: "~50", label: "People surveyed" },
-  esri: { desc: "Built an internal documentation site for Calcite components, improving discoverability for 20+ designers and developers.", meta: "UI/UX design and front-end internship\u00a0·\u00a02021", value: "50%+", label: "Improvement in content discoverability" },
+  esri: { desc: "Built an internal documentation site for Calcite components, so 20+ designers and developers found answers faster.", meta: "UI/UX design and front-end internship\u00a0·\u00a02021", value: "50%+", label: "Improvement in content discoverability" },
 };
 
 /* the hero's drifting cards: artwork, with a few work pictures mixed in */

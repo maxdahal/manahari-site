@@ -9,7 +9,7 @@ const SurgicalConsole: CaseStudy = {
   "slug": "surgical-console",
   "title": "Luna Surgical Console",
   "heading": "Luna Surgical Console",
-  "short": "UX design internship at Karl Storz. Three projects for Luna, a robotic surgery console: arm identity, a gallery with a video editor, and live annotation.",
+  "short": "UX design at Karl Storz. Three projects for Luna, a robotic surgery console: arm identity, a gallery with a video editor, and live annotation.",
   "problem": "A surgery team had one second to understand a screen. Scrub nurses could not see what the surgeon pointed at.",
   "part": "I designed three fixes for a surgical console: arm identity, a gallery with a video editor, and live annotation.",
   "metrics": [
@@ -26,7 +26,7 @@ const SurgicalConsole: CaseStudy = {
       "label": "Figma components refined"
     }
   ],
-  "caveat": "A working prototype built for Luna, a surgical robot’s operating system. The >50% comes from exploratory tests of the prototype with five engineers and a fellow intern. To follow NDA and privacy rules, I redrew the screens, changed the arm colors and hid clinical data.",
+  "caveat": "A working prototype built for Luna, a surgical robot’s operating system. The >50% comes from exploratory tests of the prototype with five engineers and an intern. To follow NDA and privacy rules, I redrew the screens, changed the arm colors and hid clinical data.",
   "spec": [
     {
       "label": "Product",
@@ -38,7 +38,7 @@ const SurgicalConsole: CaseStudy = {
     },
     {
       "label": "Role",
-      "value": "UX Design Intern"
+      "value": "UX Designer"
     },
     {
       "label": "Timeline",
@@ -50,11 +50,11 @@ const SurgicalConsole: CaseStudy = {
     },
     {
       "label": "Team",
-      "value": "Collaborating daily with Design Mentor, Clinical Supervisor, and software/clinical engineering teams"
+      "value": "My design mentor, my clinical supervisor, and the software and clinical engineering teams"
     },
     {
       "label": "Scope",
-      "value": "Live Video Editor, Console Dashboard, Case Setup Workflow, and Core Component System"
+      "value": "Live video editor, console dashboard, case setup and the component system"
     }
   ],
   "sections": [
@@ -168,22 +168,22 @@ const SurgicalConsole: CaseStudy = {
       "blocks": [
         {
           "type": "p",
-          "text": "I set out to solve real operating room problems, not to add toolbar buttons. These ideas waited:"
+          "text": "I focused on real operating room problems. These ideas waited:"
         },
         {
           "type": "pairs",
           "items": [
             {
               "term": "Post-operative AI analytics",
-              "text": "Deferred video analysis after surgery to focus strictly on low-latency, real-time controls during live procedures."
+              "text": "I left video analysis after surgery for later, to focus on fast, real-time controls during live procedures."
             },
             {
               "term": "3D anatomical reconstruction",
-              "text": "Set aside 3D spatial rendering to preserve high frame rates on the primary video feed."
+              "text": "I left 3D rendering out to keep the main video feed at a high frame rate."
             },
             {
               "term": "Scope agreement",
-              "text": "My design mentor, clinical supervisor, and I strictly prioritized intra-operative usability, situational awareness, and safety over post-case features."
+              "text": "My design mentor, my clinical supervisor and I put usability during surgery, situational awareness and safety ahead of post-case features."
             }
           ]
         }
@@ -322,7 +322,7 @@ const SurgicalConsole: CaseStudy = {
           "items": [
             {
               "term": "The core constraint",
-              "text": "Surgeons glanced at it for one second, so every action had to feel instant. The operating room is dim, the endoscope feed is bright, and machine safety warnings (such as robotic arm force limits) strictly outrank interface states in every mode without exception. Every UI element had to sit behind the anatomy and get out of the way."
+              "text": "Surgeons glanced at it for one second, so every action had to feel instant. The operating room is dim, the endoscope feed is bright, and machine safety warnings, such as robotic arm force limits, outrank everything else on screen in every mode. Every UI element had to stay out of the anatomy’s way."
             }
           ]
         }
@@ -653,7 +653,7 @@ const SurgicalConsole: CaseStudy = {
         },
         {
           "type": "p",
-          "text": "Every arm, its own color, one second. Switch between the designs I tested, from the old number-only panels to the final design, and set each arm’s state. Then take the glance test: the screen shows for one second, and you pick the arm that needs help."
+          "text": "Each arm has its own color, and you get one second. Switch between the designs I tested, from the old number-only panels to the final design, and set each arm’s state. Then take the glance test: the screen shows for one second, and you pick the arm that needs help."
         },
         {
           "type": "armpanel"
@@ -814,22 +814,22 @@ const SurgicalConsole: CaseStudy = {
         },
         {
           "type": "p",
-          "text": "To ensure designers, software engineers, and clinical specialists could communicate without ambiguity, I established six structural regions on the editor screen:"
+          "text": "I named six regions on the editor screen, so designers, software engineers and clinical specialists could talk about it without confusion:"
         },
         {
           "type": "pairs",
           "items": [
             {
               "term": "Global Header",
-              "text": "Origin breadcrumbs and transient system notifications. Never moves or flashes."
+              "text": "Breadcrumbs and short-lived system notices. Never moves or flashes."
             },
             {
               "term": "Central Workspace",
-              "text": "The endoscope feed. Nothing permanent is ever permitted to sit on top of the surgical picture."
+              "text": "The endoscope feed. Nothing permanent ever sits on top of the surgical picture."
             },
             {
               "term": "Action Ribbon",
-              "text": "Mode-dependent tool controls along the bottom, sized for gloved touch."
+              "text": "Tools along the bottom that change with the mode, sized for gloved hands."
             },
             {
               "term": "Quick Access Tray",
@@ -841,7 +841,7 @@ const SurgicalConsole: CaseStudy = {
             },
             {
               "term": "Global Footer",
-              "text": "Case timeline displaying elapsed time alongside color-coded captures and pins."
+              "text": "The case timeline: elapsed time, with captures and pins marked in color."
             }
           ]
         },
@@ -884,14 +884,14 @@ const SurgicalConsole: CaseStudy = {
             },
             {
               "title": "On-demand voice command logs",
-              "text": "System status displays a quiet voice indicator.",
-              "instead": "an audio chime alone, which destroyed user trust when speech recognition failed quietly in a noisy room."
+              "text": "A quiet voice indicator sits in the system status.",
+              "instead": "an audio chime alone. In a noisy room, nobody noticed when speech recognition failed, and people stopped trusting it."
             }
           ]
         },
         {
           "type": "p",
-          "text": "Demo session trade-off: When testing command logs, I ran a team demo session using dummy data. We observed that persistent front-facing speech transcription logs created unnecessary visual clutter over the feed. I established the decision to keep the voice activity log as a background record that users pull up on demand in the control panel."
+          "text": "Demo session trade-off: I ran a team demo with dummy data to test the command log. A transcript that stayed on screen cluttered the video, so I moved the voice log to the background. People open it from the control panel when they need it."
         },
         {
           "type": "gallery",
@@ -974,7 +974,7 @@ const SurgicalConsole: CaseStudy = {
           "items": [
             {
               "term": "What I learned",
-              "text": "It was a state problem, not a styling one. Once I designed the mode, the button was easy."
+              "text": "The real problem was the state. Once I designed the mode, the button was easy."
             }
           ]
         },
@@ -1038,11 +1038,11 @@ const SurgicalConsole: CaseStudy = {
             },
             {
               "term": "Fail-safe malfunction UI overrides",
-              "text": "When a hardware fault or force limit alert occurs, system safety warnings take instant visual priority directly inside the console UI, overriding active drawing overlays."
+              "text": "When a hardware fault or a force limit alert happens, the safety warning takes over the screen right away, above any drawing on the video."
             },
             {
               "term": "Dynamic case setup workflow",
-              "text": "Outstanding setup tasks remain full panels, while completed tasks collapse into single summary lines. Each task carries an explicit owner tag (Bedside vs Console) so staff work in parallel. Instead of: equal-sized static cards that forced staff to wait for one another and read past finished tasks. Setup time became the longest single task, not the sum of all tasks."
+              "text": "Open setup tasks stay as full panels, and finished tasks shrink to one line. Each task shows who owns it, Bedside or Console, so staff can work at the same time. Instead of: same-size cards that made staff wait for each other and read past finished tasks. Setup time became the longest single task, not the sum of all tasks."
             }
           ]
         }
@@ -1103,15 +1103,15 @@ const SurgicalConsole: CaseStudy = {
         },
         {
           "type": "p",
-          "text": "Exploratory usability testing, moderated and unmoderated, with A/B tests and timed sessions, cut task-completion time by more than 50%, with fewer interaction steps and fewer observed errors."
+          "text": "I ran exploratory usability tests, moderated and unmoderated, with A/B tests and timed sessions. Task-completion time fell by more than 50%, with fewer steps and fewer errors."
         },
         {
           "type": "p",
-          "text": "I tested the prototype with five engineers and a fellow intern."
+          "text": "I tested the prototype with five engineers and an intern."
         },
         {
           "type": "p",
-          "text": "These were exploratory tests of a prototype, so they are early signals, not product results."
+          "text": "These were exploratory tests of a prototype, so the numbers are early signals."
         },
         {
           "type": "p",
@@ -1318,7 +1318,7 @@ const SurgicalConsole: CaseStudy = {
           "items": [
             {
               "term": "What I would test next",
-              "text": "I would have tested all versions with other stakeholders."
+              "text": "Next, I would test every version with more stakeholders."
             }
           ]
         }
@@ -1417,7 +1417,7 @@ const KuBrand: CaseStudy = {
             "Interviewed Kansans, alumni, students and staff",
             "Mapped and grouped the content",
             "Designed and built the pages (HTML, CSS, JavaScript)",
-            "Implemented frontend components in Drupal alongside cross-functional web teams"
+            "Built frontend components in Drupal with the web teams"
           ]
         },
         {
@@ -1789,7 +1789,7 @@ const KuBrand: CaseStudy = {
       "blocks": [
         {
           "type": "p",
-          "text": "Small focus groups tested early layouts and the old site, which refined hierarchy and language."
+          "text": "Small focus groups tried early layouts and the old site. Their feedback shaped the hierarchy and the wording."
         },
         {
           "type": "p",
@@ -1890,7 +1890,7 @@ const Asians: CaseStudy = {
     },
     {
       "label": "Outcome",
-      "value": "Designed a mobile ordering prototype to eliminate order errors caused by language barriers for non-native English speaking guests."
+      "value": "A prototype for ordering without talking, to stop wrong orders caused by language barriers."
     },
     {
       "label": "Role",
@@ -1914,7 +1914,7 @@ const Asians: CaseStudy = {
     },
     {
       "label": "Scope",
-      "value": "Contactless mobile ordering application designed to eliminate language barriers."
+      "value": "A mobile ordering app guests can use without talking."
     }
   ],
   "sections": [
@@ -2620,7 +2620,7 @@ const Esri: CaseStudy = {
   "title": "Esri Calcite",
   "heading": "Calcite Design System Documentation",
   "short": "UI/UX design and front-end internship at Esri: an internal documentation website for the Calcite Design System, for designers and developers.",
-  "problem": "Internal designers and developers lacked a clear, unified documentation website to reference component behavior, usage rules, and code snippets.",
+  "problem": "Esri’s designers and developers had no single website to check how a component behaves, how to use it, or what code to copy.",
   "metrics": [
     {
       "value": "50%+",
@@ -2631,7 +2631,7 @@ const Esri: CaseStudy = {
       "label": "Designers and developers"
     }
   ],
-  "caveat": "The 50%+ compares the new pages with the previous documentation, which was plain HTML with little cleanup. Due to privacy and NDA guidelines, proprietary internal metrics and unreleased component specifications have been generalized.",
+  "caveat": "The 50%+ compares the new pages with the previous documentation, which was plain HTML with little cleanup. To follow privacy and NDA rules, I generalized internal metrics and unreleased component specs.",
   "spec": [
     {
       "label": "Product",
@@ -2651,7 +2651,7 @@ const Esri: CaseStudy = {
     },
     {
       "label": "Team",
-      "value": "Collaborating daily with 20+ UI/UX designers and front-end engineers"
+      "value": "I worked daily with 20+ UI/UX designers and front-end engineers"
     }
   ],
   "sections": [
@@ -2662,15 +2662,15 @@ const Esri: CaseStudy = {
       "blocks": [
         {
           "type": "p",
-          "text": "During my internship at Esri, the Calcite Design System was evolving rapidly on GitHub and Figma."
+          "text": "During my internship, the Calcite Design System was changing fast on GitHub and in Figma."
         },
         {
           "type": "p",
-          "text": "However, internal designers and developers lacked a clear, unified documentation website to reference component behavior, usage rules, and code snippets."
+          "text": "But designers and developers had no single website to check component behavior, usage rules and code snippets."
         },
         {
           "type": "p",
-          "text": "Without a centralized hub, team members spent extra time clarifying component specs, leading to inconsistent implementations across web and mobile products."
+          "text": "With no single place to look, people spent extra time checking specs, and teams built the same components differently across web and mobile products."
         },
         {
           "type": "figure",
@@ -2691,7 +2691,7 @@ const Esri: CaseStudy = {
       "blocks": [
         {
           "type": "p",
-          "text": "Designing internal documentation requires catering to two distinct user groups with different goals:"
+          "text": "The documentation had two audiences with different goals:"
         },
         {
           "type": "figure",
@@ -2708,17 +2708,17 @@ const Esri: CaseStudy = {
           "items": [
             {
               "term": "UI/UX designers",
-              "text": "Need visual examples, variant states, layout rules, clear do’s and don’ts, and accessibility standards to maintain visual consistency across products."
+              "text": "Need visual examples, variant states, layout rules, do’s and don’ts, and accessibility guidance, so products look consistent."
             },
             {
               "term": "Front-end engineers",
-              "text": "Need fast property tables, exact HTML/CSS/JS code snippets, component API details, and clean code examples with zero extra clutter."
+              "text": "Need property tables, exact HTML, CSS and JavaScript snippets, and API details, without clutter."
             }
           ]
         },
         {
           "type": "p",
-          "text": "Before my portal existed, developers experienced severe search friction, often copy-pasting outdated component syntax or asking senior engineers directly."
+          "text": "Before the site, developers struggled to find answers. They copied outdated component code or asked senior engineers."
         }
       ]
     },
@@ -2732,7 +2732,7 @@ const Esri: CaseStudy = {
           "items": [
             {
               "term": "The core constraint",
-              "text": "Documentation must serve both designers and engineers without forcing either group to wade through irrelevant details."
+              "text": "The documentation had to serve designers and engineers without making either group read what they didn’t need."
             }
           ]
         },
@@ -2748,7 +2748,7 @@ const Esri: CaseStudy = {
         },
         {
           "type": "p",
-          "text": "The site had to balance both needs cleanly while staying easy to maintain as the design system expanded."
+          "text": "It also had to stay easy to maintain as the design system grew."
         }
       ]
     },
@@ -2759,22 +2759,22 @@ const Esri: CaseStudy = {
       "blocks": [
         {
           "type": "p",
-          "text": "To deliver a scalable documentation portal within my 3-month internship, I used a 3-step process:"
+          "text": "I had a three-month internship, so I worked in three steps:"
         },
         {
           "type": "pairs",
           "items": [
             {
               "term": "Crawl (audit & structure)",
-              "text": "Audited existing Calcite components on GitHub and Figma to identify documentation gaps, usage inconsistencies, and missing guidelines across 40+ front-end pages."
+              "text": "I audited the Calcite components on GitHub and in Figma and listed the gaps, inconsistencies and missing guidelines across 40+ front-end pages."
             },
             {
               "term": "Walk (layout & component mechanics)",
-              "text": "Designed structured documentation page layouts in Figma, establishing a clear visual hierarchy that separated visual guidance from technical code specs."
+              "text": "I designed the page layouts in Figma, with a clear hierarchy that kept visual guidance apart from code specs."
             },
             {
               "term": "Run (build & launch)",
-              "text": "Developed the responsive frontend using HTML, CSS, and JavaScript, delivering a live documentation portal and hand-off guide for the design team."
+              "text": "I built the responsive site in HTML, CSS and JavaScript, and wrote a hand-off guide for the design team."
             }
           ]
         }
@@ -2787,7 +2787,7 @@ const Esri: CaseStudy = {
       "blocks": [
         {
           "type": "p",
-          "text": "To make component pages scannable and easy to navigate, I structured each component documentation page into four clear regions:"
+          "text": "To make each component page easy to scan, I split it into four regions:"
         },
         {
           "type": "pairs",
@@ -2798,15 +2798,15 @@ const Esri: CaseStudy = {
             },
             {
               "term": "Usage guidelines (do’s & don’ts)",
-              "text": "Visual examples showing correct and incorrect layout, spacing, and color applications."
+              "text": "Examples of right and wrong layout, spacing and color."
             },
             {
               "term": "Component API & properties",
-              "text": "Structured tables listing props, slots, events, and default values for developers."
+              "text": "Tables of props, slots, events and default values for developers."
             },
             {
               "term": "Code snippets & examples",
-              "text": "Copyable HTML and JavaScript code blocks for fast implementation."
+              "text": "HTML and JavaScript blocks people can copy straight into their code."
             }
           ]
         }
@@ -2822,11 +2822,11 @@ const Esri: CaseStudy = {
           "items": [
             {
               "term": "What I did",
-              "text": "I created two distinct views within each component page. Designers could quickly scan visual rules and variant states, while developers could toggle directly to technical specs and code snippets."
+              "text": "I gave each component page two views. Designers scanned visual rules and variants; developers switched straight to specs and code."
             },
             {
               "term": "What it replaced",
-              "text": "A single long text document where code blocks and visual guidelines were mixed together, forcing users to scroll past irrelevant information."
+              "text": "One long page that mixed code and visual guidelines, so everyone scrolled past what they didn’t need."
             }
           ]
         },
@@ -2845,18 +2845,18 @@ const Esri: CaseStudy = {
     {
       "id": "decision-2",
       "stage": "Key design decisions & technical execution",
-      "title": "Decision 2: Clear visual hierarchy for guidelines",
+      "title": "Decision 2: Show the rules, don’t describe them",
       "blocks": [
         {
           "type": "pairs",
           "items": [
             {
               "term": "What I did",
-              "text": "I introduced side-by-side visual cards for “Do” (green indicator) and “Don’t” (red indicator) examples, keeping descriptions brief and focused on specific interaction rules."
+              "text": "I added side-by-side “Do” (green) and “Don’t” (red) cards, each with a short note on one rule."
             },
             {
               "term": "What it replaced",
-              "text": "Text-heavy guidelines that described visual mistakes in paragraphs instead of showing them visually."
+              "text": "Paragraphs that described visual mistakes instead of showing them."
             }
           ]
         },
@@ -2875,14 +2875,14 @@ const Esri: CaseStudy = {
     {
       "id": "decision-api",
       "stage": "Key design decisions & technical execution",
-      "title": "Decision 3: Cross-functional API trade-off (Figma vs Web Components)",
+      "title": "Decision 3: Matching Figma names to code",
       "blocks": [
         {
           "type": "pairs",
           "items": [
             {
               "term": "What I did",
-              "text": "When mapping component variants, I ran into friction between Figma component properties and Stencil/Web Component prop names. I aligned prop naming conventions directly with engineering leads, ensuring that Figma variant names matched code prop keys 1-to-1."
+              "text": "Figma component properties and the Web Component prop names didn’t match. I worked with the engineering leads so every Figma variant name matched its code prop, one to one."
             }
           ]
         }
@@ -2891,22 +2891,22 @@ const Esri: CaseStudy = {
     {
       "id": "decision-4",
       "stage": "Key design decisions & technical execution",
-      "title": "Decision 4: Live component behavior & copyable code blocks",
+      "title": "Decision 4: Live previews and copyable code",
       "blocks": [
         {
           "type": "pairs",
           "items": [
             {
               "term": "What I did",
-              "text": "I built clean, interactive component previews alongside one-click copy buttons for code snippets."
+              "text": "I built live component previews with one-click copy buttons for the code."
             },
             {
               "term": "What it replaced",
-              "text": "Static screenshots of code that required developers to manually type out component syntax."
+              "text": "Screenshots of code that developers had to retype by hand."
             },
             {
               "term": "Governance and deprecation",
-              "text": "I added clear callout badges to flag deprecated component props, version updates and WCAG fallback styles."
+              "text": "I added badges that flag deprecated props, version updates and WCAG fallback styles."
             }
           ]
         },
@@ -2929,7 +2929,7 @@ const Esri: CaseStudy = {
       "blocks": [
         {
           "type": "p",
-          "text": "I conducted iterative mockup reviews and A/B tests with internal designers and developers to refine the navigation and page layouts."
+          "text": "I reviewed mockups and ran A/B tests with designers and developers, then refined the navigation and page layouts."
         },
         {
           "type": "figure",
@@ -2953,7 +2953,7 @@ const Esri: CaseStudy = {
           "items": [
             {
               "term": "50%+ improvement in content discoverability",
-              "text": "Reorganizing component pages and visual hierarchy reduced search friction, allowing team members to locate component specs and code snippets significantly faster."
+              "text": "Reorganized pages and a clearer hierarchy helped people find specs and code snippets much faster."
             }
           ]
         }
@@ -2963,15 +2963,15 @@ const Esri: CaseStudy = {
   "takeaways": [
     {
       "title": "Internal documentation is a product",
-      "text": "Treating internal tools with the same user-centered design rigor as public-facing software creates huge efficiency gains for engineering and design teams."
+      "text": "When I gave an internal tool the same care as a public product, designers and engineers saved real time."
     },
     {
       "title": "Design for dual audiences",
-      "text": "Designers and developers read documentation differently. Structuring pages to serve both needs without clutter is essential for design system adoption."
+      "text": "Designers and developers read documentation differently. Pages that serve both, without clutter, are the ones that get used."
     },
     {
       "title": "Build for evolution",
-      "text": "Designing a flexible documentation layout ensures that new components can be added easily as the design system grows."
+      "text": "A flexible page template made it easy to add new components as the system grew."
     }
   ],
   "part": "I maintained the team’s internal documentation: 40+ front-end pages that bring the already-built Calcite components together in one place.",

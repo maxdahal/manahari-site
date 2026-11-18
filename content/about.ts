@@ -2,9 +2,9 @@
 export const about = {
   "headline": "Designing for real human constraints, from operating rooms to everyday software.",
   "intro": [
-    "I am a UX Engineer with a background in computer science and human-computer interaction, and I am finishing my Master’s degree. My work focuses on reliable, human-centered interfaces that help people make decisions under pressure.",
-    "I focus on solving complex, high-stakes problems, whether that is designing real-time controls for a robotic surgical console, building university-wide brand systems, or crafting accessible campus navigation.",
-    "Because I both design and write frontend code, I understand how layout decisions impact technical performance, frame rates, accessibility compliance, and engineering timelines. I believe the best software gets out of the way and lets people focus on their work.",
+    "I am a UX Engineer with a background in computer science and human-computer interaction, and I am finishing my Master’s degree. I design interfaces that people can trust when they have to decide fast.",
+    "I like hard problems where mistakes cost a lot: real-time controls for a robotic surgical console, a university-wide brand system, and accessible campus navigation.",
+    "I design and I write frontend code, so I know how a layout choice affects performance, frame rates, accessibility and engineering timelines. Good software gets out of the way so people can focus on their work.",
     "Art is my hobby. You can see some of my pieces below."
   ],
   "facts": [
@@ -54,7 +54,7 @@ export const about = {
         },
         {
           "when": "Jun to Aug 2021",
-          "title": "UI/UX and Frontend Intern",
+          "title": "UI/UX Design and Front-End Intern",
           "org": "Esri · Redlands, CA"
         },
         {
@@ -98,7 +98,7 @@ export const about = {
         },
         {
           "when": "May to Aug 2026",
-          "title": "UX Design Intern",
+          "title": "UX Designer",
           "org": "Karl Storz · Morrisville, NC",
           "text": "Three fixes for a robotic surgery console: arm identity, so a nurse can tell which arm needs help; a gallery with a video editor; and live annotation on a second screen."
         },

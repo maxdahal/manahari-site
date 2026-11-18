@@ -1,23 +1,11 @@
 /* The About page, word for word from the published v1 site. */
 export const about = {
+  "headline": "Designing for real human constraints, from operating rooms to everyday software.",
   "intro": [
+    "I am a UX Engineer with a background in computer science and human-computer interaction, and I am finishing my Master’s degree. My work focuses on reliable, human-centered interfaces that help people make decisions under pressure.",
     "I focus on solving complex, high-stakes problems, whether that is designing real-time controls for a robotic surgical console, building university-wide brand systems, or crafting accessible campus navigation.",
     "Because I both design and write frontend code, I understand how layout decisions impact technical performance, frame rates, accessibility compliance, and engineering timelines. I believe the best software gets out of the way and lets people focus on their work.",
     "Art is my hobby. You can see some of my pieces below."
-  ],
-  "stats": [
-    {
-      "value": "4+",
-      "label": "Years in UX and frontend"
-    },
-    {
-      "value": "3",
-      "label": "Degrees in computer science and HCI"
-    },
-    {
-      "value": "4",
-      "label": "Industries: healthcare, higher education, mapping and food"
-    }
   ],
   "facts": [
     {
@@ -79,13 +67,13 @@ export const about = {
     {
       "when": "2022 to 2025",
       "place": "Kansas",
-      "text": "I built the University of Kansas brand site as a frontend developer, from research to the pages campus partners use.",
+      "text": "I worked on hundreds of KU web pages as a UX designer and front-end developer, and co-led the design of the brand site.",
       "items": [
         {
           "when": "Jun 2022 to Apr 2025",
-          "title": "Frontend Developer",
+          "title": "UX Designer / Front-End Developer",
           "org": "University of Kansas · Lawrence, KS",
-          "text": "Over three years I worked on hundreds of pages across ku.edu and its sub-sites, and co-led the design of the brand website. Traffic across ku.edu grew 30% after launch, a team result with 20+ designers, marketers and project managers.",
+          "text": "Over three years I worked on hundreds of pages across ku.edu and its sub-sites, and co-led the design of the brand website. Traffic across ku.edu grew 30% after launch, a team result with 30+ content designers, marketers and developers.",
           "link": {
             "text": "Read the KU Brand case study",
             "href": "/work/ku-brand"
@@ -117,7 +105,7 @@ export const about = {
         {
           "when": "Sep 2025 to May 2026",
           "title": "UX Designer",
-          "org": "App Team Carolina · Chapel Hill, NC",
+          "org": "AppTeamCarolina · Chapel Hill, NC",
           "text": "UX design for Luminary, an iOS app for accessible routes around campus, tested in 50+ student sessions.",
           "link": {
             "text": "Read the Luminary case study",
@@ -183,7 +171,7 @@ export const about = {
         "Fall 2025 and Spring 2026"
       ],
       [
-        "Frontend Developer, University of Kansas",
+        "UX Designer / Front-End Developer, University of Kansas",
         "",
         "Jun 2022 to Apr 2025"
       ],

@@ -14,7 +14,7 @@ import { profile } from "@/content/profile";
 /* GPA as a tag: green for a grade; grey "No GPA" for the M.S., since UNC
    Chapel Hill's graduate school doesn't use GPAs (owner-supplied fact). */
 const DEGREES: { badge: string; full: string; field: string; school: string; meta: string; gpa?: string; gpaNote?: string }[] = [
-  { badge: "M.S.", full: "Master of Science", field: "Information Science (HCI)", school: "UNC Chapel Hill", meta: "May 2027 (expected) · Health Informatics cert.", gpaNote: "UNC Chapel Hill’s graduate school doesn’t use GPAs" },
+  { badge: "M.S.", full: "Master of Science", field: "Information Science (HCI)", school: "UNC Chapel Hill", meta: "May 2027 (expected) · Public Health Informatics cert.", gpaNote: "UNC Chapel Hill’s graduate school doesn’t use GPAs" },
   { badge: "B.S.", full: "Bachelor of Science", field: "Computer Science", school: "BYU-Idaho", meta: "April 2022", gpa: "GPA 3.9" },
 ];
 /* from / to are [year, month 1-12]; to: null is "Present" */
@@ -22,7 +22,7 @@ type Ym = [number, number];
 const JOBS: { title: string; org: string; when: string; from: Ym; to: Ym | null }[] = [
   { title: "UX Design Intern", org: "Karl Storz (Asensus Surgical)", when: "May to Aug 2026", from: [2026, 5], to: [2026, 8] },
   { title: "Graduate Research Assistant", org: "UNC Chapel Hill", when: "Feb 2026 to Present", from: [2026, 2], to: null },
-  { title: "UX Designer", org: "App Team Carolina", when: "Sep 2025 to May 2026", from: [2025, 9], to: [2026, 5] },
+  { title: "UX Designer", org: "AppTeamCarolina", when: "Sep 2025 to May 2026", from: [2025, 9], to: [2026, 5] },
   { title: "UX Designer / Front-End Developer", org: "University of Kansas", when: "Jun 2022 to Apr 2025", from: [2022, 6], to: [2025, 4] },
   { title: "UI/UX Design and Front-End Intern", org: "Esri", when: "Jun to Aug 2021", from: [2021, 6], to: [2021, 8] },
 ];

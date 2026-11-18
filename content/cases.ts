@@ -42,7 +42,7 @@ const SurgicalConsole: CaseStudy = {
     },
     {
       "label": "Timeline",
-      "value": "Summer 2026 (3 months)"
+      "value": "May to August 2026"
     },
     {
       "label": "Tools",
@@ -59,31 +59,9 @@ const SurgicalConsole: CaseStudy = {
   ],
   "sections": [
     {
-      "id": "situation",
-      "stage": "Overview",
-      "title": "Situation",
-      "blocks": [
-        {
-          "type": "p",
-          "text": "A robotic surgery console had been in development for 8 years. In the operating room, nobody shared one picture of what was happening. Nurses could not tell which robotic arm needed help, residents had to scrub through an hour of footage to find one moment, and scrub nurses at the wall monitor could not see what the surgeon was pointing at."
-        }
-      ]
-    },
-    {
-      "id": "task",
-      "stage": "Overview",
-      "title": "Task",
-      "blocks": [
-        {
-          "type": "p",
-          "text": "The brief asked me to add annotation and measurement tools to the surgical video feed. I reframed it: help the whole room share one understanding of the camera feed without the surgeon looking away from the surgery. A surgeon looks at the console for about a second at a time, so every action had to feel instant."
-        }
-      ]
-    },
-    {
       "id": "action",
       "stage": "Overview",
-      "title": "Action",
+      "title": "At a glance",
       "blocks": [
         {
           "type": "list",
@@ -99,8 +77,19 @@ const SurgicalConsole: CaseStudy = {
       ]
     },
     {
+      "id": "situation",
+      "stage": "Define",
+      "title": "The situation",
+      "blocks": [
+        {
+          "type": "p",
+          "text": "A robotic surgery console had been in development for 8 years. In the operating room, nobody shared one picture of what was happening. Nurses could not tell which robotic arm needed help, residents had to scrub through an hour of footage to find one moment, and scrub nurses at the wall monitor could not see what the surgeon was pointing at."
+        }
+      ]
+    },
+    {
       "id": "the-problems",
-      "stage": "The setup",
+      "stage": "Define",
       "title": "The problems",
       "blocks": [
         {
@@ -119,6 +108,10 @@ const SurgicalConsole: CaseStudy = {
               "text": "Scrub nurses at the wall monitor could not see it. The surgeon’s hands stayed on the controls. Success: a mark reaches the main screen within a second."
             }
           ]
+        },
+        {
+          "type": "p",
+          "text": "Before this project, staff dealt with high click counts, long screen setup, machine calibration delays and frequent look-aways from the surgical field."
         },
         {
           "type": "gallery",
@@ -154,8 +147,51 @@ const SurgicalConsole: CaseStudy = {
       ]
     },
     {
+      "id": "task",
+      "stage": "Define",
+      "title": "Reframing the goal",
+      "blocks": [
+        {
+          "type": "p",
+          "text": "The brief asked for video annotation tools. I reframed the goal: help everyone in the room share an understanding of what the surgeon sees, without making the surgeon look away from the 3D viewer."
+        },
+        {
+          "type": "p",
+          "text": "A surgeon looks at the console for about a second at a time, so every action had to feel instant."
+        }
+      ]
+    },
+    {
+      "id": "scope",
+      "stage": "Define",
+      "title": "Scope trade-offs",
+      "blocks": [
+        {
+          "type": "p",
+          "text": "I set out to solve real operating room problems, not to add toolbar buttons. These ideas waited:"
+        },
+        {
+          "type": "pairs",
+          "items": [
+            {
+              "term": "Post-operative AI analytics",
+              "text": "Deferred video analysis after surgery to focus strictly on low-latency, real-time controls during live procedures."
+            },
+            {
+              "term": "3D anatomical reconstruction",
+              "text": "Set aside 3D spatial rendering to preserve high frame rates on the primary video feed."
+            },
+            {
+              "term": "Scope agreement",
+              "text": "My design mentor, clinical supervisor, and I strictly prioritized intra-operative usability, situational awareness, and safety over post-case features."
+            }
+          ]
+        }
+      ]
+    },
+    {
       "id": "three-projects",
-      "stage": "The setup",
+      "stage": "Define",
       "title": "Three projects",
       "blocks": [
         {
@@ -188,8 +224,70 @@ const SurgicalConsole: CaseStudy = {
       ]
     },
     {
+      "id": "users-and-environment",
+      "stage": "Research",
+      "title": "Roles in the operating room",
+      "blocks": [
+        {
+          "type": "p",
+          "text": "I designed for four roles standing in four different places in the room."
+        },
+        {
+          "type": "pairs",
+          "items": [
+            {
+              "term": "Surgeon",
+              "text": "At the console. Eyes in the 3D viewer, hands on the controls. Needs to mark, measure and capture anatomy in seconds without breaking focus."
+            },
+            {
+              "term": "Scrub nurse",
+              "text": "Sterile, by the patient. Watches the wall monitor from 6 feet. Needs to see instantly what the surgeon points to, without reading small labels."
+            },
+            {
+              "term": "Circulating nurse",
+              "text": "Walks the room, unsterile. Handles equipment alerts, recording states, patient privacy and case records."
+            },
+            {
+              "term": "Biomed engineer",
+              "text": "At the machine, before or after surgery. Reviews system logs and module states."
+            }
+          ]
+        },
+        {
+          "type": "pairs",
+          "items": [
+            {
+              "term": "Key insight",
+              "text": "Only the biomed engineer has time to read dense text. The other three rely on one-second glances."
+            }
+          ]
+        },
+        {
+          "type": "h3",
+          "text": "Environment constraints"
+        },
+        {
+          "type": "pairs",
+          "items": [
+            {
+              "term": "Bright endoscope feed",
+              "text": "Warm interface colors looked like anatomy."
+            },
+            {
+              "term": "Brief, fragmented attention",
+              "text": "Surgeons looked for only a second at a time."
+            },
+            {
+              "term": "Safety alerts first",
+              "text": "Machine safety warnings beat every other message."
+            }
+          ]
+        }
+      ]
+    },
+    {
       "id": "constraints",
-      "stage": "The setup",
+      "stage": "Research",
       "title": "Constraints",
       "blocks": [
         {
@@ -232,7 +330,7 @@ const SurgicalConsole: CaseStudy = {
     },
     {
       "id": "the-product",
-      "stage": "The setup",
+      "stage": "Research",
       "title": "The product",
       "blocks": [
         {
@@ -258,37 +356,9 @@ const SurgicalConsole: CaseStudy = {
       ]
     },
     {
-      "id": "users-and-environment",
-      "stage": "The setup",
-      "title": "Users and environment",
-      "blocks": [
-        {
-          "type": "h3",
-          "text": "Environment constraints"
-        },
-        {
-          "type": "pairs",
-          "items": [
-            {
-              "term": "Bright endoscope feed",
-              "text": "Warm interface colors looked like anatomy."
-            },
-            {
-              "term": "Brief, fragmented attention",
-              "text": "Surgeons looked for only a second at a time."
-            },
-            {
-              "term": "Safety alerts first",
-              "text": "Machine safety warnings beat every other message."
-            }
-          ]
-        }
-      ]
-    },
-    {
       "id": "strategy",
-      "stage": "Engineering & stakeholder trade-offs",
-      "title": "Strategy",
+      "stage": "Plan",
+      "title": "Crawl, walk, run",
       "blocks": [
         {
           "type": "figure",
@@ -320,33 +390,12 @@ const SurgicalConsole: CaseStudy = {
               "text": "I used one alert scale and one component library in the editor, gallery, and service screens."
             }
           ]
-        },
-        {
-          "type": "h3",
-          "text": "Ideas I set aside for later"
-        },
-        {
-          "type": "pairs",
-          "items": [
-            {
-              "term": "Post-operative AI analytics",
-              "text": "Deferred video analysis after surgery to focus strictly on low-latency, real-time controls during live procedures."
-            },
-            {
-              "term": "3D anatomical reconstruction",
-              "text": "Set aside 3D spatial rendering to preserve high frame rates on the primary video feed."
-            },
-            {
-              "term": "Scope agreement",
-              "text": "My design mentor, clinical supervisor, and I strictly prioritized intra-operative usability, situational awareness, and safety over post-case features."
-            }
-          ]
         }
       ]
     },
     {
       "id": "vision-principles",
-      "stage": "Engineering & stakeholder trade-offs",
+      "stage": "Plan",
       "title": "Vision & principles",
       "blocks": [
         {
@@ -396,8 +445,8 @@ const SurgicalConsole: CaseStudy = {
     },
     {
       "id": "lo-fi-sketches",
-      "stage": "Engineering & stakeholder trade-offs",
-      "title": "Lo-fi sketches",
+      "stage": "Plan",
+      "title": "Early wireframes",
       "blocks": [
         {
           "type": "gallery",
@@ -443,7 +492,7 @@ const SurgicalConsole: CaseStudy = {
     },
     {
       "id": "component-system",
-      "stage": "Engineering & stakeholder trade-offs",
+      "stage": "Design",
       "title": "Component system",
       "blocks": [
         {
@@ -561,7 +610,7 @@ const SurgicalConsole: CaseStudy = {
     },
     {
       "id": "project-1-arm-identity",
-      "stage": "Engineering & stakeholder trade-offs",
+      "stage": "Design",
       "title": "Project 1 · Arm identity",
       "blocks": [
         {
@@ -595,7 +644,7 @@ const SurgicalConsole: CaseStudy = {
     },
     {
       "id": "arm-sandbox",
-      "stage": "Engineering & stakeholder trade-offs",
+      "stage": "Design",
       "title": "Arm sandbox",
       "blocks": [
         {
@@ -613,7 +662,7 @@ const SurgicalConsole: CaseStudy = {
     },
     {
       "id": "project-2-gallery-and-video-editor",
-      "stage": "Engineering & stakeholder trade-offs",
+      "stage": "Design",
       "title": "Project 2 · Gallery and video editor",
       "blocks": [
         {
@@ -756,7 +805,7 @@ const SurgicalConsole: CaseStudy = {
     },
     {
       "id": "inside-the-video-editor",
-      "stage": "Engineering & stakeholder trade-offs",
+      "stage": "Design",
       "title": "Inside the video editor",
       "blocks": [
         {
@@ -868,7 +917,7 @@ const SurgicalConsole: CaseStudy = {
     },
     {
       "id": "annotation-became-a-mode",
-      "stage": "Engineering & stakeholder trade-offs",
+      "stage": "Design",
       "title": "Annotation became a mode",
       "blocks": [
         {
@@ -943,7 +992,7 @@ const SurgicalConsole: CaseStudy = {
     },
     {
       "id": "project-3-live-annotation",
-      "stage": "Engineering & stakeholder trade-offs",
+      "stage": "Design",
       "title": "Project 3 · Live annotation",
       "blocks": [
         {
@@ -977,8 +1026,8 @@ const SurgicalConsole: CaseStudy = {
     },
     {
       "id": "safety-and-setup",
-      "stage": "Engineering & stakeholder trade-offs",
-      "title": "Fail-safe overrides and case setup",
+      "stage": "Design",
+      "title": "Privacy, fail-safes and case setup",
       "blocks": [
         {
           "type": "pairs",
@@ -993,7 +1042,7 @@ const SurgicalConsole: CaseStudy = {
             },
             {
               "term": "Dynamic case setup workflow",
-              "text": "Outstanding setup tasks remain full panels, while completed tasks collapse into single summary lines. Each task carries an explicit owner tag (Bedside vs Console) so staff work in parallel. Instead of: equal-sized static cards that forced staff to wait for one another and read past finished tasks. Setup duration now equals the longest single task rather than the sum of all tasks."
+              "text": "Outstanding setup tasks remain full panels, while completed tasks collapse into single summary lines. Each task carries an explicit owner tag (Bedside vs Console) so staff work in parallel. Instead of: equal-sized static cards that forced staff to wait for one another and read past finished tasks. Setup time became the longest single task, not the sum of all tasks."
             }
           ]
         }
@@ -1001,7 +1050,7 @@ const SurgicalConsole: CaseStudy = {
     },
     {
       "id": "from-wireframe-to-prototype",
-      "stage": "Engineering & stakeholder trade-offs",
+      "stage": "Prototype",
       "title": "From wireframe to prototype",
       "blocks": [
         {
@@ -1036,8 +1085,8 @@ const SurgicalConsole: CaseStudy = {
     },
     {
       "id": "outcome",
-      "stage": "Resolution and impact",
-      "title": "Outcome",
+      "stage": "Test",
+      "title": "Usability testing",
       "blocks": [
         {
           "type": "stats",
@@ -1066,7 +1115,11 @@ const SurgicalConsole: CaseStudy = {
         },
         {
           "type": "p",
-          "text": "Primary evaluation metric, visual cost: In surgical UI, traditional web metrics like clicks or time-on-page are irrelevant. The core metric I evaluated against was minimizing visual cost: reducing how often and how long a surgeon must look away from their active surgical field."
+          "text": "My main measure was visual cost: how often and how long a surgeon had to look away from the surgical field. In an operating room, clicks and time on page matter little."
+        },
+        {
+          "type": "p",
+          "text": "Every engineer who evaluated the voice-assisted interaction preferred it."
         },
         {
           "type": "pairs",
@@ -1081,8 +1134,8 @@ const SurgicalConsole: CaseStudy = {
     },
     {
       "id": "heuristic-evaluation",
-      "stage": "Resolution and impact",
-      "title": "Heuristic evaluation",
+      "stage": "Test",
+      "title": "Heuristic audit",
       "blocks": [
         {
           "type": "figure",
@@ -1163,7 +1216,7 @@ const SurgicalConsole: CaseStudy = {
     },
     {
       "id": "all-three-together",
-      "stage": "Resolution and impact",
+      "stage": "Hand-off",
       "title": "All three together",
       "blocks": [
         {
@@ -1205,7 +1258,7 @@ const SurgicalConsole: CaseStudy = {
     },
     {
       "id": "what-i-handed-over",
-      "stage": "Resolution and impact",
+      "stage": "Hand-off",
       "title": "What I handed over",
       "blocks": [
         {
@@ -1231,7 +1284,7 @@ const SurgicalConsole: CaseStudy = {
             },
             {
               "term": "A test plan",
-              "text": "A full test plan with 10 tasks and 9 ideas to test."
+              "text": "A full test plan with 10 tasks and 9 ideas to test, with look-away frequency as the main measure."
             }
           ]
         }
@@ -1239,13 +1292,13 @@ const SurgicalConsole: CaseStudy = {
     },
     {
       "id": "still-unfinished",
-      "stage": "Resolution and impact",
-      "title": "Still unfinished",
+      "stage": "Hand-off",
+      "title": "Still to do",
       "blocks": [
         {
           "type": "list",
           "items": [
-            "I designed an Undo button, but the full prototype never went to the software developers, so it was not built.",
+            "I designed an Undo button that still needs to be built.",
             "Repeated error alerts did not merge into one row.",
             "A medical expert still had to review the clinical words.",
             "Live annotation still needed an Edit button."
@@ -1308,7 +1361,7 @@ const KuBrand: CaseStudy = {
   "slug": "ku-brand",
   "title": "KU Brand",
   "heading": "KU Brand",
-  "short": "Research, design and frontend for the University of Kansas brand site, for 20,000+ campus communicators, part of a campus-wide rebrand. Traffic across ku.edu grew 30% after launch, a team result.",
+  "short": "Research, design and frontend for the University of Kansas brand site, part of a campus-wide rebrand across websites serving 50,000+ users. Traffic across ku.edu grew 30% after launch, a team result.",
   "problem": "KU refreshed its identity, and its brand site had to catch up. People struggled to find guidelines and assets on the old site.",
   "metrics": [
     {
@@ -1316,11 +1369,11 @@ const KuBrand: CaseStudy = {
       "label": "Traffic across ku.edu after launch (a team result)"
     },
     {
-      "value": "100K+",
-      "label": "Daily visitors across all of ku.edu and its subdomains"
+      "value": "80K+",
+      "label": "Daily visitors across KU’s websites"
     }
   ],
-  "caveat": "A new brand site for 20,000+ campus communicators and partners, live at brand.ku.edu. The traffic numbers are a team result of the campus-wide rebrand, not mine alone.",
+  "caveat": "A new brand site for KU communicators and campus partners, live at brand.ku.edu. The traffic numbers are a team result of the campus-wide rebrand, not mine alone.",
   "spec": [
     {
       "label": "Organization",
@@ -1328,7 +1381,7 @@ const KuBrand: CaseStudy = {
     },
     {
       "label": "Role",
-      "value": "Frontend Developer; I co-led the design of the brand website (the team had no UX or product designer)"
+      "value": "UX Designer / Front-End Developer. I co-led the design of the brand website."
     },
     {
       "label": "Timeline",
@@ -1340,7 +1393,7 @@ const KuBrand: CaseStudy = {
     },
     {
       "label": "Team",
-      "value": "20+ designers, marketers and project managers"
+      "value": "30+ content designers, marketers and developers"
     },
     {
       "label": "Tools",
@@ -1374,14 +1427,14 @@ const KuBrand: CaseStudy = {
         {
           "type": "list",
           "items": [
-            "A core team of 20+ designers, marketers and PMs"
+            "A team of 30+ content designers, marketers and developers"
           ]
         }
       ]
     },
     {
       "id": "the-problem",
-      "stage": "The setup",
+      "stage": "Problem",
       "title": "The problem",
       "blocks": [
         {
@@ -1405,13 +1458,22 @@ const KuBrand: CaseStudy = {
               "text": "Build a brand site that reflects the new identity and makes guidelines and assets easy to find."
             }
           ]
+        },
+        {
+          "type": "pairs",
+          "items": [
+            {
+              "term": "Problem statement",
+              "text": "How might we rebuild the KU brand site so campus communicators can find guidelines and assets without asking for help?"
+            }
+          ]
         }
       ]
     },
     {
       "id": "user-interviews",
-      "stage": "The setup",
-      "title": "User interviews",
+      "stage": "Research",
+      "title": "Interviews and focus groups",
       "blocks": [
         {
           "type": "split",
@@ -1423,12 +1485,45 @@ const KuBrand: CaseStudy = {
             "alt": "Kansans walking together through the Flint Hills prairie"
           },
           "caption": "Photo from the KU Brand Center. It shows the Kansas people and places the interviews were about."
+        },
+        {
+          "type": "pairs",
+          "items": [
+            {
+              "term": "Short talks beat long surveys",
+              "text": "Small-group conversations showed where people got stuck finding assets more clearly than surveys did."
+            },
+            {
+              "term": "Pushback on early concepts",
+              "text": "Some early concepts got pushback on tone and clutter, which led to layout fixes."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "what-didn-t-work",
+      "stage": "Research",
+      "title": "What people told us",
+      "blocks": [
+        {
+          "type": "pairs",
+          "items": [
+            {
+              "term": "Surveys lacked depth",
+              "text": "Many people rushed through them."
+            },
+            {
+              "term": "People liked the old brand",
+              "text": "Many preferred the old fonts, colors and logo: status quo bias and the mere exposure effect."
+            }
+          ]
         }
       ]
     },
     {
       "id": "information-architecture",
-      "stage": "Trade-offs",
+      "stage": "Architecture",
       "title": "Information architecture",
       "blocks": [
         {
@@ -1456,7 +1551,7 @@ const KuBrand: CaseStudy = {
     },
     {
       "id": "new-identity",
-      "stage": "Trade-offs",
+      "stage": "Architecture",
       "title": "New identity",
       "blocks": [
         {
@@ -1490,7 +1585,7 @@ const KuBrand: CaseStudy = {
     },
     {
       "id": "the-new-platform",
-      "stage": "Trade-offs",
+      "stage": "Architecture",
       "title": "The new platform",
       "blocks": [
         {
@@ -1517,8 +1612,62 @@ const KuBrand: CaseStudy = {
       ]
     },
     {
+      "id": "design-system-decisions",
+      "stage": "Architecture",
+      "title": "Design system decisions",
+      "blocks": [
+        {
+          "type": "pairs",
+          "items": [
+            {
+              "term": "Keep the two core colors",
+              "text": "Jayhawk Blue #0051ba and Crimson #e8000d."
+            },
+            {
+              "term": "Name every color",
+              "text": "Plain names like Night, Lake and Sky."
+            },
+            {
+              "term": "Never rely on color alone",
+              "text": "Every pairing passed a WCAG contrast check."
+            },
+            {
+              "term": "Pick type by job",
+              "text": "Roc Grotesk and Moret for headlines; Gotham Narrow or Freight Text for body."
+            },
+            {
+              "term": "Use the grid and frames",
+              "text": "Square grid units, Fire holding boxes, Lake pinpoints."
+            },
+            {
+              "term": "Write in the brand voice",
+              "text": "Active voice, present or future tense."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "color-sandbox",
+      "stage": "Architecture",
+      "title": "Color sandbox",
+      "blocks": [
+        {
+          "type": "h3",
+          "text": "Try the KU color system yourself"
+        },
+        {
+          "type": "p",
+          "text": "Pick any two of the 17 brand colors, or one of the 8 pairs from the system, and see whether it passes the same contrast check we used."
+        },
+        {
+          "type": "kusandbox"
+        }
+      ]
+    },
+    {
       "id": "low-fi-to-high-fi",
-      "stage": "Trade-offs",
+      "stage": "Design",
       "title": "Low-fi to high-fi",
       "blocks": [
         {
@@ -1606,62 +1755,8 @@ const KuBrand: CaseStudy = {
       ]
     },
     {
-      "id": "design-system-decisions",
-      "stage": "Trade-offs",
-      "title": "Design system decisions",
-      "blocks": [
-        {
-          "type": "pairs",
-          "items": [
-            {
-              "term": "Keep the two core colors",
-              "text": "Jayhawk Blue #0051ba and Crimson #e8000d."
-            },
-            {
-              "term": "Name every color",
-              "text": "Plain names like Night, Lake and Sky."
-            },
-            {
-              "term": "Never rely on color alone",
-              "text": "Every pairing passed a WCAG contrast check."
-            },
-            {
-              "term": "Pick type by job",
-              "text": "Roc Grotesk and Moret for headlines; Gotham Narrow or Freight Text for body."
-            },
-            {
-              "term": "Use the grid and frames",
-              "text": "Square grid units, Fire holding boxes, Lake pinpoints."
-            },
-            {
-              "term": "Write in the brand voice",
-              "text": "Active voice, present or future tense."
-            }
-          ]
-        }
-      ]
-    },
-    {
-      "id": "color-sandbox",
-      "stage": "Trade-offs",
-      "title": "Color sandbox",
-      "blocks": [
-        {
-          "type": "h3",
-          "text": "Try the KU color system yourself"
-        },
-        {
-          "type": "p",
-          "text": "Pick any two of the 17 brand colors, or one of the 8 pairs from the system, and see whether it passes the same contrast check we used."
-        },
-        {
-          "type": "kusandbox"
-        }
-      ]
-    },
-    {
       "id": "bringing-it-together",
-      "stage": "Trade-offs",
+      "stage": "Design",
       "title": "Bringing it together",
       "blocks": [
         {
@@ -1689,7 +1784,7 @@ const KuBrand: CaseStudy = {
     },
     {
       "id": "testing",
-      "stage": "Resolution and impact",
+      "stage": "Test & launch",
       "title": "Testing",
       "blocks": [
         {
@@ -1721,8 +1816,8 @@ const KuBrand: CaseStudy = {
     },
     {
       "id": "the-new-brand-system",
-      "stage": "Resolution and impact",
-      "title": "The new brand system",
+      "stage": "Test & launch",
+      "title": "Launch",
       "blocks": [
         {
           "type": "figure",
@@ -1736,32 +1831,12 @@ const KuBrand: CaseStudy = {
         },
         {
           "type": "p",
-          "text": "Traffic across ku.edu grew 30% after launch, to 100k+ daily visitors."
+          "text": "Traffic across ku.edu grew 30% after launch. KU’s websites serve 50,000+ users and reach 80,000+ daily visitors."
         },
         {
           "type": "link",
           "text": "You can see the live site at brand.ku.edu.",
           "href": "https://brand.ku.edu"
-        }
-      ]
-    },
-    {
-      "id": "what-didn-t-work",
-      "stage": "Resolution and impact",
-      "title": "What didn’t work",
-      "blocks": [
-        {
-          "type": "pairs",
-          "items": [
-            {
-              "term": "Surveys lacked depth",
-              "text": "Many people rushed through them."
-            },
-            {
-              "term": "People liked the old brand",
-              "text": "Many preferred the old fonts, colors and logo: status quo bias and the mere exposure effect."
-            }
-          ]
         }
       ]
     }
@@ -1815,7 +1890,7 @@ const Asians: CaseStudy = {
     },
     {
       "label": "Outcome",
-      "value": "Designed a mobile ordering prototype that eliminated order errors caused by language barriers for non-native English speaking guests."
+      "value": "Designed a mobile ordering prototype to eliminate order errors caused by language barriers for non-native English speaking guests."
     },
     {
       "label": "Role",
@@ -1875,7 +1950,7 @@ const Asians: CaseStudy = {
     },
     {
       "id": "the-problem",
-      "stage": "The setup",
+      "stage": "Problem",
       "title": "The problem",
       "blocks": [
         {
@@ -1908,12 +1983,21 @@ const Asians: CaseStudy = {
               "text": "Many guests are not comfortable ordering aloud in English, so the app had to work without talking."
             }
           ]
+        },
+        {
+          "type": "pairs",
+          "items": [
+            {
+              "term": "Problem statement",
+              "text": "How might we create a simple mobile ordering app so guests can customize and place orders accurately, without worrying about language?"
+            }
+          ]
         }
       ]
     },
     {
       "id": "survey",
-      "stage": "The setup",
+      "stage": "Research",
       "title": "Survey",
       "blocks": [
         {
@@ -1945,8 +2029,8 @@ const Asians: CaseStudy = {
     },
     {
       "id": "what-guests-needed",
-      "stage": "The setup",
-      "title": "What guests needed",
+      "stage": "Research",
+      "title": "Persona and needs",
       "blocks": [
         {
           "type": "h3",
@@ -1954,7 +2038,7 @@ const Asians: CaseStudy = {
         },
         {
           "type": "p",
-          "text": "I created Emma, a 32-year-old non-native English speaker. She loves the restaurant but avoids ordering by phone or in person because of the language barrier."
+          "text": "I created Emma, a non-native English speaker. She loves the restaurant but avoids ordering by phone or in person because of the language barrier."
         },
         {
           "type": "pairs",
@@ -1981,7 +2065,7 @@ const Asians: CaseStudy = {
     },
     {
       "id": "card-sorting",
-      "stage": "The setup",
+      "stage": "Research",
       "title": "Card sorting",
       "blocks": [
         {
@@ -2013,7 +2097,7 @@ const Asians: CaseStudy = {
     },
     {
       "id": "information-architecture",
-      "stage": "The setup",
+      "stage": "Research",
       "title": "Information architecture",
       "blocks": [
         {
@@ -2037,7 +2121,7 @@ const Asians: CaseStudy = {
     },
     {
       "id": "early-sketches",
-      "stage": "Trade-offs",
+      "stage": "Concepts",
       "title": "Early sketches",
       "blocks": [
         {
@@ -2082,7 +2166,7 @@ const Asians: CaseStudy = {
     },
     {
       "id": "paper-sketches",
-      "stage": "Trade-offs",
+      "stage": "Concepts",
       "title": "Paper sketches",
       "blocks": [
         {
@@ -2100,7 +2184,7 @@ const Asians: CaseStudy = {
     },
     {
       "id": "low-fidelity-wireframes",
-      "stage": "Trade-offs",
+      "stage": "Concepts",
       "title": "Low-fidelity wireframes",
       "blocks": [
         {
@@ -2120,8 +2204,32 @@ const Asians: CaseStudy = {
       ]
     },
     {
+      "id": "key-decisions",
+      "stage": "Design",
+      "title": "Key design decisions",
+      "blocks": [
+        {
+          "type": "decisions",
+          "items": [
+            {
+              "title": "One-tap language selector",
+              "text": "A language toggle on the first screen, so guests can switch language right away."
+            },
+            {
+              "title": "Popular items up top",
+              "text": "Top-rated dishes lead the menu, so new guests decide quickly."
+            },
+            {
+              "title": "Two-step checkout",
+              "text": "Confirm, then pay with a saved payment method. No long forms."
+            }
+          ]
+        }
+      ]
+    },
+    {
       "id": "design-system",
-      "stage": "Trade-offs",
+      "stage": "Design",
       "title": "Design system",
       "blocks": [
         {
@@ -2157,7 +2265,7 @@ const Asians: CaseStudy = {
     },
     {
       "id": "high-fidelity",
-      "stage": "Trade-offs",
+      "stage": "Design",
       "title": "High fidelity",
       "blocks": [
         {
@@ -2188,7 +2296,7 @@ const Asians: CaseStudy = {
     },
     {
       "id": "sketch-to-design",
-      "stage": "Trade-offs",
+      "stage": "Design",
       "title": "Sketch to design",
       "blocks": [
         {
@@ -2409,7 +2517,7 @@ const Asians: CaseStudy = {
     },
     {
       "id": "a-b-testing",
-      "stage": "Trade-offs",
+      "stage": "Test",
       "title": "A/B testing",
       "blocks": [
         {
@@ -2445,7 +2553,7 @@ const Asians: CaseStudy = {
     },
     {
       "id": "prototype",
-      "stage": "Trade-offs",
+      "stage": "Test",
       "title": "Prototype",
       "blocks": [
         {
@@ -2461,7 +2569,7 @@ const Asians: CaseStudy = {
     },
     {
       "id": "usability-testing",
-      "stage": "Resolution and impact",
+      "stage": "Test",
       "title": "Usability testing",
       "blocks": [
         {
@@ -2474,10 +2582,6 @@ const Asians: CaseStudy = {
             {
               "term": "Address at the top",
               "text": "Testers liked seeing the address at the top of the screen."
-            },
-            {
-              "term": "Payment in 2 taps",
-              "text": "I simplified payment to two taps."
             }
           ]
         }
@@ -2485,7 +2589,7 @@ const Asians: CaseStudy = {
     },
     {
       "id": "still-unfinished",
-      "stage": "Resolution and impact",
+      "stage": "Test",
       "title": "Still unfinished",
       "blocks": [
         {
@@ -2882,7 +2986,7 @@ const Luminary: CaseStudy = {
   "slug": "luminary",
   "title": "Luminary",
   "heading": "Luminary Campus Navigation",
-  "short": "UX design for Luminary, an App Team Carolina iOS app that helps students find accessible routes around the UNC Chapel Hill campus.",
+  "short": "UX design for Luminary, an AppTeamCarolina iOS app that helps students find accessible routes around the UNC Chapel Hill campus.",
   "problem": "Commercial map apps miss what students with mobility needs care about on campus: working elevators, steep slopes, accessible entrances and construction detours.",
   "metrics": [
     {
@@ -2894,7 +2998,7 @@ const Luminary: CaseStudy = {
   "spec": [
     {
       "label": "Product",
-      "value": "Luminary iOS app (App Team Carolina)"
+      "value": "Luminary iOS app (AppTeamCarolina)"
     },
     {
       "label": "Organization",
@@ -2906,11 +3010,11 @@ const Luminary: CaseStudy = {
     },
     {
       "label": "Timeline",
-      "value": "September 2025 to May 2026 (8 months)"
+      "value": "September 2025 to May 2026"
     },
     {
       "label": "Team",
-      "value": "Collaborating with 4 iOS developers and product leads"
+      "value": "Collaborating with iOS developers and product leads"
     },
     {
       "label": "Scope",
@@ -2924,7 +3028,7 @@ const Luminary: CaseStudy = {
   "sections": [
     {
       "id": "problem",
-      "stage": "Overview",
+      "stage": "Problem",
       "title": "Problem and accessibility scope",
       "blocks": [
         {
@@ -2948,7 +3052,7 @@ const Luminary: CaseStudy = {
     },
     {
       "id": "research",
-      "stage": "The setup",
+      "stage": "Research",
       "title": "User research and usability testing",
       "blocks": [
         {
@@ -2972,7 +3076,7 @@ const Luminary: CaseStudy = {
     },
     {
       "id": "phases",
-      "stage": "Trade-offs",
+      "stage": "Design",
       "title": "Phased strategy and route architecture",
       "blocks": [
         {
@@ -2996,7 +3100,7 @@ const Luminary: CaseStudy = {
     },
     {
       "id": "decisions",
-      "stage": "Trade-offs",
+      "stage": "Design",
       "title": "Key design decisions",
       "blocks": [
         {
@@ -3020,7 +3124,7 @@ const Luminary: CaseStudy = {
     },
     {
       "id": "wireframes",
-      "stage": "Trade-offs",
+      "stage": "Design",
       "title": "Illustrative wireframes",
       "blocks": [
         {
@@ -3065,12 +3169,16 @@ const Luminary: CaseStudy = {
     },
     {
       "id": "testing",
-      "stage": "Resolution and impact",
+      "stage": "Test",
       "title": "Testing",
       "blocks": [
         {
           "type": "p",
           "text": "I measured navigation task completion across 50+ student sessions, looking at how fast students picked a route and whether they avoided detours."
+        },
+        {
+          "type": "p",
+          "text": "I then refined the user flows and prototypes, and built reusable design-system components and variants that cut interaction steps."
         }
       ]
     }

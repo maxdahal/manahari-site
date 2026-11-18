@@ -66,6 +66,7 @@ export function HeroStage({ status, resume, pics }: { status: string; resume: st
             </span>
           ))}
         </h1>
+        <p className="hero__sub">I design and code software interfaces for complex, high-stakes environments. With a background in computer science, human-computer interaction and frontend development, I build clear, working web apps and design systems.</p>
         <div className="actions">
           <a className="hbtn" href="#work">
             See case studies

@@ -66,11 +66,6 @@ export function AboutSection() {
           <figure className="portrait">
             <img src="/images/index-01-5d96ff329c.webp" alt="Portrait of Manahari Dahal" width={900} height={900} loading="lazy" />
           </figure>
-          <div className="about__stats">
-            {about.stats.map((s) => (
-              <p key={s.label}><b>{s.value}</b><span>{s.label}</span></p>
-            ))}
-          </div>
         </div>
 
         <div className="about__main">
@@ -95,6 +90,7 @@ export function AboutSection() {
 
           <div className="about__panels">
             <div {...panel(0)}>
+              <h3 className="about-headline">{about.headline}</h3>
               {about.intro.map((t) => <p key={t} className="about-lede">{t}</p>)}
               <dl className="about-facts">
                 {about.facts.map((f) => <div key={f.label}><dt>{f.label}</dt><dd>{f.value}</dd></div>)}

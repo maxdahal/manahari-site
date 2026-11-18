@@ -7,6 +7,7 @@ export type IndexCase = {
   slug: string;
   title: string;
   meta: string;
+  desc: string;
   outcome: { value: string; label: string };
   pic: { src: string; w: number; h: number };
   top?: boolean;
@@ -70,6 +71,7 @@ export function WorkIndex({ items }: { items: IndexCase[] }) {
               <span className="ws__body">
                 <span className="ws__title">{c.title}</span>
                 <span className="ws__role">{c.meta}</span>
+                <span className="ws__desc">{c.desc}</span>
                 <span className="ws__outcome"><b>{c.outcome.value}</b> {c.outcome.label}</span>
                 <span className="ws__go" aria-hidden="true">
                   View project

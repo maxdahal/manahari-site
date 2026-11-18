@@ -1251,3 +1251,8 @@ button.nav__cta:focus-visible { outline: 2px solid var(--color-ring); outline-of
 @media (prefers-color-scheme: dark) { :root:not(.light) .tenure--plain { border-color: var(--color-border); background: var(--color-muted); color: var(--color-foreground); } }
 .gpa-none { display: inline-flex; flex-wrap: wrap; align-items: center; gap: 4px 8px; }
 .gpa-none__why { font-size: 0.8125rem; color: var(--color-muted-foreground); }
+
+/* hero sub-headline, the About headline, and the one-line card description */
+.hstage .hero__sub { max-width: 60ch; margin-top: 24px; font-size: clamp(1rem, 0.95rem + 0.3vw, 1.1875rem); line-height: 1.6; color: var(--stage-soft); }
+.about-headline { max-width: 26ch; font-size: clamp(1.375rem, 1.1rem + 1vw, 1.875rem); font-weight: 700; line-height: 1.2; letter-spacing: -0.02em; text-wrap: balance; }
+.ws__desc { max-width: 52ch; font-size: 1rem; line-height: 1.5; color: var(--stage-ink); }

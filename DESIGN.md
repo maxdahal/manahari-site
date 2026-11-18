@@ -112,7 +112,7 @@ Taken from brand.ku.edu and ku.edu: a line is a signal, not a separator.
 - Hairlines stay only where they hold structure: table rows (spec, decisions, checks), the vertical stat dividers, and one line above each study's last actions.
 
 ## Home case list (Nov 2026)
-A grid. Top row: the lead study (Luna) in a wide cell beside the next study (4 : 2 of six columns), both one shared height. Second row: three equal 8:7 cards. Each card is one link: the cover, then the title in display type with its years opposite in muted text; hover zooms the cover a touch and underlines the title. Drawn covers are shown whole (`contain`) on a faint card; Luminary uses a dark-background copy. Under 860px: one column, lead first, 16:10 covers.
+A grid. Top row: the lead study (Luna) in a wide cell beside the next study (4 : 2 of six columns), both one shared height. Second row: three equal 8:7 cards. Gaps 24 to 48px. Each card is one link: the cover under a dark scrim (even 12 to 18% plus a 72% band at the foot), with the title in white display type and the years opposite at 85% white, set inside the cover's bottom edge. Hover darkens the scrim by another 20% and zooms the cover a touch. Drawn covers are shown whole (`contain`) with extra room at the foot for the text. Under 860px: one column, lead first, 4:3 covers.
 
 ## Type scale (Nov 2026)
 One step down from the first build: every section heading uses `--t-h2` (max 36px), the home hero tops out at 52px and case titles at 48px; act headings max 34px, part headings 23px, mini titles 19px.

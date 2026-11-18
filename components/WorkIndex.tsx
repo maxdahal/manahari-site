@@ -11,8 +11,8 @@ type IndexCase = {
 
 /* Case studies: a grid of covers. The first study (Luna) is the lead and
    takes the wide cell of the top row; the next sits beside it, and the last
-   three share the second row. Each card is one link: cover, then the title
-   with its years opposite. Under 860px it is one column, lead first. */
+   three share the second row. Each card is one link: a darkened cover with
+   the title and years set on it. Under 860px it is one column, lead first. */
 export function WorkIndex({ items }: { items: IndexCase[] }) {
   return (
     <section className="wrap ws" id="work" aria-labelledby="work-h">

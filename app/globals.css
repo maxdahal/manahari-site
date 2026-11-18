@@ -1209,36 +1209,38 @@ button.nav__cta:focus-visible { outline: 2px solid var(--color-ring); outline-of
 .case-end { padding-top: 32px; border-top: 1px solid var(--color-border); }
 
 /* Home case studies: a grid. Top row: the lead study (Luna) wide, the next
-   beside it (3 : 2). Second row: three equal cards. Each card is a cover,
-   then the title with its years opposite. Under 860px: one column. */
-.wg__head { margin-bottom: clamp(24px, 3vw, 40px); }
-.wg { display: grid; grid-template-columns: repeat(6, minmax(0, 1fr)); gap: clamp(40px, 4vw, 56px) clamp(16px, 2vw, 32px); }
+   beside it (4 : 2 of six columns). Second row: three equal cards. Each card
+   is a cover darkened by a scrim, with the title and years set on it in
+   white; hover darkens it a little more. Under 860px: one column. */
+.wg__head { margin-bottom: clamp(32px, 4vw, 56px); }
+.wg { display: grid; grid-template-columns: repeat(6, minmax(0, 1fr)); gap: clamp(24px, 3vw, 48px); }
 .wg__card { grid-column: span 2; }
 .wg__card.is-lead { grid-column: span 4; }
-.wg__card:nth-child(2) { grid-column: span 2; }
-.wg__link { display: grid; gap: 14px; color: inherit; text-decoration: none; }
-.wg__link:focus-visible { outline: 2px solid var(--color-foreground); outline-offset: 4px; border-radius: 16px; }
-.wg__pic { display: block; overflow: hidden; aspect-ratio: 8 / 7; border-radius: 16px; background: var(--stage); }
+.wg__link { position: relative; display: block; overflow: hidden; border-radius: 16px; color: #fff; text-decoration: none; isolation: isolate; }
+.wg__link:focus-visible { outline: 2px solid var(--color-foreground); outline-offset: 4px; }
+.wg__pic { display: block; aspect-ratio: 8 / 7; background: var(--stage); }
 /* the top row is shorter and shares one height */
-.wg__card:nth-child(-n + 2) .wg__pic { aspect-ratio: auto; height: clamp(260px, 28vw, 420px); }
-.wg__pic img { width: 100%; height: 100%; object-fit: cover; transition: transform 1.2s cubic-bezier(0.16, 1, 0.3, 1); }
+.wg__card:nth-child(-n + 2) .wg__pic { aspect-ratio: auto; height: clamp(300px, 30vw, 460px); }
+.wg__pic img { display: block; width: 100%; height: 100%; object-fit: cover; transition: transform 1.2s cubic-bezier(0.16, 1, 0.3, 1); }
 .wg__link:hover .wg__pic img { transform: scale(1.03); }
 .wg__pic.is-contain { background: color-mix(in srgb, var(--color-foreground) 6%, var(--color-background)); }
-.wg__pic.is-contain img { object-fit: contain; padding: clamp(14px, 2.4vw, 36px); }
+.wg__pic.is-contain img { object-fit: contain; padding: clamp(20px, 3vw, 44px) clamp(20px, 3vw, 44px) clamp(64px, 6vw, 88px); }
 .wg__pic.is-contain:has(img[src$="-dark.svg"]) { background: #15171E; }
 :root.dark .wg__pic.is-contain:has(img[src$="-dark.svg"]) { background: var(--color-card); }
 @media (prefers-color-scheme: dark) { :root:not(.light) .wg__pic.is-contain:has(img[src$="-dark.svg"]) { background: var(--color-card); } }
-.wg__row { display: flex; align-items: baseline; justify-content: space-between; gap: 16px; }
-.wg__title { font-family: var(--font-display); font-size: clamp(1.1875rem, 1.05rem + 0.45vw, 1.4375rem); font-weight: 700; letter-spacing: -0.015em; line-height: 1.25; }
-.wg__card.is-lead .wg__title { font-size: clamp(1.375rem, 1.15rem + 0.7vw, 1.75rem); }
-.wg__years { flex: none; font-size: 0.9375rem; color: var(--color-muted-foreground); font-variant-numeric: tabular-nums; }
-.wg__link:hover .wg__title { text-decoration: underline; text-underline-offset: 4px; text-decoration-thickness: 1.5px; }
+/* the scrim: an even darkening plus a deeper band at the foot for the text */
+.wg__link::after { content: ""; position: absolute; inset: 0; z-index: 1; pointer-events: none; background: linear-gradient(to top, rgb(0 0 0 / 0.72), rgb(0 0 0 / 0.18) 55%, rgb(0 0 0 / 0.12)); transition: background-color 400ms ease; }
+.wg__link:hover::after, .wg__link:focus-visible::after { background-color: rgb(0 0 0 / 0.2); }
+.wg__row { position: absolute; z-index: 2; left: 0; right: 0; bottom: 0; display: flex; align-items: baseline; justify-content: space-between; gap: 16px; padding: clamp(18px, 2.2vw, 28px); }
+.wg__title { font-family: var(--font-display); font-size: clamp(1.25rem, 1.1rem + 0.5vw, 1.5rem); font-weight: 700; letter-spacing: -0.015em; line-height: 1.2; text-shadow: 0 1px 12px rgb(0 0 0 / 0.35); }
+.wg__card.is-lead .wg__title { font-size: clamp(1.5rem, 1.2rem + 0.9vw, 2rem); }
+.wg__years { flex: none; font-size: 0.9375rem; font-weight: 500; color: rgb(255 255 255 / 0.85); font-variant-numeric: tabular-nums; }
 @media (max-width: 860px) {
-  .wg { grid-template-columns: 1fr; gap: 40px; }
-  .wg__card, .wg__card.is-lead, .wg__card:nth-child(2) { grid-column: auto; }
-  .wg__pic, .wg__card:nth-child(-n + 2) .wg__pic { aspect-ratio: 16 / 10; height: auto; }
+  .wg { grid-template-columns: 1fr; gap: 24px; }
+  .wg__card, .wg__card.is-lead { grid-column: auto; }
+  .wg__pic, .wg__card:nth-child(-n + 2) .wg__pic { aspect-ratio: 4 / 3; height: auto; }
 }
-@media (prefers-reduced-motion: reduce) { .wg__pic img { transition: none; } }
+@media (prefers-reduced-motion: reduce) { .wg__pic img, .wg__link::after { transition: none; } .wg__link:hover .wg__pic img { transform: none; } }
 
 /* Case study reading flow (Nov 2026).
    1. Story rows: text on one side, its one picture on the other, swapping

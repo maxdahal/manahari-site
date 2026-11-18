@@ -136,7 +136,7 @@ export function ArmPanel({ tagline = "Arm panel" }: { tagline?: string }) {
       </div>
 
       <Frame tag={tagline} size={`${d.tab} · ${VERDICT_LABEL[d.verdict]}`}>
-        <div className="console" data-design={design} role="group" aria-label={`Console, ${d.name} design`}>
+        <div className="console" data-design={design} role="group" aria-label={`Console: ${d.name}`}>
           <div className="console__video" aria-hidden="true">
             <i className="console__tool console__tool--l" />
             <i className="console__tool console__tool--r" />

@@ -2280,7 +2280,7 @@ const Asians: CaseStudy = {
             "src": "/images/asians-06-f207029491.webp",
             "w": 1682,
             "h": 937,
-            "alt": "High-fidelity screens of the Asian's app"
+            "alt": "High-fidelity screens of the Asian’s app"
           },
           "caption": "The full flow in high fidelity."
         },
@@ -2615,7 +2615,7 @@ const Asians: CaseStudy = {
   actions: [{ label: "Try the prototype", href: "https://xd.adobe.com/view/b17983ec-566c-45c2-9c0c-a748f80b1719-e42a/?fullscreen" }],
   years: "2021 to 2022",
   accent: "#FF5200",
-  cover: I("asians-07-c40b497de9.webp", 1600, 675, "Tilted high-fidelity screens of the Asian's app on an orange background"),
+  cover: I("asians-07-c40b497de9.webp", 1600, 675, "Tilted high-fidelity screens of the Asian’s app on an orange background"),
 };
 
 const Esri: CaseStudy = {
@@ -2869,7 +2869,7 @@ const Esri: CaseStudy = {
             "src": "/images/v1/esri-07.webp",
             "w": 1008,
             "h": 380,
-            "alt": "Diagram: a Do card with a green check and a Don't card with a red cross"
+            "alt": "Diagram: a Do card with a green check and a Don’t card with a red cross"
           },
           "caption": ""
         }

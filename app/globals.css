@@ -1208,68 +1208,40 @@ button.nav__cta:focus-visible { outline: 2px solid var(--color-ring); outline-of
 .pairs > div::before, .takeaways li::before { content: ""; position: absolute; top: 0; left: 0; width: 28px; height: 2px; border-radius: 2px; background: var(--color-foreground); }
 .case-end { padding-top: 32px; border-top: 1px solid var(--color-border); }
 
-/* Home case studies: a grid. Top row: the lead study (Luna) wide, the next
-   beside it (4 : 2 of six columns). Second row: three equal cards. Each card
-   is a cover darkened by a scrim, with the title and years set on it in
-   white; hover darkens it a little more. Under 860px: one column. */
-.wg__head { margin-bottom: clamp(32px, 4vw, 56px); }
-.wg { position: relative; z-index: 1; display: grid; grid-template-columns: repeat(20, minmax(0, 1fr)); gap: clamp(40px, 4vw, 64px) 0; margin: 0; padding: 0; list-style: none; }
-/* the scatter: one study per row, in order; each card has its own width,
-   side and shape, and tucks up (--tuck) beside the one above. The tuck is
-   kept under half the shortest card plus the gap, so no two cards touch. */
-.wg { --tuck: clamp(48px, 7vw, 112px); align-items: start; }
-.wg__card { position: relative; }
-.wg__card:not(:first-child) { margin-top: calc(-1 * var(--tuck)); }
-.wg__card:nth-child(1) { grid-row: 1; grid-column: 1 / span 10; }
-.wg__card:nth-child(2) { grid-row: 2; grid-column: 14 / span 6; }
-.wg__card:nth-child(3) { grid-row: 3; grid-column: 3 / span 8; }
-.wg__card:nth-child(4) { grid-row: 4; grid-column: 12 / span 9; }
-.wg__card:nth-child(5) { grid-row: 5; grid-column: 4 / span 7; }
-.wg__card:nth-child(2) .wg__pic { aspect-ratio: 4 / 5; }
-.wg__card:nth-child(4) .wg__pic { aspect-ratio: 16 / 10; }
-/* the thread: a soft S-curve between neighbouring cards, behind them; one
-   Lake marker travels along with the scroll and lights the thread it is on */
-.wg-route { position: relative; }
-.wg-thread { position: absolute; inset: 0; z-index: 0; overflow: visible; pointer-events: none; }
-.wg-thread__line { fill: none; stroke: color-mix(in srgb, var(--color-foreground) 22%, transparent); stroke-width: 1.5; stroke-dasharray: 1 7; stroke-linecap: round; transition: stroke 300ms ease; }
-.wg-thread__line.is-on { stroke: var(--lake); stroke-dasharray: none; }
-.wg-thread__end { fill: var(--color-background); stroke: color-mix(in srgb, var(--color-foreground) 30%, transparent); stroke-width: 1.5; }
-.wg-thread__dot { fill: var(--lake); }
-.wg-thread__halo { fill: color-mix(in srgb, var(--lake) 18%, transparent); }
-@media (max-width: 860px) { .wg-thread { display: none; } }
-@media (prefers-reduced-motion: reduce) { .wg-thread__line { transition: none; } }
-/* one focal point: --f (0 to 1) comes from the scroll; away from the middle
-   a card fades, greys and its edges dissolve into the page like a vignette */
-.wg__card { --f: 1; opacity: calc(0.22 + 0.78 * var(--f)); filter: saturate(calc(0.35 + 0.65 * var(--f))); -webkit-mask-image: radial-gradient(ellipse 75% 75% at 50% 50%, #000 calc(35% + 65% * var(--f)), transparent 100%); mask-image: radial-gradient(ellipse 75% 75% at 50% 50%, #000 calc(35% + 65% * var(--f)), transparent 100%); transition: opacity 250ms ease-out, filter 250ms ease-out; }
-.wg__card:hover, .wg__card:focus-within { --f: 1 !important; }
-@media (prefers-reduced-motion: reduce) { .wg__card { transition: none; } }
-/* step number, top left of each cover */
-.wg__step { position: absolute; z-index: 2; top: clamp(14px, 1.8vw, 22px); left: clamp(14px, 1.8vw, 22px); display: grid; place-items: center; width: 36px; height: 36px; border-radius: 50%; background: var(--color-neutral-50); color: var(--color-neutral-950); font-family: var(--font-display); font-size: 0.9375rem; font-weight: 700; font-variant-numeric: tabular-nums; box-shadow: 0 2px 10px rgb(21 23 30 / 0.25); transition: background-color 300ms ease, color 300ms ease; }
-.wg__link:hover .wg__step, .wg__link:focus-visible .wg__step { background: var(--lake); color: var(--color-neutral-50); }
-.wg__link { position: relative; display: block; overflow: hidden; border-radius: 16px; color: var(--color-neutral-50); text-decoration: none; isolation: isolate; }
-.wg__link:focus-visible { outline: 2px solid var(--color-foreground); outline-offset: 4px; }
-.wg__pic { display: block; aspect-ratio: 3 / 2; background: var(--stage); }
-/* the lead runs the full width, as a wide band */
-.wg__pic img { display: block; width: 100%; height: 100%; object-fit: cover; transition: transform 1.2s cubic-bezier(0.16, 1, 0.3, 1); }
-.wg__link:hover .wg__pic img { transform: scale(1.03); }
-.wg__pic.is-contain { background: color-mix(in srgb, var(--color-foreground) 6%, var(--color-background)); }
-.wg__pic.is-contain img { object-fit: contain; padding: clamp(20px, 3vw, 44px) clamp(20px, 3vw, 44px) clamp(64px, 6vw, 88px); }
-.wg__pic.is-contain:has(img[src$="-dark.svg"]) { background: #15171E; }
-:root.dark .wg__pic.is-contain:has(img[src$="-dark.svg"]) { background: var(--color-card); }
-@media (prefers-color-scheme: dark) { :root:not(.light) .wg__pic.is-contain:has(img[src$="-dark.svg"]) { background: var(--color-card); } }
-/* the scrim: an even darkening plus a deeper band at the foot for the text */
-.wg__link::after { content: ""; position: absolute; inset: 0; z-index: 1; pointer-events: none; background: linear-gradient(to top, rgb(21 23 30 / 0.72), rgb(21 23 30 / 0.18) 55%, rgb(21 23 30 / 0.12)); transition: background-color 400ms ease; }
-.wg__link:hover::after, .wg__link:focus-visible::after { background-color: rgb(21 23 30 / 0.2); }
-.wg__row { position: absolute; z-index: 2; left: 0; right: 0; bottom: 0; display: flex; align-items: baseline; justify-content: space-between; gap: 16px; padding: clamp(18px, 2.2vw, 28px); }
-.wg__title { font-family: var(--font-display); font-size: clamp(1.125rem, 1rem + 0.4vw, 1.375rem); font-weight: 700; letter-spacing: -0.015em; line-height: 1.2; text-shadow: 0 1px 12px rgb(21 23 30 / 0.35); }
-.wg__card.is-lead .wg__title { font-size: clamp(1.5rem, 1.2rem + 0.9vw, 2rem); }
-.wg__years { flex: none; font-size: 0.9375rem; font-weight: 500; color: rgb(246 247 248 / 0.85); font-variant-numeric: tabular-nums; }
+/* Home case studies: alternating text and image, like the studies' own
+   reading flow. One row per study; cover 7 parts, text 5, sides swapping
+   every other row. The title link stretches over the whole row. */
+.wa__head { margin-bottom: clamp(32px, 4vw, 56px); }
+.wa { display: grid; gap: clamp(64px, 8vw, 120px); margin: 0; padding: 0; list-style: none; }
+.wa__row { position: relative; display: grid; grid-template-columns: 7fr 5fr; gap: clamp(32px, 5vw, 80px); align-items: center; }
+.wa__row--flip { grid-template-columns: 5fr 7fr; }
+.wa__row--flip .wa__pic { order: 2; }
+.wa__pic { display: block; overflow: hidden; aspect-ratio: 3 / 2; border-radius: 16px; background: var(--stage); }
+.wa__pic img { display: block; width: 100%; height: 100%; object-fit: cover; transition: transform 1.2s cubic-bezier(0.16, 1, 0.3, 1); }
+.wa__row:hover .wa__pic img { transform: scale(1.03); }
+.wa__pic.is-contain { background: color-mix(in srgb, var(--color-foreground) 6%, var(--color-background)); }
+.wa__pic.is-contain img { object-fit: contain; padding: clamp(16px, 3vw, 40px); }
+.wa__pic.is-contain:has(img[src$="-dark.svg"]) { background: #15171E; }
+:root.dark .wa__pic.is-contain:has(img[src$="-dark.svg"]) { background: var(--color-card); }
+@media (prefers-color-scheme: dark) { :root:not(.light) .wa__pic.is-contain:has(img[src$="-dark.svg"]) { background: var(--color-card); } }
+.wa__text { display: grid; justify-items: start; gap: 12px; max-width: 34rem; }
+.wa__years { margin: 0; font-size: 0.9375rem; font-weight: 500; color: var(--color-muted-foreground); font-variant-numeric: tabular-nums; }
+.wa__title { margin: 0; font-family: var(--font-display); font-size: clamp(1.5rem, 1.2rem + 1vw, 2.125rem); font-weight: 700; letter-spacing: -0.02em; line-height: 1.15; }
+.wa__link { color: var(--color-foreground); text-decoration: none; }
+.wa__link::after { content: ""; position: absolute; inset: 0; z-index: 1; border-radius: 16px; }
+.wa__link:focus-visible { outline: none; }
+.wa__link:focus-visible::after { outline: 2px solid var(--color-ring); outline-offset: 8px; }
+.wa__row:hover .wa__link { text-decoration: underline; text-underline-offset: 5px; text-decoration-thickness: 2px; }
+.wa__short { margin: 0; font-size: 1.0625rem; line-height: 1.6; color: var(--color-muted-foreground); }
+.wa__go { margin-top: 8px; display: grid; place-items: center; width: 44px; height: 44px; border: 1px solid var(--color-border); border-radius: 50%; color: var(--color-foreground); transition: background-color 200ms ease, color 200ms ease, border-color 200ms ease, transform 300ms ease; }
+.wa__go svg { width: 18px; height: 18px; }
+.wa__row:hover .wa__go { background: var(--color-foreground); border-color: var(--color-foreground); color: var(--color-background); transform: rotate(45deg); }
 @media (max-width: 860px) {
-  .wg { grid-template-columns: 1fr; gap: 56px; }
-  .wg__card, .wg__card.is-lead, .wg__card:nth-child(n) { grid-column: auto; grid-row: auto; margin-top: 0; }
-  .wg__pic, .wg__card:nth-child(n) .wg__pic { aspect-ratio: 4 / 3; }
+  .wa { gap: 56px; }
+  .wa__row, .wa__row--flip { grid-template-columns: 1fr; gap: 20px; }
+  .wa__row--flip .wa__pic { order: 0; }
 }
-@media (prefers-reduced-motion: reduce) { .wg__pic img, .wg__link::after, .wg__step { transition: none; } .wg__link:hover .wg__pic img { transform: none; } }
+@media (prefers-reduced-motion: reduce) { .wa__pic img, .wa__go { transition: none; } .wa__row:hover .wa__pic img, .wa__row:hover .wa__go { transform: none; } }
 
 /* Case study reading flow (Nov 2026).
    1. Story rows: text on one side, its one picture on the other, swapping
@@ -1334,7 +1306,7 @@ button.nav__cta:focus-visible { outline: 2px solid var(--color-ring); outline-of
 
 /* Type scale, one step down (Nov 2026): headings were reading too loud. */
 :root { --t-h2: clamp(1.625rem, 1.25rem + 1vw, 2.25rem); --t-display: clamp(2.125rem, 1.2rem + 2.8vw, 3.5rem); --t-lead: clamp(1.0625rem, 1rem + 0.3vw, 1.25rem); --t-h3: 1.125rem; }
-.wg__head .h2, .section__head .h2 { font-size: var(--t-h2); line-height: 1.08; letter-spacing: -0.03em; }
+.wa__head .h2, .section__head .h2 { font-size: var(--t-h2); line-height: 1.08; letter-spacing: -0.03em; }
 .hstage .hero__title { font-size: clamp(2rem, 1.1rem + 2.4vw, 3.25rem); }
 .hero__title { font-size: clamp(2.125rem, 1.1rem + 2.8vw, 3.5rem); }
 .case-title { font-size: clamp(2rem, 1.2rem + 2.2vw, 3rem); line-height: 1.02; }

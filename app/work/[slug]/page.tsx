@@ -88,8 +88,8 @@ export default async function CasePage({ params }: { params: Promise<{ slug: str
             <figure className="case-cover">
               <img src={c.cover.src} alt={c.cover.alt} width={c.cover.w} height={c.cover.h} />
             </figure>
-            <section className="case-outcome" aria-labelledby="outcome-h">
-              <h2 className="sr-only" id="outcome-h">Outcome</h2>
+            <section className="case-outcome" aria-labelledby="case-outcome-h">
+              <h2 className="sr-only" id="case-outcome-h">Outcome</h2>
               <ul className="case-outcome__nums">
                 {c.metrics.map((m) => (
                   <li key={m.label}><b>{m.value}</b><span>{m.label}</span></li>

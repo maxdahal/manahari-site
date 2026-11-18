@@ -1222,7 +1222,8 @@ button.nav__cta:focus-visible { outline: 2px solid var(--color-ring); outline-of
 /* pinned: the page scroll sets the position, so no snapping or native scroll */
 .wc.is-pinned .wc__track { overflow-x: hidden; scroll-snap-type: none; scroll-behavior: auto; }
 .wc__slide { flex: 0 0 var(--wc-w); scroll-snap-align: start; }
-.wc__link { display: grid; gap: 4px; color: inherit; text-decoration: none; }
+/* relative: keeps the screen-reader text inside the card; loose, it sat at the row's far end and widened phone pages */
+.wc__link { position: relative; display: grid; gap: 4px; color: inherit; text-decoration: none; }
 .wc__link:focus-visible { outline: 2px solid var(--color-foreground); outline-offset: 4px; border-radius: var(--wc-r); }
 .wc__pic { display: block; overflow: hidden; aspect-ratio: 16 / 10; margin-bottom: 12px; border-radius: var(--wc-r); background: var(--stage); }
 .wc__pic img { width: 100%; height: 100%; object-fit: cover; transition: transform 1.2s cubic-bezier(0.16, 1, 0.3, 1); }
@@ -1340,13 +1341,26 @@ button.nav__cta:focus-visible { outline: 2px solid var(--color-ring); outline-of
    the bar. */
 @media (max-width: 640px) {
   .site-head[data-open] { -webkit-backdrop-filter: none; backdrop-filter: none; }
-  .site-head[data-open] .nav { position: fixed; z-index: 30; top: var(--head-h, 61px); left: 0; right: 0; bottom: 0; justify-content: flex-start; gap: 4px; padding: 24px 16px calc(32px + env(safe-area-inset-bottom)); border-top: 1px solid var(--color-border); background: var(--color-background); overflow-y: auto; overscroll-behavior: contain; animation: navIn 220ms ease; }
+  .site-head[data-open] .nav { position: fixed; z-index: 30; top: var(--head-h, 61px); left: 0; right: 0; height: calc(100dvh - var(--head-h, 61px)); justify-content: flex-start; gap: 4px; padding: 24px 16px calc(32px + env(safe-area-inset-bottom)); border-top: 1px solid var(--color-border); background: var(--color-background); overflow-y: auto; overscroll-behavior: contain; animation: navIn 220ms ease; }
   .site-head[data-open] .nav a { min-height: 64px; padding: 0 8px; border-radius: 12px; font-size: clamp(1.75rem, 1.2rem + 3vw, 2.25rem); font-weight: 750; letter-spacing: -0.02em; color: var(--color-foreground); }
   .site-head[data-open] .nav a[aria-current="page"]::after { left: 8px; width: 32px; bottom: 10px; height: 3px; }
   .site-head[data-open] .nav > a { font-family: var(--font-display); }
-  .site-head[data-open] .nav__more { display: flex; flex-direction: column; gap: 4px; margin-top: auto; padding-top: 24px; border-top: 1px solid var(--color-border); }
-  .site-head[data-open] .nav .nav__more a { min-height: 44px; padding: 0 8px; font-family: inherit; font-size: 1rem; font-weight: 500; letter-spacing: 0; color: var(--color-muted-foreground); }
+  /* the sheet's foot: status, the two ways in, the address, on a Steam panel */
+  .site-head[data-open] .nav__more { display: grid; gap: 18px; margin-top: auto; padding: 22px 20px; border-radius: 18px; background: var(--steam); }
+  .site-head[data-open] .nav__btns { display: flex; gap: 10px; }
+  .site-head[data-open] .nav .nav__btns .btn { flex: 1; justify-content: center; min-height: 48px; padding: 0 18px; border-radius: 999px; font-family: inherit; font-size: 1rem; font-weight: 600; letter-spacing: 0; }
+  .site-head[data-open] .nav .nav__btns .btn--primary { color: var(--color-primary-foreground); background: var(--color-primary); }
+  .site-head[data-open] .nav .nav__btns .btn--line { color: var(--color-foreground); background: transparent; border: 1px solid color-mix(in srgb, var(--color-foreground) 22%, transparent); }
+  .site-head[data-open] .nav .nav__mail { min-height: 0; padding: 0; border-radius: 0; font-family: inherit; font-size: 1rem; font-weight: 500; letter-spacing: 0; color: var(--color-link); text-decoration: underline; text-underline-offset: 3px; text-decoration-thickness: 1px; justify-self: start; }
 }
 .nav__more { display: none; }
 @keyframes navIn { from { opacity: 0; transform: translateY(-6px); } to { opacity: 1; transform: none; } }
 @media (prefers-reduced-motion: reduce) { .site-head[data-open] .nav { animation: none; } }
+
+/* Carousel focus: only the current study is sharp; the others sit back
+   behind a soft blur, like glass, and come forward on hover. */
+.wc__pic { transition: filter 450ms ease, opacity 450ms ease; }
+.wc__slide:not([aria-current]) .wc__pic { filter: blur(6px) saturate(0.7); opacity: 0.55; }
+.wc__slide:not([aria-current]) .wc__go { opacity: 0.45; }
+.wc__slide:not([aria-current]) .wc__link:hover .wc__pic, .wc__slide:not([aria-current]) .wc__link:focus-visible .wc__pic { filter: none; opacity: 1; }
+@media (prefers-reduced-motion: reduce) { .wc__pic { transition: none; } }

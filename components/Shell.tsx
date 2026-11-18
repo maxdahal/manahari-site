@@ -27,11 +27,14 @@ export function Header({ current }: { current?: string }) {
               {n.label}
             </Link>
           ))}
-          {/* phones: the full-screen menu ends with the ways to reach me */}
+          {/* phones: the full-screen menu ends with status and the ways to reach me */}
           <span className="nav__more">
-            <a href={profile.resume} target="_blank" rel="noopener">Resume<span className="sr-only"> (PDF, opens in a new tab)</span></a>
-            <a href={profile.linkedin} target="_blank" rel="noopener">LinkedIn</a>
-            <a href={`mailto:${profile.email}`}>{profile.email}</a>
+            <span className="status"><i aria-hidden="true" />{profile.status}</span>
+            <span className="nav__btns">
+              <a className="btn btn--primary" href={profile.resume} target="_blank" rel="noopener">Resume<span className="sr-only"> (PDF, opens in a new tab)</span></a>
+              <a className="btn btn--line" href={profile.linkedin} target="_blank" rel="noopener">LinkedIn<span className="sr-only"> (opens in a new tab)</span></a>
+            </span>
+            <a className="nav__mail" href={`mailto:${profile.email}`}>{profile.email}</a>
           </span>
         </nav>
         <RecruiterDialog />

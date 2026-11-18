@@ -24,11 +24,11 @@ export function MenuButton() {
     if (!head) return;
     head.toggleAttribute("data-open", open);
     // the menu fills the screen, so the page behind it stays put
-    document.documentElement.style.overflow = open ? "hidden" : "";
+    document.body.style.overflow = open ? "hidden" : "";
     if (!open) return;
     // closes at once (not after React's next paint), so an in-page jump
     // that follows measures the header without the panel
-    const close = () => { head.removeAttribute("data-open"); document.documentElement.style.overflow = ""; setOpen(false); };
+    const close = () => { head.removeAttribute("data-open"); document.body.style.overflow = ""; setOpen(false); };
     const onKey = (e: KeyboardEvent) => { if (e.key === "Escape") { close(); btn.current?.focus(); } };
     // any link in the panel, or a tap anywhere outside the header, closes it
     const onClick = (e: MouseEvent) => {

@@ -12,6 +12,20 @@ type IndexCase = {
 };
 
 const headH = () => (document.querySelector(".site-head") as HTMLElement | null)?.offsetHeight ?? 64;
+/* Pinned scroll pauses on each study: of each step between two covers, the
+   first and last 30% hold still and the middle glides (eased), so one study
+   is always at rest in focus. p runs 0 to 1 over the whole row. */
+function settle(t: HTMLElement, p: number) {
+  const pl = parseFloat(getComputedStyle(t).paddingLeft) || 0;
+  const max = t.scrollWidth - t.clientWidth;
+  const stops = ([...t.children] as HTMLElement[]).map((s) => Math.min(max, s.offsetLeft - t.offsetLeft - pl));
+  if (stops.length < 2) return 0;
+  const f = p * (stops.length - 1), i = Math.min(stops.length - 2, Math.floor(f));
+  const x = Math.min(1, Math.max(0, (f - i - 0.3) / 0.4));
+  const ease = x * x * (3 - 2 * x);
+  return stops[i] + (stops[i + 1] - stops[i]) * ease;
+}
+
 /* where the pinned block rests: centred in the space under the header */
 const restTop = (h: number) => { const head = headH(); return Math.round(head + Math.max(0, (innerHeight - head - h) / 2)); };
 
@@ -71,7 +85,7 @@ export function WorkIndex({ items }: { items: IndexCase[] }) {
         if (!wide.matches) return;
         const dist = t.scrollWidth - t.clientWidth;
         const p = Math.min(1, Math.max(0, (restTop(k.offsetHeight) - o.getBoundingClientRect().top) / Math.max(1, dist)));
-        t.scrollLeft = p * dist;
+        t.scrollLeft = settle(t, p);
       });
     };
     measure(); drive();
@@ -96,7 +110,7 @@ export function WorkIndex({ items }: { items: IndexCase[] }) {
     if (pin && outer.current) {
       // pinned: move the page to the point where the row shows this study
       const top = outer.current.getBoundingClientRect().top + scrollY - pin.top;
-      scrollTo({ top: top + left, behavior });
+      scrollTo({ top: top + (i / Math.max(1, items.length - 1)) * pin.dist, behavior });
     } else {
       t.scrollTo({ left, behavior });
     }

@@ -1,6 +1,6 @@
 # My portfolio (v2)
 
-This is the second version of my portfolio. I'm a UX engineer and product designer, and I wanted the site itself to show both halves of that: I designed it and I built it.
+This is the second version of my portfolio. I'm a product designer who builds what I design, and I wanted the site itself to show that: I designed it and I built it.
 
 The first version was plain HTML, which I later moved to Next.js with shadcn/ui. For v2 I started over instead of patching v1, because I wanted a tighter design system and a homepage someone could skim in under two minutes.
 

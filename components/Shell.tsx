@@ -2,6 +2,7 @@ import Link from "next/link";
 import { profile } from "@/content/profile";
 import { ThemeToggle } from "./ThemeToggle";
 import { MenuButton } from "./MenuButton";
+import { NavSpy } from "./NavSpy";
 import { RecruiterDialog } from "./RecruiterDialog";
 
 /* in-page sections; Artwork sits at the end of the homepage, reachable from the footer */
@@ -29,6 +30,7 @@ export function Header({ current }: { current?: string }) {
             </Link>
           ))}
           <a href={`mailto:${profile.email}`}>Contact</a>
+          <NavSpy />
           {/* phones: the full-screen menu ends with status and the ways to reach me */}
           <span className="nav__more">
             <span className="status"><i aria-hidden="true" />{profile.status}</span>

@@ -5,6 +5,7 @@ type IndexCase = {
   title: string;
   years: string;
   short: string;
+  glance?: { role: string; domain: string; impact: string };
   pic: { src: string; w: number; h: number };
   /* a drawn cover with its own frame: shown whole, with room around it */
   contain?: boolean;
@@ -34,7 +35,15 @@ export function WorkIndex({ items }: { items: IndexCase[] }) {
               <h3 className="wa__title">
                 <Link prefetch={false} href={`/work/${c.slug}`} className="wa__link">{c.title}</Link>
               </h3>
-              <p className="wa__short">{c.short}</p>
+              {c.glance ? (
+                <dl className="wa__meta">
+                  <div><dt>Role</dt><dd>{c.glance.role}</dd></div>
+                  <div><dt>Domain</dt><dd>{c.glance.domain}</dd></div>
+                  <div><dt>Impact</dt><dd>{c.glance.impact}</dd></div>
+                </dl>
+              ) : (
+                <p className="wa__short">{c.short}</p>
+              )}
               <span className="wa__go" aria-hidden="true">
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M7 17 17 7M9 7h8v8" /></svg>
               </span>

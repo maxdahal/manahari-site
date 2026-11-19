@@ -10,6 +10,7 @@ const SurgicalConsole: CaseStudy = {
   "title": "Luna Surgical Console",
   "heading": "Luna Surgical Console",
   "short": "UX design at Karl Storz. Three projects for Luna, a robotic surgery console: arm identity, a gallery with a video editor, and live annotation.",
+  "glance": {"role": "UX Design Intern, Karl Storz (Summer 2026, 3 months)", "domain": "Medical robotics, high-stakes surgical software", "impact": ">50% less task time in exploratory prototype tests"},
   "problem": "A surgery team had one second to understand a screen. Scrub nurses could not see what the surgeon pointed at.",
   "part": "I designed three fixes for a surgical console: arm identity, a gallery with a video editor, and live annotation.",
   "metrics": [
@@ -38,7 +39,7 @@ const SurgicalConsole: CaseStudy = {
     },
     {
       "label": "Role",
-      "value": "UX Designer"
+      "value": "UX Design Intern"
     },
     {
       "label": "Timeline",
@@ -1363,6 +1364,7 @@ const KuBrand: CaseStudy = {
   "title": "KU Brand",
   "heading": "KU Brand",
   "short": "Research, design and frontend for the University of Kansas brand site, part of a campus-wide rebrand across websites serving 50,000+ users. Traffic across ku.edu grew 30% after launch, a team result.",
+  "glance": {"role": "UX Designer & Front-End Developer", "domain": "Design systems, university web platform (80K+ daily visitors)", "impact": "Live WCAG contrast sandbox; color, type and spacing tokens"},
   "problem": "KU refreshed its identity, and its brand site had to catch up. People struggled to find guidelines and assets on the old site.",
   "metrics": [
     {
@@ -2623,6 +2625,7 @@ const Esri: CaseStudy = {
   "title": "Esri Calcite",
   "heading": "Calcite Design System Documentation",
   "short": "UI/UX design and front-end internship at Esri: an internal documentation website for the Calcite Design System, for designers and developers.",
+  "glance": {"role": "UI/UX Design & Front-End Intern", "domain": "Developer tooling, design system documentation", "impact": "50%+ better content discoverability for 20+ designers and developers"},
   "problem": "Esri’s designers and developers had no single website to check how a component behaves, how to use it, or what code to copy.",
   "metrics": [
     {
@@ -2990,6 +2993,7 @@ const Luminary: CaseStudy = {
   "title": "Luminary",
   "heading": "Luminary Campus Navigation",
   "short": "UX design for Luminary, an AppTeamCarolina iOS app that helps students find accessible routes around the UNC Chapel Hill campus.",
+  "glance": {"role": "UX Designer, AppTeamCarolina", "domain": "Accessible campus navigation, iOS", "impact": "Accessible routing tested in 50+ student sessions"},
   "problem": "Commercial map apps miss what students with mobility needs care about on campus: working elevators, steep slopes, accessible entrances and construction detours.",
   "metrics": [
     {

@@ -58,7 +58,7 @@ export function HeroStage({ status, resume, pics }: { status: string; resume: st
       <div className="hstage__intro">
         <p className="hstage__status"><i aria-hidden="true" />{status}</p>
         <h1 className="hero__title" id="hero-title">
-          {[["Hi, I’m Manahari.", "hero__hi"], ["I’m a UX and product designer who builds what I design.", "hero__role"]].map(([line, cls]) => (
+          {[["Hi, I’m Manahari.", "hero__hi"], ["I’m a product designer with frontend engineering depth.", "hero__role"]].map(([line, cls]) => (
             <span className={cls} key={cls}>
               {line.split(" ").map((w, i) => (
                 <Fragment key={i}><span className="w"><span>{w}</span></span>{" "}</Fragment>
@@ -66,7 +66,7 @@ export function HeroStage({ status, resume, pics }: { status: string; resume: st
             </span>
           ))}
         </h1>
-        <p className="hero__sub">I’ve designed for Karl Storz, the University of Kansas and Esri. Now I’m getting my master’s in HCI at UNC.</p>
+        <p className="hero__sub">I specialize in design systems, developer tooling and high-stakes software, most recently for Karl Storz, the University of Kansas and Esri. Now I’m getting my master’s in HCI at UNC.</p>
         <div className="actions">
           <a className="hbtn" href="#work">
             See case studies

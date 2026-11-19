@@ -20,7 +20,7 @@ const DEGREES: { badge: string; full: string; field: string; school: string; met
 /* from / to are [year, month 1-12]; to: null is "Present" */
 type Ym = [number, number];
 const JOBS: { title: string; org: string; when: string; from: Ym; to: Ym | null }[] = [
-  { title: "UX Designer", org: "Karl Storz (Asensus Surgical)", when: "May to Aug 2026", from: [2026, 5], to: [2026, 8] },
+  { title: "UX Design Intern", org: "Karl Storz (Asensus Surgical)", when: "May to Aug 2026", from: [2026, 5], to: [2026, 8] },
   { title: "Graduate Research Assistant", org: "UNC Chapel Hill", when: "Feb 2026 to Present", from: [2026, 2], to: null },
   { title: "UX Designer", org: "AppTeamCarolina", when: "Sep 2025 to May 2026", from: [2025, 9], to: [2026, 5] },
   { title: "UX Designer / Front-End Developer", org: "University of Kansas", when: "Jun 2022 to Apr 2025", from: [2022, 6], to: [2025, 4] },
@@ -92,7 +92,7 @@ export function RecruiterDialog() {
           <section className="rec-top" aria-labelledby="r-h">
             <p className="status"><i aria-hidden="true" />Available for new roles</p>
             <h2 className="rdlg__name" id="r-h">{profile.name}</h2>
-            <p className="about-lede">UX / Product Designer who builds in code</p>
+            <p className="about-lede">Product designer with frontend engineering depth</p>
             <div className="actions" style={{ marginTop: 24 }}>
               <Link prefetch={false} className="btn btn--primary" href="/#work" onClick={close}>See case studies</Link>
               <a className="btn btn--line" href={profile.resume} target="_blank" rel="noopener">Resume<span className="sr-only"> (PDF, opens in a new tab)</span></a>

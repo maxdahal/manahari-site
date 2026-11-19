@@ -1,7 +1,6 @@
 import { Header, Footer } from "@/components/Shell";
 import { HeroStage } from "@/components/HeroStage";
 import { WorkIndex } from "@/components/WorkIndex";
-import { Timeline } from "@/components/Timeline";
 import { ArtGallery } from "@/components/ArtGallery";
 import { AboutSection } from "@/components/AboutSection";
 import { AvailabilityRail } from "@/components/AvailabilityRail";
@@ -9,7 +8,9 @@ import { cases } from "@/content/cases";
 import { artwork, profile } from "@/content/profile";
 
 /* order of the case studies on the homepage */
-const HOME_ORDER = ["surgical-console", "ku-brand", "luminary", "asians", "esri"];
+/* Asian's stays live at /work/asians but is off the homepage: coursework-scale
+   next to the industry work. */
+const HOME_ORDER = ["surgical-console", "ku-brand", "esri", "luminary"];
 
 /* the hero's drifting cards: artwork, with a few work pictures mixed in */
 const T = (f: string) => `/images/thumbs/${f}.jpg`;
@@ -42,18 +43,11 @@ export default function Home() {
         <WorkIndex
           items={HOME_ORDER.map((slug) => cases.find((c) => c.slug === slug)!).map((c) => {
             const pic = c.card ?? c.cover;
-            return { slug: c.slug, title: c.title, years: c.years, short: c.short, pic: { src: pic.src, w: pic.w, h: pic.h }, contain: pic.src.endsWith(".svg") || c.slug === "esri" };
+            return { slug: c.slug, title: c.title, years: c.years, short: c.short, glance: c.glance, pic: { src: pic.src, w: pic.w, h: pic.h }, contain: pic.src.endsWith(".svg") || c.slug === "esri" };
           })}
         />
 
         <AboutSection />
-
-        <section className="wrap section" id="experience" aria-labelledby="career-h">
-          <div className="section__head">
-            <h2 className="h2" id="career-h">Experience</h2>
-          </div>
-          <Timeline />
-        </section>
 
         <section className="section section--art" id="artwork" aria-labelledby="art-h">
           {/* every piece, flown through on scroll; full-size files, since each one comes up large */}

@@ -2,11 +2,14 @@
 
 /* eslint-disable @next/next/no-img-element */
 import Link from "next/link";
-import { useRef, useState, type KeyboardEvent, type ReactNode } from "react";
+import { useEffect, useRef, useState, type KeyboardEvent, type ReactNode } from "react";
 import { profile } from "@/content/profile";
 import { about } from "@/content/about";
+import { Timeline } from "./Timeline";
 
-/* About, on the homepage: the portrait and the three numbers stay in view
+/* About, on the homepage: a heading, one line and a button under the case
+   studies. The button opens the full story and the Experience timeline in a
+   modal dialog, so the page stays about the work. Inside the dialog, the portrait stays in view
    beside four tabs (v1's own section titles), so only one part of the story
    is on screen at a time. Each tab carries an icon and the open one is filled
    with the primary blue. Tabs follow the ARIA pattern: arrow keys, Home, End.
@@ -36,6 +39,20 @@ export function AboutSection() {
   const refs = useRef<(HTMLButtonElement | null)[]>([]);
   const place = about.places[stop];
   const [featured, ...awards] = about.rec["Awards & honors"];
+  const dlg = useRef<HTMLDialogElement>(null);
+  const open = () => { if (!dlg.current?.open) dlg.current?.showModal(); };
+  const close = () => dlg.current?.close();
+
+  // #about-me in the address opens it, on load and on later hash changes
+  useEffect(() => {
+    const check = () => { if (location.hash === "#about-me") open(); };
+    check();
+    addEventListener("hashchange", check);
+    return () => removeEventListener("hashchange", check);
+  }, []);
+  function onClose() {
+    if (location.hash === "#about-me") history.replaceState(null, "", location.pathname + location.search);
+  }
 
   function onKey(e: KeyboardEvent<HTMLDivElement>) {
     const last = TABS.length - 1;
@@ -57,17 +74,30 @@ export function AboutSection() {
 
   return (
     <section className="wrap section" id="about" aria-labelledby="about-h">
-      <div className="section__head">
-        <h2 className="h2" id="about-h">About</h2>
+      <div className="about-mini">
+        <h2 className="h2" id="about-h">About me</h2>
+        <p className="about-lede">{about.teaser}</p>
+        <button type="button" className="btn btn--line" aria-haspopup="dialog" onClick={open}>More about me and my experience</button>
+      </div>
+
+      <dialog
+        ref={dlg}
+        className="rdlg adlg"
+        aria-labelledby="about-dlg-h"
+        onClose={onClose}
+        onClick={(e) => { if (e.target === dlg.current) close(); }}
+      >
+      <div className="rdlg__in">
+      <button type="button" className="rdlg__close" onClick={close}>
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6 6 18" /></svg>
+        <span className="sr-only">Close</span>
+      </button>
+      <div className="adlg__head">
+        <img className="adlg__avatar" src="/images/index-01-5d96ff329c.webp" alt="" width={900} height={900} loading="lazy" />
+        <h2 className="rdlg__name" id="about-dlg-h">About me</h2>
       </div>
 
       <div className="about">
-        <div className="about__side">
-          <figure className="portrait">
-            <img src="/images/index-01-5d96ff329c.webp" alt="Portrait of Manahari Dahal" width={900} height={900} loading="lazy" />
-          </figure>
-        </div>
-
         <div className="about__main">
           <div className="tabs" role="tablist" aria-label="About" onKeyDown={onKey}>
             {TABS.map((t, i) => (
@@ -172,6 +202,13 @@ export function AboutSection() {
           </div>
         </div>
       </div>
+
+      <section className="adlg__exp" aria-labelledby="career-h">
+        <h3 className="h2" id="career-h">Experience</h3>
+        <Timeline />
+      </section>
+      </div>
+      </dialog>
     </section>
   );
 }

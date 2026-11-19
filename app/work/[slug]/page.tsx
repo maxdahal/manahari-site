@@ -41,7 +41,8 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
 export default async function CasePage({ params }: { params: Promise<{ slug: string }> }) {
   const c = getCase((await params).slug);
   if (!c) notFound();
-  const others = cases.filter((o) => o.slug !== c.slug);
+  /* Asian's is off the homepage, so it isn't suggested here either */
+  const others = cases.filter((o) => o.slug !== c.slug && o.slug !== "asians");
   /* v1's acts, in order: each groups the parts that follow it */
   const acts: { id: string; title: string; parts: typeof c.sections }[] = [];
   for (const s of c.sections) {

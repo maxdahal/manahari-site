@@ -24,13 +24,13 @@ Manahari both designs and builds. The portfolio itself is evidence: real, workin
 - Design leads may share a case-study link with their team.
 
 ## Capabilities and Constraints
-- Pages: home (with About, Experience and Artwork sections) and four case studies (Surgical Console, KU Brand, Asian's, Esri Calcite). The recruiter summary is a dialog available from every page.
+- Pages: home (with a short About section that opens the full About and Experience in a dialog, and Artwork) and case studies. Homepage grid (Nov 2026): Surgical Console, KU Brand, Esri Calcite, Luminary, each card with a Role / Domain / Impact strip. Asian's stays live at /work/asians but is off the homepage and out of "More projects". Header nav: Work, About, Contact; Resume stays in the hero, the For recruiters dialog, the phone menu and the footer. Artwork is linked from the footer only. The recruiter summary is a dialog available from every page.
 - Static export only: no server, forms or analytics backend.
 - Luna Surgical Console is under NDA. The owner approved naming Luna and Karl Storz; screens stay redrawn, arm colors are stand-ins (lavender, sand, pine, pink), and clinical data is hidden. Don't say how the project ended; talk only about the owner's work.
 - Luminary (App Team Carolina) is in development and under NDA: show only our own low-fi greyscale wireframes (`public/images/luminary-*.svg`, made by a script), always captioned as illustrations. The prototype can't be shown; offer a walkthrough on a call.
 
 ## Brand Commitments
-- Name: Manahari Dahal. Roles: UX engineer, product designer.
+- Name: Manahari Dahal. Title: Product Designer, framed as "product designer with frontend engineering depth" (owner's choice, Nov 2026). Avoid slash titles and "designer who can code".
 - Voice: crisp and executive. Impact first, short sentences, minimal story, built for skimming. Numbers always keep their honest caveats.
 - Colors: Himalayan blue `#003893` for action and rhododendron crimson `#DC143C` for annotation, on ink `#191C24` neutrals. Both come from Nepal, where Manahari is from; a footer line says so. Chosen by the owner after an impeccable colorize pass (Nov 2026); generated with the color-palette skill into `styles/tokens.css`.
 

@@ -41,7 +41,8 @@ h1, h2, h3, h4, p, figure, blockquote, dl, dd { margin: 0; }
 h1, h2, h3, h4, dt { text-wrap: balance; }
 ul, ol { margin: 0; padding: 0; list-style: none; }
 button { font: inherit; color: inherit; }
-a { color: var(--color-link); text-decoration-thickness: 1px; text-underline-offset: 0.2em; }
+/* every text link is underlined; buttons, cards, the nav and the logo opt out with their own text-decoration: none */
+a { color: var(--color-link); text-decoration-line: underline; text-decoration-thickness: 1px; text-underline-offset: 0.2em; }
 a:hover { text-decoration-thickness: 2px; }
 :focus-visible { outline: 2px solid var(--color-ring); outline-offset: 3px; border-radius: 3px; }
 .num { font-variant-numeric: tabular-nums; }
@@ -55,9 +56,9 @@ html { scrollbar-color: var(--color-neutral-400) transparent; }
 
 /* ---------- Header and footer ---------- */
 
-.site-foot { margin-top: clamp(96px, 12vw, 160px); border-top: 1px solid var(--color-border); padding-block: 56px 40px; }
+.site-foot { margin-top: clamp(96px, 12vw, 160px); padding-block: 56px 40px; }
 .site-foot__ask { font-size: var(--t-lead); color: var(--color-muted-foreground); max-width: 36ch; }
-.site-foot__mail { display: inline-block; margin-top: 12px; font-size: clamp(1.5rem, 0.5rem + 4.4vw, 4.25rem); font-weight: 800; letter-spacing: -0.04em; line-height: 1.05; color: var(--color-foreground); text-decoration: none; overflow-wrap: anywhere; }
+.site-foot__mail { display: inline-block; margin-top: 12px; font-size: clamp(1.5rem, 0.5rem + 4.4vw, 4.25rem); font-weight: 800; letter-spacing: -0.04em; line-height: 1.05; color: var(--color-foreground); text-decoration: underline; text-decoration-thickness: 0.05em; text-underline-offset: 0.14em; overflow-wrap: anywhere; }
 .site-foot__mail:hover { color: var(--color-link); }
 .site-foot__row { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 16px 32px; margin-top: 48px; color: var(--color-muted-foreground); font-size: var(--t-small); }
 .site-foot__row nav { display: flex; flex-wrap: wrap; gap: 8px 24px; }
@@ -977,6 +978,23 @@ html.theme-fade, html.theme-fade *, html.theme-fade *::before, html.theme-fade *
   .about__side .portrait { max-width: 160px; }
 }
 
+/* About: the short homepage section, and the full story in a dialog */
+.about-mini { display: grid; justify-items: start; gap: 20px; max-width: 46rem; }
+.about-mini .about-lede { margin: 0; }
+.adlg { width: min(1080px, calc(100vw - 32px)); }
+/* one column, so the four tabs get the dialog's full width */
+.adlg__head { display: flex; align-items: center; gap: 16px; padding-right: 56px; margin-bottom: 32px; }
+.adlg__avatar { flex: none; width: 64px; height: 64px; border-radius: 50%; object-fit: cover; }
+.adlg .rdlg__name { margin: 0; }
+.adlg .about { display: block; }
+/* below the width four tabs need, a 2 × 2 grid instead of a row that hides its end */
+@media (max-width: 900px) {
+  .adlg .tabs { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); width: 100%; border-radius: 16px; overflow: visible; }
+  .adlg .tabs [role="tab"] { min-height: 48px; padding: 6px 10px; border-radius: 12px; white-space: normal; line-height: 1.2; font-size: 0.875rem; justify-content: flex-start; text-align: left; }
+}
+.adlg__exp { margin-top: clamp(40px, 5vw, 64px); padding-top: clamp(32px, 4vw, 48px); border-top: 1px solid var(--color-border); }
+.adlg__exp .h2 { margin-bottom: 24px; }
+
 /* =================================================================
    For recruiters: a modal dialog over the current page
    ================================================================= */
@@ -1239,6 +1257,11 @@ button.nav__cta:focus-visible { outline: 2px solid var(--color-ring); outline-of
 .wa__link:focus-visible::after { outline: 2px solid var(--color-ring); outline-offset: 3px; }
 .wa__row:hover .wa__link { text-decoration: underline; text-underline-offset: 5px; text-decoration-thickness: 2px; }
 .wa__short { margin: 0; font-size: 1.0625rem; line-height: 1.6; color: var(--color-muted-foreground); }
+/* the card's metadata strip: three labelled lines a recruiter can scan in seconds */
+.wa__meta { display: grid; gap: 10px; margin: 4px 0 0; padding-top: 14px; border-top: 1px solid var(--wa-line); width: 100%; }
+.wa__meta div { display: grid; grid-template-columns: 4.75rem 1fr; gap: 12px; align-items: baseline; }
+.wa__meta dt { font-size: 0.75rem; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; color: var(--color-muted-foreground); }
+.wa__meta dd { margin: 0; font-size: 1rem; line-height: 1.5; color: var(--color-foreground); }
 .wa__go { margin-top: 8px; display: grid; place-items: center; width: 44px; height: 44px; border: 1px solid color-mix(in srgb, var(--color-foreground) 22%, transparent); border-radius: 50%; color: var(--color-foreground); transition: background-color 200ms ease, color 200ms ease, border-color 200ms ease, transform 300ms ease; }
 .wa__go svg { width: 18px; height: 18px; }
 .wa__row:hover .wa__go { background: var(--color-foreground); border-color: var(--color-foreground); color: var(--color-background); transform: rotate(45deg); }
@@ -1345,3 +1368,18 @@ button.nav__cta:focus-visible { outline: 2px solid var(--color-ring); outline-of
 @keyframes navIn { from { opacity: 0; transform: translateY(-6px); } to { opacity: 1; transform: none; } }
 @media (prefers-reduced-motion: reduce) { .site-head[data-open] .nav { animation: none; } }
 
+/* Film grain over the whole page, in both themes: one small tiled noise
+   texture on a fixed layer that ignores the pointer. A touch stronger in dark,
+   where grain reads less. Static, so nothing moves under reduced motion. */
+:root { --grain-opacity: 0.05; --grain: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 0.5 0 0 0 0 0.5 0 0 0 0 0.5 0 0 0 1.4 -0.2'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E"); }
+:root.dark { --grain-opacity: 0.07; }
+@media (prefers-color-scheme: dark) { :root:not(.light) { --grain-opacity: 0.07; } }
+body::after {
+  content: ""; position: fixed; inset: 0; z-index: 2147483000; pointer-events: none;
+  opacity: var(--grain-opacity);
+  background-image: var(--grain);
+  background-size: 180px 180px;
+}
+/* dialogs open in the top layer, above the page's grain, so they carry their own */
+.rdlg::after { content: ""; position: absolute; inset: 0; pointer-events: none; border-radius: inherit; opacity: var(--grain-opacity); background-image: var(--grain); background-size: 180px 180px; }
+@media print { body::after { display: none; } }

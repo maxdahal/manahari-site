@@ -4,7 +4,7 @@ export const profile = {
   linkedin: "https://www.linkedin.com/in/manaharidahal/",
   dribbble: "https://dribbble.com/manaharidahal",
   resume: "/resume.pdf",
-  status: "Available for UX design, product design and UX engineering roles",
+  status: "Available for product designer roles",
 };
 
 export const artwork = [

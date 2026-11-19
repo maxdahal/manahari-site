@@ -45,6 +45,8 @@ export type CaseStudy = {
   heading?: string;
   /* one-line card description */
   short: string;
+  /* the homepage card's metadata strip: role, domain, impact, readable in seconds */
+  glance?: { role: string; domain: string; impact: string };
   problem: string;
   part?: string;
   years: string;

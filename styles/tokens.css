@@ -53,31 +53,31 @@
   --color-redline-950: #2F040D;
 
   /* Light mode semantic tokens */
-  --color-background: var(--color-neutral-50);
+  --color-background: #F3F0E8;
   --color-foreground: var(--color-neutral-950);
-  --color-card: #FBFCFD;
+  --color-card: #FAF8F3;
   --color-card-foreground: var(--color-neutral-950);
-  --color-popover: #FBFCFD;
+  --color-popover: #FAF8F3;
   --color-popover-foreground: var(--color-neutral-950);
   --color-primary: #003893;
   --color-primary-foreground: var(--color-neutral-50);
   --color-primary-hover: var(--color-primary-900);
   --color-secondary: var(--color-primary-100);
   --color-secondary-foreground: var(--color-primary-900);
-  --color-muted: var(--color-neutral-100);
+  --color-muted: #E9E5DB;
   --color-muted-foreground: var(--color-neutral-600);
   --color-accent: var(--color-primary-100);
   --color-accent-foreground: var(--color-primary-900);
   --color-destructive: #D42222;
   --color-destructive-foreground: var(--color-neutral-50);
-  --color-border: var(--color-neutral-200);
+  --color-border: #DAD5C9;
   --color-input: var(--color-neutral-500);
   --color-ring: #003893;
   --color-link: #003893;
   --color-error: #B91C1C;
   --color-redline: var(--color-redline-500);
   --color-redline-foreground: var(--color-neutral-50);
-  --color-redline-text: var(--color-redline-500);
+  --color-redline-text: var(--color-redline-600);
   --radius: 0.5rem;
 }
 

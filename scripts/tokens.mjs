@@ -8,15 +8,16 @@ import {scale,contrast} from './palette.mjs';
 // Light: the seed blue with off-white text; dark: a vivid blue with off-white text.
 const SEED='#003893';
 const P=scale(SEED), R=scale('#DC143C');
-// No pure white or black (color-palette skill): the lightest surface is PAPER, a cool
-// off-white; text on dark or colour is ON (neutral-50); the darkest ink is neutral-950.
-const N=scale('#191C24'), PAPER='#FBFCFD', ON=N[50];
+// No pure white or black (color-palette skill): the light page is BG, a warm off-white
+// (owner's ask, Nov 2026), PAPER the lighter surface on it, with warm MUTED and LINE to
+// match; text on dark or colour is ON (neutral-50); the darkest ink is neutral-950.
+const N=scale('#191C24'), BG='#F3F0E8', PAPER='#FAF8F3', MUTED='#E9E5DB', LINE='#DAD5C9', ON=N[50];
 export const scales={primary:P,neutral:N,redline:R};
 export const light={
-  background:N[50], foreground:N[950], card:PAPER, 'card-foreground':N[950], popover:PAPER, 'popover-foreground':N[950],
+  background:BG, foreground:N[950], card:PAPER, 'card-foreground':N[950], popover:PAPER, 'popover-foreground':N[950],
   primary:SEED, 'primary-foreground':ON, 'primary-hover':P[900], secondary:P[100], 'secondary-foreground':P[900],
-  muted:N[100], 'muted-foreground':N[600], accent:P[100], 'accent-foreground':P[900],
-  destructive:'#D42222', 'destructive-foreground':ON, border:N[200], input:N[500], ring:SEED, link:SEED, error:'#B91C1C', redline:R[500], 'redline-foreground':ON, 'redline-text':R[500]};
+  muted:MUTED, 'muted-foreground':N[600], accent:P[100], 'accent-foreground':P[900],
+  destructive:'#D42222', 'destructive-foreground':ON, border:LINE, input:N[500], ring:SEED, link:SEED, error:'#B91C1C', redline:R[500], 'redline-foreground':ON, 'redline-text':R[600]};
 export const dark={
   background:N[950], foreground:N[50], card:N[900], 'card-foreground':N[50], popover:N[900], 'popover-foreground':N[50],
   primary:'#1462EC', 'primary-foreground':ON, 'primary-hover':P[500], secondary:P[950], 'secondary-foreground':P[100],

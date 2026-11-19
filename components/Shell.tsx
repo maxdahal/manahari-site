@@ -4,11 +4,12 @@ import { ThemeToggle } from "./ThemeToggle";
 import { MenuButton } from "./MenuButton";
 import { RecruiterDialog } from "./RecruiterDialog";
 
+/* in-page sections; Artwork sits at the end of the homepage, reachable from the footer */
 const NAV = [
   { href: "/#work", label: "Work" },
   { href: "/#about", label: "About" },
-  { href: "/#artwork", label: "Artwork" },
 ];
+const FOOT_NAV = [...NAV, { href: "/#artwork", label: "Artwork" }];
 
 /* Full-width bar: wordmark left; links, the recruiter pill and the theme
    toggle right. Clear at the top of the page, frosted with a hairline once
@@ -27,6 +28,7 @@ export function Header({ current }: { current?: string }) {
               {n.label}
             </Link>
           ))}
+          <a href={`mailto:${profile.email}`}>Contact</a>
           {/* phones: the full-screen menu ends with status and the ways to reach me */}
           <span className="nav__more">
             <span className="status"><i aria-hidden="true" />{profile.status}</span>
@@ -65,7 +67,7 @@ export function Footer() {
             <a href={profile.dribbble} target="_blank" rel="noopener">Dribbble</a>
           </nav>
           <nav className="site-foot__site" aria-label="Site">
-            {NAV.map((n) => (
+            {FOOT_NAV.map((n) => (
               <Link prefetch={false} key={n.href} href={n.href}>{n.label}</Link>
             ))}
           </nav>

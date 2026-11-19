@@ -14,14 +14,14 @@ const SITE = process.env.NEXT_PUBLIC_SITE_URL ?? "http://localhost:3000";
 export const metadata: Metadata = {
   metadataBase: new URL(SITE),
   title: { default: "Manahari Dahal", template: "%s · Manahari Dahal" },
-  description: "Manahari Dahal, a UX and product designer in the US. I design products and build them in code. Case studies: Luna Surgical Console, Luminary, KU Brand, Asian's and Esri Calcite.",
+  description: "Manahari Dahal, a product designer with frontend engineering depth: design systems, developer tooling and high-stakes software. Case studies: Luna Surgical Console (Karl Storz), KU Brand, Esri Calcite and Luminary.",
   openGraph: { type: "website", siteName: "Manahari Dahal", images: ["/images/card-console.webp"] },
   twitter: { card: "summary_large_image" },
 };
 
 export const viewport: Viewport = {
   themeColor: [
-    { media: "(prefers-color-scheme: light)", color: "#F6F7F8" },
+    { media: "(prefers-color-scheme: light)", color: "#F3F0E8" },
     { media: "(prefers-color-scheme: dark)", color: "#15171E" },
   ],
 };

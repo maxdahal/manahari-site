@@ -11,14 +11,14 @@ The portfolio is a handoff document: daylight spec paper, ink type, Himalayan bl
 - Himalayan blue #003893 (the blue of Nepal's flag): buttons, links, focus, text selection, the rail tint. Light: the seed with off-white text 9.9:1, hover #002766, tints #E3EDFC. Dark: #1462EC with off-white text 4.9:1 (3.4:1 against the page), hover #005EF5, links #86B2F9 (8.3:1), tints #001433.
 - Rhododendron #DC143C (crimson, Nepal's national flower): the redline, annotation only. #E0153D light (off-white text), #EB5270 dark.
 - Uses colours, never the flag's shape or emblems.
-- No pure white or black anywhere (color-palette skill). The lightest surface is paper #FBFCFD (cards, popovers); text on dark or colour is neutral-50 #F6F7F8; the darkest ink is neutral-950 #15171E. Shadows and scrims are tinted with that ink (`rgb(21 23 30 / a)`), highlights with neutral-50 (`rgb(246 247 248 / a)`). Exceptions, on purpose: `#000` inside `mask-image` (masks read alpha only), and KU's own brand White in the KU sandbox, which is a real brand value. Destructive red is #D42222 so off-white text passes.
+- No pure white or black anywhere (color-palette skill). The light page is a warm off-white #F3F0E8 (owner's ask, Nov 2026), with paper #FAF8F3 for cards and popovers, muted #E9E5DB and border #DAD5C9 to match; light-mode annotation text uses redline-600 to keep AA on it. Text on dark or colour is neutral-50 #F6F7F8; the darkest ink is neutral-950 #15171E. Shadows and scrims are tinted with that ink (`rgb(21 23 30 / a)`), highlights with neutral-50 (`rgb(246 247 248 / a)`). Exceptions, on purpose: `#000` inside `mask-image` (masks read alpha only), and KU's own brand White in the KU sandbox, which is a real brand value. Destructive red is #D42222 so off-white text passes.
 - The stage (hero, case cards) is the ink neutral #15171E in both themes. Its action is a paper pill with ink text; blue-300 #86B2F9 shows only in the arrow chip, the focus ring and the Resume underline on hover, so the hero never reads as one bright accent on black.
 - Browser surfaces: selection is the green tint, the caret and form controls take the action green, the scrollbar is a muted ink thumb.
 | Role | Light | Dark | Rule |
 |---|---|---|---|
-| background | #F6F7F8 | #15171E | spec paper |
+| background | #F3F0E8 | #15171E | warm spec paper |
 | foreground | #15171E | #F6F7F8 | ink |
-| card | paper #FBFCFD | #2A2F3C | raised surfaces only |
+| card | paper #FAF8F3 | #2A2F3C | raised surfaces only |
 | primary | Himalayan blue #003893 | #1462EC (off-white text) | actions and links only |
 | muted-foreground | #545D78 | #B5BAC9 | captions, meta |
 | border | #D9DCE3 | #383F51 | hairlines |
@@ -99,7 +99,9 @@ The portfolio is a handoff document: daylight spec paper, ink type, Himalayan bl
 - Tailwind runs as a PostCSS plugin (`postcss.config.mjs`), so CSS edits reach `npm run dev` live. Dev writes to `.next-dev`, builds to `.next`, so a build never clobbers a running dev server.
 
 ## Site structure
-- One homepage carries everything except the case studies: hero, Case studies, About, Experience, Artwork. `/about`, `/artwork` and `/recruiter` redirect to `/#about`, `/#artwork` and `/#recruiter` (vercel.json).
+- One homepage carries everything except the case studies: hero, Case studies, About, Artwork. About is a short section (heading, one line, a button) that opens a native modal `<dialog>` (`components/AboutSection.tsx`, also `#about-me`) holding the four About tabs in one column and, under them, the Experience timeline. Header nav: Work, About, Contact (mailto), plus For recruiters; Artwork is in the footer nav only.
+- Texture: a static film grain (tiled SVG noise, `--grain`) on a fixed `body::after` layer and on each dialog, opacity 5% light / 7% dark.
+- Links: every text link is underlined (Tailwind's reset removes it, so `a` sets it back); buttons, cards, nav, logo and the TOC opt out. `/about`, `/artwork` and `/recruiter` redirect to `/#about`, `/#artwork` and `/#recruiter` (vercel.json).
 - About (`components/AboutSection.tsx`): portrait and the three numbers beside four ARIA tabs named with v1's section titles (About me, My journey so far, Skills & expertise, Research & recognition). Each tab has an icon; the open one is filled primary blue. The journey is a route map: five stops on one line that fills blue up to the chosen stop (Nepal's dot in the flag's two colours), with that stop's story in a card below; newest stop chosen first. Research rows carry status badges (In progress blue, Accepted green, Presented crimson; all AA on their tints in both themes); awards are cards with a medal, the Michael Hooker Fellow card featured in primary blue. Phones: tabs become a 2 × 2 grid and stop dates move into the card.
 - Experience (`components/Timeline.tsx`): a key (Work, Research, Education) with the same colour as a dot on each label; shaded year bands with each year label centred over its band; pointing at a row dims the others; a Now line. Below 860px it becomes a vertical rail of coloured dots.
 - Artwork (`components/DollyStage.tsx`): a dolly shot through all ten pieces. The section is pinned and the page scroll moves the camera down a corridor of pieces (CSS 3D, no WebGL), alternating left and right; "Keep scrolling to see all the artwork" (owner-requested copy) is a frosted pill under the heading, over the pieces, fading at the last one; a counter and progress bar sit underneath. Only the piece in focus takes clicks; any piece opens the lightbox; tabbing to a piece moves the camera to it. Reduced motion gets the masonry grid.

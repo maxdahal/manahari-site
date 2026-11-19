@@ -20,7 +20,7 @@ export function WorkIndex({ items }: { items: IndexCase[] }) {
   return (
     <section className="wrap ws" id="work" aria-labelledby="work-h">
       <header className="wa__head">
-        <h2 className="h2" id="work-h">Case studies</h2>
+        <h2 className="h2" id="work-h">Case studies <span className="wa__count">{items.length}</span></h2>
       </header>
       <ol className="wa">
         {items.map((c, i) => (
@@ -30,7 +30,7 @@ export function WorkIndex({ items }: { items: IndexCase[] }) {
               <img src={c.pic.src} alt="" width={c.pic.w} height={c.pic.h} loading={i < 2 ? "eager" : "lazy"} />
             </span>
             <div className="wa__text">
-              <p className="wa__years">{c.years}</p>
+              <p className="wa__years"><span className="wa__num">{i + 1}.</span>{c.years}</p>
               <h3 className="wa__title">
                 <Link prefetch={false} href={`/work/${c.slug}`} className="wa__link">{c.title}</Link>
               </h3>

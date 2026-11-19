@@ -808,11 +808,12 @@ main { overflow-x: clip; }
   .case-body .toc .toc__acts { display: flex; gap: 4px; overflow-x: auto; scrollbar-width: none; }
   .case-body .toc .toc__acts::-webkit-scrollbar { display: none; }
   .case-body .toc .toc__acts li { flex: none; }
-  .case-body .toc .toc__acts a { display: flex; align-items: center; min-height: 44px; padding: 0 10px; font-size: 0.875rem; white-space: nowrap; color: var(--color-muted-foreground); border-bottom: 2px solid transparent; }
-  .case-body .toc .toc__acts a[data-open] { color: var(--color-foreground); border-bottom-color: var(--color-redline); }
-  .case-body .toc .toc__acts a[aria-current="true"] { background: none; border-radius: 0; }
+  .case-body .toc .toc__acts a { display: flex; align-items: center; min-height: 44px; padding: 0 12px; font-size: 0.875rem; white-space: nowrap; color: var(--color-muted-foreground); }
   .case-body .toc .toc__acts a::before { display: none; }
-  .case-body .toc .toc__acts a[data-open] { font-weight: 700; }
+  /* the open act carries the same faded band as the desktop rail's active item */
+  .case-body .toc .toc__acts a[data-open] { color: var(--color-foreground); font-weight: 700; }
+  .case-body .toc .toc__acts a[data-open]::before { display: block; content: ""; position: absolute; z-index: -1; inset: 7px 0; border-radius: 8px; background: linear-gradient(to right, color-mix(in srgb, var(--color-primary) var(--band-a), transparent), color-mix(in srgb, var(--color-primary) var(--band-b), transparent) 60%, transparent); animation: toc-fade 450ms ease-out; }
+  .case-body .toc .toc__acts a[data-level]:hover { color: var(--color-foreground); }
 }
 
 /* outcomes: their own band under the cover, out of the rail */

@@ -97,7 +97,9 @@ export function Toc({ acts }: { acts: Act[] }) {
     if (!list || !link || list.scrollWidth <= list.clientWidth) return;
     const left = link.offsetLeft - list.offsetLeft;
     if (left < list.scrollLeft || left + link.offsetWidth > list.scrollLeft + list.clientWidth) {
-      list.scrollTo({ left: Math.max(0, left - 16), behavior: "auto" });
+      // centre it, so the acts either side stay readable
+      const smooth = !window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+      list.scrollTo({ left: Math.max(0, left - (list.clientWidth - link.offsetWidth) / 2), behavior: smooth ? "smooth" : "auto" });
     }
   }, [openAct]);
 

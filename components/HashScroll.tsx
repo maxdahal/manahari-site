@@ -42,7 +42,7 @@ export function HashScroll() {
       e.stopPropagation();
       history.pushState(null, "", url.hash);
       // the phone menu closes first, so the jump measures the closed header
-      dispatchEvent(new Event("site:jump"));
+      dispatchEvent(new CustomEvent("site:jump", { detail: { id } }));
       jumpTo(id, true);
     }
     document.addEventListener("click", onClick, true);

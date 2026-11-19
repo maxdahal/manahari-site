@@ -24,8 +24,22 @@ export function Toc({ acts }: { acts: Act[] }) {
 
   useEffect(() => {
     let frame = 0;
+    /* a tapped link holds the highlight while the page glides to it, so it
+       doesn't hop through every section in between */
+    let target: string | null = null;
+    let settle = 0;
+    const release = () => { target = null; clearTimeout(settle); update(); };
+    const onJump = (e: Event) => {
+      const id = (e as CustomEvent<{ id?: string }>).detail?.id;
+      if (!id || !ids.includes(id)) return;
+      target = id;
+      setActive(id);
+      clearTimeout(settle);
+      settle = window.setTimeout(release, 1500); // fallback where scrollend never fires
+    };
     const update = () => {
       frame = 0;
+      if (target) return;
       const line = headerOffset() + 8;
       let current = ids[0];
       for (const id of ids) {
@@ -36,10 +50,26 @@ export function Toc({ acts }: { acts: Act[] }) {
       setActive(current);
     };
     const onScroll = () => { if (!frame) frame = requestAnimationFrame(update); };
+    const onSettle = () => { if (target) release(); };
+    // the reader taking over mid-glide hands the highlight back to the scroll position
+    const onTakeOver = () => { if (target) release(); };
     update();
     window.addEventListener("scroll", onScroll, { passive: true });
     window.addEventListener("resize", onScroll);
-    return () => { window.removeEventListener("scroll", onScroll); window.removeEventListener("resize", onScroll); cancelAnimationFrame(frame); };
+    window.addEventListener("site:jump", onJump);
+    window.addEventListener("scrollend", onSettle);
+    window.addEventListener("wheel", onTakeOver, { passive: true });
+    window.addEventListener("touchstart", onTakeOver, { passive: true });
+    return () => {
+      window.removeEventListener("scroll", onScroll);
+      window.removeEventListener("resize", onScroll);
+      window.removeEventListener("site:jump", onJump);
+      window.removeEventListener("scrollend", onSettle);
+      window.removeEventListener("wheel", onTakeOver);
+      window.removeEventListener("touchstart", onTakeOver);
+      cancelAnimationFrame(frame);
+      clearTimeout(settle);
+    };
     // ids is derived from acts
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [acts]);

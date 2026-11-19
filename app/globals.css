@@ -797,7 +797,7 @@ main { overflow-x: clip; }
 .toc__acts a:focus-visible { outline-offset: 2px; border-radius: 6px; }
 /* the section being read: the label in full ink and weight on a soft redline tint */
 .toc__acts a { position: relative; border-radius: 8px; }
-.toc__acts a { isolation: isolate; }
+.toc__acts a { isolation: isolate; -webkit-tap-highlight-color: transparent; } /* the band is the tap feedback; no browser flash */
 .toc__acts a[aria-current="true"] { color: var(--color-foreground); font-weight: 700; }
 .toc__acts a[aria-current="true"]::before { content: ""; position: absolute; z-index: -1; inset: 0 0 0 22px; border-radius: 8px; background: linear-gradient(to right, color-mix(in srgb, var(--color-primary) 16%, transparent), color-mix(in srgb, var(--color-primary) 6%, transparent) 55%, transparent); animation: toc-fade 450ms ease-out; }
 @keyframes toc-fade { from { opacity: 0; } to { opacity: 1; } }

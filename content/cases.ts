@@ -68,7 +68,7 @@ const SurgicalConsole: CaseStudy = {
           "type": "list",
           "items": [
             "I split the work into three projects: arm identity, a gallery with a video editor, and live annotation.",
-            "I phased them as crawl, walk, run, so engineering could ship each step instead of waiting for one large redesign.",
+            "I phased them as crawl, walk, run, so engineering could ship each step as soon as it was ready.",
             "I wrote the component rules first: one alert scale (green running, amber warning, red error, grey inactive), with every state shown by color, word and icon together.",
             "Each arm kept its own color as a thin bar. The wall monitor showed only the video and the surgeon’s marks, and pins got numbers so they could be called out by voice.",
             "Annotation took six versions before it became a named mode with a clear way out.",
@@ -1043,7 +1043,7 @@ const SurgicalConsole: CaseStudy = {
             },
             {
               "term": "Dynamic case setup workflow",
-              "text": "Open setup tasks stay as full panels, and finished tasks shrink to one line. Each task shows who owns it, Bedside or Console, so staff can work at the same time. Instead of: same-size cards that made staff wait for each other and read past finished tasks. Setup time became the longest single task, not the sum of all tasks."
+              "text": "Open setup tasks stay as full panels, and finished tasks shrink to one line. Each task shows who owns it, Bedside or Console, so staff can work at the same time. The old same-size cards made staff wait for each other and read past finished tasks. Setup time now equals the longest single task, because the tasks run side by side."
             }
           ]
         }
@@ -1166,7 +1166,7 @@ const SurgicalConsole: CaseStudy = {
             {
               "tag": "H3",
               "title": "User Control and Freedom",
-              "text": "I made a separate mode with a check button to exit, instead of a confusing toggle.",
+              "text": "I made annotation a separate mode with a check button to exit. The old toggle confused people.",
               "fixed": true
             },
             {
@@ -1340,7 +1340,7 @@ const SurgicalConsole: CaseStudy = {
       "text": "A running prototype caught a tap-through bug."
     },
     {
-      "title": "Design system states, not controls",
+      "title": "Design the states before the controls",
       "text": "Decide how modes switch before polishing buttons."
     },
     {

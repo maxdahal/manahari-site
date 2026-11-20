@@ -4,6 +4,7 @@ import { ThemeToggle } from "./ThemeToggle";
 import { MenuButton } from "./MenuButton";
 import { NavSpy } from "./NavSpy";
 import { RecruiterDialog } from "./RecruiterDialog";
+import { BlackHole } from "./BlackHole";
 
 /* in-page sections; Artwork sits at the end of the homepage, reachable from the footer */
 const NAV = [
@@ -56,9 +57,11 @@ function NepalDots() {
   return <span className="nepal-dots" aria-hidden="true"><i style={{ background: "#003893" }} /><i style={{ background: "#DC143C" }} /></span>;
 }
 
+/* The footer is a dark stage, like the hero, so the page opens and closes on the
+   same panel; the dark tokens apply inside it in both themes. */
 export function Footer() {
   return (
-    <footer className="site-foot">
+    <footer className="site-foot dark">
       <div className="wrap">
         <p className="site-foot__ask">{profile.status}</p>
         <a className="site-foot__mail" href={`mailto:${profile.email}`}>{profile.email}</a>
@@ -78,6 +81,7 @@ export function Footer() {
         <p className="site-foot__colors">
           <NepalDots />
           Colors from home: Himalayan blue and rhododendron, Nepal’s national flower.
+          <BlackHole />
         </p>
       </div>
     </footer>

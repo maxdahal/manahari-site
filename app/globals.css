@@ -56,7 +56,18 @@ html { scrollbar-color: var(--color-neutral-400) transparent; }
 
 /* ---------- Header and footer ---------- */
 
-.site-foot { margin-top: clamp(96px, 12vw, 160px); padding-block: 56px 40px; }
+.site-foot { position: relative; isolation: isolate; overflow: hidden; margin-top: clamp(96px, 12vw, 160px); padding-block: clamp(120px, 14vw, 200px) 40px; }
+/* a dark stage, the hero's bookend: inset, rounded, and dark in both themes */
+.site-foot.dark { max-width: 1680px; margin-bottom: 12px; margin-inline: max(clamp(8px, 1.5vw, 24px), calc((100% - 1680px) / 2)); border-radius: clamp(22px, 2.2vw, 34px); background: var(--stage); color: var(--color-foreground); box-shadow: 0 0 0 1px var(--stage-line); }
+@media (max-width: 700px) { .site-foot.dark { padding-top: 168px; } }
+.site-foot.dark ::selection { background: #86B2F9; color: #15171E; }
+/* the black hole behind the footer (components/BlackHole.tsx), kept faint on the
+   left, where the email sits */
+.dust { position: absolute; inset: 0; z-index: -1; width: 100%; height: 100%; pointer-events: none;
+  mask-image: linear-gradient(to right, rgb(0 0 0 / 0.45), #000 48%); }
+.dust__btn { flex: none; display: inline-grid; place-items: center; width: 44px; height: 44px; margin-left: auto; border: 1px solid var(--color-border); border-radius: 50%; background: var(--color-background); color: var(--color-muted-foreground); cursor: pointer; transition: color 160ms ease, border-color 160ms ease; }
+.dust__btn:hover { color: var(--color-foreground); border-color: var(--color-input); }
+.dust__btn:focus-visible { outline: 2px solid var(--color-ring); outline-offset: 2px; }
 .site-foot__ask { font-size: var(--t-lead); color: var(--color-muted-foreground); max-width: 36ch; }
 .site-foot__mail { display: inline-block; margin-top: 12px; font-size: clamp(1.5rem, 0.5rem + 4.4vw, 4.25rem); font-weight: 800; letter-spacing: -0.04em; line-height: 1.05; color: var(--color-foreground); text-decoration: underline; text-decoration-thickness: 0.05em; text-underline-offset: 0.14em; overflow-wrap: anywhere; }
 .site-foot__mail:hover { color: var(--color-link); }
@@ -206,6 +217,7 @@ html { scrollbar-color: var(--color-neutral-400) transparent; }
 .art-item { position: relative; display: block; width: 100%; padding: 0; border: 0; border-radius: 6px; overflow: hidden; background: none; cursor: zoom-in; }
 .art-item img { width: 100%; transition: transform 400ms var(--ease); }
 .art-item:hover img { transform: scale(1.02); }
+@media (prefers-reduced-motion: reduce) { .art-item img { transition: none; } .art-item:hover img { transform: none; } }
 /* the artwork viewer: full screen, the piece scaled to fit a fixed stage, controls fixed in place */
 .lightbox { position: fixed; inset: 0; width: 100vw; height: 100dvh; max-width: none; max-height: none; margin: 0; padding: clamp(16px, 3vw, 40px); border: 0; background: transparent; color: #f4f5f6; overflow: hidden; }
 .lightbox[open] { display: grid; grid-template-rows: minmax(0, 1fr) auto; gap: 16px; }
@@ -756,7 +768,9 @@ main { overflow-x: clip; }
   .logo { min-height: 60px; }
   .site-head__end { display: contents; }
   .logo { margin-right: auto; }
-  .nav__cta { order: 1; padding: 0 14px; font-size: 0.9375rem; }
+  /* 44px tap targets on phones */
+  .nav__cta { order: 1; min-height: 44px; padding: 0 14px; font-size: 0.9375rem; }
+  .theme-btn, .menu-btn { width: 44px; height: 44px; }
   .theme-btn { order: 2; }
   .menu-btn { order: 3; display: inline-grid; }
   .nav { display: none; order: 4; width: 100%; margin: 0; flex-direction: column; align-items: stretch; gap: 2px; padding: 8px 0 14px; border-top: 1px solid var(--color-border); }

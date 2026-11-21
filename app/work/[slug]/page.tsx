@@ -18,11 +18,15 @@ const isShort = (blocks: Block[]) =>
 /* Story rows: a part with text and exactly one picture reads as text on one
    side and the picture on the other, swapping sides down the page, so the
    reading flow alternates between words and images. Parts with several
-   pictures, sandboxes or wide tables stay in one column. */
+   pictures, sandboxes or wide tables stay in one column, and so does a
+   picture wider than 2:1: in the side column a diagram strip shrinks until
+   its labels can't be read. */
 const STORY_TEXT = new Set<Block["type"]>(["p", "lead", "h3", "list", "pairs", "decisions", "stats", "link", "quote"]);
 function story(blocks: Block[]) {
   const media = blocks.filter((b) => b.type === "figure");
   if (media.length !== 1 || !blocks.every((b) => b.type === "figure" || STORY_TEXT.has(b.type))) return null;
+  const fig = media[0];
+  if (fig.type === "figure" && fig.img.w / fig.img.h > 2) return null;
   const text = blocks.filter((b) => b.type !== "figure");
   return text.length ? { text, media } : null;
 }

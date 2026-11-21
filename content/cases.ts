@@ -139,7 +139,7 @@ const SurgicalConsole: CaseStudy = {
               "caption": "Project 2 · An editor with still images only."
             }
           ],
-          "cols": 3
+          "cols": 1
         },
         {
           "type": "p",
@@ -196,27 +196,20 @@ const SurgicalConsole: CaseStudy = {
       "title": "Three projects",
       "blocks": [
         {
-          "type": "figure",
-          "img": {
-            "src": "/images/v1/surgical-console-04.webp",
-            "w": 2080,
-            "h": 396,
-            "alt": "Diagram: the three projects as three tiles, an arm color bar, a gallery with a play button, and a tablet sending marks to a screen"
-          },
-          "caption": ""
-        },
-        {
-          "type": "pairs",
+          "type": "projects",
           "items": [
             {
+              "icon": "arms",
               "term": "Arm identity",
               "text": "A color bar shows which arm has an error or warning."
             },
             {
+              "icon": "gallery",
               "term": "Gallery and video editor",
               "text": "A gallery named by procedure step, and a video editor."
             },
             {
+              "icon": "annotate",
               "term": "Live annotation",
               "text": "Marks made on a tablet appear on the main screen."
             }
@@ -766,7 +759,7 @@ const SurgicalConsole: CaseStudy = {
               "caption": "Videos"
             }
           ],
-          "cols": 3
+          "cols": 1
         },
         {
           "type": "gallery",
@@ -800,7 +793,7 @@ const SurgicalConsole: CaseStudy = {
               "caption": "Media popup"
             }
           ],
-          "cols": 5
+          "cols": 2
         }
       ]
     },
@@ -1263,27 +1256,20 @@ const SurgicalConsole: CaseStudy = {
       "title": "What I handed over",
       "blocks": [
         {
-          "type": "figure",
-          "img": {
-            "src": "/images/v1/surgical-console-19.webp",
-            "w": 2080,
-            "h": 394,
-            "alt": "Diagram: a prototype, a component library and a test plan"
-          },
-          "caption": ""
-        },
-        {
-          "type": "pairs",
+          "type": "projects",
           "items": [
             {
+              "icon": "prototype",
               "term": "A working prototype",
               "text": "Working flows for annotation, captures, the corner player, case setup and the gallery."
             },
             {
+              "icon": "library",
               "term": "A component library",
               "text": "One alert scale, the rules for using the existing arm colors, and the rules for how buttons act."
             },
             {
+              "icon": "plan",
               "term": "A test plan",
               "text": "A full test plan with 10 tasks and 9 ideas to test, with look-away frequency as the main measure."
             }

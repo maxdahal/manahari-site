@@ -35,6 +35,7 @@ export default function Home() {
       <Header />
       <main id="main">
         <HeroStage
+          backdrop="hole"
           status={profile.status}
           resume={profile.resume}
           pics={HERO_PICS}
@@ -55,7 +56,7 @@ export default function Home() {
         </section>
       </main>
       <AvailabilityRail status={profile.status} />
-      <Footer />
+      <Footer hole={false} />
     </>
   );
 }

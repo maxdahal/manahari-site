@@ -58,10 +58,11 @@ function NepalDots() {
 }
 
 /* The footer is a dark stage, like the hero, so the page opens and closes on the
-   same panel; the dark tokens apply inside it in both themes. */
-export function Footer() {
+   same panel; the dark tokens apply inside it in both themes. It carries the
+   black hole unless the page already has one in its hero (hole={false}). */
+export function Footer({ hole = true }: { hole?: boolean }) {
   return (
-    <footer className="site-foot dark">
+    <footer className="site-foot dark" data-hole={hole ? "" : undefined}>
       <div className="wrap">
         <p className="site-foot__ask">{profile.status}</p>
         <a className="site-foot__mail" href={`mailto:${profile.email}`}>{profile.email}</a>
@@ -81,7 +82,7 @@ export function Footer() {
         <p className="site-foot__colors">
           <NepalDots />
           Colors from home: Himalayan blue and rhododendron, Nepal’s national flower.
-          <BlackHole />
+          {hole ? <BlackHole place="foot" /> : null}
         </p>
       </div>
     </footer>

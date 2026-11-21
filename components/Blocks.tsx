@@ -1,6 +1,6 @@
 /* eslint-disable @next/next/no-img-element */
 import { Fragment } from "react";
-import type { Block } from "@/content/types";
+import type { Block, ProjectIconKind } from "@/content/types";
 import { ArmPanel } from "./ArmPanel";
 import { KuSandbox } from "./KuSandbox";
 import { Frame } from "./Frame";
@@ -50,6 +50,18 @@ export function Blocks({ blocks }: { blocks: Block[] }) {
                   <div key={p.term}><dt>{p.term}</dt><dd>{p.text}</dd></div>
                 ))}
               </dl>
+            );
+          case "projects":
+            return (
+              <ul key={i} className="projects">
+                {b.items.map((p) => (
+                  <li key={p.term} className="project">
+                    <ProjectIcon kind={p.icon} />
+                    <h3>{p.term}</h3>
+                    <p>{p.text}</p>
+                  </li>
+                ))}
+              </ul>
             );
           case "decisions":
             return (
@@ -175,5 +187,59 @@ export function Blocks({ blocks }: { blocks: Block[] }) {
         }
       })}
     </>
+  );
+}
+
+/* project and hand-off marks, drawn so they stay sharp at any width: the arm
+   alert scale (green running, amber warning, red error, grey inactive), a
+   gallery with one video tile, a tablet mark mirrored on the main screen; a
+   prototype screen, a component library, and a test plan */
+function ProjectIcon({ kind }: { kind: ProjectIconKind }) {
+  return (
+    <svg className="project__icon" viewBox={kind === "annotate" ? "0 0 88 64" : "0 0 64 64"} aria-hidden="true">
+      {kind === "arms" ? (
+        <>
+          <rect x="2" y="6" width="12" height="52" rx="4" fill="#1E7A46" />
+          <rect x="18" y="6" width="12" height="52" rx="4" fill="#E0A526" />
+          <rect x="34" y="6" width="12" height="52" rx="4" fill="#C0302B" />
+          <rect x="50" y="6" width="12" height="52" rx="4" className="project__off" />
+        </>
+      ) : kind === "gallery" ? (
+        <>
+          <rect x="2" y="6" width="28" height="24" rx="5" className="project__off" />
+          <rect x="34" y="6" width="28" height="24" rx="5" className="project__off" />
+          <rect x="2" y="34" width="28" height="24" rx="5" className="project__off" />
+          <rect x="34" y="34" width="28" height="24" rx="5" className="project__on" />
+          <path d="M44 40.5v11l9-5.5z" className="project__play" />
+        </>
+      ) : kind === "prototype" ? (
+        <>
+          <rect x="2" y="10" width="60" height="44" rx="6" className="project__line" />
+          <path d="M12 22h22" className="project__mark" />
+          <rect x="12" y="32" width="40" height="12" rx="3" className="project__off" />
+        </>
+      ) : kind === "library" ? (
+        <>
+          <rect x="2" y="6" width="28" height="24" rx="5" className="project__on" />
+          <rect x="34" y="6" width="28" height="24" rx="5" className="project__off" />
+          <rect x="2" y="34" width="28" height="24" rx="5" className="project__off" />
+          <rect x="34" y="34" width="28" height="24" rx="5" className="project__off" />
+        </>
+      ) : kind === "plan" ? (
+        <>
+          <rect x="2" y="12" width="60" height="9" rx="4.5" fill="#1E7A46" />
+          <rect x="2" y="28" width="60" height="9" rx="4.5" className="project__off" />
+          <rect x="2" y="44" width="44" height="9" rx="4.5" className="project__off" />
+        </>
+      ) : (
+        <>
+          <rect x="2" y="14" width="22" height="36" rx="5" className="project__line" />
+          <path d="M8 26h8" className="project__mark" />
+          <path d="M30 32h12" className="project__mark" />
+          <rect x="48" y="12" width="38" height="40" rx="5" className="project__line" />
+          <path d="M56 32h22" className="project__mark" />
+        </>
+      )}
+    </svg>
   );
 }

@@ -2,6 +2,8 @@ export type Img = { src: string; alt: string; w: number; h: number };
 
 export type Metric = { value: string; label: string };
 
+export type ProjectIconKind = "arms" | "gallery" | "annotate" | "prototype" | "library" | "plan";
+
 export type Block =
   | { type: "p"; text: string }
   | { type: "lead"; text: string }
@@ -17,10 +19,12 @@ export type Block =
   | { type: "split"; text: string; title?: string; img: Img; caption?: string; flip?: boolean }
   | { type: "video"; webm: string; mp4: string; poster: string; w: number; h: number; caption: string; label: string }
   /* more: fold supporting shots behind a disclosure labelled with this text */
-  | { type: "gallery"; items: (Img & { caption: string })[]; cols?: 2 | 3 | 4 | 5; more?: string }
+  | { type: "gallery"; items: (Img & { caption: string })[]; cols?: 1 | 2 | 3 | 4 | 5; more?: string }
   /* the same screen at each fidelity, left to right */
   | { type: "stages"; rows: { name: string; note: string; items: (Img & { caption: string })[] }[] }
   | { type: "pairs"; items: { term: string; text: string }[] }
+  /* project tiles drawn live (icon, name, one line), in place of a picture of them */
+  | { type: "projects"; items: { term: string; text: string; icon: ProjectIconKind }[] }
   | { type: "quote"; text: string; by: string }
   | { type: "checks"; items: { tag: string; title: string; text: string; fixed: boolean }[] }
   | { type: "armpanel" }

@@ -3,6 +3,7 @@
 import { Fragment, useEffect, useRef } from "react";
 import type React from "react";
 import { gsap } from "gsap";
+import { BlackHole } from "./BlackHole";
 
 /* The home hero, kept simple: the availability line, a two-tone headline,
    and two actions on the navy stage. Behind them on the right,
@@ -21,7 +22,9 @@ const SPOTS: [number, number, number][] = [
 ];
 const LOOP = 30; // seconds for one card to travel the whole way
 
-export function HeroStage({ status, resume, pics }: { status: string; resume: string; pics: HeroPic[] }) {
+/* backdrop: "cards" for the drifting artwork, "hole" for the dust black hole
+   that answers the pointer (components/BlackHole.tsx) */
+export function HeroStage({ status, resume, pics, backdrop = "cards" }: { status: string; resume: string; pics: HeroPic[]; backdrop?: "cards" | "hole" }) {
   const root = useRef<HTMLElement>(null);
 
   // one entrance: the headline rises word by word, then the rest blurs in
@@ -41,7 +44,8 @@ export function HeroStage({ status, resume, pics }: { status: string; resume: st
   }, []);
 
   return (
-    <section className="hstage" aria-labelledby="hero-title" ref={root}>
+    <section className="hstage" aria-labelledby="hero-title" ref={root} data-hole={backdrop === "hole" ? "" : undefined}>
+      {backdrop === "hole" ? <BlackHole place="hero" /> : (
       <div className="hstage__field" aria-hidden="true">
         {pics.slice(0, SPOTS.length).map((p, i) => {
           const [x, y, w] = SPOTS[i];
@@ -55,6 +59,7 @@ export function HeroStage({ status, resume, pics }: { status: string; resume: st
           );
         })}
       </div>
+      )}
       <div className="hstage__intro">
         <p className="hstage__status"><i aria-hidden="true" />{status}</p>
         <h1 className="hero__title" id="hero-title">

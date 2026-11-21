@@ -1248,7 +1248,13 @@ button.nav__cta:focus-visible { outline: 2px solid var(--color-ring); outline-of
 @media (prefers-color-scheme: dark) { :root:not(.light) .case-act__ghost { -webkit-text-stroke-color: color-mix(in srgb, var(--color-primary) 55%, transparent); } }
 @media (forced-colors: active) { .case-act__ghost { display: none; } }
 .case-act__h { --ghost: clamp(3.5rem, 1.6rem + 5.5vw, 7rem); padding-top: calc(var(--ghost) * 0.62); }
-.case-act__ghost { font-size: var(--ghost); -webkit-mask-image: linear-gradient(to bottom, #000 35%, transparent 78%); mask-image: linear-gradient(to bottom, #000 35%, transparent 78%); }
+/* the ghost word fades down into the heading, and a long one trails off at the right
+   instead of being cut mid-letter (short words never reach the fade) */
+.case-act__ghost { font-size: var(--ghost);
+  -webkit-mask-image: linear-gradient(to bottom, #000 35%, transparent 78%), linear-gradient(to right, #000 70%, transparent);
+  -webkit-mask-composite: source-in;
+  mask-image: linear-gradient(to bottom, #000 35%, transparent 78%), linear-gradient(to right, #000 70%, transparent);
+  mask-composite: intersect; }
 
 /* Skills pass (impeccable craft floor, frontend-design, DESIGN.md):
    no colored side borders, neutral shadows, blue only for actions.
